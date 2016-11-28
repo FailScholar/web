@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.news.dao.NewsInformationMapper">
+    <resultMap type="com.jltfisp.web.news.entity.NewsInformation" id="newsInformation">
+		<id property="id" column="id" />
+		<result property="imageUrl" column="imageUrl" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="source" column="source" />
+		<result property="link" column="link" />
+		<result property="publishTime" column="publish_time" />
+		<result property="columnId" column="column_id" />
+		<result property="contentReview" column="content_review" />
+		<result property="videoPath" column="videoPath" />
+		<result property="pv" column="pv" />
+	</resultMap>
+	<!-- 查询新闻内容列表 -->
+	<select id="getNewsInformationList" resultMap="newsInformation" parameterType="int">
+	   select * from  jltfisp_news jn,jltfisp_column_manage jcm where jn.column_id=jcm.id and jcm.id=#{columnId}
+	   and jn.state=1
+	</select>
+	<!-- 根据二级菜单栏的parentColumn查询对应的二级菜单 -->
+	<select id="getColumnDtoListByParentId" resultType="com.jltfisp.web.news.entity.ColumnDto" parameterType="int">
+	 select jcm.id as id, jcm.columnName as columnName,jcm.parentColumn as parentColumn ,jcm.columnNo as columnNo,jcm.isDelete as isDelete
+	  from jltfisp_column_manage jcm ,sys_dict sd where jcm.parentColumn=sd.id and sd.id=#{parentColumn} and jcm.isDelete=1 order by jcm.columnNo asc
+	</select>
+	<!--根据新闻内容id获取具体的新闻内容  -->
+	<select id="getNewsInfoById" resultType="com.jltfisp.web.news.entity.ColumnDto" parameterType="int">
+	   SELECT jn.id AS id, jcm.columnName AS columnName,jn.title AS title, jn.content AS content, jn.source AS source,
+	jn.link AS link, jn.publish_time AS publishTime, jn.content_review AS contentReview, jn.pv AS pv FROM jltfisp_column_manage jcm,
+	jltfisp_news jn WHERE jn.column_id = jcm.id AND jcm.isdelete = 1 AND jn.state = 1 AND jn.id =#{id}
+	</select>
+</mapper>

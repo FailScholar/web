@@ -1,0 +1,98 @@
+@charset "utf-8";
+/****** reset 基本样式重置 strat ******/
+/* 清除内外边距 ---------- */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fieldset, lengend, button, input, textarea, th, td {
+	margin: 0;
+	padding: 0;
+}
+/* 各种字体矫正 --------- */
+body, button, input, select, textarea { font: 14px/1 Microsoft YaHei, Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif; }
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+h4, h5, h6 { font-size: 100%; }
+button, input, select, textarea {
+	font-size: 100%;
+	outline: none;
+}
+address, cite, dfn, em, var { font-style: normal; }
+code, kbd, pre, samp, tt { font-family: "Courier New", Courier, monospace; }
+small { font-size: 12px; }
+/* 重置列表元素 --------- */
+ul, ol { list-style: none; }
+/* 重置文本格式元素 ----- */
+a { color: #545658; }
+a:hover { color: #1679ff; }
+a, a:hover { text-decoration: none; }
+a:focus { outline: none; }
+abbr[title], acronym[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+q:before, q:after { content: ''; }
+/* 重置表单元素 ------- */
+legend { color: #000; }
+fieldset, img { border: none; }
+/* 重置表格元素 ------ */
+/*table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	text-align: left;
+}
+table th { font-weight: normal; }*/
+/* 重置 hr --------- */
+hr {
+	border: none;
+	height: 1px;
+}
+/****** reset 基本样式重置 end   ******/
+/****** 复用性样式设置 strat ******/
+.clearfix:after {
+	content: "\200B";
+	display: block;
+	height: 0;
+	clear: both;
+}
+.clearfix { *zoom:1;
+}
+.clear{
+	display:block; 
+	clear:both; 
+	font-size:0; 
+	line-height:0; 
+	height:0; 
+	overflow:hidden; 
+	content:".";
+}
+.fl { float: left; }
+.fr { float: right;}
+.m0 { margin: 0; }
+.mt10 { margin-top: 10px; }
+.mb10 { margin-bottom: 10px; }
+.ml10 { margin-left: 10px; }
+.mr10 { margin-right: 10px; }
+.mt20 { margin-top: 20px; }
+.mb20 { margin-bottom: 20px; }
+.ml20 { margin-left: 20px; }
+.mr20 { margin-right: 20px; }
+.mb30 { margin-bottom: 30px; }
+.mt30 { margin-top: 30px; }
+.pd10 { padding: 10px; }
+.pt10 { padding-top: 10px; }
+.pb10 { padding-bottom: 10px; }
+.pl10 { padding-left: 10px; }
+.pr10 { padding-right: 10px; }
+.pt20 { padding-top: 20px; }
+.pb20 { padding-bottom: 20px; }
+.pl20 { padding-left: 20px; }
+.pr20 { padding-right: 20px; }
+.pd30 { padding: 30px; }
+.pt30 { padding-top: 30px; }
+.pt0 { padding-top: 0; }
+.pb0 { padding-bottom: 0; }
+h1, h2, h3, h4, h5 { font-weight: normal; }
+.fz20 { font-size: 20px; }
+.fz18 { font-size: 18px; }
+.fz16 { font-size: 16px; }
+.bold { font-weight: 800; }
+/****** 复用性样式设置 end   ******/

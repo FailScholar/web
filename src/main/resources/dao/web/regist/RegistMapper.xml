@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2016.11.14 by LiuFa.
+  ~ Copyright © 2016 Shenzhen GTA Education Tech Ltd. All rights reserved
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.regist.dao.RegistMapper">
+    <insert id="correlationRoles">
+        INSERT INTO sys_user_role (user_id, role_id, type) VALUES (#{0}, #{1}, 0)
+    </insert>
+</mapper>
