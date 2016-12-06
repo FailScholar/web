@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jltfisp.web.message.dao.CommunicateMapper">
+	<resultMap id="BaseResultMap" type="com.jltfisp.web.message.entity.Communicate">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="send_user" jdbcType="INTEGER" property="sendUser"  />
+		<result column="to_user" jdbcType="INTEGER" property="toUser"  />
+		<result column="ans_expert_type" jdbcType="INTEGER" property="ansExpertType"  />
+		<result column="content" jdbcType="VARCHAR" property="content"  />
+		<result column="time" jdbcType="TIMESTAMP" property="time"  />
+		<result column="ans_content" jdbcType="VARCHAR" property="ansContent"  />
+		<result column="content_type" jdbcType="INTEGER" property="contentType"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="sendUser != null and sendUser != ''">
+		        and a.send_user=#{sendUser,jdbcType=INTEGER}
+		     </if>
+		     <if test="toUser != null and toUser != ''">
+		        and (a.to_user=#{toUser,jdbcType=INTEGER}  or a.content_type=0)
+		     </if>
+		     <if test="ansExpertType != null and ansExpertType != ''">
+		        and a.ans_expert_type=#{ansExpertType,jdbcType=INTEGER}
+		     </if>
+		     <if test="content != null and content != ''">
+		        and a.content=#{content,jdbcType=VARCHAR}
+		     </if>
+		     <if test="time != null and time != ''">
+		        and a.time=#{time,jdbcType=TIMESTAMP}
+		     </if>
+		     <if test="ansContent != null and ansContent != ''">
+		        and a.ans_content=#{ansContent,jdbcType=VARCHAR}
+		     </if>
+		     <if test="contentType != null and contentType != ''">
+		        and a.content_type=#{contentType,jdbcType=INTEGER}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.send_user,
+		     a.to_user,
+		     a.ans_expert_type,
+		     a.content,
+		     a.time,
+		     a.ans_content,
+		     a.content_type
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.web.message.entity.Communicate" resultType="java.lang.Integer">
+        select count(1) from jltfisp_communicate a,sys_role sr 
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            and sr.id = a.ans_expert_type
+            <if test="ansExpertName != null and ansExpertName != ''">
+		        and sr.role_name=#{ansExpertName,jdbcType=VARCHAR}
+		     </if>
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+        select sr.role_name as ansExpertName,
+        <include refid="Base_Column_List"/>
+        from jltfisp_communicate a,sys_role sr 
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            and sr.id = a.ans_expert_type
+            <if test="ansExpertName != null and ansExpertName != ''">
+		        and sr.role_name=#{ansExpertName,jdbcType=VARCHAR}
+		     </if>
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select user.username as ansUserName,
+        <include refid="Base_Column_List"/>
+        from jltfisp_communicate a left join jltfisp_user user on a.to_user = user.id 
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_communicate a set a.status = 'd',a.update_at =now(),a.update_by=#userId
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_communicate 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.message.entity.Communicate">
+	   insert into jltfisp_communicate 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          send_user,
+	          to_user,
+	          ans_expert_type,
+	          content,
+	          time,
+	          ans_content,
+	          content_type,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{sendUser,jdbcType=INTEGER},
+	    	#{toUser,jdbcType=INTEGER},
+	    	#{ansExpertType,jdbcType=INTEGER},
+	    	#{content,jdbcType=VARCHAR},
+	    	#{time,jdbcType=TIMESTAMP},
+	    	#{ansContent,jdbcType=VARCHAR},
+	    	#{contentType,jdbcType=INTEGER},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.web.message.entity.Communicate">
+	   insert into jltfisp_communicate 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="sendUser != null and sendUser != ''" >
+	          send_user,
+	       </if>
+	   	   <if test="toUser != null and toUser != ''" >
+	          to_user,
+	       </if>
+	   	   <if test="ansExpertType != null and ansExpertType != ''" >
+	          ans_expert_type,
+	       </if>
+	   	   <if test="content != null and content != ''" >
+	          content,
+	       </if>
+	   	   <if test="time != null and time != ''" >
+	          time,
+	       </if>
+	   	   <if test="ansContent != null and ansContent != ''" >
+	          ans_content,
+	       </if>
+	   	   <if test="contentType != null and contentType != ''" >
+	          content_type,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="sendUser != null and sendUser != ''">
+    		#{sendUser,jdbcType=INTEGER},
+    		</if>
+    		<if test="toUser != null and toUser != ''">
+    		#{toUser,jdbcType=INTEGER},
+    		</if>
+    		<if test="ansExpertType != null and ansExpertType != ''">
+    		#{ansExpertType,jdbcType=INTEGER},
+    		</if>
+    		<if test="content != null and content != ''">
+    		#{content,jdbcType=VARCHAR},
+    		</if>
+    		<if test="time != null and time != ''">
+    		#{time,jdbcType=TIMESTAMP},
+    		</if>
+    		<if test="ansContent != null and ansContent != ''">
+    		#{ansContent,jdbcType=VARCHAR},
+    		</if>
+    		<if test="contentType != null and contentType != ''">
+    		#{contentType,jdbcType=INTEGER},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.message.entity.Communicate">
+	   	update jltfisp_communicate 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="sendUser != null and sendUser != ''" >
+		         send_user=#{sendUser,jdbcType=INTEGER},
+		     </if>
+		     <if test="toUser != null and toUser != ''" >
+		         to_user=#{toUser,jdbcType=INTEGER},
+		     </if>
+		     <if test="ansExpertType != null and ansExpertType != ''" >
+		         ans_expert_type=#{ansExpertType,jdbcType=INTEGER},
+		     </if>
+		     <if test="content != null and content != ''" >
+		         content=#{content,jdbcType=VARCHAR},
+		     </if>
+		     <if test="time != null and time != ''" >
+		         time=#{time,jdbcType=TIMESTAMP},
+		     </if>
+		     <if test="ansContent != null and ansContent != ''" >
+		         ans_content=#{ansContent,jdbcType=VARCHAR},
+		     </if>
+		     <if test="contentType != null and contentType != ''" >
+		         content_type=#{contentType,jdbcType=INTEGER},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.web.message.entity.Communicate">
+	   	update jltfisp_communicate 
+	  <set>
+	    send_user=#{sendUser,jdbcType=INTEGER},
+	    to_user=#{toUser,jdbcType=INTEGER},
+	    ans_expert_type=#{ansExpertType,jdbcType=INTEGER},
+	    content=#{content,jdbcType=VARCHAR},
+	    time=#{time,jdbcType=TIMESTAMP},
+	    ans_content=#{ansContent,jdbcType=VARCHAR},
+	    content_type=#{contentType,jdbcType=INTEGER},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+</mapper> 

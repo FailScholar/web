@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.loan.dao.PsMaterialInfoMapper">
+    <resultMap type="com.jltfisp.web.loan.entity.JltfispPsMaterialInfo" id="fispPsMaterialInfo">
+		<id property="id" column="id" />
+		<result property="infoId" column="info_id" />
+		<result property="grossedLast" column="grossed_last" />
+		<result property="grossedThis" column="grossed_this" />
+		<result property="increaseGrossedLast" column="increase_grossed_last" />
+		<result property="increaseGrossedThis" column="increase_grossed_this" />
+		<result property="investmentLast" column="investment_last" />
+		<result property="investmentThis" column="investment_this" />
+		<result property="increaseInvestmentLast" column="increase_investment_last" />
+		<result property="increaseInvestmentThis" column="increase_investment_this" />
+		<result property="profitLast" column="profit_last" />
+		<result property="profitThis" column="profit_this" />
+		<result property="increaseProfitLast" column="increase_profit_last" />
+		<result property="increaseProfitThis" column="increase_profit_this" />
+		<result property="taxesLast" column="taxes_last" />
+		<result property="taxesThis" column="taxes_this" />
+		<result property="increaseTaxesLast" column="increase_taxes_last" />
+		<result property="increaseTaxesThis" column="increase_taxes_this" />
+		<result property="inventionLast" column="invention_last"/>
+		<result property="inventionThis" column="invention_this" />
+		<result property="utilitarianLast" column="utilitarian_last" />
+		<result property="utilitarianThis" column="utilitarian_this" />
+		<result property="appearanceLast" column="appearance_last" />
+		<result property="appearanceThis" column="appearance_this" />
+		<result property="icLast" column="ic_last" />
+		<result property="icThis" column="ic_this" />
+		<result property="softwareThis" column="software_this" />
+		<result property="softwareLast" column="software_last" />
+		<result property="softwaresLast" column="softwares_last" />
+		<result property="softwaresThis" column="business_type"/>
+		<result property="knowledgeLast" column="knowledge_last" />
+		<result property="knowledgeThis" column="knowledge_this" />
+		<result property="cognizance" column="cognizance" />
+		<result property="cognizanceText" column="cognizance_text" />
+		<result property="meta" column="meta" />
+	</resultMap>
+	<!-- 根据基本信息ID获取JltfispPsMaterialInfo -->
+	<select id="getJltfispPsMaterialInfoByInfoId" parameterType="int" resultMap="fispPsMaterialInfo">  
+      SELECT
+         *
+		FROM
+			jltfisp_ps_material_info jpm 
+		WHERE
+		    jpm.info_id=#{info_id}
+   </select>
+  
+</mapper>

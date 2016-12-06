@@ -5,15 +5,14 @@
 
 package com.jltfisp.web.column.service.impl;
 
-import java.util.List;
-
+import com.jltfisp.web.column.dao.ColumnMapper;
 import com.jltfisp.web.column.entity.JltfispColumn;
-import com.jltfisp.web.column.dao.*;
 import com.jltfisp.web.column.service.ColumnService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /*
  *前台栏目内容service层 
@@ -51,5 +50,12 @@ public class ColumnServiceImpl implements ColumnService {
         jltfispColumn.setParentColumn(parentColumnId);
         return columnMapper.select(jltfispColumn);
     }
+
+	@Override
+	public JltfispColumn getColumnOne(Integer parentColumnid, Integer columnType) {
+		// TODO Auto-generated method stub
+		return columnMapper.selectColumnOne(parentColumnid, columnType);
+	}
+
 
 }

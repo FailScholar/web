@@ -17,113 +17,17 @@
 <div class="content">
     <div class="info">
         <ul class="infoTab">
-            <li class="active"><a href="javascript:;">政策申报通告</a></li>
-            <li><a href="javascript:;">国家部委</a></li>
-            <li><a href="javascript:;">吉林省委办局</a></li>
-            <li><a href="javascript:;">吉林省各市县</a></li>
+        <#list columnList as columnList>
+         <li tips="${columnList.columnNo}">
+         	<a href="javascript:void(0);" onclick="getCapitalInfoList(${columnList.columnNo})">${columnList.columnName}</a>
+         </li>
+       </#list> 
         </ul>
         <div class="clear"></div>
-        <div class="infoList">
-            <ul class="ul1">
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span>2016-06-06</span><span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-                <li>
-                    <h2><a href="${path}/anon/detail">申请须知</a></h2>
-                    <p class="tit">新浪财经<span>2016-06-06</span><span class="eye fr">100</span></p>
-                    <p>我曾经爱过这样一个女人  他说我是世上最真的男人  我为她保留着那一份认真  关上爱别人的门  也是这个被我深爱的女人  把我变成世上...</p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产金融机构有序破产金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span>2016-06-06</span><span class="eye fr">100</span></p>
-                    <p>我曾经爱过这样一个女人  他说我是世上最真的男人  我为她保留着那一份认真  关上爱别人的门  也是这个被我深爱的女人  把我变成世上...</p>
-                </li>
-                <li>
-                    <h2><a href="${path}/anon/detail">申请须知</a></h2>
-                    <p class="tit">新浪财经<span>2016-06-06</span><span class="eye fr">100</span></p>
-                    <p>我曾经爱过这样一个女人  他说我是世上最真的男人  我为她保留着那一份认真  关上爱别人的门  也是这个被我深爱的女人  把我变成世上...</p>
-                </li>
-                <li>
-                    <h2><a href="${path}/anon/detail">申请须知</a></h2>
-                    <p class="tit">新浪财经<span>2016-06-06</span><span class="eye fr">100</span></p>
-                    <p>我曾经爱过这样一个女人  他说我是世上最真的男人  我为她保留着那一份认真  关上爱别人的门  也是这个被我深爱的女人  把我变成世上...</p>
-                </li>
-                <li>
-                    <h2><a href="${path}/anon/detail">申请须知</a></h2>
-                    <p class="tit">新浪财经<span>2016-06-06</span><span class="eye fr">100</span></p>
-                    <p>我曾经爱过这样一个女人  他说我是世上最真的男人  我为她保留着那一份认真  关上爱别人的门  也是这个被我深爱的女人  把我变成世上...</p>
-                </li>
-            </ul>
         </div>
-        <div class="infoList" style="display:none;">
-            <ul class="ul1">
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">中国银监会 科技部 中国人民银行 关于支持银行业金融机构加大创新力度</a></h2>
-                    <p class="tit tit1">中国银监会<span>2016-06-06</span><span class="eye fr">100</span></p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">中国银监会 科技部 中国人民银行？</a></h2>
-                    <p class="tit tit1">中国银监会<span>2016-06-06</span><span class="eye fr">100</span></p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">中国银监会 科技部 中国人民银行 关于支持银行业金融机构加大创新力度</a></h2>
-                    <p class="tit tit1">中国银监会<span>2016-06-06</span><span class="eye fr">100</span></p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">中国银监会 科技部 中国人民银行？</a></h2>
-                    <p class="tit tit1">中国银监会<span>2016-06-06</span><span class="eye fr">100</span></p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">中国银监会 科技部 中国人民银行 关于支持银行业金融机构加大创新力度</a></h2>
-                    <p class="tit tit1">中国银监会<span>2016-06-06</span><span class="eye fr">100</span></p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">中国银监会 科技部 中国人民银行？</a></h2>
-                    <p class="tit tit1">中国银监会<span>2016-06-06</span><span class="eye fr">100</span></p>
-                </li>
-            </ul>
-        </div>
-        <div class="infoList" style="display:none;">
-            <ul class="ul1">
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-            </ul>
-        </div>
-        <div class="infoList" style="display:none;">
-            <ul class="ul1">
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-                <li>
-                    <h2 class="ellipsis"><a href="${path}/anon/detail">央行副行长：允许金融机构有序破产</a></h2>
-                    <p class="tit">新浪财经<span class="eye fr">100</span></p>
-                    <p>6月12日，陆家嘴论坛在上海开幕。中国人民银行副行长张涛先生就“全球经济增长的挑战与金融变革”这一主题发表演讲。他认为，整体...</p>
-                </li>
-            </ul>
-        </div>
-    </div>
+		<!-- 专项资金的具体内容 -->
+        <div id="showContent"></div>
+        
     <div class="clear"></div>
     <div class="page">
         <a href="javascript:;">&lt;</a>
@@ -136,13 +40,42 @@
     </div>
 </div>
 <!--content结束-->
-
-</div>
-</div>
-
+  </div>
+ </div>
 <div class="clear"></div>
 <div class="clearfix"></div>
 </div>
 <#include "website/common/footer.ftl" />
 </body>
+ <script type="text/javascript">
+   $(function(){
+	  $("div.info ul.infoTab").find("li").eq(0).addClass("active");
+	  var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
+	  getCapitalInfoList(tips);
+   });
+   
+   //获取子栏目内容列表
+   function getCapitalInfoList(columnNo){
+         $.ajax({
+			  type : "POST",
+			  url : "${path}/anon/getCapitalInfoList",
+			  data:{"columnNo":columnNo},
+			  dataType : "html",
+			  success:function(data){
+				$("#showContent").html(data);//要刷新的div
+			  },
+			  error: function() {
+                 alert("失败，请稍后再试！");
+              }
+		});
+	}
+
+	//获取详细内容
+	function getCapitalDetail(newsId){
+		 $.post(
+                "${path}/anon/getCapitalDetail",
+                {"id":newsId}
+          );
+    }
+  </script>
 </html>

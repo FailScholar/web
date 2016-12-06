@@ -38,8 +38,8 @@
                     <li><a href="${path}/anon/expert">专家资源</a><b></b></li>
                     <li><a href="${path}/anon/financing">股权融资</a><b></b></li>
                     <li><a href="${path}/anon/market">资本市场</a><b></b></li>
-                    <li><a href="${path}/anon/insurance">科技保险</a><b></b></li>
-                    <li class="last1"><a href="${path}/anon/cloud">云课堂</a><b></b></li>
+                    <li><a href="${path}/perm/insurance">科技保险</a><b></b></li>
+                    <li class="last1"><a href="${path}/perm/cloud">云课堂</a><b></b></li>
                 </ul>
             </div>
             <div class="clear"></div>

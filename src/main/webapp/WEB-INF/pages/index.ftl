@@ -50,8 +50,8 @@
                       <li><a href="${path}/anon/expert">专家资源</a><b></b></li>
                       <li><a href="${path}/anon/financing">股权融资</a><b></b></li>
                       <li><a href="${path}/anon/market">资本市场</a><b></b></li>
-                      <li><a href="${path}/anon/insurance">科技保险</a><b></b></li>
-                      <li class="last1"><a href="${path}/anon/cloud">云课堂</a><b></b></li>
+                      <li><a href="${path}/perm/insurance">科技保险</a><b></b></li>
+                      <li class="last1"><a href="${path}/perm/cloud">云课堂</a><b></b></li>
                   </ul>
               </div>
               <div class="list">
@@ -70,8 +70,8 @@
                           <li class="li2"><a href="${path}/loan/onlineApply?applytype=2"><b></b>科技小巨人贷款申请</a></li>
                           <li class="li3"><a href="${path}/loan/onlineApply?applytype=3"><b></b>高新技术贷款申请</a></li>
                           <li class="li4"><a href="${path}/loan/onlineApply?applytype=4"><b></b>科技微贷通贷款申请</a></li>
-                          <li class="li5"><a href="${path}/loan/onlineApply?applytype=5"><b></b>保费补贴申请</a></li>
-                          <li class="li6"><a href="${path}/loan/onlineApply?applytype=6"><b></b>股权融资申请</a></li>
+                          <li class="li5"><a href="${path}/loan/judgeIsApplyLoan?applytype=5"><b></b>保费补贴申请</a></li>
+                          <li class="li6"><a href="${path}/loan/financeKnow"><b></b>股权融资申请</a></li>
                       </ul>
                   </div>
                   <div class="lbot" style="display:none;">
@@ -409,7 +409,7 @@
     });
 
     function toConsult() {
-        $.cookie('toConsult', true, {path: '/'});
+        $.cookie('userinfoIndex', 4, {path: '/'});
         window.location.href = "${path}/main"
     }
 </script>

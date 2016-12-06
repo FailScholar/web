@@ -1,16 +1,16 @@
 package com.jltfisp.web.news.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.jltfisp.base.service.impl.BaseServiceImpl;
 import com.jltfisp.web.news.dao.NewsInformationMapper;
 import com.jltfisp.web.news.entity.ColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
 import com.jltfisp.web.news.service.INewsInformationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashMap;
+import java.util.List;
 /**
  * 资讯中心业务处理层实现类
  * @author cuihong.ge
@@ -23,9 +23,13 @@ public class NewsInformationServiceImpl extends BaseServiceImpl<NewsInformation>
 	@Autowired
 	private NewsInformationMapper newsInformationMapper;
 	@Override
-	public List<NewsInformation> getNewsInformationList(
-			Integer columnId) {
-		List<NewsInformation> newsInformationList=this.newsInformationMapper.getNewsInformationList(columnId);
+	public List<NewsInformation> getNewsInformationPageList(
+			int rows,int pageSize,Integer columnId) {
+			HashMap map=new HashMap();
+	    	map.put("rows", rows);
+	    	map.put("pageSize", pageSize);
+	    	map.put("columnId", columnId);
+		List<NewsInformation> newsInformationList=this.newsInformationMapper.getNewsInformationList(map);
 		return newsInformationList;
 	}
 	@Override
@@ -33,10 +37,17 @@ public class NewsInformationServiceImpl extends BaseServiceImpl<NewsInformation>
 		
 		return this.newsInformationMapper.getNewsInfoById(id);
 	}
+	
 	@Override
-	public List<ColumnDto> getColumnDtoListByParentId(Integer parentId) {
+	public void addNewsInfoPv(Integer id) {
+		this.newsInformationMapper.updateNewsInfoPv(id);
 		
-		return this.newsInformationMapper.getColumnDtoListByParentId(parentId);
+	}
+	@Override
+	public int getNewsInfoPageCount(Integer columnId) {
+		NewsInformation  jltfisnews = new NewsInformation();
+		jltfisnews.setColumnId(columnId);
+		return newsInformationMapper.selectCount(jltfisnews);
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by LiuFa on 2016/9/5.
@@ -36,6 +37,7 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
         if (contextRefreshedEvent.getApplicationContext().getParent() == null) {
             try {
                 cacheEmailAndName();
+                cacheVisitorPerm();
             } catch (Exception e) {
                 _logger.error("初始化缓存失败.....",e);
             }
@@ -51,5 +53,14 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
     private void cacheEmailAndName(){
         List<JltfispUser> list = userService.getAllUserEmailAndName();
         redisService.putKV("allUser",list);
+    }
+
+    /**
+     * @author LiuFa
+     * @description  缓存游客权限
+     */
+    private void cacheVisitorPerm(){
+        Set<String> visitorPermSet = userService.getVisitorPermSet();
+        redisService.putKV("visitorPermSet",visitorPermSet);
     }
 }

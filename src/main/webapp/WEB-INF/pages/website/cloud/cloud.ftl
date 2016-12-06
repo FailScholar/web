@@ -14,59 +14,19 @@
   <body>
   <#include "website/common/header.ftl"/>
               <!--content开始-->
-              <div class="content">
-                  <div class="info">
-                      <ul class="infoTab">
-                          <li class="active"><a href="javascript:;">信贷知识</a></li>
-                          <li><a href="javascript:;">上市辅导</a></li>
-                          <li><a href="javascript:;">投资案列</a></li>
-                          <li><a href="javascript:;">融资讲座</a></li>
-                          <li><a href="javascript:;">保险知识</a></li>
-                      </ul>
-                      <div class="clear"></div>
-                      <div class="infoList">
-                          <ul class="ul3">
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /><p>中国银监会科技部中国人民</p></a><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /><p>中国银监会科技部中国人民</p></a><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /><p>中国银监会科技部中国人民</p></a><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /><p>中国银监会科技部中国人民</p></a><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /><p>中国银监会科技部中国人民</p></a><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /><p>中国银监会科技部中国人民</p></a><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                          </ul>
-                      </div>
-                      <div class="infoList" style="display:none;">
-                          <ul class="ul3">
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /></a><p>中国银监会科技部中国人民</p><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                          </ul>
-                      </div>
-                      <div class="infoList" style="display:none;">
-                          <ul class="ul3">
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /></a><p>中国银监会科技部中国人民</p><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /></a><p>中国银监会科技部中国人民</p><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                          </ul>
-                      </div>
-                      <div class="infoList" style="display:none;">
-                          <ul class="ul3">
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /></a><p>中国银监会科技部中国人民</p><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                              <li><a href="${path}/anon/cloud/videoDetail"><b></b><img src="${path}/resource/images/demo.png" alt="video" /></a><p>中国银监会科技部中国人民</p><p class="p2"><span class="time fl">2016-11-03</span><span class="eye fr">100</span></p></li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="clear"></div>
-                  <div class="page">
-                      <a href="javascript:;">&lt;</a>
-                      <a href="javascript:;">1</a>
-                      <a href="javascript:;">2</a>
-                      <span>...</span>
-                      <a href="javascript:;">15</a>
-                      <a href="javascript:;">16</a>
-                      <a href="javascript:;">&gt;</a>
-                  </div>
-              </div>
-              <!--content结束-->
-
-          </div>
-      </div>
+             <div class="content">
+    <div class="info">
+        <ul class="infoTab">
+            <#list colList as column>
+                <li code="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+            </#list>
+        </ul>
+        <div class="clear"></div>
+        <div id="colListDetail"></div>
+    </div>
+</div>
+</div>
+</div>
 
       <div class="clear"></div>
       <div class="clearfix"></div>
@@ -77,10 +37,17 @@
 </html>
 
 <script type="text/javascript">
-    $(document).ready(function(e) {
-        $('.infoTab li').click(function(){
-            $(this).addClass('active').siblings('li').removeClass('active');
-            $('.infoList').eq($(this).index()).show().siblings('.infoList').hide();
-        });
+    var infoTab = $("div.info ul.infoTab");
+    $(function(){
+        infoTab.find("li").eq(0).addClass("active");
+        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find("li").eq(0).attr("code"),{currentPage :1});
     });
+
+    $('.infoTab li').click(function(){
+        $('#colListDetail').load("${path}/perm/cloud/"+$(this).attr("code"),{currentPage :1});
+    });
+
+    function selectPage(page) {
+        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find('li.active').attr('code'),{currentPage :page});
+    }
 </script>

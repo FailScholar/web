@@ -16,117 +16,118 @@
               <!--content开始-->
               <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">合作机构</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/institution">合作机构</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
+                	<form id="institutionForm" >
+                	<input type="hidden" name="id" value="${institution.id }"/>
                     <div class="proList nli">
                         <!--企业基本信息-->
                         <div class="nlistCont">
                         	<p class="ntit">金融机构</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>申请机构(全称)</th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
-                                    <th rowspan="4">公司logo</th>
+                                    <th><b class="red">*</b>${institutManage.label1 }</th>
+                                    <td><input type="text" name="institutionalName" value="${institution.institutionalName }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <th rowspan="4">${institutManage.label3 }</th>
                                     <td rowspan="4">
-                                    	<img src="${path}/resource/images/blank.png" class="fl" />
+                                    	<img id="logoFileImg" 
+                                    		<#if institution?? && institution.logoFile?? && institution.logoFile != "">
+                                    		src="${path}/resource/fileImage/${institution.logoFile }" 
+                                    		<#else>
+                                    		src="${path}/resource/images/blank.png" 
+                                    		</#if>
+                                    	 class="fl" style="width:110px;height:110px;" />
                                         <span class="notice fr">建议尺寸250px*100px<br />上传大小不超过320K<br />支持JPG、GIF、PNG格式</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
-                                        	<input type="file" />
+                                        	<input type="file" id="upFile" name="upFile" onchange="ajaxFileUpload()" />
+                                        	<input type="hidden" name="logoFile" id="logoFile" value="${institution.logoFile }"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>简称</th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th>${institutManage.label2 }</th>
+                                    <td><input type="text" name="abbreviation" value="${institution.abbreviation }" class="txt validate[maxSize[1000]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>法人代表</th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${institutManage.label4 }</th>
+                                    <td><input type="text" name="corporateRepresentative" value="${institution.corporateRepresentative }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>组织机构代码</th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${institutManage.label5 }</th>
+                                    <td><input type="text" name="socialCreditCode" value="${institution.socialCreditCode }" class="txt validate[required,minSize[9],maxSize[20]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>所属省市</th>
+                                    <th><b class="red">*</b>${institutManage.label6 }</th>
                                     <td colspan="3">
-                                    	<select>
-                                        	<option>-请选择省份-</option>
-                                            <option>安徽</option>
+                                    	<select id="province" name="province" value="${institution.province }"  class="validate[required]" onchange="changCity(this.value)">
+                                        	<option value="">-请选择省份-</option>
                                         </select>
-                                        <select>
-                                        	<option>合肥市</option>
-                                            <option>安庆市</option>
+                                        <select id="city" class="validate[required]" name="city" value="${institution.city }">
+                                        	<option value="">-请选择城市-</option>
                                         </select>
-                                    	<input type="text" class="txt" placeholder="详细地址" />
+                                    	<input type="text" name="address" value="${institution.address }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
+                                
+                                <input type="hidden" name="columnId" value="${columnId }"/>
+                               
                                 <tr>
-                                    <th><b class="red">*</b>机构属性</th>
-                                    <td colspan="3">
-                                    	<select>
-                                        	<option>合作银行</option>
-                                        </select>
-                                    </td>
+                                    <th>${institutManage.label7 }</th>
+                                    <td colspan="3"><input type="text" name="url" value="${institution.url }" class="txt validate[maxSize[1000],custom[url]]" placeholder="详细地址" /></td>
                                 </tr>
                                 <tr>
-                                    <th>公司网站</th>
-                                    <td colspan="3"><input type="text" class="txt" placeholder="详细地址" /></td>
+                                    <th><b class="red">*</b>${institutManage.label8 }</th>
+                                    <td colspan="3"><textarea name="institutionalAbstract" class="txta validate[required,maxSize[500]]">${institution.institutionalAbstract }</textarea></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>单位简介(限500字)</th>
-                                    <td colspan="3"><textarea class="txta"></textarea></td>
+                                    <th><b class="red">*</b>${institutManage.label9 }</th>
+                                    <td colspan="3"><textarea name="serviceProductsAndFeatures" class="txta validate[required,maxSize[2000]]">${institution.serviceProductsAndFeatures }</textarea></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>服务产品及特色(请提供10款主要适合中小企业的信贷产品及简介)</th>
-                                    <td colspan="3"><textarea class="txta"></textarea></td>
-                                </tr>
-                                <tr>
-                                    <th><b class="red">*</b>服务团队介绍(限500字)</th>
-                                    <td colspan="3"><textarea class="txta"></textarea></td>
+                                    <th><b class="red">*</b>${institutManage.label10 }</th>
+                                    <td colspan="3"><textarea name="investmentTeam" class="txta validate[required,maxSize[500]]">${institution.investmentTeam }</textarea></td>
                                 </tr>
                             </table>
                             <p class="ntit">联系方式</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>单位地址</th>
+                                    <th><b class="red">*</b>${institutManage.label11 }</th>
                                     <td colspan="3">
-                                    	<select>
-                                        	<option>-请选择省份-</option>
-                                            <option>安徽</option>
+                                    	<select id="companyRealAddress" name="companyRealAddress" value="${institution.companyRealAddress }" class="validate[required]" onchange="changCity2(this.value)">
+                                        	<option value="">-请选择省份-</option>
                                         </select>
-                                        <select>
-                                        	<option>合肥市</option>
-                                            <option>安庆市</option>
+                                        <select id="companyCity" name="companyCity" value="${institution.companyCity }" class="validate[required]">
+                                        	<option value="">-请选择城市-</option>
                                         </select>
-                                    	<input type="text" class="txt" placeholder="详细地址" />
+                                    	<input type="text" name="institutionalAddress" value="${institution.institutionalAddress }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b><b>邮编</b></th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
-                                    <th><b class="red">*</b><b>联系人</b></th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b><b>${institutManage.label12 }</b></th>
+                                    <td><input type="text" name="postcodes" value="${institution.postcodes }" class="txt validate[required,custom[chinaZip]]" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b><b>${institutManage.label13 }</b></th>
+                                    <td><input type="text" name="linkMan" value="${institution.linkMan }" class="txt validate[required,minSize[2],maxSize[20]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b><b>手机</b></th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
-                                    <th><b class="red">*</b><b>E-mail</b></th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b><b>${institutManage.label14 }</b></th>
+                                    <td><input type="text" name="mobilePhone" value="${institution.mobilePhone }" class="txt validate[required,custom[mobile]]" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b><b>${institutManage.label15 }</b></th>
+                                    <td><input type="text" name="email" value="${institution.email }" class="txt validate[required,custom[email]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b><b>电话</b></th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
-                                    <th><b class="red">*</b><b>传真</b></th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b><b>${institutManage.label16 }</b></th>
+                                    <td><input type="text" name="phoneNumer" value="${institution.phoneNumer }" class="txt validate[required,custom[phone]]" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b><b>${institutManage.label17 }</b></th>
+                                    <td><input type="text" name="fax" value="${institution.fax }" class="txt validate[required,custom[fax]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                         </div>
-                       	<div class="btnFld"><a href="${path}/main"><input type="button" value="完成注册" class="btnSave" /></a></div>
+                       	<div class="btnFld"><a href="javascript: void(0);"><input type="button" value="完成注册" class="btnSave" /></a></div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -141,6 +142,11 @@
 
 <#include "website/common/footer.ftl" />
 <script>
+var province = '${institution.province!"" }';
+var companyRealAddress = '${institution.companyRealAddress!"" }';
+var city = '${institution.city!"" }';
+var companyCity = '${institution.companyCity!"" }';
+
 $(document).ready(function(e) {
     $('.proList .logbtn input').click(function(){
 		var index=$(this).parents('.proList').index()-3;
@@ -170,15 +176,129 @@ $(document).ready(function(e) {
 		$(this).addClass('active').siblings().removeClass('active');
 	});
 	
-	$('.btnSave').click(function(){
-		var index=$(this).parents('.nlistCont').index()-1;
-		if(index<7)
-		{	
-			$(this).parents('.nlistCont').hide().next('.nlistCont').show();
-			$(this).parents('.nlistCont').siblings('.nlist').find('li').eq(index).addClass('active').siblings('li').removeClass('active');
-		}		
-	});
+	//输入框验证
+    $.validationEngineLanguage.newLang();   
+    $("#institutionForm").validationEngine('attach', {
+        promptPosition: "bottomRight:-10", scroll: false
+    }); 
+	
+	//获取省份
+	$.ajax({
+        type: "POST",
+        url: "${path}/anon/area",
+        dateType:"json",
+        success: function(msg){
+          for(var i=0;i<msg.length;i++){  
+          		if(province == msg[i].id){
+          			$("#province").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");
+          		}else{
+          			$("#province").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");
+          		}
+          		if(companyRealAddress == msg[i].id){
+          			$("#companyRealAddress").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>"); 
+          		}else{
+          			$("#companyRealAddress").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>"); 
+          		}
+          } 
+        }
+    });
+    
+    changCity(province);
+    changCity2(companyRealAddress);
 });
+
+//更换申请的机构所在省份时，级联更新城市
+function changCity(id){
+    $.ajax({
+	    type: "POST",
+	    url: "${path}/anon/area",
+	    data:{areaId:id},
+	    dateType:"json",
+	    success: function(msg){
+	      $("#city").html("");
+	      $("#city").append("<option value=''>-请选择城市-</option>"); 
+	      for(var i=0;i<msg.length;i++){
+		      if(city == msg[i].id){
+		      	$("#city").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");  
+		      }else{
+		      	$("#city").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+		      }
+	      }
+	    }
+	});
+}
+
+//更换单位所在省份时，级联更新城市
+function changCity2(id){
+    $.ajax({
+	    type: "POST",
+	    url: "${path}/anon/area",
+	    data:{areaId:id},
+	    dateType:"json",
+	    success: function(msg){
+	      $("#companyCity").html("");
+	      $("#companyCity").append("<option value=''>-请选择城市-</option>"); 
+	      for(var i=0;i<msg.length;i++){
+	      		if(companyCity == msg[i].id){
+		      		$("#companyCity").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");  
+		      	}else{
+		      		$("#companyCity").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+		      	}
+	      }
+	    }
+	});
+}
+
+<!--上传附件-->
+function ajaxFileUpload() {
+	var filepath = $("#upFile").val();
+	if(filepath != ""){
+		var fileend = filepath.substring(filepath.indexOf(".")); 
+		if(fileend != ".jpg" && fileend != ".gif" && fileend != ".png") {
+			dialog.tipsPop('ban-pop','提示',"上传图片格式不正确",'确定');
+		}else{
+			$.ajaxFileUpload({
+		        type: "POST",
+		        url: '${path}/anon/institution/savePhoto', 
+		        secureuri: false,
+		        fileElementId: 'upFile',
+		        dataType:"text",
+		        success: function(msg) {
+		            if(msg =="0"){
+		              dialog.tipsPop('ban-pop','提示',"操作失败",'确定');
+		              return false;
+		            }else{
+		              $('#logoFile').val(msg);
+		              $("#logoFileImg").attr("src","${path}/resource/fileImage/"+msg);
+		            }
+		        }
+		    }); 
+		}
+	}
+} 
+
+//保存申请--完成注册
+$('.btnSave').click(function(){
+	if($("#institutionForm").validationEngine("validate")){//表单验证成功
+		$.ajax({
+            type: "POST",
+            url: '${path}/anon/saveInstitution',
+            data: $("#institutionForm").serialize(),
+            dateType:"json",
+            success: function(msg){
+              if( msg == "保存成功"){
+              	$(".content").load("${path}/anon/registerSuccess");
+              	$(".content").height(445);
+              }else{
+              	dialog.tipsPop('ban-pop','提示',"操作失败",'确定');
+                return false;
+              }
+            }
+        });
+		}else{
+			return false;
+		}
+   });
 </script>
   </body>
 </html>

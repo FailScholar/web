@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jltfisp.web.loan.dao.BusinessApplayAuditMapper">
+	<resultMap id="BaseResultMap" type="com.jltfisp.web.loan.entity.BusinessApplayAudit">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="user_id" jdbcType="INTEGER" property="userId"  />
+		<result column="submit_date" jdbcType="DATE" property="submitDate"  />
+		<result column="state" jdbcType="INTEGER" property="state"  />
+		<result column="type" jdbcType="CHAR" property="type"  />
+		<result column="audit_desc" jdbcType="VARCHAR" property="auditDesc"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="userId != null and userId != ''">
+		        and a.user_id=#{userId,jdbcType=INTEGER}
+		     </if>
+		     <if test="submitDate != null and submitDate != ''">
+		        and a.submit_date=#{submitDate,jdbcType=DATE}
+		     </if>
+		     <if test="state != null and state != ''">
+		        and a.state=#{state,jdbcType=INTEGER}
+		     </if>
+		     <if test="type != null and type != ''">
+		        and a.type=#{type,jdbcType=CHAR}
+		     </if>
+		     <if test="auditDesc != null and auditDesc != ''">
+		        and a.audit_desc=#{auditDesc,jdbcType=VARCHAR}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.user_id,
+		     a.submit_date,
+		     a.state,
+		     a.type,
+		     a.audit_desc
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.web.loan.entity.BusinessApplayAudit" resultType="java.lang.Integer">
+        select count(1) from jltfisp_business_applay a LEFT JOIN jltfisp_user b on b.id = a.user_id 
+        LEFT JOIN jltfisp_co_base jcb  on a.user_id = jcb.user_id
+        LEFT JOIN jltfisp_loan_apply jla on a.user_id=jla.user_id
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            b.account_number like '%${userName}%'
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+         select   a.id,
+        		 a.user_id,
+			     a.submit_date,
+			     a.state,
+			     a.type,
+			     a.audit_desc,
+			     b.account_number as userName,
+				 b.username as companyName,
+			     jla.applyAmount as amount,
+			     jla.id as applyId,
+			     (select c.value from sys_dict c where c.type=1002 and c.code = a.type) as typeName,
+			     (select c.value from sys_dict c where c.type=1004 and c.code = jcb.tec_domain) as tecName
+        from jltfisp_business_applay a LEFT JOIN jltfisp_user b on b.id = a.user_id 
+        LEFT JOIN jltfisp_co_base jcb  on a.user_id = jcb.user_id
+        LEFT JOIN jltfisp_loan_apply jla on a.user_id=jla.user_id
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            b.account_number like '%${userName}%'
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPK" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_business_applay a
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_business_applay a set a.status = 'd',a.update_at =now(),a.update_by=#userId
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_business_applay 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.loan.entity.BusinessApplayAudit">
+	   insert into jltfisp_business_applay 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          user_id,
+	          submit_date,
+	          state,
+	          type,
+	          audit_desc,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{userId,jdbcType=INTEGER},
+	    	#{submitDate,jdbcType=DATE},
+	    	#{state,jdbcType=INTEGER},
+	    	#{type,jdbcType=CHAR},
+	    	#{auditDesc,jdbcType=VARCHAR},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.web.loan.entity.BusinessApplayAudit">
+	   insert into jltfisp_business_applay 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="userId != null and userId != ''" >
+	          user_id,
+	       </if>
+	   	   <if test="submitDate != null and submitDate != ''" >
+	          submit_date,
+	       </if>
+	   	   <if test="state != null and state != ''" >
+	          state,
+	       </if>
+	   	   <if test="type != null and type != ''" >
+	          type,
+	       </if>
+	   	   <if test="auditDesc != null and auditDesc != ''" >
+	          audit_desc,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="userId != null and userId != ''">
+    		#{userId,jdbcType=INTEGER},
+    		</if>
+    		<if test="submitDate != null and submitDate != ''">
+    		#{submitDate,jdbcType=DATE},
+    		</if>
+    		<if test="state != null and state != ''">
+    		#{state,jdbcType=INTEGER},
+    		</if>
+    		<if test="type != null and type != ''">
+    		#{type,jdbcType=CHAR},
+    		</if>
+    		<if test="auditDesc != null and auditDesc != ''">
+    		#{auditDesc,jdbcType=VARCHAR},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.loan.entity.BusinessApplayAudit">
+	   	update jltfisp_business_applay 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="userId != null and userId != ''" >
+		         user_id=#{userId,jdbcType=INTEGER},
+		     </if>
+		     <if test="submitDate != null and submitDate != ''" >
+		         submit_date=#{submitDate,jdbcType=DATE},
+		     </if>
+		     <if test="state != null and state != ''" >
+		         state=#{state,jdbcType=INTEGER},
+		     </if>
+		     <if test="type != null and type != ''" >
+		         type=#{type,jdbcType=CHAR},
+		     </if>
+		     <if test="auditDesc != null and auditDesc != ''" >
+		         audit_desc=#{auditDesc,jdbcType=VARCHAR},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.web.loan.entity.BusinessApplayAudit">
+	   	update jltfisp_business_applay 
+	  <set>
+	    user_id=#{userId,jdbcType=INTEGER},
+	    submit_date=#{submitDate,jdbcType=DATE},
+	    state=#{state,jdbcType=INTEGER},
+	    type=#{type,jdbcType=CHAR},
+	    audit_desc=#{auditDesc,jdbcType=VARCHAR},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	   <!-- 根据用户id获取用户申请贷款情况 -->
+   <select id="getBusinessApplayAuditByUserId" parameterType="map"  resultType  ="com.jltfisp.web.loan.entity.BusinessApplayAudit">
+    select 
+    jba.id as id,
+    jba.state as state
+    from jltfisp_business_applay jba 
+    where  jba.user_id =#{userId} and jba.type=#{type} ORDER BY jba.submit_date DESC limit 1
+   </select>
+   
+   	<!-- 根据用户id及申请业务类型  获取 正在审核中或审核通过的 业务审核信息 -->
+	<select id="checkApply" resultMap="BaseResultMap">
+		select
+        <include refid="Base_Column_List"/>
+        from jltfisp_business_applay a
+        where 
+	    	a.user_id = #{userId,jdbcType=INTEGER} 
+	    	and a.type = #{type,jdbcType=CHAR} 
+	    	and a.state in (0,1) 
+	</select>
+	
+	<!-- 根据用户id、申请业务类型及审核状态  获取 业务审核信息 -->
+	<select id="getBusinessApplayAudit" resultMap="BaseResultMap">
+		select
+        <include refid="Base_Column_List"/>
+        from jltfisp_business_applay a
+        where 
+	    	a.user_id = #{userId,jdbcType=INTEGER} 
+	    	and a.type = #{type,jdbcType=CHAR} 
+	    	and a.state = #{state,jdbcType=INTEGER}
+	</select>
+</mapper> 

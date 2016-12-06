@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.capital.dao.CapitalDao">
+    <resultMap type="com.jltfisp.web.column.entity.JltfispColumn" id="jltfispColumn">
+		<id property="id" column="id" />
+		<result property="columnName" column="columnName" />
+		<result property="columnType" column="columnType" />
+		<result property="parentColumn" column="parentColumn" />
+		<result property="columnNo" column="columnNo" />
+		<result property="image" column="image" />
+		<result property="columnDesc" column="columnDesc" />
+		<result property="isdelete" column="isdelete" />
+		<result property="createTime" column="createTime" />
+		<result property="createUserid" column="createUserid" />
+	</resultMap>
+	<!-- 查询专项资金二级列表，并按columnNo升序排列-->
+	<select id="getJltfispColumnList" resultMap="jltfispColumn" parameterType="int">
+	  select * from jltfisp_column_manage cm where cm.parentColumn=#{parentColumn} order by  columnNo asc
+	</select>
+	<!-- 查询专项资金二级列表下一级的具体信息的集合，并按发布时间降序排列 -->
+	<select id="getCapitalInfoList" resultType="com.jltfisp.web.capital.entity.JltfispCapital" parameterType="int">
+		 select * from jltfisp_capital ca,jltfisp_column_manage cm where cm.parentColumn=5 and ca.state=1 and  ca.column_id=cm.id and cm.columnNo=#{columnNo} order by  ca.publish_time desc
+	</select>
+	<!--更新浏览记录,浏览记录每访问一次，+1 -->
+	<update id="updateCapitalPv">
+		update jltfisp_capital  ca set ca.pv=ca.pv+1 where ca.state=1 and ca.id=#{id}
+	</update>
+	<!-- 查询专项资金最后一级的详细信息 -->
+	<select id="getCapitalDetail" resultType="com.jltfisp.web.capital.entity.JltfispCapital" parameterType="int">
+		select * from jltfisp_capital ca where ca.state=1 and ca.id=#{id}
+	</select>
+</mapper>

@@ -57,18 +57,61 @@
   </body>
 </html>
 <script type="text/javascript">
+     var firstYear;
+     var secondYear;
+     var thirdYear;
+     var fourYear;
+     <!--办公地址省份-->
+     var officeProv=${coAll.jltfispCoBase.officeProv};
+     <!--办公地址市级-->
+     var officeCity=${coAll.jltfispCoBase.officeCity};
+     <!--办公地址区县-->
+     var officeArea=${coAll.jltfispCoBase.officeArea};
+     
+     <!--生产地址省份-->
+     var productProv=${coAll.jltfispCoBase.productProv};
+     <!--生产地址市级-->
+     var productCity=${coAll.jltfispCoBase.productCity};
+     <!--生产地址区县-->
+     var productArea=${coAll.jltfispCoBase.productArea};
+     <!--获取当前业务申请类型-->
+     var applytype=${applytype};
+     <!--企业概况企业曾获得科技认定字段-->
+     var technologyOrFinance="${coAll.jltfispCoProfile.technologyOrFinance}";
+     var technologyOrFinanceList= new Array(); 
+     technologyOrFinanceList=technologyOrFinance.split(",");
     $(document).ready(function(e) {
-        $("#coBase").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
-        
+        $("#coBase ,#coDebt, #coProfit ,#coFinancial ,#coProfile, #coOther").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
+          <!--初始化页面数据-->
+          var Year=new Date();
+          firstYear=Year.getFullYear()-3;
+          secondYear=firstYear+1;
+          thirdYear=secondYear+1;
+          fourYear=thirdYear+1;
+          $('#year').eq(0).val(firstYear);
+          <!--初始化企业概况企业曾获得科技认定字段-->
+          for (i=0;i<technologyOrFinanceList.length ;i++ )
+          {
+          $('#technologyOrFinance'+technologyOrFinanceList[i]).attr("checked","checked");
+          } 
+          $('.lnav').html("<li class='active'>"+firstYear+"年</li><li>"+secondYear+"年</li><li>"+thirdYear+"年</li><li>"+fourYear+"年</li>");
+          $('#coProfit tr').eq(0).before("<tr><th>项目</th><th>"+firstYear+"年末</th><th>"+secondYear+"年末</th><th>"+thirdYear+"年末</th><th>"+fourYear+"年1~<select name='month' id='month'><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></th></tr>");
         <!--初始化办公地址下拉框-->
             $.ajax({
             type: "POST",
             url: "${path}/anon/area",
             dateType:"json",
             success: function(msg){
-              for(var i=0;i<msg.length;i++){  
-                    $("#officeProv").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+              $("#officeProv").append("<option value='"+msg[7].id+"'>"+msg[7].name+"</option>");  
+              for(var i=1;i<msg.length;i++){
+                     <!--默认吉林省顶头-->
+                    if(i!=7){
+                     $("#officeProv").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+                     }
                   } 
+                  if(null!=officeProv || ""!=officeProv){
+                  $("#officeProv   option[value='"+officeProv+"']").attr("selected",true);
+                  }
                   changCity($("#officeProv").val());
               }
         });
@@ -84,6 +127,9 @@
               $("#officeCity").html("");
               for(var i=0;i<msg.length;i++){
                     $("#officeCity").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+                  }
+              if(null!=officeCity || ""!=officeCity){
+                  $("#officeCity   option[value='"+officeCity+"']").attr("selected",true);
                   }
               changArea($("#officeCity").val());
               }
@@ -101,6 +147,9 @@
               for(var i=0;i<msg.length;i++){
                     $("#officeArea").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
                   }
+               if(null!=officeArea || ""!=officeArea){
+                  $("#officeArea   option[value='"+officeArea+"']").attr("selected",true);
+                  }    
               }
         });
   }
@@ -119,9 +168,16 @@
             url: "${path}/anon/area",
             dateType:"json",
             success: function(msg){
-              for(var i=0;i<msg.length;i++){  
-                    $("#productProv").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+               $("#productProv").append("<option value='"+msg[7].id+"'>"+msg[7].name+"</option>");  
+              for(var i=1;i<msg.length;i++){
+                    <!--默认吉林省顶头-->
+                    if(i!=7){
+                    $("#productProv").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>"); 
+                    }
                   } 
+                   if(null!=productProv || ""!=productProv){
+                  $("#productProv   option[value='"+productProv+"']").attr("selected",true);
+                  }
                   changProductCity($("#productProv").val());
               }
         });
@@ -137,6 +193,9 @@
               $("#productCity").html("");
               for(var i=0;i<msg.length;i++){
                     $("#productCity").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
+                  }
+               if(null!=productCity || ""!=productCity){
+                  $("#productCity   option[value='"+productCity+"']").attr("selected",true);
                   }
               changProductArea($("#productCity").val());
               }
@@ -154,6 +213,9 @@
               for(var i=0;i<msg.length;i++){
                     $("#productArea").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
                   }
+              if(null!=productArea || ""!=productArea){
+                  $("#productArea   option[value='"+productArea+"']").attr("selected",true);
+                  }
               }
         });
   }
@@ -165,6 +227,7 @@
         changProductArea($(this).val());
         }); 
         
+        <!--上传功能-->
         
         $('.proList .logbtn input').click(function(){
             var index=$(this).parents('.proList').index()-3;
@@ -191,9 +254,37 @@
         autoRisize();
 
         $('.lnav li').click(function(){
+            if(!$('#coDebt').validationEngine('validate')){
+               return false;
+               }
+            var index=$(this).index();
+            url='${path}/anon/loan/saveCoDebt';
+            data=$("#coDebt").serialize();
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
+            dateType:"json",
+            success: function(msg){
+                if(msg != 1){
+                    dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
+                    return false;
+                }else{
+                    if(index==0){
+                    coDebtTable(firstYear);
+                    }else if(index==1){
+                    coDebtTable(secondYear);
+                    }else if(index==2){
+                    coDebtTable(thirdYear);
+                    }else{
+                    coDebtTable(fourYear);
+                    }
+                }
+            }
+        });
             $(this).addClass('active').siblings().removeClass('active');
         });
-
+       
         $('.btnSave').click(function(){
             var index=$(this).parents('.nlistCont').index()-1;
             var url;
@@ -205,18 +296,33 @@
             url='${path}/anon/loan/saveCoBase';
             data=$("#coBase").serialize();
             }else if(index==2){
+            if(!$('#coProfile').validationEngine('validate')){
+               return false;
+               }
             url='${path}/anon/loan/saveCoProfile';
             data=$("#coProfile").serialize();
             }else if(index==3){
+            if(!$('#coDebt').validationEngine('validate')){
+               return false;
+               }
             url='${path}/anon/loan/saveCoDebt';
             data=$("#coDebt").serialize();
             }else if(index==4){
+            if(!$('#coProfit').validationEngine('validate')){
+               return false;
+               }
             url='${path}/anon/loan/saveCoProfit';
             data=$("#coProfit").serialize();
             }else if(index==5){
-            url='${path}/anon/loan/saveOnlineApply';
-            data=$("#coBase").serialize();
+            if(!$('#coOther').validationEngine('validate')){
+               return false;
+               }
+            url='${path}/anon/loan/saveCoOther';
+            data=$("#coOther").serialize();
             }else if(index==6){
+            if(!$('#coFinancial').validationEngine('validate')){
+               return false;
+               }
             url='${path}/anon/loan/saveCoFinancial';
             data=$("#coFinancial").serialize();
             }else{
@@ -231,10 +337,10 @@
             data: data,
             dateType:"json",
             success: function(msg){
-                if(msg != 1){
-                    dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
-                    return false;
-                }
+               if((index==4 && msg != 4) || (index!=4 && msg != 1 )){
+                dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
+                return false;
+               };
             }
         });
                 $(this).parents('.nlistCont').hide().next('.nlistCont').show();
@@ -242,4 +348,40 @@
                                     }
         });
     });
+<!--切换年份时获取该年费数据-->
+function coDebtTable(year){
+                    var year =year;
+                    $.ajax({
+                    type: "POST",
+                    url: "${path}/anon/loan/selectCoDebtTable",
+                    data: {year:year,applytype:applytype},
+                    dateType:"json",
+                    success: function(msg){
+                     $('#coDebt').html(msg);
+                     $('#year').val(year);
+                     $('#tabYear').html(year);
+             }
+             });
+}
+    
+          <!--上传附件-->
+function ajaxFileUpload(index,applytype) { 
+    var index=index;
+    $.ajaxFileUpload({
+        type: "POST",
+        url: '${path}/anon/loan/saveCoFile?index='+index+'&applytype='+applytype, 
+        secureuri: false,
+        fileElementId: 'UpFile'+index,
+        dataType:"text",
+        success: function(msg) {
+            if(msg =="0"){
+              dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
+              return false;
+            }else{
+              $("#coFile img").eq(index-1).attr("src","${path}/resource/fileImage/"+msg);
+            }
+        }
+    }); 
+} 
+<!--上传附件代码结束-->
 </script>

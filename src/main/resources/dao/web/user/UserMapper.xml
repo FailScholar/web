@@ -1,9 +1,344 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~ Copyright (c) 2016.11.10 by LiuFa.
-  ~ Copyright © 2016 Shenzhen GTA Education Tech Ltd. All rights reserved
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jltfisp.web.user.dao.UserMapper">
-</mapper>
+	<resultMap id="BaseResultMap" type="com.jltfisp.login.entity.JltfispUser">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="account_number" jdbcType="VARCHAR" property="accountNumber"  />
+		<result column="username" jdbcType="VARCHAR" property="username"  />
+		<result column="password" jdbcType="VARCHAR" property="password"  />
+		<result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone"  />
+		<result column="job_post" jdbcType="VARCHAR" property="jobPost"  />
+		<result column="department_name" jdbcType="VARCHAR" property="departmentName"  />
+		<result column="photo_path" jdbcType="VARCHAR" property="photoPath"  />
+		<result column="role_id" jdbcType="INTEGER" property="roleId"  />
+		<result column="contact" jdbcType="VARCHAR" property="contact"  />
+		<result column="social_code" jdbcType="VARCHAR" property="socialCode"  />
+		<result column="type" jdbcType="INTEGER" property="type"  />
+		<result column="is_delete" jdbcType="INTEGER" property="isDelete"  />
+		<result column="state" jdbcType="INTEGER" property="state"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="accountNumber != null and accountNumber != ''">
+		        and a.account_number=#{accountNumber,jdbcType=VARCHAR}
+		     </if>
+		     <if test="username != null and username != ''">
+		        and a.username like '%${username}%'
+		     </if>
+		     <if test="password != null and password != ''">
+		        and a.password=#{password,jdbcType=VARCHAR}
+		     </if>
+		     <if test="mobilePhone != null and mobilePhone != ''">
+		        and a.mobile_phone=#{mobilePhone,jdbcType=VARCHAR}
+		     </if>
+		     <if test="jobPost != null and jobPost != ''">
+		        and a.job_post=#{jobPost,jdbcType=VARCHAR}
+		     </if>
+		     <if test="departmentName != null and departmentName != ''">
+		        and a.department_name=#{departmentName,jdbcType=VARCHAR}
+		     </if>
+		     <if test="photoPath != null and photoPath != ''">
+		        and a.photo_path=#{photoPath,jdbcType=VARCHAR}
+		     </if>
+		     <if test="roleId != null and roleId != ''">
+		        and a.id in(select sur.user_id from sys_user_role sur,sys_role sr where sur.role_id = sr.id and sur.type=0 and sr.id=#{roleId,jdbcType=INTEGER})
+		     </if>
+		     <if test="contact != null and contact != ''">
+		        and a.contact=#{contact,jdbcType=VARCHAR}
+		     </if>
+		     <if test="socialCode != null and socialCode != ''">
+		        and a.social_code=#{socialCode,jdbcType=VARCHAR}
+		     </if>
+		     <if test="type != null and type != ''">
+		        and a.type=#{type,jdbcType=INTEGER}
+		     </if>
+		     <if test="isDelete != null and isDelete != '' or isDelete==0">
+		        and a.is_delete=#{isDelete,jdbcType=INTEGER}
+		     </if>
+		     <if test="state != null and state != ''">
+		        and a.state=#{state,jdbcType=INTEGER}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.account_number,
+		     a.username,
+		     a.password,
+		     a.mobile_phone,
+		     a.job_post,
+		     a.department_name,
+		     a.photo_path,
+		     a.role_id,
+		     a.contact,
+		     a.social_code,
+		     a.type,
+		     a.is_delete,
+		     a.state
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.login.entity.JltfispUser" resultType="java.lang.Integer">
+        select count(1) from jltfisp_user a
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_user a
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_user a
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_user a set a.is_delete = '1'
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_user 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 批量删除 -->
+	<delete id="deleteBatch" parameterType="java.util.List">
+	   update jltfisp_user a set a.is_delete = '1'
+	     where id IN
+        <foreach collection="list" item = "item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+	
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.login.entity.JltfispUser">
+	   insert into jltfisp_user 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          account_number,
+	          username,
+	          password,
+	          mobile_phone,
+	          job_post,
+	          department_name,
+	          photo_path,
+	          role_id,
+	          contact,
+	          social_code,
+	          type,
+	          is_delete,
+	          state,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{accountNumber,jdbcType=VARCHAR},
+	    	#{username,jdbcType=VARCHAR},
+	    	#{password,jdbcType=VARCHAR},
+	    	#{mobilePhone,jdbcType=VARCHAR},
+	    	#{jobPost,jdbcType=VARCHAR},
+	    	#{departmentName,jdbcType=VARCHAR},
+	    	#{photoPath,jdbcType=VARCHAR},
+	    	#{roleId,jdbcType=INTEGER},
+	    	#{contact,jdbcType=VARCHAR},
+	    	#{socialCode,jdbcType=VARCHAR},
+	    	#{type,jdbcType=INTEGER},
+	    	#{isDelete,jdbcType=INTEGER},
+	    	#{state,jdbcType=INTEGER},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.login.entity.JltfispUser">
+	   insert into jltfisp_user 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="accountNumber != null and accountNumber != ''" >
+	          account_number,
+	       </if>
+	   	   <if test="username != null and username != ''" >
+	          username,
+	       </if>
+	   	   <if test="password != null and password != ''" >
+	          password,
+	       </if>
+	   	   <if test="mobilePhone != null and mobilePhone != ''" >
+	          mobile_phone,
+	       </if>
+	   	   <if test="jobPost != null and jobPost != ''" >
+	          job_post,
+	       </if>
+	   	   <if test="departmentName != null and departmentName != ''" >
+	          department_name,
+	       </if>
+	   	   <if test="photoPath != null and photoPath != ''" >
+	          photo_path,
+	       </if>
+	   	   <if test="roleId != null and roleId != ''" >
+	          role_id,
+	       </if>
+	   	   <if test="contact != null and contact != ''" >
+	          contact,
+	       </if>
+	   	   <if test="socialCode != null and socialCode != ''" >
+	          social_code,
+	       </if>
+	   	   <if test="type != null and type != ''" >
+	          type,
+	       </if>
+	   	   <if test="isDelete != null and isDelete != ''" >
+	          is_delete,
+	       </if>
+	   	   <if test="state != null and state != ''" >
+	          state,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="accountNumber != null and accountNumber != ''">
+    		#{accountNumber,jdbcType=VARCHAR},
+    		</if>
+    		<if test="username != null and username != ''">
+    		#{username,jdbcType=VARCHAR},
+    		</if>
+    		<if test="password != null and password != ''">
+    		#{password,jdbcType=VARCHAR},
+    		</if>
+    		<if test="mobilePhone != null and mobilePhone != ''">
+    		#{mobilePhone,jdbcType=VARCHAR},
+    		</if>
+    		<if test="jobPost != null and jobPost != ''">
+    		#{jobPost,jdbcType=VARCHAR},
+    		</if>
+    		<if test="departmentName != null and departmentName != ''">
+    		#{departmentName,jdbcType=VARCHAR},
+    		</if>
+    		<if test="photoPath != null and photoPath != ''">
+    		#{photoPath,jdbcType=VARCHAR},
+    		</if>
+    		<if test="roleId != null and roleId != ''">
+    		#{roleId,jdbcType=INTEGER},
+    		</if>
+    		<if test="contact != null and contact != ''">
+    		#{contact,jdbcType=VARCHAR},
+    		</if>
+    		<if test="socialCode != null and socialCode != ''">
+    		#{socialCode,jdbcType=VARCHAR},
+    		</if>
+    		<if test="type != null and type != ''">
+    		#{type,jdbcType=INTEGER},
+    		</if>
+    		<if test="isDelete != null and isDelete != ''">
+    		#{isDelete,jdbcType=INTEGER},
+    		</if>
+    		<if test="state != null and state != ''">
+    		#{state,jdbcType=INTEGER},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.login.entity.JltfispUser">
+	   	update jltfisp_user 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="accountNumber != null and accountNumber != ''" >
+		         account_number=#{accountNumber,jdbcType=VARCHAR},
+		     </if>
+		     <if test="username != null and username != ''" >
+		         username=#{username,jdbcType=VARCHAR},
+		     </if>
+		     <if test="password != null and password != ''" >
+		         password=#{password,jdbcType=VARCHAR},
+		     </if>
+		     <if test="mobilePhone != null and mobilePhone != ''" >
+		         mobile_phone=#{mobilePhone,jdbcType=VARCHAR},
+		     </if>
+		     <if test="jobPost != null and jobPost != ''" >
+		         job_post=#{jobPost,jdbcType=VARCHAR},
+		     </if>
+		     <if test="departmentName != null and departmentName != ''" >
+		         department_name=#{departmentName,jdbcType=VARCHAR},
+		     </if>
+		     <if test="photoPath != null and photoPath != ''" >
+		         photo_path=#{photoPath,jdbcType=VARCHAR},
+		     </if>
+		     <if test="roleId != null and roleId != ''" >
+		         role_id=#{roleId,jdbcType=INTEGER},
+		     </if>
+		     <if test="contact != null and contact != ''" >
+		         contact=#{contact,jdbcType=VARCHAR},
+		     </if>
+		     <if test="socialCode != null and socialCode != ''" >
+		         social_code=#{socialCode,jdbcType=VARCHAR},
+		     </if>
+		     <if test="type != null and type != ''" >
+		         type=#{type,jdbcType=INTEGER},
+		     </if>
+		     <if test="isDelete != null and isDelete != ''" >
+		         is_delete=#{isDelete,jdbcType=INTEGER},
+		     </if>
+		     <if test="state != null and state != ''" >
+		         state=#{state,jdbcType=INTEGER},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.login.entity.JltfispUser">
+	   	update jltfisp_user 
+	  <set>
+	    account_number=#{accountNumber,jdbcType=VARCHAR},
+	    username=#{username,jdbcType=VARCHAR},
+	    password=#{password,jdbcType=VARCHAR},
+	    mobile_phone=#{mobilePhone,jdbcType=VARCHAR},
+	    job_post=#{jobPost,jdbcType=VARCHAR},
+	    department_name=#{departmentName,jdbcType=VARCHAR},
+	    photo_path=#{photoPath,jdbcType=VARCHAR},
+	    role_id=#{roleId,jdbcType=INTEGER},
+	    contact=#{contact,jdbcType=VARCHAR},
+	    social_code=#{socialCode,jdbcType=VARCHAR},
+	    type=#{type,jdbcType=INTEGER},
+	    is_delete=#{isDelete,jdbcType=INTEGER},
+	    state=#{state,jdbcType=INTEGER},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	<insert id="correlationRoles">
+        INSERT INTO sys_user_role (user_id, role_id, type) VALUES (#{0}, #{1}, 0)
+    </insert>
+</mapper> 

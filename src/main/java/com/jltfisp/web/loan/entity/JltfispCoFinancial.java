@@ -6,7 +6,7 @@
 package com.jltfisp.web.loan.entity;
 
 import javax.persistence.*;
-
+@Table(name = "jltfisp_co_financial")
 public class JltfispCoFinancial {
     
     /**
@@ -32,7 +32,7 @@ public class JltfispCoFinancial {
      * 应收款余额
      */
     @Column(name = "yszkye")
-    private double yszkye;
+    private String yszkye;
 
     /**
      * 其他应收款余额
@@ -50,7 +50,7 @@ public class JltfispCoFinancial {
      * 百分比
      */
     @Column(name = "percent")
-    private double percent;
+    private String percent;
     
     
     /**
@@ -69,13 +69,13 @@ public class JltfispCoFinancial {
      * 贷款金额
      */
     @Column(name = "loanAccount")
-    private double loanAccount;
+    private String loanAccount;
     
     /**
      * 担保方式
      */
     @Column(name = "sureMethod")
-    private double sureMethod;
+    private String sureMethod;
     
     /**
      * 开始日期
@@ -95,6 +95,85 @@ public class JltfispCoFinancial {
      */
     @Column(name = "otherrz")
     private String otherrz;
+    
+    
+    /**
+     * 民间借款
+     */
+    @Column(name = "mjjk")
+    private String mjjk;
+    
+    /**
+     * 关系
+     */
+    @Column(name = "gx")
+    private String gx;
+    
+    
+    /**
+     * 注册资本
+     */
+    @Column(name = "zczb")
+    private String zczb;
+    
+    /**
+     * 主营业务
+     */
+    @Column(name = "zyyw")
+    private String zyyw;
+    
+    /**
+     * 主营收入
+     */
+    @Column(name = "zysr")
+    private String zysr;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "createTime")
+    private String createTime;
+    
+    /**
+     * 创建人
+     */
+    @Column(name = "createUserid")
+    private int createUserid;
+    
+    /**
+     * 序号
+     */
+    @Column(name = "orderNum")
+    private String orderNum;
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+
+	public int getCreateUserid() {
+		return createUserid;
+	}
+
+
+	public void setCreateUserid(int createUserid) {
+		this.createUserid = createUserid;
+	}
+
+
+	public String getOrderNum() {
+		return orderNum;
+	}
+
+
+	public void setOrderNum(String orderNum) {
+		this.orderNum = orderNum;
+	}
 
 
 	public int getId() {
@@ -127,12 +206,12 @@ public class JltfispCoFinancial {
 	}
 
 
-	public double getYszkye() {
+	public String getYszkye() {
 		return yszkye;
 	}
 
 
-	public void setYszkye(double yszkye) {
+	public void setYszkye(String yszkye) {
 		this.yszkye = yszkye;
 	}
 
@@ -157,12 +236,12 @@ public class JltfispCoFinancial {
 	}
 
 
-	public double getPercent() {
+	public String getPercent() {
 		return percent;
 	}
 
 
-	public void setPercent(double percent) {
+	public void setPercent(String percent) {
 		this.percent = percent;
 	}
 
@@ -187,22 +266,22 @@ public class JltfispCoFinancial {
 	}
 
 
-	public double getLoanAccount() {
+	public String getLoanAccount() {
 		return loanAccount;
 	}
 
 
-	public void setLoanAccount(double loanAccount) {
+	public void setLoanAccount(String loanAccount) {
 		this.loanAccount = loanAccount;
 	}
 
 
-	public double getSureMethod() {
+	public String getSureMethod() {
 		return sureMethod;
 	}
 
 
-	public void setSureMethod(double sureMethod) {
+	public void setSureMethod(String sureMethod) {
 		this.sureMethod = sureMethod;
 	}
 
@@ -235,5 +314,56 @@ public class JltfispCoFinancial {
 	public void setOtherrz(String otherrz) {
 		this.otherrz = otherrz;
 	}
+
+
+	public String getMjjk() {
+		return mjjk;
+	}
+
+
+	public void setMjjk(String mjjk) {
+		this.mjjk = mjjk;
+	}
+
+
+	public String getGx() {
+		return gx;
+	}
+
+
+	public void setGx(String gx) {
+		this.gx = gx;
+	}
+
+
+	public String getZczb() {
+		return zczb;
+	}
+
+
+	public void setZczb(String zczb) {
+		this.zczb = zczb;
+	}
+
+
+	public String getZyyw() {
+		return zyyw;
+	}
+
+
+	public void setZyyw(String zyyw) {
+		this.zyyw = zyyw;
+	}
+
+
+	public String getZysr() {
+		return zysr;
+	}
+
+
+	public void setZysr(String zysr) {
+		this.zysr = zysr;
+	}
+
 
 }

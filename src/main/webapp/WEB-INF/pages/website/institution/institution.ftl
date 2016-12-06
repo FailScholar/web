@@ -17,104 +17,35 @@
               <div class="content">
                   <div class="info">
                       <ul class="infoTab">
-                          <li <#if type=="1">class="active"</#if>><a href="javascript:;">合作银行</a></li>
-                          <li <#if type=="2">class="active"</#if>><a href="javascript:;">担保公司</a></li>
-                          <li <#if type=="3">class="active"</#if>><a href="javascript:;">租赁公司</a></li>
-                          <li <#if type=="4">class="active"</#if>><a href="javascript:;">保险公司</a></li>
-                          <li <#if type=="5">class="active"</#if>><a href="javascript:;">中介机构</a></li>
-                          <li>
-                              <select>
-                                  <option>投资机构</option>
-                                  <option>小贷公司</option>
-                              </select>&nbsp;
-                          </li>
+                      <#if (columnList?size<5)>
+                     	 	<#list columnList as columnList>
+				        		 <li tips="${columnList.id}">
+				         			<a href="javascript:void(0);" onclick="getInstitutionList(${columnList.id})">${columnList.columnName}</a>
+				        	 	 </li>
+				      		</#list> 
+				      <#else>
+				     	  <#list foreFiveList as foreFiveList>
+				        		 <li tips="${foreFiveList.id}">
+				         			<a href="javascript:void(0);" onclick="getInstitutionList(${foreFiveList.id})">${foreFiveList.columnName}</a>
+				        	 	 </li>
+				      	 </#list> 
+ 				       	 <li>
+	 				       	 <select id="selectId" onchange="getList()">
+	 				       		<option value="0">-选择更多机构-</option>
+	 				       	 	<#list afterFiveList as afterFiveList>
+	 				       	 		<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
+	 				       	 	</#list>
+	 				       	 </select>
+ 				       	 </li>
+				      </#if>
+				       
                       </ul>
                       <div class="clear"></div>
-                       <a href="${path}/institution/institutionApply" class="apply2">申请成为合作机构</a>
-                      <div class="infoList" <#if type!="1">style="display:none;"</#if>>
-                          <ul class="applyList apy">
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="${path}/anon/institutionDetail">合作银行-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="#">合作银行-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="#">合作银行-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                      <div class="infoList" <#if type!="2">style="display:none;"</#if>>
-                          <ul class="applyList apy">
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="${path}/anon/institutionDetail">担保公司-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                      <div class="infoList" <#if type!="3">style="display:none;"</#if>>
-                          <ul class="applyList apy">
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="#">租赁公司-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                      <div class="infoList" <#if type!="4">style="display:none;"</#if>>
-                          <ul class="applyList apy">
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="#">保险公司-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                      <div class="infoList" <#if type!="5">style="display:none;"</#if>>
-                          <ul class="applyList apy">
-                              <li>
-                                  <img style="width: 120px;height: 137px;" src="${path}/resource/images/img3.jpg" alt="img" class="appImg fl" />
-                                  <div class="appDetail ap3 fr">
-                                      <h3 class="fl"><a href="#">中介机构-吉林融资担保</a></h3>
-                                      <div class="clear"></div>
-                                      <p>自成立以来，创业接力担保致力于产品和服务的创新，与上海市科委及政策银行、商业银行等合作，成功推出了“科贷通履约担保”、“集合统贷”、“集合信托”、“结算通宝”等产品，为中小企业解决融资难题开辟路径，已为近700家企业提供累计30亿元的融资担保贷款。</p>
-                                      <p class="contact"><span class="sp1">联系人：周梦奇</span><span class="sp2">电话：53413512</span><span class="sp3">地址：银城中路200号中银大厦36楼</span></p>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
+                      <input type="hidden" id="applyColumnId" />
+                      <a href="javascript: void(0);" class="apply2" onclick="applyInstitution();">申请成为合作机构</a>
+                     
                   </div>
+ 				<div id="showContent"></div>
                   <div class="clear"></div>
                   <div class="page">
                       <a href="javascript:;">&lt;</a>
@@ -137,4 +68,45 @@
 
   <#include "website/common/footer.ftl" />
   </body>
+   <script type="text/javascript">
+   $(function(){
+	  $("div.info ul.infoTab").find("li").eq(0).addClass("active");
+	  var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
+	  getInstitutionList(tips);
+   });
+
+ 	//获取子栏目内容列表
+    function getInstitutionList(columnId){
+    	$("#applyColumnId").val(columnId);
+         $.ajax({
+			  type : "POST",
+			  url : "${path}/anon/getInstitutionList",
+			  data:{"columnId":columnId},
+			  dataType : "html",
+			  success:function(data){
+				$("#showContent").html(data);//要刷新的div
+			  },
+			  error: function() {
+                 alert("失败，请稍后再试！");
+              }
+		});
+	}
+
+	function getList(){
+	  var columnId = $('select option:selected').val();
+	  if(columnId!=0){
+		  getInstitutionList(columnId);
+	  }
+	}
+	
+	function applyInstitution(){
+		$.post("${path}/institution/checkApply",function(msg){
+			if(msg != ""){
+				dialog.tipsPop('ban-pop','提示',msg,'确定');
+			}else{
+				$(".content").load("${path}/anon/institutionGuide",{columnId: $("#applyColumnId").val()});
+			}
+		});
+	}
+   </script>
 </html>

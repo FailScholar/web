@@ -65,3 +65,35 @@ function setColumnIndex(index) {
     $.cookie('navigation', Number(index), {path: '/'});
 }
 
+/**
+ * @author LiuFa
+ * @description  全局状态判断
+ */
+$(document).ajaxError(function (event, request, settings) {
+    if (request.status == 401) {
+        dialog.tipsPop('ban-pop','提示:','您没有相应的权限',function () {});
+        return false;
+    }
+    if(request.status == 666){
+        dialog.tipsPop('ban-pop','提示:','您尚未登录或会话已过期',function () {
+            window.location = path +'/login';
+        });
+        return false;
+    }
+});
+
+/**
+ * @author LiuFa
+ * @param action, data, n
+ * @description  以post的方式打开新窗口
+ */
+function openBlank(action, data, n) {
+    var form = $("<form/>").attr('action', action).attr('method', 'post');
+    if (n)
+        form.attr('target', '_blank');
+    var input = '';
+    $.each(data, function (i, n) {
+        input += '<input type="hidden" name="' + i + '" value="' + n + '" />';
+    });
+    form.append(input).appendTo("body").css('display', 'none').submit();
+}

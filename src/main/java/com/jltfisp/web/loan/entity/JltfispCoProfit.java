@@ -28,103 +28,109 @@ public class JltfispCoProfit {
      */
     @Column(name = "year")
     private String year;
-
+    
     /**
+     * 当年年份
+     */
+    @Column(name = "month")
+    private String month;
+
+	/**
      * 主营业务收入
      */
     @Column(name = "main_income")
-    private double mainincome;
+    private String mainincome;
 
     /**
      * 减：主营业务成本
      */
     @Column(name = "main_cost")
-    private double maincost;
+    private String maincost;
 
     /**
      * 减：主营业务税金及附加
      */
     @Column(name = "main_tax")
-    private double maintax;
+    private String maintax;
 
     /**
      * 主营业务利润
      */
     @Column(name = "main_profit")
-    private double mainprofit;
+    private String mainprofit;
 
     /**
      * 加：其他业务利润
      */
     @Column(name = "other_profit")
-    private double otherprofit;
+    private String otherprofit;
 
 
     /**
      * 减：营业费用
      */
     @Column(name = "business_cost")
-    private double businesscost;
+    private String businesscost;
     
     /**
      * 减：管理费
      */
     @Column(name = "manage_cost")
-    private double managecost;
+    private String managecost;
 
     /**
      * 减：财务费用
      */
     @Column(name = "finance_cost")
-    private double financecost;
+    private String financecost;
 
     /**
      * 营业利润
      */
     @Column(name = "business_profit")
-    private double businessprofit;
+    private String businessprofit;
     
     /**
      * 加：投资收益
      */
     @Column(name = "investment_income")
-    private double investmentincome;
+    private String investmentincome;
     
     /**
      * 加：营业外收入
      */
     @Column(name = "other_income")
-    private double otherincome;
+    private String otherincome;
     
     /**
      * 加：营业外支出
      */
     @Column(name = "other_pay")
-    private double otherpay;
+    private String otherpay;
     
     /**
      * 减：资产减值损失
      */
     @Column(name = "asset_loss")
-    private double assetloss;
+    private String assetloss;
     
     /**
      * 利润总额
      */
     @Column(name = "profit_amount")
-    private double profitamount;
+    private String profitamount;
     
     /**
      * 减：所得税
      */
     @Column(name = "income_tax")
-    private double incometax;
+    private String incometax;
     
     /**
      * 净利润
      */
     @Column(name = "net_profit")
-    private double netprofit;
+    private String netprofit;
 
 	public int getId() {
 		return id;
@@ -150,132 +156,140 @@ public class JltfispCoProfit {
 		this.year = year;
 	}
 
-	public double getMainincome() {
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getMainincome() {
 		return mainincome;
 	}
 
-	public void setMainincome(double mainincome) {
+	public void setMainincome(String mainincome) {
 		this.mainincome = mainincome;
 	}
 
-	public double getMaincost() {
+	public String getMaincost() {
 		return maincost;
 	}
 
-	public void setMaincost(double maincost) {
+	public void setMaincost(String maincost) {
 		this.maincost = maincost;
 	}
 
-	public double getMaintax() {
+	public String getMaintax() {
 		return maintax;
 	}
 
-	public void setMaintax(double maintax) {
+	public void setMaintax(String maintax) {
 		this.maintax = maintax;
 	}
 
-	public double getMainprofit() {
+	public String getMainprofit() {
 		return mainprofit;
 	}
 
-	public void setMainprofit(double mainprofit) {
+	public void setMainprofit(String mainprofit) {
 		this.mainprofit = mainprofit;
 	}
 
-	public double getOtherprofit() {
+	public String getOtherprofit() {
 		return otherprofit;
 	}
 
-	public void setOtherprofit(double otherprofit) {
+	public void setOtherprofit(String otherprofit) {
 		this.otherprofit = otherprofit;
 	}
 
-	public double getBusinesscost() {
+	public String getBusinesscost() {
 		return businesscost;
 	}
 
-	public void setBusinesscost(double businesscost) {
+	public void setBusinesscost(String businesscost) {
 		this.businesscost = businesscost;
 	}
 
-	public double getManagecost() {
+	public String getManagecost() {
 		return managecost;
 	}
 
-	public void setManagecost(double managecost) {
+	public void setManagecost(String managecost) {
 		this.managecost = managecost;
 	}
 
-	public double getFinancecost() {
+	public String getFinancecost() {
 		return financecost;
 	}
 
-	public void setFinancecost(double financecost) {
+	public void setFinancecost(String financecost) {
 		this.financecost = financecost;
 	}
 
-	public double getBusinessprofit() {
+	public String getBusinessprofit() {
 		return businessprofit;
 	}
 
-	public void setBusinessprofit(double businessprofit) {
+	public void setBusinessprofit(String businessprofit) {
 		this.businessprofit = businessprofit;
 	}
 
-	public double getInvestmentincome() {
+	public String getInvestmentincome() {
 		return investmentincome;
 	}
 
-	public void setInvestmentincome(double investmentincome) {
+	public void setInvestmentincome(String investmentincome) {
 		this.investmentincome = investmentincome;
 	}
 
-	public double getOtherincome() {
+	public String getOtherincome() {
 		return otherincome;
 	}
 
-	public void setOtherincome(double otherincome) {
+	public void setOtherincome(String otherincome) {
 		this.otherincome = otherincome;
 	}
 
-	public double getOtherpay() {
+	public String getOtherpay() {
 		return otherpay;
 	}
 
-	public void setOtherpay(double otherpay) {
+	public void setOtherpay(String otherpay) {
 		this.otherpay = otherpay;
 	}
 
-	public double getAssetloss() {
+	public String getAssetloss() {
 		return assetloss;
 	}
 
-	public void setAssetloss(double assetloss) {
+	public void setAssetloss(String assetloss) {
 		this.assetloss = assetloss;
 	}
 
-	public double getProfitamount() {
+	public String getProfitamount() {
 		return profitamount;
 	}
 
-	public void setProfitamount(double profitamount) {
+	public void setProfitamount(String profitamount) {
 		this.profitamount = profitamount;
 	}
 
-	public double getIncometax() {
+	public String getIncometax() {
 		return incometax;
 	}
 
-	public void setIncometax(double incometax) {
+	public void setIncometax(String incometax) {
 		this.incometax = incometax;
 	}
 
-	public double getNetprofit() {
+	public String getNetprofit() {
 		return netprofit;
 	}
 
-	public void setNetprofit(double netprofit) {
+	public void setNetprofit(String netprofit) {
 		this.netprofit = netprofit;
 	}
-    
+
 }

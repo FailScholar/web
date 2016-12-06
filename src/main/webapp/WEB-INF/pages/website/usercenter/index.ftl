@@ -7,12 +7,56 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
+    <link href="${path }/resource/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
     <#include "website/common/common.ftl" />
     <title>用户中心</title>
       <style type="text/css">
           .ifo {width:590px;}
           .per .sde { width:130px;}
       </style>
+        <script type="text/javascript">
+
+  	var imgDialog;
+function ajaxFileUpload1() {  
+    if($("#uploadFile").val()==''){
+        alert('请选择图片上传');
+        return false;
+    }
+    $.ajaxFileUpload({  
+        url: '${path}/imageScreenshot/uploadImage?pop=1',  
+        secureuri: false,  
+        fileElementId: 'uploadFile',  
+        dataType: 'json',  
+        success: function(json, status) {
+            if(json.result=='true'){
+                var filePath = json.filePath;
+                var width = json.width;
+                var height = json.height;
+                var url = '${path}/imageScreenshot/imageCrop?pop=1&filePath='+filePath+"&width="+width+"&height="+height;
+                imgDialog = dialog({
+					width: 600,
+					height : 400,
+					padding: 10,
+					content: $('#dialogShow').load(url)
+				});
+               imgDialog.showModal();
+            }else{
+                alert(json.message);
+            }
+        },error: function (data, status, e)//服务器响应失败处理函数
+        {
+            alert(e);
+        }
+    }  
+);
+    return false;  
+} 
+
+function userForm(){
+	$.cookie('userinfoIndex', 1, {path: '/'});
+	$("#insForm").submit();
+}
+  </script>
   </head>
 
   <body>
@@ -23,18 +67,18 @@
                       <ul class="infoTab">
                           <li class="active"><a href="javascript:;">用户中心</a></li>
                           <li><a href="javascript:;">用户信息</a></li>
-                          <li><a href="javascript:;">通知通告</a></li>
+                          <li><a href="${path}/message/page">通知通告</a></li>
 
-                          <@shiro.hasRole name="企业会员">
-                              <li><a href="javascript:;">业务管理</a></li>
-                          </@shiro.hasRole>
+                          <@shiro.hasAnyRoles name="企业会员,机构会员">
+                              <li><a href="${path}/business/page">业务管理</a></li>
+                          </@shiro.hasAnyRoles>
 
-                          <@shiro.hasAnyRoles name="个人会员,企业会员">
-                              <li><a href="javascript:;">我要咨询</a></li>
+                          <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
+                              <li><a href="${path}/communicate/page">我要咨询</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasRole name="专家会员">
-                              <li><a href="javascript:;">我要解答</a></li>
+                              <li><a href="${path}/communicate/expertPage">我要解答</a></li>
                           </@shiro.hasRole>
 
                       </ul>
@@ -45,38 +89,43 @@
               <#--用户中心开始-->
                   <div class="infoList pi">
                       <div class="personInfo fl">
-                          <img src="${path}/resource/images/head1.jpg" alt="head" class="fl" />
+                          <img src="${path}${user.photoPath}" alt="head" class="fl" />
                           <div class="me fr">
-                              <h3>张小盼</h3>
-                              <p>用户名：wi拉拉</p>
-                              <p>手机号：15155556666</p>
+                              <h3>${user.username}</h3>
+                              <p>用户名：${user.accountNumber}</p>
+                              <p>手机号：${user.mobilePhone}</p>
                           </div>
                       </div>
                       <div class="setInfo fr">
                           <h2>申请认证</h2>
-                          <@shiro.hasRole name="个人会员">
+                          <@shiro.hasAnyRoles name="个人会员">
                           <#--最多显示7个，多的显示更多-->
-                              <a href="javascript:;">申请成为科技金融专家</a>
-                              <a href="javascript:;">申请成为科技金融专员</a>
-                              <a href="javascript:;">申请成为科技信贷专员</a>
-                              <a href="javascript:;"><span class="bds_more">更多></span></a>
+                              <#list columnList as column>
+                              	<#if (column_index <7)>
+								 <a href="javascript:;">${column.columnName}</a>
+							  	</#if>
+							  </#list>
+                              <#if (columnList?size >6)>
+                              	<a href="${path}/anon/institution"><span class="bds_more">更多></span></a>
+                              </#if>
+                              
                               <p></p>
-                          </@shiro.hasRole>
-                          <@shiro.hasRole name="专家会员">
-                              您已申请成为XXX专家
-                          </@shiro.hasRole>
-                          <@shiro.hasRole name="企业会员">
+                          </@shiro.hasAnyRoles>
+                          <@shiro.hasAnyRoles name="专家会员,机构会员">
+                              您已申请成为${user.roleName}
+                          </@shiro.hasAnyRoles>
+                          <@shiro.hasAnyRoles name="企业会员">
                           <#--最多显示7个，多的显示更多-->
-                              <a href="${path}/institution/institutionApply">申请成为合作银行</a>
-                              <a href="${path}/institution/institutionApply">申请成为投资机构</a>
-                              <a href="${path}/institution/institutionApply">申请成为担保公司</a>
-                              <a href="${path}/institution/institutionApply">申请成为租赁公司</a>
-                              <a href="${path}/institution/institutionApply">申请成为中介机构</a>
-                              <a href="${path}/institution/institutionApply">申请成为小贷公司</a>
-                              <a href="${path}/institution/institutionApply">申请成为保险公司</a>
-                              <a href="javascript:;"><span class="bds_more">更多></span></a>
+                              <#list columnList as column>
+                              	<#if (column_index <7)>
+								 <a href="${path}/institution/institutionApply">${column.columnName}</a>
+							  	</#if>
+							  </#list>
+                              <#if (columnList?size >6)>
+                              	<a href="${path}/anon/institution"><span class="bds_more">更多></span></a>
+                              </#if>
                               <p></p>
-                          </@shiro.hasRole>
+                          </@shiro.hasAnyRoles>
                       </div>
                       <div class="clear"></div>
                   </div>
@@ -88,14 +137,17 @@
                   <#--用户信息开始-->
               <@shiro.hasAnyRoles name="个人会员,专家会员">
                   <div class="infoList pi" style="display:none;">
+                   	<form action="${path}/user/updateUser" method="post" id="insForm">
+                  	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
+                  	  <input type="hidden" name="photoPath" id="photoPath"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
                               <div class="uploadImg fl">
-                                  <img src="${path}/resource/images/head2.jpg" alt="head" />
+                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px"/>
                                   <div class="upload">
                                       <div></div>
-                                      <input type="file" />
+                                      <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()"/>
                                   </div>
                               </div>
                               <div class="tip fl">
@@ -107,53 +159,57 @@
                           <div class="per">
                               <span class="sde fl">用户邮箱：</span>
                               <div class="fl">
-                                  <input type="text" value="250250250" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.accountNumber}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">姓名：</span>
                               <div class="fl">
-                                  <input type="text" value="张三三" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.username}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">手机：</span>
                               <div class="fl">
-                                  <input type="text" value="15900002222" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.mobilePhone}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">工作单位：</span>
                               <div class="fl">
-                                  <input type="text" value="合肥国泰安" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.jobPost}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">所属部门：</span>
                               <div class="fl">
-                                  <input type="text" value="教育资源部门" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.departmentName}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="clear"></div>
                           <div class="grad"></div>
                           <input value="修 改" class="btnCom mod" type="button">
                           <div class="btnHide">
-                              <input value="确 定" class="btnCom" type="button">
+                              <input value="确 定" class="btnCom" type="button" onclick="userForm()">
                               <input value="取 消" class="btnCom btnCle" type="button">
                           </div>
                       </div>
+                      </form>
                   </div>
               </@shiro.hasAnyRoles>
-              <@shiro.hasAnyRoles name="企业会员">
+              <@shiro.hasAnyRoles name="企业会员,机构会员">
                   <div class="infoList pi" style="display:none;">
+                  <form action="${path}/user/updateUser" method="post" id="insForm">
+                  	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
+                  	  <input type="hidden" name="photoPath" id="photoPath"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
                               <div class="uploadImg fl">
-                                  <img src="${path}/resource/images/head2.jpg" alt="head" />
+                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px"/>
                                   <div class="upload">
                                       <div></div>
-                                      <input type="file" />
+                                      <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()"/>
                                   </div>
                               </div>
                               <div class="tip fl">
@@ -165,41 +221,42 @@
                           <div class="per">
                               <span class="sde fl">用户邮箱：</span>
                               <div class="fl">
-                                  <input type="text" value="250250250" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.accountNumber}" readonly="readonly" class="txt"/>
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">企业名称：</span>
                               <div class="fl">
-                                  <input type="text" value="张三三" readonly="readonly" class="txt" />
+                                  <input type="text" name="username" value="${user.username}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">联系人：</span>
                               <div class="fl">
-                                  <input type="text" value="合肥国泰安" readonly="readonly" class="txt" />
+                                  <input type="text" name="contact" value="${user.contact}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">手机：</span>
                               <div class="fl">
-                                  <input type="text" value="15900002222" readonly="readonly" class="txt" />
+                                  <input type="text" name="mobilePhone" value="${user.mobilePhone}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">统一社会信用代码：</span>
                               <div class="fl">
-                                  <input type="text" value="12345678910" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.socialCode}" readonly="readonly" class="txt" />
                               </div>
                           </div>
                           <div class="clear"></div>
                           <div class="grad"></div>
                           <input value="修 改" class="btnCom mod" type="button">
                           <div class="btnHide">
-                              <input value="确 定" class="btnCom" type="button">
+                              <input value="确 定" class="btnCom" type="button" onclick="userForm()">
                               <input value="取 消" class="btnCom btnCle" type="button">
                           </div>
                       </div>
+                      </form>
                   </div>
               </@shiro.hasAnyRoles>
                   <#--用户信息结束-->
@@ -217,21 +274,13 @@
                           </tr>
                           </thead>
                           <tbody>
-                          <tr>
-                              <td>系统维护通知</td>
-                              <td>2016年10月31日</td>
-                              <td><a href="javascript:;" class="scan">查看</a></td>
+                          <#list messageList as message>
+                          	 <tr>
+                              <td>${message.title}</td>
+                              <td>${(message.pushDate?string("yyyy-MM-dd HH:mm:ss"))}  </td>
+                              <td><a href="javascript:showDetail(${message.id})" class="scan">查看</a></td>
                           </tr>
-                          <tr class="even">
-                              <td>版本更新通知</td>
-                              <td>2016年10月31日</td>
-                              <td><a href="javascript:;" class="scan">查看</a></td>
-                          </tr>
-                          <tr>
-                              <td>会员贷款信息通知</td>
-                              <td>2016年10月31日</td>
-                              <td><a href="javascript:;" class="scan">查看</a></td>
-                          </tr>
+                          </#list>
                           </tbody>
                       </table>
                       <div class="paging">
@@ -250,9 +299,9 @@
 
 
                   <#--业务管理开始-->
-              <@shiro.hasRole name="企业会员">
+              <@shiro.hasAnyRoles name="企业会员,机构会员">
                   <div class="infoList" style="display:none;">
-                      <p class="tit2">咨询对象类型</p>
+                      <p class="tit2">贷款申请类型</p>
                       <ul class="aply">
                           <li class="bbm">
                               <h4>科技履约贷款申请</h4>
@@ -335,13 +384,13 @@
                           </div>
                       </div>
                   </div>
-              </@shiro.hasRole>
+              </@shiro.hasAnyRoles>
                   <#--业务管理结束-->
 
 
 
                   <#--我要咨询开始-->
-              <@shiro.hasAnyRoles name="个人会员,企业会员">
+              <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
                   <div class="infoList pi" style="display:none;">
                       <form method="post" class="consult">
                           <div>
@@ -470,17 +519,6 @@
       <div class="clear"></div>
       <div class="clearfix"></div>
   </div>
-  <!--自定义弹窗开始-->
-  <div class="pop">
-      <div class="shade"></div>
-      <div class="popup">
-          <a href="javascript:;" class="close">&nbsp;</a>
-          <div>
-              <h1>系统维护通知</h1>
-              <p>通知，是向特定受文对象告知或转达有关事项或文件，让对象知道或执行的公文。通报的含义：通报适用于表彰先进，批评错误，传达重要精神或情况。通报的特点：1、内容的真实性。真实是通报的生命。通报的任何情况、事实都必须是真实的，不能有差错。2、目的的告知性。</p>
-          </div>
-      </div>
-  </div>
 
 <#--我要咨询弹窗-->
   <div id="test01">
@@ -494,19 +532,18 @@
       <p class="ans">金融专家：sadasd</p>
       <textarea class="txta" readonly="readonly">所谓文字，是承载语言的图像与/或符号。词语释义含义：1、文字和语言等其他工具一样，都是交流信息的工具。基本解释(1) 交流信息的工具。如汉字、拉丁字母。秦始皇统一中国后，在“琅琊山刻石”中才第一次把文字叫做字 仓颉之初作书，盖依类象形，故谓之文，其后形声相益,即谓之字。文者物象之本,字者...</textarea>
   </div>
-
+<div id ="dialogShow"></div> 
   <#include "website/common/footer.ftl" />
   </body>
 </html>
 
 <script type="text/javascript">
     $(document).ready(function(e) {
-        if($.cookie('toConsult')){
-            var tbar = $('.infoTab li');
-            tbar.eq(4).addClass('active').siblings('li').removeClass('active');
-            $('.infoList').eq(4).show().siblings('.infoList').hide();
-            $.cookie('toConsult', null, {path: '/'});
-        }
+        var tbar = $('.infoTab li');
+    	var navigationIndex = $.cookie('userinfoIndex');
+    	tbar.eq(navigationIndex ? Number(navigationIndex) : 0).addClass('active').siblings('li').removeClass('active');
+        $('.infoList').eq(navigationIndex ? Number(navigationIndex) : 0).show().siblings('.infoList').hide();
+   		$.cookie('userinfoIndex', null, {path: '/'});
 
         $('.infoTab li').click(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
@@ -522,6 +559,8 @@
         $('.mod').click(function(){
             $(this).siblings('.per').find('input').addClass('txt2').removeAttr("readonly").end().find('.upload').show();
             $(this).hide();
+            $(this).siblings('.per').find('input').eq(1).removeClass('txt2').attr("readonly","readonly")
+            $(this).siblings('.per').find('input').eq(5).removeClass('txt2').attr("readonly","readonly")
             $('.btnHide').show();
         });
 
@@ -530,17 +569,33 @@
             $(this).parents(".btnHide").hide();
             $('.mod').show();
         });
-
-
-        //通知通告弹窗
-        $('.scan').click(function(){
-            $('.pop').show();
-        });
-
         $('.close').click(function(){
             $(this).parents('.pop').hide();
         });
     });
+    
+      //通知通告弹窗
+        function showDetail(id) {
+        	dialog({
+	            id: 'dialogPop',
+	            width: 650,
+	            height:300,
+	            autoOpen:false,//默认关闭  
+    			modal: true,//开启遮罩层
+	            resizable:false,  
+			    position: { using:function(pos){  
+			        console.log(pos)  
+			        var topOffset = $(this).css(pos).offset().top;  
+			        if (topOffset = 0||topOffset>0) {  
+			            $(this).css('top', 20);  
+			        }  
+			    }},  
+	            title: '通知通告详情',
+	            content: $('#dialogShow').load("${path }/message/showDetail?id="+id),
+	            okValue: '确定',
+	            ok: function (){}
+	        }).showModal();
+        }
 
 
 

@@ -23,34 +23,37 @@
                             <!--企业基本信息-->
                             <div class="nlistCont">
                                 <p class="ntit">科技金融专员登记注册表</p>
+                            <form id="jinRongzy">
+                            <input type="hidden" name="columnid" id="columnid" value="20" />
                                 <table width="100%" class="tab3">
                                     <tr>
                                         <th><b class="red">*</b>姓名</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="name" id="name" type="text" class="txt" placeholder="请输入" /></td>
                                         <th rowspan="4">照片</th>
                                         <td rowspan="4">
                                             <img src="${path}/resource/images/blank.png" class="fl" />
-                                            <span class="notice fr">建议尺寸120px*150px<br />上传大小不超过320K<br />支持JPG</span>
+                                            <span class="notice fr">建议尺寸110px*110px<br />上传大小不超过320K<br />支持JPG</span>
                                             <div class="clear"></div>
                                             <div class="btnUp fl">
-                                                <input type="file" />
+                                                 <input type="file" name="UpFile9" id="UpFile9" onchange="ajaxFileUpload(9)"/>
+                                                 <input name="userlogo" id="userlogo" type="hidden"/>
                                                 <a href="javascript:;">上传</a>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>性别</th>
-                                        <td><label><input type="radio" name="sex" />保密</label><label><input type="radio" name="sex" />男</label><label><input type="radio" name="sex" />女</label></td>
+                                        <td><label><input id="sex" type="radio" name="sex" />保密</label><label><input type="radio" name="sex" />男</label><label><input type="radio" name="sex" />女</label></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>出生年月</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input type="text" id="birthday" onClick="WdatePicker()" name="birthday" class="txt" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
 
                                         <th><b class="red">*</b>学位</th>
                                         <td>
-                                            <select>
+                                            <select name="degree" id="degree">
                                                 <option>请选择</option>
                                                 <option>博士</option>
                                             </select>
@@ -58,12 +61,12 @@
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>工作单位</th>
-                                        <td colspan="3"><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td colspan="3"><input name="businesaddress" id="businesaddress" type="text" class="txt" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>行业</th>
                                         <td>
-                                            <select>
+                                            <select name="technologydomain" id="technologydomain" >
                                                 <option>请选择</option>
                                                 <option>IT</option>
                                             </select>
@@ -71,80 +74,63 @@
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>职务</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="workpost" id="workpost" type="text" class="txt" placeholder="请输入" /></td>
                                         <th><b class="red">*</b>职称</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="worktitle" id="worktitle"  type="text" class="txt" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>传真</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="fax" id="fax" type="text" class="txt" placeholder="请输入" /></td>
                                         <th><b class="red">*</b>邮编</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="postcode" id="postcode" type="text" class="txt" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>手机</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="phone" id="phone" type="text" class="txt" placeholder="请输入" /></td>
                                         <th><b class="red">*</b>电子邮件</th>
-                                        <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input name="email" id="email" type="text" class="txt" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>主要工作地</th>
                                         <td colspan="3">
-                                            <select>
-                                                <option>上海市</option>
-                                            </select>
-                                            <select>
-                                                <option>请选择城区</option>
-                                            </select>
-                                            <input type="text" class="txt" placeholder="详细地址" />
+                                            <input name="mainaddress" id="mainaddress" type="text" class="txt" placeholder="主要工作地" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>通讯地址</th>
                                         <td colspan="3">
-                                            <select>
-                                                <option>上海市</option>
-                                            </select>
-                                            <select>
-                                                <option>请选择城区</option>
-                                            </select>
-                                            <input type="text" class="txt" placeholder="详细地址" />
+                                            <input name="postaladdress" id="postaladdress" type="text" class="txt" placeholder="通讯地址" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>办公地址</th>
                                         <td colspan="3">
-                                            <select>
-                                                <option>上海市</option>
-                                            </select>
-                                            <select>
-                                                <option>请选择城区</option>
-                                            </select>
-                                            <input type="text" class="txt" placeholder="详细地址" />
+                                            <input name="businesaddress" id="businesaddress" type="text" class="txt" placeholder="办公地址" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>个人简介(500字以内)</th>
                                         <td colspan="3">
                                             <div class="else" style="line-height:24px;">本人工作经历、专业特长、服务业绩</div>
-                                            <textarea class="txta"></textarea>
+                                            <textarea name="educationalbackground" id="educationalbackground" class="txta"></textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>机构logo</th>
                                         <td colspan="3">
                                             <img src="${path}/resource/images/blank.png" class="fl" />
-                                            <span class="notice fl ml16">建议尺寸250px*100px<br />上传大小不超过320K<br />支持JPG</span>
+                                            <span class="notice fl ml16">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
                                             <div class="clear"></div>
                                             <div class="btnUp fl">
-                                                <input type="file" />
+                                                <input type="file" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
+                                            <input type="hidden" name="agencylogo" id="agencylogo"/>
                                                 <a href="javascript:;">上传</a>
                                             </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>机构介绍(500字以内)</th>
-                                        <td colspan="3"><textarea class="txta"></textarea></td>
+                                        <td colspan="3"><textarea name="agencyinfo" id="agencyinfo" class="txta"></textarea></td>
                                     </tr>
                                 </table>
                             </div>
@@ -167,6 +153,22 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
+         $('.btnSave').click(function(){
+       $.ajax({
+            type: "POST",
+            url: '${path}/anon/addExpert',
+            data: $("#jinRongzy").serialize(),
+            dateType:"json",
+            success: function(msg){
+              if( msg != 1){
+                dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
+                return false;
+              }else{
+              dialog.tipsPop('ban-pop','提示:',"注册成功",'确定');
+              }
+            }
+        });
+     });
         //增加
         $('.add').click(function(){
             var node = $('.module tr:last').clone(true).removeClass('module');
@@ -177,4 +179,30 @@
             $(this).parents('tr').remove();
         });
     });
+    
+     
+              <!--上传附件-->
+function ajaxFileUpload(index) { 
+    var index=index;
+    $.ajaxFileUpload({
+        type: "POST",
+        url: '${path}/anon/savePhoto?index='+index, 
+        secureuri: false,
+        fileElementId: 'UpFile'+index,
+        dataType:"text",
+        success: function(msg) {
+            if(msg =="0"){
+              dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
+              return false;
+            }else{
+              if(index==9){
+              $('#userlogo').val(msg);
+              }else{
+              $('#agencylogo').val(msg);
+              }
+              $("#jinRongzy img").eq(index-9).attr("src","${path}/resource/fileImage/"+msg);
+            }
+        }
+    }); 
+} 
 </script>

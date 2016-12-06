@@ -5,16 +5,22 @@
 
 package com.jltfisp.login.controller;
 
+import com.jltfisp.log.service.LogService;
+import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
-import com.jltfisp.shiro.AuthorizingRealm;
 import com.jltfisp.shiro.CaptchaException;
 import com.jltfisp.util.captcha.Captcha;
 import com.jltfisp.util.captcha.SpecCaptcha;
+import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.message.entity.Message;
+import com.jltfisp.web.message.service.IMessageService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by LiuFa on 2016/11/1.
@@ -35,9 +43,17 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class LoginController {
     private final Logger _logger = LoggerFactory.getLogger(this.getClass());
-
+    
+    @Autowired
+    private ColumnService columnService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private IMessageService messageService;
+
+    @Autowired
+    private LogService logService;
+
     @RequestMapping("/")
     public String home(){
         return "redirect:/index";
@@ -51,10 +67,28 @@ public class LoginController {
      * 登陆成功页面
      * @return
      */
-    @Autowired
-    private AuthorizingRealm authorizingRealm;
     @RequestMapping("/main")
-    public String main(){
+    public String main(HttpServletRequest request){
+    	JltfispUser user = loginService.getCurrentUser();
+    	Integer parentid=null;
+    	if(user.getType()==1) {
+    		parentid=7;
+    	}else {
+    		parentid=6;
+		}
+    	
+    	Set<String> roles = loginService.findRoles(user.getAccountNumber());
+		for (String roleName : roles) {
+			if(!roleName.equals("个人会员") && !roleName.equals("企业会员") && !roleName.equals("专家会员")){
+				user.setRoleName(roleName);
+				break;
+			}
+		}
+    	List<Message> messageList = messageService.selectBySample(null, null);
+    	request.setAttribute("messageList", messageList);
+    	List<JltfispColumn> columnList = columnService.getColumnList(parentid);
+    	request.setAttribute("columnList", columnList);
+    	request.setAttribute("user", user);
         return "/website/usercenter/index";
     }
     /**
@@ -85,6 +119,9 @@ public class LoginController {
         } else if (exceptionClassName != null) {
             error = "您的账号存在异常,请联系管理员";
         }
+        if (StringUtils.hasLength(error)) {
+            saveLoginErrorLog(request,error,subject);
+        }
         model.addAttribute("message", error);
         return "/website/login";
     }
@@ -113,5 +150,10 @@ public class LoginController {
         } catch (Exception e) {
             _logger.error("获取验证码异常：%s",e.getMessage());
         }
+    }
+
+    private boolean saveLoginErrorLog(HttpServletRequest request,String error,Subject subject){
+        logService.saveLog(request.getParameter("username"),"用户登录失败:"+error,0,subject.getSession().getHost());
+        return true;
     }
 }

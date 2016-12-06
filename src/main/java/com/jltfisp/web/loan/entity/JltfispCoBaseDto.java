@@ -5,9 +5,8 @@
 
 package com.jltfisp.web.loan.entity;
 
-import java.util.Date;
-
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "jltfisp_co_base")
 public class JltfispCoBaseDto {
@@ -147,6 +146,11 @@ public class JltfispCoBaseDto {
      */
     @Column(name = "basicAccountCard")
     private String basicAccountCard;
+    /**
+     * 基本户户名
+     */
+    @Column(name="basicAccountName")
+	private String basicAccountName;
     
     /**
      * 一般账户开户银行
@@ -239,7 +243,7 @@ public class JltfispCoBaseDto {
      * 企业申请账户id
      */
     @Column(name = "user_id")
-    private int user_id;
+    private int userid;
     
     /**
      * 本年度已签订所有合同的标的总额
@@ -345,6 +349,19 @@ public class JltfispCoBaseDto {
      */
     @Column(name = "apply_state")
     private int applystate;
+    /**
+     * 贷款银行
+     */
+    @Column(name="loan_bank_name")
+    private String loanBankName;
+    
+	public String getLoanBankName() {
+		return loanBankName;
+	}
+
+	public void setLoanBankName(String loanBankName) {
+		this.loanBankName = loanBankName;
+	}
 
 	public String getTecdomain() {
 		return tecdomain;
@@ -754,12 +771,12 @@ public class JltfispCoBaseDto {
 		this.createTime = createTime;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public float getAgreementsAmount() {
@@ -786,4 +803,12 @@ public class JltfispCoBaseDto {
 		this.otherDesc = otherDesc;
 	}
 
+	public String getBasicAccountName() {
+		return basicAccountName;
+	}
+
+	public void setBasicAccountName(String basicAccountName) {
+		this.basicAccountName = basicAccountName;
+	}
+    
 }

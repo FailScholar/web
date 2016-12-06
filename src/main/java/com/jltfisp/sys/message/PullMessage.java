@@ -17,6 +17,5 @@ import org.springframework.stereotype.Service;
 public class PullMessage implements ConsumerInterface{
     @Override
     public void receiveMessage(Object message) {
-        System.out.println(message.toString());
     }
 }

@@ -42,7 +42,7 @@
                               <div class="regdiv"><span class="ml70" style="margin-left:28px;"><span class="red">*</span>统一社会信用代码：</span><input id="socialCode" name="socialCode" type="text" class="txt" placeholder="统一社会信用代码" onmouseout="validSocialCode('#socialCode')"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;&emsp;*</span>手机：</span><input id="mobilePhone1" name="mobilePhone" type="text" class="txt" placeholder="请输入手机号码" onmouseout="validMobilePhone('#mobilePhone1')"/></div>
                               <div class="code">验证码：<input id="captcha1" name="captcha" type="text" class="txt txt1 validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" placeholder="请输入验证码" /><div class="fr" style="margin-right: 120px;"><img draggable="false" id="validateCodeImg1" style="border-radius: 10px;cursor: hand" title="看不清楚" src="${path}/anon/getPngCode?" onclick="refreshCode('validateCodeImg1')" /></div></div>
-                              <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" name="agree" class="validate[required] "/>同意“<a href="javascript:;">用户服务条款</a>”和“<a href="javascript:;">隐私权相关政策</a>”</label></div>
+                              <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" name="agree" class="validate[required] "/>同意“<a href="${path}/anon/about?to=0" target="_blank">用户服务条款</a>”和“<a href="${path}/anon/about?to=3" target="_blank">隐私权相关政策</a>”</label></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
                               <div class="logbtn"><input type="button" id="comFormButton" value="下一步" onclick="comFormSubmit()"/></div>
                           </form>
@@ -58,9 +58,8 @@
                           </form>
                           <div class="tips">
                               <p>没有收到邮件？</p>
-                              <p>1.请检查邮箱地址是否正确，您可以返回<a href="#">重新填写</a>。</p>
-                              <p>2.检查您的邮件垃圾箱。</p>
-                              <p>3.若仍未收到确认，请尝试<a href="#">重新发送</a>。</p>
+                              <p>1.检查您的邮件垃圾箱。</p>
+                              <p>2.若仍未收到确认，请尝试<a href="#">重新发送</a>。</p>
 
                           </div>
                       </div>
@@ -93,7 +92,7 @@
                               <div class="regdiv"><span class="ml80"><span class="red">*</span>所属部门：</span><input id="departmentName" name="departmentName" type="text" class="txt" placeholder="请输入部门名称" onmouseout="validDepartmentName('#departmentName')"/></div>
                               <div class="regdiv"><span class="ml80">&emsp;&emsp;<span class="red">*</span>手机：</span><input id="mobilePhone" name="mobilePhone" type="text" class="txt" placeholder="请输入手机号码" onmouseout="validMobilePhone('#mobilePhone')"/></div>
                               <div class="code">验证码：<input id="captcha" name="captcha" type="text" class="txt txt1 validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" placeholder="请输入验证码"/><div class="fr" style="margin-right: 120px;"><img draggable="false" id="validateCodeImg2" style="border-radius: 10px;cursor: hand" title="看不清楚" src="${path}/anon/getPngCode?" onclick="refreshCode('validateCodeImg2')" /></div></div>
-                              <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" name="agree" class="validate[required] "/>同意“<a href="javascript:;">用户服务条款</a>”和“<a href="javascript:;">隐私权相关政策</a>”</label></div>
+                              <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" name="agree" class="validate[required] "/>同意“<a href="${path}/anon/about?to=0" target="_blank">用户服务条款</a>”和“<a href="${path}/anon/about?to=3" target="_blank">隐私权相关政策</a>”</label></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
                               <div class="logbtn"><input type="button" id="userFormButton" value="下一步" onclick="userFormSubmit()"/></div>
                           </form>
@@ -109,9 +108,8 @@
                           </form>
                           <div class="tips">
                               <p>没有收到邮件？</p>
-                              <p>1.请检查邮箱地址是否正确，您可以返回<a href="#">重新填写</a>。</p>
-                              <p>2.检查您的邮件垃圾箱。</p>
-                              <p>3.若仍未收到确认，请尝试<a href="#">重新发送</a>。</p>
+                              <p>1.检查您的邮件垃圾箱。</p>
+                              <p>2.若仍未收到确认，请尝试<a href="#">重新发送</a>。</p>
 
                           </div>
                       </div>

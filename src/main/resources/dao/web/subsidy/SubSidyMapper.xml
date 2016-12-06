@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.loan.dao.SubSidyMapper">
+    <resultMap type="com.jltfisp.web.loan.entity.JlfispPsBaseDto" id="subSidyCoBase">
+		<id property="id" column="id" />
+		<result property="company" column="company" />
+		<result property="socialCreditCode" column="socialCreditCode" />
+		<result property="cardNo" column="cardNo" />
+		<result property="basicAccountBank" column="basicAccountBank" />
+		<result property="basicAccountName" column="basicAccountName" />
+		<result property="basicAccountCard" column="basicAccountCard" />
+		<result property="loanBankName" column="loan_bank_name" />
+		<result property="registeredCapital" column="registeredCapital" />
+		<result property="registeredAddress" column="registeredAddress" />
+		<result property="officeProv" column="officeProv" />
+		<result property="officeCity" column="officeCity" />
+		<result property="officeArea" column="officeArea" />
+		<result property="officeAddress" column="officeAddress" />
+		<result property="linkMan" column="linkMan" />
+		<result property="email" column="email" />
+		<result property="phoneOrFax" column="phoneOrFax" />
+		<result property="mobilephone" column="mobilephone" />
+		<result property="bussinessType" column="business_type"/>
+		<result property="zoneDescription" column="zoneDescription" />
+	</resultMap>
+	<resultMap type="com.jltfisp.web.loan.entity.JltfispPsInfo" id="jltfispPsInfoList">
+	     <id property="id" column="id"/> 
+         <result property="infoId" column="info_id"/>  
+         <result property="contractNumber" column="contract_number"/>
+         <result property="policyNumber" column="policy_number"/>  
+         <result property="loanMoney" column="loan_money"/>
+         <result property="loanBank" column="loan_bank"/>
+         <result property="InsuranceCompany" column="insurance_company"/>  
+         <result property="premiumMoney" column="premium_money"/>
+         <result property="repaymentDate" column="repayment_date"/>  
+         <result property="principalInterest" column="principal_interest"/>
+         <result property="lendDate" column="lend_date"/> 
+         <result property="loanTerm" column="loan_term"/>
+	</resultMap>
+	<!-- 根据用户id查询企业基本信息 -->
+	<select id="getJlfispPsBaseDtoByUserId" parameterType="int" resultMap="subSidyCoBase">  
+      SELECT
+          jcb.id as id,
+		  jcb.company as company,
+		  jcb.socialCreditCode as socialCreditCode,
+		  jcb.cardNo as cardNo,
+		  jcb.basicAccountBank AS basicAccountBank,
+		  jcb.basicAccountName AS basicAccountName ,
+		  jcb.basicAccountCard AS basicAccountCard,
+		  jcb.loan_bank_name as loanBankName,
+		  jcb.registeredCapital AS registeredCapital,
+		  jcb.registeredAddress AS registeredAddress,
+		  jcb.officeProv AS officeProv,
+		  jcb.officeCity AS officeCity,
+		  jcb.officeArea AS officeArea,
+		  jcb.officeAddress AS officeAddress,
+		  jcb.linkMan AS linkMan,
+		  jcb.email AS email,
+		  jcb.phoneOrFax AS phoneOrFax,
+		  jcb.business_type as bussinessType,
+		  jcb.mobilephone AS mobilephone,
+		  jcb.zoneDescription as zoneDescription
+		FROM
+			jltfisp_co_base jcb 
+		WHERE
+		    jcb.user_id=#{user_id}
+   </select>
+   <!-- 根据企业基本信息id获取保费补贴信息 -->
+   <select id="getJltfispPsInfoListByBaseId" parameterType="int" resultMap="jltfispPsInfoList">
+      SELECT
+          jpi.id as id,
+		  jpi.info_id as infoId,
+		  jpi.contract_number as contractNumber,
+		  jpi.policy_number AS policyNumber,
+		  jpi.loan_money AS loanMoney,
+		  jpi.loan_bank AS loanBank,
+		  jpi.insurance_company AS InsuranceCompany,
+		  jpi.premium_money AS premiumMoney,
+		  jpi.repayment_date AS repaymentDate,
+		  jpi.principal_interest AS principalInterest,
+		  jpi.lend_date AS lendDate,
+		  jpi.loan_term AS loanTerm
+	  FROM
+	      jltfisp_ps_info jpi 
+	  where
+	      jpi.info_id=#{info_id}
+   </select>
+   <!-- 根据用户id跟企业名称查询企业基本信息 -->
+	<select id="getJlfispPsBaseByUserIdAndName" parameterType="map" resultType="com.jltfisp.web.loan.entity.JltfispCoBaseDto">  
+      SELECT
+          jcb.id as id,
+		  jcb.company as company,
+		  jcb.socialCreditCode as socialCreditCode,
+		  jcb.cardNo as cardNo,
+		  jcb.basicAccountBank AS basicAccountBank,
+		  jcb.basicAccountName AS basicAccountName ,
+		  jcb.basicAccountCard AS basicAccountCard,
+		  jcb.loan_bank_name as loanBankName,
+		  jcb.registeredCapital AS registeredCapital,
+		  jcb.registeredAddress AS registeredAddress,
+		  jcb.officeProv AS officeProv,
+		  jcb.officeCity AS officeCity,
+		  jcb.officeArea AS officeArea,
+		  jcb.officeAddress AS officeAddress,
+		  jcb.linkMan AS linkMan,
+		  jcb.email AS email,
+		  jcb.phoneOrFax AS phoneOrFax,
+		  jcb.business_type as bussinessType,
+		  jcb.mobilephone AS mobilephone
+		FROM
+			jltfisp_co_base jcb 
+		WHERE
+		    jcb.user_id=#{userId} and jcb.company=#{companyName} and jcb.business_type=5
+   </select>
+</mapper>

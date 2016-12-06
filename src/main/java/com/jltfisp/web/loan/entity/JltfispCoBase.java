@@ -234,7 +234,7 @@ public class JltfispCoBase {
      * 企业申请账户id
      */
     @Column(name = "user_id")
-    private int user_id;
+    private int userid;
     
     /**
      * 本年度已签订所有合同的标的总额
@@ -452,7 +452,11 @@ public class JltfispCoBase {
      */
     @Column(name = "apply_state")
     private int applystate;
-
+    /**
+     * 贷款银行
+     */
+    @Column(name="loan_bank_name")
+    private String loanBankName;
 	public int getId() {
 		return id;
 	}
@@ -749,12 +753,12 @@ public class JltfispCoBase {
 		this.createTime = createTime;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public float getAgreementsAmount() {
@@ -781,4 +785,12 @@ public class JltfispCoBase {
 		this.otherDesc = otherDesc;
 	}
 
+	public String getLoanBankName() {
+		return loanBankName;
+	}
+
+	public void setLoanBankName(String loanBankName) {
+		this.loanBankName = loanBankName;
+	}
+    
 }

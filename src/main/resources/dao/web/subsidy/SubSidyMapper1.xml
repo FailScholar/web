@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="">
+    <resultMap type="com.jltfisp.web.loan.entity.JlfispPsBaseDto" id="subSidyCoBase">
+		<id property="baseId" column="base_Id" />
+		<result property="company" column="company" />
+		<result property="socialCreditCode" column="socialCreditCode" />
+		<result property="basicAccountBank" column="basicAccountBank" />
+		<result property="basicAccountName" column="basicAccountName" />
+		<result property="basicAccountCard" column="basicAccountCard" />
+		<!-- 贷款银行没有需要添加此字段 -->
+		<result property="registeredCapital" column="registeredCapital" />
+		<result property="registeredAddress" column="registeredAddress" />
+		<result property="officeProv" column="officeProv" />
+		<result property="officeCity" column="officeCity" />
+		<result property="officeArea" column="officeArea" />
+		<result property="officeAddress" column="officeAddress" />
+		<result property="linkMan" column="linkMan" />
+		<result property="email" column="email" />
+		<result property="phoneOrFax" column="phoneOrFax" />
+		<result property="mobilephone" column="mobilephone" />
+	    <collection property=""  ofType="" >  
+             <id property="id" column="id"/> 
+             <result property="infoId" column="info_id"/>  
+             <result property="contractNumber" column="contract_number"/>
+             <result property="policyNumber" column="policy_number"/>  
+             <result property="loanMoney" column="loan_money"/>
+             <result property="loanBank" column="loan_bank"/>
+             <result property="InsuranceCompany" column="insurance_company"/>  
+             <result property="premiumMoney" column="premium_money"/>
+             <result property="repaymentDate" column="repayment_date"/>  
+             <result property="principalInterest" column="principal_interest"/>
+             <result property="lendDate" column="lend_date"/> 
+             <result property="loanTerm" column="loan_term"/> 
+        </collection> 
+	</resultMap>
+	<!-- 根据 -->
+	<select id="getJlfispPsBaseDtoByUserId" parameterType="int" resultMap="subSidyCoBase">  
+      SELECT
+          jcb.id as baseId,
+		  jcb.company as company,
+		  jcb.socialCreditCode as socialCreditCode,
+		  jcb.basicAccountBank AS basicAccountBank,
+		  jcb.basicAccountName AS basicAccountName ,
+		  jcb.basicAccountCard AS basicAccountCard,
+		  jcb.registeredCapital AS registeredCapital,
+		  jcb.registeredAddress AS registeredAddress,
+		  jcb.officeProv AS officeProv,
+		  jcb.officeCity AS officeCity,
+		  jcb.officeArea AS officeArea,
+		  jcb.officeAddress AS officeAddress,
+		  jcb.linkMan AS linkMan,
+		  jcb.email AS email,
+		  jcb.phoneOrFax AS phoneOrFax,
+		  jcb.mobilephone AS mobilephone,
+		  jpi.id as id,
+		  jpi.info_id as infoId,
+		  jpi.contract_number as contractNumber,
+		  jpi.policy_number AS policyNumber,
+		  jpi.loan_money AS loanMoney,
+		  jpi.loan_bank AS loanBank,
+		  jpi.insurance_company AS InsuranceCompany,
+		  jpi.premium_money AS premiumMoney,
+		  jpi.repayment_date AS repaymentDate,
+		  jpi.principal_interest AS principalInterest,
+		  jpi.lend_date AS lendDate,
+		  jpi.loan_term AS loanTerm
+		FROM
+			jltfisp_co_base jcb ,
+			jltfisp_ps_info jpi 
+		WHERE
+		  jcb.id = jpi.info_id
+		  and jcb.user_id=#{user_id}
+   </select>  
+</mapper>

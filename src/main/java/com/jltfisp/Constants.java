@@ -2,6 +2,12 @@ package com.jltfisp;
 
 public interface Constants {
 
+	
+	 public static final String FILE_HOME = "upload";//文件主目录
+	 public static final String	basePath="D:\\files\\jltfisp_cms";
+	 public static final String	imageFile="image";
+	 public static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
+	
     /**
 	 * 贷款业务申请类型信息
 	 */

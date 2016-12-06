@@ -5,9 +5,9 @@
 
 package com.jltfisp.web.loan.service;
 
-import java.util.List;
-
 import com.jltfisp.web.loan.entity.*;
+
+import java.util.List;
 
 /**
  * 首页贷款服务功能
@@ -28,6 +28,14 @@ public interface LoanService {
      * @author 张舒西 2016年11月24日 上午9:12:54
      */
     List<JltfispCoBaseDto> getCoBaseList(Integer userid);
+    
+    /**
+     * 
+     * @param userid
+     * @return List<JltfispCoBaseDto> 返回JltfispCoBaseDto对象
+     * @author 张舒西 2016年11月24日 上午9:12:54
+     */
+    JltfispCoBaseDto getCoBaseContextByUserIdAndType(int userid,int business_type);
     
     /**
      * 
@@ -70,6 +78,40 @@ public interface LoanService {
      * @return
      */
     int saveCoFile(JltfispCoFile coFile);
-
-
+    
+    /**
+     * 保存企业其他信息
+     * @param coOther
+     * @return
+     */
+    int saveCoOther(JltfispCoOther coOther);
+    
+    /**
+     * 保存填写申请表格
+     * @param coFillInApply
+     * @return
+     */
+    int saveCoFillInApply(JltfispCoFillInApply coFillInApply);
+    
+    /**
+     * 通过userid获取所有的信息
+     * @param userid
+     * @return
+     */
+    JltfispCoAll getApplyALL(int userid,int businesstype);
+    
+    /**
+     * 通过year获取所有的信息
+     * @param year 年费
+     * @return
+     */
+    JltfispCoAll getCoDebtTable(int userid,String year,int businesstype);
+    
+    /**
+     * 通过userid和business_type获取所有资产负债表
+     * @param userid  用户ID
+     * @param business_type  业务类型
+     * @return
+     */
+     List<JltfispCoDebt> getCoDebtTableList(int userid,int businesstype);
 }

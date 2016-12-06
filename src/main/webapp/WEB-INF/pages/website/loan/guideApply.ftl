@@ -25,7 +25,7 @@
 你身上有他的香水味  是你赐给的自卑  你要求的太完美  我永远都学不会  你身上有他的香水味  是我鼻子犯的罪  不该嗅到他的味  擦掉一切陪你醉
 是你赐给的自卑  你要的爱太完美  我永远都学不会  你身上有他的香水味  是你赐给的自卑  你要求的太完美  我永远都学不会</p>
                 </div>
-                <a href="${path}/loan/onlineApply?applytype=${applytype}" class="apply ap1">在线申请</a>
+                <a href="${path}/loan/onlineApplyPage?applytype=${applytype}" class="apply ap1">在线申请</a>
             </div>
             <!--content结束-->
             

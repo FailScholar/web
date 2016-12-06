@@ -6,6 +6,7 @@
 package com.jltfisp.web.expert.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "jltfisp_fin_expert")
 public class JltfispExpert {
@@ -20,18 +21,28 @@ public class JltfispExpert {
     private Integer userid;
     
     /**
+     * 用户名称
+     */
+    @Column(name = "name")
+    private String name;
+    
+    /**
+     * 用户照片
+     */
+    @Column(name = "user_logo")
+    private String userlogo;
+    
+    /**
+     * 用户照片
+     */
+    @Column(name = "birthday")
+    private Date birthday;
+    
+    /**
      * 用户ID
      */
     @Column(name = "columnid")
     private Integer columnid;
-
-    public Integer getColumnid() {
-        return columnid;
-    }
-
-    public void setColumnid(Integer columnid) {
-        this.columnid = columnid;
-    }
 
     /**
      * 性别
@@ -67,14 +78,14 @@ public class JltfispExpert {
      * 传真
      */
     @Column(name = "fax")
-    private Integer fax;
+    private String fax;
 
 
     /**
      * 邮编
      */
     @Column(name = "postcode")
-    private Integer postcode;
+    private String postcode;
     
     /**
      * 办公地址
@@ -160,7 +171,15 @@ public class JltfispExpert {
         return email;
     }
 
-    public void setEmail(String email) {
+    public Integer getColumnid() {
+		return columnid;
+	}
+
+	public void setColumnid(Integer columnid) {
+		this.columnid = columnid;
+	}
+
+	public void setEmail(String email) {
         this.email = email;
     }
 
@@ -220,23 +239,23 @@ public class JltfispExpert {
         this.worktitle = worktitle;
     }
 
-    public Integer getFax() {
-        return fax;
-    }
+    public String getFax() {
+		return fax;
+	}
 
-    public void setFax(Integer fax) {
-        this.fax = fax;
-    }
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
 
-    public Integer getPostcode() {
-        return postcode;
-    }
+	public String getPostcode() {
+		return postcode;
+	}
 
-    public void setPostcode(Integer postcode) {
-        this.postcode = postcode;
-    }
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
 
-    public String getBusinesaddress() {
+	public String getBusinesaddress() {
         return businesaddress;
     }
 
@@ -315,5 +334,29 @@ public class JltfispExpert {
     public void setDomain(String domain) {
         this.domain = domain;
     }
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUserlogo() {
+		return userlogo;
+	}
+
+	public void setUserlogo(String userlogo) {
+		this.userlogo = userlogo;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
     
 }

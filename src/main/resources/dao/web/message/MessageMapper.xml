@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jltfisp.web.message.dao.MessageMapper">
+	<resultMap id="BaseResultMap" type="com.jltfisp.web.message.entity.Message">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="title" jdbcType="VARCHAR" property="title"  />
+		<result column="content" jdbcType="VARCHAR" property="content"  />
+		<result column="push_date" jdbcType="TIMESTAMP" property="pushDate"  />
+		<result column="createuserid" jdbcType="INTEGER" property="createuserid"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="title != null and title != ''">
+		        and a.title=#{title,jdbcType=VARCHAR}
+		     </if>
+		     <if test="content != null and content != ''">
+		        and a.content=#{content,jdbcType=VARCHAR}
+		     </if>
+		     <if test="pushDate != null and pushDate != ''">
+		        and a.push_date=#{pushDate,jdbcType=TIMESTAMP}
+		     </if>
+		     <if test="createuserid != null and createuserid != ''">
+		        and a.createuserid=#{createuserid,jdbcType=INTEGER}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.title,
+		     a.content,
+		     a.push_date,
+		     a.createuserid
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.web.message.entity.Message" resultType="java.lang.Integer">
+        select count(1) from jltfisp_message_push a
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_message_push a
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_message_push a
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_message_push a set a.status = 'd',a.update_at =now(),a.update_by=#userId
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_message_push 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.message.entity.Message">
+	   insert into jltfisp_message_push 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          title,
+	          content,
+	          push_date,
+	          createuserid,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{title,jdbcType=VARCHAR},
+	    	#{content,jdbcType=VARCHAR},
+	    	#{pushDate,jdbcType=TIMESTAMP},
+	    	#{createuserid,jdbcType=INTEGER},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.web.message.entity.Message">
+	   insert into jltfisp_message_push 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="title != null and title != ''" >
+	          title,
+	       </if>
+	   	   <if test="content != null and content != ''" >
+	          content,
+	       </if>
+	   	   <if test="pushDate != null and pushDate != ''" >
+	          push_date,
+	       </if>
+	   	   <if test="createuserid != null and createuserid != ''" >
+	          createuserid,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="title != null and title != ''">
+    		#{title,jdbcType=VARCHAR},
+    		</if>
+    		<if test="content != null and content != ''">
+    		#{content,jdbcType=VARCHAR},
+    		</if>
+    		<if test="pushDate != null and pushDate != ''">
+    		#{pushDate,jdbcType=TIMESTAMP},
+    		</if>
+    		<if test="createuserid != null and createuserid != ''">
+    		#{createuserid,jdbcType=INTEGER},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.message.entity.Message">
+	   	update jltfisp_message_push 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="title != null and title != ''" >
+		         title=#{title,jdbcType=VARCHAR},
+		     </if>
+		     <if test="content != null and content != ''" >
+		         content=#{content,jdbcType=VARCHAR},
+		     </if>
+		     <if test="pushDate != null and pushDate != ''" >
+		         push_date=#{pushDate,jdbcType=TIMESTAMP},
+		     </if>
+		     <if test="createuserid != null and createuserid != ''" >
+		         createuserid=#{createuserid,jdbcType=INTEGER},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.web.message.entity.Message">
+	   	update jltfisp_message_push 
+	  <set>
+	    title=#{title,jdbcType=VARCHAR},
+	    content=#{content,jdbcType=VARCHAR},
+	    push_date=#{pushDate,jdbcType=TIMESTAMP},
+	    createuserid=#{createuserid,jdbcType=INTEGER},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+</mapper> 

@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jltfisp.web.cloud.dao.CloudMapper">
+	<resultMap id="BaseResultMap" type="com.jltfisp.web.cloud.entity.Cloud">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="image" jdbcType="VARCHAR" property="image"  />
+		<result column="title" jdbcType="VARCHAR" property="title"  />
+		<result column="content" jdbcType="LONGVARCHAR" property="content"  />
+		<result column="source" jdbcType="VARCHAR" property="source"  />
+		<result column="link" jdbcType="VARCHAR" property="link"  />
+		<result column="publish_time" jdbcType="TIMESTAMP" property="publishTime"  />
+		<result column="column_id" jdbcType="INTEGER" property="columnId"  />
+		<result column="content_review" jdbcType="VARCHAR" property="contentReview"  />
+		<result column="video" jdbcType="VARCHAR" property="video"  />
+		<result column="pv" jdbcType="INTEGER" property="pv"  />
+		<result column="state" jdbcType="INTEGER" property="state"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="image != null and image != ''">
+		        and a.image=#{image,jdbcType=VARCHAR}
+		     </if>
+		     <if test="title != null and title != ''">
+		        and a.title=#{title,jdbcType=VARCHAR}
+		     </if>
+		     <if test="content != null and content != ''">
+		        and a.content=#{content,jdbcType=LONGVARCHAR}
+		     </if>
+		     <if test="source != null and source != ''">
+		        and a.source=#{source,jdbcType=VARCHAR}
+		     </if>
+		     <if test="link != null and link != ''">
+		        and a.link=#{link,jdbcType=VARCHAR}
+		     </if>
+		     <if test="publishTime != null and publishTime != ''">
+		        and a.publish_time=#{publishTime,jdbcType=TIMESTAMP}
+		     </if>
+		     <if test="columnId != null and columnId != ''">
+		        and a.column_id=#{columnId,jdbcType=INTEGER}
+		     </if>
+		     <if test="contentReview != null and contentReview != ''">
+		        and a.content_review=#{contentReview,jdbcType=VARCHAR}
+		     </if>
+		     <if test="video != null and video != ''">
+		        and a.video=#{video,jdbcType=VARCHAR}
+		     </if>
+		     <if test="pv != null and pv != ''">
+		        and a.pv=#{pv,jdbcType=INTEGER}
+		     </if>
+		     <if test="state != null and state != ''">
+		        and a.state=#{state,jdbcType=INTEGER}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.image,
+		     a.title,
+		     a.content,
+		     a.source,
+		     a.link,
+		     a.publish_time,
+		     a.column_id,
+		     a.content_review,
+		     a.video,
+		     a.pv,
+		     a.state
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.web.cloud.entity.Cloud" resultType="java.lang.Integer">
+        select count(1) from jltfisp_cloud a
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_cloud a
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_cloud a
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_cloud a set a.status = 'd',a.update_at =now(),a.update_by=#userId
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_cloud 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.cloud.entity.Cloud">
+	   insert into jltfisp_cloud 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          image,
+	          title,
+	          content,
+	          source,
+	          link,
+	          publish_time,
+	          column_id,
+	          content_review,
+	          video,
+	          pv,
+	          state,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{image,jdbcType=VARCHAR},
+	    	#{title,jdbcType=VARCHAR},
+	    	#{content,jdbcType=LONGVARCHAR},
+	    	#{source,jdbcType=VARCHAR},
+	    	#{link,jdbcType=VARCHAR},
+	    	#{publishTime,jdbcType=TIMESTAMP},
+	    	#{columnId,jdbcType=INTEGER},
+	    	#{contentReview,jdbcType=VARCHAR},
+	    	#{video,jdbcType=VARCHAR},
+	    	#{pv,jdbcType=INTEGER},
+	    	#{state,jdbcType=INTEGER},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.web.cloud.entity.Cloud">
+	   insert into jltfisp_cloud 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="image != null and image != ''" >
+	          image,
+	       </if>
+	   	   <if test="title != null and title != ''" >
+	          title,
+	       </if>
+	   	   <if test="content != null and content != ''" >
+	          content,
+	       </if>
+	   	   <if test="source != null and source != ''" >
+	          source,
+	       </if>
+	   	   <if test="link != null and link != ''" >
+	          link,
+	       </if>
+	   	   <if test="publishTime != null and publishTime != ''" >
+	          publish_time,
+	       </if>
+	   	   <if test="columnId != null and columnId != ''" >
+	          column_id,
+	       </if>
+	   	   <if test="contentReview != null and contentReview != ''" >
+	          content_review,
+	       </if>
+	   	   <if test="video != null and video != ''" >
+	          video,
+	       </if>
+	   	   <if test="pv != null and pv != ''" >
+	          pv,
+	       </if>
+	   	   <if test="state != null and state != ''" >
+	          state,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="image != null and image != ''">
+    		#{image,jdbcType=VARCHAR},
+    		</if>
+    		<if test="title != null and title != ''">
+    		#{title,jdbcType=VARCHAR},
+    		</if>
+    		<if test="content != null and content != ''">
+    		#{content,jdbcType=LONGVARCHAR},
+    		</if>
+    		<if test="source != null and source != ''">
+    		#{source,jdbcType=VARCHAR},
+    		</if>
+    		<if test="link != null and link != ''">
+    		#{link,jdbcType=VARCHAR},
+    		</if>
+    		<if test="publishTime != null and publishTime != ''">
+    		#{publishTime,jdbcType=TIMESTAMP},
+    		</if>
+    		<if test="columnId != null and columnId != ''">
+    		#{columnId,jdbcType=INTEGER},
+    		</if>
+    		<if test="contentReview != null and contentReview != ''">
+    		#{contentReview,jdbcType=VARCHAR},
+    		</if>
+    		<if test="video != null and video != ''">
+    		#{video,jdbcType=VARCHAR},
+    		</if>
+    		<if test="pv != null and pv != ''">
+    		#{pv,jdbcType=INTEGER},
+    		</if>
+    		<if test="state != null and state != ''">
+    		#{state,jdbcType=INTEGER},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.cloud.entity.Cloud">
+	   	update jltfisp_cloud 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="image != null and image != ''" >
+		         image=#{image,jdbcType=VARCHAR},
+		     </if>
+		     <if test="title != null and title != ''" >
+		         title=#{title,jdbcType=VARCHAR},
+		     </if>
+		     <if test="content != null and content != ''" >
+		         content=#{content,jdbcType=LONGVARCHAR},
+		     </if>
+		     <if test="source != null and source != ''" >
+		         source=#{source,jdbcType=VARCHAR},
+		     </if>
+		     <if test="link != null and link != ''" >
+		         link=#{link,jdbcType=VARCHAR},
+		     </if>
+		     <if test="publishTime != null and publishTime != ''" >
+		         publish_time=#{publishTime,jdbcType=TIMESTAMP},
+		     </if>
+		     <if test="columnId != null and columnId != ''" >
+		         column_id=#{columnId,jdbcType=INTEGER},
+		     </if>
+		     <if test="contentReview != null and contentReview != ''" >
+		         content_review=#{contentReview,jdbcType=VARCHAR},
+		     </if>
+		     <if test="video != null and video != ''" >
+		         video=#{video,jdbcType=VARCHAR},
+		     </if>
+		     <if test="pv != null and pv != ''" >
+		         pv=#{pv,jdbcType=INTEGER},
+		     </if>
+		     <if test="state != null and state != ''" >
+		         state=#{state,jdbcType=INTEGER},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.web.cloud.entity.Cloud">
+	   	update jltfisp_cloud 
+	  <set>
+	    image=#{image,jdbcType=VARCHAR},
+	    title=#{title,jdbcType=VARCHAR},
+	    content=#{content,jdbcType=LONGVARCHAR},
+	    source=#{source,jdbcType=VARCHAR},
+	    link=#{link,jdbcType=VARCHAR},
+	    publish_time=#{publishTime,jdbcType=TIMESTAMP},
+	    column_id=#{columnId,jdbcType=INTEGER},
+	    content_review=#{contentReview,jdbcType=VARCHAR},
+	    video=#{video,jdbcType=VARCHAR},
+	    pv=#{pv,jdbcType=INTEGER},
+	    state=#{state,jdbcType=INTEGER},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+</mapper> 

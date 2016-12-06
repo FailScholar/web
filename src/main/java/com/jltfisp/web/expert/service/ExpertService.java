@@ -5,9 +5,9 @@
 
 package com.jltfisp.web.expert.service;
 
-import java.util.List;
-
 import com.jltfisp.web.expert.entity.JltfispExpert;
+
+import java.util.List;
 
 /**
  * 首页专家资源功能
@@ -17,16 +17,38 @@ public interface ExpertService {
     /**
      * 
      * @param id
-     * @return JltfispUser 返回内容对象
+     * @return JltfispExpert 返回内容对象
      * @author 张舒西 2016年11月18日 下午2:22:22
      */
     JltfispExpert getExpertContext(Integer id);
     /**
      * 
      * @param columnid
-     * @param id
-     * @return List<JltfispUser> 返回JltfispUser list对象
+     * @return List<JltfispExpert> 返回JltfispExpert list对象
      * @author 张舒西 2016年11月22日 上午9:12:54
      */
     List<JltfispExpert> getExpertList(Integer columnid);
+    
+    /**
+     * 
+     * @param columnid
+     * @return List<JltfispExpert> 返回JltfispExpert list对象
+     * @author 张舒西 2016年11月22日 上午9:12:54
+     */
+    List<JltfispExpert> getExpertPageList(int rows,int Pagesize,int columnId);
+    
+    /**
+     * 
+     * @param columnid
+     * @return int 
+     * @author 张舒西 2016年11月26日 上午9:12:54
+     */
+    int getExpertPageCount(Integer columnid);
+    
+    /**
+     * 
+     * @param columnid
+     * @return
+     */
+    int saveExpert(JltfispExpert expert);
 }

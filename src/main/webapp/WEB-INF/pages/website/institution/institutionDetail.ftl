@@ -12,7 +12,7 @@
   </head>
 
   <body>
-  <#include "website/common/header.ftl"/>
+  <#include "website/common/header.ftl"/> 
               <!--content开始-->
              <div class="content">
                 <div class="bread">
@@ -20,14 +20,14 @@
                 </div>
                 <div class="bank">
                 	<div class="bl fl">
-                		<img src="${path}/resource/images/bank.jpg" class="fl" />
-                        <h1 class="bankname fr">中国建设银行<a href="javascript:;">官网</a></h1>
+                		<img src="${path}/${jltfispInstitutionDetail.logoFile}" class="fl" />
+                        <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a></h1>
                     </div>
                     <div class="br fl ml57">
-                    	<h1>上海银行股份有限公司</h1>
-                        <p>联系人：范一飞</p>
-                        <p>联系电话：6847553268号</p>
-                        <p>联系地址：银城中路1</p>
+                    	<h1>${jltfispInstitutionDetail.institutionalName}</h1>
+                        <p>联系人：${jltfispInstitutionDetail.linkMan}</p>
+                        <p>联系电话：${jltfispInstitutionDetail.phoneNumer}</p>
+                        <p>联系地址：${jltfispInstitutionDetail.address}</p>
                     </div>
                     <div class="clear"></div>
                     <div class="proList nli" style="margin-top:40px;">
@@ -38,79 +38,19 @@
                     </div>
                     <div class="resume re1">
                         <h2>银行简讯</h2>
-                        <p>1969－1975年，陕西省延川县文安驿公社梁家河大队知青、党支部书记</p>
-                        <p>1975－1979年，清华大学化工系基本有机合成专业学习</p>
-                        <p>1979－1982年，国务院办公厅、中央军委办公厅秘书（现役）</p>
-                        <p>1982－1983年，河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记</p>
-                        <p>1983－1985年，河北省正定县委书记，正定县武装部第一政委、党委第一书记</p>
-                        <p>1985－1988年，福建省厦门市委常委、副市长</p>
-                        
+                        <p>${jltfispInstitutionDetail.mainInvestmentStage}</p>
                         <h2>中小企业信贷产品</h2>
-                        <p>1969－1975年，陕西省延川县文安驿公社梁家河大队知青、党支部书记</p>
-                        <p>1975－1979年，清华大学化工系基本有机合成专业学习</p>
-                        <p>1979－1982年，国务院办公厅、中央军委办公厅秘书（现役）</p>
-                        <p>1982－1983年，河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记河北省正定县委副书记</p>
-                        <p>1983－1985年，河北省正定县委书记，正定县武装部第一政委、党委第一书记</p>
-                        <p>1985－1988年，福建省厦门市委常委、副市长</p>
+                        <p>${jltfispInstitutionDetail.mainInvestmentStage}</p>
                     </div>
                     
                     <div class="resume re1" style="display:none;">	
                     	<ul class="ul2">
                             <li><a href="${path}/anon/expertDetail">
                             	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
+                                <h4 class="blue">${jltfispInstitutionDetail.linkMan}</h4>
                                 <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
-                            </li>
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">张小盼</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">13866668888</p>
-                                <p class="email">2121212121@qq.com</p></a>
+                                <p class="phone">${jltfispInstitutionDetail.phoneNumer}</p>
+                                <p class="email">${jltfispInstitutionDetail.email}</p></a>
                             </li>
                         </ul>
                         <div class="clear"></div>
@@ -132,6 +72,7 @@ $(document).ready(function(e) {
 		$(this).parents('.nli').siblings(".resume").hide().eq($(this).index()).show();
 	});
 });
+
 </script>
   <#include "website/common/footer.ftl" />
   </body>

@@ -5,21 +5,25 @@
 
 package com.jltfisp.web.expert.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
+import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.login.service.LoginService;
+import com.jltfisp.util.FileUpDownUtils;
+import com.jltfisp.util.UploadFile;
+import com.jltfisp.util.WebUtil;
+import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.expert.entity.JltfispExpert;
+import com.jltfisp.web.expert.entity.JltfispExpertDto;
+import com.jltfisp.web.expert.service.ExpertService;
+import com.jltfisp.web.pager.entity.PagerModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
-import com.jltfisp.web.column.entity.JltfispColumn;
-import com.jltfisp.web.column.service.ColumnService;
-import com.jltfisp.web.expert.entity.*;
-import com.jltfisp.web.expert.service.ExpertService;
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * 
@@ -36,38 +40,123 @@ public class ExpertController {
     
     @Autowired
     private ColumnService columnService;
-
+    
+    @Autowired
+    private LoginService loginService;
+    
     /**
      * 专家资源栏目主页面
      * @return
      */
     @RequestMapping("/expert")
-    public String expert(HttpServletRequest request){
+    public String expertPage(HttpServletRequest request){
+    	//获取父栏目columnId
     	String columnId = request.getParameter("columnId");
-    	if(columnId==null)
-    	    columnId="50";
-    	List<JltfispExpert> expertList=(List<JltfispExpert>) expertService.getExpertList(Integer.valueOf(columnId));
-     List<JltfispColumn> columnList=columnService.getColumnList(384);
-     request.setAttribute("columnList", columnList);
-     request.setAttribute("columnId", columnList.get(0).getId());
-    	request.setAttribute("expertList", expertList);
-     return "/website/expert/expert";
+    	String type = request.getParameter("type");
+    	String isPage = request.getParameter("isPage");
+    	//获取当前页之前的数据总合
+    	String offset=request.getParameter("pager.offset");
+    	int rows;
+    	if(offset !=null){
+    	rows=Integer.parseInt(request.getParameter("pager.offset"));
+    	}else{
+    	rows=0;
+    	}
+    	List<JltfispColumn> columnList;
+    	int total;
+    	List<JltfispExpert> datas;
+    	if(type=="" || type==null){
+    	//根据父栏目columnId查询子栏目信息
+        columnList=columnService.getColumnList(7);
+        request.setAttribute("columnList", columnList);
+        request.setAttribute("columnId", columnList.get(0).getId());
+        //获取当前子栏目下所有的数据总数
+        total =expertService.getExpertPageCount(columnList.get(0).getId());
+        //获取当前页的数据，且显示10条
+        datas=expertService.getExpertPageList(rows, 10,columnList.get(0).getId());
+    	}else{
+    	//根据子栏目columnId查询子栏目信息
+    	JltfispColumn ChirldColumn=columnService.getColumnContext(Integer.parseInt(columnId));
+    	//根据父栏目columnId查询子栏目信息
+    	columnList=columnService.getColumnList(ChirldColumn.getParentColumn());
+        request.setAttribute("columnList", columnList);
+        request.setAttribute("columnId", columnId);
+        //获取当前子栏目下所有的数据总数
+        total =expertService.getExpertPageCount(Integer.parseInt(columnId));
+        //获取当前页的数据，且显示10条
+        datas=expertService.getExpertPageList(rows, 10,Integer.parseInt(columnId));
+    	}
+        PagerModel pm = new PagerModel();
+        pm.setDatas(datas);
+        pm.setTotal(total);
+        request.setAttribute("pm", pm);
+        request.setAttribute("url", "anon/expert");
+        if(type=="" || type==null){
+         return "/website/expert/expert";
+        }else{
+         if(isPage == null){
+        	 return "/website/expert/expertContext";
+         }else{
+        	 return "/website/expert/expert";
+         }
+        }
     }
     
     /**
-     * 切换专家资源
+     * 进入专家资源列表页面
+     * @param request
      * @return
+     * @author 张舒西 2016年11月23日 下午12:53:56
      */
-    @RequestMapping("/changeExpert")
-    public String changeExpert(HttpServletRequest request){
-     String columnId = request.getParameter("columnId");
-     List<JltfispExpert> expertList=expertService.getExpertList(Integer.valueOf(columnId));
-     //384为暂时测试用，实际为parentColumn值
-     List<JltfispColumn> columnList=columnService.getColumnList(384);
-     request.setAttribute("columnList", columnList);
-     request.setAttribute("expertList", expertList);
-     return "website/expert/expertContext";
+    @RequestMapping("/addExpertPage")
+    public String addExpertPage(HttpServletRequest request){
+    	//获取父栏目columnId
+    	String columnId = request.getParameter("columnId");
+    	if(columnId.equals("19")){
+    		return "/website/expert/expertUser1";
+    	}else if(columnId.equals("20")){
+    		return "/website/expert/expertUser2";
+    	}else if(columnId.equals("21")){
+    		return "/website/expert/expertUser3";
+    	}else{
+    		return "/website/expert/expertUser1";
+    	}
     }
+    
+    
+    /**
+     * 添加专家资源
+     * @param request
+     * @return
+     * @author 张舒西 2016年12月2日 下午12:53:56
+     */
+    @RequestMapping("/addExpert")
+    @ResponseBody
+    public int addExpert(HttpServletRequest request,JltfispExpertDto jltfispExpertDto){
+    	JltfispExpert jltfispExpert=new JltfispExpert();
+    	WebUtil.copyBean(jltfispExpertDto, jltfispExpert);
+    	//获取当前用户登录信息
+    	JltfispUser user=loginService.getCurrentUser();
+    	jltfispExpert.setUserid(user.getId());
+    	jltfispExpert.setAgencylogo("/resource/fileImage/"+jltfispExpert.getAgencylogo());
+    	return expertService.saveExpert(jltfispExpert);
+    }
+    
+    /**
+     * 添加专家资源-上传图片
+     * @param request
+     * @return
+     * @throws IOException 
+     */
+    @RequestMapping("/savePhoto")
+    @ResponseBody
+    public String saveCoFile(HttpServletRequest request) throws IOException {
+    	String index = request.getParameter("index");
+    	UploadFile uploadFile = FileUpDownUtils.getUploadFile2(request, "UpFile"+index);
+    	String path=uploadFile.getFile().getName();
+        return path;
+    }
+    
 
     /**
      * 专家资源详情

@@ -6,16 +6,13 @@
 package com.jltfisp.web.anon;
 
 import com.alibaba.fastjson.JSON;
-import com.jltfisp.redis.RedisService;
+import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
 
 /**
  * Created by LiuFa on 2016/11/9.
@@ -39,42 +36,6 @@ public class AnonController {
         return "/website/loan/loan";
     }
 
-    /**
-     * 合作机构栏目主页面
-     * @return
-     */
-    @RequestMapping("/institution")
-    public String institution(HttpServletRequest request){
-    	
-    	String type = request.getParameter("type");
-    	if(type==null) 
-    		type="1";
-    	request.setAttribute("type", type);
-        return "/website/institution/institution";
-    }
-    
-    @RequestMapping("/institutionDetail")
-    public String institutionDetail(HttpServletRequest request){
-        return "/website/institution/institutionDetail";
-    }
-    /**
-     * 政策中心栏目主页面
-     * @return
-     */
-    @RequestMapping("/policy")
-    public String policy(){
-        return "/website/policy/policy";
-    }
-
-    /**
-     * 专项资金栏目主页面
-     * @return
-     */
-    @RequestMapping("/capital")
-    public String capital(){
-        return "/website/capital/capital";
-    }
-
 
     /**
      * 资本市场栏目主页面
@@ -85,14 +46,6 @@ public class AnonController {
         return "/website/market/market";
     }
 
-    /**
-     * 科技保险栏目主页面
-     * @return
-     */
-    @RequestMapping("/insurance")
-    public String insurance(){
-        return "/website/insurance/insurance";
-    }
 
     /**
      * 云课堂栏目主页面
@@ -145,29 +98,40 @@ public class AnonController {
         return "/website/about/about";
     }
 
+    /**
+     * @author LiuFa
+     * @description  跳转到未授权页面
+     */
+    @RequestMapping("/noPermissions")
+    public String noPermissions(){
+        return "/website/sys/noPermissions";
+    }
+
+    /**
+     * @author LiuFa
+     * @description 跳转到系统错误页面
+     */
+    @RequestMapping("/error")
+    public String error(){
+        return "/website/sys/error";
+    }
+
+
+    /**
+     * @author LiuFa
+     * @description 跳转到404ＮＯＴＦＯＵＮＤ页面
+     */
+    @RequestMapping("/notFound")
+    public String notFound(){
+        return "/website/sys/notFound";
+    }
 
     @Autowired
-    private RedisService redisService;
+    private LuceneService luceneService;
     @RequestMapping("/test")
     @ResponseBody
-    public String test() throws InterruptedException {
-        redisService.pushMessage("chat",new Date());
-        return "success";
-    }
-
-    @RequestMapping("/sse")
-    public String sse(){
-        return "/website/sse";
-    }
-
-    @RequestMapping("/push")
-    @ResponseBody
-    public String push(){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        return "data:"+System.currentTimeMillis()+"\n\n";
+    public String test(){
+        luceneService.buildIndex();
+        return "/website/sys/notFound";
     }
 }

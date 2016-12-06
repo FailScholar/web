@@ -1,10 +1,10 @@
 package com.jltfisp.web.news.service;
 
-import java.util.List;
-
 import com.jltfisp.base.service.IBaseService;
 import com.jltfisp.web.news.entity.ColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
+
+import java.util.List;
 	/**
 	 * 新闻资讯业务处理层
 	 * @author cuihong.ge
@@ -17,7 +17,7 @@ import com.jltfisp.web.news.entity.NewsInformation;
      * @param secondlevelType 二级栏目类型
      * @return list
      */
-	public List<NewsInformation> getNewsInformationList(Integer columnId);
+	public List<NewsInformation> getNewsInformationPageList(int rows,int Pagesize,Integer columnId);
     /**
      * 根据新闻内容id或去具体的新闻内容
      * @param id
@@ -25,10 +25,15 @@ import com.jltfisp.web.news.entity.NewsInformation;
      */
 	public ColumnDto getNewsInfoById(Integer id);
 	/**
-	 * 根据二级菜单栏的父节点Id获取二级菜单栏list
-	 * @param parentId
-	 * @return list<ColumnDto>
+	 * 
+	 * @param id 新闻Id
 	 */
-	public List<ColumnDto> getColumnDtoListByParentId(Integer parentId);
+	public void addNewsInfoPv(Integer id);
+	/**
+	 * 获取新闻资讯二级栏目下对应的资讯总条目
+	 * @param columnId 二级栏目id
+	 * @return
+	 */
+	public int getNewsInfoPageCount(Integer columnId);
 
 }

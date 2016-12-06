@@ -8,6 +8,7 @@ package com.jltfisp.web.user.service;
 import com.jltfisp.login.entity.JltfispUser;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by LiuFa on 2016/11/10.
@@ -17,5 +18,8 @@ import java.util.List;
 public interface UserService {
 
     List<JltfispUser> getAllUserEmailAndName();
+    
+    int updateByPKSelective(JltfispUser user);
 
+    Set<String> getVisitorPermSet();
 }

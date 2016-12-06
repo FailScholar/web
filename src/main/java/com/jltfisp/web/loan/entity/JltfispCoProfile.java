@@ -6,10 +6,8 @@
 package com.jltfisp.web.loan.entity;
 
 
-
-import java.util.Date;
-
 import javax.persistence.*;
+import java.util.Date;
 
 @Table(name = "jltfisp_co_profile")
 public class JltfispCoProfile {
@@ -25,7 +23,7 @@ public class JltfispCoProfile {
      * 关联的企业申请信息id
      */
     @Column(name = "info_id")
-    private int info_id;
+    private int infoid;
 
     /**
      * 经营范围（主营）
@@ -156,12 +154,12 @@ public class JltfispCoProfile {
 		this.id = id;
 	}
 
-	public int getInfo_id() {
-		return info_id;
+	public int getInfoid() {
+		return infoid;
 	}
 
-	public void setInfo_id(int info_id) {
-		this.info_id = info_id;
+	public void setInfoid(int infoid) {
+		this.infoid = infoid;
 	}
 
 	public String getMainBusiness() {

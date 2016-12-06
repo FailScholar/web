@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.policy.dao.PolicyMapper">
+    <resultMap type="com.jltfisp.web.policy.entity.JltfispPolicy" id="jltfispPolicy">
+		<id property="id" column="id" />
+		<result property="image" column="image" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="source" column="source" />
+		<result property="link" column="link" />
+		<result property="publishTime" column="publish_time" />
+		<result property="columnId" column="column_id" />
+		<result property="contentReview" column="content_review" />
+		<result property="video" column="video" />
+		<result property="pv" column="pv" />
+		<result property="state" column="state" />
+	</resultMap>
+	
+	<!-- 每次分页查询语句 -->
+	<select id="getPolicyPageList" resultMap="jltfispPolicy" parameterType="map">
+	   select
+	   jp.id as id,jp.image as image,jp.title as title,jp.content as content,jp.source as source,jp.link as link,
+	   jp.publish_time as publishTime,jp.column_id as columnId ,jp.content_review as contentReview,
+	   jp.video as video ,jp.pv as pv,jp.state as state
+	   from jltfisp_policy jp 
+	   where column_id = #{columnId} limit #{rows},#{pageSize}
+	</select>
+	<!--更新浏览记录,浏览记录每访问一次+1 -->
+	<update id="updatePolicyInfo">
+		update jltfisp_policy jp set jp.pv=jp.pv+1 where jp.state=1 and jp.id=#{id}
+	</update>
+</mapper>

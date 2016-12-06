@@ -8,14 +8,13 @@ package com.jltfisp.web.user.service.impl;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.web.user.dao.UserMapper;
 import com.jltfisp.web.user.service.UserService;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by LiuFa on 2016/11/10.
@@ -33,6 +32,17 @@ public class UserServiceImpl implements UserService {
         Example example = new Example(JltfispUser.class);
         example.createCriteria().andCondition("is_delete=0").andCondition("state=1");
         return userMapper.selectByExample(example);
+    }
+
+	@Override
+	public int updateByPKSelective(JltfispUser user) {
+		// TODO Auto-generated method stub
+		return userMapper.updateByPKSelective(user);
+	}
+
+    @Override
+    public Set<String> getVisitorPermSet() {
+        return userMapper.getVisitorPermSet();
     }
 
 }

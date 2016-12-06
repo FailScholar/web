@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.expert.dao.ExpertMapper">
+    <resultMap type="com.jltfisp.web.expert.entity.JltfispExpert" id="jltfispExpert">
+		<id property="id" column="id" />
+		<result property="userid" column="userid" />
+		<result property="columnid" column="columnid" />
+		<result property="sex" column="sex" />
+		<result property="degree" column="degree" />
+		<result property="technologydomain" column="technologydomain" />
+		<result property="workpost" column="workpost" />
+		<result property="worktitle" column="worktitle" />
+		<result property="fax" column="fax" />
+		<result property="postcode" column="postcode" />
+		<result property="businesaddress" column="businesaddress" />
+		<result property="mainaddress" column="mainaddress" />
+		<result property="postaladdress" column="postaladdress" />
+		<result property="educationalbackground" column="educationalbackground" />
+		<result property="partfull" column="partfull" />
+		<result property="majorinfo" column="majorinfo" />
+		<result property="projectinfo" column="projectinfo" />
+		<result property="agencylogo" column="agencylogo" />
+		<result property="agencyinfo" column="agencyinfo" />
+		<result property="domain" column="domain" />
+		<result property="phone" column="phone" />
+		<result property="email" column="email" />
+	</resultMap>
+	<sql id="expert_column">
+	id,userid,columnid,sex,degree,technology_domain,work_post,work_title,fax,postcode,busines_address,main_address,postal_address,educational_background,part_full,major_info,project_info,agency_logo,agency_info,domain,phone,email
+	</sql>
+	<!-- 每次分页查询语句 -->
+	<select id="getExpertPageList" resultMap="jltfispExpert" parameterType="map">
+	   select
+	   <include refid="expert_column" />
+	   from jltfisp_fin_expert
+	   where columnid = #{columnId} limit #{rows},#{pageSize}
+	</select>
+</mapper>

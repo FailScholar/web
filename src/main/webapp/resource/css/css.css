@@ -187,13 +187,13 @@ html,body { width:100%; height:100%; background-color:#fff; min-width:1200px; fo
 .apply:hover { color:#fff; background-color:#075dd3;}
 .ap1 { margin:120px auto 40px;}
 
-.info { height:39px; border-bottom:3px solid #f5f5f5;position:relative;}
+.info { height:auto; border-bottom:3px solid #f5f5f5;position:relative;}
 .infoTab { margin-bottom:-3px; line-height:39px;}
 .infoTab li { border-bottom:3px solid transparent; float:left; padding:0 28px; font-size:16px;}
 .infoTab li.active,.info li:hover { border-bottom-color:#1679ff;}
 .infoTab li a { color:#333;}
 .infoTab li.active a,.info li:hover a{ color:#1679ff;}
-.ul1 li{ width:474px; padding:10px 26px 5px; border:1px solid #eaeaea; border-radius:4px; float:left; margin:33px 26px 0 26px; line-height:29px;}
+.ul1 li{ height:132px;width:474px; padding:10px 26px 5px; border:1px solid #eaeaea; border-radius:4px; float:left; margin:33px 26px 0 26px; line-height:29px;}
 .ul1 h2 { font-size:16px; color:#333; width:464px;}
 .ul1 p.tit { color:#999; font-size:14px; border-bottom:1px dashed #ddd; margin:8px 0 2px; padding-bottom:8px; line-height:24px;}
 .ul1 p.tit span { margin-left:20px;}
@@ -511,3 +511,9 @@ html,body { width:100%; height:100%; background-color:#fff; min-width:1200px; fo
 .bar { border-bottom:1px solid #4f94f2; margin-top:20px; margin-bottom:10px;}
 .bar span { display:block; width:120px; height:32px; text-align:center; line-height:32px; background-color:#4f94f2; color:#fff;}
 .imgList b { position:absolute; top:0; left:0; width:400px; height:311px; background:url(../../resource/images/play.png) center no-repeat #000; opacity:0.3; filter:alpha(opcity=30); filter:progid:DXImageTransform.Microsoft.Alpha(opacity=30);  z-index:1;}
+
+
+/*2016年11月29日10:25:20
+增加消息息提示
+*/
+.person a.mes { position:absolute; width:14px; height:14px; background-color: #ff0500; left:32px; top:-7px; line-height:14px; text-align:center; border-radius:100%; color:#fff; font-weight:normal; background-image:none ;margin-left:0; padding-left:0;}

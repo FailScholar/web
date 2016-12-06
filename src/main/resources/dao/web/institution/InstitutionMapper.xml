@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.institution.dao.InstitutionDao">
+    <resultMap type="com.jltfisp.web.column.entity.JltfispColumn" id="jltfispColumn">
+		<id property="id" column="id" />
+		<result property="columnName" column="columnName" />
+		<result property="columnType" column="columnType" />
+		<result property="parentColumn" column="parentColumn" />
+		<result property="columnNo" column="columnNo" />
+		<result property="image" column="image" />
+		<result property="columnDesc" column="columnDesc" />
+		<result property="isdelete" column="isdelete" />
+		<result property="createTime" column="createTime" />
+		<result property="createUserid" column="createUserid" />
+	</resultMap>
+	<!-- 查询合作机构二级列表，并按columnNo升序排列-->
+	<select id="getJltfispColumnList" resultMap="jltfispColumn" parameterType="int">
+	  select * from jltfisp_column_manage cm where cm.parentColumn=#{parentColumn} order by  columnNo asc
+	</select>
+	<!-- 根据合作机构二级列表的columnNo查询列表-->
+	<select id="getInstitutionList" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
+	    select * from jltfisp_institut institut,jltfisp_column_manage cm where cm.parentColumn=6 and  institut.columnId=cm.id and institut.columnId=#{columnId}
+	   order by  institut.createTime desc
+	</select>
+	<select id="getInstitutionDetail" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
+	  select * from jltfisp_institut institut where institut.id=#{id}
+	</select>
+	<!--查询记录总数 -->
+	<select id="getInstitutionPageCount" resultType="int" parameterType="int">
+		select count(*) from jltfisp_institut institut where institut.columnId=#{columnId}
+	</select>
+	<sql id="institution_column">
+		id,institutionalName,logoFile,abbreviation,corporateRepresentative,socialCreditCode,province,city,area,address,institutionalNature,url,institutionalAbstract,investmentTeam,ServiceProductsAndFeatures,mainAreas,specialAreas,mainInvestmentStage,projectRequirement,companyRealAddress,companyCity,institutionalAddress,postcodes,linkMan,mobilePhone,email,zoneDescription,phoneNumer,fax,institutionalType,createTime,columnId,user_id
+	</sql>
+	<!-- 每次分页查询语句 -->
+	<select id="getInstitutionPageList" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="map">
+	   select
+	   <include refid="institution_column" />
+	   from jltfisp_institut
+	   where columnId = #{columnId} limit #{rows},#{pageSize}
+	</select>
+	
+	<!-- 新增合作机构申请数据 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.institution.entity.JltfispInstitution">
+		insert into jltfisp_institut 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          institutionalName,
+	          logoFile,
+	          abbreviation,
+	          corporateRepresentative,
+	          socialCreditCode,
+	          province,
+	          city,
+	          area,
+	          address,
+	          institutionalNature,
+	          url,
+	          institutionalAbstract,
+	          investmentTeam,
+	          ServiceProductsAndFeatures,
+	          mainAreas,
+	          specialAreas,
+	          mainInvestmentStage,
+	          projectRequirement,
+	          companyRealAddress,
+	          companyCity,
+	          institutionalAddress,
+	          postcodes,
+	          linkMan,
+	          mobilePhone,
+	          email,
+	          zoneDescription,
+	          phoneNumer,
+	          fax,
+	          institutionalType,
+	          createTime,
+	          columnId,
+	          user_id
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{institutionalName,jdbcType=VARCHAR},
+	    	#{logoFile,jdbcType=VARCHAR},
+	    	#{abbreviation,jdbcType=VARCHAR},
+	    	#{corporateRepresentative,jdbcType=VARCHAR},
+	    	#{socialCreditCode,jdbcType=VARCHAR},
+	    	#{province,jdbcType=INTEGER},
+	    	#{city,jdbcType=INTEGER},
+	    	#{area,jdbcType=INTEGER},
+	    	#{address,jdbcType=VARCHAR},
+	    	#{institutionalNature,jdbcType=INTEGER},
+	    	#{url,jdbcType=VARCHAR},
+	    	#{institutionalAbstract,jdbcType=VARCHAR},
+	    	#{investmentTeam,jdbcType=VARCHAR},
+	    	#{serviceProductsAndFeatures,jdbcType=VARCHAR},
+	    	#{mainAreas,jdbcType=VARCHAR},
+	    	#{specialAreas,jdbcType=VARCHAR},
+	    	#{mainInvestmentStage,jdbcType=VARCHAR},
+	    	#{projectRequirement,jdbcType=VARCHAR},
+	    	#{companyRealAddress,jdbcType=INTEGER},
+	    	#{companyCity,jdbcType=INTEGER},
+	    	#{institutionalAddress,jdbcType=VARCHAR},
+	    	#{postcodes,jdbcType=INTEGER},
+	    	#{linkMan,jdbcType=VARCHAR},
+	    	#{mobilePhone,jdbcType=VARCHAR},
+	    	#{email,jdbcType=VARCHAR},
+	    	#{zoneDescription,jdbcType=VARCHAR},
+	    	#{phoneNumer,jdbcType=VARCHAR},
+	    	#{fax,jdbcType=VARCHAR},
+	    	#{institutionalType,jdbcType=INTEGER},
+	    	#{createTime,jdbcType=TIMESTAMP},
+	    	#{columnId,jdbcType=INTEGER},
+	    	#{userId,jdbcType=INTEGER},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	
+	<!-- 根据用户id获取该用户申请过的合作机构信息 -->
+	<select id="getInstitutionByUserId" resultType="com.jltfisp.web.institution.entity.JltfispInstitution">
+	  select * from jltfisp_institut institut where institut.user_id = #{userId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.institution.entity.JltfispInstitution">
+	   	update jltfisp_institut 
+	  <set>
+		     <if test="institutionalName != null and institutionalName != ''" >
+		         institutionalName=#{institutionalName,jdbcType=VARCHAR},
+		     </if>
+		     <if test="logoFile != null and logoFile != ''" >
+		         logoFile=#{logoFile,jdbcType=VARCHAR},
+		     </if>
+		     <if test="abbreviation != null and abbreviation != ''" >
+		         abbreviation=#{abbreviation,jdbcType=VARCHAR},
+		     </if>
+		     <if test="corporateRepresentative != null and corporateRepresentative != ''" >
+		         corporateRepresentative=#{corporateRepresentative,jdbcType=VARCHAR},
+		     </if>
+		     <if test="socialCreditCode != null and socialCreditCode != ''" >
+		         socialCreditCode=#{socialCreditCode,jdbcType=VARCHAR},
+		     </if>
+		     <if test="province != null and province != ''" >
+		         province=#{province,jdbcType=INTEGER},
+		     </if>
+		     <if test="city != null and city != ''" >
+		         city=#{city,jdbcType=INTEGER},
+		     </if>
+		     <if test="area != null and area != ''" >
+		         area=#{area,jdbcType=INTEGER},
+		     </if>
+		     <if test="address != null and address != ''" >
+		         address=#{address,jdbcType=VARCHAR},
+		     </if>
+		     <if test="institutionalNature != null and institutionalNature != ''" >
+		         institutionalNature=#{institutionalNature,jdbcType=INTEGER},
+		     </if>
+		     <if test="url != null and url != ''" >
+		         url=#{url,jdbcType=VARCHAR},
+		     </if>
+		     <if test="institutionalAbstract != null and institutionalAbstract != ''" >
+		         institutionalAbstract=#{institutionalAbstract,jdbcType=VARCHAR},
+		     </if>
+		     <if test="investmentTeam != null and investmentTeam != ''" >
+		         investmentTeam=#{investmentTeam,jdbcType=VARCHAR},
+		     </if>
+		     <if test="serviceProductsAndFeatures != null and serviceProductsAndFeatures != ''" >
+		         ServiceProductsAndFeatures=#{serviceProductsAndFeatures,jdbcType=VARCHAR},
+		     </if>
+		     <if test="mainAreas != null and mainAreas != ''" >
+		         mainAreas=#{mainAreas,jdbcType=VARCHAR},
+		     </if>
+		     <if test="specialAreas != null and specialAreas != ''" >
+		         specialAreas=#{specialAreas,jdbcType=VARCHAR},
+		     </if>
+		     <if test="mainInvestmentStage != null and mainInvestmentStage != ''" >
+		         mainInvestmentStage=#{mainInvestmentStage,jdbcType=VARCHAR},
+		     </if>
+		     <if test="projectRequirement != null and projectRequirement != ''" >
+		         projectRequirement=#{projectRequirement,jdbcType=VARCHAR},
+		     </if>
+		     <if test="companyRealAddress != null and companyRealAddress != ''" >
+		         companyRealAddress=#{companyRealAddress,jdbcType=INTEGER},
+		     </if>
+		     <if test="companyCity != null and companyCity != ''" >
+		         companyCity=#{companyCity,jdbcType=INTEGER},
+		     </if>
+		     <if test="institutionalAddress != null and institutionalAddress != ''" >
+		         institutionalAddress=#{institutionalAddress,jdbcType=VARCHAR},
+		     </if>
+		     <if test="postcodes != null and postcodes != ''" >
+		         postcodes=#{postcodes,jdbcType=INTEGER},
+		     </if>
+		     <if test="linkMan != null and linkMan != ''" >
+		         linkMan=#{linkMan,jdbcType=VARCHAR},
+		     </if>
+		     <if test="mobilePhone != null and mobilePhone != ''" >
+		         mobilePhone=#{mobilePhone,jdbcType=VARCHAR},
+		     </if>
+		     <if test="email != null and email != ''" >
+		         email=#{email,jdbcType=VARCHAR},
+		     </if>
+		     <if test="zoneDescription != null and zoneDescription != ''" >
+		         zoneDescription=#{zoneDescription,jdbcType=VARCHAR},
+		     </if>
+		     <if test="phoneNumer != null and phoneNumer != ''" >
+		         phoneNumer=#{phoneNumer,jdbcType=VARCHAR},
+		     </if>
+		     <if test="fax != null and fax != ''" >
+		         fax=#{fax,jdbcType=VARCHAR},
+		     </if>
+		     <if test="institutionalType != null and institutionalType != ''" >
+		         institutionalType=#{institutionalType,jdbcType=INTEGER},
+		     </if>
+		     <if test="columnId != null and columnId != ''" >
+		         columnId=#{columnId,jdbcType=INTEGER},
+		     </if>
+		     createTime=#{createTime,jdbcType=TIMESTAMP},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	<update id="updateByPK" parameterType="com.jltfisp.web.institution.entity.JltfispInstitution">
+	   	update jltfisp_institut 
+	  <set>
+	    institutionalName=#{institutionalName,jdbcType=VARCHAR},
+        logoFile=#{logoFile,jdbcType=VARCHAR},
+        abbreviation=#{abbreviation,jdbcType=VARCHAR},
+        corporateRepresentative=#{corporateRepresentative,jdbcType=VARCHAR},
+        socialCreditCode=#{socialCreditCode,jdbcType=VARCHAR},
+        province=#{province,jdbcType=INTEGER},
+        city=#{city,jdbcType=INTEGER},
+        area=#{area,jdbcType=INTEGER},
+        address=#{address,jdbcType=VARCHAR},
+        institutionalNature=#{institutionalNature,jdbcType=INTEGER},
+        url=#{url,jdbcType=VARCHAR},
+        institutionalAbstract=#{institutionalAbstract,jdbcType=VARCHAR},
+        investmentTeam=#{investmentTeam,jdbcType=VARCHAR},
+        ServiceProductsAndFeatures=#{serviceProductsAndFeatures,jdbcType=VARCHAR},
+        mainAreas=#{mainAreas,jdbcType=VARCHAR},
+        specialAreas=#{specialAreas,jdbcType=VARCHAR},
+        mainInvestmentStage=#{mainInvestmentStage,jdbcType=VARCHAR},
+        projectRequirement=#{projectRequirement,jdbcType=VARCHAR},
+        companyRealAddress=#{companyRealAddress,jdbcType=INTEGER},
+        companyCity=#{companyCity,jdbcType=INTEGER},
+        institutionalAddress=#{institutionalAddress,jdbcType=VARCHAR},
+        postcodes=#{postcodes,jdbcType=INTEGER},
+        linkMan=#{linkMan,jdbcType=VARCHAR},
+        mobilePhone=#{mobilePhone,jdbcType=VARCHAR},
+        email=#{email,jdbcType=VARCHAR},
+        zoneDescription=#{zoneDescription,jdbcType=VARCHAR},
+        phoneNumer=#{phoneNumer,jdbcType=VARCHAR},
+        fax=#{fax,jdbcType=VARCHAR},
+        institutionalType=#{institutionalType,jdbcType=INTEGER},
+        createTime=#{createTime,jdbcType=TIMESTAMP},
+        columnId=#{columnId,jdbcType=INTEGER},
+        user_id=#{userId,jdbcType=INTEGER}
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+</mapper>
