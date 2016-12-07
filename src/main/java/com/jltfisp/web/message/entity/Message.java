@@ -1,8 +1,8 @@
 package com.jltfisp.web.message.entity;
 
-import com.jltfisp.base.entity.BaseEntity;
-
 import javax.persistence.Table;
+
+import com.jltfisp.base.entity.BaseEntity;
 /**
  * 
  * jltfisp_message_push表

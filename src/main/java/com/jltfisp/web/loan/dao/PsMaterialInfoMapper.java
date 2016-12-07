@@ -1,11 +1,12 @@
 package com.jltfisp.web.loan.dao;
 
-import com.jltfisp.base.basedao.BaseMapper;
-import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
+import com.jltfisp.base.basedao.BaseMapper;
+import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
 /**
  * 保费补贴申请材料数据访问层接口
  * @author cuihong.ge

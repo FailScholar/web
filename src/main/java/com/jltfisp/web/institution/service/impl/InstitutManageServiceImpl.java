@@ -1,14 +1,15 @@
 package com.jltfisp.web.institution.service.impl;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
 import com.jltfisp.web.institution.dao.InstitutManageMapper;
 import com.jltfisp.web.institution.entity.InstitutManage;
 import com.jltfisp.web.institution.service.IInstitutManageService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
 
 @Repository
 public class InstitutManageServiceImpl extends BaseServiceImpl<InstitutManage>

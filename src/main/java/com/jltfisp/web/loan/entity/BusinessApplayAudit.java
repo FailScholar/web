@@ -1,8 +1,8 @@
 package com.jltfisp.web.loan.entity;
 
-import com.jltfisp.base.entity.BaseEntity;
-
 import java.util.Date;
+
+import com.jltfisp.base.entity.BaseEntity;
 /**
  * 
  * jltfisp_business_applay表

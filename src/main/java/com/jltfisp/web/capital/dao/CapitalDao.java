@@ -1,11 +1,12 @@
 package com.jltfisp.web.capital.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.capital.entity.JltfispCapital;
 import com.jltfisp.web.column.entity.JltfispColumn;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 public interface CapitalDao extends BaseMapper<JltfispCapital>{
 	

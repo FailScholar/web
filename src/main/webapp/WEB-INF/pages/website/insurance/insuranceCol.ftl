@@ -5,7 +5,7 @@
         <li>
             <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${list.id}')">${list.title }</a></h2>
             <p class="tit">${list.source}<span>${list.publishTime ? date}</span><span class="eye fr">${list.pv}</span></p>
-            <p>${list.contentReview}</p>
+            <p>${list.contentReview[0..40]}...</p>
         </li>
         </#list>
     </ul>

@@ -1,10 +1,10 @@
 package com.jltfisp.web.news.service;
 
+import java.util.List;
+
 import com.jltfisp.base.service.IBaseService;
 import com.jltfisp.web.news.entity.ColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
-
-import java.util.List;
 	/**
 	 * 新闻资讯业务处理层
 	 * @author cuihong.ge

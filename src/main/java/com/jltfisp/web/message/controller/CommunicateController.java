@@ -1,14 +1,14 @@
 package com.jltfisp.web.message.controller;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import com.jltfisp.base.controller.BaseController;
-import com.jltfisp.base.entity.PageInfo;
-import com.jltfisp.base.service.IBaseService;
-import com.jltfisp.login.entity.JltfispUser;
-import com.jltfisp.login.service.LoginService;
-import com.jltfisp.web.message.entity.Communicate;
-import com.jltfisp.web.message.service.ICommunicateService;
-import com.jltfisp.web.user.entity.Role;
-import com.jltfisp.web.user.service.IRoleService;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.collections.map.HashedMap;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+import com.jltfisp.base.controller.BaseController;
+import com.jltfisp.base.entity.PageInfo;
+import com.jltfisp.base.service.IBaseService;
+import com.jltfisp.login.entity.JltfispAdmin;
+import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.login.service.LoginService;
+import com.jltfisp.web.message.entity.Communicate;
+import com.jltfisp.web.message.service.ICommunicateService;
+import com.jltfisp.web.user.entity.Role;
+import com.jltfisp.web.user.service.IRoleService;
 
 
 /**

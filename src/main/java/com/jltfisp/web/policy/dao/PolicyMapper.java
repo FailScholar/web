@@ -1,10 +1,10 @@
 package com.jltfisp.web.policy.dao;
 
-import com.jltfisp.base.basedao.BaseMapper;
-import com.jltfisp.web.policy.entity.JltfispPolicy;
-
 import java.util.List;
 import java.util.Map;
+
+import com.jltfisp.base.basedao.BaseMapper;
+import com.jltfisp.web.policy.entity.JltfispPolicy;
 /**
  * 政策中心数据访问层接口
  * @author cuihong.ge

@@ -1,9 +1,10 @@
 package com.jltfisp.web.loan.dao;
 
-import com.jltfisp.base.basedao.BaseMapper;
-import com.jltfisp.web.loan.entity.JltfispCoProfile;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+
+import com.jltfisp.base.basedao.BaseMapper;
+import com.jltfisp.web.loan.entity.JltfispCoProfile;
 
 public interface CoProfileMapper extends BaseMapper<JltfispCoProfile>{
 	/**

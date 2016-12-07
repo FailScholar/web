@@ -1,14 +1,15 @@
 package com.jltfisp.web.loan.dao;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.loan.entity.JlfispPsBaseDto;
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
 import com.jltfisp.web.loan.entity.JltfispPsInfo;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
-import java.util.Map;
 /**
  * 保费补贴数据访问层接口
  * @author cuihong.ge

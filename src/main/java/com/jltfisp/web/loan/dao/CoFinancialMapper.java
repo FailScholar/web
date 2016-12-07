@@ -1,11 +1,13 @@
 package com.jltfisp.web.loan.dao;
 
-import com.jltfisp.base.basedao.BaseMapper;
-import com.jltfisp.web.loan.entity.JltfispCoFinancialDto;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
 
-import java.util.List;
+import com.jltfisp.base.basedao.BaseMapper;
+import com.jltfisp.web.loan.entity.JltfispCoFillInApply;
+import com.jltfisp.web.loan.entity.JltfispCoFinancialDto;
 
 public interface CoFinancialMapper extends BaseMapper<JltfispCoFinancialDto>{
 	/**

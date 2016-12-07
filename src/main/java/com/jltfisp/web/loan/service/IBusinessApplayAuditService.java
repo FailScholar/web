@@ -1,11 +1,11 @@
 package com.jltfisp.web.loan.service;
 
+import java.util.List;
+
 import com.jltfisp.base.service.IBaseService;
-import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.entity.JltfispCoDebt;
 import com.jltfisp.web.loan.entity.JltfispCoFillInApply;
-
-import java.util.List;
+import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 
 public interface IBusinessApplayAuditService extends
         IBaseService<BusinessApplayAudit> {

@@ -5,16 +5,21 @@
 
 package com.jltfisp.web.user.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.jltfisp.login.entity.JltfispAdmin;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
+import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.user.service.UserService;
+
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by LiuFa on 2016/11/10.

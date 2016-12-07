@@ -1,10 +1,10 @@
 package com.jltfisp.web.loan.service;
 
+import java.util.List;
+
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
 import com.jltfisp.web.loan.entity.JltfispFinShareholder;
-
-import java.util.List;
 
 public interface FinanceApplyService {
 

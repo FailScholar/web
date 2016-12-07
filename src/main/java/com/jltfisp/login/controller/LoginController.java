@@ -5,16 +5,17 @@
 
 package com.jltfisp.login.controller;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.jltfisp.log.service.LogService;
-import com.jltfisp.login.entity.JltfispUser;
-import com.jltfisp.login.service.LoginService;
 import com.jltfisp.shiro.CaptchaException;
 import com.jltfisp.util.captcha.Captcha;
 import com.jltfisp.util.captcha.SpecCaptcha;
-import com.jltfisp.web.column.entity.JltfispColumn;
-import com.jltfisp.web.column.service.ColumnService;
-import com.jltfisp.web.message.entity.Message;
-import com.jltfisp.web.message.service.IMessageService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -29,11 +30,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-import java.util.Set;
+import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.login.service.LoginService;
+import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.message.entity.Message;
+import com.jltfisp.web.message.service.IMessageService;
 
 /**
  * Created by LiuFa on 2016/11/1.

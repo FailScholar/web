@@ -1,8 +1,9 @@
 package com.jltfisp.web.institution.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.institution.entity.InstitutManage;
-import org.apache.ibatis.annotations.Param;
 /**
  * 数据访问接口
  */

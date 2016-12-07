@@ -5,6 +5,20 @@
 
 package com.jltfisp.web.loan.controller;
 
+import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
 import com.jltfisp.util.FileUpDownUtils;
@@ -12,19 +26,8 @@ import com.jltfisp.util.UploadFile;
 import com.jltfisp.util.WebUtil;
 import com.jltfisp.web.area.service.AreaService;
 import com.jltfisp.web.loan.entity.*;
+import com.jltfisp.web.area.entity.*;
 import com.jltfisp.web.loan.service.LoanService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**

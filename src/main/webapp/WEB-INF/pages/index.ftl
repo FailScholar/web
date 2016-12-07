@@ -20,7 +20,7 @@
                       <div class="searchIcon fl">&nbsp;</div>
                       <div class="search fl">
                           <form method="post" action="${path}/anon/search">
-                              <input type="text" class="searchText" />
+                              <input type="text" name="keyWords" class="searchText" />
                               <input type="submit" class="searchBtn" value="" />
                           </form>
                       </div>

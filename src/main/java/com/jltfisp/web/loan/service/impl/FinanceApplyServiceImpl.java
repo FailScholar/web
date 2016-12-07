@@ -1,5 +1,11 @@
 package com.jltfisp.web.loan.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.jltfisp.web.loan.dao.FinanceApplyDao;
 import com.jltfisp.web.loan.dao.FinanceMaterialDao;
 import com.jltfisp.web.loan.dao.FinanceShareholderDao;
@@ -7,11 +13,6 @@ import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
 import com.jltfisp.web.loan.entity.JltfispFinShareholder;
 import com.jltfisp.web.loan.service.FinanceApplyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

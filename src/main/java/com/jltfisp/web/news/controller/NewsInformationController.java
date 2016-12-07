@@ -1,17 +1,20 @@
 package com.jltfisp.web.news.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.news.entity.ColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
 import com.jltfisp.web.news.service.INewsInformationService;
 import com.jltfisp.web.pager.entity.PagerModel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 /**
  * 咨讯中心Controller
  * @author cuihong.ge

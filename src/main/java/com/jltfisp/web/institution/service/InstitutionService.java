@@ -1,10 +1,10 @@
 package com.jltfisp.web.institution.service;
 
+import java.util.List;
+
 import com.jltfisp.base.service.IBaseService;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.institution.entity.JltfispInstitution;
-
-import java.util.List;
 
 public interface InstitutionService extends IBaseService<JltfispInstitution> {
 

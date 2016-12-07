@@ -1,11 +1,14 @@
 package com.jltfisp.web.user.controller;
 
-import com.jltfisp.Constants;
-import com.jltfisp.FileManager;
-import com.jltfisp.util.AjaxUtils;
-import com.jltfisp.util.FileUpDownUtils;
-import com.jltfisp.util.ImageUtils;
-import com.jltfisp.util.UploadFile;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +17,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
+import com.jltfisp.Constants;
+import com.jltfisp.FileManager;
+import com.jltfisp.util.AjaxUtils;
+import com.jltfisp.util.FileUpDownUtils;
+import com.jltfisp.util.ImageUtils;
+import com.jltfisp.util.UploadFile;
 
 
 /**

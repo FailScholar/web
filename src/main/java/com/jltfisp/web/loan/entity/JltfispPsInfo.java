@@ -1,6 +1,10 @@
 package com.jltfisp.web.loan.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 /**
  * 保费补贴企业信息关联类
  * @author cuihong.ge

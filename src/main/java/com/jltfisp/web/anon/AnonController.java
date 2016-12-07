@@ -6,6 +6,7 @@
 package com.jltfisp.web.anon;
 
 import com.alibaba.fastjson.JSON;
+import com.jltfisp.lucene.pojo.Pojo;
 import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Created by LiuFa on 2016/11/9.
@@ -27,6 +30,8 @@ public class AnonController {
     @Autowired
     private StatisticsService statisticsService;
 
+    @Autowired
+    private LuceneService luceneService;
     /**
      * 贷款服务栏目主页面
      * @return
@@ -56,11 +61,6 @@ public class AnonController {
         return "/website/cloud/cloud";
     }
     
-    @RequestMapping("/detail")
-    public String detail(){
-        return "/website/news/detail";
-    }
-
     /**
      * @author LiuFa
      * @return boolean
@@ -126,12 +126,25 @@ public class AnonController {
         return "/website/sys/notFound";
     }
 
-    @Autowired
-    private LuceneService luceneService;
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test(){
-        luceneService.buildIndex();
-        return "/website/sys/notFound";
+    @RequestMapping("/search")
+    public String search(String keyWords, Model model){
+        List<Pojo> list = luceneService.search(keyWords);
+        model.addAttribute("keyWords",keyWords);
+        model.addAttribute("pojoList",list);
+        return "/website/sys/search";
+    }
+
+    @RequestMapping("/pojo/detail")
+    public String PojoDetail(String tableName, int id, String keyWords, Model model){
+        List<Pojo> list = luceneService.search(keyWords);
+        Pojo pj = new Pojo();
+        for (Pojo pojo : list) {
+            if(pojo.getTableName().equals(tableName) && pojo.getId() == id){
+                pj = pojo;
+                break;
+            }
+        }
+        model.addAttribute("pojo",pj);
+        return "/website/sys/PojoDetail";
     }
 }

@@ -5,14 +5,15 @@
 
 package com.jltfisp.web.column.service.impl;
 
-import com.jltfisp.web.column.dao.ColumnMapper;
+import java.util.List;
+
 import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.web.column.dao.*;
 import com.jltfisp.web.column.service.ColumnService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /*
  *前台栏目内容service层 

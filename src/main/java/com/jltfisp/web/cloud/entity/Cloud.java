@@ -1,8 +1,8 @@
 package com.jltfisp.web.cloud.entity;
 
-import com.jltfisp.base.entity.BaseEntity;
-
 import java.util.Date;
+
+import com.jltfisp.base.entity.BaseEntity;
 /**
  * 
  * jltfisp_cloud表

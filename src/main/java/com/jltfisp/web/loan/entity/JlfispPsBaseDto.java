@@ -1,6 +1,8 @@
 package com.jltfisp.web.loan.entity;
 
 import java.util.List;
+
+import javax.persistence.Column;
 /**
  * 申请保费补贴对应的企业基本信息跟申请保费补贴信息Dto
  * @author cuihong.ge

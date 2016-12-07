@@ -5,8 +5,9 @@
 
 package com.jltfisp.web.expert.entity;
 
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.*;
 
 @Table(name = "jltfisp_fin_expert")
 public class JltfispExpert {

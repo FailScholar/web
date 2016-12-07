@@ -5,6 +5,8 @@
 
 package com.jltfisp.web.loan.entity;
 
+import java.util.Date;
+
 import javax.persistence.*;
 @Table(name = "jltfisp_co_financial")
 public class JltfispCoFinancial {

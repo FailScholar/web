@@ -1,9 +1,10 @@
 package com.jltfisp.web.loan.dao;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
-import org.apache.ibatis.annotations.Select;
 
 public interface  FinanceApplyDao extends BaseMapper<JltfispCoBase> {
 

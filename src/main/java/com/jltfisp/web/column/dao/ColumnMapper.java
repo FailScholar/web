@@ -1,8 +1,9 @@
 package com.jltfisp.web.column.dao;
 
+import org.apache.ibatis.annotations.Select;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.column.entity.JltfispColumn;
-import org.apache.ibatis.annotations.Select;
 
 public interface ColumnMapper extends BaseMapper<JltfispColumn>{
 	

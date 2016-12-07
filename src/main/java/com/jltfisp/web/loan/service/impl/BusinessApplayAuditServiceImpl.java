@@ -1,5 +1,13 @@
 package com.jltfisp.web.loan.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
 import com.jltfisp.web.loan.dao.BusinessApplayAuditMapper;
@@ -9,13 +17,6 @@ import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.entity.JltfispCoDebt;
 import com.jltfisp.web.loan.entity.JltfispCoFillInApply;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
-import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @Repository
 public class BusinessApplayAuditServiceImpl extends

@@ -1,11 +1,12 @@
 package com.jltfisp.web.loan.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Delete;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.loan.entity.JltfispCoProfitDto;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
 
 public interface CoProfitMapper extends BaseMapper<JltfispCoProfitDto>{
 	/**

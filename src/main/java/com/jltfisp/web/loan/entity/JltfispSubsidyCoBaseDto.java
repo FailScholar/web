@@ -5,9 +5,10 @@
 
 package com.jltfisp.web.loan.entity;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.*;
 
 @Table(name = "jltfisp_co_base")
 public class JltfispSubsidyCoBaseDto {
