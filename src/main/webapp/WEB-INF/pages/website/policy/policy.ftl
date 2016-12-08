@@ -10,61 +10,57 @@
 <#include "website/common/common.ftl" />
     <title>吉林省科技金融信息服务平台</title>
 </head>
-
-<body>
-<#include "website/common/header.ftl"/>
-<!--content开始-->
-<div class="content">
-    <div class="info">
-        <ul class="infoTab">
-             <#list columnList as column>
+ <body>
+ <#include "website/common/header.ftl"/>
+ <!--content开始-->
+   <div class="content">
+      <div class="info">
+          <ul class="infoTab">
+            <#list columnList as column>
                 <li id="Type${column.id}" name="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
              </#list>
-        </ul>
-     <div class="clear"></div>
-        <div class="infoList">
-           <ul class="ul1">
-			   <#list pm.datas as policy>
-			     <li>
+          </ul>
+          <div class="clear"></div>
+          <div class="infoList">
+              <#list pm.datas as policy>
+                <ul class="ul1">
+                   <li>
 			        <h2 class="ellipsis"><a href="${path}/anon/policyDetail?policyId=${policy.id}">${policy.title }</a></h2>
 			        <p class="tit">${policy.source }<span>${policy.publishTime ?date }</span><span class="eye fr">${policy.pv }</span></p>
 			        <p>${policy.contentReview }</p>
 			     </li>
-			    </#list>
-			</ul>
-        </div>
-     </div>
-    <div class="clear"></div>
-     <#include "website/common/commonPager.ftl"/>
-</div>
-<!--content结束-->
-
-</div>
-</div>
-
-<div class="clear"></div>
-<div class="clearfix"></div>
-</div>
-<#include "website/common/footer.ftl" />
-</body>
+                </ul>
+              </#list>
+              <div class="clear"></div>
+              <#include "website/policy/commonPager.ftl"/>
+          </div>
+      </div>
+   </div>
+ <!--content结束-->
+ </div>
+ </div>
+ 
+ <div class="clear"></div>
+ <div class="clearfix"></div>
+ <#include "website/common/footer.ftl" />
+ </body>
 </html>
 <script type="text/javascript">
-    $(document).ready(function(e) {
+  $(document).ready(function(e) {
     var columnId=${columnId};
     $('#Type'+columnId).addClass('active');
     $('.infoTab li').click(function(){
-        debugger;
         var columnId=$(this).attr("name");
         $(this).addClass('active').siblings('li').removeClass('active');
-		<!--传当前子栏目ID-->
-		$.ajax({
-                type: 'POST',
-                url:'${path}/anon/policy',
-                data: {columnId: columnId,type:1},
-                success: function (data) {
-                $('.content').html(data);
-                }
-          });
+		    <!--传当前子栏目ID-->
+			$.ajax({
+	                type: 'POST',
+	                url:'${path}/anon/changePolicy',
+	                data: {columnId: columnId,'pager.offset':0},
+	                success: function (data) {
+	                $('.infoList').html(data);
+	                }
+	          });
 	});
 });
 

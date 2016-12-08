@@ -40,11 +40,39 @@ public class AreaController {
     @ResponseBody
     public List<JltfispArea> expert(HttpServletRequest request){
     	String areaId = request.getParameter("areaId");
-    	if(areaId==null){
+    	if(areaId==null || "".equals(areaId.trim())){
     		areaId="0";
     		}
      List<JltfispArea> areaList=areaService.getAreaList(Integer.valueOf(areaId));
      return areaList;
+    }
+    
+    /**
+     * 获取省地县市全名称
+     * @return
+     */
+    @RequestMapping("/queryCityName")
+    @ResponseBody
+    public String queryCityName(HttpServletRequest request){
+    	String officeProv = request.getParameter("officeProv");
+    	String officeCity = request.getParameter("officeCity");
+    	String officeArea = request.getParameter("officeArea");
+    	String officeProvName = null;
+    	String officeCityName = null;
+    	String officeAreaName = null;
+    	if(null!=officeProv || "".endsWith(officeProv)){
+    	JltfispArea JltfispArea1=areaService.getAreaContext(Integer.parseInt(officeProv));
+    	officeProvName=JltfispArea1.getName();
+    	}
+    	if(null!=officeCity || "".endsWith(officeCity)){
+    	JltfispArea JltfispArea2=areaService.getAreaContext(Integer.parseInt(officeCity));
+    	officeCityName=JltfispArea2.getName();
+    	}
+    	if(null!=officeArea || "".endsWith(officeArea)){
+    	JltfispArea JltfispArea3=areaService.getAreaContext(Integer.parseInt(officeArea));
+    	officeAreaName=JltfispArea3.getName();
+    	}
+     return officeProvName+officeCityName+officeAreaName;
     }
     
    

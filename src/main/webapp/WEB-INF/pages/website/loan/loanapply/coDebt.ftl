@@ -1,10 +1,10 @@
    <!--资产负债表-->
                         <div class="nlistCont" style="display:none;">
-                        	<p class="ntit">资产负债表</p>
+                        	<p class="ntit" id="tableType2">资产负债表</p>
                             <ul class="lnav">
 
                             </ul>
-                            <p class="ntit"><b><span id="tabYear">${coAll.jltfispCoDebt.year}</span>年末</b>资产负债表(<span class="red">财务报表是贷款审核的重要依据，请正确完整填写。须与提交的书面纳税报表一致！</span>)<span class="fr">单位：元</span></p>
+                            <p class="ntit"><b><span id="tabYear">${coAll.jltfispCoDebt.year}</span>年末</b><span id="tableType">资产负债表</span>(<span class="red">财务报表是贷款审核的重要依据，请正确完整填写。须与提交的书面纳税报表一致！</span>)<span class="fr">单位：元</span></p>
                             <div class="clear"></div>
                             <form id="coDebt">
                             <input id="year" name="year" value="${coAll.jltfispCoDebt.year}" type="hidden">

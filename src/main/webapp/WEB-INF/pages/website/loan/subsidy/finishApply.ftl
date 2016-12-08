@@ -12,7 +12,7 @@
               </tr>
               <tr class="tal">
                   <th>经营地址</th>
-                  <td colspan="5">${ jltfispCoBaseDto.officeProv}${jltfispCoBaseDto.officeCity }${ jltfispCoBaseDto.officeArea}${jltfispCoBaseDto.officeAddress }</td>
+                  <td colspan="5" id="jinyingdizhi"></td>
                   <th>注册地址</th>
                   <td colspan="3">${jltfispCoBaseDto.registeredAddress }</td>
               </tr>
@@ -36,7 +36,7 @@
                   <th>联系人</th>
                   <td colspan="2">${jltfispCoBaseDto.linkMan}</td>
                   <th>手机</th>
-                  <td colspan="2">${jltfispCoBaseDto.linkMobile }</td>
+                  <td colspan="2">${jltfispCoBaseDto.mobilephone }</td>
                   <th>Email</th>
                   <td colspan="3">${jltfispCoBaseDto.email }</td>
               </tr>
@@ -61,7 +61,7 @@
                   <td>${psInfoList.policyNumber}</td>
                   <td>${psInfoList.premiumMoney}</td>
                   <td>${psInfoList.loanBank}</td>
-                  <td>${psInfoList.InsuranceCompany}</td>
+                  <td>${psInfoList.insuranceCompany}</td>
                   <td>${psInfoList.lendDate}</td>
                   <td>${psInfoList.repaymentDate}</td>
                   <td>${psInfoList.principalInterest}</td>
@@ -183,7 +183,16 @@
           </div>
       </div>
 <script type="text/javascript">
-$(document).ready(function(e) {
+
+	//<!--办公地址省份-->
+	var officeProv="${jltfispCoBaseDto.officeProv}";
+	//<!--办公地址市级-->
+	var officeCity="${jltfispCoBaseDto.officeCity}";
+	//<!--办公地址区县-->
+	var officeArea="${jltfispCoBaseDto.officeArea}";
+	//<!--办公详细地址-->
+	var officeAddress="${jltfispCoBaseDto.officeAddress}";
+ $(document).ready(function(e) {
     //申请页面点击上一步
     $('.proList .logbtn input.por').click(function(){
         $('.progress li').removeClass('active').eq(0).addClass('active');
@@ -232,5 +241,15 @@ $(document).ready(function(e) {
         });
         
     });
+    <!--查询办公地址-->
+	 $.ajax({
+            type: "POST",
+            url: "${path}/anon/queryCityName",
+            data:{officeProv:officeProv,officeCity:officeCity,officeArea:officeArea},
+            dateType:"json",
+            success: function(msg){
+              $('#jinyingdizhi').html(msg+officeAddress);
+             }
+        });
 });
 </script>

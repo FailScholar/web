@@ -3,6 +3,7 @@ package com.jltfisp.web.loan.service.impl;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,4 +75,26 @@ public class BusinessApplayAuditServiceImpl extends
         return businessApplayAuditMapper.getBusinessApplayAudit(userId, type,
                 state);
     }
+
+	@Override
+	public JltfispCoFillInApply getCoFillInApplyContext(int userid,
+			int applyType) {
+		// TODO Auto-generated method stub
+		return coFillInApplyMapper.getCoFillInApplyContext(userid, applyType);
+	}
+
+	@Override
+	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer userId) {
+		return businessApplayAuditMapper.getBusinessApplayAuditListByUserId(userId);
+	}
+
+	@Override
+	public void updateBusinessApplayAuditByUserIdAndType(Integer userId,String type,Integer state) {
+		businessApplayAuditMapper.updateBusinessApplayAuditByUserIdAndType(userId,type,state);
+	}
+	
+	@Override
+	public void updateMoneyByUserIdAndType(Integer userId,String type,Double money) {
+		businessApplayAuditMapper.updateMoneyByUserIdAndType(userId,type,money);
+	}
 }

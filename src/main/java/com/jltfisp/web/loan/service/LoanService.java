@@ -114,4 +114,11 @@ public interface LoanService {
      * @return
      */
      List<JltfispCoDebt> getCoDebtTableList(int userid,int businesstype);
+     
+     /**
+      * 通过infoid获取所有财务信息
+      * @param infoId
+      * @return
+      */
+     List<JltfispCoFinancialDto> getCoCoFinancialContextByinfoId(int infoId);
 }

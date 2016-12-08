@@ -10,7 +10,7 @@ public interface InstitutionService extends IBaseService<JltfispInstitution> {
 
 	public List<JltfispColumn> getJltfispColumnList(Integer parentColumn);
 
-	public List<JltfispInstitution> getInstitutionList(Integer columnId);
+	public List<JltfispInstitution> getInstitutionList(Integer columnId, Integer page);
 
 	public JltfispInstitution getInstitutionDetail(Integer id);
 

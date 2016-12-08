@@ -123,7 +123,7 @@ function userForm(){
                               <th width="16.2%">企业名称</th>
                               <th width="16.2%">融资金额/万元</th>
                               <th>所属领域</th>
-                              <th>申请状态</th>
+                              <th>申请时间</th>
                               <th width="11.2%">状态</th>
                               <th width="11.2%">操作</th>
                           </tr>
@@ -133,7 +133,7 @@ function userForm(){
                           <tr>
                               <td>${business.typeName}</td>
                               <td>${business.companyName}</td>
-                              <td>${business.amount}</td>
+                              <td>${business.loanValue}</td>
                               <td>${business.tecName}</td>
                               <td>${(business.submitDate?string("yyyy-MM-dd"))}</td>
                               <td>
@@ -145,7 +145,15 @@ function userForm(){
                               			不通过
                               	</#if>
                               </td>
-                              <td><a href="${path}/business/detail?applyId=${business.applyId}&userid=${business.userId}" target="_blank">查看</a></td>
+                              <td>
+                              <#if business.type =='5'>
+                              	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}" target="_blank">查看</a>
+                              <#elseif business.type =='1'>
+                              	<a href="${path}/business/detail?businessType=${business.type}" target="_blank">查看</a>
+                              <#elseif business.type =='6'>
+                              	<a href="${path}/business/showFinanceApplyDetail?businessType=${business.type}" target="_blank">查看</a>
+                              </#if>
+                              </td>
                           </tr>
                           </#list>
                           </tbody>
@@ -176,42 +184,6 @@ function userForm(){
 </html>
 
 <script type="text/javascript">
-    $(document).ready(function(e) {
-        var tbar = $('.infoTab li');
-    	var navigationIndex = $.cookie('userinfoIndex');
-    	tbar.eq(navigationIndex ? Number(navigationIndex) : 0).addClass('active').siblings('li').removeClass('active');
-        $('.infoList').eq(navigationIndex ? Number(navigationIndex) : 0).show().siblings('.infoList').hide();
-   		$.cookie('userinfoIndex', null, {path: '/'});
-
-        $('.infoTab li').click(function(){
-            $(this).addClass('active').siblings('li').removeClass('active');
-            $('.infoList').eq($(this).index()).show().siblings('.infoList').hide();
-        });
-
-        $('.setInfo a').click(function(){
-            $(this).siblings('a').hide().end().hide();
-            $(this).siblings('p').html("您已"+$(this).text()).show();
-        });
-
-        //用户信息修改
-        $('.mod').click(function(){
-            $(this).siblings('.per').find('input').addClass('txt2').removeAttr("readonly").end().find('.upload').show();
-            $(this).hide();
-            $(this).siblings('.per').find('input').eq(1).removeClass('txt2').attr("readonly","readonly")
-            $(this).siblings('.per').find('input').eq(5).removeClass('txt2').attr("readonly","readonly")
-            $('.btnHide').show();
-        });
-
-        $('.btnHide .btnCle').click(function(){
-            $('.per').find('input').removeClass('txt2').attr("readonly","readonly").end().find('.upload').hide();;
-            $(this).parents(".btnHide").hide();
-            $('.mod').show();
-        });
-        $('.close').click(function(){
-            $(this).parents('.pop').hide();
-        });
-    });
-    
       //通知通告弹窗
         function showDetail(id) {
         	dialog({

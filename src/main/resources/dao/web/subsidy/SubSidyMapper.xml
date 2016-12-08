@@ -30,14 +30,14 @@
          <result property="policyNumber" column="policy_number"/>  
          <result property="loanMoney" column="loan_money"/>
          <result property="loanBank" column="loan_bank"/>
-         <result property="InsuranceCompany" column="insurance_company"/>  
+         <result property="insuranceCompany" column="insurance_company"/>  
          <result property="premiumMoney" column="premium_money"/>
          <result property="repaymentDate" column="repayment_date"/>  
          <result property="principalInterest" column="principal_interest"/>
          <result property="lendDate" column="lend_date"/> 
          <result property="loanTerm" column="loan_term"/>
 	</resultMap>
-	<!-- 根据用户id查询企业基本信息 -->
+	<!-- 根据用户id查询企业基本信息(保费补贴) -->
 	<select id="getJlfispPsBaseDtoByUserId" parameterType="int" resultMap="subSidyCoBase">  
       SELECT
           jcb.id as id,
@@ -63,7 +63,7 @@
 		FROM
 			jltfisp_co_base jcb 
 		WHERE
-		    jcb.user_id=#{user_id}
+		    jcb.user_id=#{user_id} and jcb.business_type=5
    </select>
    <!-- 根据企业基本信息id获取保费补贴信息 -->
    <select id="getJltfispPsInfoListByBaseId" parameterType="int" resultMap="jltfispPsInfoList">
@@ -74,7 +74,7 @@
 		  jpi.policy_number AS policyNumber,
 		  jpi.loan_money AS loanMoney,
 		  jpi.loan_bank AS loanBank,
-		  jpi.insurance_company AS InsuranceCompany,
+		  jpi.insurance_company AS insuranceCompany,
 		  jpi.premium_money AS premiumMoney,
 		  jpi.repayment_date AS repaymentDate,
 		  jpi.principal_interest AS principalInterest,

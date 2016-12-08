@@ -84,7 +84,7 @@
             </tr>
             <tr>
                 <th><b class="red">*</b>新获政府项目资助情况名称和自助金额</th>
-                <td><textarea id="meta" name="meta" value="${PsMaterialInfo.meta }" class="txta validate[required,minSize[1],maxSize[1000]]"></textarea></td>
+                <td><textarea  name="meta" class="txta validate[required,minSize[1],maxSize[1000]]">${PsMaterialInfo.meta }</textarea></td>
             </tr>
         </table>
         </form>

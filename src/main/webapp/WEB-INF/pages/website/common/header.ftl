@@ -16,7 +16,7 @@
                             <div class="person fr">
                                 <a href="${path}/main" onclick="setColumnIndex(0)"><@shiro.principal/></a>
                                 <ul>
-                                    <li class="first"><a href="${path}/user/toResetPage" onclick="setColumnIndex(0)">修改密码</a></li>
+                                    <li class="first"><a href="${path}/user/toResetPass" onclick="setColumnIndex(0)">修改密码</a></li>
                                     <li><a href="${path}/logout" onclick="setColumnIndex(0)">安全退出</a></li>
                                 </ul>
                             </div>
@@ -36,7 +36,7 @@
                     <li><a href="${path}/anon/capital">专项资金</a><b></b></li>
                     <li><a href="${path}/anon/institution">合作机构</a><b></b></li>
                     <li><a href="${path}/anon/expert">专家资源</a><b></b></li>
-                    <li><a href="${path}/anon/financing">股权融资</a><b></b></li>
+                    <li><a href="${path}/perm/financing">股权融资</a><b></b></li>
                     <li><a href="${path}/anon/market">资本市场</a><b></b></li>
                     <li><a href="${path}/perm/insurance">科技保险</a><b></b></li>
                     <li class="last1"><a href="${path}/perm/cloud">云课堂</a><b></b></li>

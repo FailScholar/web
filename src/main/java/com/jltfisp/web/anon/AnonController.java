@@ -5,17 +5,28 @@
 
 package com.jltfisp.web.anon;
 
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.alibaba.fastjson.JSON;
 import com.jltfisp.lucene.pojo.Pojo;
 import com.jltfisp.lucene.service.LuceneService;
+import com.jltfisp.email.EmailService;
+import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
+import com.jltfisp.util.captcha.Randoms;
+import com.jltfisp.web.user.service.UserService;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
  * Created by LiuFa on 2016/11/9.
@@ -29,7 +40,10 @@ public class AnonController {
 
     @Autowired
     private StatisticsService statisticsService;
-
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private UserService userService;
     @Autowired
     private LuceneService luceneService;
     /**
@@ -60,7 +74,7 @@ public class AnonController {
     public String cloud(){
         return "/website/cloud/cloud";
     }
-    
+
     /**
      * @author LiuFa
      * @return boolean
@@ -126,6 +140,127 @@ public class AnonController {
         return "/website/sys/notFound";
     }
 
+    @RequestMapping("/toResetPage")
+    public String toResetPage() {
+        return "/website/usercenter/reset";
+    }
+
+    /**
+     * 发送邮箱验证码
+     * @param request
+     * @param accountNumber
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/sendEamil")
+    public int sendEmail(String accountNumber){
+    	String emailCaptcha = Randoms.random(5);
+    	emailService.sendText(accountNumber, "欢迎使用吉林科技金融服务平台", "您的验证码为：" + emailCaptcha);
+    	int i = userService.updateUserByAccountNumber(emailCaptcha, accountNumber);
+    	return i;
+    }
+
+    /**
+     * 把邮箱验证码置空
+     * @param accountNumber
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/resetEmailCaptcha")
+    public int resetEmailCaptcha(String accountNumber){
+    	int i = userService.updateUserByAccountNumber("", accountNumber);
+    	return i;
+    }
+
+    /**
+     * 检查账号是否存在
+     * @param fieldId
+     * @param fieldValue
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/checkAccountNumber")
+    public void checkAccountNumber(String fieldId,
+            String fieldValue, HttpServletRequest request,
+            HttpServletResponse response) {
+        Boolean flag = false;
+
+        List<JltfispUser> list = userService.selectUserByAccountNumber(fieldValue);
+        if(list != null && list.size() != 0){
+            flag = true;
+        }
+        try {
+            response.setContentType("text/plain;charset=utf-8");
+            response.getWriter().write("[\"" + fieldId + "\","+ flag + "]");
+            response.getWriter().flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    /**
+     * 校验邮箱验证码是否正确
+     * @param user
+     * @return
+     */
+    @RequestMapping("/checkEmailInfo")
+    @ResponseBody
+    public int checkEmailInfo(JltfispUser user){
+    	List<JltfispUser> userList = userService.selectUserByAccountNumber(user.getAccountNumber());
+    	if(!user.getEmailCaptcha().equals(userList.get(0).getEmailCaptcha())) {
+    		return 0;
+    	}
+    	return 1;
+    }
+
+    /**
+     * 密码重置
+     * @param user
+     * @return
+     */
+    @RequestMapping("/resetPassword")
+    @ResponseBody
+    public int resetPassword(JltfispUser user){
+
+    	if(user.getPassword() != null && !"".equals(user.getPassword())){
+            //重置密码
+    		user.setPassword(new SimpleHash("md5",user.getPassword(), ByteSource.Util.bytes("gta"),2).toHex());
+        }
+    	int i = userService.updatePasswordByAccountNumber(user.getPassword(),user.getAccountNumber());
+    	userService.updateUserByAccountNumber("", user.getAccountNumber());
+    	return i;
+    }
+
+    /**
+     * 检查密码是否正确
+     * @param id
+     * @param fieldId
+     * @param fieldValue
+     * @param request
+     * @param response
+     */
+    @RequestMapping("/checkOldPassword")
+    public void checkOldPassword(Integer id, String fieldId,
+            String fieldValue, HttpServletRequest request,
+            HttpServletResponse response) {
+        Boolean flag = false;
+        JltfispUser user = userService.selectByPk(id);
+        String password = new SimpleHash("md5",fieldValue, ByteSource.Util.bytes("gta"),2).toHex();
+        if(password.equals(user.getPassword())){
+            flag = true;
+        }
+
+        try {
+            response.setContentType("text/plain;charset=utf-8");
+            response.getWriter().write("[\"" + fieldId + "\","+ flag + "]");
+            response.getWriter().flush();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
+
     @RequestMapping("/search")
     public String search(String keyWords, Model model){
         List<Pojo> list = luceneService.search(keyWords);
@@ -140,6 +275,7 @@ public class AnonController {
         Pojo pj = new Pojo();
         for (Pojo pojo : list) {
             if(pojo.getTableName().equals(tableName) && pojo.getId() == id){
+                pojo.setTitle(pojo.getTitle().replace("color='red'",""));
                 pj = pojo;
                 break;
             }

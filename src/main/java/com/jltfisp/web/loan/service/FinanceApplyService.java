@@ -5,6 +5,7 @@ import java.util.List;
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
 import com.jltfisp.web.loan.entity.JltfispFinShareholder;
+import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
 
 public interface FinanceApplyService {
 
@@ -12,7 +13,7 @@ public interface FinanceApplyService {
 	
 	public JltfispFinMaterial getJltfispFinMaterialInfo(Integer id);
 	
-	public void deleteBase(Integer userId);
+	public void deleteBase(Integer id);
 
 	public Object addCoBase(JltfispCoBase jltfispCoBase);
 	
@@ -25,6 +26,12 @@ public interface FinanceApplyService {
 	public List<JltfispFinShareholder> getShareholderlistByInfoId(int id);
 
 	public void updateJltfispCoBaseInfo(Integer id);
+
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id);
+
+	public void addShareholders(JltfispFinShareholder jltfispFinShareholder);
+
+	public void deleteShareholders(Integer id);
 
 	
 }

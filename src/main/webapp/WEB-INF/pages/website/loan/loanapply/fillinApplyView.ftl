@@ -28,7 +28,7 @@
                                       </#if>                                                                              
                                       </td>
                                       <th>上次履约贷款还款时间</th>
-                                      <td colspan=2>${coAll.jltfispCoFillInApply.historyEndtime?date}</td>
+                                      <td colspan=2><#if coAll.jltfispCoFillInApply.historyEndtime?date !="">${coAll.jltfispCoFillInApply.historyEndtime?date}</#if></td>
                                   </tr>
                                   <tr>
                                       <th>选择科技贷款品种</th>

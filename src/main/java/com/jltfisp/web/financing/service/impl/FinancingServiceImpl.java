@@ -7,6 +7,7 @@ package com.jltfisp.web.financing.service.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
 import com.jltfisp.web.financing.entity.JltfispFinancing;
 import com.jltfisp.web.financing.dao.FinancingMapper;
 import com.jltfisp.web.financing.service.FinancingService;
@@ -38,9 +39,11 @@ public class FinancingServiceImpl implements FinancingService {
      * @author 张舒西 2016年11月22日 上午9:17:39
      */
     @Override
-    public List<JltfispFinancing> getFinancingList(Integer columnid) {
+    public List<JltfispFinancing> getFinancingList(Integer columnid,int page,Integer type) {
         JltfispFinancing jltfispFinancing = new JltfispFinancing();
         jltfispFinancing.setColumnid(columnid);
+        jltfispFinancing.setType(type);
+        PageHelper.startPage(page, 8);
         return financingMapper.select(jltfispFinancing);
     }
 

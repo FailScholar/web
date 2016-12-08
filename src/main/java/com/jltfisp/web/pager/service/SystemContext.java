@@ -29,7 +29,7 @@ public class SystemContext {
 	    }  
 	      
 	    public static void setPagesize(int pagesizevalue){  
-	        pagesize.set(pagesizevalue);  
+	        pagesize.set(pagesizevalue);
 	   }  
 	    
 	   public static void removePagesize(){  

@@ -15,7 +15,14 @@ public interface InstitutManageMapper extends BaseMapper<InstitutManage>{
      * @return
      * @author yingying.wang1 2016年12月5日 下午2:22:10
      */
-    InstitutManage selectByColumnId(@Param("columnId")Integer columnId);    
+    InstitutManage selectByColumnId(@Param("columnId")Integer columnId);
+
+    /**
+     * 获取 合作机构申请表单的 字段名称模板
+     * @return
+     * @author yingying.wang1 2016年12月7日 上午10:37:26
+     */
+    InstitutManage selectTemplate();    
     
     
 

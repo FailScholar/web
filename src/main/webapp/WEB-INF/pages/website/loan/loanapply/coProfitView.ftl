@@ -1,9 +1,6 @@
                         <!--利润表-->
-                        <div class="nlistCont" style="display:none;">
-                        	<p class="ntit">利润表<span class="red">(财务报表是贷款审核的重要依据，请正确完整填写。须与提交的书面纳税报表一致！</span>)<span class="fr">单位：元</span></p>
-                            <form id="coProfit">
-                            <input type="hidden" id="businesstype"   name="businesstype"   value="${applytype}"/>
                             <table width="100%" class="tab3 tab4">
+                                <tr><th>项目</th><th>${coAll.jltfispCoDebt.year}年末</th><th>${coAll.jltfispCoDebt.year?number+1}年末</th><th>${coAll.jltfispCoDebt.year?number+2}年末</th><th>${coAll.jltfispCoDebt.year?number+3}年1~${coAll.jltfispCoProfit[0].month}月</th></tr>
                                 <tr>
                                 	<td><b>主营业务收入</b></td>
                                     <td><input name="mainincome" id="mainincome" value="${coAll.jltfispCoProfit[0].mainincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
@@ -116,7 +113,4 @@
                                     <td><input name="netprofit" id="netprofit" type="text" value="${coAll.jltfispCoProfit[2].netprofit}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input name="netprofit" id="netprofit" type="text" value="${coAll.jltfispCoProfit[3].netprofit}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                 </tr>
-                            </table>
-                            </form>
-                            <div class="btnFld"><input type="button" value="保存并下一步" class="btnSave" /><a href="${path}/loan/onlineApplyPage"><input type="button" class="btnCan" value="取消" /></a></div>
-                        </div>                      
+                            </table>                   

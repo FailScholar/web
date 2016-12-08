@@ -17,35 +17,40 @@
 <div class="content">
     <div class="info">
         <ul class="infoTab">
-        <#list columnList as column>
-        	<li  name="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
-        </#list>
+      	<#list colList as list>
+      		<#if list_index lt 5>
+                <li code="${list.id}" onclick="infoTabClick(${list.id})"><a href="javascript:void(0);">${list.columnName}</a></li>
+           	</#if>
+            </#list>
+            <#if colList?size gt 5>
+            	<li>
+			       	 <select id="selectId" onchange="getList()">
+			       		<option value="0">-选择更多机构-</option>
+			       	 	<#list colList as afterFiveList>
+			       	 		<#if afterFiveList_index gt 4>
+			       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
+			       	 		</#if>
+			       	 	</#list>
+			       	 </select>
+		       	 </li>
+            </#if>
         </ul>
         <div class="clear"></div>
-        <a onclick="toConsult()" class="apply2" style="width:80px;cursor: pointer;">投资咨询</a>
+        <a href="${path}/communicate/page" target="_blank" class="apply2" style="width:80px;cursor: pointer;">投资咨询</a>
         <div class="selSearch fr">
-        	<select class="selOpt">
-            	<option>选择类型</option>
-                <option>电子信息技术</option>
-                <option>生物医药技术</option>
+        	<select class="selOpt" id="type">
+            	<option value="">选择类型</option>
+            	<#list dictList as dict>
+                <option value="${dict.id}">${dict.value}</option>
+                </#list>
             </select>
-            <input type="submit" value="搜 索" class="fr" />
+            <input type="button" onclick="selectPage(${pageInfo.pageNum})" value="搜 索" class="fr" />
         </div>
         <div class="clear"></div>
-        <div class="infoList">
-          <#include "website/financing/financingContext.ftl"/>
-        </div>
+        <div id="colListDetail"></div>
     </div>
     <div class="clear"></div>
-    <div class="page">
-        <a href="javascript:;">&lt;</a>
-        <a href="javascript:;">1</a>
-        <a href="javascript:;">2</a>
-        <span>...</span>
-        <a href="javascript:;">15</a>
-        <a href="javascript:;">16</a>
-        <a href="javascript:;">&gt;</a>
-    </div>
+   
 </div>
 <!--content结束-->
 
@@ -60,32 +65,28 @@
 </html>
 
 <script type="text/javascript">
-  $(document).ready(function(e) {
-    $('.infoTab li').eq(0).addClass('active');
-    $('.apply2').hide().eq(0).show();
-    $('.infoTab li').click(function(){
-        var columnId=$(this).attr("name");
-        $(this).addClass('active').siblings('li').removeClass('active');
-		<!--传当前子栏目ID-->
-		$.ajax({
-                type: 'POST',
-                url:'${path}/anon/changeFinancing',
-                data: {columnId: columnId},
-                success: function (data) {
-                $('.infoList').html(data);
-                }
-          });
-		$('.apply2').hide();
-		$('#'+columnId).show();
-	});
-});
+	function getList(){
+	  var columnId = $('#selectId').val();
+	  if(columnId!=0){
+	  	 $('#colListDetail').load("${path}/perm/financing/"+columnId,{page :1});
+	  }
+	}
+	
+	 function infoTabClick(id){
+        $('#colListDetail').load("${path}/perm/financing/"+id,{page :1});
+    }
 
-function financingDetail(id){
-	location.href="${path}/anon/financingDetail?financingId="+id;
-}
+     var infoTab = $("div.info ul.infoTab");
+    $(function(){
+        infoTab.find("li").eq(0).addClass("active");
+        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find("li").eq(0).attr("code"),{page :1});
+    });
 
-    function toConsult() {
-        $.cookie('toConsult', true, {path: '/'});
-        window.location.href = "${path}/main"
+
+    function selectPage(page) {
+	    if(page==undefined) {
+	    	page = $("#currentPage").val();
+	    }
+        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find('li.active').attr('code'),{page :page,type:$("#type").val()});
     }
 </script>

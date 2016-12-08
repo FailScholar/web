@@ -46,17 +46,7 @@
                      
                   </div>
  				<div id="showContent"></div>
-                  <div class="clear"></div>
-                  <div class="page">
-                      <a href="javascript:;">&lt;</a>
-                      <a href="javascript:;">1</a>
-                      <a href="javascript:;">2</a>
-                      <span>...</span>
-                      <a href="javascript:;">15</a>
-                      <a href="javascript:;">16</a>
-                      <a href="javascript:;">&gt;</a>
-                  </div>
-              </div>
+ 				</div>
               <!--content结束-->
 
           </div>
@@ -81,7 +71,7 @@
          $.ajax({
 			  type : "POST",
 			  url : "${path}/anon/getInstitutionList",
-			  data:{"columnId":columnId},
+			  data:{"columnId":columnId,page: 1},
 			  dataType : "html",
 			  success:function(data){
 				$("#showContent").html(data);//要刷新的div
@@ -91,6 +81,11 @@
               }
 		});
 	}
+	
+	//分页--根据页数查询
+	function selectPage(page) {
+        $('#showContent').load("${path}/anon/getInstitutionList",{columnId: $("div.info ul.infoTab").find('li.active').attr('tips'), page :page});
+    }
 
 	function getList(){
 	  var columnId = $('select option:selected').val();

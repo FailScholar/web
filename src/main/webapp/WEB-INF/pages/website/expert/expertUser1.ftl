@@ -16,20 +16,20 @@
             <!--content开始-->
             <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">合作机构</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">专家资源</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                     <div class="proList nli">
                         <!--企业基本信息-->
                         <div class="nlistCont">
-                            <p class="ntit">科技金融专家登记注册表</p>
+                            <p class="ntit">${columnName}登记注册表</p>
                             <form id="jinRong">
-                            <input type="hidden" name="columnid" id="columnid" value="19" />
+                            <input type="hidden" name="columnid" id="columnid" value="${columnId}"/>
                             <table width="100%" class="tab3">
                                 <tr>
-                                    <th><b class="red">*</b>姓名</th>
-                                    <td><input name="name" id="name" type="text"  class="txt" placeholder="请输入" /></td>
-                                    <th rowspan="4">照片</th>
+                                    <th><b class="red">*</b>${finExpertManage.label1}</th>
+                                    <td><input name="name" id="name" type="text"  class="txt validate[required,minSize[2],maxSize[20],custom[chineseEnglish]]" placeholder="请输入" /></td>
+                                    <th rowspan="4">${finExpertManage.label3}</th>
                                     <td rowspan="4">
                                         <img width="110px" height="110px" src="${path}/resource/images/blank.png" class="fl" />
                                         <span class="notice fr">建议尺寸110px*110px<br />上传大小不超过320K<br />支持JPG</span>
@@ -42,89 +42,98 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>性别</th>
-                                    <td><label><input type="radio"  name="sex" id="sex"/>保密</label><label><input type="radio" name="sex" id="sex" />男</label><label><input type="radio" name="sex" id="sex" />女</label></td>
+                                    <th>${finExpertManage.label2}</th>
+                                    <td><label><input type="radio" value="0" name="sex" id="sex" class="validate[required]" checked/>保密</label><label><input type="radio" value="1" class="validate[required]" name="sex" id="sex" />男</label><label><input type="radio" value="2" class="validate[required]" name="sex" id="sex" />女</label></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>出生年月</th>
-                                    <td><input type="text" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label4}</th>
+                                    <td><input type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker()"/></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>学位</th>
+                                    <th><b class="red">*</b>${finExpertManage.label5}</th>
                                     <td>
-                                        <select name="degree" id="degree"> 
+                                        <select name="degree" id="degree" class="validate[required]"> 
                                             <option>请选择</option>
-                                            <option>博士</option>
+                                            <option value="1">博士</option>
+                                            <option value="2">硕士</option>
+                                            <option value="3">学士</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>工作单位</th>
-                                    <td colspan="3"><input type="text" class="txt" name="businesaddress" id="businesaddress"  placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label6}</th>
+                                    <td colspan="3"><input type="text" class="txt validate[required,maxSize[1000]]" name="businesaddress" id="businesaddress"  placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>技术领域</th>
+                                    <th><b class="red">*</b>${finExpertManage.label7}</th>
                                     <td>
-                                        <select name="technologydomain" id="technologydomain">
-                                            <option>请选择</option>
-                                            <option>IT</option>
+                                        <select name="technologydomain" id="technologydomain" class="validate[required]">
+                                            <option value="0" selected>电子信息技术</option>
+                                            <option value="1">生物医药技术</option>
+                                            <option value="2">航空航天技术</option>
+                                            <option value="3">新材料技术</option>
+                                            <option value="4">高新技术服务业</option>
+                                            <option value="5">新能源节能技术</option>
+                                            <option value="6">资源环境技术</option>
+                                            <option value="7">高新技术改造传统产业</option>
+                                            <option value="8">其他</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>职务</th>
-                                    <td><input type="text" name="workpost" id="workpost" class="txt" placeholder="请输入" /></td>
-                                    <th><b class="red">*</b>职称</th>
-                                    <td><input type="text" name="worktitle" id="worktitle" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label8}</th>
+                                    <td><input type="text" name="workpost" id="workpost" class="txt validate[required,maxSize[1000]]" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label9}</th>
+                                    <td><input type="text" name="worktitle" id="worktitle" class="txt validate[required,maxSize[1000]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>传真</th>
-                                    <td><input type="text" name="fax" id="fax" class="txt" placeholder="请输入" /></td>
-                                    <th><b class="red">*</b>邮编</th>
-                                    <td><input type="text" name="postcode" id="postcode" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label10}</th>
+                                    <td><input type="text" name="fax" id="fax" class="txt validate[required,custom[fax],minSize[6],maxSize[30]]" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label11}</th>
+                                    <td><input type="text" name="postcode" id="postcode" class="txt validate[custom[number]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>手机</th>
-                                    <td><input type="text" name="phone" id="phone" class="txt" placeholder="请输入" /></td>
-                                    <th><b class="red">*</b>电子邮件</th>
-                                    <td><input type="text" name="email" id="email" class="txt" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label12}</th>
+                                    <td><input type="text" name="phone" id="phone" class="txt validate[custom[mobile]]" placeholder="请输入" /></td>
+                                    <th><b class="red">*</b>${finExpertManage.label13}</th>
+                                    <td><input type="text" name="email" id="email" class="txt  validate[required,minSize[2],maxSize[50],custom[email]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>主要工作地</th>
+                                    <th><b class="red">*</b>${finExpertManage.label14}</th>
                                     <td colspan="3">
-                                        <input name="mainaddress" id="mainaddress" type="text" class="txt" placeholder="主要工作地" />
+                                        <input name="mainaddress" id="mainaddress" type="text" class="txt validate[required,maxSize[1000]]" placeholder="主要工作地" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>通讯地址</th>
+                                    <th><b class="red">*</b>${finExpertManage.label15}</th>
                                     <td colspan="3">
-                                        <input name="postaladdress" id="postaladdress" type="text" class="txt" placeholder="通讯地址" />
+                                        <input name="postaladdress" id="postaladdress" type="text" class="txt validate[required,maxSize[1000]]" placeholder="通讯地址" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>办公地址</th>
+                                    <th><b class="red">*</b>${finExpertManage.label16}</th>
                                     <td colspan="3">
-                                        <input name="businesaddress" id="businesaddress" type="text" class="txt" placeholder="办公地址" />
+                                        <input name="businesaddress" id="businesaddress" type="text" class="txt validate[required,maxSize[1000]]" placeholder="办公地址" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>教育背景</th>
-                                    <td colspan="3"><textarea class="txta"></textarea></td>
+                                    <th><b class="red">*</b>${finExpertManage.label20}</th>
+                                    <td colspan="3"><textarea class="txta validate[required,maxSize[1000]]" ></textarea></td>
                                 </tr>
                                 <tr>
-                                    <th>兼职/专职情况</th>
-                                    <td colspan="3"><textarea name="partfull"  id="partfull" class="txta"></textarea></td>
+                                    <th>${finExpertManage.label21}</th>
+                                    <td colspan="3"><textarea name="partfull"  id="partfull" class="txta validate[maxSize[1000]]"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>近五年主要的研究成果或成果转化项目</th>
-                                    <td colspan="3"><textarea name="majorinfo" id="majorinfo" class="txta"></textarea></td>
+                                    <th><b class="red">*</b>${finExpertManage.label22}</th>
+                                    <td colspan="3"><textarea name="majorinfo" id="majorinfo" class="txta validate[required,maxSize[1000]]"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>近三年来承担国家和地方科研项目情况</th>
-                                    <td colspan="3"><textarea name="projectinfo" id="projectinfo" class="txta"></textarea></td>
+                                    <th><b class="red">*</b>${finExpertManage.label23}</th>
+                                    <td colspan="3"><textarea name="projectinfo" id="projectinfo" class="txta validate[required,maxSize[1000]]"></textarea></td>
                                 </tr>
                                 <tr>
-                                    <th>机构logo</th>
+                                    <th>${finExpertManage.label18}</th>
                                     <td colspan="3">
                                         <img width="110px" height="110px" src="${path}/resource/images/blank.png" class="fl" />
                                         <span class="notice fl ml16">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
@@ -137,26 +146,29 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>机构介绍(500字以内)</th>
-                                    <td colspan="3"><textarea class="txta"name="agency_info" id="agency_info" ></textarea></td>
-                                </tr>
-                            </table>
-                            <p class="ntit"><b class="red">*</b>技术领域<a href="javascript:;" class="fr add">添加</a></p>
-                            <table width="100%" class="tab3 tab4 module">
-                                <tr>
-                                    <th>一级领域</th>
-                                    <th>二级领域</th>
-                                    <th>三级领域</th>
-                                    <th>操作</th>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="txt" name="domain" id="domain" placeholder="请输入" /></td>
-                                    <td><input type="text" class="txt" name="domain" id="domain" placeholder="请输入" /></td>
-                                    <td><input type="text" class="txt" name="domain" id="domain" placeholder="请输入" /></td>
-                                    <td><a href="javascript:;" class="fr delete">删除</a></td>
+                                    <th>${finExpertManage.label19}</th>
+                                    <td colspan="3"><textarea class="txta validate[maxSize[500]]"name="agency_info" id="agency_info" ></textarea></td>
                                 </tr>
                             </table>
                             </form>
+                           <form id="expertDoMain">
+                            <input type="hidden" name="columnid" id="columnid" value="${columnId}"/>
+                            <p class="ntit"><b class="red">*</b>技术领域<a href="javascript:;" class="fr add">添加</a></p>
+                            <table width="100%" class="tab3 tab4 module">
+                                <tr>
+                                    <th>${finExpertManage.label24}</th>
+                                    <th>${finExpertManage.label25}</th>
+                                    <th>${finExpertManage.label26}</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="txt validate[required,maxSize[1000]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
+                                    <td><input type="text" class="txt validate[required,maxSize[1000]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
+                                    <td><input type="text" class="txt validate[required,maxSize[1000]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
+                                    <td><a href="javascript:;" class="fr delete">删除</a></td>
+                                </tr>
+                            </table>
+                           </form> 
                         </div>
                         <div class="btnFld"><a href="#"><input type="button" value="完成注册" class="btnSave" /></a></div>
                     </div>
@@ -177,7 +189,22 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
+     $("#jinRong,#expertDoMain").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
      $('.btnSave').click(function(){
+       if(!$('#jinRong').validationEngine('validate')){
+               return false;
+               }
+       if(!$('#expertDoMain').validationEngine('validate')){
+               return false;
+               }      
+       <!--请求技术领域-->
+       $.ajax({
+            type: "POST",
+            url: '${path}/anon/addDoMain',
+            data: $("#expertDoMain").serialize(),
+            dateType:"json"
+        });
+       <!--注册表基本信息-->    
        $.ajax({
             type: "POST",
             url: '${path}/anon/addExpert',
@@ -200,6 +227,11 @@
         });
         //删除
         $('.delete').live('click',function(){
+            var delCount=$('.delete').length;
+            if(delCount==1){
+             dialog.tipsPop('ban-pop','提示:',"只剩最后一行，不允许删除！",'确定');
+             return false;
+            }
             $(this).parents('tr').remove();
         });
     });

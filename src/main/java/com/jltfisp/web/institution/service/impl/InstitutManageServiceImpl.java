@@ -27,4 +27,9 @@ public class InstitutManageServiceImpl extends BaseServiceImpl<InstitutManage>
     public InstitutManage selectByColumnId(Integer columnId) {
         return institutManageMapper.selectByColumnId(columnId);
     }
+
+    @Override
+    public InstitutManage selectTemplate() {
+        return institutManageMapper.selectTemplate();
+    }
 }

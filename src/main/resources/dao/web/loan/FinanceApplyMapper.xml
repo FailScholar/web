@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jltfisp.web.loan.dao.FinanceApplyDao">
+ <resultMap type="com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto" id="jltfispFinance">
+		<id property="id" column="id" />
+		<result property="company" column="company" />
+		<result property="corporateRepresentative" column="corporateRepresentative" />
+		<result property="establishTime" column="establishTime" />
+		<result property="registeredCapital" column="registeredCapital" />
+		<result property="socialCreditCode" column="socialCreditCode" />
+		<result property="tecdomain" column="tec_domain" />
+		<result property="lastyearsellscale" column="last_year_sell_scale" />
+		<result property="officeProv" column="officeProv" />
+		<result property="officeCity" column="officeCity" />
+		<result property="officeArea" column="officeArea" />
+		<result property="officeAddress" column="officeAddress" />
+		<result property="email" column="email" />
+		<result property="workernumber" column="worker_number" />
+		<result property="registeredAddress" column="registeredAddress" />
+		<result property="refereecompany" column="referee_company" />
+		<result property="referee" column="referee"/>
+		<result property="refereemobile" column="referee_mobile"/>
+		<result property="refereeemail" column="referee_email"/>
+		<result property="companyurl" column="company_url"/>
+		<result property="linkMan" column="linkMan"/>
+		<result property="zoneDescription" column="zoneDescription"/>
+		<result property="phoneOrFax" column="phoneOrFax"/>
+		<result property="linkMobile" column="linkMobile"/>
+		<result property="linkEmail" column="linkEmail"/>
+		<result property="createTime" column="createTime"/>
+		<result property="userid" column="user_id"/>
+		<result property="projectname" column="project_name"/>
+		<result property="marketproductsummary" column="market_product_summary"/>
+		<result property="managerteamsummary" column="manager_team_summary"/>
+		<result property="technologyqualifications" column="technology_qualifications"/>
+		<result property="otherDesc" column="otherDesc"/>
+	</resultMap>
+	<select id="getJltfispFinanceAndShareholdersDto" parameterType="int" resultMap="jltfispFinance">
+	select
+		jcb.id as id,
+		jcb.company as company,
+		jcb.corporateRepresentative as corporateRepresentative,
+		jcb.establishTime as establishTime,
+		jcb.registeredCapital as registeredCapital,
+		jcb.socialCreditCode as socialCreditCode,
+		jcb.tec_domain as tecdomain,
+		jcb.last_year_sell_scale as lastyearsellscale,
+		jcb.officeProv as officeProv,
+		jcb.officeCity as officeCity,
+		jcb.officeArea as officeArea,
+		jcb.officeAddress as officeAddress,
+		jcb.email as email,
+		jcb.worker_number as workernumber,
+		jcb.registeredAddress as registeredAddress,
+		jcb.referee_company as refereecompany,
+		jcb.referee as referee ,
+		jcb.referee_mobile as refereemobile,
+		jcb.referee_email as refereeemail,
+		jcb.company_url as companyurl,
+		jcb.linkMan as linkMan,
+		jcb.zoneDescription as zoneDescription,
+		jcb.phoneOrFax as phoneOrFax,
+		jcb.linkMobile as linkMobile,
+		jcb.linkEmail as linkEmail,
+		jcb.createTime as createTime ,
+		jcb.user_id as userid,
+		jcb.project_name as projectname,
+		jcb.market_product_summary as marketproductsummary,
+		jcb.manager_team_summary as managerteamsummary,
+		jcb.technology_qualifications as technologyqualifications,
+		jcb.otherDesc as otherDesc
+	from jltfisp_co_base jcb
+	where jcb.user_id=#{user_id}
+	</select>
+</mapper>

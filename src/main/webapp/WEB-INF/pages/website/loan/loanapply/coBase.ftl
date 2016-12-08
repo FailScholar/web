@@ -11,7 +11,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>成立时间</th>
-                                    <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker()" readonly="readonly" value="${coAll.jltfispCoBase.establishTime?date}"/></td>
+                                    <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker()" readonly="readonly" value="<#if coAll.jltfispCoBase.establishTime?date != "">${coAll.jltfispCoBase.establishTime?date}</#if>"/></td>
                                     <th><b class="red">*</b>注册资本</th>
                                     <td><input type="text" class="txt validate[required,custom[number],maxSize[10]]" placeholder="请输入" id="registeredCapital" name="registeredCapital" value="${coAll.jltfispCoBase.registeredCapital}"/>万元</td>
                                 </tr>

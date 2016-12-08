@@ -33,7 +33,6 @@
                     <div class="proList nli" style="margin-top:40px;">
                         <ul class="nlist" style="top: 0px;">
                             <li class="active">业务介绍</li>
-                            <li>科技信贷员</li>
                         </ul>
                     </div>
                     <div class="resume re1">
@@ -43,18 +42,6 @@
                         <p>${jltfispInstitutionDetail.mainInvestmentStage}</p>
                     </div>
                     
-                    <div class="resume re1" style="display:none;">	
-                    	<ul class="ul2">
-                            <li><a href="${path}/anon/expertDetail">
-                            	<img src="${path}/resource/images/head.jpg" alt="head">
-                                <h4 class="blue">${jltfispInstitutionDetail.linkMan}</h4>
-                                <p>项目经理 | 商业银行分行</p>
-                                <p class="phone">${jltfispInstitutionDetail.phoneNumer}</p>
-                                <p class="email">${jltfispInstitutionDetail.email}</p></a>
-                            </li>
-                        </ul>
-                        <div class="clear"></div>
-                    </div>
                 </div>
             </div>
             <!--content结束-->

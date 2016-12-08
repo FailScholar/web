@@ -10,7 +10,6 @@
     <#include "website/common/common.ftl" />
     <title>贷款服务在线申请</title>
   </head>
-
   <body>
   <div class="wrap">
   <#include "website/common/header.ftl"/>
@@ -23,7 +22,7 @@
                 </div>
                 <div class="calt">
                 	<p>${applyname}</p>
-                    <h2>在线申请<a href="${path}/anon/loan/guideApply?applytype=${applytype}" class="notice fr">申请须知</a></h2>
+                    <h2>在线申请<!--<a href="${path}/anon/loan/guideApply?applytype=${applytype}" class="notice fr">申请须知</a>--></h2>
                     <ul class="progress">
                     	<li class="li1 active"><b></b>1.填写企业基本信息<i></i></li>
                         <li class="li2"><b></b>2.填写申请表格<i></i></li>
@@ -62,20 +61,20 @@
      var thirdYear;
      var fourYear;
      <!--办公地址省份-->
-     var officeProv=${coAll.jltfispCoBase.officeProv};
+     var officeProv="${coAll.jltfispCoBase.officeProv}";
      <!--办公地址市级-->
-     var officeCity=${coAll.jltfispCoBase.officeCity};
+     var officeCity="${coAll.jltfispCoBase.officeCity}";
      <!--办公地址区县-->
-     var officeArea=${coAll.jltfispCoBase.officeArea};
+     var officeArea="${coAll.jltfispCoBase.officeArea}";
      
      <!--生产地址省份-->
-     var productProv=${coAll.jltfispCoBase.productProv};
+     var productProv="${coAll.jltfispCoBase.productProv}";
      <!--生产地址市级-->
-     var productCity=${coAll.jltfispCoBase.productCity};
+     var productCity="${coAll.jltfispCoBase.productCity}";
      <!--生产地址区县-->
-     var productArea=${coAll.jltfispCoBase.productArea};
+     var productArea="${coAll.jltfispCoBase.productArea}";
      <!--获取当前业务申请类型-->
-     var applytype=${applytype};
+     var applytype="${applytype}";
      <!--企业概况企业曾获得科技认定字段-->
      var technologyOrFinance="${coAll.jltfispCoProfile.technologyOrFinance}";
      var technologyOrFinanceList= new Array(); 
@@ -90,9 +89,9 @@
           fourYear=thirdYear+1;
           $('#year').eq(0).val(firstYear);
           <!--初始化企业概况企业曾获得科技认定字段-->
-          for (i=0;i<technologyOrFinanceList.length ;i++ )
-          {
-          $('#technologyOrFinance'+technologyOrFinanceList[i]).attr("checked","checked");
+          for (i=0;i<technologyOrFinanceList.length;i++)
+          {    
+              $("#technologyOrFinance"+technologyOrFinanceList[i]).attr("checked",true);
           } 
           $('.lnav').html("<li class='active'>"+firstYear+"年</li><li>"+secondYear+"年</li><li>"+thirdYear+"年</li><li>"+fourYear+"年</li>");
           $('#coProfit tr').eq(0).before("<tr><th>项目</th><th>"+firstYear+"年末</th><th>"+secondYear+"年末</th><th>"+thirdYear+"年末</th><th>"+fourYear+"年1~<select name='month' id='month'><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></th></tr>");
@@ -236,8 +235,23 @@
         });
 
         $('.nlist li').click(function(){
-            $(this).addClass('active').siblings().removeClass('active');
-            $(this).parent().siblings(".nlistCont").hide().eq($(this).index()).show();
+                    var index =$(this).index();
+                    $.ajax({
+                    type: "POST",
+                    url: "${path}/anon/loan/queryCoBase",<!--查询企业基本信息是否已添加-->
+                    data: {applytype:applytype},
+                    dateType:"json",
+                    success: function(msg){
+                     if(msg==0){
+                       dialog.tipsPop('ban-pop','提示:',"企业基本信息必须先填写并保存后才能填写其他信息",'确定');
+                       return false;
+                     }else{
+                     $('.nlist li').eq(index).addClass('active').siblings().removeClass('active');
+                     $('.nlist li').eq(index).parent().siblings(".nlistCont").hide().eq(index).show();
+                     }
+                   }
+                });
+            
         });
 
         function autoRisize()

@@ -8,6 +8,8 @@
 		<result column="state" jdbcType="INTEGER" property="state"  />
 		<result column="type" jdbcType="CHAR" property="type"  />
 		<result column="audit_desc" jdbcType="VARCHAR" property="auditDesc"  />
+		<result column="loan_value" jdbcType="DOUBLE" property="loanValue"  />
+		<result column="parent_type" jdbcType="VARCHAR" property="parentType"  />
 	</resultMap>
 
 	<sql id="Example_Where_Clause">
@@ -29,6 +31,12 @@
 		     <if test="auditDesc != null and auditDesc != ''">
 		        and a.audit_desc=#{auditDesc,jdbcType=VARCHAR}
 		     </if>
+		     <if test="loanValue != null and loanValue != ''">
+		        and a.loan_value=#{loanValue,jdbcType=VARCHAR}
+		     </if>
+		     <if test="parentType != null and parentType != ''">
+		        and a.parent_type=#{parentType,jdbcType=VARCHAR}
+		     </if>
 	 </sql>
 	 
 	<sql id="Base_Column_List">
@@ -37,41 +45,41 @@
 		     a.submit_date,
 		     a.state,
 		     a.type,
-		     a.audit_desc
+		     a.audit_desc,
+		     a.loan_value,
+		     a.parent_type
    </sql>
 	<!-- 查询列表count-->
 	<select id="countByExample" parameterType="com.jltfisp.web.loan.entity.BusinessApplayAudit" resultType="java.lang.Integer">
-        select count(1) from jltfisp_business_applay a LEFT JOIN jltfisp_user b on b.id = a.user_id 
-        LEFT JOIN jltfisp_co_base jcb  on a.user_id = jcb.user_id
-        LEFT JOIN jltfisp_loan_apply jla on a.user_id=jla.user_id
+        select count(1) from jltfisp_business_applay a ,jltfisp_co_base jcb 
         <if test="_parameter != null">
         	<where>
+        	a.user_id =jcb.user_id
+			and jcb.business_type=a.type
             <include refid="Example_Where_Clause"/>
-            b.account_number like '%${userName}%'
             </where>
         </if>
     </select>
 	<!-- 查询列表-->
 	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
-         select   a.id,
+         select a.id,
         		 a.user_id,
 			     a.submit_date,
 			     a.state,
 			     a.type,
 			     a.audit_desc,
-			     b.account_number as userName,
-				 b.username as companyName,
-			     jla.applyAmount as amount,
-			     jla.id as applyId,
-			     (select c.value from sys_dict c where c.type=1002 and c.code = a.type) as typeName,
-			     (select c.value from sys_dict c where c.type=1004 and c.code = jcb.tec_domain) as tecName
-        from jltfisp_business_applay a LEFT JOIN jltfisp_user b on b.id = a.user_id 
-        LEFT JOIN jltfisp_co_base jcb  on a.user_id = jcb.user_id
-        LEFT JOIN jltfisp_loan_apply jla on a.user_id=jla.user_id
+			     a.loan_value,
+			     a.parent_type,
+			     jcb.company as companyName,
+			     jcb.id as companyId,
+				(select c.value from sys_dict c where c.type=1002 and c.code = a.type) as typeName,
+				(select c.value from sys_dict c where c.type=1004 and c.code = jcb.tec_domain) as tecName
+				 from jltfisp_business_applay a ,jltfisp_co_base jcb
          <if test="_parameter != null">
         	<where>
+        	a.user_id =jcb.user_id
+			and jcb.business_type=a.type
             <include refid="Example_Where_Clause"/>
-            b.account_number like '%${userName}%'
             </where>
         </if>
         <if test="_BY != null">order by #{_BY}</if>
@@ -108,6 +116,8 @@
 	          state,
 	          type,
 	          audit_desc,
+	          loan_value,
+	          parent_type,
 	    </trim>
 	    <trim prefix="values (" suffix=")" suffixOverrides=",">
 	    	#{id,jdbcType=INTEGER},
@@ -116,6 +126,8 @@
 	    	#{state,jdbcType=INTEGER},
 	    	#{type,jdbcType=CHAR},
 	    	#{auditDesc,jdbcType=VARCHAR},
+	    	#{loanValue,jdbcType=VARCHAR},
+	    	#{parentType,jdbcType=VARCHAR},
 	    </trim>
        <selectKey resultType="java.lang.Integer" keyProperty="id">
 		SELECT @@IDENTITY AS id
@@ -142,6 +154,12 @@
 	   	   <if test="auditDesc != null and auditDesc != ''" >
 	          audit_desc,
 	       </if>
+	       <if test="loanValue != null and loanValue != ''">
+		      loan_value,
+		   </if>
+	       <if test="parentType != null and parentType != ''">
+		      parent_type,
+		   </if>
 	    </trim>
 	    <trim prefix="values (" suffix=")" suffixOverrides=",">
     		<if test="id != null and id != ''">
@@ -162,6 +180,12 @@
     		<if test="auditDesc != null and auditDesc != ''">
     		#{auditDesc,jdbcType=VARCHAR},
     		</if>
+    		<if test="loanValue != null and loanValue != ''">
+		     #{loanValue,jdbcType=VARCHAR},
+		   	</if>
+    	    <if test="parentType != null and parentType != ''">
+		      #{parentType,jdbcType=VARCHAR},
+		    </if>
 	    </trim>
 
        <selectKey resultType="java.lang.Integer" keyProperty="id">
@@ -190,6 +214,12 @@
 		     <if test="auditDesc != null and auditDesc != ''" >
 		         audit_desc=#{auditDesc,jdbcType=VARCHAR},
 		     </if>
+		     <if test="loanValue != null and loanValue != ''">
+		     	 loan_value=#{loanValue,jdbcType=VARCHAR},
+		   	 </if>
+		     <if test="parentType != null and parentType != ''">
+		      	 parent_type=#{parentType,jdbcType=VARCHAR},
+		     </if>
 	  </set>
 	   where 
 	    id=#{id,jdbcType=INTEGER} 
@@ -205,6 +235,8 @@
 	    state=#{state,jdbcType=INTEGER},
 	    type=#{type,jdbcType=CHAR},
 	    audit_desc=#{auditDesc,jdbcType=VARCHAR},
+	    loan_value=#{loanValue,jdbcType=VARCHAR},
+	    parent_type=#{parentType,jdbcType=VARCHAR},
 	  </set>
 	   where 
 	    id=#{id,jdbcType=INTEGER} 

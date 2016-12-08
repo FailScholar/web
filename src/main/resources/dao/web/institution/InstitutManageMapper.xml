@@ -476,4 +476,16 @@
         </where>
         
     </select>
+    
+    
+    <!-- 查询列表-->
+	<select id="selectTemplate" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_institut_manage a 
+       	<where>
+           isTemplate = 1 
+        </where>
+        
+    </select>
 </mapper> 

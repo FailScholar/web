@@ -15,22 +15,20 @@ public class BusinessApplayAudit extends BaseEntity{
 	private Integer state; // 业务申请状态（0：申请中；1：申请通过；2：申请不通过）
 	private String type; // 1：保费补贴申请  2：股权融资申请  3：合作机构申请 4：服务团队申请  5：贷款申请（科技履约贷款申请、科技小巨人贷款申请、高新技术贷款申请、科技微贷通贷款申请）
 	private String auditDesc; // 审核意见
+	private Double loanValue;//贷款金额
+	private String parentType;//业务申请大类
 	
+	//以下用于查询
+	private String companyId;//企业id
 	private String companyName;//企业名称
 	private String userName;//用户名
 	private String typeName;//申请类型名称
 	private String tecName;//所属技术领域
-	private Integer amount;//融资金额
 	private Integer applyId;//申请id
 	
 
 	public BusinessApplayAudit() {
 		super();
-	}
-	public BusinessApplayAudit(Integer id, Integer state) {
-		super();
-		this.id = id;
-		this.state = state;
 	}
 
 	/**
@@ -147,6 +145,13 @@ public class BusinessApplayAudit extends BaseEntity{
 		
 	}
 
+	
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -179,20 +184,25 @@ public class BusinessApplayAudit extends BaseEntity{
 		this.tecName = tecName;
 	}
 
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
-
 	public Integer getApplyId() {
 		return applyId;
 	}
 
 	public void setApplyId(Integer applyId) {
 		this.applyId = applyId;
+	}
+	public Double getLoanValue() {
+		return loanValue;
+	}
+	public void setLoanValue(Double loanValue) {
+		this.loanValue = loanValue;
+	}
+	
+	public String getParentType() {
+		return parentType;
+	}
+	public void setParentType(String parentType) {
+		this.parentType = parentType;
 	}
 	
 	

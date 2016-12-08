@@ -1,10 +1,10 @@
                 <#setting date_format="yyyy-MM-dd">
                      <!--附加财务明细-->
                         <div class="nlistCont" style="display:none;">
-                        	<h3>附件:明细表<br/><span class="perc red">百分比获取资产负债表当期的数据进行自动计算，计算公式为：(X÷应收账款) 或 (X÷其他应收账款)！</span></h3>
+                        	<h3>附件:明细表<br/><span class="perc red"></span></h3>
                             <form id="coFinancial">
                             <input type="hidden" id="businesstype"   name="businesstype"   value="${applytype}"/>
-                            <p class="ntit">1、企业___________应收款明细表<span class="red fr">单位：万元</span></p>
+                            <p class="ntit">1、企业应收款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
                                 	<th>序号</th>
@@ -49,7 +49,7 @@
                                     <td><input value="${coAll.jltfispCoFinancialList[4].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                 </tr>
                             </table>
-                            <p class="ntit">2、企业___________其他应收款明细表<span class="red fr">单位：万元</span></p>
+                            <p class="ntit">2、企业其他应收款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
                                 	<th>序号</th>
@@ -94,7 +94,7 @@
                                     <td><input value="${coAll.jltfispCoFinancialList[9].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                 </tr>
                             </table>
-                            <p class="ntit">3、企业___________应付款明细表<span class="red fr">单位：万元</span></p>
+                            <p class="ntit">3、企业应付款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
                                 	<th>序号</th>
@@ -139,7 +139,7 @@
                                     <td><input value="${coAll.jltfispCoFinancialList[14].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                 </tr>
                             </table>
-                            <p class="ntit">4、企业___________其他应付款明细表<span class="red fr">单位：万元</span></p>
+                            <p class="ntit">4、企业其他应付款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
                                 	<th>序号</th>
@@ -184,7 +184,7 @@
                                     <td><input value="${coAll.jltfispCoFinancialList[19].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                 </tr>
                             </table>
-                            <p class="ntit">5、企业___________银行借款明细表<span class="red fr">单位：万元</span></p>
+                            <p class="ntit">5、企业银行借款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
                                 	<th>序号</th>
@@ -199,32 +199,32 @@
                                     <td><input value="${coAll.jltfispCoFinancialList[20].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[20].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[20].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[20].startTime?date}" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[20].endTime?date}" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[20].startTime?date != "">${coAll.jltfispCoFinancialList[20].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[20].endTime?date != "">${coAll.jltfispCoFinancialList[20].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
                                     <td><input value="${coAll.jltfispCoFinancialList[21].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[21].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[21].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[21].startTime?date}" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[21].endTime?date}" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[21].startTime?date != "">${coAll.jltfispCoFinancialList[21].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[21].endTime?date != "">${coAll.jltfispCoFinancialList[21].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
                                     <td><input value="${coAll.jltfispCoFinancialList[22].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[22].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[22].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[22].startTime?date}" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[22].endTime?date}" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[22].startTime?date != ''>${coAll.jltfispCoFinancialList[22].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[22].endTime?date != ''>${coAll.jltfispCoFinancialList[22].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
                                     <td><input value="${coAll.jltfispCoFinancialList[23].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[23].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[23].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[23].startTime?date}" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[23].endTime?date}" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[23].startTime?date != ''>${coAll.jltfispCoFinancialList[23].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if coAll.jltfispCoFinancialList[23].endTime?date != ''>${coAll.jltfispCoFinancialList[23].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td><b>其他金融机构融资</b></td>
@@ -233,7 +233,7 @@
                                     <td colspan="2"><input value="${coAll.jltfispCoFinancialList[25].mjjk}" name="mjjk" id="mjjk" type="text" class="txt validate[required,minSize[1],maxSize[10],custom[number]]" style="width:316px;" /></td>
                                 </tr>
                             </table>
-                            <p class="ntit">6、企业___________关联公司明细表<span class="red fr">单位：万元</span></p>
+                            <p class="ntit">6、企业关联公司明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
                                 	<th>序号</th>

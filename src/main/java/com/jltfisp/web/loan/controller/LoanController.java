@@ -27,6 +27,7 @@ import com.jltfisp.util.WebUtil;
 import com.jltfisp.web.area.service.AreaService;
 import com.jltfisp.web.loan.entity.*;
 import com.jltfisp.web.area.entity.*;
+import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.loan.service.LoanService;
 
 
@@ -49,17 +50,17 @@ public class LoanController {
     @Autowired
     private LoginService loginService;
     
-   // @Autowired
-  //  private IBusinessApplyAuditService iBusinessApplyAuditService;
+    @Autowired
+    private IBusinessApplayAuditService businessApplayAuditService;
 
 	private Map<String,String> map = new HashMap<String,String>();
 	
 	
 	public LoanController(){
-		map.put("1", "科技履约贷款申请");
-		map.put("2", "科技小巨人贷款申请");
-		map.put("3", "高新技术贷款申请");
-		map.put("4", "科技微贷通贷款申请");
+		map.put("2", "科技履约贷款申请");
+		map.put("3", "科技小巨人贷款申请");
+		map.put("4", "高新技术贷款申请");
+		map.put("1", "科技微贷通贷款申请");
 		map.put("5", "保费补贴申请");
 		map.put("6", "股权融资申请");
 	}
@@ -102,6 +103,27 @@ public class LoanController {
     	jltfispCoBaseDto.setUserid(user.getId());
     	jltfispCoBaseDto.setCreateTime(new Date());
         return loanService.saveCoBase(jltfispCoBaseDto);
+    }
+    
+    /**
+     * 查询是否有企业基本信息
+     * @param request
+     * @return
+     */
+    @RequestMapping("/queryCoBase")
+    @ResponseBody
+    public int queryCoBase(HttpServletRequest request) {
+    	String applytype = request.getParameter("applytype");
+    	request.setAttribute("applyname", map.get(applytype));
+    	request.setAttribute("applytype", applytype);
+    	//获取当前用户登录信息
+    	JltfispUser user=loginService.getCurrentUser();
+    	JltfispCoBaseDto Dto=loanService.getCoBaseContextByUserIdAndType(user.getId(), Integer.parseInt(applytype));
+        if(Dto == null){
+        	return 0;
+        }else{
+        	return 1;
+        }
     }
     
     /**
@@ -153,7 +175,24 @@ public class LoanController {
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispCoAll coAll =loanService.getCoDebtTable(user.getId(), year,Integer.parseInt(applytype));
     	request.setAttribute("coAll", coAll);
-        return "/website/loan/loanapply/coDebtTable";
+        return "/website/loan/loanapply/coDebtTableView";
+    }
+    
+    
+    /**
+     * 贷款申请填-获取对应年费利润信息
+     * @param request
+     * @param applytype
+     * @return
+     */
+    @RequestMapping("/selectCoProfitTable")
+    public String selectCoProfitTable(HttpServletRequest request,String applytype) {
+    	//获取当前用户登录信息
+    	JltfispUser user=loginService.getCurrentUser();
+    	//获取该用户所有信息
+    	JltfispCoAll coAll =loanService.getApplyALL(user.getId(), Integer.parseInt(applytype));
+    	request.setAttribute("coAll", coAll);
+        return "/website/loan/loanapply/coProfitView";
     }
     
     
@@ -298,7 +337,34 @@ public class LoanController {
     	request.setAttribute("coDebt", coDebt);
     	return "/website/loan/loanapply/loanView";
     }
-
+    /**
+     * 贷款申请-确认提交
+     * @param request
+     * @return
+     */
+    @RequestMapping("/loanSubmit")
+    public String  loanSubmit(HttpServletRequest request) {
+    	String applytype = request.getParameter("applytype");
+    	request.setAttribute("applyname", map.get(applytype));
+    	request.setAttribute("applytype", applytype);
+    	BusinessApplayAudit loan=new BusinessApplayAudit();
+    	//获取当前用户登录信息
+    	JltfispUser user=loginService.getCurrentUser();
+    	loan.setUserId(user.getId());
+    	loan.setSubmitDate(new Date());
+    	//设定为申请状态
+    	loan.setState(0);
+    	//设定applyType类型
+    	loan.setType(applytype);
+	 	int i=businessApplayAuditService.insertRecord(loan);
+	 	if(i==0){
+	 	request.setAttribute("failMes", "申请失败");
+	 	return "/website/loan/loanapply/loanApplyfail";
+	 	}else{
+	 	return "/website/loan/loanapply/loanApplysuccess";
+	 	}
+    }
+    
    /* @RequestMapping("/subsidy")
     public String subsidy(){
         return "/website/loan/subsidy/subsidyApply";

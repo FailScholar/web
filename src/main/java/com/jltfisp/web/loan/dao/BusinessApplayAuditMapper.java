@@ -1,7 +1,14 @@
 package com.jltfisp.web.loan.dao;
 
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Select;
+
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 /**
@@ -28,6 +35,26 @@ public interface BusinessApplayAuditMapper extends BaseMapper<BusinessApplayAudi
      */
     BusinessApplayAudit getBusinessApplayAudit(@Param("userId")Integer userId, @Param("type")String type, @Param("state")Integer state);    
 
+
+    /**
+     * 
+     * @description 筛选前六种贷款服务
+     * @author chenyun
+     * @date 2016年12月7日 上午10:45:55 
+     * @param @param user_id
+     * @param @return
+     * @return List<BusinessApplayAudit>
+     */
+	@Select("SELECT * FROM jltfisp_business_applay WHERE user_id = #{user_id} and type<7")
+	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer user_id);
+	
+	
+	@Select("update jltfisp_business_applay set state=#{state} where user_id=#{user_id} and type=#{type}")
+	public void updateBusinessApplayAuditByUserIdAndType(@Param("user_id")Integer user_id,@Param("type")String type,@Param("state")Integer state);
+	
+	@Select("update jltfisp_business_applay set loan_value=#{loan_value} where user_id=#{user_id} and type=#{type}")
+	public void updateMoneyByUserIdAndType(@Param("user_id")Integer user_id,@Param("type")String type,@Param("loan_value")Double loan_value);
+	
 }
 
 

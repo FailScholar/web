@@ -26,22 +26,26 @@
                           <li class="li3"><b></b>3.完成</li>
                       </ul>
                       <div class="clear"></div>
-                      <div class="log proList">
-                          <form method="post" action="">
-                              <div><span class="ml70">用户名：</span><input type="text" class="txt" /></div>
-                              <div><span class="ml57">邮箱验证：</span><input type="text" class="txt" /><div class="fr"><a href="javascript:;" class="ml26 fr">发送验证码</a></div></div>
-                              <div class="tip autologin"><span class="red">* 校验信息不匹配</span></div>
+                      <div class="log proList" style="width:556px;">
+                          <form method="post" action="" id="saveAdminForm">
+                              <div><span class="ml70">用户名：</span><input type="text" class="txt validate[required,minSize[3],maxSize[30],custom[email],ajax[ajaxAccountNumber]]" name="accountNumber" id="accountNumber"/></div>
+                              <div><span class="ml57">邮箱验证：</span><input type="text" class="txt validate[required]" name="emailCaptcha" id="emailCaptcha" />
+                              <div class="fr">
+                              <a href="javascript:;" onclick="sendEamil()" class="ml26 fr" id="sml26" style="margin-right:80px;">发送验证码</a>
+                              	<p id="retext" style="display:none;font-size:13px;text-indent:0px;width:150px;color:#545658" class="ml26 fr">验证码<b class="second" style="font-size:13px;">1</b>分钟内可用</p>
+                              </div></div>
+                              <div class="tip autologin" id="tiptext" style="display:none"><span class="red">* 校验信息不匹配</span></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
-                              <div class="logbtn"><input type="button" value="下一步" /></div>
+                              <div class="logbtn"><input type="button" onclick="checkEmailInfo()" value="下一步" /></div>
                           </form>
                       </div>
                       <div class="log proList" style="display:none;">
-                          <form method="post" action="">
-                              <div><span class="ml70">登录帐号：</span>howhahaha@163.com</div>
-                              <div><span class="ml70">&emsp;新密码：</span><input type="password" class="txt" /></div>
-                              <div><span class="ml70">确认密码：</span><input type="password" class="txt" /></div>
+                          <form method="post" action="" id="resetForm">
+                              <div id="m170"><span class="ml70">登录帐号：</span>howhahaha@163.com</div>
+                              <div><span class="ml70">&emsp;新密码：</span><input type="password" id="password" name="password" class="txt validate[required,minSize[6],maxSize[20],custom[onlyLetterNumber]" /></div>
+                              <div><span class="ml70">确认密码：</span><input type="password" class="txt validate[required,minSize[6],maxSize[20],funcCall[checkRepeat],custom[onlyLetterNumber]]" /></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
-                              <div class="logbtn"><input type="button" value="提交" /></div>
+                              <div class="logbtn"><input type="button" onclick="resetPassword()" value="提交" /></div>
                           </form>
                       </div>
                       <div class="log proList pro4" style="display:none;">
@@ -67,11 +71,74 @@
 </html>
 
 <script type="text/javascript">
+	function resetPassword() {
+		var accountNumber = $("#accountNumber").val();
+		var password = $("#password").val();
+		$.post("${path}/anon/resetPassword",{"accountNumber":accountNumber,password:password},function(data){
+			$('.progress li').removeClass('active').eq(2).addClass('active');
+           	$(".proList").hide().eq(2).show();
+		});
+	}
+	
+	function checkEmailInfo(){
+		var accountNumber = $("#accountNumber").val();
+		var emailCaptcha = $("#emailCaptcha").val();
+		$.post("${path}/anon/checkEmailInfo",{"accountNumber":accountNumber,emailCaptcha:emailCaptcha},function(data){
+			if(data>0){
+				$("#m170").html('<span class="ml70">登录帐号：</span>'+accountNumber);
+           		 $('.progress li').removeClass('active').eq(1).addClass('active');
+           		 $(".proList").hide().eq(1).show();
+			}else{
+				$("#tiptext").show();
+			}
+		});
+	}
+
+	function sendEamil(){
+		var accountNumber = $("#accountNumber").val();
+		$.post("${path}/anon/sendEamil",{"accountNumber":accountNumber},function(data){
+			if(data>0){
+				$("#sml26").hide();
+				$("#retext").show();
+				var numSecond=900;
+				var num=parseInt($('.second').text());
+		        var timer = setInterval(function(){
+			        numSecond--;
+		            if(numSecond==0)
+		            { 
+		            clearInterval(timer);
+		            $.post("${path}/anon/resetEmailCaptcha",{"accountNumber":accountNumber},function(data){
+		                $("#sml26").text("重新发送");
+		                $("#sml26").show();
+						$("#retext").hide();
+					})
+		            }
+		        },1000)
+			}
+		});
+	}
+
     $(document).ready(function(e) {
-        $('.proList .logbtn input').click(function(){
-            var index=$(this).parents('.proList').index()-3;
-            $('.progress li').removeClass('active').eq(index).addClass('active');
-            $(this).parents('.proList').hide().next('.proList').show();
-        });
+        //输入框验证
+        $.validationEngineLanguage.newLang();
+        $.validationEngineLanguage.allRules.ajaxAccountNumber = {
+       	     "url":"${path }/anon/checkAccountNumber",
+       	     "extraData": "id=",
+       	     "alertText":"* 账号不存在，请输入正确的邮箱！",
+       	     };
+        $("#saveAdminForm").validationEngine('attach', {
+            promptPosition: "bottomRight:-10", scroll: false
+        }); 
+        $("#resetForm").validationEngine('attach', {
+            promptPosition: "bottomRight:-10", scroll: false
+        }); 
+        
     });
+    //输入密码验证，两次输入是否一致
+    function checkRepeat(field, rules, i, options) {
+        if (field.val() != $("#password").val()) {
+            return "* 两次输入的密码不一致！";
+        }
+        return true;
+    }
 </script>

@@ -28,6 +28,6 @@ public interface FinancingService {
      * @return List<JltfispFinancing> 返回JltfispFinancing list对象
      * @author 张舒西 2016年11月22日 上午9:12:54
      */
-    List<JltfispFinancing> getFinancingList(Integer columnid);
+    List<JltfispFinancing> getFinancingList(Integer columnid,int page,Integer type);
 
 }

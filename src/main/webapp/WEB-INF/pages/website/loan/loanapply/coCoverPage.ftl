@@ -1,7 +1,7 @@
 <!--申请书封面-->
                           <div class="nlistCont">
                               <div class="cover">
-                                  <p class="snum fr">项目编号:20160708</p>
+                                  <p class="snum fr"></p>
                                   <div class="clear"></div>
                                   <h2>科技履约贷款申请书</h2>
                                   <p class="ntit">申请单位：<input type="text" readonly value="${coAll.jltfispCoBase.company}" class="txt3" />(签章)</p>

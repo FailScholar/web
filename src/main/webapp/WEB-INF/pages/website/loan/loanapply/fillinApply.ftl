@@ -26,7 +26,7 @@
                 </div>
                 <div class="calt">
                 	<p>${applyname}</p>
-                    <h2>在线申请<a href="${path}/anon/loan/guideApply?applytype=${applytype}" class="notice fr">申请须知</a></h2>
+                    <h2>在线申请<!--<a href="${path}/anon/loan/guideApply?applytype=${applytype}" class="notice fr">申请须知</a>--></h2>
                     <ul class="progress">
                     	<li class="li1"><b></b>1.填写企业基本信息<i></i></li>
                         <li class="li2 active"><b></b>2.填写申请表格<i></i></li>
@@ -80,7 +80,7 @@
                                     </#if>
                                     是</label></td>
                                     <th>上期贷款还款时间</th>
-                                    <td><label><input name="historyEndtime" id="historyEndtime" value="${coAll.jltfispCoFillInApply.historyEndtime?date}" onClick="WdatePicker()" type="text" class="txt" /></label></td>
+                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if coAll.jltfispCoFillInApply.historyEndtime?date !="">${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker()" type="text" class="txt" /></label></td>
                                 </tr>
                                 <tr>
                                     <th>是否银行推荐</th>

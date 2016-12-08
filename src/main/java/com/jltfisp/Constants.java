@@ -17,5 +17,12 @@ public interface Constants {
 	public static final String LOAN_TYPE_GXJS = "4";//高新技术贷款申请
 	public static final String LOAN_TYPE_BFBT = "5";//保费补贴申请
 	public static final String LOAN_TYPE_GQRZ = "6";//股权融资申请
+	
+	/**
+	 * 业务申请大类
+	 */
+	public static final String LOAN_BUSINESS= "1";//申请中
+	public static final String INSTITUTION_APPLY = "2";//申请通过
+	public static final String EXPERT_APPLY = "3";//申请不通过
     
 }

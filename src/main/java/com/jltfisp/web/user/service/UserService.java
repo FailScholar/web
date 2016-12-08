@@ -22,4 +22,11 @@ public interface UserService {
     int updateByPKSelective(JltfispUser user);
 
     Set<String> getVisitorPermSet();
+    int updateUserByAccountNumber(String emailCaptcha,String accountNumber);
+    
+    List<JltfispUser> selectUserByAccountNumber(String accountNumber);
+    
+    JltfispUser selectByPk(Integer id);
+    
+    int updatePasswordByAccountNumber(String password,String accountNumber);
 }

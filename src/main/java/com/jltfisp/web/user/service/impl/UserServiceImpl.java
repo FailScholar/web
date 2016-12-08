@@ -45,4 +45,30 @@ public class UserServiceImpl implements UserService {
         return userMapper.getVisitorPermSet();
     }
 
+	@Override
+	public int updateUserByAccountNumber(String emailCaptcha,
+			String accountNumber) {
+		// TODO Auto-generated method stub
+		return userMapper.updateUserByAccountNumber(emailCaptcha, accountNumber);
+	}
+
+	@Override
+	public List<JltfispUser> selectUserByAccountNumber(String accountNumber) {
+		// TODO Auto-generated method stub
+		return userMapper.selectUserByAccountNumber(accountNumber);
+	}
+
+	@Override
+	public JltfispUser selectByPk(Integer id) {
+		// TODO Auto-generated method stub
+		return userMapper.selectByPk(id);
+	}
+
+	@Override
+	public int updatePasswordByAccountNumber(String password,
+			String accountNumber) {
+		// TODO Auto-generated method stub
+		return userMapper.updatePasswordByAccountNumber(password, accountNumber);
+	}
+
 }

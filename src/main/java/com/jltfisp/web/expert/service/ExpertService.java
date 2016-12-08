@@ -8,6 +8,7 @@ package com.jltfisp.web.expert.service;
 import java.util.List;
 
 import com.jltfisp.web.expert.entity.JltfispExpert;
+import com.jltfisp.web.expert.entity.JltfispExpertDoMain;
 
 /**
  * 首页专家资源功能
@@ -51,4 +52,11 @@ public interface ExpertService {
      * @return
      */
     int saveExpert(JltfispExpert expert);
+    
+    /**
+     * 
+     * @param doMain
+     * @return int
+     */
+    int saveExpertDoMain(JltfispExpertDoMain doMain);
 }

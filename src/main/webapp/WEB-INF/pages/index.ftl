@@ -28,7 +28,7 @@
                               <div class="person fr">
                                   <a href="${path}/main"><@shiro.principal/></a>
                                   <ul>
-                                      <li class="first"><a href="${path}/user/toResetPage">修改密码</a></li>
+                                      <li class="first"><a href="${path}/user/toResetPass">修改密码</a></li>
                                       <li><a href="${path}/logout">安全退出</a></li>
                                   </ul>
                               </div>
@@ -48,7 +48,7 @@
                       <li><a href="${path}/anon/capital">专项资金</a><b></b></li>
                       <li><a href="${path}/anon/institution">合作机构</a><b></b></li>
                       <li><a href="${path}/anon/expert">专家资源</a><b></b></li>
-                      <li><a href="${path}/anon/financing">股权融资</a><b></b></li>
+                      <li><a href="${path}/perm/financing">股权融资</a><b></b></li>
                       <li><a href="${path}/anon/market">资本市场</a><b></b></li>
                       <li><a href="${path}/perm/insurance">科技保险</a><b></b></li>
                       <li class="last1"><a href="${path}/perm/cloud">云课堂</a><b></b></li>
@@ -98,7 +98,7 @@
               <ul>
               	<li><a href="${path}/anon/regist/toRegistPage" class="a1" title="注册">&nbsp;</a></li>
               	<li><a href="${path}/login" class="a2" title="登录">&nbsp;</a></li>
-              	<li><a onclick="toConsult()" class="a3" title="咨询">&nbsp;</a></li>
+              	<li><a href="${path}/communicate/page" target="_blank" class="a3" title="咨询">&nbsp;</a></li>
               	<li><a href="javascript:;" class="a4" title="分享">&nbsp;</a>
               		<div class="none">
 			        <div class="fx_nr">

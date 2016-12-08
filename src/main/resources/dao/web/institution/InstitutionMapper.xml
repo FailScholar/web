@@ -19,8 +19,18 @@
 	</select>
 	<!-- 根据合作机构二级列表的columnNo查询列表-->
 	<select id="getInstitutionList" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
-	    select * from jltfisp_institut institut,jltfisp_column_manage cm where cm.parentColumn=6 and  institut.columnId=cm.id and institut.columnId=#{columnId}
-	   order by  institut.createTime desc
+	    SELECT 
+			institut.* 
+		FROM 
+			jltfisp_institut institut  
+		LEFT JOIN jltfisp_business_applay jba ON jba.user_id = institut.user_id AND jba.type = '7' 
+		LEFT JOIN jltfisp_column_manage cm ON institut.columnId = cm.id  AND cm.parentColumn = 6 
+		WHERE
+			institut.columnId = #{columnId}  AND jba.state = 1 
+		ORDER BY 
+			CONVERT (
+				institut.institutionalName USING gbk
+			) COLLATE gbk_chinese_ci ASC 
 	</select>
 	<select id="getInstitutionDetail" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
 	  select * from jltfisp_institut institut where institut.id=#{id}

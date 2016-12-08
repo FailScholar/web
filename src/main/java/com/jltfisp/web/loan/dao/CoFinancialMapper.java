@@ -22,4 +22,7 @@ public interface CoFinancialMapper extends BaseMapper<JltfispCoFinancialDto>{
 	 */
 	@Delete("DELETE  FROM jltfisp_co_financial WHERE createUserid = #{createUserid}")
 	 void deleteCoFinancialContext(int createUserid);
+	
+	@Select("SELECT * FROM jltfisp_co_financial WHERE info_id = #{infoId} ")
+	List<JltfispCoFinancialDto> getCoCoFinancialContextByinfoId(int infoId);
 }

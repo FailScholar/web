@@ -10,6 +10,13 @@ import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 public interface IBusinessApplayAuditService extends
         IBaseService<BusinessApplayAudit> {
     JltfispCoFillInApply selectApplyByPk(Integer id);
+    /**
+     * 根据userid，applyType查询申请信息
+     * @param userid
+     * @param applyType
+     * @return
+     */
+    JltfispCoFillInApply getCoFillInApplyContext(int userid,int applyType);
 
     /**
      * 检查是否存在 正在申请中或申请通过 的申请记录
@@ -19,6 +26,17 @@ public interface IBusinessApplayAuditService extends
      * @author yingying.wang1 2016年12月5日 下午4:39:53
      */
     BusinessApplayAudit checkApply(Integer userId, String type);
+	
+	/**
+	 * 
+	 * @description 根据用户id查询贷款服务列表
+	 * @author chenyun
+	 * @date 2016年12月6日 下午2:43:04 
+	 * @param @param userId
+	 * @param @return
+	 * @return List<BusinessApplayAudit>
+	 */
+	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer userId);
 
     /**
      * 查询资产负债信息
@@ -47,4 +65,26 @@ public interface IBusinessApplayAuditService extends
     public BusinessApplayAudit getBusinessApplayAuditByUserId(Integer userId,
             String type);
 
+    /**
+     * 
+     * @description 根据用户id和业务类型更新BusinessApplayAudit的state
+     * @author chenyun
+     * @param @param userId
+     * @param @param type
+     * @param @param state
+     * @return void
+     */
+    public void updateBusinessApplayAuditByUserIdAndType(Integer userId,String type,Integer state);
+    
+    /**
+     * 
+     * @description 更新金额
+     * @author chenyun
+     * @date 2016年12月8日 下午1:07:29 
+     * @param @param userId
+     * @param @param type
+     * @param @param money
+     * @return void
+     */
+    public void updateMoneyByUserIdAndType(Integer userId,String type,Double money);
 }

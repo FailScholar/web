@@ -6,7 +6,7 @@
           <table width="100%" class="tab3">
               <tr>
                   <th><b class="red">*</b>企业名称</th>
-                  <td colspan="3"><input id="company"   name="company"  type="text" class="txt" readonly="readonly" value="${jlfispPsBaseDto.company}" /></td>
+                  <td colspan="3"><input id="company"   name="company"  type="text" class="txt" readonly="readonly" value="${companyName}" /></td>
               </tr>
               <tr>
                   <th><b class="red">*</b>组织机构代码</th>
@@ -65,7 +65,48 @@
           <p class="ntit">申请保费补贴信息<a href="javascript:;" class="fr add">添加</a></p>
           <#if jlfispPsBaseDto.jltfispPsInfoList?? && (jlfispPsBaseDto.jltfispPsInfoList?size > 0) >
             <#list jlfispPsBaseDto.jltfispPsInfoList as jltfispPsInfoList>
-               <table width="100%" class="tab3 module">
+               <#if jltfispPsInfoList_index gte 1 >
+                  <table width="100%" class="tab3 module">
+               <tr> <td colspan='4'><a href='javascript:;' class='fr delete'>删除</a></td></tr>
+               <tr>
+                  <th style="width:8%">借款合同编号</th>
+                  <td colspan="3"><input  name="jltfispPsInfoList[${jltfispPsInfoList_index}].contractNumber" value="${jltfispPsInfoList.contractNumber}"  type="text" class="txt validate[required,minSize[1],maxSize[1000]] hetongbianhao" placeholder="请输入合同编号" /></td>
+               </tr>
+               <tr>
+                  <th><b class="red">*</b><b>保单号</b></th>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].policyNumber" value="${jltfispPsInfoList.policyNumber}" type="text" class="txt validate[required,minSize[1],maxSize[1000]] baodanhao" placeholder="请输入" /></td>
+                  <th><b class="red">*</b><b>担保金额</b></th>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].premiumMoney" value="${jltfispPsInfoList.premiumMoney}" type="text" class="txt validate[required,minSize[1],maxSize[10]] danbaojiner" placeholder="请输入" />万元</td>
+               </tr>
+               <tr>
+                  <th><b class="red">*</b><b>贷款银行</b></th>
+                  <td>
+                      <input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanBank" value="${jltfispPsInfoList.loanBank}" type="text" class="txt daikuanyinhang validate[required,minSize[1],maxSize[1000]]" placeholder="请输入" />
+                  </td>
+                  <th><b class="red">*</b><b>保险/担保公司</b></th>
+                  <td>
+                      <input  name="jltfispPsInfoList[${jltfispPsInfoList_index}].insuranceCompany"  value="${jltfispPsInfoList.insuranceCompany}" type="text" class="txt baoxiangongsi validate[required,minSize[1],maxSize[1000]]" placeholder="请输入" />
+                  </td>
+               </tr>
+               <tr>
+                  <th>实际支付保额金额</th>
+                   <td colspan="3"><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanMoney" value="${jltfispPsInfoList.loanMoney}" type="text" class="txt shijizhifujine validate[required,minSize[1],maxSize[10]]" placeholder="请输入" />元</td>
+               </tr>
+               <tr>
+                  <th>实际还款日</th>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].repaymentDate" value="${jltfispPsInfoList.repaymentDate}" type="text" class="txt shijihuankuanri  validate[required]" placeholder="请输入" onClick="WdatePicker()" readonly="readonly" /></td>
+                  <th>实际支付本息(本金+利息)</th>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].principalInterest"  value="${jltfispPsInfoList.principalInterest}" type="text" class="txt shijizhifubenxi validate[required,custom[numberAnddit], minSize[1],maxSize[10]]" placeholder="请输入" />元</td>
+               </tr>
+               <tr>
+                  <th>实际放贷日</th>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt  shijifangdairi validate[required]" placeholder="请输入实际放贷日" onClick="WdatePicker()" readonly="readonly" /></td>
+                  <th>贷款期限</th>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt daikuanqixian validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" /></td>
+               </tr>
+            </table>
+                 <#else>
+                   <table width="100%" class="tab3 module">
                <tr>
                   <th style="width:8%">借款合同编号</th>
                   <td colspan="3"><input  name="jltfispPsInfoList[${jltfispPsInfoList_index}].contractNumber" value="${jltfispPsInfoList.contractNumber}"  type="text" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="请输入合同编号" /></td>
@@ -83,7 +124,7 @@
                   </td>
                   <th><b class="red">*</b><b>保险/担保公司</b></th>
                   <td>
-                      <input  name="jltfispPsInfoList[${jltfispPsInfoList_index}].InsuranceCompany"  value="${jltfispPsInfoList.InsuranceCompany}" type="text" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="请输入" />
+                      <input  name="jltfispPsInfoList[${jltfispPsInfoList_index}].insuranceCompany"  value="${jltfispPsInfoList.insuranceCompany}" type="text" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="请输入" />
                   </td>
                </tr>
                <tr>
@@ -103,6 +144,7 @@
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" /></td>
                </tr>
             </table>
+               </#if>
            </#list> 
           <#else>
           <table width="100%" class="tab3 module">
@@ -126,7 +168,7 @@
                   </td>
                   <th><b class="red">*</b><b>保险/担保公司</b></th>
                   <td>
-                      <input  name="jltfispPsInfoList[0].InsuranceCompany" type="text" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="请输入" />
+                      <input  name="jltfispPsInfoList[0].insuranceCompany" type="text" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="请输入" />
                   </td>
               </tr>
               <tr>

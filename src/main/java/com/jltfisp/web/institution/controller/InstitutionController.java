@@ -1,6 +1,7 @@
 package com.jltfisp.web.institution.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
 import com.jltfisp.redis.RedisService;
@@ -14,6 +15,7 @@ import com.jltfisp.web.institution.service.IInstitutManageService;
 import com.jltfisp.web.institution.service.InstitutionService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +49,7 @@ public class InstitutionController {
 	   private LoginService loginService;
 
         @Autowired
-        private RedisService<String, String> redisService;
+        private RedisService<Serializable, String> redisService;
 
 	 /**
 	  * 
@@ -105,11 +109,13 @@ public class InstitutionController {
      * @return ModelAndView
      */
     @RequestMapping("/anon/getInstitutionList")
-    public ModelAndView getInstitutionList(Integer columnId) {
-    	ModelAndView mv=new ModelAndView("/website/institution/institutionList");
-    	List<JltfispInstitution> institutionList = this.institutionService.getInstitutionList(columnId);
-    	mv.addObject("institutionList", institutionList);
-        return mv;
+    public ModelAndView getInstitutionList(Integer columnId, Integer page) {
+    	    ModelAndView mv=new ModelAndView("/website/institution/institutionList");
+    	    List<JltfispInstitution> institutionList = this.institutionService.getInstitutionList(columnId,page);
+    	    PageInfo pageInfo = new PageInfo<>(institutionList);
+    	    mv.addObject("pageInfo",pageInfo);
+    	    mv.addObject("institutionList", institutionList);
+    	    return mv;
     }
     
     @RequestMapping("/anon/getInstitutionDetail")
@@ -133,11 +139,15 @@ public class InstitutionController {
         String msg = "";
         //获取当前用户登录信息
         JltfispUser user=loginService.getCurrentUser();
-        BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),"3");
+        BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),"7");
         if(businessApplayAudit != null){
             JltfispInstitution institution = institutionService.getInstitutionByUserId(user.getId());
-            JltfispColumn column = columnServiceImpl.getColumnContext(institution.getColumnId());
-            msg="您已申请成为" + column.getColumnName();
+            if(institution != null){
+                JltfispColumn column = columnServiceImpl.getColumnContext(institution.getColumnId());
+                if(column != null){
+                    msg="您已申请成为" + column.getColumnName();
+                }
+            }
         }
         return msg;
     }
@@ -151,10 +161,18 @@ public class InstitutionController {
      */
     @RequestMapping("/anon/institutionGuide")
     public String institutionGuide(HttpServletRequest request, Integer columnId) {
-        InstitutManage institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV(columnId.toString())),
-                InstitutManage.class);
+        InstitutManage institutManage = null;
+        if(redisService.getV(columnId) != null){
+            institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV(columnId)),
+                    InstitutManage.class);
+        }else{
+            institutManage = institutManageService.selectByColumnId(columnId);
+            if(institutManage == null){
+                institutManage = institutManageService.selectTemplate();
+            }
+        }
         request.setAttribute("columnId", columnId);
-//        request.setAttribute("institutManage", institutManage);
+        request.setAttribute("institutManage", institutManage);
         return "/website/institution/institutionGuide";
     }
     
@@ -167,8 +185,16 @@ public class InstitutionController {
      */
     @RequestMapping("/anon/institutionApply")
     public String institutionApply(HttpServletRequest request,Integer columnId) {
-        //InstitutManage institutManage = institutManageService.selectByColumnId(columnId);
         InstitutManage institutManage = null;
+        if(redisService.getV(columnId) != null){
+            institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV(columnId)),
+                    InstitutManage.class);
+        }else{
+            institutManage = institutManageService.selectByColumnId(columnId);
+            if(institutManage == null){
+                institutManage = institutManageService.selectTemplate();
+            }
+        }
         //获取当前用户登录信息
         JltfispUser user=loginService.getCurrentUser();
         JltfispInstitution institution = institutionService.getInstitutionByUserId(user.getId()); 
@@ -216,7 +242,7 @@ public class InstitutionController {
             //修改
             row = institutionService.updateByPKSelective(institution);
             
-            businessApplayAudit = businessApplayAuditService.getBusinessApplayAudit(user.getId(), "3", 2);
+            businessApplayAudit = businessApplayAuditService.getBusinessApplayAudit(user.getId(), "7", 2);
             businessApplayAudit.setState(0);
             businessApplayAudit.setSubmitDate(nowDate);
             businessApplayAudit.setAuditDesc("");
@@ -226,7 +252,7 @@ public class InstitutionController {
             businessApplayAudit.setUserId(user.getId());
             businessApplayAudit.setSubmitDate(nowDate);
             businessApplayAudit.setState(0);
-            businessApplayAudit.setType("3");
+            businessApplayAudit.setType("7");
             //业务审核表中 新增 该会员的合作机构申请
             row = businessApplayAuditService.insertRecord(businessApplayAudit);
             

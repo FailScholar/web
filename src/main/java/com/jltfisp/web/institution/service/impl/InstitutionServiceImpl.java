@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
 import com.jltfisp.web.column.entity.JltfispColumn;
@@ -38,8 +39,9 @@ public class InstitutionServiceImpl extends BaseServiceImpl<JltfispInstitution> 
 	}
 
 	@Override
-	public List<JltfispInstitution> getInstitutionList(Integer columnId) {
-		return this.institutionDao.getInstitutionList(columnId);
+	public List<JltfispInstitution> getInstitutionList(Integer columnId, Integer page) {
+	    PageHelper.startPage(page, 8);
+	    return this.institutionDao.getInstitutionList(columnId);
 	}
 
 	@Override

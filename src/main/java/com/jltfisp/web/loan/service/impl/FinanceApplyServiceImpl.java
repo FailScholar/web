@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.jltfisp.web.loan.dao.FinanceApplyDao;
 import com.jltfisp.web.loan.dao.FinanceMaterialDao;
 import com.jltfisp.web.loan.dao.FinanceShareholderDao;
+import com.jltfisp.web.loan.dao.JltfispFinShareholderDao;
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
 import com.jltfisp.web.loan.entity.JltfispFinShareholder;
+import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
 import com.jltfisp.web.loan.service.FinanceApplyService;
 
 @Service
@@ -25,7 +27,10 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
     private FinanceMaterialDao financeMaterialDao;
     
     @Autowired
-    private FinanceShareholderDao financeShareholderDao;
+    private FinanceShareholderDao financeShareholderDao;  
+    
+    @Autowired
+    private JltfispFinShareholderDao jltfispFinShareholderDao;
 	
 	
 	@Override
@@ -48,7 +53,7 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 
 	@Override
 	public JltfispFinMaterial getJltfispFinMaterialInfo(Integer id) {
-		return this.financeApplyDao.getJltfispFinMaterialInfo(id);
+		return this.financeMaterialDao.getJltfispFinMaterialInfo(id);
 	}
 
 	@Override
@@ -63,8 +68,8 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 	}
 
 	@Override
-	public void deleteBase(Integer userId) {
-		this.financeApplyDao.deleteCoBase(userId);
+	public void deleteBase(Integer id) {
+		this.financeApplyDao.deleteCoBase(id);
 	}
 
 
@@ -78,4 +83,25 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 	public void updateJltfispCoBaseInfo(Integer id) {
 	   this.financeApplyDao.updateJltfispCoBaseInfo(id);
 	}
+
+
+	@Override
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id) {
+		return  this.financeApplyDao.getJltfispFinanceAndShareholdersDto(id);
+	}
+
+
+	@Override
+	public void addShareholders(JltfispFinShareholder jltfispFinShareholder) {
+		this.jltfispFinShareholderDao.insert(jltfispFinShareholder);
+	}
+
+
+	@Override
+	public void deleteShareholders(Integer id) {
+		this.jltfispFinShareholderDao.deleteShareholders(id);
+		
+	}
+	
+	
 }

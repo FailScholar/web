@@ -385,5 +385,12 @@ public class LoanServiceImpl implements LoanService {
 		List<JltfispCoDebt> coDebt=coDebtMapper.getCoDebtContextList(coBase.getId());
 		return coDebt;
 	}
+
+	@Override
+	public List<JltfispCoFinancialDto> getCoCoFinancialContextByinfoId(
+			int infoId) {
+		// TODO Auto-generated method stub
+		return coFinancialMapper.getCoCoFinancialContextByinfoId(infoId);
+	}
   
 }

@@ -9,16 +9,20 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.github.pagehelper.PageInfo;
+import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
-import com.jltfisp.web.expert.entity.JltfispExpert;
 import com.jltfisp.web.financing.entity.JltfispFinancing;
 import com.jltfisp.web.financing.service.FinancingService;
+import com.jltfisp.web.insurance.entity.JltfispInsurance;
 
 /**
  * 
@@ -26,7 +30,6 @@ import com.jltfisp.web.financing.service.FinancingService;
  * @author 张舒西 2016年11月22日 上午10:22:15
  */
 @Controller
-@RequestMapping("/anon")
 public class FinancingController {
     
     
@@ -38,55 +41,37 @@ public class FinancingController {
     
     @Autowired
     private DictionaryService dictionaryService;
-
+    
     /**
      * 股权融资栏目主页面
      * @return
      */
-    @RequestMapping("/financing")
+    @RequestMapping("/perm/financing")
     public String financing(HttpServletRequest request){
-    	String columnId = request.getParameter("columnId");
-    	
-     if(columnId==null)
-         columnId="54";
-    	List<JltfispFinancing> financingList=financingService.getFinancingList(Integer.parseInt(columnId));
-    	List<JltfispColumn> columnList=columnService.getColumnList(385);
-    	request.setAttribute("columnId", columnId);
-    	request.setAttribute("columnList", columnList);
-    	request.setAttribute("FinancingList", financingList);
+    	List<JltfispColumn> list = columnService.getColumnList(8);
+		 request.setAttribute("colList",list);
+		 List<SysDict> dictList = dictionaryService.getDictListByType(1004);
+		 request.setAttribute("dictList", dictList);
      return "/website/financing/financing";
     }
     
-    /**
-     * 股权融资切换二级页面
-     * @return
-     */
-    @RequestMapping("/changeFinancing")
-    public String changeFinancing(HttpServletRequest request){
-     String columnId = request.getParameter("columnId");
-     List<JltfispFinancing> financingList=financingService.getFinancingList(Integer.parseInt(columnId));
-     //测试数据
-     List<JltfispColumn> columnList=columnService.getColumnList(385);
-     request.setAttribute("columnId", columnId);
-     request.setAttribute("columnList", columnList);
-     request.setAttribute("FinancingList", financingList);
+    @RequestMapping("/perm/financing/{columnId}")
+    public String financingDetail(HttpServletRequest request,@PathVariable Integer columnId, int page,Integer type){
+        
+    	List<JltfispFinancing> list = financingService.getFinancingList(columnId, page,type);
+    	PageInfo pageInfo = new PageInfo<>(list);
+    	request.setAttribute("pageInfo",pageInfo);
+    	request.setAttribute("delList",list);
      return "/website/financing/financingContext";
     }
     
-    
 
-    @RequestMapping("/financingDetail")
-    public String financingDetail(HttpServletRequest request){
-        String financingId = request.getParameter("financingId");
+    @RequestMapping("/anon/financing/detail")
+    public String financingDetail(HttpServletRequest request,int id,String colName){
         //获取股权融资信息
-        JltfispFinancing jltfispFincing=financingService.getFinancingContext(Integer.parseInt(financingId));
-        //获取二级栏目信息
-        JltfispColumn jltfispColumn=columnService.getColumnContext(jltfispFincing.getColumnid());
-        //获取父栏目信息
-        JltfispColumn parentJltfispColumn=columnService.getColumnContext(jltfispColumn.getParentColumn());
-        request.setAttribute("jltfispColumn", jltfispColumn);
-        request.setAttribute("parentJltfispColumn", parentJltfispColumn);
-        request.setAttribute("jltfispFincing", jltfispFincing);
+        JltfispFinancing jltfispFincing=financingService.getFinancingContext(id);
+        request.setAttribute("fincing",jltfispFincing);
+        request.setAttribute("colName", StringUtils.hasLength(colName) ? colName : "科技保险");
         return "/website/financing/financingDetail";
 
     }

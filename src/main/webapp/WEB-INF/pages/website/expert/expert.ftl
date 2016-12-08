@@ -29,7 +29,7 @@
                           <#if  (columnList?size>4)>
                           <li>
                          <select id="columnName" name="columnName" >
-                         <option  value="">请选择</option>
+                         <option  value="">--选择更多资源--</option>
                          <#list columnList as column>
                          <#if   (column_index>4)>
                          <option  value="${column.id}">${column.columnName}</option>
@@ -51,16 +51,30 @@
                               <li>
                                   <img width="220px" height="246px" src="${path}/${expert.agencylogo}" alt="head" style="cursor: pointer;" onclick="expertDetail(${expert.id})"/>
                                   <h4 class="blue">${expert.worktitle}</h4>
-                                  <p>${expert.workpost} | ${expert.businesaddress}</p>
+                                  
+                                  <p>
+                                  <#if (expert.workpost?length >5) >
+                                  <lable title="${expert.workpost}">${expert.workpost?substring(0,5)}...</label>
+                                  <#else>
+                                  ${expert.workpost}
+                                  </#if>
+                                   | 
+                                  <#if (expert.workpost?length >8) >
+                                   <lable title="${expert.businesaddress}">${expert.businesaddress?substring(0,8)}...</label>
+                                  <#else>
+                                  ${expert.businesaddress}
+                                  </#if>
+                                   </p>
                                   <p class="phone">${expert.phone}</p>
                                   <p class="email">${expert.email}</p>
                               </li>
                            </#list>
-</ul>
+                          </ul>
+                       <div class="clear"></div>
+                       <#include "website/common/commonPager.ftl"/>
                       </div>
                   </div>
-                  <div class="clear"></div>
-                  <#include "website/common/commonPager.ftl"/>
+                  
                   <!--<div class="page">
                       <a href="javascript:;">&lt;</a>
                       <a href="javascript:;">1</a>
@@ -72,7 +86,8 @@
                   </div>-->
               </div>
               <!--content结束-->
-
+         </div>
+      </div>
       <div class="clear"></div>
       <div class="clearfix"></div>
   </div>
@@ -81,8 +96,8 @@
 </html>
 
 <script type="text/javascript">
+   var columnId=${columnId};
     $(document).ready(function(e) {
-    var columnId=${columnId};
     $('#Type'+columnId).addClass('active');
     $('.apply2').hide();
     $('#'+columnId).show();
@@ -91,34 +106,41 @@
     if('' != val){
     $('.infoTab li').eq(5).addClass('active');
     }
-    $("#columnName").change(function(){  
-        var columnId=$(this).val();
+    $("#columnName").change(function(){
+        columnId=$(this).val();
         $.ajax({
                 type: 'POST',
-                url:'${path}/anon/expert',
-                data: {columnId: columnId,type:1},
+                url:'${path}/anon/changeExpert',
+                data: {columnId: columnId,'pager.offset':0},
                 success: function (data) {
-                $('.content').html(data);
+                $('.infoList').html(data);
                 }
           });
-          $("#columnName   option[value='"+columnId+"']").attr("selected",true);
+         $("#columnName   option[value='"+columnId+"']").attr("selected",true);
          $('.infoTab li').eq(5).addClass('active');
+         $('.apply2').hide();
+         $('#'+columnId).show();
         }); 
         
         
     $('.infoTab li').click(function(){
         var index=$(this).index();
         <!--只有前五个栏目才会执行下面代码-->
-        if(index < 5){ 
-        var columnId=$(this).attr("name");
+        if(index < 5){
+        <!--将select中值设置为未选择-->
+        if($('#columnName').length > 0){
+        $('#columnName').prop('selectedIndex', 0);
+        }
+        
+        columnId=$(this).attr("name");
         $(this).addClass('active').siblings('li').removeClass('active');
 		<!--传当前子栏目ID-->
 		$.ajax({
                 type: 'POST',
-                url:'${path}/anon/expert',
-                data: {columnId: columnId,type:1},
+                url:'${path}/anon/changeExpert',
+                data: {columnId: columnId,'pager.offset':0},
                 success: function (data) {
-                $('.content').html(data);
+                $('.infoList').html(data);
                 }
           });
 		$('.apply2').hide();
@@ -129,5 +151,18 @@
 
 function expertDetail(id){
 	location.href="${path}/anon/expertDetail?expertId="+id;
+}
+
+function  changePage(url){
+var url=url.split("=");
+var offset=url[1];
+$.ajax({
+                type: 'POST',
+                url:'${path}/anon/changeExpert',
+                data: {columnId: columnId,'pager.offset':offset},
+                success: function (data) {
+                $('.infoList').html(data);
+                }
+          });
 }
 </script>

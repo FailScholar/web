@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.expert.entity.JltfispExpert;
 import com.jltfisp.web.news.entity.ColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
 import com.jltfisp.web.news.service.INewsInformationService;
@@ -35,52 +35,44 @@ public class NewsInformationController {
     public String news(HttpServletRequest request){
     	//获取父栏目columnId
     	String columnId = request.getParameter("columnId");
-    	String type = request.getParameter("type");
-    	String isPage = request.getParameter("isPage");
-    	
-		String offset=request.getParameter("pager.offset");
-    	int rows;
-    	if(offset !=null){
-    	rows=Integer.parseInt(request.getParameter("pager.offset"));
-    	}else{
-    	rows=0;
-    	}
-    	int total=0;
-    	List<JltfispColumn> columnList;
-    	List<NewsInformation> datas;
-    	if(type=="" || type==null){
-	        columnList=columnService.getColumnList(3);
-	        request.setAttribute("columnList", columnList);
-	        request.setAttribute("columnId", columnList.get(0).getId());
-	        total =newsInformationSevice.getNewsInfoPageCount(columnList.get(0).getId());
-	        datas=newsInformationSevice.getNewsInformationPageList(rows, 10,columnList.get(0).getId());
-    	}else{
-    		//根据子栏目columnId查询子栏目信息
-        	JltfispColumn ChirldColumn=columnService.getColumnContext(Integer.parseInt(columnId));
-        	//根据父栏目columnId查询子栏目信息
-        	columnList=columnService.getColumnList(ChirldColumn.getParentColumn());
-            request.setAttribute("columnList", columnList);
-            request.setAttribute("columnId", columnId);
-            //获取当前子栏目下所有的数据总数
-            total =newsInformationSevice.getNewsInfoPageCount(Integer.parseInt(columnId));
-            //获取当前页的数据，且显示10条
-            datas=newsInformationSevice.getNewsInformationPageList(rows, 10,Integer.parseInt(columnId));
-    	}
+    	//根据父栏目columnId查询子栏目信息
+    	List<JltfispColumn> columnList=columnService.getColumnList(3);
+        request.setAttribute("columnList", columnList);
+        request.setAttribute("columnId", columnList.get(0).getId());
+        //获取当前子栏目下所有的数据总数
+        int total =newsInformationSevice.getNewsInfoPageCount(columnList.get(0).getId());
+        //获取当前页的数据，且显示12条
+        List<NewsInformation> datas=newsInformationSevice.getNewsInformationPageList(0, 12,columnList.get(0).getId());
         PagerModel pm = new PagerModel();
         pm.setDatas(datas);
         pm.setTotal(total);
         request.setAttribute("pm", pm);
         request.setAttribute("url", "anon/news");
-        if(type=="" || type==null){
-            return "/website/news/news";
-        }else{
-            if(isPage == null){
-           	   return "/website/news/newsContent";
-            }else{
-           	   return "/website/news/news";
-            }
-        }
+        return "/website/news/news";
     }
+    
+    /**
+     * 点击新闻资讯下面的其他二级栏目
+     * @param request
+     * @return
+     */
+    @RequestMapping("/changeNews")
+    public String changeExpert(HttpServletRequest request){
+     String columnId = request.getParameter("columnId");
+     int rows=Integer.parseInt(request.getParameter("pager.offset"));
+     //获取当前子栏目下所有的数据总数
+     int total =newsInformationSevice.getNewsInfoPageCount(Integer.parseInt(columnId));
+     //获取当前页的数据，且显示12条
+     List<NewsInformation>  datas=newsInformationSevice.getNewsInformationPageList(rows, 12,Integer.parseInt(columnId));
+     PagerModel pm = new PagerModel();
+     pm.setDatas(datas);
+     pm.setTotal(total);
+     request.setAttribute("columnId", columnId);
+     request.setAttribute("pm", pm);
+     request.setAttribute("url", "anon/news");
+     return "/website/news/newsContent";
+    }
+    
 
 	/**
 	 * 根据新闻内容Id获取新闻的具体内容

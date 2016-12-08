@@ -47,7 +47,7 @@ public class JltfispPsInfo {
      * 保险公司
      */
 	@Column(name="insurance_company")
-	private String InsuranceCompany;
+	private String insuranceCompany;
 	/**
      * 保费金额
      */
@@ -79,6 +79,8 @@ public class JltfispPsInfo {
 		super();
 	}
 	
+	
+
 	public JltfispPsInfo(Integer id, Integer infoId, String contractNumber,
 			String policyNumber, Double loanMoney, Integer loanBank,
 			String insuranceCompany, Double premiumMoney, String repaymentDate,
@@ -90,13 +92,15 @@ public class JltfispPsInfo {
 		this.policyNumber = policyNumber;
 		this.loanMoney = loanMoney;
 		this.loanBank = loanBank;
-		this.InsuranceCompany = insuranceCompany;
+		this.insuranceCompany = insuranceCompany;
 		this.premiumMoney = premiumMoney;
 		this.repaymentDate = repaymentDate;
 		this.principalInterest = principalInterest;
 		this.lendDate = lendDate;
 		this.loanTerm = loanTerm;
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -134,13 +138,13 @@ public class JltfispPsInfo {
 	public void setLoanBank(Integer loanBank) {
 		this.loanBank = loanBank;
 	}
-	
+
 	public String getInsuranceCompany() {
-		return InsuranceCompany;
+		return insuranceCompany;
 	}
 
 	public void setInsuranceCompany(String insuranceCompany) {
-		this.InsuranceCompany = insuranceCompany;
+		this.insuranceCompany = insuranceCompany;
 	}
 
 	public Double getPremiumMoney() {
