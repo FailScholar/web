@@ -29,7 +29,7 @@
             </tr>
             <tr class="tal">
                 <th>公司名称(全称)</th>
-                <td><span>${jltfispCoBaseDto2.company}</span></td>
+                <td><span>${user.username}</span></td>
                 <th>公司通讯地址</th>
                 <td colspan="3"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
             </tr>
@@ -51,7 +51,7 @@
                                 <th>邮编</th>
                                 <td><span>${jltfispCoBaseDto2.email}</span></td>
                                 <th>组织机构代码</th>
-                                <td><span>${jltfispCoBaseDto2.socialCreditCode}</span></td>
+                                <td><span>${user.socialCode}</span></td>
                                 <th>职工人数(人)</th>
                                 <td><span>${jltfispCoBaseDto2.workernumber}</span></td>
                             </tr>
@@ -152,14 +152,22 @@
                             </tr class="tal">
                             <tr class="tal">
                                 <th>服务要求</th>
-                                <td colspan="5"><span>${jltfispFinMaterial3.capitals}</span></td>
+                                <td colspan="5">
+ 									<#if jltfispFinMaterial3.requireService=="1">
+			                 	 		<span>网站上发布&nbsp;${jltfispFinMaterial3.requireServiceText}</span>
+			                 		<#elseif jltfispFinMaterial3.requireService=="2">
+			                 	 		<span>项目洽谈会发布&nbsp;${jltfispFinMaterial3.requireServiceText}</span>
+			                 		<#else>
+			                 	 		<span>与投资机构个别洽谈&nbsp;${jltfispFinMaterial3.requireServiceText}</span>
+			                 		</#if>
+								</td>
                             </tr>
                             <tr>
                                 <td colspan="6">
                                     <div class="cover cv1 fr">
-                                        <p class="ntit">公司名称：<U>&nbsp;<span>${jltfispCoBaseDto2.company}</span>&nbsp;</U></p>
-                                        <p class="ntit">填&nbsp;表&nbsp;人    ：<U>&nbsp;${userName}&nbsp;</U></p>
-                                        <p class="ntit"><span class="ml70"></span>${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
+                                        <p class="ntit">公司名称：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
+                                        <p class="ntit">填&nbsp;表&nbsp;人    ：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
+                                        <p class="ntit"><span class="ml70"></span>&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</span></p>
                                     </div>
                                 </td>
                             </tr>
@@ -170,6 +178,6 @@
                         <div class="logbtn" style="margin-top:30px;">
                             <input type="submit" class="can" value="返回修改" onclick="location.href='/jltfisp_web/anon/loan/financeApply'"/>
                             <input type="button" class="nor" value="确认提交" onclick="location.href='/jltfisp_web/anon/loan/submitFinanceApply'"/>
-                            <input type="button" class="nor" value="打印输出"  onclick="windowsPrint()"/>
+                            <input type="button" class="nor" value="打印输出"  onclick="location.href='/jltfisp_web/business/printFinanceApply?businessType=6'"/>
              </div>
 </div>

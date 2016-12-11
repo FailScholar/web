@@ -7,7 +7,7 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>企业名称</th>
-                                    <td colspan="3"><input type="text" id="company"   name="company"  class="txt validate[required]" value="${coAll.jltfispCoBase.company}"/></td>
+                                    <td colspan="3"><input type="text" id="company"  readonly name="company"  class="txt validate[required]" value="${user.username}"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>成立时间</th>
@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>组织机构代码</th>
-                                    <td><input id="socialCreditCode" name="socialCreditCode" value="${coAll.jltfispCoBase.socialCreditCode}" type="text" class="txt validate[required,mixSize[9],maxSize[20]]" /></td>
+                                    <td><input id="socialCreditCode" name="socialCreditCode" readonly value="${user.socialCode}" type="text" class="txt validate[required,mixSize[9],maxSize[20]]" /></td>
                                     <th><b class="red">*</b>税务登记号</th>
                                     <td><input id="cnpj" name="cnpj" type="text" value="${coAll.jltfispCoBase.cnpj}" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="请输入" /></td>
                                 </tr>

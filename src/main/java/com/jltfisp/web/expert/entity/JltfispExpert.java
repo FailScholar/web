@@ -99,6 +99,12 @@ public class JltfispExpert {
      */
     @Column(name = "main_address")
     private String mainaddress;
+    
+    /**
+     * 工作单位
+     */
+    @Column(name = "work_company")
+    private String workcompany;
 
     /**
      * 通讯地址
@@ -358,6 +364,14 @@ public class JltfispExpert {
 
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
+	}
+
+	public String getWorkcompany() {
+		return workcompany;
+	}
+
+	public void setWorkcompany(String workcompany) {
+		this.workcompany = workcompany;
 	}
     
 }

@@ -56,7 +56,7 @@
                           <#include "website/loan/loanapply/coFinancialView.ftl"/>
                           <!--附件-->
                           <#include "website/loan/loanapply/coFileView.ftl"/>
-                          <div class="btnFld"><input type="button" value="确认提交" class="btnSave" /><input type="button" value="打印输出" onclick="window.print();" class="btnSave" /><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="返回修改" /></a></div>
+                          <div class="btnFld"><input type="button" value="确认提交" class="btnSave" /><input type="button" value="打印输出" onclick="${path}/business/printLoanPDF?businessType=${applytype}" class="btnSave" /><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="返回修改" /></a></div>
                           <br/>
                           <br/>
                           <br/>

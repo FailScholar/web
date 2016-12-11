@@ -5,34 +5,43 @@
 
 package com.jltfisp.web.expert.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.jltfisp.FileManager;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
 import com.jltfisp.redis.RedisService;
+import com.jltfisp.util.AjaxUtils;
 import com.jltfisp.util.FileUpDownUtils;
+import com.jltfisp.util.ImageUtils;
 import com.jltfisp.util.UploadFile;
 import com.jltfisp.util.WebUtil;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.expert.entity.*;
 import com.jltfisp.web.expert.service.ExpertService;
+import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.expert.service.IFinExpertManageService;
-import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
-import com.jltfisp.web.loan.entity.JltfispCoFile;
+import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.pager.entity.PagerModel;
 
 /**
@@ -41,7 +50,6 @@ import com.jltfisp.web.pager.entity.PagerModel;
  * @author 张舒西 2016年11月22日 上午10:22:15
  */
 @Controller
-@RequestMapping("/anon")
 public class ExpertController {
     
     
@@ -52,19 +60,25 @@ public class ExpertController {
     private ColumnService columnService;
     
     @Autowired
-    private LoginService loginService;
-    
+    private LoginService loginService;   
+
+    @Autowired
+    private IBusinessApplayAuditService businessApplayAuditService;
+
     @Autowired
     private IFinExpertManageService finExpertManageService;
     
     @Autowired
     private RedisService<Serializable, String> redisService;
     
+    @Autowired
+    private FileManager fileManager;
+    
     /**
      * 专家资源栏目主页面
      * @return
      */
-    @RequestMapping("/expert")
+    @RequestMapping("/perm/expert")
     public String expertPage(HttpServletRequest request){
     	//获取父栏目columnId
     	String columnId = request.getParameter("columnId");
@@ -89,9 +103,8 @@ public class ExpertController {
      * @param request
      * @return
      */
-    @RequestMapping("/changeExpert")
-    public String changeExpert(HttpServletRequest request){
-     String columnId = request.getParameter("columnId");
+    @RequestMapping("/perm/expert/{columnId}")
+    public String changeExpert(HttpServletRequest request,@PathVariable String columnId,Model model){
      int rows=Integer.parseInt(request.getParameter("pager.offset"));
      //获取当前子栏目下所有的数据总数
      int total =expertService.getExpertPageCount(Integer.parseInt(columnId));
@@ -100,10 +113,67 @@ public class ExpertController {
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);
-     request.setAttribute("columnId", columnId);
-     request.setAttribute("pm", pm);
-     request.setAttribute("url", "anon/expert");
+     model.addAttribute("columnId",columnId);
+     model.addAttribute("pm",pm);
+     model.addAttribute("url","anon/expert");
      return "/website/expert/expertContext";
+    }
+    
+    /**
+     * 进入专家资源须知页面
+     * @param request
+     * @return
+     * @author 张舒西 2016年11月23日 下午12:53:56
+     */
+    @RequestMapping("/expert/expertGuide")
+    public String expertGuide(HttpServletRequest request){
+    	//获取父栏目columnId
+    	String columnId = request.getParameter("columnId");
+    	JltfispColumn JltfispColumn=columnService.getColumnContext(Integer.parseInt(columnId));
+    	request.setAttribute("columnName", JltfispColumn.getColumnName());
+    	request.setAttribute("columnId", columnId);
+    	JltfispUser user=loginService.getCurrentUser();
+    	//获取当前用户登录信息
+    	//赞时屏蔽
+    	//if(!SecurityUtils.getSubject().hasRole("个人会员")){//如果当前用户不是个人用户，则不让申请成为专家
+    	//	request.setAttribute("applyname", JltfispColumn.getColumnName()+"申请");	
+        //	request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName());
+        //	return "/website/expert/expertApplyfail";
+    	//}
+    	//暂时屏蔽
+    	int flag=businessApplayAuditService.checkApplyForExpert(user.getId());
+    	if(flag==1){
+    	request.setAttribute("applyname", "专家资源申请");
+    	request.setAttribute("failMes", "对不起，你已经申请了专家资源");
+    	return "/website/expert/expertApplyfail";
+    	}else{
+    	    
+    	  //从专家资源 字段名称管理表中获取表单元素的字段名
+         /*if(columnId != null && !"20".equals(columnId) && !"21".equals(columnId) && !"19".equals(columnId)){
+             columnId = "19";
+         }*/
+         FinExpertManage finExpertManage = new FinExpertManage();
+         if(redisService.getV("FinExpertManage"+columnId) != null){
+             finExpertManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("FinExpertManage"+columnId)),
+                     FinExpertManage.class);
+         }else{
+             FinExpertManage params = new FinExpertManage();
+             params.setColumnid(Integer.parseInt(columnId));
+             params.setIstemplate(0);    
+             finExpertManage = finExpertManageService.selectOneByExample(params);
+             if(finExpertManage == null){
+                 params.setColumnid(null);
+                 params.setIstemplate(1);  
+                 finExpertManage = finExpertManageService.selectOneByExample(params);
+             }
+         }
+         request.setAttribute("finExpertManage", finExpertManage);
+    	    
+    	//获取专家信息
+        JltfispExpert jltfispExpert=expertService.getExpertByUserIdAndColumnId(user.getId(),Integer.parseInt(columnId));
+        request.setAttribute("jltfispExpert", jltfispExpert);
+        return "/website/expert/expertGuide";
+    	}
     }
     
     /**
@@ -112,7 +182,7 @@ public class ExpertController {
      * @return
      * @author 张舒西 2016年11月23日 下午12:53:56
      */
-    @RequestMapping("/addExpertPage")
+    @RequestMapping("/anon/addExpertPage")
     public String addExpertPage(HttpServletRequest request){
     	//获取父栏目columnId
     	String columnId = request.getParameter("columnId");
@@ -122,8 +192,8 @@ public class ExpertController {
     	    columnId = "19";
     	}*/
     	FinExpertManage finExpertManage = new FinExpertManage();
-     if(redisService.getV("expert"+columnId) != null){
-         finExpertManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("expert"+columnId)),
+     if(redisService.getV("FinExpertManage"+columnId) != null){
+         finExpertManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("FinExpertManage"+columnId)),
                  FinExpertManage.class);
      }else{
          FinExpertManage params = new FinExpertManage();
@@ -140,14 +210,18 @@ public class ExpertController {
     	
     	JltfispColumn JltfispColumn=columnService.getColumnContext(Integer.parseInt(columnId));
     	request.setAttribute("columnName", JltfispColumn.getColumnName());
-    	if(columnId.equals("19")){
-    		request.setAttribute("columnId", columnId);
-    		return "/website/expert/expertUser1";
-    	}else if(columnId.equals("20")){
+    	//start回显数据
+    	JltfispUser user=loginService.getCurrentUser();
+    	JltfispExpert jltfispExpert=expertService.getExpertByUserIdAndColumnId(user.getId(), Integer.parseInt(columnId));
+    	request.setAttribute("jltfispExpert", jltfispExpert);
+    	//stop回显数据   	
+    	if(columnId.equals("20")){
     		return "/website/expert/expertUser2";
     	}else if(columnId.equals("21")){
     		return "/website/expert/expertUser3";
     	}else{
+    		List<JltfispExpertDoMain> jltfispExpertDoMain=expertService.getExpertDoMainList(user.getId(),Integer.parseInt(columnId));
+    		request.setAttribute("jltfispExpertDoMain", jltfispExpertDoMain);
     		request.setAttribute("columnId", columnId);
     		return "/website/expert/expertUser1";
     	}
@@ -160,7 +234,7 @@ public class ExpertController {
      * @return
      * @author 张舒西 2016年12月2日 下午12:53:56
      */
-    @RequestMapping("/addExpert")
+    @RequestMapping("/anon/addExpert")
     @ResponseBody
     public int addExpert(HttpServletRequest request,JltfispExpertDto jltfispExpertDto){
     	JltfispExpert jltfispExpert=new JltfispExpert();
@@ -168,9 +242,44 @@ public class ExpertController {
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	jltfispExpert.setUserid(user.getId());
-    	jltfispExpert.setAgencylogo("/resource/fileImage/"+jltfispExpert.getAgencylogo());
-    	return expertService.saveExpert(jltfispExpert);
+    	jltfispExpert.setAgencylogo("/resource/fileImage/"+jltfispExpert.getUserlogo());
+    	
+    	//Start插入审核流程
+    	BusinessApplayAudit expert=new BusinessApplayAudit();
+    	expert.setUserId(user.getId());
+    	expert.setSubmitDate(new Date());
+    	//设定为申请状态
+    	expert.setState(0);
+    	expert.setParentType("3");
+    	//设定applyType类型
+    	expert.setType(String.valueOf(jltfispExpert.getColumnid()));
+	 	businessApplayAuditService.insertRecord(expert);
+    	//stop插入审核流程
+	 	int i=expertService.saveExpert(jltfispExpert);
+	 	return i;
     }
+    
+    /**
+     * 进入添加专家成功页面或失败页面
+     * @param request
+     * @param type 1代表成功0代表失败
+     * @param columnId 栏目的ID
+     * @return
+     * @author 张舒西 2016年12月2日 下午12:53:56
+     */
+    @RequestMapping("/anon/successOrFailPage")
+    public String addExpert(HttpServletRequest request,String type,String columnId)
+    {   
+		JltfispColumn JltfispColumn=columnService.getColumnContext(Integer.parseInt(columnId));
+    	request.setAttribute("applyname", "申请"+JltfispColumn.getColumnName());
+    	  if(type.equals("1")){
+    		return "/website/expert/expertApplysuccess";
+    		}
+    	else{
+    		request.setAttribute("failMes", "对不起，你申请"+JltfispColumn.getColumnName()+"失败了！");
+    	    return "/website/expert/expertApplyfail";
+    	    }
+    	}
     
     /**
      * 
@@ -178,14 +287,15 @@ public class ExpertController {
      * @param jltfispExpertDto
      * @return
      */
-    @RequestMapping("/addDoMain")
+    @RequestMapping("/anon/addDoMain")
     @ResponseBody
-    public void addDoMain(HttpServletRequest request,JltfispExpertDoMain jltfispExpertDoMain){
+    public int  addDoMain(HttpServletRequest request,JltfispExpertDoMain jltfispExpertDoMain){
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispExpertDoMain domain=jltfispExpertDoMain;
     	domain.setUserid(user.getId());
-    	expertService.saveExpertDoMain(domain);
+    	int i=expertService.saveExpertDoMain(domain);
+    	return i;
     }
     
     /**
@@ -194,7 +304,7 @@ public class ExpertController {
      * @return
      * @throws IOException 
      */
-    @RequestMapping("/savePhoto")
+    @RequestMapping("/anon/savePhoto")
     @ResponseBody
     public String saveCoFile(HttpServletRequest request) throws IOException {
     	String index = request.getParameter("index");
@@ -210,7 +320,7 @@ public class ExpertController {
      * @return
      * @author 张舒西 2016年11月23日 下午12:53:56
      */
-    @RequestMapping("/expertDetail")
+    @RequestMapping("/anon/expertDetail")
     public String detail(HttpServletRequest request){
         String expertId = request.getParameter("expertId");
         //获取专家信息
@@ -223,5 +333,55 @@ public class ExpertController {
         request.setAttribute("parentJltfispColumn", parentJltfispColumn);
         request.setAttribute("jltfispExpert", jltfispExpert);
         return "/website/expert/expertDetail";
+    }
+    
+    /**
+     * 返回图片裁剪
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/anon/imageCrop")
+    public String imageCrop(HttpServletRequest request, HttpServletResponse response) {
+        String filePath = request.getParameter("filePath");
+        int width = 300;
+        try {
+            width = Integer.parseInt(request.getParameter("width"));
+        } catch (Exception e) {
+        }
+        int height = 300;
+        try {
+            height = Integer.parseInt(request.getParameter("height"));
+        } catch (Exception e) {
+        }
+        request.setAttribute("filePath", filePath.trim());
+        request.setAttribute("width", request.getParameter("width"));
+        request.setAttribute("height", request.getParameter("height"));
+        request.setAttribute("scale", height * 1.0 / width);
+        return "/website/usercenter/crop/imageCrop";
+    }
+    
+    /**
+     * 保存图片
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("/anon/uploadImage")
+    @ResponseBody
+    public String uploadImage(HttpServletRequest request, HttpServletResponse response,String index) throws Exception {
+       // Map<String, Object> map = new HashMap<String, Object>();
+        UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "UpFile"+index);
+        String fileName = uploadFile.getFileName();
+        String Path;
+        if (StringUtils.isNotBlank(fileName) && fileName.endsWith(".jpg")) {
+            byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
+            String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName());
+            //BufferedImage image = ImageUtils.readImage(uploadFile.getFile().getAbsolutePath());
+            Path=filePath.trim();
+        }else{
+        	Path="false";
+        }
+        return Path;
     }
 }

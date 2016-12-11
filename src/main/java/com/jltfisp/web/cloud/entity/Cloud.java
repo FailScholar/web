@@ -2,26 +2,48 @@ package com.jltfisp.web.cloud.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.jltfisp.base.entity.BaseEntity;
 /**
  * 
  * jltfisp_cloud表
  *
  */
-public class Cloud extends BaseEntity{
+@Table(name = "jltfisp_cloud")
+public class Cloud{
+	@Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // id
+	@Column(name = "id")
 	private String image; // 资讯的图片地址，可能会被用于在首页展示用
+	@Column(name = "title")
 	private String title; // 标题
+	@Column(name = "content")
 	private String content; // 内容
+	@Column(name = "source")
 	private String source; // 来源
+	@Column(name = "link")
 	private String link; // 链接地址
+	@Column(name = "publish_time")
 	private Date publishTime; // 发布日期
+	@Column(name = "column_id")
 	private Integer columnId; // 资讯所属子栏目
+	@Column(name = "content_review")
 	private String contentReview; // 内容导读
+	@Column(name = "video")
 	private String video; // 视频地址
+	@Column(name = "pv")
 	private Integer pv; // Page View 浏览量
+	@Column(name = "state")
 	private Integer state; // 内容状态
-	
+	@Transient
 	private int parentNum;//上级栏目id
 
 	/**

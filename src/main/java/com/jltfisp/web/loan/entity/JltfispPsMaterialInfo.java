@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 /**
  * 保费补贴申请第二部填写内容表
  * @author cuihong.ge
@@ -179,6 +180,8 @@ public class JltfispPsMaterialInfo {
   */
  @Column(name="cognizance")
  private Integer cognizance;
+ @Transient
+ private String cognizanceValue;
  /**
   * 贷款期间新获企业资质和各种认定补充文本
   */
@@ -399,6 +402,12 @@ public Double getIncreaseInvestmentThis() {
 }
 public void setIncreaseInvestmentThis(Double increaseInvestmentThis) {
 	this.increaseInvestmentThis = increaseInvestmentThis;
+}
+public String getCognizanceValue() {
+	return cognizanceValue;
+}
+public void setCognizanceValue(String cognizanceValue) {
+	this.cognizanceValue = cognizanceValue;
 }
  
 }

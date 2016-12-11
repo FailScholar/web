@@ -11,5 +11,5 @@
 	  </ul>
  </#list>
 <div class="clear"></div>
-<#include "website/news/commonPager.ftl"/>
+<#include "website/common/commonPager.ftl"/>
  

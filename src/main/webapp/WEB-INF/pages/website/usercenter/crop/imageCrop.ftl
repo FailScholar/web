@@ -29,8 +29,8 @@
                enableRotation: false,//是否允许旋转图片true false
                enableZoom: true,//是否允许放大缩小
                selector: {
-                    w:150,//选择器宽度
-                    h:150,//旋转高度
+                    w:220,//选择器宽度
+                    h:246,//旋转高度
                     //showPositionsOnDrag:true,
                    // showDimetionsOnDrag:false,
                    // aspectRatio:true,
@@ -54,7 +54,7 @@
               cropzoom.send('${path}/imageScreenshot/saveCrop', 'POST', {'srcFilePath':'${filePath}'}, function(imgRet) {
             	  var json =  jQuery.parseJSON(imgRet);
             	  var filePath = json.filePath;
-            	  $("#photoPath").val(filePath);
+            	  $("#userlogo").val(filePath);
             	  var fileName = filePath.substring(filePath.lastIndexOf("/")+1);
             	  $("#portrait").attr("src",'${path}'+filePath);
             	  alert("头像上传成功");
@@ -63,7 +63,7 @@
           });
           $("#restore").click(function(){//显示初始状态照片
                $("#generated").attr("src", "${path}${filePath}");
-               cropzoom.restore();                    
+               cropzoom.restore();                 
           });
      });
      </script>

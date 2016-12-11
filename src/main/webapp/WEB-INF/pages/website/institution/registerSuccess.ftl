@@ -16,7 +16,7 @@ $(document).ready(function(e) {
 		if($('.second').text()==0)
 		{
 			clearInterval(timer);
-			window.location.href="${path}/anon/institution";
+			window.location.href="${path}/perm/institution";
 		}
 	},1000)
 });

@@ -49,7 +49,7 @@
                           <li class="active"><a href="${path}/message/page">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
-                              <li><a href="javascript:goMain(3);">业务管理</a></li>
+                              <li><a href="${path}/business/page">业务管理</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">

@@ -43,8 +43,16 @@ public class FinancingServiceImpl implements FinancingService {
         JltfispFinancing jltfispFinancing = new JltfispFinancing();
         jltfispFinancing.setColumnid(columnid);
         jltfispFinancing.setType(type);
-        PageHelper.startPage(page, 8);
+        PageHelper.startPage(page, 12);
         return financingMapper.select(jltfispFinancing);
     }
+
+	@Override
+	public int getFinancingCount(Integer columnid, Integer type) {
+		JltfispFinancing jltfispFinancing = new JltfispFinancing();
+        jltfispFinancing.setColumnid(columnid);
+        jltfispFinancing.setType(type);
+		return financingMapper.selectCount(jltfispFinancing);
+	}
 
 }

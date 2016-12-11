@@ -517,3 +517,11 @@ html,body { width:100%; height:100%; background-color:#fff; min-width:1200px; fo
 增加消息息提示
 */
 .person a.mes { position:absolute; width:14px; height:14px; background-color: #ff0500; left:32px; top:-7px; line-height:14px; text-align:center; border-radius:100%; color:#fff; font-weight:normal; background-image:none ;margin-left:0; padding-left:0;}
+
+
+.clist { width:180px; border:1px solid #ccc; color:#49637e;}
+.clist li { line-height:50px; background-color:#f2f5fa; border-bottom:1px solid #fff; cursor:pointer; font-size:14px; text-align:center; border-left:3px solid transparent;}
+.clist h1 { line-height:50px; background-color:#e3eaf4; text-align:center; font-size:16px;}
+.clist li.active { color:#1679ff; border-left-color:#1679ff;}
+.clist li:hover { color:#1679ff;}
+.cl { height:306px; overflow:auto;}

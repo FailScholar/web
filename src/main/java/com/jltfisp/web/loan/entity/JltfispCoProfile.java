@@ -44,6 +44,8 @@ public class JltfispCoProfile {
      */
     @Column(name = "mainField")
     private int mainField;
+    @Transient
+    private String mainFieldValue;
 
     /**
      * 企业性质
@@ -322,6 +324,14 @@ public class JltfispCoProfile {
 
 	public void setCreateUserid(int createUserid) {
 		this.createUserid = createUserid;
+	}
+
+	public String getMainFieldValue() {
+		return mainFieldValue;
+	}
+
+	public void setMainFieldValue(String mainFieldValue) {
+		this.mainFieldValue = mainFieldValue;
 	}
     
     

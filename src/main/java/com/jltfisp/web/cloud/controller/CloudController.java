@@ -18,6 +18,7 @@ import com.jltfisp.web.cloud.entity.Cloud;
 import com.jltfisp.web.cloud.service.ICloudService;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.pager.entity.PagerModel;
 
 
 /**
@@ -67,13 +68,21 @@ public class CloudController extends BaseController<Cloud> {
 	
 	@RequestMapping("/perm/cloud/{columnId}")
 	public String cloudListDetail(HttpServletRequest request, @PathVariable Integer columnId) throws Exception {
+		int rows=Integer.parseInt(request.getParameter("pager.offset"));
 		Cloud cloud =new Cloud();
 		cloud.setColumnId(columnId);
-		PageInfo info  = preparePageinfo(request,cloud);
-		handlePage(request, info, cloud);
+		List<Cloud> list = cloudService.getCloudsList(columnId, rows);
+		int total = cloudService.getCloudsCount(columnId);
+		PagerModel pm = new PagerModel();
+    	pm.setDatas(list);
+		pm.setTotal(total);
+		request.setAttribute("pm",pm);
+		request.setAttribute("url","/perm/financing");
+		request.setAttribute("columnid", columnId);
+		/*PageInfo info  = preparePageinfo(request,cloud);
+		handlePage(request, info, cloud);*/
 		JltfispColumn columnOne = columnService.getColumnOne(11, 6);
 		request.setAttribute("columnOne", columnOne);
-		request.setAttribute("columnid", columnId);
 		return getFileBasePath()+"cloudCol";
 	}
 

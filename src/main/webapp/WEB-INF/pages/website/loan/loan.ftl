@@ -76,7 +76,7 @@
                           <div class="appDetail fr">
                               <h3 class="fl">保费补贴申请</h3>
                               <div class="fr">
-                                  <a href="${path}/anon/loan/guideApply?applytype=5" class="a1">申请须知</a>
+                                  <a href="${path}/loan/judgeIsApplyLoan?applytype=5" class="a1">申请须知</a>
                                   <a href="javascript:;" class="a2">文件下载</a>
                                   <a href="${path}/loan/judgeIsApplyLoan?applytype=5" class="a3">在线申请</a>
                               </div>

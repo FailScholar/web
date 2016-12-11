@@ -50,24 +50,11 @@ public class SubsidyApplyController {
     public ModelAndView judgeIsApplyLoan(HttpServletRequest request){
     	ModelAndView mv=new ModelAndView("/website/loan/subsidy/GuideApply");
         JltfispUser user =loginService.getCurrentUser();
-        String type=null;
         //如果是企业用户则判断是否申请相应的贷款服务
-        if(user !=null && user.getType()==2 ){
-        	BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "1");
-        	//若是已经申请则判断申请状态(0：申请中；1：申请通过；2：申请不通过)
-        	if((businessApplayAudit !=null && businessApplayAudit.getState()==2)){
-        		//申请状态为申请不通过则进入申请须知页面
-        		mv=new ModelAndView("/website/loan/subsidy/GuideApply");
-        		//下次进入申请页面信息重新填
-        		mv.addObject("refill", 0);
-        	}else if(businessApplayAudit==null){
-        		mv=new ModelAndView("/website/loan/subsidy/GuideApply");
-        		//下次进入申请页面信息不用重新填
-        		mv.addObject("refill", 1);
-        	}else{
-        		mv=new ModelAndView("/website/loan/fail");
-        		mv.addObject("failMes", "对不起，您已经申请了保费补贴贷款");
-        	}
+        if(user !=null && user.getType()==1 ){
+        	//第一步先进入申请须知页面
+        	mv=new ModelAndView("/website/loan/fail");
+    		mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
         }
     	return mv;
     }
@@ -76,20 +63,30 @@ public class SubsidyApplyController {
 	 * @return
 	 */
 	@RequestMapping("/subsidy")
-    public ModelAndView subsidy(HttpServletRequest request,Integer isReFill){
+    public ModelAndView subsidy(HttpServletRequest request){
 		JltfispUser user =loginService.getCurrentUser();
 		ModelAndView mv=new ModelAndView("/website/loan/subsidy/subsidyApply");
 		
 		//企业用户如果是申请了贷款服务没有最后一步点击提交下次进入则要回显之前几个页面填写的内容
-		if(user !=null && user.getType()==2 && isReFill==1 ){
-			JlfispPsBaseDto jlfispPsBaseDto=this.subsidyService.getJlfispPsBaseDtoByUserId(user.getId());
+		if(user !=null && user.getType()==2){
+			BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "5");
+        	//若是已经申请则判断申请状态(0：申请中；1：申请通过；2：申请不通过)
+        	if((businessApplayAudit !=null && (businessApplayAudit.getState()==1 || businessApplayAudit.getState()==0) )){
+        		//申请状态为申请不通过下次进入申请页面信息重新填
+        		mv=new ModelAndView("/website/loan/fail");
+        		mv.addObject("failMes", "对不起，您已经申请了保费补贴贷款");
+        		
+        	}else{
+        		//下次进入申请页面信息不用重新填
+        		JlfispPsBaseDto jlfispPsBaseDto=this.subsidyService.getJlfispPsBaseDtoByUserId(user.getId());
+        		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
+    			// 获取保费补贴申请第二部里面的内容
+    	    	if(jlfispPsBaseDto !=null){
+    	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
+    	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
+    	    	}
+        	}
 			mv.addObject("companyName", user.getUsername());
-			mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
-			// 获取保费补贴申请第二部里面的内容
-	    	if(jlfispPsBaseDto !=null){
-	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
-	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
-	    	}
 		}
         return mv;
     }
@@ -150,22 +147,15 @@ public class SubsidyApplyController {
     	jltfispPsMaterialInfo.setInfoId(jltfispCoBaseDto.getId());
     	subsidyService.saveJltfispPsMaterialInfo(jltfispPsMaterialInfo);
     	//在保存第二部填写信息的时候就在流程表里面添加一条信息，状态为未提交（贷款金额。。。。。）
-    	BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "1");
-    	if(businessApplayAudit !=null){
-    		businessApplayAudit.setState(3);
+    	BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "5");
+    	if(businessApplayAudit ==null){
+    		businessApplayAudit=new BusinessApplayAudit();
     		businessApplayAudit.setUserId(user.getId());
-    		//或者保存为5
-    		businessApplayAudit.setType("1");
+    		businessApplayAudit.setState(3);
     		businessApplayAudit.setParentType(Constants.LOAN_BUSINESS);
-    		businessApplayAuditService.updateByPK(businessApplayAudit);
-    	}else{
-    		BusinessApplayAudit businessApplyAudit=new BusinessApplayAudit();
-     		businessApplyAudit.setUserId(user.getId());
-     		businessApplyAudit.setState(3);
-     		businessApplyAudit.setParentType(Constants.LOAN_BUSINESS);
      		//或者保存为5
-     		businessApplyAudit.setType("1");
-     		businessApplayAuditService.insertRecord(businessApplyAudit);
+    		businessApplayAudit.setType("5");
+     		businessApplayAuditService.insertRecord(businessApplayAudit);
     	}
     	mv.addObject("jltfispCoBaseDto", jltfispCoBaseDto);
     	mv.addObject("jltfispPsInfoList",jltfispPsInfoList);
@@ -181,7 +171,7 @@ public class SubsidyApplyController {
      public String submitSubsidyApply(){
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
-    	BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "1");
+    	BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "5");
     	businessApplayAudit.setState(0);
     	businessApplayAudit.setSubmitDate(new Date());;
  		businessApplayAuditService.updateByPK(businessApplayAudit);

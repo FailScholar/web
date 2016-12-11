@@ -20,7 +20,7 @@
                 </div>
                 <div class="bank">
                 	<div class="bl fl">
-                		<img src="${path}/${jltfispInstitutionDetail.logoFile}" class="fl" />
+                		<img src="${path}/resource/fileImage/${jltfispInstitutionDetail.logoFile}" class="fl" />
                         <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a></h1>
                     </div>
                     <div class="br fl ml57">
@@ -36,10 +36,7 @@
                         </ul>
                     </div>
                     <div class="resume re1">
-                        <h2>银行简讯</h2>
-                        <p>${jltfispInstitutionDetail.mainInvestmentStage}</p>
-                        <h2>中小企业信贷产品</h2>
-                        <p>${jltfispInstitutionDetail.mainInvestmentStage}</p>
+                        <p>${jltfispInstitutionDetail.serviceProductsAndFeatures}</p>
                     </div>
                     
                 </div>

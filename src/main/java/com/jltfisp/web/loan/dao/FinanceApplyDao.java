@@ -1,5 +1,6 @@
 package com.jltfisp.web.loan.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.jltfisp.base.basedao.BaseMapper;
@@ -29,7 +30,7 @@ public interface  FinanceApplyDao extends BaseMapper<JltfispCoBase> {
 	@Select("update jltfisp_co_base set apply_state=0 where user_id=#{user_id}")
 	public void updateJltfispCoBaseInfo(Integer user_id);
 
-	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer user_id);
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(@Param("user_id")Integer user_id,@Param("business_type")Integer business_type);
 	
 	
 

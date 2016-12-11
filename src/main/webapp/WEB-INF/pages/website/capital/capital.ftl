@@ -18,8 +18,8 @@
     <div class="info">
         <ul class="infoTab">
         <#list columnList as columnList>
-         <li tips="${columnList.columnNo}">
-         	<a href="javascript:void(0);" onclick="getCapitalInfoList(${columnList.columnNo})">${columnList.columnName}</a>
+         <li tips="${columnList.id}">
+         	<a href="javascript:void(0);" onclick="getCapitalInfoList(${columnList.id})">${columnList.columnName}</a>
          </li>
        </#list> 
         </ul>
@@ -29,15 +29,6 @@
         <div id="showContent"></div>
         
     <div class="clear"></div>
-    <div class="page">
-        <a href="javascript:;">&lt;</a>
-        <a href="javascript:;">1</a>
-        <a href="javascript:;">2</a>
-        <span>...</span>
-        <a href="javascript:;">15</a>
-        <a href="javascript:;">16</a>
-        <a href="javascript:;">&gt;</a>
-    </div>
 </div>
 <!--content结束-->
   </div>
@@ -53,20 +44,22 @@
 	  var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
 	  getCapitalInfoList(tips);
    });
+
+	//分页--根据页数查询
+	function selectPage(page) {
+       $('#showContent').load("${path}/perm/capital/"+$("div.info ul.infoTab").find('li.active').attr('tips'),{page:page});
+   }
    
    //获取子栏目内容列表
-   function getCapitalInfoList(columnNo){
+   function getCapitalInfoList(columnId){
          $.ajax({
-			  type : "POST",
-			  url : "${path}/anon/getCapitalInfoList",
-			  data:{"columnNo":columnNo},
+			  type : "post",
+			  url : '${path}/perm/capital/'+columnId,
+			  data:{"columnId":columnId,page: 1},
 			  dataType : "html",
 			  success:function(data){
 				$("#showContent").html(data);//要刷新的div
-			  },
-			  error: function() {
-                 alert("失败，请稍后再试！");
-              }
+			  }
 		});
 	}
 

@@ -16,7 +16,7 @@
               <!--content开始-->
               <div class="content">
                 <div class="bread">
-                    <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/institution">合作机构</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/institution">合作机构</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                 	<form id="institutionForm" >
@@ -142,10 +142,10 @@
 
 <#include "website/common/footer.ftl" />
 <script>
-var province = '${institution.province!"" }';
-var companyRealAddress = '${institution.companyRealAddress!"" }';
-var city = '${institution.city!"" }';
-var companyCity = '${institution.companyCity!"" }';
+var province = '${institution.province!"-1" }';
+var companyRealAddress = '${institution.companyRealAddress!"-1" }';
+var city = '${institution.city!"-1" }';
+var companyCity = '${institution.companyCity!"-1" }';
 
 $(document).ready(function(e) {
     $('.proList .logbtn input').click(function(){

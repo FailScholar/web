@@ -36,7 +36,7 @@ public interface IBusinessApplayAuditService extends
 	 * @param @return
 	 * @return List<BusinessApplayAudit>
 	 */
-	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer userId);
+	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer userId,String type);
 
     /**
      * 查询资产负债信息
@@ -87,4 +87,24 @@ public interface IBusinessApplayAuditService extends
      * @return void
      */
     public void updateMoneyByUserIdAndType(Integer userId,String type,Double money);
+    
+    /**
+     * 判断用户是否已经申请了科技履约贷款申请、科技小巨人贷款申请、高新技术贷款申请、科技微贷通贷款申请中的一个
+     * @param userId
+     * @return
+     */
+    public int checkApplyFour(Integer userId);
+    /**
+     * 判断用户是否已经申请了专家资源
+     * @param userId
+     * @return
+     */
+    int checkApplyForExpert(Integer userId);
+    /**
+     * 根据3个字段查询是否存在贷款流程
+     * @param userId
+     * @return
+     */
+    BusinessApplayAudit checkApplyForLoan(Integer userId, String type,String parentType);
+
 }

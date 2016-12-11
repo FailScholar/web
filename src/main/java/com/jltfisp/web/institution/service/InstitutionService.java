@@ -16,8 +16,6 @@ public interface InstitutionService extends IBaseService<JltfispInstitution> {
 
 	public int getInstitutionPageCount(Integer columnId);
 
-	public List<JltfispInstitution> getInstitutionPageList(Integer rows, Integer pageSize,Integer columnId);
-	
 	/**
 	 * 保存合作机构申请详情
 	 * @param institution

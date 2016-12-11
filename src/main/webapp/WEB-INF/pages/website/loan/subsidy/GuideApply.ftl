@@ -79,7 +79,6 @@
 </html>
 
 <script type="text/javascript">
-   var isReFill='${refill}';
    function disable()
    {
 	   document.getElementById("accept").style.backgroundColor = "#c5c5c5";
@@ -94,6 +93,6 @@
   	   document.getElementById("accept").disabled=false;
   }
    function apply(){
-		  location.href="${path}/loan/subsidy?isReFill="+isReFill ;
+		  location.href="${path}/loan/subsidy";
 	}
 </script>

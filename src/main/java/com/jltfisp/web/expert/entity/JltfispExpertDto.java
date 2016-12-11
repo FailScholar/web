@@ -37,7 +37,21 @@ public class JltfispExpertDto {
     @Column(name = "birthday")
     private String birthday;
     
-    public String getName() {
+    /**
+     * 工作单位
+     */
+    @Column(name = "work_company")
+    private String workcompany;
+    
+    public String getWorkcompany() {
+		return workcompany;
+	}
+
+	public void setWorkcompany(String workcompany) {
+		this.workcompany = workcompany;
+	}
+
+	public String getName() {
 		return name;
 	}
 

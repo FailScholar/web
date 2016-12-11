@@ -13,9 +13,9 @@ public interface CapitalDao extends BaseMapper<JltfispCapital>{
 	
 	public List<JltfispColumn> getJltfispColumnList(@Param("parentColumn")Integer parentColumn);
 
-	public List<JltfispCapital> getCapitalInfoList(@Param("columnNo")Integer columnNo);
-
 	public JltfispCapital getCapitalDetail(@Param("id")Integer id);
 
 	public void updateCapitalPv(Integer id);
+
+	public List<JltfispCapital> getCapitalList(Integer column_id);
 }

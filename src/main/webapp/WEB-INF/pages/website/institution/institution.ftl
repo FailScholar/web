@@ -44,8 +44,12 @@
                       <input type="hidden" id="applyColumnId" />
                       <a href="javascript: void(0);" class="apply2" onclick="applyInstitution();">申请成为合作机构</a>
                      
+                      
+                     
                   </div>
- 				<div id="showContent"></div>
+ 				<div class="infoList">
+       
+                </div>
  				</div>
               <!--content结束-->
 
@@ -70,21 +74,22 @@
     	$("#applyColumnId").val(columnId);
          $.ajax({
 			  type : "POST",
-			  url : "${path}/anon/getInstitutionList",
-			  data:{"columnId":columnId,page: 1},
+			  url : '${path}/perm/institution/'+columnId,
+			  data:{"columnId":columnId,'pager.offset': 0},
 			  dataType : "html",
 			  success:function(data){
-				$("#showContent").html(data);//要刷新的div
-			  },
-			  error: function() {
-                 alert("失败，请稍后再试！");
-              }
+				$(".infoList").html(data);//要刷新的div
+			  }
+// 			  ,
+// 			  error: function() {
+//                  alert("失败，请稍后再试！");
+//               }
 		});
 	}
 	
 	//分页--根据页数查询
 	function selectPage(page) {
-        $('#showContent').load("${path}/anon/getInstitutionList",{columnId: $("div.info ul.infoTab").find('li.active').attr('tips'), page :page});
+        $('.infoList').load("${path}/perm/institution/"+$("div.info ul.infoTab").find('li.active').attr('tips'), {page :page});
     }
 
 	function getList(){
@@ -103,5 +108,6 @@
 			}
 		});
 	}
+	
    </script>
 </html>

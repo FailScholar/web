@@ -17,7 +17,7 @@
 	<select id="getJltfispColumnList" resultMap="jltfispColumn" parameterType="int">
 	  select * from jltfisp_column_manage cm where cm.parentColumn=#{parentColumn} order by  columnNo asc
 	</select>
-	<!-- 根据合作机构二级列表的columnNo查询列表-->
+	<!-- 根据合作机构二级列表的columnId查询列表-->
 	<select id="getInstitutionList" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
 	    SELECT 
 			institut.* 
@@ -42,13 +42,6 @@
 	<sql id="institution_column">
 		id,institutionalName,logoFile,abbreviation,corporateRepresentative,socialCreditCode,province,city,area,address,institutionalNature,url,institutionalAbstract,investmentTeam,ServiceProductsAndFeatures,mainAreas,specialAreas,mainInvestmentStage,projectRequirement,companyRealAddress,companyCity,institutionalAddress,postcodes,linkMan,mobilePhone,email,zoneDescription,phoneNumer,fax,institutionalType,createTime,columnId,user_id
 	</sql>
-	<!-- 每次分页查询语句 -->
-	<select id="getInstitutionPageList" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="map">
-	   select
-	   <include refid="institution_column" />
-	   from jltfisp_institut
-	   where columnId = #{columnId} limit #{rows},#{pageSize}
-	</select>
 	
 	<!-- 新增合作机构申请数据 -->
 	<insert id="insertRecord" parameterType="com.jltfisp.web.institution.entity.JltfispInstitution">

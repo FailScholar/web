@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jltfisp.web.loan.dao.LoanformManageMapper">
+	<resultMap id="BaseResultMap" type="com.jltfisp.web.loan.entity.LoanformManage">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="label1" jdbcType="VARCHAR" property="label1"  />
+		<result column="label2" jdbcType="VARCHAR" property="label2"  />
+		<result column="label3" jdbcType="VARCHAR" property="label3"  />
+		<result column="label4" jdbcType="VARCHAR" property="label4"  />
+		<result column="label5" jdbcType="VARCHAR" property="label5"  />
+		<result column="label6" jdbcType="VARCHAR" property="label6"  />
+		<result column="label7" jdbcType="VARCHAR" property="label7"  />
+		<result column="label8" jdbcType="VARCHAR" property="label8"  />
+		<result column="label9" jdbcType="VARCHAR" property="label9"  />
+		<result column="label10" jdbcType="VARCHAR" property="label10"  />
+		<result column="label11" jdbcType="VARCHAR" property="label11"  />
+		<result column="label12" jdbcType="VARCHAR" property="label12"  />
+		<result column="label13" jdbcType="VARCHAR" property="label13"  />
+		<result column="label14" jdbcType="VARCHAR" property="label14"  />
+		<result column="label15" jdbcType="VARCHAR" property="label15"  />
+		<result column="label16" jdbcType="VARCHAR" property="label16"  />
+		<result column="label17" jdbcType="VARCHAR" property="label17"  />
+		<result column="label18" jdbcType="VARCHAR" property="label18"  />
+		<result column="isTemplate" jdbcType="INTEGER" property="istemplate"  />
+		<result column="createTime" jdbcType="TIMESTAMP" property="createtime"  />
+		<result column="type" jdbcType="INTEGER" property="type"  />
+		<result column="apply_guide" jdbcType="VARCHAR" property="applyGuide"  />
+		<result column="loan_guide" jdbcType="VARCHAR" property="loanGuide"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="label1 != null and label1 != ''">
+		        and a.label1=#{label1,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label2 != null and label2 != ''">
+		        and a.label2=#{label2,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label3 != null and label3 != ''">
+		        and a.label3=#{label3,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label4 != null and label4 != ''">
+		        and a.label4=#{label4,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label5 != null and label5 != ''">
+		        and a.label5=#{label5,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label6 != null and label6 != ''">
+		        and a.label6=#{label6,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label7 != null and label7 != ''">
+		        and a.label7=#{label7,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label8 != null and label8 != ''">
+		        and a.label8=#{label8,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label9 != null and label9 != ''">
+		        and a.label9=#{label9,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label10 != null and label10 != ''">
+		        and a.label10=#{label10,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label11 != null and label11 != ''">
+		        and a.label11=#{label11,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label12 != null and label12 != ''">
+		        and a.label12=#{label12,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label13 != null and label13 != ''">
+		        and a.label13=#{label13,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label14 != null and label14 != ''">
+		        and a.label14=#{label14,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label15 != null and label15 != ''">
+		        and a.label15=#{label15,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label16 != null and label16 != ''">
+		        and a.label16=#{label16,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label17 != null and label17 != ''">
+		        and a.label17=#{label17,jdbcType=VARCHAR}
+		     </if>
+		     <if test="label18 != null and label18 != ''">
+		        and a.label18=#{label18,jdbcType=VARCHAR}
+		     </if>
+		     <if test="istemplate != null">
+		        and a.isTemplate=#{istemplate,jdbcType=INTEGER}
+		     </if>
+		     <if test="createtime != null and createtime != ''">
+		        and a.createTime=#{createtime,jdbcType=TIMESTAMP}
+		     </if>
+		     <if test="type != null and type != ''">
+		        and a.type=#{type,jdbcType=INTEGER}
+		     </if>
+		     <if test="applyGuide != null and applyGuide != ''">
+		        and a.apply_guide=#{applyGuide,jdbcType=VARCHAR}
+		     </if>
+		     <if test="loanGuide != null and loanGuide != ''">
+		        and a.loan_guide=#{loanGuide,jdbcType=VARCHAR}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.label1,
+		     a.label2,
+		     a.label3,
+		     a.label4,
+		     a.label5,
+		     a.label6,
+		     a.label7,
+		     a.label8,
+		     a.label9,
+		     a.label10,
+		     a.label11,
+		     a.label12,
+		     a.label13,
+		     a.label14,
+		     a.label15,
+		     a.label16,
+		     a.label17,
+		     a.label18,
+		     a.isTemplate,
+		     a.createTime,
+		     a.type,
+		     a.apply_guide,
+		     a.loan_guide
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.web.loan.entity.LoanformManage" resultType="java.lang.Integer">
+        select count(1) from jltfisp_loanform_manage a
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+        select b.value as loanName,
+        <include refid="Base_Column_List"/>
+        from jltfisp_loanform_manage a LEFT JOIN sys_dict b on b.id = a.type
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_loanform_manage a
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_loanform_manage a set a.status = 'd',a.update_at =now(),a.update_by=#userId
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_loanform_manage 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.loan.entity.LoanformManage">
+	   insert into jltfisp_loanform_manage 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          label1,
+	          label2,
+	          label3,
+	          label4,
+	          label5,
+	          label6,
+	          label7,
+	          label8,
+	          label9,
+	          label10,
+	          label11,
+	          label12,
+	          label13,
+	          label14,
+	          label15,
+	          label16,
+	          label17,
+	          label18,
+	          isTemplate,
+	          createTime,
+	          type,
+	          apply_guide,
+	          loan_guide,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{label1,jdbcType=VARCHAR},
+	    	#{label2,jdbcType=VARCHAR},
+	    	#{label3,jdbcType=VARCHAR},
+	    	#{label4,jdbcType=VARCHAR},
+	    	#{label5,jdbcType=VARCHAR},
+	    	#{label6,jdbcType=VARCHAR},
+	    	#{label7,jdbcType=VARCHAR},
+	    	#{label8,jdbcType=VARCHAR},
+	    	#{label9,jdbcType=VARCHAR},
+	    	#{label10,jdbcType=VARCHAR},
+	    	#{label11,jdbcType=VARCHAR},
+	    	#{label12,jdbcType=VARCHAR},
+	    	#{label13,jdbcType=VARCHAR},
+	    	#{label14,jdbcType=VARCHAR},
+	    	#{label15,jdbcType=VARCHAR},
+	    	#{label16,jdbcType=VARCHAR},
+	    	#{label17,jdbcType=VARCHAR},
+	    	#{label18,jdbcType=VARCHAR},
+	    	#{istemplate,jdbcType=INTEGER},
+	    	#{createtime,jdbcType=TIMESTAMP},
+	    	#{type,jdbcType=INTEGER},
+	    	#{applyGuide,jdbcType=VARCHAR},
+	    	#{loanGuide,jdbcType=VARCHAR},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.web.loan.entity.LoanformManage">
+	   insert into jltfisp_loanform_manage 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="label1 != null and label1 != ''" >
+	          label1,
+	       </if>
+	   	   <if test="label2 != null and label2 != ''" >
+	          label2,
+	       </if>
+	   	   <if test="label3 != null and label3 != ''" >
+	          label3,
+	       </if>
+	   	   <if test="label4 != null and label4 != ''" >
+	          label4,
+	       </if>
+	   	   <if test="label5 != null and label5 != ''" >
+	          label5,
+	       </if>
+	   	   <if test="label6 != null and label6 != ''" >
+	          label6,
+	       </if>
+	   	   <if test="label7 != null and label7 != ''" >
+	          label7,
+	       </if>
+	   	   <if test="label8 != null and label8 != ''" >
+	          label8,
+	       </if>
+	   	   <if test="label9 != null and label9 != ''" >
+	          label9,
+	       </if>
+	   	   <if test="label10 != null and label10 != ''" >
+	          label10,
+	       </if>
+	   	   <if test="label11 != null and label11 != ''" >
+	          label11,
+	       </if>
+	   	   <if test="label12 != null and label12 != ''" >
+	          label12,
+	       </if>
+	   	   <if test="label13 != null and label13 != ''" >
+	          label13,
+	       </if>
+	   	   <if test="label14 != null and label14 != ''" >
+	          label14,
+	       </if>
+	   	   <if test="label15 != null and label15 != ''" >
+	          label15,
+	       </if>
+	   	   <if test="label16 != null and label16 != ''" >
+	          label16,
+	       </if>
+	   	   <if test="label17 != null and label17 != ''" >
+	          label17,
+	       </if>
+	   	   <if test="label18 != null and label18 != ''" >
+	          label18,
+	       </if>
+	   	   <if test="istemplate != null and istemplate != ''" >
+	          isTemplate,
+	       </if>
+	   	   <if test="createtime != null and createtime != ''" >
+	          createTime,
+	       </if>
+	   	   <if test="type != null and type != ''" >
+	          type,
+	       </if>
+	   	   <if test="applyGuide != null and applyGuide != ''" >
+	          apply_guide,
+	       </if>
+	   	   <if test="loanGuide != null and loanGuide != ''" >
+	          loan_guide,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="label1 != null and label1 != ''">
+    		#{label1,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label2 != null and label2 != ''">
+    		#{label2,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label3 != null and label3 != ''">
+    		#{label3,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label4 != null and label4 != ''">
+    		#{label4,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label5 != null and label5 != ''">
+    		#{label5,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label6 != null and label6 != ''">
+    		#{label6,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label7 != null and label7 != ''">
+    		#{label7,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label8 != null and label8 != ''">
+    		#{label8,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label9 != null and label9 != ''">
+    		#{label9,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label10 != null and label10 != ''">
+    		#{label10,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label11 != null and label11 != ''">
+    		#{label11,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label12 != null and label12 != ''">
+    		#{label12,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label13 != null and label13 != ''">
+    		#{label13,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label14 != null and label14 != ''">
+    		#{label14,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label15 != null and label15 != ''">
+    		#{label15,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label16 != null and label16 != ''">
+    		#{label16,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label17 != null and label17 != ''">
+    		#{label17,jdbcType=VARCHAR},
+    		</if>
+    		<if test="label18 != null and label18 != ''">
+    		#{label18,jdbcType=VARCHAR},
+    		</if>
+    		<if test="istemplate != null and istemplate != ''">
+    		#{istemplate,jdbcType=INTEGER},
+    		</if>
+    		<if test="createtime != null and createtime != ''">
+    		#{createtime,jdbcType=TIMESTAMP},
+    		</if>
+    		<if test="type != null and type != ''">
+    		#{type,jdbcType=INTEGER},
+    		</if>
+    		<if test="applyGuide != null and applyGuide != ''">
+    		#{applyGuide,jdbcType=VARCHAR},
+    		</if>
+    		<if test="loanGuide != null and loanGuide != ''">
+    		#{loanGuide,jdbcType=VARCHAR},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.loan.entity.LoanformManage">
+	   	update jltfisp_loanform_manage 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="label1 != null and label1 != ''" >
+		         label1=#{label1,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label2 != null and label2 != ''" >
+		         label2=#{label2,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label3 != null and label3 != ''" >
+		         label3=#{label3,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label4 != null and label4 != ''" >
+		         label4=#{label4,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label5 != null and label5 != ''" >
+		         label5=#{label5,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label6 != null and label6 != ''" >
+		         label6=#{label6,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label7 != null and label7 != ''" >
+		         label7=#{label7,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label8 != null and label8 != ''" >
+		         label8=#{label8,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label9 != null and label9 != ''" >
+		         label9=#{label9,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label10 != null and label10 != ''" >
+		         label10=#{label10,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label11 != null and label11 != ''" >
+		         label11=#{label11,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label12 != null and label12 != ''" >
+		         label12=#{label12,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label13 != null and label13 != ''" >
+		         label13=#{label13,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label14 != null and label14 != ''" >
+		         label14=#{label14,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label15 != null and label15 != ''" >
+		         label15=#{label15,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label16 != null and label16 != ''" >
+		         label16=#{label16,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label17 != null and label17 != ''" >
+		         label17=#{label17,jdbcType=VARCHAR},
+		     </if>
+		     <if test="label18 != null and label18 != ''" >
+		         label18=#{label18,jdbcType=VARCHAR},
+		     </if>
+		     <if test="istemplate != null and istemplate != ''" >
+		         isTemplate=#{istemplate,jdbcType=INTEGER},
+		     </if>
+		     <if test="createtime != null and createtime != ''" >
+		         createTime=#{createtime,jdbcType=TIMESTAMP},
+		     </if>
+		     <if test="type != null and type != ''" >
+		         type=#{type,jdbcType=INTEGER},
+		     </if>
+		     <if test="applyGuide != null and applyGuide != ''" >
+		         apply_guide=#{applyGuide,jdbcType=VARCHAR},
+		     </if>
+		     <if test="loanGuide != null and loanGuide != ''" >
+		         loan_guide=#{loanGuide,jdbcType=VARCHAR},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.web.loan.entity.LoanformManage">
+	   	update jltfisp_loanform_manage 
+	  <set>
+	    label1=#{label1,jdbcType=VARCHAR},
+	    label2=#{label2,jdbcType=VARCHAR},
+	    label3=#{label3,jdbcType=VARCHAR},
+	    label4=#{label4,jdbcType=VARCHAR},
+	    label5=#{label5,jdbcType=VARCHAR},
+	    label6=#{label6,jdbcType=VARCHAR},
+	    label7=#{label7,jdbcType=VARCHAR},
+	    label8=#{label8,jdbcType=VARCHAR},
+	    label9=#{label9,jdbcType=VARCHAR},
+	    label10=#{label10,jdbcType=VARCHAR},
+	    label11=#{label11,jdbcType=VARCHAR},
+	    label12=#{label12,jdbcType=VARCHAR},
+	    label13=#{label13,jdbcType=VARCHAR},
+	    label14=#{label14,jdbcType=VARCHAR},
+	    label15=#{label15,jdbcType=VARCHAR},
+	    label16=#{label16,jdbcType=VARCHAR},
+	    label17=#{label17,jdbcType=VARCHAR},
+	    label18=#{label18,jdbcType=VARCHAR},
+	    isTemplate=#{istemplate,jdbcType=INTEGER},
+	    createTime=#{createtime,jdbcType=TIMESTAMP},
+	    type=#{type,jdbcType=INTEGER},
+	    apply_guide=#{applyGuide,jdbcType=VARCHAR},
+	    loan_guide=#{loanGuide,jdbcType=VARCHAR},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	
+	<!-- 查询目前字典表里存的系统最大的贷款业务code-->
+	<select id="selectMaxCode"  resultType="java.lang.Integer">
+       select max(code+0) from sys_dict where type=1002
+    </select>
+	
+</mapper> 

@@ -50,6 +50,62 @@ public class BusinessApplayAuditServiceImpl extends
                 .checkApply(userId, type);
         return businessApplayAudit;
     }
+    
+    @Override
+    public BusinessApplayAudit checkApplyForLoan(Integer userId, String type,String parentType) {
+        return businessApplayAuditMapper.getLoanBusinessByThreeParams(userId, type, parentType);
+    }
+    
+    @Override
+    public int checkApplyForExpert(Integer userId) {
+        List<BusinessApplayAudit> list=businessApplayAuditMapper.getBusinessByUserIDAndParentType(userId, "3");
+        int flag=0;
+        if(null != list){
+        	for (BusinessApplayAudit s:list){
+        		if(s.getParentType().equals("3") && (s.getState()==0 || s.getState()==1)){
+        			flag=1;
+        		}
+        		
+        	}
+        }
+        
+        return flag;
+    }
+    
+    
+    @Override
+    public int checkApplyFour(Integer userId) {
+        BusinessApplayAudit business1 = businessApplayAuditMapper
+                .checkApply(userId, "1");
+        BusinessApplayAudit business2 = businessApplayAuditMapper
+                .checkApply(userId, "2");
+        BusinessApplayAudit business3 = businessApplayAuditMapper
+                .checkApply(userId, "3");
+        BusinessApplayAudit business4 = businessApplayAuditMapper
+                .checkApply(userId, "4");
+        int flag=0;
+        if(business1!=null){
+        if(business1.getState()==0 || business1.getState()==1){
+        	flag=1;
+        }
+        }
+        if(business2!=null){
+        if(business2.getState()==0 || business2.getState()==1){
+        	flag=1;
+        }
+        }
+        if(business3!=null){
+        if(business3.getState()==0 || business3.getState()==1){
+        	flag=1;
+        }
+        }
+        if(business4!=null){
+        if(business4.getState()==0 || business4.getState()==1){
+        	flag=1;
+        }
+        }
+        return flag;
+    }
 
     @Override
     public BusinessApplayAudit getBusinessApplayAuditByUserId(Integer userId,
@@ -84,8 +140,8 @@ public class BusinessApplayAuditServiceImpl extends
 	}
 
 	@Override
-	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer userId) {
-		return businessApplayAuditMapper.getBusinessApplayAuditListByUserId(userId);
+	public List<BusinessApplayAudit> getBusinessApplayAuditListByUserId(Integer userId,String type) {
+		return businessApplayAuditMapper.getBusinessApplayAuditListByUserId(userId,type);
 	}
 
 	@Override

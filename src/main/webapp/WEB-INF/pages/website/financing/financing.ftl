@@ -24,6 +24,7 @@
             </#list>
             <#if colList?size gt 5>
             	<li>
+            	<a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
 			       	 <select id="selectId" onchange="getList()">
 			       		<option value="0">-选择更多机构-</option>
 			       	 	<#list colList as afterFiveList>
@@ -68,25 +69,28 @@
 	function getList(){
 	  var columnId = $('#selectId').val();
 	  if(columnId!=0){
-	  	 $('#colListDetail').load("${path}/perm/financing/"+columnId,{page :1});
+	  	 $('#colListDetail').load("${path}/perm/financing/"+columnId,{'pager.offset':0});
 	  }
 	}
 	
 	 function infoTabClick(id){
-        $('#colListDetail').load("${path}/perm/financing/"+id,{page :1});
+        $('#colListDetail').load("${path}/perm/financing/"+id,{'pager.offset':0});
     }
 
      var infoTab = $("div.info ul.infoTab");
     $(function(){
         infoTab.find("li").eq(0).addClass("active");
-        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find("li").eq(0).attr("code"),{page :1});
+        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find("li").eq(0).attr("code"),{'pager.offset':0});
     });
 
 
     function selectPage(page) {
-	    if(page==undefined) {
-	    	page = $("#currentPage").val();
-	    }
-        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find('li.active').attr('code'),{page :page,type:$("#type").val()});
+        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find('li.active').attr('code'),{'pager.offset':0,type:$("#type").val()});
     }
+     $(document).ready(function () {
+        $("#selectId").bind("change",function(){
+            $(this).parent().attr('code',$(this).val());
+            $(this).parent().find('a').text($(this).html)
+        });
+    });
 </script>

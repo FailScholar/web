@@ -39,9 +39,9 @@
                         <input type="hidden" id="applyType"   name="applyType"   value="${applytype}"/>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>申请贷款额度</th>
+                                    <th><b class="red">*</b>${loanformManage.label1}</th>
                                     <td ><input value="${coAll.jltfispCoFillInApply.applyAmount}" name="applyAmount" id="applyAmount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" />万元</td>
-                                    <th><b class="red">*</b>贷款期限</th>
+                                    <th><b class="red">*</b>${loanformManage.label2}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.payCycle ==1>
                                     <input value="1" type="radio" name="payCycle" id="payCycle" class="yes validate[required]" checked/>
@@ -57,11 +57,11 @@
                                    <span class="mr20">12个月</span></label></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>贷款用途说明</th>
+                                    <th><b class="red">*</b>${loanformManage.label3}</th>
                                     <td colspan="3"><textarea name="useDesc" id="useDesc" class="txta validate[required,minSize[1],maxSize[1000]]" style="height:100px;">${coAll.jltfispCoFillInApply.useDesc}</textarea></td>
                                 </tr>
                                 <tr>
-                                    <th>是否申请过银行贷款</th>
+                                    <th>${loanformManage.label4}</th>
                                     <td colspan="3"><label>
                                     <#if coAll.jltfispCoFillInApply.historyState ==1>
                                     <input value="1" name="historyState" id="historyState" type="checkbox" class="yes" checked/>
@@ -71,7 +71,7 @@
                                     是</label></td>
                                 </tr>
                                 <tr>
-                                    <th>续贷</th>
+                                    <th>${loanformManage.label5}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.continueloan ==1>
                                     <input value="1" name="continueloan" id="continueloan" type="checkbox" class="yes" checked/>
@@ -79,11 +79,11 @@
                                     <input value="1" name="continueloan" id="continueloan" type="checkbox" class="yes" />
                                     </#if>
                                     是</label></td>
-                                    <th>上期贷款还款时间</th>
+                                    <th>${loanformManage.label6}</th>
                                     <td><label><input name="historyEndtime" id="historyEndtime" value="<#if coAll.jltfispCoFillInApply.historyEndtime?date !="">${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker()" type="text" class="txt" /></label></td>
                                 </tr>
                                 <tr>
-                                    <th>是否银行推荐</th>
+                                    <th>${loanformManage.label7}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isRecomend1 ==1>
                                     <input value="1" name="isRecomend1" id="isRecomend1" type="checkbox" class="yes" checked/>
@@ -91,7 +91,7 @@
                                    <input value="1" name="isRecomend1" id="isRecomend1" type="checkbox" class="yes" />
                                    </#if>
                                     是</label></td>
-                                    <th>是否科委或园区推荐</th>
+                                    <th>${loanformManage.label8}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isRecomend2 ==1>
                                     <input value="1" name="isRecomend2" id="isRecomend2" type="checkbox" class="yes" checked/>
@@ -101,24 +101,19 @@
                                     是</label></td>
                                 </tr>
                                 <tr>
-                                    <th>选择还款银行</th>
+                                    <th>${loanformManage.label9}</th>
                                     <td>
-                                    	<select name="bankid" id="bankid">
-                                        	<option value="1">中国建设银行</option>
-                                            <option value="2">中国工商银行</option>
-                                        </select>
+                                    <input value="${coAll.jltfispCoFillInApply.bankid}" name="bankid" id="bankid" type="text" class="txt2 validate[maxSize[1000]]" />
                                     </td>
-                                    <th>担保/保险公司</th>
+                                    <th>${loanformManage.label10}</th>
                                     <td>
-                                    	<select name="riskid" id="riskid">
-                                        	<option value="1">平安银行</option>
-                                        </select>
+                                    <input value="${coAll.jltfispCoFillInApply.riskid}" name="riskid" id="riskid" type="text" class="txt2 validate[maxSize[1000]]" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>贷款支行</th>
+                                    <th>${loanformManage.label11}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.bankBranch}" name="bankBranch" id="bankBranch" type="text" class="txt2 validate[maxSize[1000]]" /></td>
-                                    <th>是否已有其他银行贷款</th>
+                                    <th>${loanformManage.label12}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isOtherbankLoan ==1>
                                     <input name="isOtherbankLoan" value="1" id="isOtherbankLoan" type="checkbox" class="yes" checked/>
@@ -128,16 +123,16 @@
                                     是</label></td>
                                 </tr>
                                 <tr>
-                                    <th>银行信贷员姓名</th>
+                                    <th>${loanformManage.label13}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.loanOffice}" name="loanOffice" id="loanOffice" type="text" class="txt2 validate[maxSize[1000]]" placeholder="请输入" /></td>
-                                    <th>信贷员手机号</th>
+                                    <th>${loanformManage.label14}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.loanOfficeMobile}" name="loanOfficeMobile" id="loanOfficeMobile" type="text" class="txt2 validate[custom[phone],maxSize[11]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                             <p class="ntit">融资计划(如需股权融资请填写该表)</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th>是否需要股权融资</th>
+                                    <th>${loanformManage.label15}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isFinance ==1>
                                     <input type="radio" name="isFinance" id="isFinance" class="yes" value="1" checked/><span class="mr20">是</span></label><label><input type="radio" name="isFinance" id="isFinance" class="yes" value="2"/>
@@ -147,7 +142,7 @@
                                     <input type="radio" name="isFinance" id="isFinance" class="yes" value="1"/><span class="mr20">是</span></label><label><input type="radio" name="isFinance" id="isFinance" class="yes" value="2"/>
                                     </#if>
                                     <span class="mr20">否</span></label></td>
-                                    <th>是否有上市计划</th>
+                                    <th>${loanformManage.label16}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isListingPlan ==1>
                                     <input type="radio" name="isListingPlan" id="isListingPlan" class="yes" value="1" checked/><span class="mr20">是</span></label><label><input type="radio" name="isListingPlan" id="isListingPlan" class="yes" value="2"/>
@@ -159,11 +154,11 @@
                                     <span class="mr20">否</span></label></td>
                                 </tr>
                                 <tr>
-                                    <th>拟融资金额</th>
+                                    <th>${loanformManage.label17}</th>
                                     <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number],maxSize[1000]]" placeholder="请输入" />万元</td>
                                 </tr>
                                 <tr>
-                                    <th>对投资机构的要求</th>
+                                    <th>${loanformManage.label18}</th>
                                     <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[1000]]">${coAll.jltfispCoFillInApply.finaneAmount}</textarea></td>
                                 </tr>
                             </table>

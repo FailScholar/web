@@ -51,7 +51,7 @@
                           <!--附件-->
                           <#include "website/loan/loanapply/coFileView.ftl"/>
                           <div class="btnFld">
-                          <input type="button" value="打印输出" onclick="printdiv();" class="btnSave" />
+                          <input type="button" value="打印输出" onclick="printdiv('${businessType}');" class="btnSave" />
                           </div>
                           <br/>
                           <br/>
@@ -70,16 +70,9 @@
   </body>
   </html>
   <script type="text/javascript">
-  function printdiv()
+  function printdiv(businessType)
 {
-var headstr = "<html><head><title></title></head><body>";
-var footstr = "</body>";
-var newstr = document.getElementById("printDiv").innerHTML;
-var oldstr = document.body.innerHTML;
-document.body.innerHTML = headstr+newstr+footstr;
-window.print(); 
-document.body.innerHTML = oldstr;
-return false;
+location.href="${path}/business/printLoanPDF?businessType="+businessType
 }
   
 <!--初始化页面数据-->

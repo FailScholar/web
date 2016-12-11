@@ -35,7 +35,7 @@
                 <td><input id="taxesThis" name="taxesThis" type="text" value="${PsMaterialInfo.taxesThis }" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
             </tr>
         </table>
-        <p class="tip4">提示：如果没有可填0！</p>
+        <p class="tip4" style="color:#d17d00">提示：如果没有可填0！</p>
         <p class="ntit"><b class="red">*</b>知识产权情况（单位：项）</p>
         <table width="100%" class="tab3 tab4">
             <tr>
@@ -69,7 +69,7 @@
                 <td><input id="knowledgeThis" name="knowledgeThis"value="${PsMaterialInfo.knowledgeThis }"  type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
             </tr>
         </table>
-        <p class="tip4">提示：如果没有可填0！</p>
+        <p class="tip4" style="color:#d17d00">提示：如果没有可填0！</p>
         <p class="ntit">获得荣誉奖项等情况</p>
         <table class="tab3" width="100%">
             <tr>

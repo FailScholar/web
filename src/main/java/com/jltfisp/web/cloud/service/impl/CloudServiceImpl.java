@@ -1,9 +1,12 @@
 package com.jltfisp.web.cloud.service.impl;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.github.pagehelper.PageHelper;
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
 import com.jltfisp.web.cloud.dao.CloudMapper;
@@ -18,5 +21,19 @@ public class CloudServiceImpl extends BaseServiceImpl<Cloud> implements ICloudSe
 	public void setMapper(BaseMapper<Cloud> mapper) {
 		this.mapper = mapper;
 		this.cloudMapper=(CloudMapper)mapper;
+	}
+	@Override
+	public List<Cloud> getCloudsList(Integer columnid, int page) {
+		Cloud cloud = new Cloud();
+		cloud.setColumnId(columnid);
+		PageHelper.startPage(page, 12);
+		// TODO Auto-generated method stub
+		return cloudMapper.select(cloud);
+	}
+	@Override
+	public int getCloudsCount(Integer columnid) {
+		Cloud cloud = new Cloud();
+		cloud.setColumnId(columnid);
+		return cloudMapper.selectCount(cloud);
 	}
 }

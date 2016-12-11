@@ -5,7 +5,9 @@
 
 package com.jltfisp.web.loan.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -19,20 +21,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.jltfisp.FileManager;
+import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
+import com.jltfisp.redis.RedisService;
 import com.jltfisp.util.FileUpDownUtils;
+import com.jltfisp.util.ImageUtils;
 import com.jltfisp.util.UploadFile;
 import com.jltfisp.util.WebUtil;
+import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.area.service.AreaService;
 import com.jltfisp.web.loan.entity.*;
-import com.jltfisp.web.area.entity.*;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+import com.jltfisp.web.loan.service.ILoanformManageService;
 import com.jltfisp.web.loan.service.LoanService;
 
 
 /**
- * Created by LiuFa on 2016/11/14.
+ * Created by 张舒西 on 2016/11/14.
  * com.jltfisp.web.loan.controller
  * ROOT
  */
@@ -52,6 +60,18 @@ public class LoanController {
     
     @Autowired
     private IBusinessApplayAuditService businessApplayAuditService;
+    
+    @Autowired
+    private ILoanformManageService loanformManageService;
+    
+    @Autowired
+    private DictionaryService dictionaryService;
+    
+    @Autowired
+    private RedisService<Serializable, String> redisService;
+    
+    @Autowired
+    private FileManager fileManager;
 
 	private Map<String,String> map = new HashMap<String,String>();
 	
@@ -63,14 +83,58 @@ public class LoanController {
 		map.put("1", "科技微贷通贷款申请");
 		map.put("5", "保费补贴申请");
 		map.put("6", "股权融资申请");
+		map.put("8", "科技履约贷款");
+		map.put("9", "科技小巨人贷款");
+		map.put("10", "高新技术贷款");
+		map.put("7", "科技微贷通贷款");
+		map.put("11", "保费补贴");
+		map.put("12", "股权融资");
 	}
 	
 	@RequestMapping("/onlineApply")
     public String guideApply(HttpServletRequest request) {
-		String applytype = request.getParameter("applytype");
-    	request.setAttribute("applyname", map.get(applytype));
-    	request.setAttribute("applytype", applytype);
-        return "/website/loan/loanapply/coGuideApply";
+	 String applytype = request.getParameter("applytype");
+     request.setAttribute("applyname", map.get(applytype));
+     request.setAttribute("applytype", applytype);
+     
+
+     //获取当前用户登录信息
+     //赞时屏蔽
+     //if(!SecurityUtils.getSubject().hasRole("企业会员")){//如果当前用户不是企业用户，则不让申请贷款服务
+     // request.setAttribute("applyname", JltfispColumn.getColumnName()+"申请"); 
+        // request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName());
+        // return "/website/expert/expertApplyfail";
+     //}
+     //暂时屏蔽
+     
+     //获取当前用户登录信息
+     JltfispUser user=loginService.getCurrentUser();
+     int flag=businessApplayAuditService.checkApplyFour(user.getId());
+     if(flag==1){
+      request.setAttribute("failMes", "对不起，您已经申请了贷款服务！");
+      return "/website/loan/loanapply/loanApplyfail";
+     }else{
+         //获取申请表单 申请须知
+         LoanformManage loanformManage = new LoanformManage();
+         SysDict sysDict = dictionaryService.getValueByTypeCode(1002, applytype);
+         if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+             loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                     LoanformManage.class);
+         }else{
+             LoanformManage params = new LoanformManage();
+             params.setType(sysDict.getId());
+             params.setIstemplate(0);
+             loanformManage = loanformManageService.selectOneByExample(params);
+             if(loanformManage == null){
+                 params = new LoanformManage();
+                 params.setIstemplate(1);
+                 loanformManage = loanformManageService.selectOneByExample(params);
+             }
+             
+         }
+         request.setAttribute("loanformManage", loanformManage);
+         return "/website/loan/loanapply/coGuideApply";
+      }
     }
 	
     @RequestMapping("/onlineApplyPage")
@@ -82,6 +146,7 @@ public class LoanController {
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispCoAll coAll=loanService.getApplyALL(user.getId(),Integer.parseInt(applytype));
     	request.setAttribute("coAll", coAll);
+    	request.setAttribute("user", user);
         return "/website/loan/loanapply/onlineApply";
     }
     
@@ -175,6 +240,7 @@ public class LoanController {
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispCoAll coAll =loanService.getCoDebtTable(user.getId(), year,Integer.parseInt(applytype));
     	request.setAttribute("coAll", coAll);
+    	request.setAttribute("applytype", applytype);
         return "/website/loan/loanapply/coDebtTableView";
     }
     
@@ -240,7 +306,7 @@ public class LoanController {
      */
     @RequestMapping("/saveCoFile")
     @ResponseBody
-    public String saveCoFile(HttpServletRequest request,JltfispCoFile jltfispCoFile) throws IOException {
+    public String saveCoFile(HttpServletRequest request,JltfispCoFile jltfispCoFile) throws Exception  {
     	String index = request.getParameter("index");
     	String applytype = request.getParameter("applytype");
     	//获取当前用户登录信息
@@ -248,15 +314,16 @@ public class LoanController {
     	//通过USERID获取企业基本信息
     	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),Integer.parseInt(applytype));
     	jltfispCoFile.setApplyid(jltfispCoBaseDto.getId());
-    	UploadFile uploadFile = FileUpDownUtils.getUploadFile2(request, "UpFile"+index);
+    	UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "UpFile"+index);
         String fileName = uploadFile.getFileName();
         if (StringUtils.isNotBlank(fileName) && (fileName.endsWith(".jpg") || fileName.endsWith(".xls"))) {
-        	String path=uploadFile.getFile().getName();
-            jltfispCoFile.setFilepath(path);
+            byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
+            String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName()).trim();
+            jltfispCoFile.setFilepath(filePath);
             jltfispCoFile.setFiletype(Integer.parseInt(index));
             int suc=loanService.saveCoFile(jltfispCoFile);
             if(suc==1){
-            	return path;
+            	return filePath;
             } else{
             	return "0";
             }
@@ -291,6 +358,9 @@ public class LoanController {
     @RequestMapping("/saveCoFillInApply")
     @ResponseBody
     public int saveCoFillInApply(HttpServletRequest request,JltfispCoFillInApplyDto jltfispCoFillInApplyDto) {
+    	String applytype = request.getParameter("applyType");
+    	request.setAttribute("applyname", map.get(applytype));
+    	request.setAttribute("applytype", applytype);
     	JltfispCoFillInApply jltfispCoFillInApply=new JltfispCoFillInApply();
     	//将jltfispCoFillInApplyDto的属性拷贝到jltfispCoFillInApply中去
     	WebUtil.copyBean(jltfispCoFillInApplyDto, jltfispCoFillInApply);
@@ -298,6 +368,22 @@ public class LoanController {
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	jltfispCoFillInApply.setUserid(user.getId());
+    	//查询是否已经存在该流程，如果存在，则不添加新的流程
+    	BusinessApplayAudit Ba=businessApplayAuditService.checkApplyForLoan(user.getId(), applytype, "1");
+    	if(null == Ba){
+    	//Start插入审核流程
+    	BusinessApplayAudit loan=new BusinessApplayAudit();
+    	loan.setUserId(user.getId());
+    	loan.setSubmitDate(new Date());
+    	//设定为申请状态
+    	loan.setState(3);
+    	loan.setParentType("1");
+    	//设定applyType类型
+    	loan.setType(applytype);
+    	loan.setLoanValue(Double.valueOf(jltfispCoFillInApplyDto.getApplyAmount()));
+	 	businessApplayAuditService.insertRecord(loan);
+    	}
+    	//stop插入审核流程
     	return loanService.saveCoFillInApply(jltfispCoFillInApply);
     }
     
@@ -313,6 +399,26 @@ public class LoanController {
     	//获取当前用户所有的申请信息
     	JltfispCoAll coAll=loanService.getApplyALL(user.getId(),Integer.parseInt(applytype));
     	request.setAttribute("coAll", coAll);
+    	
+    	//获取申请表单 字段名称
+    	LoanformManage loanformManage = new LoanformManage();
+     SysDict sysDict = dictionaryService.getValueByTypeCode(1002, applytype);
+     if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                 LoanformManage.class);
+     }else{
+         LoanformManage params = new LoanformManage();
+         params.setType(sysDict.getId());
+         params.setIstemplate(0);
+         loanformManage = loanformManageService.selectOneByExample(params);
+         if(loanformManage == null){
+             params = new LoanformManage();
+             params.setIstemplate(1);
+             loanformManage = loanformManageService.selectOneByExample(params);
+         }
+     }
+     request.setAttribute("loanformManage", loanformManage);
+    	
         return "/website/loan/loanapply/fillinApply";
     }
     
@@ -335,6 +441,26 @@ public class LoanController {
     	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(user.getId(), Integer.parseInt(applytype));
     	request.setAttribute("coAll", coAll);
     	request.setAttribute("coDebt", coDebt);
+    	
+   //获取申请表单 申请须知
+     LoanformManage loanformManage = new LoanformManage();
+     SysDict sysDict = dictionaryService.getValueByTypeCode(1002, applytype);
+     if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                 LoanformManage.class);
+     }else{
+         LoanformManage params = new LoanformManage();
+         params.setType(sysDict.getId());
+         params.setIstemplate(0);
+         loanformManage = loanformManageService.selectOneByExample(params);
+         if(loanformManage == null){
+             params = new LoanformManage();
+             params.setIstemplate(1);
+             loanformManage = loanformManageService.selectOneByExample(params);
+         }
+     }
+     request.setAttribute("loanformManage", loanformManage);
+    	
     	return "/website/loan/loanapply/loanView";
     }
     /**
@@ -347,16 +473,12 @@ public class LoanController {
     	String applytype = request.getParameter("applytype");
     	request.setAttribute("applyname", map.get(applytype));
     	request.setAttribute("applytype", applytype);
-    	BusinessApplayAudit loan=new BusinessApplayAudit();
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
-    	loan.setUserId(user.getId());
-    	loan.setSubmitDate(new Date());
-    	//设定为申请状态
-    	loan.setState(0);
-    	//设定applyType类型
-    	loan.setType(applytype);
-	 	int i=businessApplayAuditService.insertRecord(loan);
+	 	BusinessApplayAudit loan=businessApplayAuditService.getBusinessApplayAudit(user.getId(), applytype, 3);
+	 	//更改流程状态为0
+	 	loan.setState(0);
+	 	int i=businessApplayAuditService.updateByPK(loan);
 	 	if(i==0){
 	 	request.setAttribute("failMes", "申请失败");
 	 	return "/website/loan/loanapply/loanApplyfail";
@@ -364,11 +486,6 @@ public class LoanController {
 	 	return "/website/loan/loanapply/loanApplysuccess";
 	 	}
     }
-    
-   /* @RequestMapping("/subsidy")
-    public String subsidy(){
-        return "/website/loan/subsidy/subsidyApply";
-    }*/
 
     @RequestMapping("/financing")
     public String financing(){

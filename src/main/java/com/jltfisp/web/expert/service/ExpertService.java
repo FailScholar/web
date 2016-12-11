@@ -22,6 +22,14 @@ public interface ExpertService {
      * @author 张舒西 2016年11月18日 下午2:22:22
      */
     JltfispExpert getExpertContext(Integer id);
+    
+    /**
+     * 
+     * @param id
+     * @return JltfispExpert 返回内容对象
+     * @author 张舒西 2016年11月18日 下午2:22:22
+     */
+    JltfispExpert getExpertByUserIdAndColumnId(Integer userid,Integer columnid);
     /**
      * 
      * @param columnid
@@ -59,4 +67,20 @@ public interface ExpertService {
      * @return int
      */
     int saveExpertDoMain(JltfispExpertDoMain doMain);
+    
+    /**
+     * 
+     * @param userid  用户id
+     * @param columnid 栏目id
+     * @return List<JltfispExpertDoMain> 集合
+     */
+    List<JltfispExpertDoMain> getExpertDoMainList(int userid,int columnid);
+    
+    /**
+     * 
+     * @param userid  用户id
+     * @param columnid 栏目id
+     * @return void
+     */
+    void deleteExpertDoMain(int userid,int columnid);
 }

@@ -32,7 +32,7 @@
                 </ul>
               </#list>
               <div class="clear"></div>
-              <#include "website/policy/commonPager.ftl"/>
+              <#include "website/common/commonPager.ftl"/>
           </div>
       </div>
    </div>
@@ -55,7 +55,7 @@
 		    <!--传当前子栏目ID-->
 			$.ajax({
 	                type: 'POST',
-	                url:'${path}/anon/changePolicy',
+	                url:'${path}/perm/policy/'+columnId,
 	                data: {columnId: columnId,'pager.offset':0},
 	                success: function (data) {
 	                $('.infoList').html(data);
@@ -64,4 +64,16 @@
 	});
 });
 
+  function  changePage(url){
+	  var url=url.split("=");
+	  var offset=url[1];
+	  $.ajax({
+	                  type: 'POST',
+	                  url:'${path}/perm/policy/'+${columnId},
+	                  data: {columnId: ${columnId},'pager.offset':offset},
+	                  success: function (data) {
+	                  $('.infoList').html(data);
+	                  }
+	            });
+	  }
 </script>

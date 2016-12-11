@@ -3,9 +3,9 @@
                         <p class="ntit" style="text-align:center;">本次申请贷款情况</p>
                               <table width="100%" class="tab3 tab4">
                                   <tr>
-                                      <th>申请贷款额度</th>
+                                      <th>${loanformManage.label1}</th>
                                       <td >${coAll.jltfispCoFillInApply.applyAmount}</td>
-                                      <th>贷款期限</th>
+                                      <th>${loanformManage.label2}</th>
                                       <td colspan=2>
                                      <#if coAll.jltfispCoFillInApply.payCycle ==1>
                                      6个月
@@ -15,11 +15,11 @@
                                     </td>
                                   </tr>
                                   <tr>
-                                      <th>贷款用途说明</th>
+                                      <th>${loanformManage.label3}</th>
                                       <td colspan=5>${coAll.jltfispCoFillInApply.useDesc}</td>
                                   </tr>
                                   <tr>
-                                      <th>是否首次贷款</th>
+                                      <th>${loanformManage.label4}</th>
                                       <td >
                                       <#if coAll.jltfispCoFillInApply.historyState ==1>
                                                                                                                     是
@@ -27,37 +27,27 @@
                                                                                                                     否
                                       </#if>                                                                              
                                       </td>
-                                      <th>上次履约贷款还款时间</th>
+                                      <th>${loanformManage.label6}</th>
                                       <td colspan=2><#if coAll.jltfispCoFillInApply.historyEndtime?date !="">${coAll.jltfispCoFillInApply.historyEndtime?date}</#if></td>
-                                  </tr>
+                                  </tr> 
                                   <tr>
-                                      <th>选择科技贷款品种</th>
-                                      <td colspan=5>0.00</td>
-                                  </tr>
-                                  <tr>
-                                      <th>选择申请银行</th>
+                                      <th>${loanformManage.label9}</th>
                                       <td >
-                                      <#if coAll.jltfispCoFillInApply.bankid ==1>
-                                                                                                                  中国建设银行 
-                                      <#elseif coAll.jltfispCoFillInApply.bankid ==2>
-                                                                                                                  中国工商银行
-                                      </#if>                                                                          
+                                      ${coAll.jltfispCoFillInApply.bankid}                                                                          
                                       </td>
-                                      <th>贷款支行</th>
+                                      <th>${loanformManage.label11}</th>
                                       <td colspan=2>
-                                      <#if coAll.jltfispCoFillInApply.riskid ==1>
-                                                                                                                  平安银行
-                                      </#if>
+                                      ${coAll.jltfispCoFillInApply.riskid}
                                       </td>
                                   </tr>
                                   <tr>
-                                      <th>银行信贷员姓名</th>
-                                      <td >0.00</td>
-                                      <th>信贷员手机号</th>
-                                      <td colspan=2>${coAll.jltfispCoFillInApply.loanOffice}</td>
+                                      <th>${loanformManage.label13}</th>
+                                      <td >${coAll.jltfispCoFillInApply.loanOffice}</td>
+                                      <th>${loanformManage.label14}</th>
+                                      <td colspan=2>${coAll.jltfispCoFillInApply.loanOfficeMobile}</td>
                                   </tr>
                                   <tr>
-                                     <th>是否需要股权融资</th>
+                                     <th>${loanformManage.label15}</th>
                                       <td >
                                       <#if coAll.jltfispCoFillInApply.isFinance ==1>
                                       是
@@ -65,7 +55,7 @@
                                       否
               </#if>                        
                                       </td>
-                                      <th>是否有上市计划</th>
+                                      <th>${loanformManage.label16}</th>
                                       <td colspan=2>
                                       <#if coAll.jltfispCoFillInApply.isListingPlan ==1>
                                       是
@@ -75,17 +65,15 @@
                                       </td>
                                   </tr>
                                   <tr>
-                                      <th>拟融资金额</th>
+                                      <th>${loanformManage.label17}</th>
                                       <td >${coAll.jltfispCoFillInApply.finaneAmount}</td>
-                                      <th>担保/保险公司</th>
+                                      <th>${loanformManage.label10}</th>
                                       <td colspan=2>
-                                      <#if coAll.jltfispCoFillInApply.riskid ==1>
-                                      平安银行
-                                      </#if>
+                                      ${coAll.jltfispCoFillInApply.riskid}
                                       </td>
                                   </tr>
                                   <tr>
-                                      <th>对投资机构要求</th>
+                                      <th>${loanformManage.label18}</th>
                                       <td colspan=5>${coAll.jltfispCoFillInApply.finaneAmount}</td>
                                   </tr>
                                   <tr>

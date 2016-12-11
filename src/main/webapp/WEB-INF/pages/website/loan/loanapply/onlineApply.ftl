@@ -392,7 +392,7 @@ function ajaxFileUpload(index,applytype) {
               dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
               return false;
             }else{
-              $("#coFile img").eq(index-1).attr("src","${path}/resource/fileImage/"+msg);
+              $("#coFile img").eq(index-1).attr("src","${path}"+msg);
             }
         }
     }); 

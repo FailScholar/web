@@ -55,6 +55,10 @@ function userForm(){
 	$.cookie('userinfoIndex', 1, {path: '/'});
 	$("#insForm").submit();
 }
+function goMain(flag){
+				 $.cookie('userinfoIndex', flag, {path: '/'});
+				 window.location.href = "${path}/main"
+			}
   </script>
   </head>
 
@@ -64,8 +68,8 @@ function userForm(){
               <div class="content">
                   <div class="info">
                       <ul class="infoTab">
-                          <li><a href="javascript:;">用户中心</a></li>
-                          <li><a href="javascript:;">用户信息</a></li>
+                          <li><a href="javascript:goMain(0);">用户中心</a></li>
+                          <li><a href="javascript:goMain(1);">用户信息</a></li>
                           <li><a href="${path}/message/page">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
@@ -91,79 +95,57 @@ function userForm(){
                       <ul class="aply">
                           <li class="bbm">
                               <h4>科技履约贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/anon/loan/onlineApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=1" class="online">在线申请</a>
                           </li>
                           <li class="bbm">
                               <h4>科技小巨人贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/loan/onlineApply?applytype=2">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=2" class="online">在线申请</a>
                           </li>
                           <li class="bbm">
                               <h4>高新技术贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/loan/onlineApply?applytype=3">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=3" class="online">在线申请</a>
                           </li>
                           <li>
                               <h4>科技微贷通贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/loan/onlineApply?applytype=4">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=4" class="online">在线申请</a>
                           </li>
                           <li>
                               <h4>保费补贴申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/loan/judgeIsApplyLoan?applytype=5">申请须知</a><a href="${path}/loan/subsidy?isReFill=5" class="online">在线申请</a>
                           </li>
                           <li>
                               <h4>股权融资申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/loan/financeKnow">申请须知</a><a href="${path}/loan/financeApply" class="online">在线申请</a>
                           </li>
                       </ul>
                       <div class="clear"></div>
                       <div class="grad"></div>
-                      <table class="tab1" style="width:1160px;">
-                          <thead>
-                          <tr>
-                              <th width="18.6%">我的申请记录</th>
-                              <th width="16.2%">企业名称</th>
-                              <th width="16.2%">融资金额/万元</th>
-                              <th>所属领域</th>
-                              <th>申请时间</th>
-                              <th width="11.2%">状态</th>
-                              <th width="11.2%">操作</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <#list pageInfo.data as business>
-                          <tr>
-                              <td>${business.typeName}</td>
-                              <td>${business.companyName}</td>
-                              <td>${business.loanValue}</td>
-                              <td>${business.tecName}</td>
-                              <td>${(business.submitDate?string("yyyy-MM-dd"))}</td>
-                              <td>
-                              	<#if business.state = 0>
-                              		已提交
-                              		<#elseif business.state = 1>
-                              			通过
-                              		<#else>
-                              			不通过
-                              	</#if>
-                              </td>
-                              <td>
-                              <#if business.type =='5'>
-                              	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}" target="_blank">查看</a>
-                              <#elseif business.type =='1'>
-                              	<a href="${path}/business/detail?businessType=${business.type}" target="_blank">查看</a>
-                              <#elseif business.type =='6'>
-                              	<a href="${path}/business/showFinanceApplyDetail?businessType=${business.type}" target="_blank">查看</a>
-                              </#if>
-                              </td>
-                          </tr>
-                          </#list>
-                          </tbody>
+                       <div class="clist fl">
+                    	<h1>我的申请记录</h1>
+                        <div class="cl">
+                            <ul id="queryBuss">
+                            	<#list dictListByType as dict>
+                            	<#if dict.code == t.type>
+                            		<li class="active" lang="${dict.code}">${dict.value}</li>
+                            	<#else>
+                            		<li lang="${dict.code}">${dict.value}</li>
+                            	</#if>
+                                
+                                </#list>
+                            </ul>
+                        </div>
+                    </div>
+                      <table class="tab1" id="tab1" style="width:970px;">
+                          <#include "website/usercenter/tableList.ftl"/>
                       </table>
-                      <div class="paging" style="width:1160px; margin-bottom:40px;">
+                      <!--
+                      <div class="paging" style="width:970px; margin-bottom:40px;">
                            <p class="fl">显示至<span>${pageInfo.st+1 }</span>至<span>${(pageInfo.data?size)+pageInfo.st}</span>条，共<span>${pageInfo.totalCount }</span>条</p>
                           <div class="fr">
                               <a href="javascript:last();" class="spage prevPg">&lt;</a>${pageInfo.currentPage}/${pageInfo.totalPage}<a href="javascript:next();" class="spage nextPg">&gt;</a>
                           </div>
                       </div>
+                      -->
                   </div>
               </@shiro.hasAnyRoles>
                   <#--业务管理结束-->
@@ -184,6 +166,25 @@ function userForm(){
 </html>
 
 <script type="text/javascript">
+	function subInfo(id,type){
+		$.ajax({
+            type: "POST",
+            url: "${path}/business/updateBuss",
+            data: {id:id},
+            dateType:"json",
+            success: function(msg){
+                dialog.tipsPop('ok-pop','提示:',"提交成功",function(){
+                       $('#tab1').load("${path}/business/busspage?type="+type)
+                   });
+             }
+         });
+	}
+
+	$("#queryBuss li").click(function() {
+		$(this).addClass('active').siblings('li').removeClass('active');
+		var type = $(this).attr("lang");
+		$('#tab1').load("${path}/business/busspage?type="+type)
+	});
       //通知通告弹窗
         function showDetail(id) {
         	dialog({

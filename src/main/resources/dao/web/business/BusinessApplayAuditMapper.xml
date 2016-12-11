@@ -205,7 +205,7 @@
 		     <if test="submitDate != null and submitDate != ''" >
 		         submit_date=#{submitDate,jdbcType=DATE},
 		     </if>
-		     <if test="state != null and state != ''" >
+		     <if test="state != null" >
 		         state=#{state,jdbcType=INTEGER},
 		     </if>
 		     <if test="type != null and type != ''" >
@@ -244,10 +244,9 @@
 	   <!-- 根据用户id获取用户申请贷款情况 -->
    <select id="getBusinessApplayAuditByUserId" parameterType="map"  resultType  ="com.jltfisp.web.loan.entity.BusinessApplayAudit">
     select 
-    jba.id as id,
-    jba.state as state
+    *
     from jltfisp_business_applay jba 
-    where  jba.user_id =#{userId} and jba.type=#{type} ORDER BY jba.submit_date DESC limit 1
+    where jba.parent_type=1 and jba.user_id =#{userId} and jba.type=#{type} ORDER BY jba.submit_date DESC limit 1
    </select>
    
    	<!-- 根据用户id及申请业务类型  获取 正在审核中或审核通过的 业务审核信息 -->

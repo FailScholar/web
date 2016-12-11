@@ -67,18 +67,18 @@ function userForm(){
                       <ul class="infoTab">
                           <li class="active"><a href="javascript:;">用户中心</a></li>
                           <li><a href="javascript:;">用户信息</a></li>
-                          <li><a href="${path}/message/page">通知通告</a></li>
+                          <li lang="${path}/message/page"><a href="javascript:;">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
-                              <li><a href="${path}/business/page">业务管理</a></li>
+                              <li lang="${path}/business/page"><a href="javascript:;">业务管理</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
-                              <li><a href="${path}/communicate/page">我要咨询</a></li>
+                              <li lang="${path}/communicate/page"><a href="javascript:;">我要咨询</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasRole name="专家会员">
-                              <li><a href="${path}/communicate/expertPage">我要解答</a></li>
+                              <li lang="${path}/communicate/expertPage"><a href="javascript:;">我要解答</a></li>
                           </@shiro.hasRole>
 
                       </ul>
@@ -106,7 +106,7 @@ function userForm(){
 							  	</#if>
 							  </#list>
                               <#if (columnList?size >6)>
-                              	<a href="${path}/anon/institution"><span class="bds_more">更多></span></a>
+                              	<a href="${path}/perm/institution"><span class="bds_more">更多></span></a>
                               </#if>
                               
                               <p></p>
@@ -122,7 +122,7 @@ function userForm(){
 							  	</#if>
 							  </#list>
                               <#if (columnList?size >6)>
-                              	<a href="${path}/anon/institution"><span class="bds_more">更多></span></a>
+                              	<a href="${path}/perm/institution"><span class="bds_more">更多></span></a>
                               </#if>
                               <p></p>
                           </@shiro.hasAnyRoles>
@@ -546,8 +546,12 @@ function userForm(){
    		$.cookie('userinfoIndex', null, {path: '/'});
 
         $('.infoTab li').click(function(){
-            $(this).addClass('active').siblings('li').removeClass('active');
-            $('.infoList').eq($(this).index()).show().siblings('.infoList').hide();
+	        if($(this).attr("lang")!=null) {
+	        	location.href=$(this).attr("lang");
+	        }else{
+	        	$(this).addClass('active').siblings('li').removeClass('active');
+	            $('.infoList').eq($(this).index()).show().siblings('.infoList').hide();
+	        }
         });
 
         $('.setInfo a').click(function(){

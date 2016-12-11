@@ -21,8 +21,8 @@ public interface Constants {
 	/**
 	 * 业务申请大类
 	 */
-	public static final String LOAN_BUSINESS= "1";//申请中
-	public static final String INSTITUTION_APPLY = "2";//申请通过
-	public static final String EXPERT_APPLY = "3";//申请不通过
+	public static final String LOAN_BUSINESS= "1";//贷款业务
+	public static final String INSTITUTION_APPLY = "2";//机构申请
+	public static final String EXPERT_APPLY = "3";//专家申请
     
 }

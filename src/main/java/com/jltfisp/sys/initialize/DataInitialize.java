@@ -4,7 +4,9 @@
 
 package com.jltfisp.sys.initialize;
 
+import com.jltfisp.index.service.IndexService;
 import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.redis.RedisService;
 import com.jltfisp.web.user.service.UserService;
 import org.apache.log4j.Logger;
@@ -31,15 +33,22 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
     private RedisService<Serializable, Object> redisService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private IndexService indexService;
+    @Autowired
+    private LuceneService luceneService;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         //root application context
         if (contextRefreshedEvent.getApplicationContext().getParent() == null) {
             try {
+                indexService.synchronizedFlush();
+                luceneService.synchronizedBuildIndex();
                 cacheEmailAndName();
                 cacheVisitorPerm();
             } catch (Exception e) {
-                _logger.error("初始化缓存失败.....",e);
+                e.printStackTrace();
+                _logger.error("初始化应用数据失败.....",e);
             }
         }
     }

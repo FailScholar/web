@@ -1,7 +1,7 @@
   <#assign path=request.contextPath />
       <!--完成-->
       <div class="nlistCont">
-          <p class="ntit">申请信息一览</p>
+          <p style="text-align:center" class="ntit">申请信息预览</p>
           <table class="tab2" style="width:100%">
               <tbody>
               <tr class="tal">
@@ -167,19 +167,29 @@
                   <th colspan="10">申请单位承诺</th>
               </tr>
               <tr class="tal">
-                  <td colspan="10">以上信息全部真实有效</td>
+                  <td colspan="10" style="text-align:center;color:#d17d00">以上信息全部真实有效</td>
+              </tr>
+             <!--  <tr class="tal">
+                  <th colspan="3">单位（公章）</th>
+                  <th colspan="3">法定代表人（签名盖章）</th>
+                  <th colspan="4">企业基本户三排章</th>
+              </tr> -->
+              <tr>
+                  <th colspan="3">单位（公章）</th>
+                  <th colspan="3">法定代表人（签名盖章）</th>
+                  <th colspan="4">企业基本户三排章</th>
               </tr>
               <tr class="tal">
-                  <td colspan="3">单位（公章）</td>
-                  <td colspan="3">法定代表人（签名盖章）</td>
-                  <td colspan="4">企业基本户三排章</td>
+                  <td colspan="3"></td>
+                  <td colspan="3"></td>
+                  <td colspan="4">${jltfispCoBaseDto.basicAccountBank}&nbsp;${jltfispCoBaseDto.basicAccountName}&nbsp;${jltfispCoBaseDto.basicAccountCard}</td>
               </tr>
               </tbody>
           </table>
           <div class="logbtn" style="margin-top:30px;">
               <input type="button" class="can" value="返回修改" />
               <input type="button" class="nor" value="确认提交" />
-              <input type="button" class="nor" value="打印输出" />
+              <input id="dayinshuchu" type="button" class="nor" value="打印输出" />
           </div>
       </div>
 <script type="text/javascript">
@@ -251,5 +261,9 @@
               $('#jinyingdizhi').html(msg+officeAddress);
              }
         });
-});
+ //
+  $("#dayinshuchu").click(function(){
+	  location.href="${path}/business/printSubsidyPDF?businessType=5";
+  });
+ });
 </script>

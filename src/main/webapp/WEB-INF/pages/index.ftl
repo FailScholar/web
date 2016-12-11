@@ -43,15 +43,28 @@
                   <ul>
                       <li class="first1"><a href="${path}/index">首页</a><b></b></li>
                       <li><a href="${path}/anon/loan">贷款服务</a><b></b></li>
-                      <li><a href="${path}/anon/news">资讯中心</a><b></b></li>
-                      <li><a href="${path}/anon/policy">政策中心</a><b></b></li>
-                      <li><a href="${path}/anon/capital">专项资金</a><b></b></li>
-                      <li><a href="${path}/anon/institution">合作机构</a><b></b></li>
-                      <li><a href="${path}/anon/expert">专家资源</a><b></b></li>
-                      <li><a href="${path}/perm/financing">股权融资</a><b></b></li>
-                      <li><a href="${path}/anon/market">资本市场</a><b></b></li>
-                      <li><a href="${path}/perm/insurance">科技保险</a><b></b></li>
-                      <li class="last1"><a href="${path}/perm/cloud">云课堂</a><b></b></li>
+
+                      <li><a href="${path}/perm/news">${indexCache.navigations[2].value}</a><b></b></li>
+
+                      <li><a href="${path}/perm/policy">${indexCache.navigations[3].value}</a><b></b></li>
+                      <#if indexCache.navigations[4].txt = 1>
+                          <li><a href="${path}/perm/capital">${indexCache.navigations[4].value}</a><b></b></li>
+                      </#if>
+                      <li><a href="${path}/perm/institution">${indexCache.navigations[5].value}</a><b></b></li>
+                      <#if indexCache.navigations[6].txt = 1>
+                          <li><a href="${path}/perm/expert">${indexCache.navigations[6].value}</a><b></b></li>
+                      </#if>
+
+                      <#if indexCache.navigations[7].txt = 1>
+                          <li><a href="${path}/perm/financing">${indexCache.navigations[7].value}</a><b></b></li>
+                      </#if>
+                      <#if indexCache.navigations[8].txt = 1>
+                          <li><a href="${path}/perm/market">${indexCache.navigations[8].value}</a><b></b></li>
+                      </#if>
+                      <#if indexCache.navigations[9].txt = 1>
+                          <li><a href="${path}/perm/insurance">${indexCache.navigations[9].value}</a><b></b></li>
+                      </#if>
+                      <li class="last1"><a href="${path}/perm/cloud">${indexCache.navigations[10].value}</a><b></b></li>
                   </ul>
               </div>
               <div class="list">
@@ -61,7 +74,11 @@
                           <li><a href="javascript:;">最新动态</a></li>
                       </ul>
                       <ul class="fr">
-                          <li><b></b><a href="${path}/anon/detail">通知：2016吉林省金融信息大会邀请函</a><span>2016-06-06</span></li>
+                        <#list indexCache.notices as notices>
+                            <#if notices.mark = 'notice'>
+                              <li><b></b><a href="${path}/anon/detail">${notices.title}</a><span>${notices.publishTime ? date}</span></li>
+                            </#if>
+                        </#list>
                       </ul>
                   </div>
                   <div class="lbot">
@@ -79,10 +96,13 @@
                           <span class="pre-nex prev"></span>
                           <span class="pre-nex next"></span>
                           <div class="banner-con">
+                              <#--最新动态轮播图-->
                               <ul class="img-list clearfix">
-                                  <li><a href="#"><img src="${path}/resource/images/img1.jpg" alt="img"/></a></li>
-                                  <li><a href="#"><img src="${path}/resource/images/img2.jpg" alt="img"/></a></li>
-                                  <li><a href="#"><img src="${path}/resource/images/img3.jpg" alt="img"/></a></li>
+                              <#list indexCache.indices as indices>
+                                  <#if indices.contentType = 1>
+                                      <li><a href="${indices.url}"><img src="${path}/${indices.image}" alt="img"/></a></li>
+                                  </#if>
+                              </#list>
                               </ul>
                               <ul class="btn-list">
                                   <li class="cur"><span></span></li>
@@ -120,114 +140,111 @@
                   <div class="ml fl">
                       <div class="sel">
                           <ul>
-                              <li class="active" lang="${path}/anon/news"><a href="javascript:;">新闻资讯</a></li>
-                              <li lang="${path}/anon/cloud"><a href="javascript:;">视频资讯</a></li>
+                          <#list indexCache.columns as columns>
+                              <#if columns.mark = 'news_1'>
+                                  <li class="active" lang="${path}/perm/news"><a href="javascript:;">${columns.columnName}</a></li>
+                              </#if>
+                              <#if columns.mark = 'video'>
+                                  <li id="index_video" lang="${path}/perm/cloud"><a href="javascript:;">${columns.columnName}</a></li>
+                              </#if>
+                          </#list>
                           </ul>
-                          <a href="${path}/anon/news?type=2" onclick="setColumnIndex(2)">通知公告</a>
-                          <a href="${path}/anon/news?type=3" onclick="setColumnIndex(2)">银行快讯</a>
-                          <a href="${path}/anon/news?type=4" onclick="setColumnIndex(2)">投融资动态</a>
-                          <a href="${path}/anon/news" class="fr">更多&nbsp;&gt;</a>
+                          <#list indexCache.columns as columns>
+                              <#if columns.mark = 'news_2'>
+                                  <a href="${path}/perm/news?columnId=${columns.id}" onclick="setColumnIndex(2)">${columns.columnName}</a>
+                              </#if>
+                          </#list>
+                          <a href="${path}/perm/news" class="fr">更多&nbsp;&gt;</a>
                       </div>
                       <div class="clear"></div>
                       <div class="selCont">
+                          <#--新闻资讯列表开始-->
                           <ul class="fl">
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(2)">
-                                  <h5>2016上股交科技创新挂牌项目投融资对接会活动通知</h5>
-                                  <span class="sp1">2016-11-16</span><span>上海股权托管交易中心</span>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(2)">
-                                  <h5>银监会发布2016年三季度主要监管指标数据</h5>
-                                  <span class="sp1">2016-11-15</span><span>中国银监会</span>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(2)">
-                                  <h5>期货投资者保障基金管理办法及配套规定发布</h5>
-                                  <span class="sp1">2016-11-15</span><span>京华时报</span>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(2)">
-                                  <h5>2016天使及早期投资峰会亮相全球创业周</h5>
-                                  <span class="sp1">2016-11-15</span><span>市科创中心</span>
-                              </a></li>
+                              <#list indexCache.notices as notices>
+                                  <#if notices.mark = 'news'>
+                                      <li><a href="${path}/anon/detail" onclick="setColumnIndex(2)">
+                                          <h5>${notices.title}</h5>
+                                          <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
+                                      </a></li>
+                                  </#if>
+                              </#list>
                           </ul>
+                          <#--新闻资讯列表结束-->
+                          <#--新闻资讯图片开始-->
                           <ul class="imgList fr">
-                              <li class="active"><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}/resource/images/img.jpg" alt="img" /></a></li>
-                              <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}/resource/images/imgb.jpg" alt="img" /></a></li>
-                              <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}/resource/images/imgc.jpg" alt="img" /></a></li>
-                              <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}/resource/images/imgd.jpg" alt="img" /></a></li>
+                          <#list indexCache.notices as notices>
+                              <#if notices.mark = 'news'>
+                                  <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}/${notices.image}" alt="img" /></a></li>
+                              </#if>
+                          </#list>
                           </ul>
+                          <#--新闻资讯图片结束-->
                       </div>
                       <div class="selCont" style="display:none;">
+                          <#--视频资源列表开始-->
                           <ul class="fl">
-                              <li><a href="javascript:;">
-                                  <h5>发现多彩世界，百度从8亿中文网页中提取各类图片</h5>
-                                  <span class="sp1">2016-06-06</span><span>新浪娱乐</span>
-                              </a></li>
-                              <li><a href="javascript:;">
-                                  <h5>发现多彩世界，百度从8亿中文网页中提取各类图片</h5>
-                                  <span class="sp1">2016-06-06</span><span>新浪娱乐</span>
-                              </a></li>
-                              <li><a href="javascript:;">
-                                  <h5>发现多彩世界，百度从8亿中文网页中提取各类图片</h5>
-                                  <span class="sp1">2016-06-06</span><span>新浪娱乐</span>
-                              </a></li>
-                              <li><a href="javascript:;">
-                                  <h5>发现多彩世界，百度从8亿中文网页中提取各类图片</h5>
-                                  <span class="sp1">2016-06-06</span><span>新浪娱乐</span>
-                              </a></li>
+                          <#list indexCache.notices as notices>
+                              <#if notices.mark = 'video'>
+                                  <li><a href="${path}/anon/cloud/detail?id=${notices.id}&colName=">
+                                      <h5>${notices.title}</h5>
+                                      <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
+                                  </a></li>
+                              </#if>
+                          </#list>
                           </ul>
+                          <#--视频资源列表结束-->
+
+                          <#--视频资源图片开始-->
                           <ul class="imgList fr">
-                              <li class="active"><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}/resource/images/imgc.jpg" alt="img" /></a></li>
-                              <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}/resource/images/imgb.jpg" alt="img" /></a></li>
-                              <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}/resource/images/imgc.jpg" alt="img" /></a></li>
-                              <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}/resource/images/imgd.jpg" alt="img" /></a></li>
+                              <#list indexCache.notices as notices>
+                                  <#if notices.mark = 'video'>
+                                      <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}/${notices.image}" alt="img" /></a></li>
+                                  </#if>
+                              </#list>
                           </ul>
+                          <#--视频资源图片结束-->
                       </div>
                   </div>
                   <div class="mr fr">
                       <div class="sel">
                           <ul>
-                              <li class="active" lang="${path}/anon/policy"><a href="javascript:;">政策中心</a></li>
-                              <li lang="${path}/anon/financing"><a href="javascript:;">融资项目</a></li>
+                          <#list indexCache.columns as columns>
+                              <#if columns.mark = 'policy'>
+                                  <li class="active" lang="${path}/perm/policy"><a href="javascript:;">${columns.columnName}</a></li>
+                              </#if>
+                              <#if columns.mark = 'financing'>
+                                  <li lang="${path}/perm/financing"><a href="javascript:;">${columns.columnName}</a></li>
+                              </#if>
+                          </#list>
                           </ul>
-                          <a href="${path}/anon/policy" class="fr" onclick="setColumnIndex(3)">更多&nbsp;&gt;</a>
+                          <a href="${path}/perm/policy" class="fr" onclick="setColumnIndex(3)">更多&nbsp;&gt;</a>
                       </div>
                       <div class="clear"></div>
                       <div class="selCont">
+                          <#--政策中心列表开始-->
                           <ul class="news fl">
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
-                                  <h5>关于完善股权激励和技术入股有关所得税政策的通知</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
-                                  <h5>国务院关于促进创业投资持续健康发展的若干意见</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
-                                  <h5>国务院办公厅关于印发互联网金融风险专项整治工作实施方案的通知</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
-                                  <h5>国务院印发《"十三五"国家科技创新规划》</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
-                                  <h5>促进中小企业国际化发展五年行动计划（2016－2020年）</h5>
-                              </a></li>
+                          <#list indexCache.notices as notices>
+                              <#if notices.mark = 'policy'>
+                                  <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
+                                      <h5>${notices.title}</h5>
+                                  </a></li>
+                              </#if>
+                          </#list>
                           </ul>
+                          <#--政策中心列表结束-->
                       </div>
                       <div class="selCont" style="display:none;">
+                          <#--股权融资列表开始-->
                           <ul class="news fl">
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
-                                  <h5>蜂马（上海）网络科技有限公司项目股权融资1000万元</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
-                                  <h5>上海际动网络科技股份有限公司项目股权融资1500万元</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
-                                  <h5>上海大周信息科技有限公司项目股权融资1000万元</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
-                                  <h5>上海品兴科技有限公司项目股权融资1200万元</h5>
-                              </a></li>
-                              <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
-                                  <h5>上海鼎晶生物医药科技股份有限公司股权融资5000万元</h5>
-                              </a></li>
+                          <#list indexCache.notices as notices>
+                              <#if notices.mark = 'financing'>
+                                  <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
+                                      <h5>${notices.title}</h5>
+                                  </a></li>
+                              </#if>
+                          </#list>
                           </ul>
+                          <#--股权融资列表结束-->
                       </div>
                   </div>
               </div>
@@ -239,40 +256,56 @@
               <div class="scroll">
                   <a href="javascript:;" class="arrow toLeft"></a>
                   <a href="javascript:;" class="arrow toRight"></a>
+                  <#--底部广告位开始-->
                   <ul>
-                      <li><a href="javascript:;"><img style="width: 771px;height: 259px" src="${path}/resource/images/img1.jpg" alt="img" /></a></li>
-                      <li><a href="javascript:;"><img style="width: 771px;height: 259px" src="${path}/resource/images/img2.jpg" alt="img" /></a></li>
-                      <li><a href="javascript:;"><img style="width: 771px;height: 259px" src="${path}/resource/images/img3.jpg" alt="img" /></a></li>
+                  <#list indexCache.indices as indices>
+                      <#if indices.contentType = 2>
+                          <li><a href="${indices.url}"><img style="width: 771px;height: 259px" src="${path}/${indices.image}" alt="img" /></a></li>
+                      </#if>
+                  </#list>
                   </ul>
+                  <#--底部广告位结束-->
                   <div class="mark"><i class="active"></i><i></i><i></i></div>
               </div>
           </div>
           <div class="mr fr">
               <div class="sel">
                   <ul>
-                      <li class="active" lang="${path}/anon/institution"><a href="javascript:;">合作机构</a></li>
-                      <li  lang="${path}/anon/expert"><a href="javascript:;">专家资源</a></li>
+                  <#list indexCache.columns as columns>
+                      <#if columns.mark = 'institut'>
+                          <li class="active" lang="${path}/perm/institution"><a href="javascript:;">${columns.columnName}</a></li>
+                      </#if>
+                      <#if columns.mark = 'expert'>
+                          <li  lang="${path}/perm/expert"><a href="javascript:;">${columns.columnName}</a></li>
+                      </#if>
+                  </#list>
                   </ul>
-                  <a href="${path}/anon/institution" class="fr">更多&nbsp;&gt;</a>
+                  <a href="${path}/perm/institution" class="fr">更多&nbsp;&gt;</a>
               </div>
               <div class="clear"></div>
               <div class="selCont">
+                  <#--合作机构列表开始-->
                   <ul class="team fl">
                       <#--最多显示8个，不加更多-->
-                      <li><a href="${path}/anon/institution?type=1">合作银行</a></li>
-                      <li><a href="${path}/anon/institution?type=2">担保公司</a></li>
-                      <li><a href="${path}/anon/institution?type=3">租赁公司</a></li>
-                      <li><a href="${path}/anon/institution?type=4">保险公司</a></li>
-                      <li><a href="${path}/anon/institution?type=5">中介公司</a></li>
+                      <#list indexCache.organizes as organizes>
+                          <#if organizes.organize = 'institut'>
+                              <li><a href="${path}/perm/institution/${organizes.id}?columnId=${organizes.id}&page=1">${organizes.columnName}</a></li>
+                          </#if>
+                      </#list>
                   </ul>
+                  <#--合作机构列表结束-->
               </div>
               <div class="selCont" style="display:none;">
+                  <#--专家资源列表开始-->
                   <ul class="team fl">
                   <#--最多显示8个，不加更多-->
-                      <li><a href="${path}/anon/expert?type=1">科技金融专家</a></li>
-                      <li><a href="${path}/anon/expert?type=2">科技金融专员</a></li>
-                      <li><a href="${path}/anon/expert?type=3">科技信贷专员</a></li>
+                      <#list indexCache.organizes as organizes>
+                          <#if organizes.organize = 'expert'>
+                              <li><a href="${path}/perm/expert/${organizes.id}?columnId=${organizes.id}&page=1">${organizes.columnName}</a></li>
+                          </#if>
+                      </#list>
                   </ul>
+                  <#--专家资源列表结束-->
               </div>
           </div>
       </div>
@@ -281,10 +314,15 @@
   </div>
   <#include "website/common/footer.ftl" />
 
-  <div class="fly" id="fly"><a href="javascript:;" class="close">&nbsp;</a><a href="http://www.diaochapai.com/survey/1b4aa295-3f9b-4d33-9d78-47698a267042" target="view_window">《科技企业融资服务调查问卷》</a></div>
+  <#list indexCache.indices as indices>
+      <#if indices.contentType = 3>
+      <div class="fly" id="fly"><a href="javascript:;" class="close">&nbsp;</a><a href="${indices.url}" target="view_window">${indices.title}</a></div>
+      </#if>
+  </#list>
   </body>
 </html>
 <script type="text/javascript">
+    var colName = $('#index_video').find('a').html();
     $(document).ready(function(e) {
         $('.ltop .fl li').click(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
@@ -403,6 +441,8 @@
     });
 
     $('.selCont').each(function(index, element) {
+        $('.selCont').find('.imgList li').eq(0).show();
+        $('.selCont').find('.imgList li').eq(4).show();
         $(this).find('ul:first li').mouseenter(function(){
             $(this).parents('.selCont').find('.imgList li').hide().eq($(this).index()).show();
         });

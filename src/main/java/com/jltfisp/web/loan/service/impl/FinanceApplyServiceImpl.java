@@ -86,8 +86,8 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 
 
 	@Override
-	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id) {
-		return  this.financeApplyDao.getJltfispFinanceAndShareholdersDto(id);
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id,Integer type) {
+		return  this.financeApplyDao.getJltfispFinanceAndShareholdersDto(id,type);
 	}
 
 

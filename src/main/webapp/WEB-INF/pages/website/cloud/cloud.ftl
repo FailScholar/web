@@ -18,8 +18,23 @@
     <div class="info">
         <ul class="infoTab">
             <#list colList as column>
-                <li code="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+            	<#if column_index lt 5>
+                	<li code="${column.id}" onclick="infoTabClick(${column.id})"><a href="javascript:void(0);">${column.columnName}</a></li>
+                </#if>
             </#list>
+            <#if colList?size gt 5>
+            <li>
+            <a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
+	       	 <select id="selectId" onchange="getList()">
+	       		<option value="0">-选择更多机构-</option>
+	       	 	<#list colList as afterFiveList>
+	       	 		<#if afterFiveList_index gt 4>
+	       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
+	       	 		</#if>
+	       	 	</#list>
+	       	 </select>
+       	 </li>
+       	 </#if>
         </ul>
         <div class="clear"></div>
         <div id="colListDetail"></div>
@@ -40,14 +55,28 @@
     var infoTab = $("div.info ul.infoTab");
     $(function(){
         infoTab.find("li").eq(0).addClass("active");
-        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find("li").eq(0).attr("code"),{currentPage :1});
+        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find("li").eq(0).attr("code"),{'pager.offset' :0});
     });
 
-    $('.infoTab li').click(function(){
-        $('#colListDetail').load("${path}/perm/cloud/"+$(this).attr("code"),{currentPage :1});
-    });
+
+	function infoTabClick(columnid) {
+		$('#colListDetail').load("${path}/perm/cloud/"+columnid,{'pager.offset' :0});
+	}
+	
+	function getList(){
+	  var columnId = $('select option:selected').val();
+	  if(columnId!=0){
+		  infoTabClick(columnId);
+	  }
+	}
 
     function selectPage(page) {
-        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find('li.active').attr('code'),{currentPage :page});
+        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find('li.active').attr('code'),{'pager.offset' :0});
     }
+     $(document).ready(function () {
+        $("#selectId").bind("change",function(){
+            $(this).parent().attr('code',$(this).val());
+            $(this).parent().find('a').text($(this).html)
+        });
+    });
 </script>

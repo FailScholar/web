@@ -70,6 +70,6 @@
 		jcb.technology_qualifications as technologyqualifications,
 		jcb.otherDesc as otherDesc
 	from jltfisp_co_base jcb
-	where jcb.user_id=#{user_id}
+	where jcb.user_id=#{user_id} and jcb.business_type=#{business_type}
 	</select>
 </mapper>

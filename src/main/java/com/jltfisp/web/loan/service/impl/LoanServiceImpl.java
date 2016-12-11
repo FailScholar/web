@@ -348,24 +348,32 @@ public class LoanServiceImpl implements LoanService {
 	@Override
 	public JltfispCoAll getApplyALL(int userid,int businesstype) {
 		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype);
+		JltfispCoAll CoAll=new JltfispCoAll();
+		if(null != coBase){
 		JltfispCoOther  coOther=coOtherMapper.getCoOtherContext(coBase.getId());
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
 		JltfispCoDebt   coDebt=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year-3));
+		JltfispCoDebt   coDebt2=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year-2));
+		JltfispCoDebt   coDebt3=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year-1));
+		JltfispCoDebt   coDebt4=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year));
 		List<JltfispCoFile>  coFileList=coFileMapper.getCoFileContextList(coBase.getId());
 		List<JltfispCoProfitDto> coProfit=coProfitMapper.getCoProfitContext(coBase.getId());
 		JltfispCoProfile coProfile=coProfileMapper.getCoprofileContext(coBase.getId());
 		List<JltfispCoFinancialDto> coFinancialList=coFinancialMapper.getCoCoFinancialContext(userid);
 		JltfispCoFillInApply coFillInApply=coFillInApplyMapper.getCoFillInApplyContext(userid,businesstype);
-		JltfispCoAll CoAll=new JltfispCoAll();
 		CoAll.setJltfispCoBase(coBase);
 		CoAll.setJltfispCoDebt(coDebt);
+		CoAll.setJltfispCoDebtTwo(coDebt2!=null?coDebt2:new JltfispCoDebt());
+		CoAll.setJltfispCoDebtThree(coDebt3!=null?coDebt3:new JltfispCoDebt());
+		CoAll.setJltfispCoDebtFour(coDebt4!=null?coDebt4:new JltfispCoDebt());
 		CoAll.setJltfispCoOther(coOther);
 		CoAll.setJltfispCoFileList(coFileList);
 		CoAll.setJltfispCoProfit(coProfit);
 		CoAll.setJltfispCoProfile(coProfile);
 		CoAll.setJltfispCoFinancialList(coFinancialList);
 		CoAll.setJltfispCoFillInApply(coFillInApply);
+		}
 		return CoAll;
 	}
 

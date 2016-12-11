@@ -54,16 +54,6 @@ public class InstitutionServiceImpl extends BaseServiceImpl<JltfispInstitution> 
 		return this.institutionDao.getInstitutionPageCount(columnId);
 	}
 
-	@Override
-	public List<JltfispInstitution> getInstitutionPageList(Integer rows, Integer pageSize,Integer columnId) {
-		HashMap map=new HashMap();
-    	map.put("rows", rows);
-    	map.put("pageSize", pageSize);
-    	map.put("columnId", columnId);
-    	System.out.println("rows="+map.get("rows"));
-        return this.institutionDao.getInstitutionPageList(map);
-	}
-
     @Override
     public Integer saveInstitution(JltfispInstitution institution) {
         int row = institutionDao.insertRecord(institution);

@@ -84,7 +84,7 @@
                   <td>${psInfoList.policyNumber}</td>
                   <td>${psInfoList.premiumMoney}</td>
                   <td>${psInfoList.loanBank}</td>
-                  <td>${psInfoList.InsuranceCompany}</td>
+                  <td>${psInfoList.insuranceCompany}</td>
                   <td>${psInfoList.lendDate}</td>
                   <td>${psInfoList.repaymentDate}</td>
                   <td>${psInfoList.principalInterest}</td>
@@ -173,7 +173,17 @@
                   <th colspan="6">新获政府项目资助情况名称和资助金额</th>
               </tr>
               <tr>
-                  <td colspan="4">${jltfispPsMaterialInfo.cognizance}</td>
+                  <td colspan="4">
+                  	 <#if jltfispPsMaterialInfo.cognizance==1>
+                                              私营企业
+                  <#elseif jltfispPsMaterialInfo.cognizance==2 >
+                                             中外合资企业
+                  <#elseif jltfispPsMaterialInfo.cognizance==3 >
+                                               国有企业
+                  <#elseif jltfispPsMaterialInfo.cognizance==4>
+                                                集体企业
+                  </#if>
+                  </td>
                   <td colspan="6">${jltfispPsMaterialInfo.meta}</td>
               </tr>
               <tr>
@@ -211,13 +221,6 @@
 <script>
 	  function printdiv()
 {
-var headstr = "<html><head><title></title></head><body>";
-var footstr = "</body>";
-var newstr = document.getElementById("printDiv").innerHTML;
-var oldstr = document.body.innerHTML;
-document.body.innerHTML = headstr+newstr+footstr;
-window.print(); 
-document.body.innerHTML = oldstr;
-return false;
+location.href="${path}/business/printSubsidyPDF?businessType=5"
 }
 </script>

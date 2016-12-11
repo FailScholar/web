@@ -15,6 +15,12 @@ public class JltfispCoAll {
     JltfispCoOther jltfispCoOther;
     //资产负债表
     JltfispCoDebt JltfispCoDebt;
+    //资产负债表 前年
+    JltfispCoDebt jltfispCoDebtTwo;
+    //资产负债表 去年
+    JltfispCoDebt jltfispCoDebtThree;
+    //资产负债表 当年
+    JltfispCoDebt jltfispCoDebtFour;
     //附件表
     List<JltfispCoFile> jltfispCoFileList;
     //利润表
@@ -76,5 +82,25 @@ public class JltfispCoAll {
 			JltfispCoFillInApply jltfispCoFillInApply) {
 		this.jltfispCoFillInApply = jltfispCoFillInApply;
 	}
+	public JltfispCoDebt getJltfispCoDebtTwo() {
+		return jltfispCoDebtTwo;
+	}
+	public void setJltfispCoDebtTwo(JltfispCoDebt jltfispCoDebtTwo) {
+		this.jltfispCoDebtTwo = jltfispCoDebtTwo;
+	}
+	public JltfispCoDebt getJltfispCoDebtThree() {
+		return jltfispCoDebtThree;
+	}
+	public void setJltfispCoDebtThree(JltfispCoDebt jltfispCoDebtThree) {
+		this.jltfispCoDebtThree = jltfispCoDebtThree;
+	}
+	public JltfispCoDebt getJltfispCoDebtFour() {
+		return jltfispCoDebtFour;
+	}
+	public void setJltfispCoDebtFour(JltfispCoDebt jltfispCoDebtFour) {
+		this.jltfispCoDebtFour = jltfispCoDebtFour;
+	}
+	
     
+	
 }

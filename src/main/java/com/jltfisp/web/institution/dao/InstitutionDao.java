@@ -19,8 +19,6 @@ public interface InstitutionDao extends BaseMapper<JltfispInstitution> {
 
 	public int getInstitutionPageCount(@Param("columnId")Integer columnId);
 
-	public List<JltfispInstitution> getInstitutionPageList(Map map);
-
     public JltfispInstitution getInstitutionByUserId(@Param("userId")Integer userId); 
 
 }

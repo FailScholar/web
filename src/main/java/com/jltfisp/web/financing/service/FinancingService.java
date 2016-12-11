@@ -30,4 +30,5 @@ public interface FinancingService {
      */
     List<JltfispFinancing> getFinancingList(Integer columnid,int page,Integer type);
 
+    int getFinancingCount(Integer columnid,Integer type);
 }

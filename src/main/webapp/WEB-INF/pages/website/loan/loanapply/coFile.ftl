@@ -11,7 +11,7 @@
                                 	<td><b class="red">*</b>工商营业执照(正本)</td>
                                     <td>
                                        <#if coAll.jltfispCoFileList[0] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[0].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[0].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -25,7 +25,7 @@
                                 	<td><b class="red">*</b>组织机代码证(正本)</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[1] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[1].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[1].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -39,7 +39,7 @@
                                 	<td><b class="red">*</b>税务登记证(正本)</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[2] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[2].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[2].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -53,7 +53,7 @@
                                 	<td><b class="red">*</b>法人代表、核心股东身份证或个人信用报告查询授权书</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[3] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[3].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[3].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -67,7 +67,7 @@
                                 	<td><b class="red">*</b>专利证书或其他科技资质证明（如有请必定提供）</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[4] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[4].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[4].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -81,7 +81,7 @@
                                 	<td><b class="red">*</b>公司介绍或宣传材料（如有请提供）</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[5] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[5].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[5].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -95,7 +95,7 @@
                                 	<td><b class="red">*</b>主要销售合同或订单（如有请提供）</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[6] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[6].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[6].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
@@ -109,7 +109,7 @@
                                 	<td><b class="red">*</b>其他</td>
                                     <td>
                                     	<#if coAll.jltfispCoFileList[7] !=null>
-                                    	<img width="110px" height="110px;"  src="${path}/resource/fileImage/${coAll.jltfispCoFileList[7].filepath}" class="blank" />
+                                    	<img width="110px" height="110px;"  src="${path}${coAll.jltfispCoFileList[7].filepath}" class="blank" />
                                         <#else>
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>

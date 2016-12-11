@@ -27,7 +27,7 @@ public interface FinanceApplyService {
 
 	public void updateJltfispCoBaseInfo(Integer id);
 
-	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id);
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id,Integer type);
 
 	public void addShareholders(JltfispFinShareholder jltfispFinShareholder);
 

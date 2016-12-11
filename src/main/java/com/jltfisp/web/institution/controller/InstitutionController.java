@@ -15,9 +15,11 @@ import com.jltfisp.web.institution.service.IInstitutManageService;
 import com.jltfisp.web.institution.service.InstitutionService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+import com.jltfisp.web.pager.entity.PagerModel;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -60,7 +62,7 @@ public class InstitutionController {
 	  * @param @return
 	  * @return String
 	  */
-    @RequestMapping("/anon/institution")
+    @RequestMapping("/perm/institution")
     public String institution(HttpServletRequest request){
     	List<JltfispColumn> columnList=new ArrayList<JltfispColumn>();
     	List<JltfispColumn> foreFiveList = new ArrayList<JltfispColumn>();
@@ -77,22 +79,6 @@ public class InstitutionController {
     				afterFiveList.add(columnList.get(i));
     		}
     	}
-    	/**首次进入合作机构，展示第一个的分页**/
-//    	String offset=request.getParameter("pager.offset");
-//    	int rows;
-//    	if(offset !=null){
-//    		rows=Integer.parseInt(request.getParameter("pager.offset"));
-//    	}else{
-//    		rows=0;
-//    	}
-//        int total =institutionService.getInstitutionPageCount(columnList.get(0).getId());
-//        List<JltfispInstitution> datas=institutionService.getInstitutionPageList(rows, 5,columnList.get(0).getId());
-//        PagerModel pm = new PagerModel();
-//        pm.setDatas(datas);
-//        pm.setTotal(total);
-//        request.setAttribute("pm", pm);
-//        request.setAttribute("url", "anon/institution");
-    	
     	request.setAttribute("columnList", columnList);
     	request.setAttribute("foreFiveList", foreFiveList);
     	request.setAttribute("afterFiveList", afterFiveList);
@@ -108,26 +94,30 @@ public class InstitutionController {
      * @param @return
      * @return ModelAndView
      */
-    @RequestMapping("/anon/getInstitutionList")
-    public ModelAndView getInstitutionList(Integer columnId, Integer page) {
+    @RequestMapping("/perm/institution/{columnId}")
+    public ModelAndView getInstitutionList(@PathVariable Integer columnId,HttpServletRequest request) {
+    	    int rows=Integer.parseInt(request.getParameter("pager.offset"));
     	    ModelAndView mv=new ModelAndView("/website/institution/institutionList");
-    	    List<JltfispInstitution> institutionList = this.institutionService.getInstitutionList(columnId,page);
-    	    PageInfo pageInfo = new PageInfo<>(institutionList);
-    	    mv.addObject("pageInfo",pageInfo);
-    	    mv.addObject("institutionList", institutionList);
+    	    List<JltfispInstitution> datas = this.institutionService.getInstitutionList(columnId,rows);
+    	    int total=this.institutionService.getInstitutionPageCount(columnId);
+    	    PagerModel pm = new PagerModel();
+    	    pm.setDatas(datas);
+    	    pm.setTotal(total);
+    	    mv.addObject("columnId",columnId);
+    	    mv.addObject("url","anon/institution");
+    	    mv.addObject("pm",pm);
     	    return mv;
     }
     
     @RequestMapping("/anon/getInstitutionDetail")
     public String getInstitutionDetail(HttpServletRequest request,Integer id){
-    	
     	JltfispInstitution jltfispInstitutionDetail=this.institutionService.getInstitutionDetail(id);
     	request.setAttribute("jltfispInstitutionDetail", jltfispInstitutionDetail);
         return "/website/institution/institutionDetail";
     }
     
     /**
-     * 检查是否填写过申请合作机构
+     * 检查是否有权限或是否已填写过申请合作机构
      * @param request
      * @param columnId
      * @return
@@ -139,6 +129,13 @@ public class InstitutionController {
         String msg = "";
         //获取当前用户登录信息
         JltfispUser user=loginService.getCurrentUser();
+        
+        if(user.getType() != null && user.getType() == 1){
+            //个人用户
+            msg="对不起，您不是企业会员不能申请成为合作机构！";
+            return msg;
+        }
+        
         BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),"7");
         if(businessApplayAudit != null){
             JltfispInstitution institution = institutionService.getInstitutionByUserId(user.getId());
@@ -162,8 +159,8 @@ public class InstitutionController {
     @RequestMapping("/anon/institutionGuide")
     public String institutionGuide(HttpServletRequest request, Integer columnId) {
         InstitutManage institutManage = null;
-        if(redisService.getV(columnId) != null){
-            institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV(columnId)),
+        if(redisService.getV("InstitutManage"+columnId) != null){
+            institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("InstitutManage"+columnId)),
                     InstitutManage.class);
         }else{
             institutManage = institutManageService.selectByColumnId(columnId);
@@ -186,8 +183,8 @@ public class InstitutionController {
     @RequestMapping("/anon/institutionApply")
     public String institutionApply(HttpServletRequest request,Integer columnId) {
         InstitutManage institutManage = null;
-        if(redisService.getV(columnId) != null){
-            institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV(columnId)),
+        if(redisService.getV("InstitutManage"+columnId) != null){
+            institutManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("InstitutManage"+columnId)),
                     InstitutManage.class);
         }else{
             institutManage = institutManageService.selectByColumnId(columnId);

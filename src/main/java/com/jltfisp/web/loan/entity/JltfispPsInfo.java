@@ -42,7 +42,7 @@ public class JltfispPsInfo {
      * 贷款银行
      */
 	@Column(name="loan_bank")
-	private Integer loanBank;
+	private String loanBank;
 	/**
      * 保险公司
      */
@@ -82,7 +82,7 @@ public class JltfispPsInfo {
 	
 
 	public JltfispPsInfo(Integer id, Integer infoId, String contractNumber,
-			String policyNumber, Double loanMoney, Integer loanBank,
+			String policyNumber, Double loanMoney, String loanBank,
 			String insuranceCompany, Double premiumMoney, String repaymentDate,
 			Double principalInterest, String lendDate, Integer loanTerm) {
 		super();
@@ -132,10 +132,10 @@ public class JltfispPsInfo {
 	public void setLoanMoney(Double loanMoney) {
 		this.loanMoney = loanMoney;
 	}
-	public Integer getLoanBank() {
+	public String getLoanBank() {
 		return loanBank;
 	}
-	public void setLoanBank(Integer loanBank) {
+	public void setLoanBank(String loanBank) {
 		this.loanBank = loanBank;
 	}
 

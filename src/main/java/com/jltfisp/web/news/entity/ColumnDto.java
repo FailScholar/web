@@ -68,7 +68,7 @@ public ColumnDto(Integer id, String columnName, Integer parentColumn,
 
 public ColumnDto(Integer id, String columnName, String title,
 		String content, String source, String link, Date publishTime,
-		String contentReview, Integer pv) {
+		String contentReview, Integer pv,Integer parentColumn) {
 	super();
 	this.id = id;
 	this.columnName = columnName;
@@ -79,6 +79,7 @@ public ColumnDto(Integer id, String columnName, String title,
 	this.publishTime = publishTime;
 	this.contentReview = contentReview;
 	this.pv = pv;
+	this.parentColumn =parentColumn;
 }
 public Integer getId() {
 	return id;

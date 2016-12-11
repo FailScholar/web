@@ -7,16 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
 import com.jltfisp.web.capital.entity.JltfispCapital;
 import com.jltfisp.web.capital.service.CapitalService;
 import com.jltfisp.web.column.entity.JltfispColumn;
 
-
 @Controller
-@RequestMapping("/anon")
 public class CapitalController {
 	
 	@Autowired
@@ -31,29 +31,29 @@ public class CapitalController {
     * @param @return
     * @return String
     */
-    @RequestMapping("/capital")
+    @RequestMapping("/perm/capital")
     public String capital(HttpServletRequest request){
-    	List<JltfispColumn> columnList=new ArrayList<JltfispColumn>();
-    	Integer parentColumn=5;
-    	columnList=this.capitalService.getJltfispColumnList(parentColumn);
+    	List<JltfispColumn> columnList=this.capitalService.getJltfispColumnList(5);
     	request.setAttribute("columnList", columnList);
         return "/website/capital/capital";
     }
     
     /**
      * 
-     * @description 通过二级菜单的columnNo获取二级菜单下的信息集合
+     * @description 通过二级菜单的columnId获取二级菜单下的信息集合
      * @author chenyun
-     * @date 2016年11月28日 下午3:52:13 
-     * @param @param columnId 主菜单的
+     * @date 2016年12月8日 下午2:28:04 
+     * @param @param columnId
+     * @param @param page
      * @param @return
      * @return ModelAndView
      */
-    @RequestMapping("/getCapitalInfoList")
-    public ModelAndView getCapitalInfoList(Integer columnNo){
-    	List<JltfispCapital> captialList = new ArrayList<JltfispCapital>();
-    	captialList=this.capitalService.getCapitalInfoList(columnNo);
+    @RequestMapping("/perm/capital/{columnId}")
+    public ModelAndView getCapitalInfoList(@PathVariable Integer columnId, Integer page){
     	ModelAndView mv=new ModelAndView("/website/capital/capitalInfoList");
+    	List<JltfispCapital> captialList = this.capitalService.getCapitalList(columnId,page);
+    	PageInfo pageInfo = new PageInfo<>(captialList);
+    	mv.addObject("pageInfo",pageInfo);
     	mv.addObject("captialList", captialList);
     	return mv;
     }
@@ -68,7 +68,7 @@ public class CapitalController {
      * @param @return
      * @return String
      */
-	@RequestMapping("/getCapitalDetail")
+	@RequestMapping("/anon/getCapitalDetail")
 	public String getCapitalDetail(HttpServletRequest request,Integer id){
 		/**浏览记录加一**/
 		this.capitalService.updateCapitalPv(id);

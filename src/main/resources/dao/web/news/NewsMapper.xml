@@ -25,7 +25,7 @@
 	<!--根据新闻内容id获取具体的新闻内容  -->
 	<select id="getNewsInfoById" resultType="com.jltfisp.web.news.entity.ColumnDto" parameterType="int">
 	   SELECT jn.id AS id, jcm.columnName AS columnName,jn.title AS title, jn.content AS content, jn.source AS source,
-	jn.link AS link, jn.publish_time AS publishTime, jn.content_review AS contentReview, jn.pv AS pv FROM jltfisp_column_manage jcm,
+	jn.link AS link, jn.publish_time AS publishTime, jn.content_review AS contentReview, jn.pv AS pv,jcm.parentColumn as parentColumn FROM jltfisp_column_manage jcm,
 	jltfisp_news jn WHERE jn.column_id = jcm.id AND jcm.isdelete = 1 AND jn.state = 1 AND jn.id =#{id}
 	</select>
 	<!--更新浏览记录,浏览记录每访问一次+1 -->

@@ -115,20 +115,20 @@
          index = $(this).parents('p.ntit').nextAll("table:last").index()-1;
          var content="<table width='100%' class='tab3 module'>"+
          "<tr> <td colspan='4'><a href='javascript:;' class='fr delete'>删除</a></td></tr>"+
-         "<tr><th style='width:8%'>借款合同编号</th><td colspan='3'><input  name='jltfispPsInfoList["+index+"].contractNumber'  type='text' class='txt validate[required,minSize[1],maxSize[1000]] hetongbianhao' placeholder='请输入合同编号' /></td></tr>"+
+         "<tr><th style='width:8%'>借款合同编号</th><td colspan='3'><input  name='jltfispPsInfoList["+index+"].contractNumber'  type='text' class='txt validate[minSize[1],maxSize[1000]] hetongbianhao' placeholder='请输入合同编号' /></td></tr>"+
          "<tr><th><b class='red'>*</b><b>保单号</b></th>"+
-         "<td><input name='jltfispPsInfoList["+index+"].policyNumber' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baodanhao' placeholder='请输入' /></td>"+
+         "<td><input name='jltfispPsInfoList["+index+"].policyNumber' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baodanhao' placeholder='请输入保单号' /></td>"+
          "<th><b class='red'>*</b><b>担保金额</b></th>"+
-         "<td><input name='jltfispPsInfoList["+index+"].premiumMoney' type='text' class='txt validate[required,minSize[1],maxSize[10]] danbaojiner' placeholder='请输入' />万元</td></tr>"+
+         "<td><input name='jltfispPsInfoList["+index+"].premiumMoney' type='text' class='txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]] danbaojiner' placeholder='请输入担保金额' />万元</td></tr>"+
          "<tr><th><b class='red'>*</b><b>贷款银行</b></th><td>"+
-         "<input name='jltfispPsInfoList["+index+"].loanBank' type='text' class='txt validate[required,minSize[1],maxSize[1000]] daikuanyinhang' placeholder='请输入' /></td>"+
+         "<input name='jltfispPsInfoList["+index+"].loanBank' type='text' class='txt validate[required,minSize[1],maxSize[1000]] daikuanyinhang' placeholder='请输入贷款银行' /></td>"+
          "<th><b class='red'>*</b><b>保险/担保公司</b></th>"+
-         "<td> <input name='jltfispPsInfoList["+index+"].insuranceCompany' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baoxiangongsi' placeholder='请输入' /></td>"+
-         "</tr><tr><th>实际支付保额金额</th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[required,minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入' />元</td></tr>"+
-         "<tr><th>实际还款日</th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt validate[required] shijihuankuanri' placeholder='请输入' /></td>"+
-         "<th>实际支付本息(本金+利息)</th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[required,custom[numberAnddit], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入' />元</td></tr>"+
-         "<tr><th>实际放贷日</th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt validate[required] shijifangdairi' placeholder='请输入实际放贷日' /></td>"+
-         "<th>贷款期限</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' /></td></tr>"+
+         "<td> <input name='jltfispPsInfoList["+index+"].insuranceCompany' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baoxiangongsi' placeholder='请输入保险/担保公司' /></td>"+
+         "</tr><tr><th>实际支付保额金额</th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入实际支付保额金额' />元</td></tr>"+
+         "<tr><th>实际还款日</th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt shijihuankuanri' placeholder='请输入实际还款日' /></td>"+
+         "<th>实际支付本息(本金+利息)</th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[custom[onlyNumberSp], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入实际支付本息(本金+利息)' />元</td></tr>"+
+         "<tr><th>实际放贷日</th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt shijifangdairi' placeholder='请输入实际放贷日' /></td>"+
+         "<th>贷款期限</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' /></td></tr>"+
          "</table>";
          $("table.tab3.module:first").after(content);
          index++;

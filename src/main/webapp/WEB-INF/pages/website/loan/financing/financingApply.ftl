@@ -35,7 +35,7 @@
                         <table width="100%" class="tab3">
                             <tr>
                                 <th><b class="red">*</b>企业名称</th>
-                                <td colspan="3"><input type="text" class="txt validate[required,mixSize[2],maxSize[50]]" id="company" name="company"  value="${jltfispCoBaseDto.company}" placeholder="请输入"/></td>
+                                <td colspan="3"><input type="text" class="txt" value="${user.username}" readonly="readonly" /></td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>法人代表</th>
@@ -47,7 +47,7 @@
                                 <th><b class="red">*</b>成立时间</th>
                                 <td><input type="text" class="txt dateIcon validate[required]" onClick="WdatePicker()" placeholder="请选择"  id="establishTime" name="establishTime" value="${jltfispCoBaseDto.establishTime}" readonly="readonly"/></td>
                                 <th><b class="red">*</b>组织机构代码</th>
-                                <td><input type="text" class="txt validate[required,mixSize[2],maxSize[50]]" id="socialCreditCode" name="socialCreditCode" value="${jltfispCoBaseDto.socialCreditCode}"  placeholder="请输入"/></td>
+                                 <td><input type="text" class="txt" value="${user.socialCode}" readonly="readonly" /></td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>所属技术领域</th>
@@ -105,7 +105,7 @@
                             </tr>
                             <tr>
                                 <th>推荐人手机</th>
-                                <td><input type="text" class="txt validate[maxSize[11],custom[phone]]" placeholder="请输入" id="refereemobile" name="refereemobile" value="${jltfispCoBaseDto.refereemobile}"/></td>
+                                <td><input type="text" class="txt validate[custom[mobile]]" placeholder="请输入" id="refereemobile" name="refereemobile" value="${jltfispCoBaseDto.refereemobile}"/></td>
                                 <th>推荐人邮箱</th>
                                 <td><input type="text" class="txt validate[mixSize[2],maxSize[50],custom[email]]" placeholder="请输入" id="refereeemail" name="refereeemail" value="${jltfispCoBaseDto.refereeemail}"/></td>
                             </tr>
@@ -156,7 +156,7 @@
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>联系人手机号</th>
-                                <td><input type="text" class="txt validate[required,maxSize[11],custom[phone]]" placeholder="请输入" id="linkMobile" name="linkMobile" value="${jltfispCoBaseDto.linkMobile}"/></td>
+                                <td><input type="text" class="txt validate[required,custom[mobile]]" placeholder="请输入" id="linkMobile" name="linkMobile" value="${jltfispCoBaseDto.linkMobile}"/></td>
                                 <th><b class="red">*</b>联系人邮箱</th>
                                 <td><input type="text" class="txt validate[required,mixSize[2],maxSize[50],custom[email]]" placeholder="请输入" id="linkEmail" name="linkEmail" value="${jltfispCoBaseDto.linkEmail}"/></td>
                             </tr>
@@ -188,8 +188,8 @@
                         </table>
                         </form>
                         <div class="logbtn" style="margin-top:30px;">
-                        	<input type="button" class="nor" value="下一步" />
                         	<input type="submit" class="can" value="取消" onclick="location.href='/jltfisp_web/index'"/>	
+                       		<input type="button" class="nor" value="下一步" />
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                         <table width="100%" class="tab3">
                             <tr>
                                 <th width="8%"><b class="red">*</b>企业名称</th>
-                                <td><input type="text" class="txt" id="company2" readonly="readonly" /></td>
+                                <td><input type="text" class="txt" value="${user.username}" readonly="readonly" /></td>
                                 <input type="hidden" class="txt" id="infoId" name="infoId"  value="${jltfispCoBaseDto.id}"/>
                             </tr>
                             <tr>
@@ -289,8 +289,6 @@
             	if(!$('#coBase').validationEngine('validate')){
                       return false;
                 }
-                var company2=$("#company").val();
-                $("#company2").val(company2);
                 var projectname2=$("#projectname").val();
                 $("#projectname2").val(projectname2);
             	data=$("#coBase").serialize();
@@ -444,10 +442,6 @@
         }); 
         
     });
-
-    function windowsPrint(){
-    	window.print();
-    }
 
     //移除股东
     function removetr(obj){

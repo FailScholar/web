@@ -42,36 +42,11 @@
                       <div class="clear"></div>
                       <#list columnList as column>
                           <!--<a href="#" class="apply2"<#if type!="1">style="width:150px; display:none"</#if><#if type=="1">style="width:150px;"</#if>>申请成为科技金融专家</a>-->
-                          <a href="${path}/anon/addExpertPage?columnId=${column.id}" class="apply2" style="width:150px;" id="${column.id}">申请成为${column.columnName}</a>
+                          <a href="${path}/expert/expertGuide?columnId=${column.id}" class="apply2" style="width:150px;" id="${column.id}">申请成为${column.columnName}</a>
                       </#list>
                       
                       <div class="infoList">
-                           <ul class="ul2">
-                           <#list pm.datas as expert>
-                              <li>
-                                  <img width="220px" height="246px" src="${path}/${expert.agencylogo}" alt="head" style="cursor: pointer;" onclick="expertDetail(${expert.id})"/>
-                                  <h4 class="blue">${expert.worktitle}</h4>
-                                  
-                                  <p>
-                                  <#if (expert.workpost?length >5) >
-                                  <lable title="${expert.workpost}">${expert.workpost?substring(0,5)}...</label>
-                                  <#else>
-                                  ${expert.workpost}
-                                  </#if>
-                                   | 
-                                  <#if (expert.workpost?length >8) >
-                                   <lable title="${expert.businesaddress}">${expert.businesaddress?substring(0,8)}...</label>
-                                  <#else>
-                                  ${expert.businesaddress}
-                                  </#if>
-                                   </p>
-                                  <p class="phone">${expert.phone}</p>
-                                  <p class="email">${expert.email}</p>
-                              </li>
-                           </#list>
-                          </ul>
-                       <div class="clear"></div>
-                       <#include "website/common/commonPager.ftl"/>
+       
                       </div>
                   </div>
                   
@@ -110,8 +85,8 @@
         columnId=$(this).val();
         $.ajax({
                 type: 'POST',
-                url:'${path}/anon/changeExpert',
-                data: {columnId: columnId,'pager.offset':0},
+                url:'${path}/perm/expert/'+columnId,
+                data: {'pager.offset':0},
                 success: function (data) {
                 $('.infoList').html(data);
                 }
@@ -137,8 +112,8 @@
 		<!--传当前子栏目ID-->
 		$.ajax({
                 type: 'POST',
-                url:'${path}/anon/changeExpert',
-                data: {columnId: columnId,'pager.offset':0},
+                url:'${path}/perm/expert/'+columnId,
+                data: {'pager.offset':0},
                 success: function (data) {
                 $('.infoList').html(data);
                 }
@@ -147,6 +122,7 @@
 		$('#'+columnId).show();
 		}
 	});
+	$('.infoTab li').eq(0).click();
 });
 
 function expertDetail(id){
@@ -158,8 +134,8 @@ var url=url.split("=");
 var offset=url[1];
 $.ajax({
                 type: 'POST',
-                url:'${path}/anon/changeExpert',
-                data: {columnId: columnId,'pager.offset':offset},
+                url:'${path}/perm/expert/'+columnId,
+                data: {'pager.offset':offset},
                 success: function (data) {
                 $('.infoList').html(data);
                 }

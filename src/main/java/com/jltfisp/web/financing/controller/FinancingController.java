@@ -23,6 +23,7 @@ import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.financing.entity.JltfispFinancing;
 import com.jltfisp.web.financing.service.FinancingService;
 import com.jltfisp.web.insurance.entity.JltfispInsurance;
+import com.jltfisp.web.pager.entity.PagerModel;
 
 /**
  * 
@@ -56,12 +57,18 @@ public class FinancingController {
     }
     
     @RequestMapping("/perm/financing/{columnId}")
-    public String financingDetail(HttpServletRequest request,@PathVariable Integer columnId, int page,Integer type){
-        
-    	List<JltfispFinancing> list = financingService.getFinancingList(columnId, page,type);
-    	PageInfo pageInfo = new PageInfo<>(list);
-    	request.setAttribute("pageInfo",pageInfo);
-    	request.setAttribute("delList",list);
+    public String financingDetail(HttpServletRequest request,@PathVariable Integer columnId,Integer type){
+    	int rows=Integer.parseInt(request.getParameter("pager.offset"));
+    	int total = financingService.getFinancingCount(columnId, type);
+    	
+    	List<JltfispFinancing> list = financingService.getFinancingList(columnId, rows,type);
+    	
+    	PagerModel pm = new PagerModel();
+    	pm.setDatas(list);
+    	 pm.setTotal(total);
+    	 request.setAttribute("pm",pm);
+    	 request.setAttribute("url","/perm/financing");
+    	 request.setAttribute("columnid", columnId);
      return "/website/financing/financingContext";
     }
     

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jltfisp.web.column.entity.JltfispColumn;
@@ -21,7 +22,7 @@ import com.jltfisp.web.policy.service.PolicyService;
  *
  */
 @Controller
-@RequestMapping("/anon")
+//@RequestMapping("/perm")
 public class PolicyController {
 	 @Autowired
 	 private ColumnService columnService; 
@@ -31,7 +32,7 @@ public class PolicyController {
 	 * 政策中心
 	 * @return
 	 */
-	@RequestMapping("/policy")
+	@RequestMapping("/perm/policy")
     public String policy(HttpServletRequest request){
     	//根据父栏目columnId查询子栏目信息
     	List<JltfispColumn> columnList=columnService.getColumnList(4);
@@ -45,7 +46,7 @@ public class PolicyController {
         pm.setDatas(datas);
         pm.setTotal(total);
         request.setAttribute("pm", pm);
-        request.setAttribute("url", "anon/policy");
+        request.setAttribute("url", "perm/policy");
         return "/website/policy/policy";
     }
 	
@@ -54,20 +55,20 @@ public class PolicyController {
      * @param request
      * @return
      */
-    @RequestMapping("/changePolicy")
-    public String changeExpert(HttpServletRequest request){
-     String columnId = request.getParameter("columnId");
+    @RequestMapping("/perm/policy/{columnId}")
+    public String changeExpert(@PathVariable Integer columnId,HttpServletRequest request){
+//     String columnId = request.getParameter("columnId");
      int rows=Integer.parseInt(request.getParameter("pager.offset"));
      //获取当前子栏目下所有的数据总数
-     int total =policyService.getPolicyPageCount(Integer.parseInt(columnId));
+     int total =policyService.getPolicyPageCount(columnId);
      //获取当前页的数据，且显示12条
-     List<JltfispPolicy>  datas=policyService.getPolicyPageList(rows, 12,Integer.parseInt(columnId));
+     List<JltfispPolicy>  datas=policyService.getPolicyPageList(rows, 12,columnId);
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);
-     request.setAttribute("columnId", columnId);
+    // request.setAttribute("columnId", columnId);
      request.setAttribute("pm", pm);
-     request.setAttribute("url", "anon/policy");
+     request.setAttribute("url", "perm/policy");
      return "/website/policy/policyContent";
     }
      
@@ -77,7 +78,7 @@ public class PolicyController {
      * @return
      * @author 
      */
-    @RequestMapping("/policyDetail")
+    @RequestMapping("/anon/policyDetail")
     public String detail(HttpServletRequest request){
         String policyId = request.getParameter("policyId");
        //每浏览一次新闻浏览量会改变
@@ -86,10 +87,10 @@ public class PolicyController {
         JltfispPolicy ltfispPolicy=policyService.getPolicyContext(Integer.parseInt(policyId));
         //获取二级栏目信息
         JltfispColumn jltfispColumn=columnService.getColumnContext(ltfispPolicy.getColumnId());
-        //获取父栏目信息
-        JltfispColumn parentJltfispColumn=columnService.getColumnContext(jltfispColumn.getParentColumn());
+       /* //获取父栏目信息
+        JltfispColumn parentJltfispColumn=columnService.getColumnContext(jltfispColumn.getParentColumn());*/
         request.setAttribute("jltfispColumn", jltfispColumn);
-        request.setAttribute("parentJltfispColumn", parentJltfispColumn);
+       /* request.setAttribute("parentJltfispColumn", parentJltfispColumn);*/
         request.setAttribute("ltfispPolicy", ltfispPolicy);
         return "/website/policy/policyDetail";
     }

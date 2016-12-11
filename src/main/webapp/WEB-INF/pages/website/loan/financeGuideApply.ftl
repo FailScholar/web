@@ -64,6 +64,7 @@
 				<input type="button" id="accept" style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#c5c5c5" 
 					disabled="true" value="在线申请" onclick="apply()">
            		</div>
+           		<input id="userType" value="${userType}" type="hidden"/>
             </div>
             <!--content结束-->
             
@@ -94,6 +95,13 @@
   	   document.getElementById("accept").disabled=false;
   }
    function apply(){
+	   var type=$('#userType').val();
+	   if(type==1){
+		   dialog.tipsPop('ban-pop','提示:',"您的身份是个人用户，不能申请贷款服务",'确定');
+		   return false;
+		}
+	   else{
 		   location.href="${path}/loan/financeApply" ;
+		 }
 	}
 </script>

@@ -72,16 +72,13 @@ public class JltfispCoFillInApply {
      * 贷款银行
      */
     @Column(name = "bankid")
-    private int bankid;
-    
-    @Transient
-    private String institutionalName;
+    private String bankid;
     
     /**
      * 担保/保险公司
      */
     @Column(name = "riskid")
-    private int riskid;
+    private String riskid;
 
     /**
      * 贷款支行
@@ -219,19 +216,19 @@ public class JltfispCoFillInApply {
 		this.isRecomend2 = isRecomend2;
 	}
 
-	public int getBankid() {
+	public String getBankid() {
 		return bankid;
 	}
 
-	public void setBankid(int bankid) {
+	public void setBankid(String bankid) {
 		this.bankid = bankid;
 	}
 
-	public int getRiskid() {
+	public String getRiskid() {
 		return riskid;
 	}
 
-	public void setRiskid(int riskid) {
+	public void setRiskid(String riskid) {
 		this.riskid = riskid;
 	}
 
@@ -337,14 +334,6 @@ public class JltfispCoFillInApply {
 
 	public void setContinueloan(String continueloan) {
 		this.continueloan = continueloan;
-	}
-
-	public String getInstitutionalName() {
-		return institutionalName;
-	}
-
-	public void setInstitutionalName(String institutionalName) {
-		this.institutionalName = institutionalName;
 	}
 
 }

@@ -18,8 +18,9 @@
 	  select * from jltfisp_column_manage cm where cm.parentColumn=#{parentColumn} order by  columnNo asc
 	</select>
 	<!-- 查询专项资金二级列表下一级的具体信息的集合，并按发布时间降序排列 -->
-	<select id="getCapitalInfoList" resultType="com.jltfisp.web.capital.entity.JltfispCapital" parameterType="int">
-		 select * from jltfisp_capital ca,jltfisp_column_manage cm where cm.parentColumn=5 and ca.state=1 and  ca.column_id=cm.id and cm.columnNo=#{columnNo} order by  ca.publish_time desc
+	<select id="getCapitalList" resultType="com.jltfisp.web.capital.entity.JltfispCapital" parameterType="int">
+		select capital.* from jltfisp_capital capital LEFT JOIN jltfisp_column_manage cm ON capital.column_Id = cm.id
+		AND cm.parentColumn = 5 WHERE capital.column_Id = #{column_Id} AND capital.state=1 ORDER BY capital.publish_time DESC
 	</select>
 	<!--更新浏览记录,浏览记录每访问一次，+1 -->
 	<update id="updateCapitalPv">
