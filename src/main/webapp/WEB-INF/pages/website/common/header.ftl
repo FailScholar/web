@@ -29,17 +29,7 @@
             </div>
             <div class="nav">
                 <ul>
-                    <li class="first1"><a href="${path}/index">首页</a><b></b></li>
-                    <li><a href="${path}/anon/loan">贷款服务</a><b></b></li>
-                    <li><a href="${path}/perm/news">资讯中心</a><b></b></li>
-                    <li><a href="${path}/perm/policy">政策中心</a><b></b></li>
-                    <li><a href="${path}/perm/capital">专项资金</a><b></b></li>
-                    <li><a href="${path}/perm/institution">合作机构</a><b></b></li>
-                    <li><a href="${path}/perm/expert">专家资源</a><b></b></li>
-                    <li><a href="${path}/perm/financing">股权融资</a><b></b></li>
-                    <li><a href="${path}/perm/market">资本市场</a><b></b></li>
-                    <li><a href="${path}/perm/insurance">科技保险</a><b></b></li>
-                    <li class="last1"><a href="${path}/perm/cloud">云课堂</a><b></b></li>
+                    <@indexTag.indexHeader/>
                 </ul>
             </div>
             <div class="clear"></div>

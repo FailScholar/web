@@ -41,30 +41,7 @@
               </div>
               <div class="nav">
                   <ul>
-                      <li class="first1"><a href="${path}/index">首页</a><b></b></li>
-                      <li><a href="${path}/anon/loan">贷款服务</a><b></b></li>
-
-                      <li><a href="${path}/perm/news">${indexCache.navigations[2].value}</a><b></b></li>
-
-                      <li><a href="${path}/perm/policy">${indexCache.navigations[3].value}</a><b></b></li>
-                      <#if indexCache.navigations[4].txt = 1>
-                          <li><a href="${path}/perm/capital">${indexCache.navigations[4].value}</a><b></b></li>
-                      </#if>
-                      <li><a href="${path}/perm/institution">${indexCache.navigations[5].value}</a><b></b></li>
-                      <#if indexCache.navigations[6].txt = 1>
-                          <li><a href="${path}/perm/expert">${indexCache.navigations[6].value}</a><b></b></li>
-                      </#if>
-
-                      <#if indexCache.navigations[7].txt = 1>
-                          <li><a href="${path}/perm/financing">${indexCache.navigations[7].value}</a><b></b></li>
-                      </#if>
-                      <#if indexCache.navigations[8].txt = 1>
-                          <li><a href="${path}/perm/market">${indexCache.navigations[8].value}</a><b></b></li>
-                      </#if>
-                      <#if indexCache.navigations[9].txt = 1>
-                          <li><a href="${path}/perm/insurance">${indexCache.navigations[9].value}</a><b></b></li>
-                      </#if>
-                      <li class="last1"><a href="${path}/perm/cloud">${indexCache.navigations[10].value}</a><b></b></li>
+                      <@indexTag.indexHeader/>
                   </ul>
               </div>
               <div class="list">
