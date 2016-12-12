@@ -26,9 +26,9 @@
         <div class="clear"></div>
         </div>
 		<!-- 专项资金的具体内容 -->
-        <div id="showContent"></div>
+        <div class="infoList"> </div>
         
-    <div class="clear"></div>
+<!--     <div class="clear"></div> -->
 </div>
 <!--content结束-->
   </div>
@@ -47,7 +47,7 @@
 
 	//分页--根据页数查询
 	function selectPage(page) {
-       $('#showContent').load("${path}/perm/capital/"+$("div.info ul.infoTab").find('li.active').attr('tips'),{page:page});
+       $('.infoList').load("${path}/perm/capital/"+$("div.info ul.infoTab").find('li.active').attr('tips'),{page:page});
    }
    
    //获取子栏目内容列表
@@ -55,10 +55,10 @@
          $.ajax({
 			  type : "post",
 			  url : '${path}/perm/capital/'+columnId,
-			  data:{"columnId":columnId,page: 1},
+			  data:{"columnId":columnId,'pager.offset': 0},
 			  dataType : "html",
 			  success:function(data){
-				$("#showContent").html(data);//要刷新的div
+				$(".infoList").html(data);//要刷新的div
 			  }
 		});
 	}

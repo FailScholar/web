@@ -82,10 +82,11 @@ public class ExpertController {
     public String expertPage(HttpServletRequest request){
     	//获取父栏目columnId
     	String columnId = request.getParameter("columnId");
+    	//获取父栏目columnId
+    	String isFrontPage = request.getParameter("isFrontPage");
     	//根据父栏目columnId查询子栏目信息
     	List<JltfispColumn> columnList=columnService.getColumnList(7);
         request.setAttribute("columnList", columnList);
-        request.setAttribute("columnId", columnList.get(0).getId());
         //获取当前子栏目下所有的数据总数
         int total =expertService.getExpertPageCount(columnList.get(0).getId());
         //获取当前页的数据，且显示12条
@@ -95,6 +96,13 @@ public class ExpertController {
         pm.setTotal(total);
         request.setAttribute("pm", pm);
         request.setAttribute("url", "anon/expert");
+        //代表从前台页面传过来的值
+        if(null != isFrontPage){ 
+          request.setAttribute("isFrontPage", "1");
+          request.setAttribute("columnId",columnId);
+        }else{
+          request.setAttribute("columnId", columnList.get(0).getId());
+        }
         return "/website/expert/expert";
     }
     
@@ -242,7 +250,6 @@ public class ExpertController {
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	jltfispExpert.setUserid(user.getId());
-    	jltfispExpert.setAgencylogo("/resource/fileImage/"+jltfispExpert.getUserlogo());
     	
     	//Start插入审核流程
     	BusinessApplayAudit expert=new BusinessApplayAudit();

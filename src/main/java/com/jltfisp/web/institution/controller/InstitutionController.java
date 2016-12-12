@@ -1,7 +1,8 @@
 package com.jltfisp.web.institution.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.github.pagehelper.PageInfo;
+import com.jltfisp.Constants;
+import com.jltfisp.FileManager;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
 import com.jltfisp.redis.RedisService;
@@ -17,6 +18,7 @@ import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.pager.entity.PagerModel;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +32,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class InstitutionController {
@@ -50,8 +54,11 @@ public class InstitutionController {
 	   @Autowired
 	   private LoginService loginService;
 
-        @Autowired
-        private RedisService<Serializable, String> redisService;
+    @Autowired
+    private RedisService<Serializable, String> redisService;
+        
+    @Autowired
+    private FileManager fileManager;
 
 	 /**
 	  * 
@@ -63,7 +70,7 @@ public class InstitutionController {
 	  * @return String
 	  */
     @RequestMapping("/perm/institution")
-    public String institution(HttpServletRequest request){
+    public String institution(HttpServletRequest request,Integer columnId){
     	List<JltfispColumn> columnList=new ArrayList<JltfispColumn>();
     	List<JltfispColumn> foreFiveList = new ArrayList<JltfispColumn>();
     	List<JltfispColumn> afterFiveList = new ArrayList<JltfispColumn>();
@@ -79,6 +86,7 @@ public class InstitutionController {
     				afterFiveList.add(columnList.get(i));
     		}
     	}
+    	request.setAttribute("columnId", columnId);
     	request.setAttribute("columnList", columnList);
     	request.setAttribute("foreFiveList", foreFiveList);
     	request.setAttribute("afterFiveList", afterFiveList);
@@ -136,14 +144,11 @@ public class InstitutionController {
             return msg;
         }
         
-        BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),"7");
+        BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),Constants.INSTITUTION_APPLY);
         if(businessApplayAudit != null){
-            JltfispInstitution institution = institutionService.getInstitutionByUserId(user.getId());
-            if(institution != null){
-                JltfispColumn column = columnServiceImpl.getColumnContext(institution.getColumnId());
-                if(column != null){
-                    msg="您已申请成为" + column.getColumnName();
-                }
+            JltfispColumn column = columnServiceImpl.getColumnContext(Integer.parseInt(businessApplayAudit.getType()));
+            if(column != null){
+                msg="您已申请成为" + column.getColumnName();
             }
         }
         return msg;
@@ -194,7 +199,7 @@ public class InstitutionController {
         }
         //获取当前用户登录信息
         JltfispUser user=loginService.getCurrentUser();
-        JltfispInstitution institution = institutionService.getInstitutionByUserId(user.getId()); 
+        JltfispInstitution institution = institutionService.getInstitutionByUserIdAndColumnId(user.getId(), columnId); 
         
         request.setAttribute("columnId", columnId);
         request.setAttribute("institutManage", institutManage);
@@ -211,10 +216,26 @@ public class InstitutionController {
      */
     @RequestMapping("/anon/institution/savePhoto")
     @ResponseBody
-    public String savePhoto(HttpServletRequest request) throws IOException {
-     UploadFile uploadFile = FileUpDownUtils.getUploadFile2(request, "upFile");
-     String path=uploadFile.getFile().getName();
-        return path;
+    public String imageUpload(HttpServletRequest request) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        String fileName = "";
+        try {
+         UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "upFile");
+         fileName = uploadFile.getFileName();
+         if (StringUtils.isNotBlank(fileName) && uploadFile.getFileSize() <= 327680) {
+          byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
+          String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName());
+
+          fileName = filePath.trim();
+          map.put("fileName", fileName);
+          map.put("msg", "success");
+         } else {
+           map.put("msg", "请上传大小在320k以内的图片!");
+         }
+        } catch (Exception e) {
+         map.put("msg", e.toString());
+        }
+        return JSON.toJSONString(map);
     }
     
     /**
@@ -235,24 +256,19 @@ public class InstitutionController {
         
         institution.setCreateTime(nowDate);
         institution.setUserId(user.getId());
+        
+        businessApplayAudit.setUserId(user.getId());
+        businessApplayAudit.setSubmitDate(nowDate);
+        businessApplayAudit.setState(0);
+        businessApplayAudit.setType(institution.getColumnId().toString());
+        businessApplayAudit.setParentType(Constants.INSTITUTION_APPLY);
+        //业务审核表中 新增 该会员的合作机构申请
+        row = businessApplayAuditService.insertRecord(businessApplayAudit);
+        
         if(institution.getId() != null){
             //修改
             row = institutionService.updateByPKSelective(institution);
-            
-            businessApplayAudit = businessApplayAuditService.getBusinessApplayAudit(user.getId(), "7", 2);
-            businessApplayAudit.setState(0);
-            businessApplayAudit.setSubmitDate(nowDate);
-            businessApplayAudit.setAuditDesc("");
-            row = businessApplayAuditService.updateByPK(businessApplayAudit);
-            
         }else{
-            businessApplayAudit.setUserId(user.getId());
-            businessApplayAudit.setSubmitDate(nowDate);
-            businessApplayAudit.setState(0);
-            businessApplayAudit.setType("7");
-            //业务审核表中 新增 该会员的合作机构申请
-            row = businessApplayAuditService.insertRecord(businessApplayAudit);
-            
             //保存合作机构申请信息
             row = institutionService.saveInstitution(institution);
         }

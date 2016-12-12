@@ -40,6 +40,6 @@
 					<#else>
 					<a onclick="changePage('${pageUrl}')">尾页</a>
 					</#if>
-					</@pg.last>		
+					</@pg.last>
 </@pg.pager>
 			</div>

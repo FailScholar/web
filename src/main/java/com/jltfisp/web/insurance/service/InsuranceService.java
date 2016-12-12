@@ -18,4 +18,8 @@ public interface InsuranceService {
     List<JltfispInsurance> getDetail(int columnId, int page);
 
     JltfispInsurance getDetailById(int id);
+    
+    List<JltfispInsurance> getInsuranceList(Integer columnid,int page);
+	
+	int getInsuranceCount(Integer columnid);
 }

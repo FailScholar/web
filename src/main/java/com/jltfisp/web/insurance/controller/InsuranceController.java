@@ -6,10 +6,13 @@
 package com.jltfisp.web.insurance.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.jltfisp.web.cloud.entity.Cloud;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.insurance.entity.JltfispInsurance;
 import com.jltfisp.web.insurance.service.InsuranceService;
+import com.jltfisp.web.pager.entity.PagerModel;
+
 import org.apache.shiro.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by LiuFa on 2016/12/2.
@@ -52,11 +57,17 @@ public class InsuranceController {
      * @return
      */
     @RequestMapping("/perm/insurance/{columnId}")
-    public String insuranceListDetail(@PathVariable String columnId, int page, Model model){
-        List<JltfispInsurance> list = insuranceService.getDetail(Integer.parseInt(columnId),page);
-        PageInfo pageInfo = new PageInfo<>(list);
-        model.addAttribute("pageInfo",pageInfo);
-        model.addAttribute("delList",list);
+    public String insuranceListDetail(@PathVariable Integer columnId, HttpServletRequest request){
+        
+    	int rows=Integer.parseInt(request.getParameter("pager.offset")==null ? "0" :request.getParameter("pager.offset"));
+    	List<JltfispInsurance> list = insuranceService.getInsuranceList(columnId, rows);
+		int total = insuranceService.getInsuranceCount(columnId);
+		PagerModel pm = new PagerModel();
+    	pm.setDatas(list);
+		pm.setTotal(total);
+		request.setAttribute("pm",pm);
+		request.setAttribute("url","/perm/insurance");
+		request.setAttribute("columnid", columnId);
         return "/website/insurance/insuranceCol";
     }
 

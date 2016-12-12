@@ -83,7 +83,7 @@
                   </div>
                   <div class="lbot">
                       <ul class="snav">
-                          <li class="li1"><a href="${path}/anon/loan/onlineApply?applytype=1"><b></b>科技履约贷款申请</a></li>
+                          <li class="li1"><a href="${path}/loan/onlineApply?applytype=1"><b></b>科技履约贷款申请</a></li>
                           <li class="li2"><a href="${path}/loan/onlineApply?applytype=2"><b></b>科技小巨人贷款申请</a></li>
                           <li class="li3"><a href="${path}/loan/onlineApply?applytype=3"><b></b>高新技术贷款申请</a></li>
                           <li class="li4"><a href="${path}/loan/onlineApply?applytype=4"><b></b>科技微贷通贷款申请</a></li>
@@ -100,7 +100,7 @@
                               <ul class="img-list clearfix">
                               <#list indexCache.indices as indices>
                                   <#if indices.contentType = 1>
-                                      <li><a href="${indices.url}"><img src="${path}/${indices.image}" alt="img"/></a></li>
+                                      <li><a href="${indices.url}"><img src="${path}${indices.image}" alt="img"/></a></li>
                                   </#if>
                               </#list>
                               </ul>
@@ -162,7 +162,7 @@
                           <ul class="fl">
                               <#list indexCache.notices as notices>
                                   <#if notices.mark = 'news'>
-                                      <li><a href="${path}/anon/detail" onclick="setColumnIndex(2)">
+                                      <li><a href="${path}/anon/getNewsDetail?id=${notices.id}" onclick="setColumnIndex(2)">
                                           <h5>${notices.title}</h5>
                                           <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
                                       </a></li>
@@ -174,7 +174,7 @@
                           <ul class="imgList fr">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'news'>
-                                  <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}/${notices.image}" alt="img" /></a></li>
+                                  <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
                               </#if>
                           </#list>
                           </ul>
@@ -185,7 +185,7 @@
                           <ul class="fl">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'video'>
-                                  <li><a href="${path}/anon/cloud/detail?id=${notices.id}&colName=">
+                                  <li><a href="javascript:;" onclick="toVideoDetailPage(${notices.id},${notices.columnId})">
                                       <h5>${notices.title}</h5>
                                       <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
                                   </a></li>
@@ -198,7 +198,7 @@
                           <ul class="imgList fr">
                               <#list indexCache.notices as notices>
                                   <#if notices.mark = 'video'>
-                                      <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}/${notices.image}" alt="img" /></a></li>
+                                      <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
                                   </#if>
                               </#list>
                           </ul>
@@ -225,7 +225,7 @@
                           <ul class="news fl">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'policy'>
-                                  <li><a href="${path}/anon/detail" onclick="setColumnIndex(3)">
+                                  <li><a href="${path}/anon/policyDetail?policyId=${notices.id}" onclick="setColumnIndex(3)">
                                       <h5>${notices.title}</h5>
                                   </a></li>
                               </#if>
@@ -238,7 +238,7 @@
                           <ul class="news fl">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'financing'>
-                                  <li><a href="${path}/anon/detail" onclick="setColumnIndex(7)">
+                                  <li><a href="${path}/anon/financing/detail?id=${notices.id}" onclick="setColumnIndex(7)">
                                       <h5>${notices.title}</h5>
                                   </a></li>
                               </#if>
@@ -260,7 +260,7 @@
                   <ul>
                   <#list indexCache.indices as indices>
                       <#if indices.contentType = 2>
-                          <li><a href="${indices.url}"><img style="width: 771px;height: 259px" src="${path}/${indices.image}" alt="img" /></a></li>
+                          <li><a href="${indices.url}"><img style="width: 771px;height: 259px" src="${path}${indices.image}" alt="img" /></a></li>
                       </#if>
                   </#list>
                   </ul>
@@ -289,7 +289,7 @@
                       <#--最多显示8个，不加更多-->
                       <#list indexCache.organizes as organizes>
                           <#if organizes.organize = 'institut'>
-                              <li><a href="${path}/perm/institution/${organizes.id}?columnId=${organizes.id}&page=1">${organizes.columnName}</a></li>
+                              <li><a onclick="setColumnIndex(5)" href="${path}/perm/institution?columnId=${organizes.id}">${organizes.columnName}</a></li>
                           </#if>
                       </#list>
                   </ul>
@@ -301,7 +301,7 @@
                   <#--最多显示8个，不加更多-->
                       <#list indexCache.organizes as organizes>
                           <#if organizes.organize = 'expert'>
-                              <li><a href="${path}/perm/expert/${organizes.id}?columnId=${organizes.id}&page=1">${organizes.columnName}</a></li>
+                              <li><a onclick="setColumnIndex(6)" href="${path}/perm/expert?columnId=${organizes.id}&isFrontPage=1">${organizes.columnName}</a></li>
                           </#if>
                       </#list>
                   </ul>
@@ -322,7 +322,6 @@
   </body>
 </html>
 <script type="text/javascript">
-    var colName = $('#index_video').find('a').html();
     $(document).ready(function(e) {
         $('.ltop .fl li').click(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
@@ -451,5 +450,11 @@
     function toConsult() {
         $.cookie('userinfoIndex', 4, {path: '/'});
         window.location.href = "${path}/main"
+    }
+
+    function toVideoDetailPage(id, columnId) {
+        setColumnIndex(10);
+        var colName = $('#index_video').find('a').html();
+        window.location = '${path}/anon/cloud/detail?id='+id+'&columnid='+columnId+'&colName='+colName
     }
 </script>

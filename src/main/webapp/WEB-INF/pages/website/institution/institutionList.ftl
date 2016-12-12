@@ -2,7 +2,7 @@
       <ul class="applyList apy">
         <#list pm.datas as institutionList>
              <li>
-               <img style="width: 120px;height: 137px;" src="${path}/resource/fileImage/${institutionList.logoFile }" alt="img" class="appImg fl" />
+               <img style="width: 120px;height: 137px;" src="${path}${institutionList.logoFile }" alt="img" class="appImg fl" />
                    <div class="appDetail ap3 fr">
                       <h3 class="fl"><a href="${path}/anon/getInstitutionDetail?id=${institutionList.id}">${institutionList.institutionalName}</a></h3>
                       <div class="clear"></div>

@@ -11,6 +11,12 @@
       <link rel="stylesheet" type="text/css" href="${path}/resource/plugins/videoJs/css/video-js.min.css" />
       <script type="text/javascript" src="${path}/resource/plugins/videoJs/js/video.min.js"></script>
     <title>吉林省科技金融信息服务平台</title>
+    <script>
+    	function goHistory(columnid){
+    		 $.cookie('columnid', columnid, {path: '/'});
+        	 window.location.href = "${path}/perm/cloud"
+    	}
+    </script>
   </head>
 
   <body>
@@ -18,7 +24,7 @@
               <!--content开始-->
               <div class="content">
                   <div class="bread">
-                      <a href="javascript:;">首页</a>&gt;<a>${colName}</a>&gt;<a>详情</a>
+                      <a href="${path}/index">首页</a>&gt;<a href="javascript:goHistory(${columnid})">${colName}></a>&gt;<a>详情</a>
                   </div>
                   <div class="video">
                      <h1>${cloudDetail.title}</h1>
@@ -30,6 +36,9 @@
                                  poster="${path}${cloudDetail.image}"
                                  data-setup="{}">
                               <source src="${path}${cloudDetail.video}" type='video/mp4' />
+                     	 </div>
+                     	 <div class="artical">
+                     	 	<p>${cloudDetail.content}</p>
                      	 </div>
 				     <#else>
 				     	<div class="artical" style="background-color:#fff;">

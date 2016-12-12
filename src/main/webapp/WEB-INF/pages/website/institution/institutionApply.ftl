@@ -33,7 +33,7 @@
                                     <td rowspan="4">
                                     	<img id="logoFileImg" 
                                     		<#if institution?? && institution.logoFile?? && institution.logoFile != "">
-                                    		src="${path}/resource/fileImage/${institution.logoFile }" 
+                                    		src="${path}${institution.logoFile }" 
                                     		<#else>
                                     		src="${path}/resource/images/blank.png" 
                                     		</#if>
@@ -263,15 +263,15 @@ function ajaxFileUpload() {
 		        secureuri: false,
 		        fileElementId: 'upFile',
 		        dataType:"text",
-		        success: function(msg) {
-		            if(msg =="0"){
-		              dialog.tipsPop('ban-pop','提示',"操作失败",'确定');
-		              return false;
-		            }else{
-		              $('#logoFile').val(msg);
-		              $("#logoFileImg").attr("src","${path}/resource/fileImage/"+msg);
-		            }
-		        }
+		        success: function(data) {
+		            var result = eval("("+data+")")
+		            if (result.msg == "success") {
+	                    $("#logoFile").val(result.fileName);
+	                    $("#logoFileImg").attr("src","${path}"+result.fileName);
+	                }else{
+	                    dialog.tipsPop('ban-pop','提示:',result.msg,function(){});
+	                }
+			        }
 		    }); 
 		}
 	}

@@ -9,6 +9,12 @@
     <meta name="renderer" content="webkit">
 <#include "website/common/common.ftl" />
     <title>吉林省科技金融信息服务平台</title>
+    <script>
+    	function goHistory(columnid){
+    		 $.cookie('columnid', columnid, {path: '/'});
+        	 window.location.href = "${path}/perm/insurance"
+    	}
+    </script>
 </head>
 
 <body>
@@ -16,7 +22,7 @@
 <!--content开始-->
 <div class="content">
     <div class="bread">
-        <a href="${path}/perm/insurance">科技保险</a>&gt;<a>${colName}</a>&gt;<a>详情</a>
+        <a href="${path}/perm/insurance">科技保险</a>&gt;<a href="javascript:goHistory(${insurance.columnId})">${colName}</a>&gt;<a>详情</a>
     </div>
     <div class="video">
         <h1>${insurance.title}</h1>

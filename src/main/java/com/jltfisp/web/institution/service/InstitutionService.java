@@ -27,9 +27,10 @@ public interface InstitutionService extends IBaseService<JltfispInstitution> {
 	   /**
 	    * 根据用户id获取曾经申请过的合作机构信息
 	    * @param userId
+	    * @param columnId 
 	    * @return
 	    * @author yingying.wang1 2016年12月6日 上午10:50:51
 	    */
-    public JltfispInstitution getInstitutionByUserId(Integer userId);
+    public JltfispInstitution getInstitutionByUserIdAndColumnId(Integer userId, Integer columnId);
 
 }

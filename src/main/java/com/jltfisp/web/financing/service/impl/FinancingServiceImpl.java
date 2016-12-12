@@ -44,6 +44,7 @@ public class FinancingServiceImpl implements FinancingService {
         jltfispFinancing.setColumnid(columnid);
         jltfispFinancing.setType(type);
         PageHelper.startPage(page, 12);
+        PageHelper.orderBy("publish_time desc");
         return financingMapper.select(jltfispFinancing);
     }
 

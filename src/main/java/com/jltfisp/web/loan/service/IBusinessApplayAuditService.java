@@ -21,11 +21,11 @@ public interface IBusinessApplayAuditService extends
     /**
      * 检查是否存在 正在申请中或申请通过 的申请记录
      * @param userId 用户id
-     * @param type 申请类型
+     * @param parentType 申请类型
      * @return
      * @author yingying.wang1 2016年12月5日 下午4:39:53
      */
-    BusinessApplayAudit checkApply(Integer userId, String type);
+    BusinessApplayAudit checkApply(Integer userId, String parentType);
 	
 	/**
 	 * 
@@ -48,12 +48,12 @@ public interface IBusinessApplayAuditService extends
     /**
      * 根据条件获取业务审核信息
      * @param userId
-     * @param type
+     * @param parentType
      * @param state
      * @return
      * @author yingying.wang1 2016年12月6日 上午11:41:46
      */
-    BusinessApplayAudit getBusinessApplayAudit(Integer userId, String type,
+    BusinessApplayAudit getBusinessApplayAudit(Integer userId, String parentType,
             Integer state);
 
     /**

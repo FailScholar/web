@@ -23,8 +23,8 @@
                 </#if>
             </#list>
             <#if colList?size gt 5>
-            <li>
-            <a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
+            <li code="${colList[5].id}">
+            <a href="javascript:void(0);" code="1" style="display: none">${colList[5].columnName}</a>
 	       	 <select id="selectId" onchange="getList()">
 	       		<option value="0">-选择更多机构-</option>
 	       	 	<#list colList as afterFiveList>
@@ -54,19 +54,36 @@
 <script type="text/javascript">
     var infoTab = $("div.info ul.infoTab");
     $(function(){
-        infoTab.find("li").eq(0).addClass("active");
-        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find("li").eq(0).attr("code"),{'pager.offset' :0});
+		var columnid = $.cookie('columnid');
+		
+		var cloudIndex=-1;
+		var i=0;
+		$(".infoTab li").each(function(){
+			if($(this).attr("code")==columnid  && i<5){
+				cloudIndex=i;
+			}
+			i++;
+		});
+		if(columnid !=null && cloudIndex==-1){
+			$("#selectId").val(columnid);
+		}else if(columnid ==null){
+			cloudIndex=0;
+		}
+		$.cookie('columnid', null, {path: '/'});
+       	infoTab.find("li").eq(cloudIndex).addClass("active");
+        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find("li").eq(cloudIndex).attr("code"),{'pager.offset' :0});
     });
 
 
 	function infoTabClick(columnid) {
+		$("#selectId").val("0");
 		$('#colListDetail').load("${path}/perm/cloud/"+columnid,{'pager.offset' :0});
 	}
 	
 	function getList(){
 	  var columnId = $('select option:selected').val();
 	  if(columnId!=0){
-		  infoTabClick(columnId);
+		  $('#colListDetail').load("${path}/perm/cloud/"+columnId,{'pager.offset' :0});
 	  }
 	}
 

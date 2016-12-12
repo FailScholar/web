@@ -68,7 +68,8 @@ public class CloudController extends BaseController<Cloud> {
 	
 	@RequestMapping("/perm/cloud/{columnId}")
 	public String cloudListDetail(HttpServletRequest request, @PathVariable Integer columnId) throws Exception {
-		int rows=Integer.parseInt(request.getParameter("pager.offset"));
+		int rows=Integer.parseInt(request.getParameter("pager.offset")==null ? "0" :request.getParameter("pager.offset"));
+		
 		Cloud cloud =new Cloud();
 		cloud.setColumnId(columnId);
 		List<Cloud> list = cloudService.getCloudsList(columnId, rows);

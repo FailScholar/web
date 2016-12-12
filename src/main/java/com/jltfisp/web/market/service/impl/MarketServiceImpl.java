@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import com.github.pagehelper.PageHelper;
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
@@ -27,6 +28,7 @@ public class MarketServiceImpl extends BaseServiceImpl<Market> implements IMarke
 		Market market = new Market();
 		market.setColumnId(columnid);
 		PageHelper.startPage(page, 12);
+		PageHelper.orderBy("publish_time desc");
 		return marketMapper.select(market);
 	}
 	@Override

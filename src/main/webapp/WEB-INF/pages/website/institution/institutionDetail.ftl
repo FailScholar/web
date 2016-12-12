@@ -20,7 +20,7 @@
                 </div>
                 <div class="bank">
                 	<div class="bl fl">
-                		<img src="${path}/resource/fileImage/${jltfispInstitutionDetail.logoFile}" class="fl" />
+                		<img src="${path}${jltfispInstitutionDetail.logoFile}" class="fl" />
                         <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a></h1>
                     </div>
                     <div class="br fl ml57">

@@ -45,9 +45,9 @@ public class BusinessApplayAuditServiceImpl extends
     }
 
     @Override
-    public BusinessApplayAudit checkApply(Integer userId, String type) {
+    public BusinessApplayAudit checkApply(Integer userId, String parentType) {
         BusinessApplayAudit businessApplayAudit = businessApplayAuditMapper
-                .checkApply(userId, type);
+                .checkApply(userId, parentType);
         return businessApplayAudit;
     }
     
@@ -127,8 +127,8 @@ public class BusinessApplayAuditServiceImpl extends
 
     @Override
     public BusinessApplayAudit getBusinessApplayAudit(Integer userId,
-            String type, Integer state) {
-        return businessApplayAuditMapper.getBusinessApplayAudit(userId, type,
+            String parentType, Integer state) {
+        return businessApplayAuditMapper.getBusinessApplayAudit(userId, parentType,
                 state);
     }
 

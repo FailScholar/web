@@ -40,7 +40,7 @@
                                         <span class="notice fr">建议尺寸110px*110px<br />上传大小不超过320K<br />支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
-                                            <input type="file" name="uploadFile" id="uploadFile" onchange="ajaxFileUploadLogo()"/>
+                                            <input type="file" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
                                             <input name="userlogo" id="userlogo" type="hidden"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
@@ -154,7 +154,7 @@
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
                                             <input type="file" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
-                                            <input type="hidden" name="agencylogo" id="agency_logo"/>
+                                            <input type="hidden" name="agencylogo" id="agencylogo"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
                                     </td>
@@ -286,6 +286,7 @@ function ajaxFileUpload(index) {
         fileElementId: 'UpFile'+index,
         dataType:"text",  
         success: function(msg) {
+        alert(msg);
             if(msg!='false'){
                 $('#agencylogo').val(msg);
                 $("#agencylogoimg").attr("src","${path}"+msg);
@@ -295,6 +296,26 @@ function ajaxFileUpload(index) {
         }
     }); 
 } 
+
+              <!--用户logo上传附件-->
+function ajaxFileUploadUserLogo(index) {
+    var index=index;
+    $.ajaxFileUpload({
+        type: "POST",
+        url: '${path}/anon/uploadImage?pop=1&index='+index, 
+        secureuri: false,
+        fileElementId: 'UpFile'+index,
+        dataType:"text",  
+        success: function(msg) {
+            if(msg!='false'){
+                $('#userlogo').val(msg);
+                $("#portrait").attr("src","${path}"+msg);
+            }else{
+                alert("图片上传失败");
+            }
+        }
+    }); 
+}
 
 
 <!--上传用户logo头像，并剪裁-->

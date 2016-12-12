@@ -283,4 +283,11 @@ public class AnonController {
         model.addAttribute("pojo",pj);
         return "/website/sys/PojoDetail";
     }
+
+    @RequestMapping("/test")
+    @ResponseBody
+    private String test(){
+        emailService.sendText("2587038142@qq.com","zhiti","test");
+        return "test";
+    }
 }

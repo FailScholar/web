@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import com.jltfisp.web.capital.entity.JltfispCapital;
 import com.jltfisp.web.capital.service.CapitalService;
 import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.web.pager.entity.PagerModel;
 
 @Controller
 public class CapitalController {
@@ -30,7 +31,7 @@ public class CapitalController {
     * @param @param request
     * @param @return
     * @return String
-    */
+    */ 
     @RequestMapping("/perm/capital")
     public String capital(HttpServletRequest request){
     	List<JltfispColumn> columnList=this.capitalService.getJltfispColumnList(5);
@@ -49,12 +50,19 @@ public class CapitalController {
      * @return ModelAndView
      */
     @RequestMapping("/perm/capital/{columnId}")
-    public ModelAndView getCapitalInfoList(@PathVariable Integer columnId, Integer page){
+    public ModelAndView getCapitalInfoList(@PathVariable Integer columnId,HttpServletRequest request){
+    	int rows=Integer.parseInt(request.getParameter("pager.offset"));
     	ModelAndView mv=new ModelAndView("/website/capital/capitalInfoList");
-    	List<JltfispCapital> captialList = this.capitalService.getCapitalList(columnId,page);
-    	PageInfo pageInfo = new PageInfo<>(captialList);
-    	mv.addObject("pageInfo",pageInfo);
-    	mv.addObject("captialList", captialList);
+    	List<JltfispCapital> datas = this.capitalService.getCapitalList(columnId,rows);
+    	int total=this.capitalService.getCapitalPageCount(columnId);
+    	PagerModel pm = new PagerModel();
+ 	    pm.setDatas(datas);
+ 	    pm.setTotal(total);
+ 	    mv.addObject("columnId",columnId);
+ 	    mv.addObject("url","anon/capital");
+ 	    mv.addObject("pm",pm);
+//    	mv.addObject("pageInfo",pageInfo);
+//    	mv.addObject("captialList", captialList);
     	return mv;
     }
     

@@ -74,13 +74,31 @@
 	}
 	
 	 function infoTabClick(id){
+	 	$("#selectId").val("0");
         $('#colListDetail').load("${path}/perm/financing/"+id,{'pager.offset':0});
     }
 
      var infoTab = $("div.info ul.infoTab");
     $(function(){
-        infoTab.find("li").eq(0).addClass("active");
-        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find("li").eq(0).attr("code"),{'pager.offset':0});
+    	var columnid = $.cookie('columnid');
+		
+		var insuranceIndex=-1;
+		var i=0;
+		$(".infoTab li").each(function(){
+			if($(this).attr("code")==columnid  && i<5){
+				insuranceIndex=i;
+			}
+			i++;
+		});
+		if(columnid !=null && insuranceIndex==-1){
+			$("#selectId").val(columnid);
+		}else if(columnid ==null){
+			insuranceIndex=0;
+		}
+		$.cookie('columnid', null, {path: '/'});  	
+        infoTab.find("li").eq(insuranceIndex).addClass("active");
+        infoTab.find("li").eq(insuranceIndex).addClass("active");
+        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find("li").eq(insuranceIndex).attr("code"),{'pager.offset':0});
     });
 
 

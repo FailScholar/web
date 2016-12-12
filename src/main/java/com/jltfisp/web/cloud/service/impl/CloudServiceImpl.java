@@ -27,7 +27,7 @@ public class CloudServiceImpl extends BaseServiceImpl<Cloud> implements ICloudSe
 		Cloud cloud = new Cloud();
 		cloud.setColumnId(columnid);
 		PageHelper.startPage(page, 12);
-		// TODO Auto-generated method stub
+		PageHelper.orderBy("publish_time desc");
 		return cloudMapper.select(cloud);
 	}
 	@Override

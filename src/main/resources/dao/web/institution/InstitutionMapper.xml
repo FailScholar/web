@@ -23,7 +23,7 @@
 			institut.* 
 		FROM 
 			jltfisp_institut institut  
-		LEFT JOIN jltfisp_business_applay jba ON jba.user_id = institut.user_id AND jba.type = '7' 
+		JOIN jltfisp_business_applay jba ON jba.user_id = institut.user_id AND jba.type = institut.columnId AND jba.parent_type = '2'  
 		LEFT JOIN jltfisp_column_manage cm ON institut.columnId = cm.id  AND cm.parentColumn = 6 
 		WHERE
 			institut.columnId = #{columnId}  AND jba.state = 1 
@@ -121,9 +121,11 @@
 	   </selectKey> 
 	</insert>
 	
-	<!-- 根据用户id获取该用户申请过的合作机构信息 -->
-	<select id="getInstitutionByUserId" resultType="com.jltfisp.web.institution.entity.JltfispInstitution">
-	  select * from jltfisp_institut institut where institut.user_id = #{userId,jdbcType=INTEGER}
+	<!-- 根据用户id,栏目id获取该用户申请过的合作机构信息 -->
+	<select id="getInstitutionByUserIdAndColumnId" resultType="com.jltfisp.web.institution.entity.JltfispInstitution">
+	  select * from jltfisp_institut institut 
+	  where institut.user_id = #{userId,jdbcType=INTEGER}  
+	  and institut.columnId = #{columnId,jdbcType=INTEGER} 
 	</select>
 	
 	<!-- 更新 -->

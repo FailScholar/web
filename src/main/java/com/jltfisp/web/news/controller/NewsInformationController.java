@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
-import com.jltfisp.web.expert.entity.JltfispExpert;
 import com.jltfisp.web.news.entity.ColumnDto;
+import com.jltfisp.web.news.entity.DictColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
+import com.jltfisp.web.news.service.IDictColumnService;
 import com.jltfisp.web.news.service.INewsInformationService;
 import com.jltfisp.web.pager.entity.PagerModel;
 /**
@@ -26,7 +27,9 @@ public class NewsInformationController {
 	@Autowired
 	private INewsInformationService newsInformationSevice;
 	@Autowired
-	private ColumnService columnService; 
+	private ColumnService columnService;
+	@Autowired
+	private IDictColumnService deictColumnService;
 	/**
      * 资讯中心栏目主页面
      * @return
@@ -82,7 +85,7 @@ public class NewsInformationController {
     
 
 	/**
-	 * 根据新闻内容Id获取新闻的具体内容
+	 * 根据新闻内容Id获取新闻的具体内容 
 	 * @param newsContentId 新闻id
 	 * @return 具体的新闻内容
 	 */
@@ -91,6 +94,10 @@ public class NewsInformationController {
 		//每浏览一次新闻浏览量会改变
 		 this.newsInformationSevice.addNewsInfoPv(id);
 		ColumnDto columnDto=this.newsInformationSevice.getNewsInfoById(id);	
+		if(columnDto !=null){
+			DictColumnDto dictColumn=this.deictColumnService.SelectDictColumnDtoById(columnDto.getParentColumn());
+			request.setAttribute("dictColumn", dictColumn);
+		}
 		request.setAttribute("columnDto", columnDto);
 		return "/website/news/detail";
 	}

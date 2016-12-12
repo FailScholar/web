@@ -47,9 +47,7 @@ public class ColumnServiceImpl implements ColumnService {
      */
     @Override
     public List<JltfispColumn> getColumnList(Integer parentColumnId) {
-        JltfispColumn jltfispColumn=new JltfispColumn();
-        jltfispColumn.setParentColumn(parentColumnId);
-        return columnMapper.select(jltfispColumn);
+        return columnMapper.selectSubColumn(parentColumnId);
     }
 
 	@Override

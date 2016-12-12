@@ -61,8 +61,8 @@ public class InstitutionServiceImpl extends BaseServiceImpl<JltfispInstitution> 
     }
     
     @Override
-    public JltfispInstitution getInstitutionByUserId(Integer userId) {
-        return institutionDao.getInstitutionByUserId(userId);
+    public JltfispInstitution getInstitutionByUserIdAndColumnId(Integer userId, Integer columnId) {
+        return institutionDao.getInstitutionByUserIdAndColumnId(userId, columnId);
     }
 
 }

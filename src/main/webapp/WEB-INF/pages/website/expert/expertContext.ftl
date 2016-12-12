@@ -1,3 +1,4 @@
+<#assign path=request.contextPath />
 <ul class="ul2">
   <#list pm.datas as expert>
      <li>

@@ -5,7 +5,13 @@
 	        <li>
 	            <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${marketMsg.id}',${columnid})">${marketMsg.title }</a></h2>
 	            <p class="tit">${marketMsg.source}<span>${marketMsg.publishTime ? date}</span><span class="eye fr">${marketMsg.pv}</span></p>
-	            <p>${marketMsg.contentReview}</p>
+	            <p>
+	            	<#if marketMsg.contentReview?length lt 40>
+		            	${marketMsg.contentReview}
+		            <#else>
+		            	${marketMsg.contentReview[0..40]}...
+		            </#if>
+	            </p>
 	        </li>
 	        </#list>
 	    </ul>

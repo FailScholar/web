@@ -39,6 +39,11 @@ public class CapitalServiceImpl extends BaseServiceImpl<JltfispCapital> implemen
 		PageHelper.startPage(page, 8);
 	    return this.capitalDao.getCapitalList(columnId);
 	}
+
+	@Override
+	public int getCapitalPageCount(Integer columnId) {
+		return this.capitalDao.getCapitalPageCount(columnId);
+	}
 	
 	
 	

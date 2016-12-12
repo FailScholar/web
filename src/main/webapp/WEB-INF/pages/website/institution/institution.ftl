@@ -19,14 +19,14 @@
                       <ul class="infoTab">
                       <#if (columnList?size<5)>
                      	 	<#list columnList as columnList>
-				        		 <li tips="${columnList.id}">
-				         			<a href="javascript:void(0);" onclick="getInstitutionList(${columnList.id})">${columnList.columnName}</a>
+				        		 <li tips="${columnList.id}" id="columnId${columnList.id}">
+				         			<a href="javascript:void(0);" onclick="getInstitutionList(${columnList.id},'${columnList.columnName}')">${columnList.columnName}</a>
 				        	 	 </li>
 				      		</#list> 
 				      <#else>
 				     	  <#list foreFiveList as foreFiveList>
-				        		 <li tips="${foreFiveList.id}">
-				         			<a href="javascript:void(0);" onclick="getInstitutionList(${foreFiveList.id})">${foreFiveList.columnName}</a>
+				        		 <li tips="${foreFiveList.id}" id="columnId${foreFiveList.id}">
+				         			<a href="javascript:void(0);" onclick="getInstitutionList(${foreFiveList.id},'${foreFiveList.columnName}')">${foreFiveList.columnName}</a>
 				        	 	 </li>
 				      	 </#list> 
  				       	 <li>
@@ -42,7 +42,7 @@
                       </ul>
                       <div class="clear"></div>
                       <input type="hidden" id="applyColumnId" />
-                      <a href="javascript: void(0);" class="apply2" onclick="applyInstitution();">申请成为合作机构</a>
+                      <a href="javascript: void(0);" class="apply2" onclick="applyInstitution();">申请成为<span id="columnName">合作机构</span></a>
                      
                       
                      
@@ -64,13 +64,26 @@
   </body>
    <script type="text/javascript">
    $(function(){
-	  $("div.info ul.infoTab").find("li").eq(0).addClass("active");
-	  var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
-	  getInstitutionList(tips);
+	  var columnId = '${columnId}';
+	  if(columnId == ''){
+	  	$("div.info ul.infoTab").find("li").eq(0).addClass("active");
+	  	var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
+	  	var columnName= $("div.info ul.infoTab").find("li").eq(0).find("a").text();
+	  	getInstitutionList(tips,columnName);
+	  }else{
+	  	if($("#columnId"+columnId).html() == null ){
+	  		$("#selectId").val(columnId);
+	  		getList();
+	  	}else{
+	  		$("#columnId"+columnId).addClass("active");
+	    	var columnName= $("#columnId"+columnId).find("a").text();
+	  		getInstitutionList(columnId,columnName);
+	  	}
+	  }
    });
 
  	//获取子栏目内容列表
-    function getInstitutionList(columnId){
+    function getInstitutionList(columnId,columnName){
     	$("#applyColumnId").val(columnId);
          $.ajax({
 			  type : "POST",
@@ -78,6 +91,7 @@
 			  data:{"columnId":columnId,'pager.offset': 0},
 			  dataType : "html",
 			  success:function(data){
+			  	$("#columnName").html(columnName);
 				$(".infoList").html(data);//要刷新的div
 			  }
 // 			  ,
@@ -94,8 +108,9 @@
 
 	function getList(){
 	  var columnId = $('select option:selected').val();
+	  var columnName = $('select option:selected').html();
 	  if(columnId!=0){
-		  getInstitutionList(columnId);
+		  getInstitutionList(columnId,columnName);
 	  }
 	}
 	

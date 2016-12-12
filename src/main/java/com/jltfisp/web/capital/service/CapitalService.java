@@ -16,4 +16,6 @@ public interface CapitalService extends IBaseService<JltfispCapital> {
 
 	public List<JltfispCapital> getCapitalList(Integer columnId, Integer page);
 
+	public int getCapitalPageCount(Integer columnId);
+
 }

@@ -20,16 +20,17 @@
         <#assign len = colList?size />
         <#if (len <= 5) >
             <#list colList as list>
-                <li code="${list.id}"><a href="javascript:void(0);">${list.columnName}</a></li>
+                <li code="${list.id}" onclick="infoTabClick(${list.id})"><a href="javascript:void(0);">${list.columnName}</a></li>
             </#list>
         <#else>
             <#list 0..4 as i>
-                <li code="${colList[i].id}"><a href="javascript:void(0);">${colList[i].columnName}</a></li>
+                <li code="${colList[i].id}" onclick="infoTabClick(${colList[i].id})"><a href="javascript:void(0);">${colList[i].columnName}</a></li>
             </#list>
 
             <li code="${colList[5].id}">
               <a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
-            <select id="moreSel">
+            <select id="moreSel" onchange="getList()">
+            <option value="0">-选择更多机构-</option>
             <#list 5..len-1 as i>
                 <option value="${colList[i].id}">${colList[i].columnName}</option>
             </#list>
@@ -53,16 +54,40 @@
 <script type="text/javascript">
     var infoTab = $("div.info ul.infoTab");
     $(function(){
-        infoTab.find("li").eq(0).addClass("active");
-        $('#colListDetail').load("${path}/perm/insurance/"+infoTab.find("li").eq(0).attr("code"),{page :1});
+		var columnid = $.cookie('columnid');
+		
+		var insuranceIndex=-1;
+		var i=0;
+		$(".infoTab li").each(function(){
+			if($(this).attr("code")==columnid  && i<5){
+				insuranceIndex=i;
+			}
+			i++;
+		});
+		if(columnid !=null && insuranceIndex==-1){
+			$("#selectId").val(columnid);
+		}else if(columnid ==null){
+			insuranceIndex=0;
+		}
+		$.cookie('columnid', null, {path: '/'});  	
+        infoTab.find("li").eq(insuranceIndex).addClass("active");
+        $('#colListDetail').load("${path}/perm/insurance/"+infoTab.find("li").eq(insuranceIndex).attr("code"),{'pager.offset' :0});
     });
 
-    $('.infoTab li').click(function(){
-        $('#colListDetail').load("${path}/perm/insurance/"+$(this).attr("code"),{page :1});
-    });
+    function infoTabClick(columnid){
+    	$("#moreSel").val("0");
+    	$('#colListDetail').load("${path}/perm/insurance/"+columnid,{'pager.offset' :0});
+    }
+
+	function getList(){
+	  var columnId = $('select option:selected').val();
+	  if(columnId!=0){
+		  $('#colListDetail').load("${path}/perm/insurance/"+columnId,{'pager.offset' :0});
+	  }
+	}
 
     function selectPage(page) {
-        $('#colListDetail').load("${path}/perm/insurance/"+infoTab.find('li.active').attr('code'),{page :page});
+        $('#colListDetail').load("${path}/perm/insurance/"+infoTab.find('li.active').attr('code'),{'pager.offset' :0});
     }
 
     $(document).ready(function () {

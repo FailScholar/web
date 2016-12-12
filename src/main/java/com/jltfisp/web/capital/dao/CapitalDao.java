@@ -18,4 +18,6 @@ public interface CapitalDao extends BaseMapper<JltfispCapital>{
 	public void updateCapitalPv(Integer id);
 
 	public List<JltfispCapital> getCapitalList(Integer column_id);
+
+	public int getCapitalPageCount(@Param("column_id")Integer column_id);
 }

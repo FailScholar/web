@@ -23,7 +23,7 @@
 	            </#if>
             </#list>
             <#if colList?size gt 5>
-	            <li>
+	            <li code="${colList[5].id}">
 	            <a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
 		       	 <select id="selectId" onchange="getList()">
 		       		<option value="0">-选择更多机构-</option>
@@ -54,17 +54,35 @@
 <script type="text/javascript">
     var infoTab = $("div.info ul.infoTab");
     $(function(){
-        infoTab.find("li").eq(0).addClass("active");
-        $('#colListDetail').load("${path}/perm/market/"+infoTab.find("li").eq(0).attr("code"),{'pager.offset' :0});
+    	var columnid = $.cookie('columnid');
+		
+		var insuranceIndex=-1;
+		var i=0;
+		$(".infoTab li").each(function(){
+			if($(this).attr("code")==columnid  && i<5){
+				insuranceIndex=i;
+			}
+			i++;
+		});
+		if(columnid !=null && insuranceIndex==-1){
+			insuranceIndex=5;
+			$("#selectId").val(columnid);
+		}else if(columnid ==null){
+			insuranceIndex=0;
+		}
+		$.cookie('columnid', null, {path: '/'}); 
+        infoTab.find("li").eq(insuranceIndex).addClass("active");
+        $('#colListDetail').load("${path}/perm/market/"+infoTab.find("li").eq(insuranceIndex).attr("code"),{'pager.offset' :0});
     });
     
     function marketList(columnid) {
+    	$("#selectId").val("0");
     	$('#colListDetail').load("${path}/perm/market/"+columnid,{'pager.offset' :0});
     }
 	function getList(){
 	  var columnId = $('select option:selected').val();
 	  if(columnId!=0){
-		  marketList(columnId);
+		  $('#colListDetail').load("${path}/perm/market/"+columnId,{'pager.offset' :0});
 	  }
 	}
 	

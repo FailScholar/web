@@ -256,7 +256,7 @@
         from jltfisp_business_applay a
         where 
 	    	a.user_id = #{userId,jdbcType=INTEGER} 
-	    	and a.type = #{type,jdbcType=CHAR} 
+	    	and a.parent_type = #{parentType,jdbcType=CHAR} 
 	    	and a.state in (0,1) 
 	</select>
 	
@@ -267,7 +267,7 @@
         from jltfisp_business_applay a
         where 
 	    	a.user_id = #{userId,jdbcType=INTEGER} 
-	    	and a.type = #{type,jdbcType=CHAR} 
+	    	and a.parent_type = #{parentType,jdbcType=CHAR} 
 	    	and a.state = #{state,jdbcType=INTEGER}
 	</select>
 </mapper> 

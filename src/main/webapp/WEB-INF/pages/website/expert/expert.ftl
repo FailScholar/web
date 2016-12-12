@@ -26,7 +26,7 @@
                           <#break>
                           </#if>
                           </#list>
-                          <#if  (columnList?size>4)>
+                          <#if  (columnList?size>5)>
                           <li>
                          <select id="columnName" name="columnName" >
                          <option  value="">--选择更多资源--</option>
@@ -71,7 +71,8 @@
 </html>
 
 <script type="text/javascript">
-   var columnId=${columnId};
+    var columnId="${columnId}";
+    var isFrontPage="${isFrontPage}";
     $(document).ready(function(e) {
     $('#Type'+columnId).addClass('active');
     $('.apply2').hide();
@@ -122,7 +123,41 @@
 		$('#'+columnId).show();
 		}
 	});
-	$('.infoTab li').eq(0).click();
+	<!--处理从前台页面转过来的请求-->
+	if(isFrontPage==1){
+	  $("#columnName   option[value='"+columnId+"']").attr("selected",true);
+	  val = $('select option:selected').val();
+      if('' != val){
+      $('.infoTab li').eq(5).addClass('active');
+      $.ajax({
+                type: 'POST',
+                url:'${path}/perm/expert/'+columnId,
+                data: {'pager.offset':0},
+                success: function (data) {
+                $('.infoList').html(data);
+                }
+          });
+      $('.infoTab li').eq(5).addClass('active');
+      $('.apply2').hide();
+      $('#'+columnId).show();
+      }else{
+       $('#Type'+columnId).addClass('active').siblings('li').removeClass('active');
+	  <!--传当前子栏目ID-->
+	   $.ajax({
+                type: 'POST',
+                url:'${path}/perm/expert/'+columnId,
+                data: {'pager.offset':0},
+                success: function (data) {
+                $('.infoList').html(data);
+                }
+          });
+       $('.apply2').hide();
+	   $('#'+columnId).show();
+       }
+    <!--如果不是从前台转过来的请求，则默认显示第1个列表-->   	  
+	}else{  
+	  $('.infoTab li').eq(0).click();
+	}
 });
 
 function expertDetail(id){

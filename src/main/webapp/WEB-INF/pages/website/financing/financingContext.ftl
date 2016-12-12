@@ -5,7 +5,13 @@
         <li>
             <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${list.id}')">${list.title }</a></h2>
             <p class="tit">${list.source}<span>${list.publishtime ? date}</span><span class="eye fr">${list.pv}</span></p>
-            <p>${list.contentreview}</p>
+            <p>
+            	<#if list.contentreview?length lt 40>
+	            	${list.contentreview}
+	            <#else>
+	            	${list.contentreview[0..40]}...
+	            </#if>
+            </p>
         </li>
         </#list>
     </ul>

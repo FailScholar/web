@@ -76,17 +76,17 @@
                           </div>
                           <!--重要提示-->
                           <div class="nlistCont">
-                              <div class="tip3">
+                              <div class="tip3" style="table-layout:fixed; word-break:break-strict;">              
                                   <h3>重要提示</h3>
-                                  <p class="ntit">1、企业申请科技贷款必须以诚信为基础，在整个受理、审查、放贷和资金回收过程中，借款企业有任何不符合诚信原则的状况发生，由此产生的后果由借款企业自行负责。</p>
-                                  <p class="ntit">2、借款企业必须配合银行、保险或担保公司和科技部门的调查、检查和监督。</p>
-                                  <p class="ntit">3、按要求准备申请材料,并确保贷款申请及附件资料和数据的真实、准确、 有效。这些数据及材料将作为企业信用评级的基本依据。</p>
-                                  <p class="ntit">4、申报材料一律不退回。</p>
-                                  <p class="ntit">5、吉林省科技创业中心承诺对企业提交申请材料负有责任保密责任。</p>
-                                  <p class="ntit">6、请在线打印《科技贷款申请表》及复印附件（加盖公章），一式四份，提交市创业中心、贷款银行和保险及保险经纪公司或担保公司各一份。</p>
-                                  <p class="ntit">7、借款企业仅支付贷款利息和担保或保险费，无需承担银行或担保及保险公司收取任何的其他服务费用。</p>
-                                  <p class="ntit"></p>
-                                  <p class="ntit">咨询电话：0431-81334101</p>
+                                  <p class="ntit" style="border-bottom:none;">1、企业申请科技贷款必须以诚信为基础，在整个受理、审查、放贷和资金回收过程中，借款企业有任何不符合诚信原则的状况发<br/>生，由此产生的后果由借款企业自行负责。</p>
+                                  <p class="ntit" style="border-bottom:none;">2、借款企业必须配合银行、保险或担保公司和科技部门的调查、检查和监督。</p>
+                                  <p class="ntit" style="border-bottom:none;">3、按要求准备申请材料,并确保贷款申请及附件资料和数据的真实、准确、 有效。这些数据及材料将作为企业信用评级的基本依据。</p>
+                                  <p class="ntit" style="border-bottom:none;">4、申报材料一律不退回。</p>
+                                  <p class="ntit" style="border-bottom:none;">5、吉林省科技创业中心承诺对企业提交申请材料负有责任保密责任。</p>
+                                  <p class="ntit" style="border-bottom:none;">6、请在线打印《科技贷款申请表》及复印附件（加盖公章），一式四份，提交市创业中心、贷款银行和保险及保险经纪公司或担<br/>保公司各一份。</p>
+                                  <p class="ntit" style="border-bottom:none;">7、借款企业仅支付贷款利息和担保或保险费，无需承担银行或担保及保险公司收取任何的其他服务费用。</p>
+                                  <p class="ntit" style="border-bottom:none;"></p>
+                                  <p class="ntit" style="border-bottom:none;">咨询电话：0431-81334101</p>
                               </div>
                               
                           </div>
@@ -1084,115 +1084,115 @@
                                 <tr><th>项目</th><th>${coAll.jltfispCoDebt.year}年末</th><th>${coAll.jltfispCoDebt.year?number+1}年末</th><th>${coAll.jltfispCoDebt.year?number+2}年末</th><th>${coAll.jltfispCoDebt.year?number+3}年1~${coAll.jltfispCoProfit[0].month}月</th></tr>
                                 <tr>
                                 	<td><b>主营业务收入</b></td>
-                                    <td><input name="mainincome" id="mainincome" value="${coAll.jltfispCoProfit[0].mainincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="mainincome" id="mainincome" value="${coAll.jltfispCoProfit[1].mainincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="mainincome" id="mainincome" value="${coAll.jltfispCoProfit[2].mainincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="mainincome" id="mainincome" value="${coAll.jltfispCoProfit[3].mainincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].mainincome}</td>
+                                    <td>${coAll.jltfispCoProfit[1].mainincome}</td>
+                                    <td>${coAll.jltfispCoProfit[2].mainincome}</td>
+                                    <td>${coAll.jltfispCoProfit[3].mainincome}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：主营业务成本</td>
-                                    <td><input name="maincost" id="maincost" value="${coAll.jltfispCoProfit[0].maincost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="maincost" id="maincost" value="${coAll.jltfispCoProfit[1].maincost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="maincost" id="maincost" value="${coAll.jltfispCoProfit[2].maincost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="maincost" id="maincost" value="${coAll.jltfispCoProfit[3].maincost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].maincost}</td>
+                                    <td>${coAll.jltfispCoProfit[1].maincost}</td>
+                                    <td>${coAll.jltfispCoProfit[2].maincost}</td>
+                                    <td>${coAll.jltfispCoProfit[3].maincost}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：主营业务税金及附加</td>
-                                    <td><input name="maintax" id="maintax" value="${coAll.jltfispCoProfit[0].maintax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="maintax" id="maintax" value="${coAll.jltfispCoProfit[1].maintax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="maintax" id="maintax" value="${coAll.jltfispCoProfit[2].maintax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="maintax" id="maintax" value="${coAll.jltfispCoProfit[3].maintax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].maintax}</td>
+                                    <td>${coAll.jltfispCoProfit[1].maintax}</td>
+                                    <td>${coAll.jltfispCoProfit[2].maintax}</td>
+                                    <td>${coAll.jltfispCoProfit[3].maintax}</td>
                                 </tr>
                                 <tr>
                                 	<td><b>主营业务利润(亏损以"-"号填列)</b></td>
-                                    <td><input name="mainprofit" id="mainprofit" value="${coAll.jltfispCoProfit[0].mainprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="mainprofit" id="mainprofit" value="${coAll.jltfispCoProfit[1].mainprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="mainprofit" id="mainprofit" value="${coAll.jltfispCoProfit[2].mainprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="mainprofit" id="mainprofit" value="${coAll.jltfispCoProfit[3].mainprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].mainprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[1].mainprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[2].mainprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[3].mainprofit}</td>
                                 </tr>
                                 <tr>
                                 	<td>加：其他业务利润(亏损以"-"号填列)</td>
-                                    <td><input name="otherprofit" id="otherprofit" value="${coAll.jltfispCoProfit[0].otherprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherprofit" id="otherprofit" value="${coAll.jltfispCoProfit[1].otherprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherprofit" id="otherprofit" value="${coAll.jltfispCoProfit[2].otherprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherprofit" id="otherprofit" value="${coAll.jltfispCoProfit[3].otherprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].otherprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[1].otherprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[2].otherprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[3].otherprofit}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：营业费用</td>
-                                    <td><input name="businesscost" id="businesscost" value="${coAll.jltfispCoProfit[0].businesscost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="businesscost" id="businesscost" value="${coAll.jltfispCoProfit[1].businesscost}"  type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="businesscost" id="businesscost" value="${coAll.jltfispCoProfit[2].businesscost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="businesscost" id="businesscost" value="${coAll.jltfispCoProfit[3].businesscost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].businesscost}</td>
+                                    <td>${coAll.jltfispCoProfit[1].businesscost}</td>
+                                    <td>${coAll.jltfispCoProfit[2].businesscost}</td>
+                                    <td>${coAll.jltfispCoProfit[3].businesscost}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：管理费用</td>
-                                    <td><input name="managecost" id="managecost"  value="${coAll.jltfispCoProfit[0].managecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="managecost" id="managecost" value="${coAll.jltfispCoProfit[1].managecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="managecost" id="managecost" value="${coAll.jltfispCoProfit[2].managecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="managecost" id="managecost" value="${coAll.jltfispCoProfit[3].managecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].managecost}</td>
+                                    <td>${coAll.jltfispCoProfit[1].managecost}</td>
+                                    <td>${coAll.jltfispCoProfit[2].managecost}</td>
+                                    <td>${coAll.jltfispCoProfit[3].managecost}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：财务费用</td>
-                                    <td><input name="financecost" id="financecost" value="${coAll.jltfispCoProfit[0].financecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="financecost" id="financecost" value="${coAll.jltfispCoProfit[1].financecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="financecost" id="financecost" value="${coAll.jltfispCoProfit[2].financecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="financecost" id="financecost" value="${coAll.jltfispCoProfit[3].financecost}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].financecost}</td>
+                                    <td>${coAll.jltfispCoProfit[1].financecost}</td>
+                                    <td>${coAll.jltfispCoProfit[2].financecost}</td>
+                                    <td>${coAll.jltfispCoProfit[3].financecost}</td>
                                 </tr>
                                 <tr>
                                 	<td><b>营业利润(亏损以"-"号填列)</b></td>
-                                    <td><input name="businessprofit" id="businessprofit" value="${coAll.jltfispCoProfit[0].businessprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="businessprofit" id="businessprofit" value="${coAll.jltfispCoProfit[1].businessprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="businessprofit" id="businessprofit" value="${coAll.jltfispCoProfit[2].businessprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="businessprofit" id="businessprofit" value="${coAll.jltfispCoProfit[3].businessprofit}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].businessprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[1].businessprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[2].businessprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[3].businessprofit}</td>
                                 </tr>
                                 <tr>
                                 	<td>加：投资收益(亏损以"-"号填列)</td>
-                                    <td><input name="investmentincome" id="investmentincome" value="${coAll.jltfispCoProfit[0].investmentincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="investmentincome" id="investmentincome" value="${coAll.jltfispCoProfit[1].investmentincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="investmentincome" id="investmentincome" value="${coAll.jltfispCoProfit[2].investmentincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="investmentincome" id="investmentincome" value="${coAll.jltfispCoProfit[3].investmentincome}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].investmentincome}</td>
+                                    <td>${coAll.jltfispCoProfit[1].investmentincome}</td>
+                                    <td>${coAll.jltfispCoProfit[2].investmentincome}</td>
+                                    <td>${coAll.jltfispCoProfit[3].investmentincome}</td>
                                 </tr>
                                 <tr>
                                 	<td>加：营业外收入</td>
-                                    <td><input name="otherincome" id="otherincome" type="text" value="${coAll.jltfispCoProfit[0].otherincome}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherincome" id="otherincome" type="text" value="${coAll.jltfispCoProfit[1].otherincome}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherincome" id="otherincome" type="text" value="${coAll.jltfispCoProfit[2].otherincome}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherincome" id="otherincome" type="text" value="${coAll.jltfispCoProfit[3].otherincome}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].otherincome}</td>
+                                    <td>${coAll.jltfispCoProfit[1].otherincome}</td>
+                                    <td>${coAll.jltfispCoProfit[2].otherincome}</td>
+                                    <td>${coAll.jltfispCoProfit[3].otherincome}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：营业外支出</td>
-                                    <td><input name="otherpay" id="otherpay" type="text" value="${coAll.jltfispCoProfit[0].otherpay}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherpay" id="otherpay" type="text" value="${coAll.jltfispCoProfit[1].otherpay}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherpay" id="otherpay" type="text" value="${coAll.jltfispCoProfit[2].otherpay}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="otherpay" id="otherpay" type="text" value="${coAll.jltfispCoProfit[3].otherpay}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].otherpay}</td>
+                                    <td>${coAll.jltfispCoProfit[1].otherpay}</td>
+                                    <td>${coAll.jltfispCoProfit[2].otherpay}</td>
+                                    <td>${coAll.jltfispCoProfit[3].otherpay}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：资产减值损失</td>
-                                    <td><input name="assetloss" id="assetloss" type="text" value="${coAll.jltfispCoProfit[0].assetloss}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="assetloss" id="assetloss" type="text" value="${coAll.jltfispCoProfit[1].assetloss}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="assetloss" id="assetloss" type="text" value="${coAll.jltfispCoProfit[2].assetloss}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="assetloss" id="assetloss" type="text" value="${coAll.jltfispCoProfit[3].assetloss}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].assetloss}</td>
+                                    <td>${coAll.jltfispCoProfit[1].assetloss}</td>
+                                    <td>${coAll.jltfispCoProfit[2].assetloss}</td>
+                                    <td>${coAll.jltfispCoProfit[3].assetloss}</td>
                                 </tr>
                                 <tr>
                                 	<td><b>利润总额(亏损以"-"号填列)</b></td>
-                                    <td><input name="profitamount" id="profitamount" type="text" value="${coAll.jltfispCoProfit[0].profitamount}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="profitamount" id="profitamount" type="text" value="${coAll.jltfispCoProfit[1].profitamount}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="profitamount" id="profitamount" type="text" value="${coAll.jltfispCoProfit[2].profitamount}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="profitamount" id="profitamount" type="text" value="${coAll.jltfispCoProfit[3].profitamount}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].profitamount}</td>
+                                    <td>${coAll.jltfispCoProfit[1].profitamount}</td>
+                                    <td>${coAll.jltfispCoProfit[2].profitamount}</td>
+                                    <td>${coAll.jltfispCoProfit[3].profitamount}</td>
                                 </tr>
                                 <tr>
                                 	<td>减：所得税</td>
-                                    <td><input name="incometax" id="incometax" value="${coAll.jltfispCoProfit[0].incometax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="incometax" id="incometax" value="${coAll.jltfispCoProfit[1].incometax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="incometax" id="incometax" value="${coAll.jltfispCoProfit[2].incometax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="incometax" id="incometax" value="${coAll.jltfispCoProfit[3].incometax}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].incometax}</td>
+                                    <td>${coAll.jltfispCoProfit[1].incometax}</td>
+                                    <td>${coAll.jltfispCoProfit[2].incometax}</td>
+                                    <td>${coAll.jltfispCoProfit[3].incometax}</td>
                                 </tr>
                                 <tr>
                                 	<td><b>净利润(亏损以"-"号填列)</b></td>
-                                    <td><input name="netprofit" id="netprofit" type="text" value="${coAll.jltfispCoProfit[0].netprofit}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="netprofit" id="netprofit" type="text" value="${coAll.jltfispCoProfit[1].netprofit}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="netprofit" id="netprofit" type="text" value="${coAll.jltfispCoProfit[2].netprofit}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
-                                    <td><input name="netprofit" id="netprofit" type="text" value="${coAll.jltfispCoProfit[3].netprofit}" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
+                                    <td>${coAll.jltfispCoProfit[0].netprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[1].netprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[2].netprofit}</td>
+                                    <td>${coAll.jltfispCoProfit[3].netprofit}</td>
                                 </tr>
                             </table>
                               </form>

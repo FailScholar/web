@@ -12,7 +12,13 @@
 	        <li>
 	            <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${cloudMsg.id}',${columnid})">${cloudMsg.title }</a></h2>
 	            <p class="tit">${cloudMsg.source}<span>${cloudMsg.publishTime ? date}</span><span class="eye fr">${cloudMsg.pv}</span></p>
-	            <p>${cloudMsg.contentReview}</p>
+	            <p>
+	            	<#if cloudMsg.contentReview?length lt 40>
+		            	${cloudMsg.contentReview}
+		            <#else>
+		            	${cloudMsg.contentReview[0..40]}...
+		            </#if>
+	            </p>
 	        </li>
 	        </#list>
 	    </ul>

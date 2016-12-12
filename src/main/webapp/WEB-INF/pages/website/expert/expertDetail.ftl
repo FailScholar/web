@@ -19,7 +19,7 @@
                     <a href="javascript:;">${parentJltfispColumn.columnName}</a>&gt;<a href="javascript:;">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">专家详情</a>
                 </div>
                 <div class="detail">
-                	<img src="${path}/${jltfispExpert.agencylogo}" class="fl" />
+                	<img width="220px" height="246px" src="${path}/${jltfispExpert.agencylogo}" class="fl" />
                     <div class="ul2 fl ml57">
                     	<h1>${jltfispExpert.userid}</h1>
                         <p style="padding-left:0;">${jltfispExpert.workpost} | ${jltfispExpert.businesaddress}</p>

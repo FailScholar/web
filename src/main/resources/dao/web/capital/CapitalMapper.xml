@@ -30,4 +30,7 @@
 	<select id="getCapitalDetail" resultType="com.jltfisp.web.capital.entity.JltfispCapital" parameterType="int">
 		select * from jltfisp_capital ca where ca.state=1 and ca.id=#{id}
 	</select>
+	<select id="getCapitalPageCount" resultType="int" parameterType="int">
+		select count(*) from jltfisp_capital capital where capital.column_id=#{column_id}
+	</select>
 </mapper>

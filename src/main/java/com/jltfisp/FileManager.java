@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.jltfisp.config.SysConstant;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +78,8 @@ public class FileManager {
         String fullRelativePath = File.separator + Constants.FILE_HOME+getFileRelativePath(relativePath, fileId, fileName.substring(fileName.lastIndexOf(".")));
         boolean result = false;
         try{
-            result = handleDisk(fileData, Constants.basePath + fullRelativePath );
+            String uploadDir = SysConstant.get("upload_dir");
+            result = handleDisk(fileData, uploadDir + fullRelativePath );
         }catch(Exception e){
             LOGGER.error("saveContractFile",e);
         }

@@ -54,4 +54,20 @@ public class InsuranceServiceImpl implements InsuranceService {
         }
         return true;
     }
+
+	@Override
+	public List<JltfispInsurance> getInsuranceList(Integer columnid, int page) {
+		JltfispInsurance insurance = new JltfispInsurance();
+		insurance.setColumnId(columnid);
+		PageHelper.startPage(page, 12);
+		PageHelper.orderBy("publish_time desc");
+		return jltfispInsuranceMapper.select(insurance);
+	}
+
+	@Override
+	public int getInsuranceCount(Integer columnid) {
+		JltfispInsurance insurance = new JltfispInsurance();
+		insurance.setColumnId(columnid);
+		return jltfispInsuranceMapper.selectCount(insurance);
+	}
 }
