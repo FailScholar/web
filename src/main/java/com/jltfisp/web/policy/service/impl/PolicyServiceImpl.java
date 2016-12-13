@@ -34,7 +34,6 @@ public class PolicyServiceImpl implements PolicyService {
     	map.put("rows", rows);
     	map.put("pageSize", pageSize);
     	map.put("columnId", columnId);
-    	System.out.println("rows="+map.get("rows"));
         return policyMapper.getPolicyPageList(map);
 	}
 

@@ -18,8 +18,8 @@
 	<select id="getNewsInformationList" resultMap="newsInformation" parameterType="map">
 	   select jn.id as id,jn.title as title,jn.content as content,jn.source as source,
 	    jn.link as link,jn.publish_time as publishTime ,jn.column_id as columnId ,jn.content_review as contentReview,
-	    jn.videoPath as videoPath,jn.pv as pv
-         from  jltfisp_news jn where  jn.column_id=#{columnId} limit #{rows},#{pageSize}
+	    jn.videoPath as videoPath,jn.pv as pv from
+	      jltfisp_news jn where  column_id=#{columnId} order by jn.publish_time desc limit #{rows},#{pageSize}
 	</select>
 	
 	<!--根据新闻内容id获取具体的新闻内容  -->

@@ -47,7 +47,7 @@
               </tr>
               <tr class="tal">
                   <th>经营地址</th>
-                  <td colspan="5">${ jltfispCoBaseDto.officeProv}${jltfispCoBaseDto.officeCity }${ jltfispCoBaseDto.officeArea}${jltfispCoBaseDto.officeAddress }</td>
+                  <td colspan="5">${ jltfispCoBaseDto.officeProv}${jltfispCoBaseDto.officeCity!''}${ jltfispCoBaseDto.officeArea!''}${jltfispCoBaseDto.officeAddress!''}</td>
                   <th>注册地址</th>
                   <td colspan="3">${jltfispCoBaseDto.registeredAddress!''}</td>
               </tr>

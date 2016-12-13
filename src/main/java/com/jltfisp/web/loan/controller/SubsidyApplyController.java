@@ -41,6 +41,25 @@ public class SubsidyApplyController {
     @Autowired
     private IBusinessApplayAuditService businessApplayAuditService;
 	
+    
+    
+    /**
+	 * 跳转申请须知页面
+	 * @param request
+	 * @return mv
+	 */
+    @RequestMapping("/guidApplyText")
+    public ModelAndView guidApplyText(HttpServletRequest request){
+    	ModelAndView mv=new ModelAndView("/website/loan/subsidy/GuideApplyText");
+        JltfispUser user =loginService.getCurrentUser();
+        //如果是企业用户则判断是否申请相应的贷款服务
+        if(user !=null && user.getType()==1 ){
+        	//第一步先进入申请须知页面
+        	mv=new ModelAndView("/website/loan/fail");
+    		mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
+        }
+    	return mv;
+    }
     /**
 	 * 判断是否已经申请贷款服务
 	 * @param request

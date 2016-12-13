@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -99,13 +100,11 @@ public class LoanController {
      
 
      //获取当前用户登录信息
-     //赞时屏蔽
-     //if(!SecurityUtils.getSubject().hasRole("企业会员")){//如果当前用户不是企业用户，则不让申请贷款服务
-     // request.setAttribute("applyname", JltfispColumn.getColumnName()+"申请"); 
-        // request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName());
-        // return "/website/expert/expertApplyfail";
-     //}
-     //暂时屏蔽
+     if(!SecurityUtils.getSubject().hasRole("企业会员")){//如果当前用户不是企业用户，则不让申请贷款服务
+         request.setAttribute("applyname", "贷款服务申请"); 
+         request.setAttribute("failMes", "对不起，只有企业用户才能申请贷款服务！");
+         return "/website/loan/loanapply/loanApplyfail";
+     }
      
      //获取当前用户登录信息
      JltfispUser user=loginService.getCurrentUser();
@@ -136,6 +135,40 @@ public class LoanController {
          return "/website/loan/loanapply/coGuideApply";
       }
     }
+	
+	
+	/**
+	 * 点击贷款服务页面中的申请须知，则跳转到贷款服务须知页面
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/guideApply2")
+    public String guideApply2(HttpServletRequest request) {
+	    String applytype = request.getParameter("applytype");
+        request.setAttribute("applyname", map.get(applytype));
+        request.setAttribute("applytype", applytype);
+         //获取申请表单 申请须知
+         LoanformManage loanformManage = new LoanformManage();
+         SysDict sysDict = dictionaryService.getValueByTypeCode(1002, applytype);
+         if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+             loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                     LoanformManage.class);
+         }else{
+             LoanformManage params = new LoanformManage();
+             params.setType(sysDict.getId());
+             params.setIstemplate(0);
+             loanformManage = loanformManageService.selectOneByExample(params);
+             if(loanformManage == null){
+                 params = new LoanformManage();
+                 params.setIstemplate(1);
+                 loanformManage = loanformManageService.selectOneByExample(params);
+             }
+             
+         }
+         request.setAttribute("loanformManage", loanformManage);
+         return "/website/loan/loanapply/coGuideApply1";
+      }
+    
 	
     @RequestMapping("/onlineApplyPage")
     public String onlineApply(HttpServletRequest request) {
@@ -236,6 +269,22 @@ public class LoanController {
      */
     @RequestMapping("/selectCoDebtTable")
     public String selectCoDebtTable(HttpServletRequest request,String year,String applytype) {
+    	//获取当前用户登录信息
+    	JltfispUser user=loginService.getCurrentUser();
+    	JltfispCoAll coAll =loanService.getCoDebtTable(user.getId(), year,Integer.parseInt(applytype));
+    	request.setAttribute("coAll", coAll);
+    	request.setAttribute("applytype", applytype);
+        return "/website/loan/loanapply/coDebtTable";
+    }
+    
+    /**
+     * 科技履约贷款申请填写企业基本信息-获取对应年费资产信息
+     * @param request
+     * @param year
+     * @return
+     */
+    @RequestMapping("/selectCoDebtTableView")
+    public String selectCoDebtTableView(HttpServletRequest request,String year,String applytype) {
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispCoAll coAll =loanService.getCoDebtTable(user.getId(), year,Integer.parseInt(applytype));

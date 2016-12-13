@@ -13,6 +13,7 @@
  <body>
  <#include "website/common/header.ftl"/>
  <!--content开始-->
+ <input type="hidden" id="columnIdValue" value=""/>
    <div class="content">
       <div class="info">
           <ul class="infoTab">
@@ -25,7 +26,7 @@
               <#list pm.datas as policy>
                 <ul class="ul1">
                    <li>
-			        <h2 class="ellipsis"><a href="${path}/anon/policyDetail?policyId=${policy.id}">${policy.title }</a></h2>
+			        <h2 class="ellipsis"><a href="javascript:void(0);" onclick="policyDetail(${policy.id})">${policy.title }</a></h2>
 			        <p class="tit">${policy.source }<span>${policy.publishTime ?date }</span><span class="eye fr">${policy.pv }</span></p>
 			        <p>${policy.contentReview }</p>
 			     </li>
@@ -49,8 +50,19 @@
   $(document).ready(function(e) {
     var columnId=${columnId};
     $('#Type'+columnId).addClass('active');
+    $("#columnIdValue").val(columnId);
+    <!--传当前子栏目ID-->
+	$.ajax({
+            type: 'POST',
+            url:'${path}/perm/policy/'+columnId,
+            data: {columnId: columnId,'pager.offset':0},
+            success: function (data) {
+            $('.infoList').html(data);
+            }
+      });
     $('.infoTab li').click(function(){
         var columnId=$(this).attr("name");
+        $("#columnIdValue").val(columnId);
         $(this).addClass('active').siblings('li').removeClass('active');
 		    <!--传当前子栏目ID-->
 			$.ajax({
@@ -63,13 +75,18 @@
 	          });
 	});
 });
+  //跳转页面详情
+  function policyDetail(id){
+  	window.location.href="${path}/anon/policyDetail?policyId="+id;
+  }
 
   function  changePage(url){
+	  var columnId=$("#columnIdValue").val();
 	  var url=url.split("=");
 	  var offset=url[1];
 	  $.ajax({
 	                  type: 'POST',
-	                  url:'${path}/perm/policy/'+${columnId},
+	                  url:'${path}/perm/policy/'+columnId,
 	                  data: {columnId: ${columnId},'pager.offset':offset},
 	                  success: function (data) {
 	                  $('.infoList').html(data);

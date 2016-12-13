@@ -1,4 +1,5 @@
 <input id="year" name="year" value="${coAll.jltfispCoDebt.year}" type="hidden">
+<input type="hidden" id="businesstype"  name="businesstype" value="${applytype}"/>
 <table width="100%" class="tab3 tab4">
                             	<tr>
                                     <th>资产</th>

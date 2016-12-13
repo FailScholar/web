@@ -40,18 +40,20 @@ public class NewsInformationController {
     	List<JltfispColumn> columnList=columnService.getColumnList(3);
         request.setAttribute("columnList", columnList);
         List<NewsInformation> datas=null;
+        int total=0;
         if(columnId !=null){
         	 request.setAttribute("columnId", columnId);
         	 //获取当前页的数据，且显示12条
              datas=newsInformationSevice.getNewsInformationPageList(0, 12,columnId);
+           //获取当前子栏目下所有的数据总数
+             total =newsInformationSevice.getNewsInfoPageCount(columnId);
         }else if(columnList !=null && columnList.size()>0){
         	 request.setAttribute("columnId", columnList.get(0).getId());
         	 //获取当前页的数据，且显示12条
              datas=newsInformationSevice.getNewsInformationPageList(0, 12,columnList.get(0).getId());
+           //获取当前子栏目下所有的数据总数
+             total =newsInformationSevice.getNewsInfoPageCount(columnList.get(0).getId());
         }
-        
-        //获取当前子栏目下所有的数据总数
-        int total =newsInformationSevice.getNewsInfoPageCount(columnList.get(0).getId());
         PagerModel pm = new PagerModel();
         pm.setDatas(datas);
         pm.setTotal(total);

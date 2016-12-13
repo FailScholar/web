@@ -96,17 +96,17 @@
                               <table width="100%" class="tab3">
                                   <tr>
                                       <th><b class="red">*</b>企业名称</th>
-                                      <td colspan="3">${coAll.jltfispCoBase.company!''}</td>
+                                      <td colspan="3"></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>成立时间</th>
-                                      <td>${coAll.jltfispCoBase.establishTime!''}</td>
+                                      <td></td>
                                       <th><b class="red">*</b>注册资本</th>
-                                      <td>${coAll.jltfispCoBase.registeredCapital!''}万元</td>
+                                      <td>万元</td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>注册地址</th>
-                                      <td colspan="3">${coAll.jltfispCoBase.registeredCapital!''}</td>
+                                      <td colspan="3"></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>办公地址</th>
@@ -118,25 +118,25 @@
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>法定代表人</th>
-                                      <td>${coAll.jltfispCoBase.corporateRepresentative!''}</td>
+                                      <td></td>
                                       <th><b class="red">*</b>手机号</th>
-                                      <td>${coAll.jltfispCoBase.mobilephone!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>邮箱</th>
-                                      <td>${coAll.jltfispCoBase.email!''}</td>
+                                      <td></td>
                                       <th><b class="red">*</b>身份证号码</th>
-                                      <td>${coAll.jltfispCoBase.IDcard!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>组织机构代码</th>
-                                      <td>${coAll.jltfispCoBase.socialCreditCode!''}</td>
+                                      <td></td>
                                       <th><b class="red">*</b>税务登记号</th>
-                                      <td>${coAll.jltfispCoBase.cnpj!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <th>贷款账号</th>
-                                      <td colspan="3">${coAll.jltfispCoBase.cardNo!''}</td>
+                                      <td colspan="3"></td>
                                   </tr>
                               </table>
                               <p class="ntit">银行信息</p>
@@ -148,32 +148,32 @@
                                   </tr>
                                   <tr>
                                       <td><b class="red">*</b><b>基本账户</b></td>
-                                      <td>${coAll.jltfispCoBase.basicAccountBank!''}</td>
-                                      <td>${coAll.jltfispCoBase.basicAccountCard!''}</td>
+                                      <td></td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td><b>一般账户</b></td>
-                                      <td>${coAll.jltfispCoBase.generalAccountBank!''}</td>
-                                      <td>${coAll.jltfispCoBase.generalAccountCard!''}</td>
+                                      <td></td>
+                                      <td></td>
                                   </tr>
                               </table>
                               <p class="ntit">企业联系人</p>
                               <table width="100%" class="tab3">
                                   <tr>
                                       <th><b class="red">*</b>联系人</th>
-                                      <td colspan="3">${coAll.jltfispCoBase.linkMan!''}</td>
+                                      <td colspan="3"></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>职务</th>
-                                      <td>${coAll.jltfispCoBase.duties!''}</td>
+                                      <td></td>
                                       <th><b class="red">*</b>手机</th>
-                                      <td>${coAll.jltfispCoBase.linkMobile!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>电话/传真</th>
-                                      <td>${coAll.jltfispCoBase.zoneDescription!''}-${coAll.jltfispCoBase.phoneOrFax!''}</td>
+                                      <td></td>
                                       <th><b class="red">*</b>电子邮件</th>
-                                      <td>${coAll.jltfispCoBase.linkEmail!''}</td>
+                                      <td></td>
                                   </tr>
                               </table>
                               <p class="ntit"><b class="red">*</b>股东构成</p>
@@ -185,42 +185,42 @@
                                   </tr>
                                   <tr>
                                       <td>第一股东</td>
-                                      <td>${coAll.jltfispCoBase.oneShareholderName!''}</td>
-                                      <td>${coAll.jltfispCoBase.oneStock!''}%</td>
+                                      <td></td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>第二股东</td>
-                                      <td>${coAll.jltfispCoBase.twoShareholderName!''}</td>
-                                      <td>${coAll.jltfispCoBase.twoStock!''}%</td>
+                                      <td></td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>第三股东</td>
-                                      <td>${coAll.jltfispCoBase.threeShareholerName!''}</td>
-                                      <td>${coAll.jltfispCoBase.threeStock!''}%</td>
+                                      <td></td>
+                                      <td></td>
                                   </tr>
                               </table>
                               <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>经营范围(主营)</th>
-                                    <td>${coAll.jltfispCoProfile.mainBusiness!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>经营范围(兼营)</th>
-                                    <td>${coAll.jltfispCoProfile.sidelineBusses!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>主要技术领域</th>
-                                    <td>${coAll.jltfispCoProfile.mainFieldValue!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>企业性质</th>
-                                    <td>${coAll.jltfispCoProfile.nature!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>职工总数</th>
                                     <td>
-                                    	${coAll.jltfispCoProfile.workforce!''}人
-                                        <span style="margin-left:30px;">其中：大专以上人数：</span>${coAll.jltfispCoProfile.collegeDegreeOrAboveNum!''}人<span style="margin-left:30px;">研发人员：</span>${coAll.jltfispCoProfile.researchStaffNum!''}人<br />
+                                    	人
+                                        <span style="margin-left:30px;">其中：大专以上人数：</span>人<span style="margin-left:30px;">研发人员：</span>人<br />
                                     </td>
                                 </tr>
                             </table>
@@ -228,19 +228,19 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th>已获得知识产权总数</th>
-                                    <td colspan="3">${coAll.jltfispCoProfile.intellectualPropertyNum!''}个</td>
+                                    <td colspan="3">个</td>
                                 </tr>
                                 <tr>
                                     <th>发明专利</th>
-                                    <td>${coAll.jltfispCoProfile.patentOfInventionNum!''}个</td>
+                                    <td>个</td>
                                     <th>实用新型专利</th>
-                                    <td>${coAll.jltfispCoProfile.utilityModelPatentNum!''}个</td>
+                                    <td>个</td>
                                 </tr>
                                 <tr>
                                     <th>软件著作权</th>
-                                    <td>${coAll.jltfispCoProfile.softwareCopyrightNum!''}个</td>
+                                    <td>个</td>
                                     <th>集成电路设计板块</th>
-                                    <td>${coAll.jltfispCoProfile.integratedCircuitDesignNum!''}个</td>
+                                    <td>个</td>
                                 </tr>
                                 <tr>
                                     <th>企业曾获得科技认定<br/>或资助情况</th>
@@ -253,15 +253,15 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>企业简介</th>
-                                    <td>${coAll.jltfispCoProfile.institutionalAbstract!''}${coAll.jltfispCoProfile.institutionalAbstract!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>管理团队简介(主要经<br/>营、管理、技术人员背景)</th>
-                                    <td>${coAll.jltfispCoProfile.managementTeamProfile!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>主营产品简介(产品特点、销售市场、<br/>主要客户等)</th>
-                                    <td>${coAll.jltfispCoProfile.mainProductIntroduction!''}</td>
+                                    <td></td>
                                 </tr>
                             </table>
                           </div>
@@ -271,52 +271,52 @@
                               <table width="100%" class="tab3 tab4">
                                   <tr>
                                       <th>申请贷款额度</th>
-                                      <td >${coAll.jltfispCoFillInApply.applyAmount!''}</td>
+                                      <td ></td>
                                       <th>贷款期限</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.payCycle!''}个月</td>
+                                      <td colspan="2">个月</td>
                                   </tr>
                                   <tr>
                                       <th>贷款用途说明</th>
-                                      <td colspan="5">${coAll.jltfispCoFillInApply.useDesc!''}</td>
+                                      <td colspan="5"></td>
                                   </tr>
                                   <tr>
                                       <th>是否首次贷款</th>
-                                      <td >${coAll.jltfispCoFillInApply.historyState!''}</td>
+                                      <td ></td>
                                       <th>上次履约贷款还款时间</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.historyEndtime!''}</td>
+                                      <td colspan="2"></td>
                                   </tr>
                                   <tr>
                                       <th>选择科技贷款品种</th>
-                                      <td colspan="5">0.00</td>
+                                      <td colspan="5"></td>
                                   </tr>
                                   <!--待修改-->
                                   <tr>
                                       <th>选择申请银行</th>
-                                      <td >${coAll.jltfispCoFillInApply.bankid!''}</td>
+                                      <td ></td>
                                       <th>贷款支行</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.riskid!''}</td>
+                                      <td colspan="2"></td>
                                   </tr>
                                   <tr>
                                       <th>银行信贷员姓名</th>
-                                      <td >0.00</td>
+                                      <td ></td>
                                       <th>信贷员手机号</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.loanOffice!''}</td>
+                                      <td colspan="2"></td>
                                   </tr>
                                   <tr>
                                      <th>是否需要股权融资</th>
-                                      <td >${coAll.jltfispCoFillInApply.isFinance!''}</td>
+                                      <td ></td>
                                       <th>是否有上市计划</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.isListingPlan!''}</td>
+                                      <td colspan="2"></td>
                                   </tr>
                                   <tr>
                                       <th>拟融资金额</th>
-                                      <td >${coAll.jltfispCoFillInApply.finaneAmount!''}</td>
+                                      <td ></td>
                                       <th>担保/保险公司</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.riskid!''}</td>
+                                      <td colspan="2"></td>
                                   </tr>
                                   <tr>
                                       <th>对投资机构要求</th>
-                                      <td colspan="5">${coAll.jltfispCoFillInApply.finaneAmount!''}</td>
+                                      <td colspan="5"></td>
                                   </tr>
                                   <tr>
                                       <th>推荐意见</th>
@@ -346,166 +346,166 @@
                                   </tr>
                                   <tr>
                                       <td>货币资金</td>
-                                      <td>${coAll.jltfispCoDebt.capital!''}</td>
+                                      <td></td>
                                       <td>短期借款</td>
-                                      <td>${coAll.jltfispCoDebt.shortborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>短期投资</td>
-                                      <td>${coAll.jltfispCoDebt.shortinvestment!''}</td>
+                                      <td></td>
                                       <td>应付票据</td>
-                                      <td>${coAll.jltfispCoDebt.billpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收票据</td>
-                                      <td>${coAll.jltfispCoDebt.bill!''}</td>
+                                      <td></td>
                                       <td>应付账款</td>
-                                      <td>${coAll.jltfispCoDebt.accountpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收股息</td>
-                                      <td>${coAll.jltfispCoDebt.dividend!''}</td>
+                                      <td></td>
                                       <td>代付职工薪酬</td>
-                                      <td>${coAll.jltfispCoDebt.salariespayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收账款</td>
-                                      <td>${coAll.jltfispCoDebt.accountreceivable!''}</td>
+                                      <td></td>
                                       <td>应付福利费</td>
-                                      <td>${coAll.jltfispCoDebt.welfarepayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他应收款</td>
-                                      <td>${coAll.jltfispCoDebt.otherreceivable!''}</td>
+                                      <td></td>
                                       <td>应付利润</td>
-                                      <td>${coAll.jltfispCoDebt.profitpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>存货</td>
-                                      <td>${coAll.jltfispCoDebt.stock!''}</td>
+                                      <td></td>
                                       <td>应交税金</td>
-                                      <td>${coAll.jltfispCoDebt.taxpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>待摊费用</td>
-                                      <td>${coAll.jltfispCoDebt.prepaidexpenses!''}</td>
+                                      <td></td>
                                       <td>其他应交款</td>
-                                      <td>${coAll.jltfispCoDebt.otherpayment!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>一年内到期的长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebt.debtsinvestment!''}</td>
+                                      <td></td>
                                       <td>其他应付款</td>
-                                      <td>${coAll.jltfispCoDebt.otherpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他流动资产</td>
-                                      <td>${coAll.jltfispCoDebt.liquidassets!''}</td>
+                                      <td></td>
                                       <td>预提费用</td>
-                                      <td>${coAll.jltfispCoDebt.accruedexpenses!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>预付账款</td>
-                                      <td>${coAll.jltfispCoDebt.preaccountsreceivable!''}</td>
+                                      <td></td>
                                       <td>一年到期的长期负债</td>
-                                      <td>${coAll.jltfispCoDebt.oneyeardebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>流动资产合计</td>
-                                      <td>${coAll.jltfispCoDebt.liquidassetsamount!''}</td>
+                                      <td></td>
                                       <td>其他流动负债</td>
-                                      <td>${coAll.jltfispCoDebt.currentdebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
                                       <td>预收账款</td>
-                                      <td>${coAll.jltfispCoDebt.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期股权投资</td>
-                                      <td>${coAll.jltfispCoDebt.longstockinvestment!''}</td>
+                                      <td></td>
                                       <td>流动负债合计</td>
-                                      <td>0</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebt.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
                                       <td>长期投资合计</td>
-                                      <td>${coAll.jltfispCoDebt.longinvestmentamount!''}</td>
+                                      <td></td>
                                       <td>长期借款</td>
-                                      <td>${coAll.jltfispCoDebt.longborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
                                       <td>长期应付款</td>
-                                      <td>${coAll.jltfispCoDebt.longpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                     <td >累计折旧</td>
-                                    <td>${coAll.jltfispCoDebt.depreciation!''}</td>
+                                    <td></td>
                                     <td>其他长期负债</td>
-                                    <td>${coAll.jltfispCoDebt.otherlongdebt!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产净值</td>
-                                    <td>${coAll.jltfispCoDebt.fixedassetsvalue!''}</td>
+                                    <td></td>
                                     <td>长期负债合计</td>
-                                    <td>${coAll.jltfispCoDebt.longdebtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >工程物资</td>
-                                    <td>${coAll.jltfispCoDebt.engineeringmaterial!''}</td>
+                                    <td></td>
                                     <td>负债合计（流动负债+长期负债）</td>
-                                    <td>${coAll.jltfispCoDebt.debtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产清理</td>
-                                    <td>${coAll.jltfispCoDebt.fixedassetsclean!''}</td>
+                                    <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产合计</td>
-                                    <td>${coAll.jltfispCoDebt.fixedassetsamount!''}</td>
+                                    <td></td>
                                     <td>实收资本</td>
-                                    <td>${coAll.jltfispCoDebt.paidincapital!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
                                     <td>资本公积</td>
-                                    <td>${coAll.jltfispCoDebt.capitalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产</td>
-                                    <td>${coAll.jltfispCoDebt.intangibleassets!''}</td>
+                                    <td></td>
                                     <td>盈余公积</td>
-                                    <td>${coAll.jltfispCoDebt.surplusreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >长期待摊费用</td>
-                                    <td>${coAll.jltfispCoDebt.longprepaidexpenses!''}</td>
+                                    <td></td>
                                     <td>其中：法定公积</td>
-                                    <td>${coAll.jltfispCoDebt.legalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >其他长期资产</td>
-                                    <td>${coAll.jltfispCoDebt.otherlongassets!''}</td>
+                                    <td></td>
                                     <td>未分配利润</td>
-                                    <td>${coAll.jltfispCoDebt.undistributedprofit!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产及其他资产合计</td>
-                                    <td>${coAll.jltfispCoDebt.intangibleandotherassets!''}</td>
+                                    <td></td>
                                     <td>所有者权益（或股东权益）合计</td>
-                                    <td>${coAll.jltfispCoDebt.ownerequity!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >资产合计</td>
-                                    <td>${coAll.jltfispCoDebt.assetsamount!''}</td>
+                                    <td></td>
                                     <td>负债和所有者权益（或股东权益）总计</td>
-                                    <td>${coAll.jltfispCoDebt.ownerequityamount!''}</td>
+                                    <td></td>
                                 </tr>
                               </table>
                               </form>
@@ -520,7 +520,7 @@
                               <div class="clear"></div>
                               <form id="coDebt">
                               <table width="100%" class="tab3 tab4">
-                                  <tr>
+                                   <tr>
                                       <th>资产</th>
                                       <th>金额(期末数)</th>
                                       <th>负债和所有者权益</th>
@@ -532,166 +532,166 @@
                                   </tr>
                                   <tr>
                                       <td>货币资金</td>
-                                      <td>${coAll.jltfispCoDebtTwo.capital!''}</td>
+                                      <td></td>
                                       <td>短期借款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.shortborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>短期投资</td>
-                                      <td>${coAll.jltfispCoDebtTwo.shortinvestment!''}</td>
+                                      <td></td>
                                       <td>应付票据</td>
-                                      <td>${coAll.jltfispCoDebtTwo.billpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收票据</td>
-                                      <td>${coAll.jltfispCoDebtTwo.bill!''}</td>
+                                      <td></td>
                                       <td>应付账款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.accountpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收股息</td>
-                                      <td>${coAll.jltfispCoDebtTwo.dividend!''}</td>
+                                      <td></td>
                                       <td>代付职工薪酬</td>
-                                      <td>${coAll.jltfispCoDebtTwo.salariespayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收账款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.accountreceivable!''}</td>
+                                      <td></td>
                                       <td>应付福利费</td>
-                                      <td>${coAll.jltfispCoDebtTwo.welfarepayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他应收款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.otherreceivable!''}</td>
+                                      <td></td>
                                       <td>应付利润</td>
-                                      <td>${coAll.jltfispCoDebtTwo.profitpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>存货</td>
-                                      <td>${coAll.jltfispCoDebtTwo.stock!''}</td>
+                                      <td></td>
                                       <td>应交税金</td>
-                                      <td>${coAll.jltfispCoDebtTwo.taxpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>待摊费用</td>
-                                      <td>${coAll.jltfispCoDebtTwo.prepaidexpenses!''}</td>
+                                      <td></td>
                                       <td>其他应交款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.otherpayment!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>一年内到期的长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebtTwo.debtsinvestment!''}</td>
+                                      <td></td>
                                       <td>其他应付款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.otherpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他流动资产</td>
-                                      <td>${coAll.jltfispCoDebtTwo.liquidassets!''}</td>
+                                      <td></td>
                                       <td>预提费用</td>
-                                      <td>${coAll.jltfispCoDebtTwo.accruedexpenses!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>预付账款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.preaccountsreceivable!''}</td>
+                                      <td></td>
                                       <td>一年到期的长期负债</td>
-                                      <td>${coAll.jltfispCoDebtTwo.oneyeardebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>流动资产合计</td>
-                                      <td>${coAll.jltfispCoDebtTwo.liquidassetsamount!''}</td>
+                                      <td></td>
                                       <td>其他流动负债</td>
-                                      <td>${coAll.jltfispCoDebtTwo.currentdebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
                                       <td>预收账款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期股权投资</td>
-                                      <td>${coAll.jltfispCoDebtTwo.longstockinvestment!''}</td>
+                                      <td></td>
                                       <td>流动负债合计</td>
-                                      <td>0</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebtTwo.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
                                       <td>长期投资合计</td>
-                                      <td>${coAll.jltfispCoDebtTwo.longinvestmentamount!''}</td>
+                                      <td></td>
                                       <td>长期借款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.longborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
                                       <td>长期应付款</td>
-                                      <td>${coAll.jltfispCoDebtTwo.longpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                     <td >累计折旧</td>
-                                    <td>${coAll.jltfispCoDebtTwo.depreciation!''}</td>
+                                    <td></td>
                                     <td>其他长期负债</td>
-                                    <td>${coAll.jltfispCoDebtTwo.otherlongdebt!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产净值</td>
-                                    <td>${coAll.jltfispCoDebtTwo.fixedassetsvalue!''}</td>
+                                    <td></td>
                                     <td>长期负债合计</td>
-                                    <td>${coAll.jltfispCoDebtTwo.longdebtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >工程物资</td>
-                                    <td>${coAll.jltfispCoDebtTwo.engineeringmaterial!''}</td>
+                                    <td></td>
                                     <td>负债合计（流动负债+长期负债）</td>
-                                    <td>${coAll.jltfispCoDebtTwo.debtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产清理</td>
-                                    <td>${coAll.jltfispCoDebtTwo.fixedassetsclean!''}</td>
+                                    <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产合计</td>
-                                    <td>${coAll.jltfispCoDebtTwo.fixedassetsamount!''}</td>
+                                    <td></td>
                                     <td>实收资本</td>
-                                    <td>${coAll.jltfispCoDebtTwo.paidincapital!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
                                     <td>资本公积</td>
-                                    <td>${coAll.jltfispCoDebtTwo.capitalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产</td>
-                                    <td>${coAll.jltfispCoDebtTwo.intangibleassets!''}</td>
+                                    <td></td>
                                     <td>盈余公积</td>
-                                    <td>${coAll.jltfispCoDebtTwo.surplusreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >长期待摊费用</td>
-                                    <td>${coAll.jltfispCoDebtTwo.longprepaidexpenses!''}</td>
+                                    <td></td>
                                     <td>其中：法定公积</td>
-                                    <td>${coAll.jltfispCoDebtTwo.legalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >其他长期资产</td>
-                                    <td>${coAll.jltfispCoDebtTwo.otherlongassets!''}</td>
+                                    <td></td>
                                     <td>未分配利润</td>
-                                    <td>${coAll.jltfispCoDebtTwo.undistributedprofit!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产及其他资产合计</td>
-                                    <td>${coAll.jltfispCoDebtTwo.intangibleandotherassets!''}</td>
+                                    <td></td>
                                     <td>所有者权益（或股东权益）合计</td>
-                                    <td>${coAll.jltfispCoDebtTwo.ownerequity!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >资产合计</td>
-                                    <td>${coAll.jltfispCoDebtTwo.assetsamount!''}</td>
+                                    <td></td>
                                     <td>负债和所有者权益（或股东权益）总计</td>
-                                    <td>${coAll.jltfispCoDebtTwo.ownerequityamount!''}</td>
+                                    <td></td>
                                 </tr>
                               </table>
                               </form>
@@ -707,7 +707,7 @@
                               <div class="clear"></div>
                               <form id="coDebt">
                               <table width="100%" class="tab3 tab4">
-                                  <tr>
+                                   <tr>
                                       <th>资产</th>
                                       <th>金额(期末数)</th>
                                       <th>负债和所有者权益</th>
@@ -719,166 +719,166 @@
                                   </tr>
                                   <tr>
                                       <td>货币资金</td>
-                                      <td>${coAll.jltfispCoDebtThree.capital!''}</td>
+                                      <td></td>
                                       <td>短期借款</td>
-                                      <td>${coAll.jltfispCoDebtThree.shortborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>短期投资</td>
-                                      <td>${coAll.jltfispCoDebtThree.shortinvestment!''}</td>
+                                      <td></td>
                                       <td>应付票据</td>
-                                      <td>${coAll.jltfispCoDebtThree.billpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收票据</td>
-                                      <td>${coAll.jltfispCoDebtThree.bill!''}</td>
+                                      <td></td>
                                       <td>应付账款</td>
-                                      <td>${coAll.jltfispCoDebtThree.accountpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收股息</td>
-                                      <td>${coAll.jltfispCoDebtThree.dividend!''}</td>
+                                      <td></td>
                                       <td>代付职工薪酬</td>
-                                      <td>${coAll.jltfispCoDebtThree.salariespayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收账款</td>
-                                      <td>${coAll.jltfispCoDebtThree.accountreceivable!''}</td>
+                                      <td></td>
                                       <td>应付福利费</td>
-                                      <td>${coAll.jltfispCoDebtThree.welfarepayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他应收款</td>
-                                      <td>${coAll.jltfispCoDebtThree.otherreceivable!''}</td>
+                                      <td></td>
                                       <td>应付利润</td>
-                                      <td>${coAll.jltfispCoDebtThree.profitpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>存货</td>
-                                      <td>${coAll.jltfispCoDebtThree.stock!''}</td>
+                                      <td></td>
                                       <td>应交税金</td>
-                                      <td>${coAll.jltfispCoDebtThree.taxpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>待摊费用</td>
-                                      <td>${coAll.jltfispCoDebtThree.prepaidexpenses!''}</td>
+                                      <td></td>
                                       <td>其他应交款</td>
-                                      <td>${coAll.jltfispCoDebtThree.otherpayment!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>一年内到期的长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebtThree.debtsinvestment!''}</td>
+                                      <td></td>
                                       <td>其他应付款</td>
-                                      <td>${coAll.jltfispCoDebtThree.otherpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他流动资产</td>
-                                      <td>${coAll.jltfispCoDebtThree.liquidassets!''}</td>
+                                      <td></td>
                                       <td>预提费用</td>
-                                      <td>${coAll.jltfispCoDebtThree.accruedexpenses!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>预付账款</td>
-                                      <td>${coAll.jltfispCoDebtThree.preaccountsreceivable!''}</td>
+                                      <td></td>
                                       <td>一年到期的长期负债</td>
-                                      <td>${coAll.jltfispCoDebtThree.oneyeardebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>流动资产合计</td>
-                                      <td>${coAll.jltfispCoDebtThree.liquidassetsamount!''}</td>
+                                      <td></td>
                                       <td>其他流动负债</td>
-                                      <td>${coAll.jltfispCoDebtThree.currentdebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
                                       <td>预收账款</td>
-                                      <td>${coAll.jltfispCoDebtThree.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期股权投资</td>
-                                      <td>${coAll.jltfispCoDebtThree.longstockinvestment!''}</td>
+                                      <td></td>
                                       <td>流动负债合计</td>
-                                      <td>0</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebtThree.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
                                       <td>长期投资合计</td>
-                                      <td>${coAll.jltfispCoDebtThree.longinvestmentamount!''}</td>
+                                      <td></td>
                                       <td>长期借款</td>
-                                      <td>${coAll.jltfispCoDebtThree.longborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
                                       <td>长期应付款</td>
-                                      <td>${coAll.jltfispCoDebtThree.longpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                     <td >累计折旧</td>
-                                    <td>${coAll.jltfispCoDebtThree.depreciation!''}</td>
+                                    <td></td>
                                     <td>其他长期负债</td>
-                                    <td>${coAll.jltfispCoDebtThree.otherlongdebt!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产净值</td>
-                                    <td>${coAll.jltfispCoDebtThree.fixedassetsvalue!''}</td>
+                                    <td></td>
                                     <td>长期负债合计</td>
-                                    <td>${coAll.jltfispCoDebtThree.longdebtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >工程物资</td>
-                                    <td>${coAll.jltfispCoDebtThree.engineeringmaterial!''}</td>
+                                    <td></td>
                                     <td>负债合计（流动负债+长期负债）</td>
-                                    <td>${coAll.jltfispCoDebtThree.debtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产清理</td>
-                                    <td>${coAll.jltfispCoDebtThree.fixedassetsclean!''}</td>
+                                    <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产合计</td>
-                                    <td>${coAll.jltfispCoDebtThree.fixedassetsamount!''}</td>
+                                    <td></td>
                                     <td>实收资本</td>
-                                    <td>${coAll.jltfispCoDebtThree.paidincapital!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
                                     <td>资本公积</td>
-                                    <td>${coAll.jltfispCoDebtThree.capitalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产</td>
-                                    <td>${coAll.jltfispCoDebtThree.intangibleassets!''}</td>
+                                    <td></td>
                                     <td>盈余公积</td>
-                                    <td>${coAll.jltfispCoDebtThree.surplusreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >长期待摊费用</td>
-                                    <td>${coAll.jltfispCoDebtThree.longprepaidexpenses!''}</td>
+                                    <td></td>
                                     <td>其中：法定公积</td>
-                                    <td>${coAll.jltfispCoDebtThree.legalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >其他长期资产</td>
-                                    <td>${coAll.jltfispCoDebtThree.otherlongassets!''}</td>
+                                    <td></td>
                                     <td>未分配利润</td>
-                                    <td>${coAll.jltfispCoDebtThree.undistributedprofit!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产及其他资产合计</td>
-                                    <td>${coAll.jltfispCoDebtThree.intangibleandotherassets!''}</td>
+                                    <td></td>
                                     <td>所有者权益（或股东权益）合计</td>
-                                    <td>${coAll.jltfispCoDebtThree.ownerequity!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >资产合计</td>
-                                    <td>${coAll.jltfispCoDebtThree.assetsamount!''}</td>
+                                    <td></td>
                                     <td>负债和所有者权益（或股东权益）总计</td>
-                                    <td>${coAll.jltfispCoDebtThree.ownerequityamount!''}</td>
+                                    <td></td>
                                 </tr>
                               </table>
                               </form>
@@ -894,7 +894,7 @@
                               <div class="clear"></div>
                               <form id="coDebt">
                               <table width="100%" class="tab3 tab4">
-                                  <tr>
+                                   <tr>
                                       <th>资产</th>
                                       <th>金额(期末数)</th>
                                       <th>负债和所有者权益</th>
@@ -906,166 +906,166 @@
                                   </tr>
                                   <tr>
                                       <td>货币资金</td>
-                                      <td>${coAll.jltfispCoDebtFour.capital!''}</td>
+                                      <td></td>
                                       <td>短期借款</td>
-                                      <td>${coAll.jltfispCoDebtFour.shortborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>短期投资</td>
-                                      <td>${coAll.jltfispCoDebtFour.shortinvestment!''}</td>
+                                      <td></td>
                                       <td>应付票据</td>
-                                      <td>${coAll.jltfispCoDebtFour.billpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收票据</td>
-                                      <td>${coAll.jltfispCoDebtFour.bill!''}</td>
+                                      <td></td>
                                       <td>应付账款</td>
-                                      <td>${coAll.jltfispCoDebtFour.accountpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收股息</td>
-                                      <td>${coAll.jltfispCoDebtFour.dividend!''}</td>
+                                      <td></td>
                                       <td>代付职工薪酬</td>
-                                      <td>${coAll.jltfispCoDebtFour.salariespayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>应收账款</td>
-                                      <td>${coAll.jltfispCoDebtFour.accountreceivable!''}</td>
+                                      <td></td>
                                       <td>应付福利费</td>
-                                      <td>${coAll.jltfispCoDebtFour.welfarepayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他应收款</td>
-                                      <td>${coAll.jltfispCoDebtFour.otherreceivable!''}</td>
+                                      <td></td>
                                       <td>应付利润</td>
-                                      <td>${coAll.jltfispCoDebtFour.profitpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>存货</td>
-                                      <td>${coAll.jltfispCoDebtFour.stock!''}</td>
+                                      <td></td>
                                       <td>应交税金</td>
-                                      <td>${coAll.jltfispCoDebtFour.taxpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>待摊费用</td>
-                                      <td>${coAll.jltfispCoDebtFour.prepaidexpenses!''}</td>
+                                      <td></td>
                                       <td>其他应交款</td>
-                                      <td>${coAll.jltfispCoDebtFour.otherpayment!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>一年内到期的长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebtFour.debtsinvestment!''}</td>
+                                      <td></td>
                                       <td>其他应付款</td>
-                                      <td>${coAll.jltfispCoDebtFour.otherpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>其他流动资产</td>
-                                      <td>${coAll.jltfispCoDebtFour.liquidassets!''}</td>
+                                      <td></td>
                                       <td>预提费用</td>
-                                      <td>${coAll.jltfispCoDebtFour.accruedexpenses!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>预付账款</td>
-                                      <td>${coAll.jltfispCoDebtFour.preaccountsreceivable!''}</td>
+                                      <td></td>
                                       <td>一年到期的长期负债</td>
-                                      <td>${coAll.jltfispCoDebtFour.oneyeardebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>流动资产合计</td>
-                                      <td>${coAll.jltfispCoDebtFour.liquidassetsamount!''}</td>
+                                      <td></td>
                                       <td>其他流动负债</td>
-                                      <td>${coAll.jltfispCoDebtFour.currentdebt!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
                                       <td>预收账款</td>
-                                      <td>${coAll.jltfispCoDebtFour.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期股权投资</td>
-                                      <td>${coAll.jltfispCoDebtFour.longstockinvestment!''}</td>
+                                      <td></td>
                                       <td>流动负债合计</td>
-                                      <td>0</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td>长期债权投资</td>
-                                      <td>${coAll.jltfispCoDebtFour.preaccountsreceivable2!''}</td>
+                                      <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
                                       <td>长期投资合计</td>
-                                      <td>${coAll.jltfispCoDebtFour.longinvestmentamount!''}</td>
+                                      <td></td>
                                       <td>长期借款</td>
-                                      <td>${coAll.jltfispCoDebtFour.longborrow!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
                                       <td>长期应付款</td>
-                                      <td>${coAll.jltfispCoDebtFour.longpayable!''}</td>
+                                      <td></td>
                                   </tr>
                                   <tr>
                                     <td >累计折旧</td>
-                                    <td>${coAll.jltfispCoDebtFour.depreciation!''}</td>
+                                    <td></td>
                                     <td>其他长期负债</td>
-                                    <td>${coAll.jltfispCoDebtFour.otherlongdebt!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产净值</td>
-                                    <td>${coAll.jltfispCoDebtFour.fixedassetsvalue!''}</td>
+                                    <td></td>
                                     <td>长期负债合计</td>
-                                    <td>${coAll.jltfispCoDebtFour.longdebtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >工程物资</td>
-                                    <td>${coAll.jltfispCoDebtFour.engineeringmaterial!''}</td>
+                                    <td></td>
                                     <td>负债合计（流动负债+长期负债）</td>
-                                    <td>${coAll.jltfispCoDebtFour.debtamount!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产清理</td>
-                                    <td>${coAll.jltfispCoDebtFour.fixedassetsclean!''}</td>
+                                    <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
                                     <td >固定资产合计</td>
-                                    <td>${coAll.jltfispCoDebtFour.fixedassetsamount!''}</td>
+                                    <td></td>
                                     <td>实收资本</td>
-                                    <td>${coAll.jltfispCoDebtFour.paidincapital!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
                                     <td>资本公积</td>
-                                    <td>${coAll.jltfispCoDebtFour.capitalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产</td>
-                                    <td>${coAll.jltfispCoDebtFour.intangibleassets!''}</td>
+                                    <td></td>
                                     <td>盈余公积</td>
-                                    <td>${coAll.jltfispCoDebtFour.surplusreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >长期待摊费用</td>
-                                    <td>${coAll.jltfispCoDebtFour.longprepaidexpenses!''}</td>
+                                    <td></td>
                                     <td>其中：法定公积</td>
-                                    <td>${coAll.jltfispCoDebtFour.legalreserve!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >其他长期资产</td>
-                                    <td>${coAll.jltfispCoDebtFour.otherlongassets!''}</td>
+                                    <td></td>
                                     <td>未分配利润</td>
-                                    <td>${coAll.jltfispCoDebtFour.undistributedprofit!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >无形资产及其他资产合计</td>
-                                    <td>${coAll.jltfispCoDebtFour.intangibleandotherassets!''}</td>
+                                    <td></td>
                                     <td>所有者权益（或股东权益）合计</td>
-                                    <td>${coAll.jltfispCoDebtFour.ownerequity!''}</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td >资产合计</td>
-                                    <td>${coAll.jltfispCoDebtFour.assetsamount!''}</td>
+                                    <td></td>
                                     <td>负债和所有者权益（或股东权益）总计</td>
-                                    <td>${coAll.jltfispCoDebtFour.ownerequityamount!''}</td>
+                                    <td></td>
                                 </tr>
                               </table>
                               </form>
@@ -1081,118 +1081,118 @@
                               <div class="clear"></div>
                               <form id="coDebt">
                             <table width="100%" class="tab3 tab4">
-                                <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th><th>${.now?string('yyyy')}年1~${coAll.jltfispCoProfit[0].month!''}月</th></tr>
+                                <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th><th>${.now?string('yyyy')}年1~${.now?string('MM')}月</th></tr>
                                 <tr>
                                 	<td><b>主营业务收入</b></td>
-                                    <td>${coAll.jltfispCoProfit[0].mainincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].mainincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].mainincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].mainincome!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：主营业务成本</td>
-                                    <td>${coAll.jltfispCoProfit[0].maincost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].maincost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].maincost}</td>
-                                    <td>${coAll.jltfispCoProfit[3].maincost!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：主营业务税金及附加</td>
-                                    <td>${coAll.jltfispCoProfit[0].maintax!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].maintax!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].maintax!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].maintax!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td><b>主营业务利润(亏损以"-"号填列)</b></td>
-                                    <td>${coAll.jltfispCoProfit[0].mainprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].mainprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].mainprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].mainprofit!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>加：其他业务利润(亏损以"-"号填列)</td>
-                                    <td>${coAll.jltfispCoProfit[0].otherprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].otherprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].otherprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].otherprofit!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：营业费用</td>
-                                    <td>${coAll.jltfispCoProfit[0].businesscost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].businesscost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].businesscost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].businesscost!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：管理费用</td>
-                                    <td>${coAll.jltfispCoProfit[0].managecost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].managecost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].managecost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].managecost!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：财务费用</td>
-                                    <td>${coAll.jltfispCoProfit[0].financecost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].financecost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].financecost!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].financecost!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td><b>营业利润(亏损以"-"号填列)</b></td>
-                                    <td>${coAll.jltfispCoProfit[0].businessprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].businessprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].businessprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].businessprofit!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>加：投资收益(亏损以"-"号填列)</td>
-                                    <td>${coAll.jltfispCoProfit[0].investmentincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].investmentincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].investmentincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].investmentincome!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>加：营业外收入</td>
-                                    <td>${coAll.jltfispCoProfit[0].otherincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].otherincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].otherincome!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].otherincome!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：营业外支出</td>
-                                    <td>${coAll.jltfispCoProfit[0].otherpay!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].otherpay!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].otherpay!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].otherpay!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：资产减值损失</td>
-                                    <td>${coAll.jltfispCoProfit[0].assetloss!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].assetloss!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].assetloss!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].assetloss!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td><b>利润总额(亏损以"-"号填列)</b></td>
-                                    <td>${coAll.jltfispCoProfit[0].profitamount!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].profitamount!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].profitamount!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].profitamount!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>减：所得税</td>
-                                    <td>${coAll.jltfispCoProfit[0].incometax!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].incometax!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].incometax!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].incometax!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td><b>净利润(亏损以"-"号填列)</b></td>
-                                    <td>${coAll.jltfispCoProfit[0].netprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[1].netprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[2].netprofit!''}</td>
-                                    <td>${coAll.jltfispCoProfit[3].netprofit!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                               </form>
@@ -1213,38 +1213,38 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                               <p class="ntit" style="text-align:center;">2、其他应收明细表</p>
@@ -1260,38 +1260,38 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">3、应付款明细表</p>
@@ -1307,38 +1307,38 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">4、其他应付款明细表</p>
@@ -1354,38 +1354,38 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].percent!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">5、银行借款明细表</p>
@@ -1402,41 +1402,41 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].endTime!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].endTime!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].endTime!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].endTime!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td><b>其他金融机构融资</b></td>
-                                    <td colspan="2">${coAll.jltfispCoFinancialList[24].otherrz!''}</td>
+                                    <td colspan="2"></td>
                                     <td><b>民间融资</b></td>
-                                    <td colspan="2">${coAll.jltfispCoFinancialList[25].mjjk!''}</td>
+                                    <td colspan="2"></td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">6、关联公司明细表</p>
@@ -1453,35 +1453,35 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].zysr!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].zysr!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                     <td>${coAll.jltfispCoFinancialList[28].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].zysr!''}</td>
+                                     <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].zysr!''}</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             </table>
                           </div>

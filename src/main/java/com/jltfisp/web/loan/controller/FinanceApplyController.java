@@ -125,6 +125,14 @@ public class FinanceApplyController {
 	      return "/website/loan/financeGuideApply";
 	  }
 	  
+	  @RequestMapping("/financeKnow2")
+	  public String financeKnowNoApply(HttpServletRequest request) {
+		  JltfispUser user=loginService.getCurrentUser();
+		  int userType = user.getType();
+		  request.setAttribute("userType", userType);
+	      return "/website/loan/financing/financeGuideApply";
+	  }
+	  
 	  /**
 	   * 
 	   * @description 保存用户填写股权融资申请的基本信息(第一步)

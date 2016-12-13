@@ -142,13 +142,11 @@ public class ExpertController {
     	request.setAttribute("columnId", columnId);
     	JltfispUser user=loginService.getCurrentUser();
     	//获取当前用户登录信息
-    	//赞时屏蔽
-    	//if(!SecurityUtils.getSubject().hasRole("个人会员")){//如果当前用户不是个人用户，则不让申请成为专家
-    	//	request.setAttribute("applyname", JltfispColumn.getColumnName()+"申请");	
-        //	request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName());
-        //	return "/website/expert/expertApplyfail";
-    	//}
-    	//暂时屏蔽
+    	if(!SecurityUtils.getSubject().hasRole("个人会员")){//如果当前用户不是个人用户，则不让申请成为专家
+    		request.setAttribute("applyname", JltfispColumn.getColumnName()+"申请");	
+        	request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName());
+        	return "/website/expert/expertApplyfail";
+    	}
     	int flag=businessApplayAuditService.checkApplyForExpert(user.getId());
     	if(flag==1){
     	request.setAttribute("applyname", "专家资源申请");

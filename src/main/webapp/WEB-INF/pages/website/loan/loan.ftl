@@ -24,8 +24,8 @@
                           <div class="appDetail fr">
                               <h3 class="fl">科技履约贷款申请</h3>
                               <div class="fr">
-                                  <a href="${path}/anon/loan/guideApply?applytype=2" class="a1">申请须知</a>
-                                  <a href="javascript:;" class="a2">文件下载</a>
+                                  <a href="${path}/loan/guideApply2?applytype=2" class="a1">申请须知</a>
+                                  <a href="${path}/anon/business/printLoanPDF?businessType=2" class="a2">文件下载</a>
                                   <a href="${path}/loan/onlineApply?applytype=2" class="a3">在线申请</a>
                               </div>
                               <div class="clear"></div>
@@ -37,8 +37,8 @@
                           <div class="appDetail fr">
                               <h3 class="fl">科技小巨人贷款申请</h3>
                               <div class="fr">
-                                  <a href="${path}/anon/loan/guideApply?applytype=3" class="a1">申请须知</a>
-                                  <a href="javascript:;" class="a2">文件下载</a>
+                                  <a href="${path}/loan/guideApply2?applytype=3" class="a1">申请须知</a>
+                                  <a href="${path}/anon/business/printLoanPDF?businessType=3" class="a2">文件下载</a>
                                   <a href="${path}/loan/onlineApply?applytype=3" class="a3">在线申请</a>
                               </div>
                               <div class="clear"></div>
@@ -50,8 +50,8 @@
                           <div class="appDetail fr">
                               <h3 class="fl">高新技术贷款申请</h3>
                               <div class="fr">
-                                  <a href="${path}/anon/loan/guideApply?applytype=4" class="a1">申请须知</a>
-                                  <a href="javascript:;" class="a2">文件下载</a>
+                                  <a href="${path}/loan/guideApply2?applytype=4" class="a1">申请须知</a>
+                                  <a href="${path}/anon/business/printLoanPDF?businessType=4" class="a2">文件下载</a>
                                   <a href="${path}/loan/onlineApply?applytype=4" class="a3">在线申请</a>
                               </div>
                               <div class="clear"></div>
@@ -63,8 +63,8 @@
                           <div class="appDetail fr">
                               <h3 class="fl">科技微贷通贷款申请</h3>
                               <div class="fr">
-                                  <a href="${path}/anon/loan/guideApply?applytype=1" class="a1">申请须知</a>
-                                  <a href="javascript:;" class="a2">文件下载</a>
+                                  <a href="${path}/loan/guideApply2?applytype=1" class="a1">申请须知</a>
+                                  <a href="${path}/anon/business/printLoanPDF?businessType=1" class="a2">文件下载</a>
                                   <a href="${path}/loan/onlineApply?applytype=1" class="a3">在线申请</a>
                               </div>
                               <div class="clear"></div>
@@ -77,7 +77,7 @@
                               <h3 class="fl">保费补贴申请</h3>
                               <div class="fr">
                                   <a href="${path}/loan/judgeIsApplyLoan?applytype=5" class="a1">申请须知</a>
-                                  <a href="javascript:;" class="a2">文件下载</a>
+                                  <a href="${path}/anon/business/printSubsidyPDF?businessType=5" class="a2">文件下载</a>
                                   <a href="${path}/loan/judgeIsApplyLoan?applytype=5" class="a3">在线申请</a>
                               </div>
                               <div class="clear"></div>
@@ -89,9 +89,9 @@
                           <div class="appDetail fr">
                               <h3 class="fl">股权融资申请</h3>
                               <div class="fr">
-                                  <a href="${path}/loan/financeKnow" class="a1">申请须知</a>
-                                  <a href="javascript:;" class="a2">文件下载</a>
-                                  <a href="${path}/loan/financeApply" class="a3">在线申请</a>
+                                  <a href="${path}/loan/financeKnow2" class="a1">申请须知</a>
+                                  <a href="${path}/anon/business/printFinanceApply?businessType=6" class="a2">文件下载</a>
+                                  <a href="${path}/loan/financeKnow" class="a3">在线申请</a>
                               </div>
                               <div class="clear"></div>
                               <p>科技创投贷是上海市创业投资引导基金、上海市天使投资引导基金投资的子基金所参股投资的科技型中小微企业（符合国家发改委、财政部、工信部和国家统计局等四部委2011年制定的《中小企业划型标准规定》和上海市科学技术委员会2015年发布的《上海市科技企业界定参考标准》）。</p>

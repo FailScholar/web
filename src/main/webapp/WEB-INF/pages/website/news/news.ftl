@@ -35,7 +35,7 @@
 			     </ul>
 			    </#list>
           <div class="clear"></div>
-          <#include "website/common/commonPager.ftl"/>
+         <#include "website/common/commonPager.ftl"/>
       </div>
    </div> 
 </div>
@@ -78,7 +78,7 @@
 });
     //跳转页面详情
     function newsDetail(id){
-    	location.href="${path}/anon/getNewsDetail?id="+id;
+    	window.location.href="${path}/anon/getNewsDetail?id="+id;
     }
 
     function  changePage(url){
@@ -88,7 +88,7 @@
     	$.ajax({
     	                type: 'POST',
     	                url:'${path}/perm/news/'+columnId,
-    	                data: {columnId: ${columnId},'pager.offset':offset},
+    	                data: {columnId: columnId,'pager.offset':offset},
     	                success: function (data) {
     	                $('.infoList').html(data);
     	                }

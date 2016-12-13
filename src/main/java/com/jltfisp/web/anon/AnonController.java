@@ -6,18 +6,33 @@
 package com.jltfisp.web.anon;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.jltfisp.PdfGenerator;
 import com.jltfisp.lucene.pojo.Pojo;
 import com.jltfisp.lucene.service.LuceneService;
+import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.email.EmailService;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
 import com.jltfisp.util.captcha.Randoms;
+import com.jltfisp.util.service.DictionaryService;
+import com.jltfisp.web.area.entity.JltfispArea;
+import com.jltfisp.web.loan.entity.JltfispCoAll;
+import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
+import com.jltfisp.web.loan.entity.JltfispCoDebt;
+import com.jltfisp.web.loan.entity.JltfispFinMaterial;
+import com.jltfisp.web.loan.entity.JltfispFinShareholder;
+import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
+import com.jltfisp.web.loan.entity.JltfispPsInfo;
+import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
 import com.jltfisp.web.user.service.UserService;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -46,6 +61,8 @@ public class AnonController {
     private UserService userService;
     @Autowired
     private LuceneService luceneService;
+    @Autowired
+    private DictionaryService dictionaryService;
     /**
      * 贷款服务栏目主页面
      * @return
@@ -283,11 +300,70 @@ public class AnonController {
         model.addAttribute("pojo",pj);
         return "/website/sys/PojoDetail";
     }
-
-    @RequestMapping("/test")
-    @ResponseBody
-    private String test(){
-        emailService.sendText("2587038142@qq.com","zhiti","test");
-        return "test";
+    
+    
+    /**
+     * 贷款打印pdf
+     * @param request
+     * @param businessType
+     * @param response
+     */
+    @RequestMapping("/business/printLoanPDF")
+    public void printLoanPDF(HttpServletRequest request,Integer businessType,HttpServletResponse response){
+    	
+    	SysDict dict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
+    	Map<String,Object> variables = new HashMap<String,Object>();
+    	
+    	variables.put("applyname",dict.getValue());
+    	variables.put("applytype", businessType);
+    	String basePath = request.getSession().getServletContext()  
+                .getRealPath("/");  
+    	PdfGenerator.printPDF(basePath, variables, dict.getValue(), response,"loanEmptyView.ftl");
+    }
+    
+    /**
+     * 打印保费补贴申请信息
+     * @param request
+     * @param businessType
+     * @param response
+     */
+    @RequestMapping("/business/printSubsidyPDF")
+    public void printSubsidyPDF(HttpServletRequest request,Integer businessType,HttpServletResponse response){
+    	//通过USERID获取企业基本信息
+    	JltfispCoBaseDto jltfispCoBaseDto=new JltfispCoBaseDto();
+    	//根据企业id获取保费补贴
+    	List<JltfispPsInfo> jltfispPsInfoList=new ArrayList<JltfispPsInfo>();
+    	//保费补贴申请信息
+    	JltfispPsMaterialInfo jltfispPsMaterialInfo = new JltfispPsMaterialInfo();
+    	
+    	Map<String,Object> variables = new HashMap<String,Object>();
+    	 variables.put("jltfispCoBaseDto", jltfispCoBaseDto);
+    	 variables.put("jltfispPsInfoList", jltfispPsInfoList);
+    	 variables.put("jltfispPsMaterialInfo", jltfispPsMaterialInfo);
+    	 String basePath = request.getSession().getServletContext()  
+                 .getRealPath("/");  
+    	 PdfGenerator.printPDF(basePath, variables, "保费补贴申请", response,"subsidyApplyDetail.ftl");
+    }
+    
+    @RequestMapping("/business/printFinanceApply")
+    public void printFinanceApply(HttpServletRequest request,HttpServletResponse response,Integer businessType){
+    	
+    	Map<String,Object> variables = new HashMap<String,Object>();
+	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = new JltfispFinanceAndShareholdersDto();
+	      JltfispFinMaterial jltfispFinMaterial3 = new JltfispFinMaterial();
+	      variables.put("jltfispFinMaterial3", jltfispFinMaterial3);
+		  
+		  variables.put("provName", "");
+		  variables.put("cityName", "");
+		  variables.put("areaName", "");
+		  List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
+	      shareholderList=new ArrayList<JltfispFinShareholder>();
+	      if(shareholderList!=null){
+	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
+	      }
+	      variables.put("jltfispCoBaseDto2", jltfispCoBaseDto2);
+	      String basePath = request.getSession().getServletContext()  
+	                 .getRealPath("/");  
+	     PdfGenerator.printPDF(basePath, variables, "股权融资申请", response,"financeApplyDetail.ftl");
     }
 }

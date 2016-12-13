@@ -44,47 +44,47 @@
                  <th>项目名称</th>
                  <td><span>${jltfispCoBaseDto2.projectname!''}</span></td>
                  <th>所属技术领域</th>
-                  <td colspan="3">${jltfispCoBaseDto2.tecdomain}</td>
+                  <td colspan="3">${jltfispCoBaseDto2.tecdomain!''}</td>
             </tr>
             <tr class="tal">
                 <th>公司名称(全称)</th>
-                <td><span>${jltfispCoBaseDto2.company}</span></td>
+                <td><span>${jltfispCoBaseDto2.company!''}</span></td>
                 <th>公司通讯地址</th>
-                <td colspan="3"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
+                <td colspan="3"><span>${provName!''}&nbsp;${cityName!''}&nbsp;${areaName!''}&nbsp;${jltfispCoBaseDto2.officeAddress!''}</span></td>
             </tr>
             <tr class="tal">
                  <th>注册资本</th>
-                 <td><span>${jltfispCoBaseDto2.registeredCapital}</span></td>
+                 <td><span>${jltfispCoBaseDto2.registeredCapital!''}</span></td>
                  <th>注册地址</th>
-                 <td colspan="3"><span>${jltfispCoBaseDto2.registeredAddress}</span></td>
+                 <td colspan="3"><span>${jltfispCoBaseDto2.registeredAddress!''}</span></td>
                  </tr>
                             <tr class="tal">
                                 <th width="16.6%">法人代表</th>
-                                <td width="16.6%"><span>${jltfispCoBaseDto2.corporateRepresentative}</span></td>
+                                <td width="16.6%"><span>${jltfispCoBaseDto2.corporateRepresentative!''}</span></td>
                                 <th width="16.6%">成立时间</th>
-                                <td width="16.6%"><span>${jltfispCoBaseDto2.establishTime}</span></td>
+                                <td width="16.6%"><span>${jltfispCoBaseDto2.establishTime!''}</span></td>
                                 <th width="16.6%">联系人邮箱</th>
-                                <td><span>${jltfispCoBaseDto2.linkEmail}</span></td>
+                                <td><span>${jltfispCoBaseDto2.linkEmail!''}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>邮编</th>
-                                <td><span>${jltfispCoBaseDto2.email}</span></td>
+                                <td><span>${jltfispCoBaseDto2.email!''}</span></td>
                                 <th>组织机构代码</th>
-                                <td><span>${jltfispCoBaseDto2.socialCreditCode}</span></td>
+                                <td><span>${jltfispCoBaseDto2.socialCreditCode!''}</span></td>
                                 <th>职工人数(人)</th>
-                                <td><span>${jltfispCoBaseDto2.workernumber}</span></td>
+                                <td><span>${jltfispCoBaseDto2.workernumber!''}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>联系人姓名</th>
-                                <td><span>${jltfispCoBaseDto2.linkMan}</span></td>
+                                <td><span>${jltfispCoBaseDto2.linkMan!''}</span></td>
                                 <th>联系人电话</th>
-                                <td><span>${jltfispCoBaseDto2.phoneOrFax}</span></td>
+                                <td><span>${jltfispCoBaseDto2.phoneOrFax!''}</span></td>
                                 <th>联系人手机</th>
-                                <td><span>${jltfispCoBaseDto2.linkMobile}</span></td>
+                                <td><span>${jltfispCoBaseDto2.linkMobile!''}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>公司网址</th>
-                                <td  colspan="5"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
+                                <td  colspan="5"><span>${provName!''}&nbsp;${cityName!''}&nbsp;${areaName!''}&nbsp;${jltfispCoBaseDto2.officeAddress!''}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>推荐人单位</th>
@@ -135,9 +135,9 @@
                             </tr>
                             <tr class="tal">
                                 <th>年度</th>
-                                <td>${.now?string('yyyy')?number-1}年</td>
-                                <td>${.now?string('yyyy')?number-2}年</td>
-                                <td colspan="3">${.now?string('yyyy')?number-3}年</td>
+                                <td>${(.now?string('yyyy')?number-1)?string('####')}年</td>
+                                <td>${(.now?string('yyyy')?number-2)?string('####')}年</td>
+                                <td colspan="3">${(.now?string('yyyy')?number-3)?string('####')}年</td>
                             </tr>
                             <tr class="tal">
                                 <th>总收入</th>

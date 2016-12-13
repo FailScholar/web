@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.expert.entity.JltfispExpert;
+import com.jltfisp.web.news.entity.DictColumnDto;
 import com.jltfisp.web.news.entity.NewsInformation;
+import com.jltfisp.web.news.service.IDictColumnService;
 import com.jltfisp.web.pager.entity.PagerModel;
 import com.jltfisp.web.policy.entity.JltfispPolicy;
 import com.jltfisp.web.policy.service.PolicyService;
@@ -28,20 +30,32 @@ public class PolicyController {
 	 private ColumnService columnService; 
 	 @Autowired
 	 private PolicyService policyService;
+	 @Autowired
+	private IDictColumnService deictColumnService;
 	/**
 	 * 政策中心
 	 * @return
 	 */
 	@RequestMapping("/perm/policy")
-    public String policy(HttpServletRequest request){
+    public String policy(HttpServletRequest request,Integer columnId){
     	//根据父栏目columnId查询子栏目信息
     	List<JltfispColumn> columnList=columnService.getColumnList(4);
         request.setAttribute("columnList", columnList);
-        request.setAttribute("columnId", columnList.get(0).getId());
-        //获取当前子栏目下所有的数据总数
-        int total =policyService.getPolicyPageCount(columnList.get(0).getId());
-        //获取当前页的数据，且显示12条
-        List<JltfispPolicy> datas=policyService.getPolicyPageList(0, 12,columnList.get(0).getId());
+        int total=0;
+        List<JltfispPolicy> datas=null;
+        if(columnId !=null){
+       	 request.setAttribute("columnId", columnId);
+       	 //获取当前页的数据，且显示12条
+            datas= datas=policyService.getPolicyPageList(0, 12,columnId);
+          //获取当前子栏目下所有的数据总数
+            total =policyService.getPolicyPageCount(columnId);
+       }else if(columnList !=null && columnList.size()>0){
+       	    request.setAttribute("columnId", columnList.get(0).getId());
+       	   //获取当前页的数据，且显示12条
+            datas= datas=policyService.getPolicyPageList(0, 12,columnList.get(0).getId());
+           //获取当前子栏目下所有的数据总数
+            total =policyService.getPolicyPageCount(columnList.get(0).getId());
+       }
         PagerModel pm = new PagerModel();
         pm.setDatas(datas);
         pm.setTotal(total);
@@ -57,7 +71,6 @@ public class PolicyController {
      */
     @RequestMapping("/perm/policy/{columnId}")
     public String changeExpert(@PathVariable Integer columnId,HttpServletRequest request){
-//     String columnId = request.getParameter("columnId");
      int rows=Integer.parseInt(request.getParameter("pager.offset"));
      //获取当前子栏目下所有的数据总数
      int total =policyService.getPolicyPageCount(columnId);
@@ -66,7 +79,6 @@ public class PolicyController {
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);
-    // request.setAttribute("columnId", columnId);
      request.setAttribute("pm", pm);
      request.setAttribute("url", "perm/policy");
      return "/website/policy/policyContent";
@@ -87,10 +99,11 @@ public class PolicyController {
         JltfispPolicy ltfispPolicy=policyService.getPolicyContext(Integer.parseInt(policyId));
         //获取二级栏目信息
         JltfispColumn jltfispColumn=columnService.getColumnContext(ltfispPolicy.getColumnId());
-       /* //获取父栏目信息
-        JltfispColumn parentJltfispColumn=columnService.getColumnContext(jltfispColumn.getParentColumn());*/
+        if(jltfispColumn !=null){
+			DictColumnDto dictColumn=this.deictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
+			request.setAttribute("dictColumn", dictColumn);
+		}
         request.setAttribute("jltfispColumn", jltfispColumn);
-       /* request.setAttribute("parentJltfispColumn", parentJltfispColumn);*/
         request.setAttribute("ltfispPolicy", ltfispPolicy);
         return "/website/policy/policyDetail";
     }

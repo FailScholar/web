@@ -2,13 +2,23 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <#include "website/common/common.ftl" />
-    <title>吉林省科技金融信息服务平台</title>
+	  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <meta name="renderer" content="webkit">
+      <link rel="stylesheet" type="text/css" href="${path}/resource/css/css.css" />
+      <link rel="stylesheet" type="text/css" href="${path}/resource/css/reset.css" />
+      <script type="text/javascript" src="${path}/resource/js/jquery-1.7.2.min.js"></script>
+      <script type="text/javascript" src="${path}/resource/js/js.js"></script>
+      <script type="text/javascript" src="${path}/resource/js/common.js"></script>
+      <script type="application/javascript">
+          var path = '${path}';
+          $(document).ready(function(e) {
+              $('.nav li').click(function(){
+                  $(this).addClass('active').siblings('li').removeClass('active');
+              });
+          })
+      </script>
+      <title>吉林省科技金融信息服务平台</title>
   </head>
   <body>
   <div class="wrap">
@@ -53,7 +63,7 @@
                       <ul class="fr">
                         <#list indexCache.notices as notices>
                             <#if notices.mark = 'notice'>
-                              <li><b></b><a href="${path}/anon/detail">${notices.title}</a><span>${notices.publishTime ? date}</span></li>
+                              <li><b></b><a href="${path}/anon/getNewsDetail?id=${notices.id}">${notices.title}</a><span>${notices.publishTime ? date}</span></li>
                             </#if>
                         </#list>
                       </ul>
@@ -151,7 +161,7 @@
                           <ul class="imgList fr">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'news'>
-                                  <li><a href="javascript:;"><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
+                                  <li><a href="${path}/anon/getNewsDetail?id=${notices.id}"><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
                               </#if>
                           </#list>
                           </ul>
@@ -175,7 +185,7 @@
                           <ul class="imgList fr">
                               <#list indexCache.notices as notices>
                                   <#if notices.mark = 'video'>
-                                      <li><a href="javascript:;"><b></b><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
+                                      <li><a href="javascript:;" onclick="toVideoDetailPage(${notices.id},${notices.columnId})"><b></b><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
                                   </#if>
                               </#list>
                           </ul>

@@ -52,4 +52,5 @@
     function ttPost(tableName,id,keyWords) {
         openBlank('${path}/anon/pojo/detail',{tableName:tableName,id:id,keyWords:keyWords},true);
     }
+    $("#TopSearchInput").attr("value",'${keyWords}');
 </script>

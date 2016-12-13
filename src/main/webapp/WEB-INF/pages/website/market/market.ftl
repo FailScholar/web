@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
     <#include "website/common/common.ftl" />
-    <title>云课堂</title>
+    <title>吉林省科技金融信息服务平台</title>
   </head>
 
   <body>
