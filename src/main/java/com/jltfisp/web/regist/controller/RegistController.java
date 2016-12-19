@@ -12,7 +12,6 @@ import com.jltfisp.login.service.LoginService;
 import com.jltfisp.redis.RedisService;
 import com.jltfisp.util.captcha.Randoms;
 import com.jltfisp.web.regist.service.RegistService;
-import com.jltfisp.web.user.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
@@ -22,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,7 +43,7 @@ public class RegistController {
     private EmailService emailService;
 
     @Autowired
-    private UserService userService;
+    private LoginService loginService;
 
 
     private final static String subject = "欢迎注册吉林省信息科技金融平台";
@@ -117,6 +117,7 @@ public class RegistController {
             user.setEmailCaptcha(emailCaptcha);
             user.setState(0);
             user.setType(type);
+            user.setCaptchaTime(new Date());
             user.setIsDelete(0);
             user.setPassword(new SimpleHash("md5", user.getPassword(), ByteSource.Util.bytes("gta"), 2).toHex());
             registService.registBaseInfo(user);
@@ -145,8 +146,6 @@ public class RegistController {
      * @description 激活账号,并更新缓存
      */
 
-    @Autowired
-    private LoginService loginService;
     @RequestMapping("/registCheckEmailInfo")
     @ResponseBody
     public String registCheckEmailInfo(JltfispUser user, Model model) {
@@ -156,16 +155,32 @@ public class RegistController {
             model.addAttribute("message", "验证码错误");
             return JSON.toJSONString(model);
         }
+        if(new Date().getTime() - aUser.getCaptchaTime().getTime() > 60000*30){
+            model.addAttribute("success", false);
+            model.addAttribute("message", "验证码过期,请重新获取");
+            return JSON.toJSONString(model);
+        }
         user.setState(1);
         registService.updateUser(user);
 
         //添加相关角色
-        registService.correlationRoles(aUser.getId(),aUser.getType() == 1 ? 3 : 5);
+        registService.correlationRoles(aUser.getId(),aUser.getType() == 1 ? 4 : 5);
         //更新缓存
-        List<JltfispUser> list = redisService.getV("allUser");
-        list.add(registService.getAUser(user.getId()));
-        redisService.putKV("allUser",list);
+        loginService.flushUserCache();
         model.addAttribute("success", true);
+        return JSON.toJSONString(model);
+    }
+
+    @RequestMapping("/repeatSendEmail")
+    @ResponseBody
+    public String repeatSendEmail(String accountNumber, Model model){
+        JltfispUser user = registService.getAUser(accountNumber);
+        model.addAttribute("success", true);
+        try {
+            emailService.sendText(accountNumber,subject,contentPrefix + user.getEmailCaptcha() + contentSuffix);
+        } catch (Exception e) {
+            return JSON.toJSONString(model);
+        }
         return JSON.toJSONString(model);
     }
 }

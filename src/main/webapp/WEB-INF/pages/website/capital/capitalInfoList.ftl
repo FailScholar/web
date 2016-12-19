@@ -5,7 +5,7 @@
         <h2 class="ellipsis"><a href="${path}/anon/getCapitalDetail?id=${captialList.id}">${captialList.title }</a></h2>
         <p class="tit">${captialList.source }<span>${captialList.publishTime ?date }</span><span class="eye fr">${captialList.pv }</span></p>
         <p>
-        	<#if captialList.contentReview?length lt 40>
+        	<#if captialList.contentReview?length lte 40>
         		${captialList.contentReview}
             <#else>
             	${captialList.contentReview[0..40]}...

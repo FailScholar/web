@@ -22,4 +22,13 @@ public interface InsuranceService {
     List<JltfispInsurance> getInsuranceList(Integer columnid,int page);
 	
 	int getInsuranceCount(Integer columnid);
+	
+	int updateByPKSelective(JltfispInsurance record);
+	/**
+	 * 更新浏览量
+	 * @param id
+	 * @param pv
+	 * @return
+	 */
+	int updateInsurancePv(Integer id,Integer pv);
 }

@@ -14,13 +14,13 @@ public interface CoFinancialMapper extends BaseMapper<JltfispCoFinancialDto>{
 	 * @param 通过createUserid查询JltfispCoFinancialDto信息
 	 * @return
 	 */
-	@Select("SELECT * FROM jltfisp_co_financial WHERE createUserid = #{createUserid} ")
-	List<JltfispCoFinancialDto> getCoCoFinancialContext(int createUserid);
+	@Select("SELECT * FROM jltfisp_co_financial WHERE info_id = #{info_id} ")
+	List<JltfispCoFinancialDto> getCoCoFinancialContext(int info_id);
 	/**
 	 * 通过createUserid删除jltfisp_co_financial信息
 	 * @param createUserid
 	 */
-	@Delete("DELETE  FROM jltfisp_co_financial WHERE createUserid = #{createUserid}")
+	@Delete("DELETE  FROM jltfisp_co_financial WHERE info_id = #{info_id}")
 	 void deleteCoFinancialContext(int createUserid);
 	
 	@Select("SELECT * FROM jltfisp_co_financial WHERE info_id = #{infoId} ")

@@ -1,4 +1,4 @@
-
+<#setting date_format="yyyy-MM-dd">
                           <!--企业基本情况-->
                           <div class="nlistCont" style="display:none;">
                               <p class="ntit">企业基本信息</p>
@@ -9,13 +9,13 @@
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>成立时间</th>
-                                      <td><#if coAll.jltfispCoBase.establishTime?date !="">${coAll.jltfispCoBase.establishTime?date}</#if></td>
+                                      <td><#if (coAll.jltfispCoBase.establishTime?exists)>${coAll.jltfispCoBase.establishTime?date}</#if></td>
                                       <th><b class="red">*</b>注册资本</th>
                                       <td>${coAll.jltfispCoBase.registeredCapital}万元</td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>注册地址</th>
-                                      <td colspan="3">${coAll.jltfispCoBase.registeredCapital}</td>
+                                      <td colspan="3">${coAll.jltfispCoBase.registeredAddress}</td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>办公地址</th>
@@ -120,30 +120,11 @@
                                 <tr>
                                     <th><b class="red">*</b>主要技术领域</th>
                                     <td>
-                                        <#if coAll.jltfispCoProfile.mainField ==1 >
-                                    	<label>电子信息技术</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==2 >
-                                        <label>生物医药技术</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==3 >
-                                        <label>航空航天技术</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==4 >
-                                        <label>新科技技术</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==5 >
-                                        <label>高技术服务业</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==6 >
-                                        <label>新能源节能技术</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==7 >
-                                        <label>资源环境技术</label>
-                                        </#if>
-                                        <#if coAll.jltfispCoProfile.mainField ==8 >
-                                        <label>高新技术改造传统行业</label>
-                                        </#if>
+                                      <#list dicList as dic>
+                                      <#if coAll.jltfispCoProfile.mainField ==dic.code >
+                                      <label>${dic.value}</label>
+                                      </#if>
+                                      </#list>
                                     </td>
                                 </tr>
                                 <tr>
@@ -161,8 +142,8 @@
                                         <#if coAll.jltfispCoProfile.nature ==4 >
                                         <label>集体企业</label>
                                         </#if>
-                                        <#if coAll.jltfispCoProfile.otherNature !='' >
-                                        <label>${coAll.jltfispCoProfile.otherNature}</label>
+                                        <#if coAll.jltfispCoProfile.nature ==5 >
+                                        <label>其他</label>
                                         </#if>
                                     </td>
                                 </tr>

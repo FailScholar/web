@@ -6,7 +6,7 @@
             <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${list.id}')">${list.title }</a></h2>
             <p class="tit">${list.source}<span>${list.publishTime ? date}</span><span class="eye fr">${list.pv}</span></p>
             <p>
-	            <#if list.contentReview?length lt 40>
+	            <#if list.contentReview?length  lte 40>
 	            	${list.contentReview}
 	            <#else>
 	            	${list.contentReview[0..40]}...

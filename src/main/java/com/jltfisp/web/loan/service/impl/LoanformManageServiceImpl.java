@@ -1,12 +1,4 @@
 package com.jltfisp.web.loan.service.impl;
-import java.util.Date;
-
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
@@ -14,6 +6,12 @@ import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.loan.dao.LoanformManageMapper;
 import com.jltfisp.web.loan.entity.LoanformManage;
 import com.jltfisp.web.loan.service.ILoanformManageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.Date;
 
 @Repository
 public class LoanformManageServiceImpl extends BaseServiceImpl<LoanformManage> implements ILoanformManageService {
@@ -45,5 +43,12 @@ public class LoanformManageServiceImpl extends BaseServiceImpl<LoanformManage> i
 		t.setIstemplate(0);
 		t.setType(sys.getId());
 		return insertRecord(t);
+	}
+
+	@Override
+	public LoanformManage queryManage(Integer id) {
+		LoanformManage loanformManage = new LoanformManage();
+		loanformManage.setType(id);
+		return loanformManageMapper.selectOne(loanformManage);
 	}
 }

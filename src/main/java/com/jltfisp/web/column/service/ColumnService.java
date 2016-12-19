@@ -42,4 +42,6 @@ public interface ColumnService {
      */
     JltfispColumn getColumnOne(Integer parentColumnid,Integer columnType);
     
+    JltfispColumn getColumnById(Integer id);
+    
 }

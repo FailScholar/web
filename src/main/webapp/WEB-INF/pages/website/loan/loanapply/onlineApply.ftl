@@ -18,7 +18,7 @@
             <!--content开始-->
             <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-2);">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                 	<p>${applyname}</p>
@@ -79,6 +79,7 @@
      var technologyOrFinance="${coAll.jltfispCoProfile.technologyOrFinance}";
      var technologyOrFinanceList= new Array(); 
      technologyOrFinanceList=technologyOrFinance.split(",");
+     var month="${coAll.jltfispCoProfit[0].month}";
     $(document).ready(function(e) {
         $("#coBase ,#coDebt, #coProfit ,#coFinancial ,#coProfile, #coOther").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
           <!--初始化页面数据-->
@@ -95,6 +96,9 @@
           } 
           $('.lnav').html("<li class='active'>"+firstYear+"年</li><li>"+secondYear+"年</li><li>"+thirdYear+"年</li><li>"+fourYear+"年</li>");
           $('#coProfit tr').eq(0).before("<tr><th>项目</th><th>"+firstYear+"年末</th><th>"+secondYear+"年末</th><th>"+thirdYear+"年末</th><th>"+fourYear+"年1~<select name='month' id='month'><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></th></tr>");
+          if(""!=month || null != month){
+            $("#month   option[value='"+month+"']").attr("selected",true);
+          }
         <!--初始化办公地址下拉框-->
             $.ajax({
             type: "POST",
@@ -350,8 +354,8 @@
             url: url,
             data: data,
             dateType:"json",
-            success: function(msg){
-               if((index==4 && msg != 4) || (index!=4 && msg != 1 )){
+            success: function(msg){              
+               if((index==4 && msg != 4) || (index==6 && msg != 30) || (index!=4 && index!=6 && msg != 1 )){
                 dialog.tipsPop('ban-pop','提示:',"操作失败",'确定');
                 return false;
                };

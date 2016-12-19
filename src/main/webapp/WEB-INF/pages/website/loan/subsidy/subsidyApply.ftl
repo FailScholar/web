@@ -128,7 +128,7 @@
          "<tr><th>实际还款日</th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt shijihuankuanri' placeholder='请输入实际还款日' /></td>"+
          "<th>实际支付本息(本金+利息)</th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[custom[onlyNumberSp], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入实际支付本息(本金+利息)' />元</td></tr>"+
          "<tr><th>实际放贷日</th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt shijifangdairi' placeholder='请输入实际放贷日' /></td>"+
-         "<th>贷款期限</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' /></td></tr>"+
+         "<th>贷款期限</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' />月</td></tr>"+
          "</table>";
          $("table.tab3.module:first").after(content);
          index++;

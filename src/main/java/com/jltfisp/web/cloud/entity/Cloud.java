@@ -21,7 +21,7 @@ public class Cloud{
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // id
-	@Column(name = "id")
+	@Column(name = "image")
 	private String image; // 资讯的图片地址，可能会被用于在首页展示用
 	@Column(name = "title")
 	private String title; // 标题

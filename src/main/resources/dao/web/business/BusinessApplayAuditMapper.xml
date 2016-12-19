@@ -10,6 +10,7 @@
 		<result column="audit_desc" jdbcType="VARCHAR" property="auditDesc"  />
 		<result column="loan_value" jdbcType="DOUBLE" property="loanValue"  />
 		<result column="parent_type" jdbcType="VARCHAR" property="parentType"  />
+		<result column="info_id" jdbcType="INTEGER" property="infoId"  />
 	</resultMap>
 
 	<sql id="Example_Where_Clause">
@@ -37,6 +38,9 @@
 		     <if test="parentType != null and parentType != ''">
 		        and a.parent_type=#{parentType,jdbcType=VARCHAR}
 		     </if>
+		      <if test="infoId != null and infoId != ''">
+		        and a.info_id=#{infoId,jdbcType=INTEGER}
+		     </if>
 	 </sql>
 	 
 	<sql id="Base_Column_List">
@@ -47,6 +51,7 @@
 		     a.type,
 		     a.audit_desc,
 		     a.loan_value,
+		     a.info_id,
 		     a.parent_type
    </sql>
 	<!-- 查询列表count-->
@@ -70,11 +75,17 @@
 			     a.audit_desc,
 			     a.loan_value,
 			     a.parent_type,
+			     a.info_id,
 			     jcb.company as companyName,
 			     jcb.id as companyId,
 				(select c.value from sys_dict c where c.type=1002 and c.code = a.type) as typeName,
-				(select c.value from sys_dict c where c.type=1004 and c.code = jcb.tec_domain) as tecName
+				(select c.value from sys_dict c where c.type=1002 and c.code = a.type) as typeName,
+				case when 
+				(select c.value from sys_dict c where c.type=1004 and c.code = jcb.tec_domain) is null THEN
+				(select c.value from sys_dict c where c.type=1004 and c.code = jcp.mainField) else (
+				select c.value from sys_dict c where c.type=1004 and c.code = jcb.tec_domain) end as tecName
 				 from jltfisp_business_applay a ,jltfisp_co_base jcb
+				 LEFT JOIN jltfisp_co_profile jcp on jcb.id = jcp.info_id
          <if test="_parameter != null">
         	<where>
         	a.user_id =jcb.user_id
@@ -118,6 +129,7 @@
 	          audit_desc,
 	          loan_value,
 	          parent_type,
+	          info_id,
 	    </trim>
 	    <trim prefix="values (" suffix=")" suffixOverrides=",">
 	    	#{id,jdbcType=INTEGER},
@@ -128,6 +140,7 @@
 	    	#{auditDesc,jdbcType=VARCHAR},
 	    	#{loanValue,jdbcType=VARCHAR},
 	    	#{parentType,jdbcType=VARCHAR},
+	    	#{infoId,jdbcType=INTEGER},
 	    </trim>
        <selectKey resultType="java.lang.Integer" keyProperty="id">
 		SELECT @@IDENTITY AS id
@@ -160,6 +173,9 @@
 	       <if test="parentType != null and parentType != ''">
 		      parent_type,
 		   </if>
+		    <if test="infoId != null and infoId != ''" >
+	          info_id,
+	       </if>
 	    </trim>
 	    <trim prefix="values (" suffix=")" suffixOverrides=",">
     		<if test="id != null and id != ''">
@@ -186,6 +202,9 @@
     	    <if test="parentType != null and parentType != ''">
 		      #{parentType,jdbcType=VARCHAR},
 		    </if>
+		    <if test="infoId != null and infoId != ''" >
+	          #{infoId,jdbcType=INTEGER},
+	       </if>
 	    </trim>
 
        <selectKey resultType="java.lang.Integer" keyProperty="id">
@@ -202,7 +221,7 @@
 		     <if test="userId != null and userId != ''" >
 		         user_id=#{userId,jdbcType=INTEGER},
 		     </if>
-		     <if test="submitDate != null and submitDate != ''" >
+		     <if test="submitDate != null" >
 		         submit_date=#{submitDate,jdbcType=DATE},
 		     </if>
 		     <if test="state != null" >
@@ -220,6 +239,9 @@
 		     <if test="parentType != null and parentType != ''">
 		      	 parent_type=#{parentType,jdbcType=VARCHAR},
 		     </if>
+		     <if test="infoId != null and infoId != ''" >
+	          	 info_id=#{infoId,jdbcType=INTEGER},
+	       	 </if>
 	  </set>
 	   where 
 	    id=#{id,jdbcType=INTEGER} 
@@ -237,6 +259,7 @@
 	    audit_desc=#{auditDesc,jdbcType=VARCHAR},
 	    loan_value=#{loanValue,jdbcType=VARCHAR},
 	    parent_type=#{parentType,jdbcType=VARCHAR},
+	    info_id=#{infoId,jdbcType=INTEGER},
 	  </set>
 	   where 
 	    id=#{id,jdbcType=INTEGER} 
@@ -246,7 +269,7 @@
     select 
     *
     from jltfisp_business_applay jba 
-    where jba.parent_type=1 and jba.user_id =#{userId} and jba.type=#{type} ORDER BY jba.submit_date DESC limit 1
+    where jba.parent_type=1 and jba.user_id =#{userId} and jba.type=#{type} and jba.state !=1 and jba.state !=2 limit 1
    </select>
    
    	<!-- 根据用户id及申请业务类型  获取 正在审核中或审核通过的 业务审核信息 -->

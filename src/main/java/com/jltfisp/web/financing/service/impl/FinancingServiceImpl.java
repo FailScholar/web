@@ -56,4 +56,16 @@ public class FinancingServiceImpl implements FinancingService {
 		return financingMapper.selectCount(jltfispFinancing);
 	}
 
+	@Override
+	public int updateByPKSelective(JltfispFinancing record) {
+		// TODO Auto-generated method stub
+		return financingMapper.updateByPKSelective(record);
+	}
+
+	@Override
+	public int updateFinancingPv(Integer id, Integer pv) {
+		// TODO Auto-generated method stub
+		return financingMapper.updateFinancingPv(id, pv);
+	}
+
 }

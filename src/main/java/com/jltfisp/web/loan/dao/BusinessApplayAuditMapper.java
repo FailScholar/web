@@ -69,11 +69,40 @@ public interface BusinessApplayAuditMapper extends BaseMapper<BusinessApplayAudi
 	public BusinessApplayAudit getLoanBusinessByThreeParams(Integer userid,String type,String parenttype);
 	
 	
-	@Select("update jltfisp_business_applay set state=#{state} where user_id=#{user_id} and type=#{type}")
+	/**
+	 * 根据4个字段查询查询Loan流程数据
+	 * @param userid
+	 * @param parenttype
+	 * @param type
+	 * @param state
+	 * @return
+	 */
+	@Select("SELECT * FROM jltfisp_business_applay WHERE user_id = #{0} and type=#{1} and parent_type=#{2} and state=#{3}")
+	public BusinessApplayAudit getLoanBusinessByFourParams(Integer userid,String type,String parenttype,String state);
+	
+	
+	/**
+	 * 根据USERID和PARENTTYPE和type查询查询Loan流程数据
+	 * @param userid
+	 * @param parenttype
+	 * @param type
+	 * @return
+	 */
+	@Select("SELECT * FROM jltfisp_business_applay WHERE user_id = #{0} and type=#{1} and parent_type=#{2}")
+	public List<BusinessApplayAudit> getLoanBusinessByThreeParamsList(Integer userid,String type,String parenttype);
+	
+	@Select("update jltfisp_business_applay set state=#{state} where state=3 and user_id=#{user_id} and type=#{type}")
 	public void updateBusinessApplayAuditByUserIdAndType(@Param("user_id")Integer user_id,@Param("type")String type,@Param("state")Integer state);
 	
-	@Select("update jltfisp_business_applay set loan_value=#{loan_value} where user_id=#{user_id} and type=#{type}")
+	@Select("update jltfisp_business_applay set loan_value=#{loan_value} where state=3 and user_id=#{user_id} and type=#{type}")
 	public void updateMoneyByUserIdAndType(@Param("user_id")Integer user_id,@Param("type")String type,@Param("loan_value")Double loan_value);
+	
+	@Select("SELECT * FROM jltfisp_business_applay WHERE user_id = #{user_id} and info_id=#{info_id} and type=#{type}")
+	public BusinessApplayAudit getBusinessApplayAuditByUserIdAndInfoIdAndType(
+			@Param("user_id")Integer user_id, @Param("info_id")Integer info_id, @Param("type")int type);
+	
+	@Select("update jltfisp_business_applay set info_id=#{info_id} where id=#{id}")
+	public void updateInfoIdById(@Param("id")Integer id,@Param("info_id")Integer info_id);
 	
 }
 

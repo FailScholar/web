@@ -63,7 +63,11 @@
 		FROM
 			jltfisp_co_base jcb 
 		WHERE
-		    jcb.user_id=#{user_id} and jcb.business_type=5
+		    jcb.user_id=#{user_id}
+		   <if test="id != null and id != ''">
+		        and jcb.id=#{id}
+		   </if>
+		   and jcb.apply_state=0 and jcb.business_type=5
    </select>
    <!-- 根据企业基本信息id获取保费补贴信息 -->
    <select id="getJltfispPsInfoListByBaseId" parameterType="int" resultMap="jltfispPsInfoList">

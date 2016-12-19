@@ -16,7 +16,7 @@
               <!--content开始-->
              <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/loan">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                     <h2>申请须知</h2>
@@ -95,13 +95,13 @@
   	   document.getElementById("accept").disabled=false;
   }
    function apply(){
-	   var type=$('#userType').val();
-	   if(type==1){
-		   dialog.tipsPop('ban-pop','提示:',"您的身份是个人用户，不能申请贷款服务",'确定');
-		   return false;
-		}
-	   else{
+// 	   var type=$('#userType').val();
+// 	   if(type==1){
+// 		   dialog.tipsPop('ban-pop','提示:',"您的身份是个人用户，不能申请贷款服务",'确定');
+// 		   return false;
+// 		}
+// 	   else{
 		   location.href="${path}/loan/financeApply" ;
-		 }
+// 		 }
 	}
 </script>

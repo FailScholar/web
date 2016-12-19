@@ -21,13 +21,11 @@ import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.email.EmailService;
 import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.shiro.AuthorizingRealm;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
 import com.jltfisp.util.captcha.Randoms;
 import com.jltfisp.util.service.DictionaryService;
-import com.jltfisp.web.area.entity.JltfispArea;
-import com.jltfisp.web.loan.entity.JltfispCoAll;
 import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
-import com.jltfisp.web.loan.entity.JltfispCoDebt;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
 import com.jltfisp.web.loan.entity.JltfispFinShareholder;
 import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
@@ -63,16 +61,8 @@ public class AnonController {
     private LuceneService luceneService;
     @Autowired
     private DictionaryService dictionaryService;
-    /**
-     * 贷款服务栏目主页面
-     * @return
-     */
-    @RequestMapping("/loan")
-    public String loan(){
-        return "/website/loan/loan";
-    }
-
-
+    @Autowired
+	private AuthorizingRealm authorizingRealm;
     /**
      * 资本市场栏目主页面
      * @return
@@ -245,6 +235,8 @@ public class AnonController {
         }
     	int i = userService.updatePasswordByAccountNumber(user.getPassword(),user.getAccountNumber());
     	userService.updateUserByAccountNumber("", user.getAccountNumber());
+    	//清除缓存
+        authorizingRealm.clearUserCache(user.getAccountNumber());
     	return i;
     }
 
@@ -356,6 +348,7 @@ public class AnonController {
 		  variables.put("provName", "");
 		  variables.put("cityName", "");
 		  variables.put("areaName", "");
+		  variables.put("user", new JltfispUser());
 		  List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
 	      shareholderList=new ArrayList<JltfispFinShareholder>();
 	      if(shareholderList!=null){

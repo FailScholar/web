@@ -11,13 +11,13 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>成立时间</th>
-                                    <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker()" readonly="readonly" value="<#if coAll.jltfispCoBase.establishTime?date != "">${coAll.jltfispCoBase.establishTime?date}</#if>"/></td>
+                                    <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker()" readonly="readonly" value="<#if (coAll.jltfispCoBase.establishTime?exists)>${coAll.jltfispCoBase.establishTime?date}</#if>"/></td>
                                     <th><b class="red">*</b>注册资本</th>
                                     <td><input type="text" class="txt validate[required,custom[number],maxSize[10]]" placeholder="请输入" id="registeredCapital" name="registeredCapital" value="${coAll.jltfispCoBase.registeredCapital}"/>万元</td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>注册地址</th>
-                                    <td><input type="text" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="请输入"  id="registeredAddress" name="registeredAddress" value="${coAll.jltfispCoBase.registeredAddress}"/></td>
+                                    <td><input type="text" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="请输入"  id="registeredAddress" name="registeredAddress" value="${coAll.jltfispCoBase.registeredAddress}"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>办公地址</th>
@@ -31,7 +31,7 @@
                                         <select id="officeArea" name="officeArea">
                                         	
                                         </select>
-                                        <input id="officeAddress" name="officeAddress" value="${coAll.jltfispCoBase.officeAddress}" type="text" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="详细地址" />
+                                        <input id="officeAddress" name="officeAddress" value="${coAll.jltfispCoBase.officeAddress}" type="text" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -46,12 +46,12 @@
                                         <select id="productArea" name="productArea">
                                         	
                                         </select>
-                                        <input id="productAddress" value="${coAll.jltfispCoBase.productAddress}" name="productAddress" type="text" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="详细地址" />
+                                        <input id="productAddress" value="${coAll.jltfispCoBase.productAddress}" name="productAddress" type="text" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>法定代表人</th>
-                                    <td><input id="corporateRepresentative" name="corporateRepresentative" value="${coAll.jltfispCoBase.corporateRepresentative}" type="text" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input id="corporateRepresentative" name="corporateRepresentative" value="${coAll.jltfispCoBase.corporateRepresentative}" type="text" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b>手机号</th>
                                     <td><input id="mobilephone" name="mobilephone" value="${coAll.jltfispCoBase.mobilephone}" type="text" class="txt validate[required,maxSize[11],custom[phone]]" placeholder="请输入" /></td>
                                 </tr>
@@ -65,11 +65,11 @@
                                     <th><b class="red">*</b>组织机构代码</th>
                                     <td><input id="socialCreditCode" name="socialCreditCode" readonly value="${user.socialCode}" type="text" class="txt validate[required,mixSize[9],maxSize[20]]" /></td>
                                     <th><b class="red">*</b>税务登记号</th>
-                                    <td><input id="cnpj" name="cnpj" type="text" value="${coAll.jltfispCoBase.cnpj}" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input id="cnpj" name="cnpj" type="text" value="${coAll.jltfispCoBase.cnpj}" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th>贷款账号</th>
-                                    <td colspan="3"><input id="cardNo" name="cardNo" type="text" value="${coAll.jltfispCoBase.cardNo}" class="txt validate[maxSize[1000]]" placeholder="请输入"/></td>
+                                    <td colspan="3"><input id="cardNo" name="cardNo" type="text" value="${coAll.jltfispCoBase.cardNo}" class="txt validate[maxSize[255]]" placeholder="请输入"/></td>
                                 </tr>
                             </table>
                             <p class="ntit">银行信息</p>
@@ -82,23 +82,23 @@
                                 <tr>
                                     <td><b class="red">*</b><b>基本账户</b></td>
                                     <td><input id="basicAccountBank" value="${coAll.jltfispCoBase.basicAccountBank}" name="basicAccountBank" type="text" class="txt validate[required]" placeholder="可手动输入" /></td>
-                                    <td><input id="basicAccountCard" value="${coAll.jltfispCoBase.basicAccountCard}" name="basicAccountCard" type="text" class="txt validate[required,mixSize[2],maxSize[1000],custom[number]]" placeholder="请输入" /></td>
+                                    <td><input id="basicAccountCard" value="${coAll.jltfispCoBase.basicAccountCard}" name="basicAccountCard" type="text" class="txt validate[required,mixSize[2],maxSize[255],custom[number]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <td><b>一般账户</b></td>
                                     <td><input id="generalAccountBank" value="${coAll.jltfispCoBase.generalAccountBank}" name="generalAccountBank" type="text" class="txt" placeholder="可手动输入" /></td>
-                                    <td><input id="generalAccountCard" value="${coAll.jltfispCoBase.generalAccountCard}" name="generalAccountCard" type="text" class="txt validate[maxSize[1000],custom[number]]" placeholder="请输入" /></td>
+                                    <td><input id="generalAccountCard" value="${coAll.jltfispCoBase.generalAccountCard}" name="generalAccountCard" type="text" class="txt validate[maxSize[255],custom[number]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                             <p class="ntit">企业联系人</p>
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>联系人</th>
-                                    <td colspan="3"><input id="linkMan" name="linkMan" value="${coAll.jltfispCoBase.linkMan}" type="text" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td colspan="3"><input id="linkMan" name="linkMan" value="${coAll.jltfispCoBase.linkMan}" type="text" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>职务</th>
-                                    <td><input id="duties" name="duties" type="text" value="${coAll.jltfispCoBase.duties}" class="txt validate[required,mixSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input id="duties" name="duties" type="text" value="${coAll.jltfispCoBase.duties}" class="txt validate[required,mixSize[2],maxSize[255]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b>手机</th>
                                     <td><input id="linkMobile" name="linkMobile" value="${coAll.jltfispCoBase.linkMobile}" type="text" class="txt validate[required,maxSize[11],custom[phone]]" placeholder="请输入" /></td>
                                 </tr>

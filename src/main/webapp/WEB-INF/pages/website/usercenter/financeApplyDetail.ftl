@@ -76,7 +76,7 @@
                                 <th>邮编</th>
                                 <td><span>${jltfispCoBaseDto2.email}</span></td>
                                 <th>组织机构代码</th>
-                                <td><span>${jltfispCoBaseDto2.socialCreditCode}</span></td>
+                                <td><span>${user.socialCode}</span></td>
                                 <th>职工人数(人)</th>
                                 <td><span>${jltfispCoBaseDto2.workernumber}</span></td>
                             </tr>
@@ -183,17 +183,24 @@
                                 <td colspan="6">
                                     <div class="cover cv1 fr">
                                         <p class="ntit">公司名称：<U>&nbsp;<span>${jltfispCoBaseDto2.company}</span>&nbsp;</U></p>
-                                        <p class="ntit">填&nbsp;表&nbsp;人    ：<U>&nbsp;${userName}&nbsp;</U></p>
                                         <p class="ntit"><span class="ml70"></span>${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
                                     </div>
                                 </td>
                             </tr>
+                             <#list applayAudits as applayAudit>
+				              	<#if (applayAudit.state == 1)>
+					              	<tr>
+					              		<td>审核意见</td>
+					              		<td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
+					              	</tr>
+				              	</#if>
+			              </#list>
                             </tbody>
                         </table>
                         
                         <p class="tip4" style="color:#d17d00">企业承诺：本企业提供上述信息真实可靠！</p>
                         <div class="btnFld">
-                            <input type="button" class="btnSave" value="打印输出" onclick="printdiv()"/>
+                            <input type="button" class="btnSave" value="打印输出" onclick="printdiv('${infoId}')"/>
              </div>
 </div>
       		
@@ -213,7 +220,7 @@
 </body>
 </html>
 <script>
-	function printdiv(){
-		location.href="${path}/business/printFinanceApply?businessType=6";
+	function printdiv(infoId){
+		location.href="${path}/business/printFinanceApply?businessType=6&infoId="+infoId;
 	}
 </script>

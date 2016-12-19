@@ -31,9 +31,9 @@
 				      	 </#list> 
  				       	 <li>
 	 				       	 <select id="selectId" onchange="getList()">
-	 				       		<option value="0">-选择更多机构-</option>
+	 				       		<option value="0">-选择更多-</option>
 	 				       	 	<#list afterFiveList as afterFiveList>
-	 				       	 		<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
+	 				       	 		<option value="${afterFiveList.id}">&nbsp;${afterFiveList.columnName}&nbsp;</option>
 	 				       	 	</#list>
 	 				       	 </select>
  				       	 </li>
@@ -84,6 +84,7 @@
 
  	//获取子栏目内容列表
     function getInstitutionList(columnId,columnName){
+    	$("#selectId").val("0");
     	$("#applyColumnId").val(columnId);
          $.ajax({
 			  type : "POST",
@@ -94,10 +95,6 @@
 			  	$("#columnName").html(columnName);
 				$(".infoList").html(data);//要刷新的div
 			  }
-// 			  ,
-// 			  error: function() {
-//                  alert("失败，请稍后再试！");
-//               }
 		});
 	}
 	
@@ -110,7 +107,17 @@
 	  var columnId = $('select option:selected').val();
 	  var columnName = $('select option:selected').html();
 	  if(columnId!=0){
-		  getInstitutionList(columnId,columnName);
+		  $("#applyColumnId").val(columnId);
+		  $.ajax({
+			  type : "POST",
+			  url : '${path}/perm/institution/'+columnId,
+			  data:{"columnId":columnId,'pager.offset': 0},
+			  dataType : "html",
+			  success:function(data){
+			  	$("#columnName").html(columnName);
+				$(".infoList").html(data);//要刷新的div
+			  }
+		});
 	  }
 	}
 	

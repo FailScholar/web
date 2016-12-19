@@ -86,7 +86,7 @@
                           </div>
                           <div>
                               <span>我要咨询</span>
-                              <textarea class="csCont validate[required,minSize[2],maxSize[10]]" name="content" placeholder="请输入咨询问题"></textarea>
+                              <textarea class="csCont validate[required,minSize[2],maxSize[255]]" name="content" placeholder="请输入咨询问题"></textarea>
                           </div>
                           <div>
                               <input type="submit" value="确 定" class="btnCom" />

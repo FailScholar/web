@@ -70,4 +70,16 @@ public class InsuranceServiceImpl implements InsuranceService {
 		insurance.setColumnId(columnid);
 		return jltfispInsuranceMapper.selectCount(insurance);
 	}
+
+	@Override
+	public int updateByPKSelective(JltfispInsurance record) {
+		// TODO Auto-generated method stub
+		return jltfispInsuranceMapper.updateByPKSelective(record);
+	}
+
+	@Override
+	public int updateInsurancePv(Integer id, Integer pv) {
+		// TODO Auto-generated method stub
+		return jltfispInsuranceMapper.updateInsurancePv(id, pv);
+	}
 }

@@ -77,11 +77,14 @@
     $('#Type'+columnId).addClass('active');
     $('.apply2').hide();
     $('#'+columnId).show();
+    <!--如果栏目在select框，则将对应的值选中-->
     $("#columnName   option[value='"+columnId+"']").attr("selected",true);
     val = $('select option:selected').val();
+    <!--如果select框值不为空，则给第6个li添加激活样式-->
     if('' != val){
     $('.infoTab li').eq(5).addClass('active');
     }
+    <!--选择select框触发事件-->
     $("#columnName").change(function(){
         columnId=$(this).val();
         $.ajax({
@@ -90,15 +93,21 @@
                 data: {'pager.offset':0},
                 success: function (data) {
                 $('.infoList').html(data);
+                $("#columnName   option[value='"+columnId+"']").attr("selected",true);
+                $('.infoTab li').eq(5).addClass('active');
+                $('.apply2').hide();
+                $('#'+columnId).show();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                <!--鉴权不通过，则隐藏添加功能-->
+                if(XMLHttpRequest.status ==401){
+                 $('.apply2').hide();
+                 $('.infoList').html(''); 
+                }
                 }
           });
-         $("#columnName   option[value='"+columnId+"']").attr("selected",true);
-         $('.infoTab li').eq(5).addClass('active');
-         $('.apply2').hide();
-         $('#'+columnId).show();
         }); 
-        
-        
+    <!--点击li标签触发事件-->    
     $('.infoTab li').click(function(){
         var index=$(this).index();
         <!--只有前五个栏目才会执行下面代码-->
@@ -107,9 +116,7 @@
         if($('#columnName').length > 0){
         $('#columnName').prop('selectedIndex', 0);
         }
-        
         columnId=$(this).attr("name");
-        $(this).addClass('active').siblings('li').removeClass('active');
 		<!--传当前子栏目ID-->
 		$.ajax({
                 type: 'POST',
@@ -117,10 +124,18 @@
                 data: {'pager.offset':0},
                 success: function (data) {
                 $('.infoList').html(data);
+                $(this).addClass('active').siblings('li').removeClass('active');
+                $('.apply2').hide();
+		        $('#'+columnId).show();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                <!--鉴权不通过，则隐藏添加功能-->
+                if(XMLHttpRequest.status ==401){
+                 $('.apply2').hide();
+                 $('.infoList').html('');  
+                }
                 }
           });
-		$('.apply2').hide();
-		$('#'+columnId).show();
 		}
 	});
 	<!--处理从前台页面转过来的请求-->
@@ -135,11 +150,19 @@
                 data: {'pager.offset':0},
                 success: function (data) {
                 $('.infoList').html(data);
+                $('.infoTab li').eq(5).addClass('active');
+                $('.apply2').hide();
+                $('#'+columnId).show();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                <!--鉴权不通过，则隐藏添加功能-->
+                if(XMLHttpRequest.status ==401){
+                 $('.apply2').hide();
+                 $('.infoList').html(''); 
+                }
                 }
           });
-      $('.infoTab li').eq(5).addClass('active');
-      $('.apply2').hide();
-      $('#'+columnId).show();
+ 
       }else{
        $('#Type'+columnId).addClass('active').siblings('li').removeClass('active');
 	  <!--传当前子栏目ID-->
@@ -149,10 +172,18 @@
                 data: {'pager.offset':0},
                 success: function (data) {
                 $('.infoList').html(data);
+                $('.apply2').hide();
+	            $('#'+columnId).show();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                <!--鉴权不通过，则隐藏添加功能-->
+                if(XMLHttpRequest.status ==401){
+                 $('.apply2').hide();
+                 $('.infoList').html(''); 
+                }
                 }
           });
-       $('.apply2').hide();
-	   $('#'+columnId).show();
+       
        }
     <!--如果不是从前台转过来的请求，则默认显示第1个列表-->   	  
 	}else{  

@@ -43,6 +43,7 @@ import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.expert.service.IFinExpertManageService;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.pager.entity.PagerModel;
+import com.jltfisp.web.user.service.UserService;
 
 /**
  * 
@@ -73,6 +74,7 @@ public class ExpertController {
     
     @Autowired
     private FileManager fileManager;
+
     
     /**
      * 专家资源栏目主页面
@@ -95,9 +97,10 @@ public class ExpertController {
         pm.setDatas(datas);
         pm.setTotal(total);
         request.setAttribute("pm", pm);
+        request.setAttribute("pageSize",12);
         request.setAttribute("url", "anon/expert");
         //代表从前台页面传过来的值
-        if(null != isFrontPage){ 
+        if(null != isFrontPage){
           request.setAttribute("isFrontPage", "1");
           request.setAttribute("columnId",columnId);
         }else{
@@ -117,12 +120,13 @@ public class ExpertController {
      //获取当前子栏目下所有的数据总数
      int total =expertService.getExpertPageCount(Integer.parseInt(columnId));
      //获取当前页的数据，且显示12条
-     List<JltfispExpert> datas=expertService.getExpertPageList(rows, 12,Integer.parseInt(columnId));
+     List<JltfispExpert> datas=expertService.getExpertPageList(rows,12,Integer.parseInt(columnId));
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);
      model.addAttribute("columnId",columnId);
      model.addAttribute("pm",pm);
+     model.addAttribute("pageSize",12);
      model.addAttribute("url","anon/expert");
      return "/website/expert/expertContext";
     }
@@ -142,15 +146,15 @@ public class ExpertController {
     	request.setAttribute("columnId", columnId);
     	JltfispUser user=loginService.getCurrentUser();
     	//获取当前用户登录信息
-    	if(!SecurityUtils.getSubject().hasRole("个人会员")){//如果当前用户不是个人用户，则不让申请成为专家
+    	if(user.getType()==2){//如果当前用户不是个人用户，则不让申请成为专家
     		request.setAttribute("applyname", JltfispColumn.getColumnName()+"申请");	
-        	request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName());
+        	request.setAttribute("failMes", "对不起，只有个人用户才能申请"+JltfispColumn.getColumnName()+"!");
         	return "/website/expert/expertApplyfail";
     	}
     	int flag=businessApplayAuditService.checkApplyForExpert(user.getId());
     	if(flag==1){
     	request.setAttribute("applyname", "专家资源申请");
-    	request.setAttribute("failMes", "对不起，你已经申请了专家资源");
+    	request.setAttribute("failMes", "对不起，你已经申请了专家资源！");
     	return "/website/expert/expertApplyfail";
     	}else{
     	    
@@ -216,6 +220,7 @@ public class ExpertController {
     	
     	JltfispColumn JltfispColumn=columnService.getColumnContext(Integer.parseInt(columnId));
     	request.setAttribute("columnName", JltfispColumn.getColumnName());
+    	request.setAttribute("columnId", columnId);
     	//start回显数据
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispExpert jltfispExpert=expertService.getExpertByUserIdAndColumnId(user.getId(), Integer.parseInt(columnId));
@@ -228,7 +233,6 @@ public class ExpertController {
     	}else{
     		List<JltfispExpertDoMain> jltfispExpertDoMain=expertService.getExpertDoMainList(user.getId(),Integer.parseInt(columnId));
     		request.setAttribute("jltfispExpertDoMain", jltfispExpertDoMain);
-    		request.setAttribute("columnId", columnId);
     		return "/website/expert/expertUser1";
     	}
     }

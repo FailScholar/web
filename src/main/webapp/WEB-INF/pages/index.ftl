@@ -92,9 +92,11 @@
                               </#list>
                               </ul>
                               <ul class="btn-list">
-                                  <li class="cur"><span></span></li>
-                                  <li><span></span></li>
-                                  <li><span></span></li>
+                              <#list indexCache.indices as indices>
+                                  <#if indices.contentType = 1>
+                                      <li><span></span></li>
+                                  </#if>
+                              </#list>
                               </ul>
                           </div>
                       </div>
@@ -141,7 +143,7 @@
                                   <a href="${path}/perm/news?columnId=${columns.id}" onclick="setColumnIndex(2)">${columns.columnName}</a>
                               </#if>
                           </#list>
-                          <a href="${path}/perm/news" class="fr">更多&nbsp;&gt;</a>
+                          <a href="${path}/perm/news" class="fr" onclick="setColumnIndex(2)">更多&nbsp;&gt;</a>
                       </div>
                       <div class="clear"></div>
                       <div class="selCont">
@@ -252,7 +254,13 @@
                   </#list>
                   </ul>
                   <#--底部广告位结束-->
-                  <div class="mark"><i class="active"></i><i></i><i></i></div>
+                  <div class="mark">
+                  <#list indexCache.indices as indices>
+                      <#if indices.contentType = 2>
+                          <i></i>
+                      </#if>
+                  </#list>
+                  </div>
               </div>
           </div>
           <div class="mr fr">
@@ -402,33 +410,38 @@
         var step = 2;
         var delay = 30;
         var obj=document.getElementById("fly");
-        function fly() {
-            var L=T=0;
-            var R= document.body.clientWidth-obj.offsetWidth;
-            var B = document.body.clientHeight-obj.offsetHeight;
-            obj.style.left = xt + document.body.scrollLeft+'px';
-            obj.style.top = yt + document.body.scrollTop+'px';
-            xt = xt + step*(xin?1:-1);
-            if (xt < L) { xin = true; xt = L}
-            if (xt > R){ xin = false; xt = R}
-            yt = yt + step*(yin?1:-1);
-            if (yt < T) { yin = true; yt = T }
-            if (yt > B) { yin = false; yt = B }
+        if(obj != null){
+            function fly() {
+                var L=T=0;
+                var R= document.body.clientWidth-obj.offsetWidth;
+                var B = document.body.clientHeight-obj.offsetHeight;
+                obj.style.left = xt + document.body.scrollLeft+'px';
+                obj.style.top = yt + document.body.scrollTop+'px';
+                xt = xt + step*(xin?1:-1);
+                if (xt < L) { xin = true; xt = L}
+                if (xt > R){ xin = false; xt = R}
+                yt = yt + step*(yin?1:-1);
+                if (yt < T) { yin = true; yt = T }
+                if (yt > B) { yin = false; yt = B }
+            }
+            var itl= setInterval(fly, delay);
+            obj.onmouseover=function(){clearInterval(itl)};
+            obj.onmouseout=function(){itl=setInterval(fly, delay)}
         }
-        var itl= setInterval(fly, delay);
-        obj.onmouseover=function(){clearInterval(itl)};
-        obj.onmouseout=function(){itl=setInterval(fly, delay)}
 
         $('.fly .close').click(function(){
             $(this).parents('.fly').hide();
             clearInterval(itl);
         });
         $.get("${path}/anon//statisticsPV");
+        /*小圆点默认定位第一个*/
+        $('.btn-list').find('li').eq(0).addClass('cur').siblings('li').removeClass('cur')
+        $('.mark').find('i').eq(0).addClass('active').siblings('i').removeClass('active')
     });
 
     $('.selCont').each(function(index, element) {
-        $('.selCont').find('.imgList li').eq(0).show();
-        $('.selCont').find('.imgList li').eq(4).show();
+        $('.imgList').eq(0).find('li').eq(0).show();
+        $('.imgList').eq(1).find('li').eq(0).show();
         $(this).find('ul:first li').mouseenter(function(){
             $(this).parents('.selCont').find('.imgList li').hide().eq($(this).index()).show();
         });

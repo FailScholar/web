@@ -75,11 +75,11 @@
             <tr>
                 <th><b class="red">*</b>贷款期间新获企业资质和各种认定</th>
                 <td>
-                    <label><input name="cognizance" type="radio" value="1" <#if PsMaterialInfo.cognizance==1>checked="checked"</#if> >私营企业</label>
-                    <label><input name="cognizance" type="radio" value="2" <#if PsMaterialInfo.cognizance==2>checked="checked"</#if> >中外合资企业</label>
-                    <label><input name="cognizance" type="radio" value="3" <#if PsMaterialInfo.cognizance==3>checked="checked"</#if> >国有企业</label>
-                    <label><input name="cognizance" type="radio" value="4" <#if PsMaterialInfo.cognizance==4>checked="checked"</#if> >集体企业</label><br>
-                    <div class="else">其他请说明<input id="cognizanceText" name="cognizanceText" value="${PsMaterialInfo.cognizanceText }" class="txt validate[required,minSize[1],maxSize[1000]]" type="text"></div>
+                    <label><input name="cognizance" class="validate[required]" type="radio" value="1" <#if PsMaterialInfo.cognizance==1>checked="checked"</#if> >私营企业</label>
+                    <label><input name="cognizance" class="validate[required]" type="radio" value="2" <#if PsMaterialInfo.cognizance==2>checked="checked"</#if> >中外合资企业</label>
+                    <label><input name="cognizance" class="validate[required]" type="radio" value="3" <#if PsMaterialInfo.cognizance==3>checked="checked"</#if> >国有企业</label>
+                    <label><input name="cognizance" class="validate[required]" type="radio" value="4" <#if PsMaterialInfo.cognizance==4>checked="checked"</#if> >集体企业</label><br>
+                    <label><input name="cognizance" class="validate[required]" type="radio" value="5" <#if PsMaterialInfo.cognizance==5>checked="checked"</#if> >其他</label>
                 </td>
             </tr>
             <tr>

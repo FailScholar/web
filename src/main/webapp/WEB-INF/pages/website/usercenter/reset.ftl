@@ -32,7 +32,7 @@
                               <div><span class="ml57">邮箱验证：</span><input type="text" class="txt validate[required]" name="emailCaptcha" id="emailCaptcha" />
                               <div class="fr">
                               <a href="javascript:;" onclick="sendEamil()" class="ml26 fr" id="sml26" style="margin-right:80px;">发送验证码</a>
-                              	<p id="retext" style="display:none;font-size:13px;text-indent:0px;width:150px;color:#545658" class="ml26 fr">验证码<b class="second" style="font-size:13px;">1</b>分钟内可用</p>
+                              	<p id="retext" style="display:none;font-size:13px;text-indent:0px;width:150px;color:#545658" class="ml26 fr">验证码<b class="second" style="font-size:13px;">15</b>分钟内可用</p>
                               </div></div>
                               <div class="tip autologin" id="tiptext" style="display:none"><span class="red">* 校验信息不匹配</span></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>

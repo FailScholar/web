@@ -36,4 +36,9 @@ public class CloudServiceImpl extends BaseServiceImpl<Cloud> implements ICloudSe
 		cloud.setColumnId(columnid);
 		return cloudMapper.selectCount(cloud);
 	}
+	@Override
+	public int updateCloudPv(Integer id, Integer pv) {
+		// TODO Auto-generated method stub
+		return cloudMapper.updateCloudPv(id, pv);
+	}
 }

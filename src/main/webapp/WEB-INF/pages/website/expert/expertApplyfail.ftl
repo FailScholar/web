@@ -18,7 +18,7 @@
             <div class="calt">
                 <div class="log proList pro4">
                     <form method="post" action="" class="ant">
-                        <h1 style="width:460px;">${failMes}</h1>
+                        <h1 style="width:470px;">${failMes}</h1>
                         <p class="antp" style="text-indent:0; font-size:16px;">咨询电话：0551-66668788</p>
                         <p class="antp" style="text-indent:0;">等待时间：<b class="second">5</b> 秒后页面自动<span class="ml10 mr10"><a href="${path}/index">跳转</a></span>或者<span class="ml10 mr10"><a href="${path}/index">返回首页</a></span></p>
                     </form>

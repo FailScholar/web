@@ -16,7 +16,7 @@ public interface IBusinessApplayAuditService extends
      * @param applyType
      * @return
      */
-    JltfispCoFillInApply getCoFillInApplyContext(int userid,int applyType);
+    JltfispCoFillInApply getCoFillInApplyContext(int info_id);
 
     /**
      * 检查是否存在 正在申请中或申请通过 的申请记录
@@ -106,5 +106,33 @@ public interface IBusinessApplayAuditService extends
      * @return
      */
     BusinessApplayAudit checkApplyForLoan(Integer userId, String type,String parentType);
+    
+    /**
+     * 根据userId,type字段查询是否存在贷款流程
+     * @param userId
+     * @return
+     */
+    int checkApplyOne(Integer userId,String type);
+
+    
+    /**
+     * 根据userId,type和infoId字段查询是否存在贷款流程
+     * @param userId
+     * @return
+     */
+	BusinessApplayAudit getBusinessApplayAuditByUserIdAndInfoIdAndType(Integer userId, Integer infoId, int Type);
+	
+	void updateInfoIdById(Integer id,Integer infoId);
+
+    
+    /**
+     * 根据4个字段查询流程表
+     * @param userId
+     * @param type
+     * @param parentType
+     * @param state
+     * @return
+     */
+    BusinessApplayAudit selectBusinessByStatusAndUserIdAndParentType(Integer userId,String type,String parentType,String state);
 
 }

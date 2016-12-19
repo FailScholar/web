@@ -17,11 +17,10 @@ import java.util.Set;
  */
 public interface UserService {
 
-    List<JltfispUser> getAllUserEmailAndName();
-    
     int updateByPKSelective(JltfispUser user);
 
     Set<String> getVisitorPermSet();
+
     int updateUserByAccountNumber(String emailCaptcha,String accountNumber);
     
     List<JltfispUser> selectUserByAccountNumber(String accountNumber);

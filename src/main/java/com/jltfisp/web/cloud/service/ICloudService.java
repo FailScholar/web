@@ -10,4 +10,6 @@ public interface ICloudService extends IBaseService<Cloud>{
 	public List<Cloud> getCloudsList(Integer columnid,int page);
 	
 	int getCloudsCount(Integer columnid);
+	
+	int updateCloudPv(Integer id,Integer pv);
 }

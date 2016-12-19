@@ -32,6 +32,6 @@ public interface  FinanceApplyDao extends BaseMapper<JltfispCoBase> {
 
 	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(@Param("user_id")Integer user_id,@Param("business_type")Integer business_type);
 	
-	
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDtoByInfoId(@Param("infoId")Integer infoId);
 
 }

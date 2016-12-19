@@ -4,28 +4,47 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
     <title>股权融资保费申请</title>
     <style>  
-      @page{size:297mm 330mm;}
-     .content { padding:25px -50px; background-color:#fff;}
-.bread { background:url(../../resource/images/home.png) 0 0 no-repeat; padding-left:16px; font-family:"宋体"; margin-bottom:14px;}
-.bread a { font-size:16px; color:#666; margin:0 10px; font-family:"微软雅黑";}
-.bread a:hover { color:#1679ff;}
-.calt { padding:0 25px;}
-.calt p { line-height:45px; color:#666; font-size:16px; border-bottom:1px solid #ddd; overflow:hidden;}
-.calt p.note { line-height:29px; font-size:14px; border-bottom:none;}
-.calt h2 { text-align:center; margin:40px auto; position:relative;}
-.calt h2 a { padding:6px 12px; color:#1679ff; position:absolute; right:0; border:1px dashed #1679ff; border-radius:3px; top:-44px;}
-.calt h2 a:hover { color:#0147a6; border-color:#0147a6;}
-.nlist { overflow:hidden; padding-left:1px; border-bottom:1px solid #ccc; position:absolute; top:0; left:0; background-color:#fff; z-index:10;}
-.nlist li { float:left; width:124px; text-align:center; height:40px; line-height:40px; border:1px solid #ccc; margin-left:-1px; border-bottom:none; cursor:pointer;}
-.nlist li.active,.nlist li:hover { background-color:#1679ff; color:#fff; border-color:#1679ff;}
-.nlistCont { border:1px solid #ccc; margin-top:-1px;}
-.nlistCont .ntit { text-align:left; margin:10px 0 0 0; font-size:14px; color:#333; text-indent:0; width:auto;}
-.tab2 { border-collapse:collapse; width:10%; margin:10px auto; letter-spacing:0.5;}
-.tab2 th,.tab2 td { border:1px solid #d2d2d2; height:32px; font-size:13px; line-height:18px; padding:0 6px; text-align:center; color:#5e5e5e;}
-.tab2 th { font-weight:600;}
-.tal th { text-align:right;}
-.tal td { text-align:left;}
-.clearfix { height:134px;}
+      @page{size:297mm 350mm;}
+  	.content { padding:25px 20px; background-color:#fff;}
+  	.calt { padding:0 25px;}
+	.calt p { line-height:45px; color:#666; font-size:16px; border-bottom:1px solid #ddd; overflow:hidden;}
+	.calt p.note { line-height:29px; font-size:14px; border-bottom:none;}
+	.calt h2 { text-align:center; margin:40px auto; position:relative;}
+	.calt h2 a { padding:6px 12px; color:#1679ff; position:absolute; right:0; border:1px dashed #1679ff; border-radius:3px; top:-44px;}
+	.calt h2 a:hover { color:#0147a6; border-color:#0147a6;}
+	.alptable h1 { margin:20px auto; text-align:center;}
+	.clear{
+		display:block; 
+		clear:both; 
+		font-size:0; 
+		line-height:0; 
+		height:0; 
+		overflow:hidden; 
+		content:".";
+	}
+	
+	
+	.nlistCont { padding:0 20px 20px 20px; border:1px solid #ccc; margin-top:-1px;}
+	.nlistCont .ntit { text-align:left; margin:10px 0 0 0; font-size:14px; color:#333; text-indent:0; width:auto;}
+	.nlistCont h3 { font-size:16px; text-align:center; margin:20px auto; font-weight:bold;}
+	.nlistCont h3 span { font-size:12px; font-weight:normal; line-height:32px;}
+	.nlistCont .tip3 h3 { color:#333; font-weight:normal; font-size:18px;}
+	.nlistCont .tip3 p { line-height:24px; color:#666; font-size:14px;}
+	.nlistCont b { margin-right:6px;}
+	.alptable h1 { margin:20px auto; text-align:center;}
+	.alptable p { padding-right:88px; font-size:12px;}
+	.tab2 { border-collapse:collapse; width:85%; margin:10px auto; letter-spacing:0.5;}
+	.tab2 th,.tab2 td { border:1px solid #d2d2d2; height:32px; font-size:13px; line-height:18px; padding:0 6px; text-align:center; color:#5e5e5e;}
+	.tab2 th { font-weight:600;}
+	.tal th { text-align:right;}
+	.tal td { text-align:left;}
+	.calt .snum { margin-top:20px; text-align:right; font-size:14px;}
+.cover { padding-bottom:100px;}
+.cover h2 { font-size:26px; margin:100px auto 180px;}
+.cover .ntit { width:300px; margin-top:10px;margin-left:520px}
+.cover .txt3 { border:none; border-bottom:1px solid #ccc; margin:0 6px; width:200px;}
+.cv1 { padding-bottom:0;}
+.cv1 p { padding-right:0;}
   </style>  
 </head>
 <body style='font-family:SimSun;'>
@@ -70,7 +89,7 @@
                                 <th>邮编</th>
                                 <td><span>${jltfispCoBaseDto2.email!''}</span></td>
                                 <th>组织机构代码</th>
-                                <td><span>${jltfispCoBaseDto2.socialCreditCode!''}</span></td>
+                                <td><span>${user.socialCode!''}</span></td>
                                 <th>职工人数(人)</th>
                                 <td><span>${jltfispCoBaseDto2.workernumber!''}</span></td>
                             </tr>
@@ -127,7 +146,19 @@
                             <tr class="tal">
                             	<th>科技资质</th>
                                 <td colspan="5">
-                                	<span>${jltfispCoBaseDto2.technologyqualifications!''}&nbsp;${jltfispCoBaseDto2.otherDesc!''}</span>
+                                	<span>
+                                	<#if (jltfispCoBaseDto2??&&jltfispCoBaseDto2.technologyqualifications??)>
+				                  		<#if (jltfispCoBaseDto2.technologyqualifications=='1')>
+				                  			高科技企业
+				                  		<#elseif (jltfispCoBaseDto2.technologyqualifications=='2')>
+				                  			科技小巨人企业
+				                  		<#elseif (jltfispCoBaseDto2.technologyqualifications=='3')>
+				                  			科技小巨人培训企业
+				                  		<#else>
+				                  			软件企业
+				                  		</#if>
+				                  	</#if>
+                                	&nbsp;${jltfispCoBaseDto2.otherDesc!''}</span>
 			                 	 </td>
                             </tr>
                             <tr>
@@ -164,18 +195,17 @@
                                 <td colspan="5"><span>${jltfispFinMaterial3.capitals!''}</span></td>
                             </tr>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="6"  style="height:169px">
                                     <div class="cover cv1 fr">
-                                        <p class="ntit">公司名称：<U>&nbsp;<span></span>&nbsp;</U></p>
-                                        <p class="ntit">填&nbsp;表&nbsp;人    ：<U>&nbsp;&nbsp;</U></p>
-                                        <p class="ntit"><span class="ml70"></span>&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</p>
+                                        <p class="ntit">公司名称：<U>&nbsp;${jltfispCoBaseDto2.company!''}&nbsp;</U></p>
+                                        <p class="ntit"><span class="ml70"><#if (year??)>${year?string('####')}</#if>&nbsp;&nbsp;年&nbsp;&nbsp;${month!''}&nbsp;&nbsp;月&nbsp;&nbsp;${date!''}&nbsp;&nbsp;日</span></p>
                                     </div>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                         
-                        <p class="tip4" style="color:#d17d00">企业承诺：本企业提供上述信息真实可靠！</p>
+                        <p  style="color:#d17d00;font-size:12px; text-align:left; width:auto; text-indent:0;">企业承诺：本企业提供上述信息真实可靠！</p>
 </div>
 	      <!--完成-->
 	</div>

@@ -39,6 +39,8 @@ import com.jltfisp.web.loan.dao.CoOtherMapper;
 import com.jltfisp.web.loan.dao.CoProfileMapper;
 import com.jltfisp.web.loan.dao.CoProfitMapper;
 import com.jltfisp.web.loan.service.LoanService;
+import com.jltfisp.web.news.dao.DictColumnMapper;
+import com.jltfisp.web.news.entity.DictColumnDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +75,9 @@ public class LoanServiceImpl implements LoanService {
     
     @Autowired
     private CoFillInApplyMapper coFillInApplyMapper;
+    
+    @Autowired
+    private DictColumnMapper dictColumnMapper;
 
 	private List<JltfispCoProfitDto> listJltfispCoProfitDto;
     
@@ -101,7 +106,7 @@ public class LoanServiceImpl implements LoanService {
      */
 	@Override
 	public int saveCoBase(JltfispCoBaseDto coBase) {
-		JltfispCoBaseDto JltfispCoBaseDto=coBaseMapper.getCoBaseContextByUserIdAndType(coBase.getUserid(),coBase.getBusinesstype());
+		JltfispCoBaseDto JltfispCoBaseDto=coBaseMapper.getCoBaseContextByUserIdAndType(coBase.getUserid(),coBase.getBusinesstype(),3);
 		//如果数据库中已有该记录，则更新该记录
 		if(JltfispCoBaseDto!=null){
 		coBase.setId(JltfispCoBaseDto.getId());
@@ -182,9 +187,10 @@ public class LoanServiceImpl implements LoanService {
 	
 	@Override
 	public int saveCoFinancial(JltfispCoFinancial coFinancial)  {
-		List<JltfispCoFinancialDto> JltfispCoFinancialList=coFinancialMapper.getCoCoFinancialContext(coFinancial.getCreateUserid());
+		
+		List<JltfispCoFinancialDto> JltfispCoFinancialList=coFinancialMapper.getCoCoFinancialContext(coFinancial.getInfoid());
 		if(JltfispCoFinancialList!=null){
-			coFinancialMapper.deleteCoFinancialContext(coFinancial.getCreateUserid());
+			coFinancialMapper.deleteCoFinancialContext(coFinancial.getInfoid());
 		}
 		String[] company=coFinancial.getCompany().split(",");
 		String[] Yszkye=coFinancial.getYszkye().split(",");
@@ -331,23 +337,23 @@ public class LoanServiceImpl implements LoanService {
 	
 	@Override
 	public int saveCoFillInApply(JltfispCoFillInApply coFillInApply) {
-		JltfispCoFillInApply jltfispCoFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coFillInApply.getUserid(),coFillInApply.getApplyType());
+		JltfispCoFillInApply jltfispCoFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coFillInApply.getInfoid());
 		if(jltfispCoFillInApply!=null){
-			coFillInApplyMapper.deleteCoFillInApplyContext(coFillInApply.getUserid(),coFillInApply.getApplyType());
+			coFillInApplyMapper.deleteCoFillInApplyContext(coFillInApply.getInfoid());
 		} 
 		return coFillInApplyMapper.insert(coFillInApply);
 	}
 
 	@Override
-	public JltfispCoBaseDto getCoBaseContextByUserIdAndType(int userid,int business_type) {
-		return coBaseMapper.getCoBaseContextByUserIdAndType(userid,business_type);
+	public JltfispCoBaseDto getCoBaseContextByUserIdAndType(int userid,int business_type,int apply_state) {
+		return coBaseMapper.getCoBaseContextByUserIdAndType(userid,business_type,apply_state);
 	}
     /**
      * 查询所有申请信息并返回
      */
 	@Override
-	public JltfispCoAll getApplyALL(int userid,int businesstype) {
-		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype);
+	public JltfispCoAll getApplyALL(int userid,int businesstype,int applystate) {
+		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype,applystate);
 		JltfispCoAll CoAll=new JltfispCoAll();
 		if(null != coBase){
 		JltfispCoOther  coOther=coOtherMapper.getCoOtherContext(coBase.getId());
@@ -360,10 +366,10 @@ public class LoanServiceImpl implements LoanService {
 		List<JltfispCoFile>  coFileList=coFileMapper.getCoFileContextList(coBase.getId());
 		List<JltfispCoProfitDto> coProfit=coProfitMapper.getCoProfitContext(coBase.getId());
 		JltfispCoProfile coProfile=coProfileMapper.getCoprofileContext(coBase.getId());
-		List<JltfispCoFinancialDto> coFinancialList=coFinancialMapper.getCoCoFinancialContext(userid);
-		JltfispCoFillInApply coFillInApply=coFillInApplyMapper.getCoFillInApplyContext(userid,businesstype);
+		List<JltfispCoFinancialDto> coFinancialList=coFinancialMapper.getCoCoFinancialContext(coBase.getId());
+		JltfispCoFillInApply coFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coBase.getId());
 		CoAll.setJltfispCoBase(coBase);
-		CoAll.setJltfispCoDebt(coDebt);
+		CoAll.setJltfispCoDebt(coDebt!=null?coDebt:new JltfispCoDebt());
 		CoAll.setJltfispCoDebtTwo(coDebt2!=null?coDebt2:new JltfispCoDebt());
 		CoAll.setJltfispCoDebtThree(coDebt3!=null?coDebt3:new JltfispCoDebt());
 		CoAll.setJltfispCoDebtFour(coDebt4!=null?coDebt4:new JltfispCoDebt());
@@ -378,8 +384,8 @@ public class LoanServiceImpl implements LoanService {
 	}
 
 	@Override
-	public JltfispCoAll getCoDebtTable(int userid,String year,int businesstype) {
-		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype);
+	public JltfispCoAll getCoDebtTable(int userid,String year,int businesstype,int applystate) {
+		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype,applystate);
 		JltfispCoDebt coDebt=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(), year);
 		JltfispCoAll CoAll=new JltfispCoAll();
 		CoAll.setJltfispCoDebt(coDebt);
@@ -388,8 +394,17 @@ public class LoanServiceImpl implements LoanService {
 	
 	
 	@Override
-	public List<JltfispCoDebt> getCoDebtTableList(int userid,int businesstype) {
-		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype);
+	public DictColumnDto getAppName(String apptype) {
+		DictColumnDto dto=new DictColumnDto();
+		dto.setCode(apptype);
+		dto.setType(1002);
+		return dictColumnMapper.selectOne(dto);
+	}
+	
+	
+	@Override
+	public List<JltfispCoDebt> getCoDebtTableList(int userid,int businesstype,int applystate) {
+		JltfispCoBaseDto coBase=this.getCoBaseContextByUserIdAndType(userid,businesstype,applystate);
 		List<JltfispCoDebt> coDebt=coDebtMapper.getCoDebtContextList(coBase.getId());
 		return coDebt;
 	}
@@ -399,6 +414,44 @@ public class LoanServiceImpl implements LoanService {
 			int infoId) {
 		// TODO Auto-generated method stub
 		return coFinancialMapper.getCoCoFinancialContextByinfoId(infoId);
+	}
+
+	@Override
+	public JltfispCoAll getApplyALL(int infoid) {
+		JltfispCoBaseDto coBase=this.getCoBaseContext(infoid);
+		JltfispCoAll CoAll=new JltfispCoAll();
+		if(null != coBase){
+		JltfispCoOther  coOther=coOtherMapper.getCoOtherContext(coBase.getId());
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		JltfispCoDebt   coDebt=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year-3));
+		JltfispCoDebt   coDebt2=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year-2));
+		JltfispCoDebt   coDebt3=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year-1));
+		JltfispCoDebt   coDebt4=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(),String.valueOf(year));
+		List<JltfispCoFile>  coFileList=coFileMapper.getCoFileContextList(coBase.getId());
+		List<JltfispCoProfitDto> coProfit=coProfitMapper.getCoProfitContext(coBase.getId());
+		JltfispCoProfile coProfile=coProfileMapper.getCoprofileContext(coBase.getId());
+		List<JltfispCoFinancialDto> coFinancialList=coFinancialMapper.getCoCoFinancialContextByinfoId(infoid);
+		JltfispCoFillInApply coFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coBase.getId());
+		CoAll.setJltfispCoBase(coBase);
+		CoAll.setJltfispCoDebt(coDebt!=null?coDebt:new JltfispCoDebt());
+		CoAll.setJltfispCoDebtTwo(coDebt2!=null?coDebt2:new JltfispCoDebt());
+		CoAll.setJltfispCoDebtThree(coDebt3!=null?coDebt3:new JltfispCoDebt());
+		CoAll.setJltfispCoDebtFour(coDebt4!=null?coDebt4:new JltfispCoDebt());
+		CoAll.setJltfispCoOther(coOther);
+		CoAll.setJltfispCoFileList(coFileList);
+		CoAll.setJltfispCoProfit(coProfit);
+		CoAll.setJltfispCoProfile(coProfile);
+		CoAll.setJltfispCoFinancialList(coFinancialList);
+		CoAll.setJltfispCoFillInApply(coFillInApply);
+		}
+		return CoAll;
+	}
+
+	@Override
+	public List<JltfispCoDebt> getCoDebtTableList(int infoId) {
+		// TODO Auto-generated method stub
+		return coDebtMapper.getCoDebtContextList(infoId);
 	}
   
 }

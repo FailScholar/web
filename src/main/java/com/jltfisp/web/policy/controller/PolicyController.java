@@ -46,13 +46,13 @@ public class PolicyController {
         if(columnId !=null){
        	 request.setAttribute("columnId", columnId);
        	 //获取当前页的数据，且显示12条
-            datas= datas=policyService.getPolicyPageList(0, 12,columnId);
+            datas= datas=policyService.getPolicyPageList(0, 8,columnId);
           //获取当前子栏目下所有的数据总数
             total =policyService.getPolicyPageCount(columnId);
        }else if(columnList !=null && columnList.size()>0){
        	    request.setAttribute("columnId", columnList.get(0).getId());
        	   //获取当前页的数据，且显示12条
-            datas= datas=policyService.getPolicyPageList(0, 12,columnList.get(0).getId());
+            datas= datas=policyService.getPolicyPageList(0, 8,columnList.get(0).getId());
            //获取当前子栏目下所有的数据总数
             total =policyService.getPolicyPageCount(columnList.get(0).getId());
        }
@@ -75,7 +75,7 @@ public class PolicyController {
      //获取当前子栏目下所有的数据总数
      int total =policyService.getPolicyPageCount(columnId);
      //获取当前页的数据，且显示12条
-     List<JltfispPolicy>  datas=policyService.getPolicyPageList(rows, 12,columnId);
+     List<JltfispPolicy>  datas=policyService.getPolicyPageList(rows, 8,columnId);
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);

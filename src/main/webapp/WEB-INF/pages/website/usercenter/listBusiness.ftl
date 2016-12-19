@@ -95,27 +95,27 @@ function goMain(flag){
                       <ul class="aply">
                           <li class="bbm">
                               <h4>科技履约贷款申请</h4>
-                              <a href="${path}/anon/loan/onlineApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=1" class="online">在线申请</a>
+                              <a href="${path}/loan/guideApply2?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
                           </li>
                           <li class="bbm">
                               <h4>科技小巨人贷款申请</h4>
-                              <a href="${path}/loan/onlineApply?applytype=2">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=2" class="online">在线申请</a>
+                              <a href="${path}/loan/guideApply2?applytype=2">申请须知</a><a href="${path}/loan/onlineApply?applytype=2" class="online">在线申请</a>
                           </li>
                           <li class="bbm">
                               <h4>高新技术贷款申请</h4>
-                              <a href="${path}/loan/onlineApply?applytype=3">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=3" class="online">在线申请</a>
+                              <a href="${path}/loan/guideApply2?applytype=3">申请须知</a><a href="${path}/loan/onlineApply?applytype=3" class="online">在线申请</a>
                           </li>
                           <li>
                               <h4>科技微贷通贷款申请</h4>
-                              <a href="${path}/loan/onlineApply?applytype=4">申请须知</a><a href="${path}/loan/onlineApplyPage?applytype=4" class="online">在线申请</a>
+                              <a href="${path}/loan/guideApply2?applytype=4">申请须知</a><a href="${path}/loan/onlineApply?applytype=4" class="online">在线申请</a>
                           </li>
                           <li>
                               <h4>保费补贴申请</h4>
-                              <a href="${path}/loan/judgeIsApplyLoan?applytype=5">申请须知</a><a href="${path}/loan/subsidy?isReFill=5" class="online">在线申请</a>
+                              <a href="${path}/loan/guidApplyIndex">申请须知</a><a href="${path}/loan/judgeIsApplyLoan?applytype=5" class="online">在线申请</a>
                           </li>
                           <li>
                               <h4>股权融资申请</h4>
-                              <a href="${path}/loan/financeKnow">申请须知</a><a href="${path}/loan/financeApply" class="online">在线申请</a>
+                              <a href="${path}/loan/financeKnow2">申请须知</a><a href="${path}/loan/financeKnow" class="online">在线申请</a>
                           </li>
                       </ul>
                       <div class="clear"></div>

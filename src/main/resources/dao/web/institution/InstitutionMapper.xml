@@ -15,22 +15,27 @@
 	</resultMap>
 	<!-- 查询合作机构二级列表，并按columnNo升序排列-->
 	<select id="getJltfispColumnList" resultMap="jltfispColumn" parameterType="int">
-	  select * from jltfisp_column_manage cm where cm.parentColumn=#{parentColumn} order by  columnNo asc
+	  select * from jltfisp_column_manage cm where cm.isdelete=1 and cm.parentColumn=#{parentColumn} order by  columnNo asc
 	</select>
 	<!-- 根据合作机构二级列表的columnId查询列表-->
 	<select id="getInstitutionList" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
-	    SELECT 
+		(SELECT 
 			institut.* 
 		FROM 
 			jltfisp_institut institut  
-		JOIN jltfisp_business_applay jba ON jba.user_id = institut.user_id AND jba.type = institut.columnId AND jba.parent_type = '2'  
+		LEFT JOIN jltfisp_business_applay jba ON jba.user_id = institut.user_id AND jba.type = institut.columnId AND jba.parent_type = '2'
 		LEFT JOIN jltfisp_column_manage cm ON institut.columnId = cm.id  AND cm.parentColumn = 6 
 		WHERE
-			institut.columnId = #{columnId}  AND jba.state = 1 
+			institut.columnId = #{columnId} AND jba.state = 1)
+		UNION ALL
+		(SELECT 
+			a.* 
+		FROM 
+			jltfisp_institut a  
+		WHERE
+			a.columnId = #{columnId} AND a.user_id = -1)
 		ORDER BY 
-			CONVERT (
-				institut.institutionalName USING gbk
-			) COLLATE gbk_chinese_ci ASC 
+			createTime DESC
 	</select>
 	<select id="getInstitutionDetail" resultType="com.jltfisp.web.institution.entity.JltfispInstitution" parameterType="int">
 	  select * from jltfisp_institut institut where institut.id=#{id}

@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import com.jltfisp.util.FilePathUtil;
 
-
 @Service
 public class FileManager {
 
@@ -91,7 +90,7 @@ public class FileManager {
 
 
     public byte[] getFile(String relativePath) {
-        File file = new File(Constants.basePath + File.separator + relativePath);
+        File file = new File(com.jltfisp.util.Constants.basePath + File.separator + relativePath);
         if(file.exists()){
             try{
                 return getFileContent(file);
@@ -116,7 +115,7 @@ public class FileManager {
     }
 
     public boolean deleteFile(String relativePath) {
-        File file = new File(Constants.basePath + relativePath);
+        File file = new File(com.jltfisp.util.Constants.basePath + relativePath);
         if(file.exists()){
             file.delete();
             return true;

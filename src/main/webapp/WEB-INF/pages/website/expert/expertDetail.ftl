@@ -16,13 +16,25 @@
               <!--content开始-->
              <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">${parentJltfispColumn.columnName}</a>&gt;<a href="javascript:;">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">专家详情</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/expert?columnId=${jltfispColumn.id}&isFrontPage=1">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">专家详情</a>
                 </div>
                 <div class="detail">
                 	<img width="220px" height="246px" src="${path}/${jltfispExpert.agencylogo}" class="fl" />
                     <div class="ul2 fl ml57">
-                    	<h1>${jltfispExpert.userid}</h1>
-                        <p style="padding-left:0;">${jltfispExpert.workpost} | ${jltfispExpert.businesaddress}</p>
+                    	<h1>${jltfispExpert.name}</h1>
+                        <p style="padding-left:0;">
+                        <#if (jltfispExpert.workpost?length >20) >
+                                  <lable title="${jltfispExpert.workpost}">${jltfispExpert.workpost[0..20]}...</label>
+                                  <#else>
+                                  ${jltfispExpert.workpost}
+                                  </#if>                     
+                        | 
+                        <#if (jltfispExpert.workcompany?length >30) >
+                                   <lable title="${jltfispExpert.workcompany}">${jltfispExpert.workcompany[0..30]}...</label>
+                                  <#else>
+                                  ${jltfispExpert.workcompany}
+                                  </#if>     
+                        </p>
                         <p class="phone">${jltfispExpert.phone}</p>
                         <p class="email">${jltfispExpert.email}</p>
                     </div>

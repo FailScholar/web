@@ -16,7 +16,7 @@
               <!--content开始-->
                <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="${path}/perm/news">${dictColumn.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${columnDto.columnId})">${columnDto.columnName}</a>&gt;<a href="javascript:;">详情</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/news">${dictColumn.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${columnDto.columnId})">${columnDto.columnName}</a>&gt;<a href="javascript:;">详情</a>
                 </div>
                 <div class="video">
                 	<h1>${columnDto.title}</h1>

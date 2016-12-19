@@ -59,7 +59,7 @@
                           <div class="tips">
                               <p>没有收到邮件？</p>
                               <p>1.检查您的邮件垃圾箱。</p>
-                              <p>2.若仍未收到确认，请尝试<a href="#">重新发送</a>。</p>
+                              <p>2.若仍未收到确认，请尝试<a href="javascript:;" onclick="repeatSendEmail($('#checkEmail1').html())">重新发送</a>。</p>
 
                           </div>
                       </div>
@@ -109,7 +109,7 @@
                           <div class="tips">
                               <p>没有收到邮件？</p>
                               <p>1.检查您的邮件垃圾箱。</p>
-                              <p>2.若仍未收到确认，请尝试<a href="#">重新发送</a>。</p>
+                              <p>2.若仍未收到确认，请尝试<a href="javascript:;" onclick="repeatSendEmail($('#checkEmail').html())">重新发送</a>。</p>
 
                           </div>
                       </div>
@@ -463,4 +463,19 @@
         cancel: function () {},
         cancelDisplay: false
     });
+    
+
+    function repeatSendEmail(accountNumber) {
+        $.ajax({
+            type: 'POST',
+            url: path + '/anon/regist/repeatSendEmail',
+            data: {accountNumber: accountNumber},
+            success: function (msg) {
+                var json = jQuery.parseJSON(msg);
+                if (json.success) {
+                    dialog.tipsPop('ban-pop','提示:','邮件已发送,请注意查收','确定')
+                }
+            }
+        });
+    }
 </script>

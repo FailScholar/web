@@ -93,6 +93,7 @@ public class CloudController extends BaseController<Cloud> {
 		 Cloud cloudDetail = cloudService.selectByPk(id);
 		 request.setAttribute("columnOne", columnOne);
 		 request.setAttribute("cloudDetail", cloudDetail);
+		 cloudService.updateCloudPv(cloudDetail.getId(), cloudDetail.getPv()==null?1:cloudDetail.getPv()+1);
 		 request.setAttribute("columnid", columnid);
 		 request.setAttribute("colName", StringUtils.hasLength(colName) ? colName : "云课堂");
 	        return "/website/cloud/videoDetail";

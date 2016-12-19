@@ -22,62 +22,68 @@
 	    		k = 0,
 	    		Player;
 			$imgUl.css("width",n*width);
-			function scroll(){                                      //轮播事件
-				$imgUl.stop().animate({left:-width}, o.speed, function(){
-					k += 1;
-					$imgUl.css("left",0);
-					$imgUl.children("li:first").appendTo($(this));
-					$btnLi.removeClass('cur');
-					if(k >= n){
-						k = 0;
-					}
-					$btnUl.children("li").eq(k).addClass('cur');			
-				});
+			function scroll(){
+				if(n>1){
+					$imgUl.stop().animate({left:-width}, o.speed, function(){
+						k += 1;
+						$imgUl.css("left",0);
+						$imgUl.children("li:first").appendTo($(this));
+						$btnLi.removeClass('cur');
+						if(k >= n){
+							k = 0;
+						}
+						$btnUl.children("li").eq(k).addClass('cur');
+					});
+				}//轮播事件
 			}
 			$btnLi.click(function(){                                //小圆点点击事件
-				var index = $btnLi.index(this);	
-				$(this).addClass('cur').siblings("li").removeClass('cur');
-				if(index >= k){
-					var dif = index-k;
-					left = -dif*width;
-					$imgUl.stop().animate({left:left}, o.speed, function(){
-						$imgUl.css("left",0);
-						$imgUl.children("li:lt("+dif+")").appendTo($imgUl);	
-					});
+				if(n>1){
+                    var index = $btnLi.index(this);
+                    $(this).addClass('cur').siblings("li").removeClass('cur');
+                    if(index >= k){
+                        var dif = index-k;
+                        left = -dif*width;
+                        $imgUl.stop().animate({left:left}, o.speed, function(){
+                            $imgUl.css("left",0);
+                            $imgUl.children("li:lt("+dif+")").appendTo($imgUl);
+                        });
+                    }
+                    else{
+                        var j = n-(k-index);
+                        $imgUl.css("left",(index-k)*width);
+                        $imgUl.children("li:lt("+j+")").appendTo($imgUl);
+                        $imgUl.stop().animate({left:0}, o.speed);
+                    }
+                    k = index;
 				}
-				else{
-					var j = n-(k-index);
-					$imgUl.css("left",(index-k)*width);
-					$imgUl.children("li:lt("+j+")").appendTo($imgUl);
-					$imgUl.stop().animate({left:0}, o.speed);	
-				}
-				k = index;
 			});	
 			$btnPreNex.click(function(){      //左右按钮点击事件
-				if($(this).hasClass('next')){
-					if(!$imgUl.is(":animated")){
-						k += 1;
-						$imgUl.animate({left:-width}, o.speed, function(){
-							$imgUl.css("left",0);
-							$imgUl.children("li:first").appendTo($(this));
-							if(k >= n){
-								k = 0;
-							}
-							$btnUl.children("li").removeClass('cur').eq(k).addClass('cur');
-						});
-					}
-				}
-				else {
-					if(!$imgUl.is(":animated")){
-						k += -1;
-						$imgUl.css("left",-width);
-						$imgUl.children("li:last").prependTo($imgUl);
-						$imgUl.stop().animate({left:0}, o.speed);
-						if(k < 0){
-							k = n-1;
-						}
-						$btnUl.children("li").removeClass('cur').eq(k).addClass('cur');
-					}
+				if(n>1){
+                    if($(this).hasClass('next')){
+                        if(!$imgUl.is(":animated")){
+                            k += 1;
+                            $imgUl.animate({left:-width}, o.speed, function(){
+                                $imgUl.css("left",0);
+                                $imgUl.children("li:first").appendTo($(this));
+                                if(k >= n){
+                                    k = 0;
+                                }
+                                $btnUl.children("li").removeClass('cur').eq(k).addClass('cur');
+                            });
+                        }
+                    }
+                    else {
+                        if(!$imgUl.is(":animated")){
+                            k += -1;
+                            $imgUl.css("left",-width);
+                            $imgUl.children("li:last").prependTo($imgUl);
+                            $imgUl.stop().animate({left:0}, o.speed);
+                            if(k < 0){
+                                k = n-1;
+                            }
+                            $btnUl.children("li").removeClass('cur').eq(k).addClass('cur');
+                        }
+                    }
 				}
 			});		
 			$banner.hover(                     //鼠标移入、移出事件

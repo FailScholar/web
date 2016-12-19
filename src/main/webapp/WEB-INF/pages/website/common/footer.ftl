@@ -8,16 +8,16 @@
             <a href="${path}/anon/about?to=3" onclick="setColumnIndex(0)" target="_blank">隐私保护</a>
         </div>
         <div class="fr">
-            <select onChange="javascript:window.open(this.options[this.selectedIndex].value)">
-                <option value="javascript:void(0)" style="background-color:#DEDEDE">金融投资机构</option>
+            <select class="footSe">
+                <option value="" style="background-color:#DEDEDE">金融投资机构</option>
                 <@indexTag.hasLink name="4"/>
             </select>
-            <select onChange="javascript:window.open(this.options[this.selectedIndex].value)">
-                <option value="javascript:void(0)" style="background-color:#DEDEDE">科技金融服务机构</option>
+            <select class="footSe">
+                <option value="" style="background-color:#DEDEDE">科技金融服务机构</option>
                 <@indexTag.hasLink name="5"/>
             </select>
-            <select onChange="javascript:window.open(this.options[this.selectedIndex].value)">
-                <option value="javascript:void(0)" style="background-color:#DEDEDE">政府科技部门</option>
+            <select class="footSe">
+                <option value="" style="background-color:#DEDEDE">政府科技部门</option>
                 <@indexTag.hasLink name="6"/>
             </select>
         </div>
@@ -26,14 +26,11 @@
         <p><span>地址：长春市人民大街7696号</span><span>邮编：130028</span><span class="fr num"><i>您是本站第</i><b id="count"><@indexTag.indexFooter/></b><i>位访客</i></span></p>
     </div>
 </div>
-<#--
-<script>
-    $.ajax({
-        url: '${path}/anon/visitorsCount',
-        type:"POST",
-        success:function(msg){
-            var json = jQuery.parseJSON(msg);
-            $("#count").text(json.count);
+<script type="application/javascript">
+    $(".footSe").change(function(){
+        var v = this.options[this.selectedIndex].value;
+        if(v!=''){
+            window.open(v)
         }
     });
-</script>-->
+</script>

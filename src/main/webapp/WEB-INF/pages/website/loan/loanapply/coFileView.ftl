@@ -19,7 +19,7 @@
                                             <#if coAll.jltfispCoFileList[0].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[0].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[0].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -36,7 +36,7 @@
                                             <#if coAll.jltfispCoFileList[1].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[1].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[1].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -53,7 +53,7 @@
                                             <#if coAll.jltfispCoFileList[2].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[2].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[2].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -70,7 +70,7 @@
                                             <#if coAll.jltfispCoFileList[3].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[3].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[3].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -87,7 +87,7 @@
                                             <#if coAll.jltfispCoFileList[4].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[4].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[4].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -104,7 +104,7 @@
                                             <#if coAll.jltfispCoFileList[5].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[5].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[5].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -121,7 +121,7 @@
                                             <#if coAll.jltfispCoFileList[6].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[6].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[6].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>
@@ -138,7 +138,7 @@
                                             <#if coAll.jltfispCoFileList[7].filepath ==''>
                                                                                                                                        未上传
                                             <#else>
-                                            ${coAll.jltfispCoFileList[7].filepath?substring(18)}
+                                            ${coAll.jltfispCoFileList[7].filepath?substring(25)}
                                             </#if>
                                         </div>
                                     </td>

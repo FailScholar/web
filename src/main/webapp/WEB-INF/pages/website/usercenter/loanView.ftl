@@ -50,8 +50,20 @@
                           <#include "website/loan/loanapply/coFinancialView.ftl"/>
                           <!--附件-->
                           <#include "website/loan/loanapply/coFileView.ftl"/>
+                          <div>
+                          	<#list applayAudits as applayAudit>
+				              	<#if (applayAudit.state == 1)>
+				              		<table class="tab2" style="width:93%;margin-top:-20px">
+				              		<tr>
+	                                  <td>审核意见</td>
+	                                  <td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
+	                                  </tr>
+	                                </table>
+				              	</#if>
+			              </#list>
+                          </div>
                           <div class="btnFld">
-                          <input type="button" value="打印输出" onclick="printdiv('${businessType}');" class="btnSave" />
+                          <input type="button" value="打印输出" onclick="printdiv('${businessType}','${infoId}');" class="btnSave" />
                           </div>
                           <br/>
                           <br/>
@@ -70,9 +82,9 @@
   </body>
   </html>
   <script type="text/javascript">
-  function printdiv(businessType)
+  function printdiv(businessType,infoId)
 {
-location.href="${path}/business/printLoanPDF?businessType="+businessType
+location.href="${path}/business/printLoanPDF?businessType="+businessType+"&infoId="+infoId
 }
   
 <!--初始化页面数据-->

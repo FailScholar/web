@@ -1,3 +1,4 @@
+<#assign path=request.contextPath />
 <div class="alptable nlistCont">
    <h1 style="width:100%; background:none">吉林省科技股权融资申请表</h1>
    <div class="clear"></div>
@@ -111,13 +112,15 @@
                             	<th>科技资质</th>
                                 <td colspan="5">
                                 	<#if jltfispCoBaseDto2.technologyqualifications==1>
-			                 	 		<span>高科技企业&nbsp;${jltfispCoBaseDto2.otherDesc}</span>
+			                 	 		<span>高科技企业</span>
 			                 		<#elseif jltfispCoBaseDto2.technologyqualifications==2>
-			                 	 		<span>科技小巨人企业&nbsp;${jltfispCoBaseDto2.otherDesc}</span>
+			                 	 		<span>科技小巨人企业</span>
 			                 		<#elseif jltfispCoBaseDto2.technologyqualifications==3>
-			                 			<span>科技小巨人培训企业&nbsp;${jltfispCoBaseDto2.otherDesc}</span>
-			                 		<#else>
-			                 	 		<span>软件企业&nbsp;${jltfispCoBaseDto2.otherDesc}</span>
+			                 			<span>科技小巨人培训企业</span>
+			                 		<#elseif jltfispCoBaseDto2.technologyqualifications==3>
+			                 	 		<span>软件企业</span>
+			                 	 	<#else>
+			                 	 		<span>其它</span>
 			                 		</#if>
 			                 	 </td>
                             </tr>
@@ -144,7 +147,7 @@
                             </tr>
                             <tr class="tal">
                                 <th>融资金额</th>
-                                <td colspan="5"><span>${jltfispFinMaterial3.capitals}</span></td>
+                                <td colspan="5"><span>${jltfispFinMaterial3.capitals}&nbsp;万元</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>对投资机构的要求</th>
@@ -165,9 +168,8 @@
                             <tr>
                                 <td colspan="6">
                                     <div class="cover cv1 fr">
-                                        <p class="ntit">公司名称：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
-                                        <p class="ntit">填&nbsp;表&nbsp;人    ：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
-                                        <p class="ntit"><span class="ml70"></span>&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;日</span></p>
+                                        <p class="ntit"><span class="ml70"></span>公司名称：<U>&nbsp;&nbsp;&nbsp;&nbsp;${user.username}&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
+                                        <p class="ntit"><span class="ml70"></span>${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
                                     </div>
                                 </td>
                             </tr>
@@ -176,8 +178,8 @@
                         
                         <p class="tip4" style="color:#d17d00">企业承诺：本企业提供上述信息真实可靠！</p>
                         <div class="logbtn" style="margin-top:30px;">
-                            <input type="submit" class="can" value="返回修改" onclick="location.href='/jltfisp_web/anon/loan/financeApply'"/>
-                            <input type="button" class="nor" value="确认提交" onclick="location.href='/jltfisp_web/anon/loan/submitFinanceApply'"/>
-                            <input type="button" class="nor" value="打印输出"  onclick="location.href='/jltfisp_web/business/printFinanceApply?businessType=6'"/>
+                            <input type="submit" class="can" value="返回修改" onclick="location.href='${path}/anon/loan/financeApply'"/>
+                            <input type="button" class="nor" value="确认提交" onclick="location.href='${path}/anon/loan/submitFinanceApply'"/>
+                            <input type="button" class="nor" value="打印输出"  onclick="location.href='${path}/business/printFinanceApply?businessType=6&infoId=${jltfispCoBaseDto2.id}'"/>
              </div>
 </div>

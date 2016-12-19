@@ -102,6 +102,14 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 		this.jltfispFinShareholderDao.deleteShareholders(id);
 		
 	}
+
+
+	@Override
+	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(
+			Integer infoId) {
+		// TODO Auto-generated method stub
+		return financeApplyDao.getJltfispFinanceAndShareholdersDtoByInfoId(infoId);
+	}
 	
 	
 }

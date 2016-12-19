@@ -65,9 +65,9 @@ public class ExpertServiceImpl implements ExpertService {
 
 	@Override
 	public int getExpertPageCount(Integer columnid) {
-		JltfispExpert  jltfispexpert = new JltfispExpert();
-		jltfispexpert.setColumnid(columnid);
-		return expertMapper.selectCount(jltfispexpert);
+		HashMap map=new HashMap();
+    	map.put("columnId", columnid);
+		return expertMapper.getExpertPageCount(map);
 	}
 
 	@Override
@@ -75,9 +75,10 @@ public class ExpertServiceImpl implements ExpertService {
 		JltfispExpert jltfispExpert=this.getExpertByUserIdAndColumnId(expert.getUserid(), expert.getColumnid());
 		if(null !=jltfispExpert){
 			expert.setId(jltfispExpert.getId());
-			expertMapper.updateByPrimaryKey(expert);
-		}
+		return	expertMapper.updateByPrimaryKey(expert);
+		}else{
 		return expertMapper.insert(expert);
+		}
 	}
 
 	@Override

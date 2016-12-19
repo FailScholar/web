@@ -37,4 +37,9 @@ public class MarketServiceImpl extends BaseServiceImpl<Market> implements IMarke
 		market.setColumnId(columnid);
 		return marketMapper.selectCount(market);
 	}
+	@Override
+	public int updateMarketPv(Integer id, Integer pv) {
+		// TODO Auto-generated method stub
+		return marketMapper.updateMarketPv(id, pv);
+	}
 }

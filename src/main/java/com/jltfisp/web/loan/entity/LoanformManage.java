@@ -1,14 +1,16 @@
 package com.jltfisp.web.loan.entity;
 
-import javax.persistence.Transient;
-
 import com.jltfisp.base.entity.BaseEntity;
+
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 
  * jltfisp_loanform_manage表
  *
  */
+@Table(name = "jltfisp_loanform_manage")
 public class LoanformManage extends BaseEntity{
 		private java.lang.String label1; // 自定义申请表label1
 		private java.lang.String label2; // 自定义申请表label2

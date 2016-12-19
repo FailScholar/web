@@ -16,11 +16,18 @@
               <!--content开始-->
              <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">合作机构</a>&gt;<a href="javascript:;">业务介绍</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/institution">${dictColumnDto.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${jltfispColumn.id})">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">业务介绍</a>
                 </div>
                 <div class="bank">
                 	<div class="bl fl">
-                		<img src="${path}${jltfispInstitutionDetail.logoFile}" class="fl" />
+                	    <img id="logoFileImg" style="width: 100px;height: 120px;"
+                            <#if jltfispInstitutionDetail.logoFile?? && jltfispInstitutionDetail.logoFile != "">
+                                  src="${path}${jltfispInstitutionDetail.logoFile}"
+                            <#else>
+                                    src="${path}/resource/images/img3.jpg" 
+                            </#if>
+                              class="fl" />
+<!--                 		<img src="${path}${jltfispInstitutionDetail.logoFile}" class="fl" /> -->
                         <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a></h1>
                     </div>
                     <div class="br fl ml57">
@@ -61,3 +68,8 @@ $(document).ready(function(e) {
   <#include "website/common/footer.ftl" />
   </body>
 </html>
+<script type="text/javascript">
+ function goBack(columnId){
+	 window.location.href="${path}/perm/institution?columnId="+columnId;
+	 }
+</script>

@@ -158,7 +158,9 @@
                   <#elseif jltfispPsMaterialInfo.cognizance==3 >
                                                国有企业
                   <#elseif jltfispPsMaterialInfo.cognizance==4>
-                                                集体企业
+                      集体企业
+                  <#elseif jltfispPsMaterialInfo.cognizance==5>
+                                               其他                          
                   </#if>
                   </td>
                   <td colspan="6">${jltfispPsMaterialInfo.meta}</td>
@@ -263,7 +265,7 @@
         });
  //
   $("#dayinshuchu").click(function(){
-	  location.href="${path}/business/printSubsidyPDF?businessType=5";
+	  location.href="${path}/business/printSubsidyPDF?businessType=5&infoId="+'${jltfispCoBaseDto.id}';
   });
  });
 </script>

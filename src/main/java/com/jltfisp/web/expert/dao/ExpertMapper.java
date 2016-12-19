@@ -13,6 +13,8 @@ public interface ExpertMapper extends BaseMapper<JltfispExpert>{
   
 	public List<JltfispExpert> getExpertPageList(Map map);
 	
+	public int getExpertPageCount(Map map);
+	
 	/**
 	 * @param 通过userid和columnid查询JltfispExpert信息
 	 * @return

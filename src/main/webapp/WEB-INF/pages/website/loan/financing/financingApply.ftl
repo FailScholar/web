@@ -41,7 +41,7 @@
                                 <th><b class="red">*</b>法人代表</th>
                                 <td><input type="text" class="txt validate[required,mixSize[2],maxSize[50]]" id="corporateRepresentative" name="corporateRepresentative" value="${jltfispCoBaseDto.corporateRepresentative}" placeholder="请输入"/></td>
                                 <th><b class="red">*</b>注册资本</th>
-                                <td><input type="text" class="txt validate[required,mixSize[2],maxSize[50]]" id="registeredCapital" name="registeredCapital" value="${jltfispCoBaseDto.registeredCapital}" placeholder="请输入"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" id="registeredCapital" name="registeredCapital" value="${jltfispCoBaseDto.registeredCapital}" placeholder="请输入"/>万元</td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>成立时间</th>
@@ -89,7 +89,7 @@
                                 <th><b class="red">*</b>邮编</th>
                                 <td><input type="text" class="txt validate[required,minSize[6],maxSize[6],custom[number]]"  id="email" name="email" value="${jltfispCoBaseDto.email}" class="txt validate[required,mixSize[6],maxSize[6]]" placeholder="请输入"/></td>
                                 <th><b class="red">*</b>职工人数</th>
-                                <td><input type="text" class="txt validate[required,mixSize[1],maxSize[10]]" id="workernumber" name="workernumber" value="${jltfispCoBaseDto.workernumber}" placeholder="请输入"/></td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[8]]" id="workernumber" name="workernumber" value="${jltfispCoBaseDto.workernumber}" placeholder="请输入"/></td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>注册地址</th>
@@ -142,7 +142,7 @@
 	                            <tr>
 	                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]"  name="jltfispFinShareholderList[0].name" placeholder="请输入" /></td>
 	                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]"  name="jltfispFinShareholderList[0].number" placeholder="请输入" /></td>
-	                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[3]]"  name="jltfispFinShareholderList[0].ratio" placeholder="请输入" /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+	                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[3]]"  name="jltfispFinShareholderList[0].ratio" placeholder="请输入" /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 	                            </tr>
                             </#if>
                         </table>
@@ -181,14 +181,15 @@
 	                                <label><input type="radio" class="validate[required]"  value="1" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==1>checked="checked"</#if>/>高科技企业</label>
 	                                <label><input type="radio" class="validate[required]"  value="2" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==2>checked="checked"</#if>/>科技小巨人企业</label>
 	                                <label><input type="radio" class="validate[required]"  value="3" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==3>checked="checked"</#if>/>科技小巨人培训企业</label>
-	                                <label><input type="radio" class="validate[required]"  value="4" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==4>checked="checked"</#if>/>软件企业</label><br/>
-                                    <div class="else">其他<input name="otherDesc" id="otherDesc" name="otherDesc" type="text" class="txt validate[maxSize[1000]]" value="${jltfispCoBaseDto.otherDesc}"/></div>
+	                                <label><input type="radio" class="validate[required]"  value="4" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==4>checked="checked"</#if>/>软件企业</label>
+	                                <label><input type="radio" class="validate[required]"  value="5" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==4>checked="checked"</#if>/>其它</label><br/>
+<!--                                     <div class="else">其他<input name="otherDesc" id="otherDesc" name="otherDesc" type="text" class="txt validate[maxSize[1000]]" value="${jltfispCoBaseDto.otherDesc}"/></div> -->
                                 </td>
                             </tr>
                         </table>
                         </form>
                         <div class="logbtn" style="margin-top:30px;">
-                        	<input type="submit" class="can" value="取消" onclick="location.href='/jltfisp_web/index'"/>	
+                        	<input type="submit" class="can" value="取消" onclick="location.href='${path}/index'"/>	
                        		<input type="button" class="nor" value="下一步" />
                         </div>
                     </div>
@@ -220,26 +221,26 @@
                             </tr>
                             <tr>
                                 <th width="8%"><b class="red">*</b>总收入</th>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]" id="incomeLast" name="incomeLast" value="${jltfispFinMaterial.incomeLast}"/>万元</td>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]" id="incomeBeforeLast" name="incomeBeforeLast" value="${jltfispFinMaterial.incomeBeforeLast}"/>万元</td>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]" id="incomeThreeLast" name="incomeThreeLast" value="${jltfispFinMaterial.incomeThreeLast}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" id="incomeLast" name="incomeLast" value="${jltfispFinMaterial.incomeLast}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" id="incomeBeforeLast" name="incomeBeforeLast" value="${jltfispFinMaterial.incomeBeforeLast}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" id="incomeThreeLast" name="incomeThreeLast" value="${jltfispFinMaterial.incomeThreeLast}"/>万元</td>
                             </tr>
                             <tr>
                                 <th width="8%"><b class="red">*</b>净利润</th>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]"  id="profitLast" name="profitLast" value="${jltfispFinMaterial.profitLast}"/>万元</td>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]"  id="profitBeforeLast" name="profitBeforeLast" value="${jltfispFinMaterial.profitBeforeLast}"/>万元</td>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]"  id="profitThreeLast" name="profitThreeLast" value="${jltfispFinMaterial.profitThreeLast}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]"  id="profitLast" name="profitLast" value="${jltfispFinMaterial.profitLast}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]"  id="profitBeforeLast" name="profitBeforeLast" value="${jltfispFinMaterial.profitBeforeLast}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]"  id="profitThreeLast" name="profitThreeLast" value="${jltfispFinMaterial.profitThreeLast}"/>万元</td>
                             </tr>
                         </table>
                         <p class="ntit">企业需求</p>
                         <table class="tab3" width="100%">
                             <tr>
                                 <th><b class="red">*</b>拟融资金额</th>
-                                <td><input type="text" class="txt validate[required,minSize[1],maxSize[20]]" id="capitals" name="capitals" value="${jltfispFinMaterial.capitals}"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" id="capitals" name="capitals" value="${jltfispFinMaterial.capitals}"/>万元</td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>对投资机构的要求</th>
-                                <td><textarea class="txta dateIcon validate[required]" style="height:40px;" id="requireOrganization" name="requireOrganization">${jltfispFinMaterial.requireOrganization}</textarea></td>
+                                <td><textarea class="txta dateIcon validate[required,minSize[1],maxSize[250]]" style="height:40px;" id="requireOrganization" name="requireOrganization">${jltfispFinMaterial.requireOrganization}</textarea></td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>服务要求</th>
@@ -248,7 +249,7 @@
 	                                <label><input type="radio" class="validate[required] " value="2" name="requireService" id="requireService" <#if jltfispFinMaterial.requireService=="2">checked="checked"</#if>/>项目洽谈会发布</label>
 	                                <label><input type="radio" class="validate[required] " value="3" name="requireService" id="requireService" <#if jltfispFinMaterial.requireService=="3">checked="checked"</#if>/>与投资机构个别洽谈</label>
                                     <div class="else" style="line-height:24px;">具体要求</div>
-                                    <textarea class="txta" style="height:40px;" id="requireServiceText" name="requireServiceText">${jltfispFinMaterial.requireServiceText}</textarea>
+                                    <textarea class="txta dateIcon validate[required,minSize[1],maxSize[250]]" style="height:40px;" id="requireServiceText" name="requireServiceText">${jltfispFinMaterial.requireServiceText}</textarea>
                                 </td>
                             </tr>
                         </table>
@@ -280,6 +281,7 @@
 <script type="text/javascript">
 	var index;
     $(document).ready(function(e) {
+    	 $("#coBase ,#finMaterial").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
         $('.proList .logbtn input.nor').click(function(){
             var index2=$(this).parents('.proList').index()-3;
             var url;
@@ -382,17 +384,6 @@
               }
         });
         
-        $.ajax({
-            type: "POST",
-            url: "${path}/anon/area",
-            dateType:"json",
-            success: function(msg){
-              for(var i=0;i<msg.length;i++){  
-                    $("#officeProv").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
-                  } 
-                  changCity($("#officeProv").val());
-              }
-        });
         
       //获取城市
         function changCity(id){

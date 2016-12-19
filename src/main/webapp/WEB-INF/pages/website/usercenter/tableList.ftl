@@ -4,8 +4,8 @@
       <th width="16.2%">企业名称</th>
       <#if t.type != '5'>
       	<th width="16.2%">融资金额/万元</th>
+      	<th>所属领域</th>
       </#if>
-      <th>所属领域</th>
       <th>申请时间</th>
       <th width="11.2%">状态</th>
       <th width="11.2%">操作</th>
@@ -17,8 +17,8 @@
       <td>${business.companyName}</td>
       <#if t.type != '5'>
       	<td>${business.loanValue}</td>
+      	<td>${business.tecName}</td>
       </#if>
-      <td>${business.tecName}</td>
       <td>${(business.submitDate?string("yyyy-MM-dd"))}</td>
       <td>
       	<#if business.state = 0>
@@ -42,11 +42,11 @@
      	</#if>
      	<a href="javascript:;" onclick="subInfo(${business.id},${business.type})" target="_blank">提交</a>
       <#elseif business.type =='5'>
-      	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}" target="_blank">查看</a>
-      <#elseif business.type =='1'>
-      	<a href="${path}/business/detail?businessType=${business.type}" target="_blank">查看</a>
+      	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}&infoId=${business.infoId}" target="_blank">查看</a>
+      <#elseif business.type !='5' &&  business.type !='6'>
+      	<a href="${path}/business/detail?businessType=${business.type}&infoId=${business.infoId}" target="_blank">查看</a>
       <#elseif business.type =='6'>
-      	<a href="${path}/business/showFinanceApplyDetail?businessType=${business.type}" target="_blank">查看</a>
+      	<a href="${path}/business/showFinanceApplyDetail?businessType=${business.type}&infoId=${business.infoId}" target="_blank">查看</a>
       </#if>
       </td>
   </tr>

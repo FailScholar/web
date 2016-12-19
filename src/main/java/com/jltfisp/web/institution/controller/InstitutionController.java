@@ -16,6 +16,8 @@ import com.jltfisp.web.institution.service.IInstitutManageService;
 import com.jltfisp.web.institution.service.InstitutionService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+import com.jltfisp.web.news.entity.DictColumnDto;
+import com.jltfisp.web.news.service.IDictColumnService;
 import com.jltfisp.web.pager.entity.PagerModel;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +61,12 @@ public class InstitutionController {
         
     @Autowired
     private FileManager fileManager;
+    
+    @Autowired
+    private ColumnService columnService;
+	
+	@Autowired
+    private IDictColumnService dictColumnService;
 
 	 /**
 	  * 
@@ -120,6 +128,10 @@ public class InstitutionController {
     @RequestMapping("/anon/getInstitutionDetail")
     public String getInstitutionDetail(HttpServletRequest request,Integer id){
     	JltfispInstitution jltfispInstitutionDetail=this.institutionService.getInstitutionDetail(id);
+    	JltfispColumn jltfispColumn  = this.columnService.getColumnById(jltfispInstitutionDetail.getColumnId());
+		DictColumnDto dictColumnDto  =this.dictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
+		request.setAttribute("jltfispColumn", jltfispColumn);
+		request.setAttribute("dictColumnDto", dictColumnDto);
     	request.setAttribute("jltfispInstitutionDetail", jltfispInstitutionDetail);
         return "/website/institution/institutionDetail";
     }

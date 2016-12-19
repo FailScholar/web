@@ -6,10 +6,10 @@
 	        <p class="tit">${policy.source }<#if policy.publishTime ??><span>${policy.publishTime ?date }</span></#if><span class="eye fr">${policy.pv }</span></p>
 	         <#if policy.contentReview ??>
                 <p>
-                	<#if policy.contentReview?length lt 80>
+                	<#if policy.contentReview?length lt 60>
 	            		${policy.contentReview}
 		            <#else>
-		            	${policy.contentReview[0..80]}...
+		            	${policy.contentReview[0..60]}...
 		            </#if>
                 </p>
              </#if>

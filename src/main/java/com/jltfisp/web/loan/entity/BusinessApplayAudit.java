@@ -16,7 +16,8 @@ public class BusinessApplayAudit extends BaseEntity{
 	private String type; // 1：保费补贴申请  2：股权融资申请  3：合作机构申请 4：服务团队申请  5：贷款申请（科技履约贷款申请、科技小巨人贷款申请、高新技术贷款申请、科技微贷通贷款申请）
 	private String auditDesc; // 审核意见
 	private Double loanValue;//贷款金额
-	private String parentType;//业务申请大类
+	private String parentType;//业务申请大类  
+	private Integer infoId; // 申请信息id
 	
 	//以下用于查询
 	private String companyId;//企业id
@@ -203,6 +204,14 @@ public class BusinessApplayAudit extends BaseEntity{
 	}
 	public void setParentType(String parentType) {
 		this.parentType = parentType;
+	}
+
+	public Integer getInfoId() {
+		return infoId;
+	}
+
+	public void setInfoId(Integer infoId) {
+		this.infoId = infoId;
 	}
 	
 	

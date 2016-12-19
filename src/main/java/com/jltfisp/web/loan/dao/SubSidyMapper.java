@@ -22,7 +22,7 @@ public interface SubSidyMapper extends BaseMapper<JltfispCoBase> {
   * @param 企业用户id
   * @return JlfispPsBaseDto
   */
- public List<JlfispPsBaseDto> getJlfispPsBaseDtoByUserId(@Param("user_id") Integer user_id);
+ public JlfispPsBaseDto getJlfispPsBaseDtoByUserId(@Param("user_id")Integer user_id,@Param("id") Integer id);
  /**
   * 根据企业基本信息Id获取保费补贴信息
   * @param id 企业基本信息

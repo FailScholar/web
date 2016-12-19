@@ -18,10 +18,25 @@
     <div class="info">
         <ul class="infoTab">
         <#list columnList as columnList>
-         <li tips="${columnList.id}">
-         	<a href="javascript:void(0);" onclick="getCapitalInfoList(${columnList.id})">${columnList.columnName}</a>
-         </li>
+       		 <#if columnList_index lt 5>
+        		 <li tips="${columnList.id}" id="columnId${columnList.id}">
+         			<a href="javascript:void(0);" onclick="getCapitalInfoList(${columnList.id})">${columnList.columnName}</a>
+         		</li>
+         	 </#if>
        </#list> 
+       <#if columnList?size gt 5>
+	            <li tips="${columnList[5].id}" id="columnId${columnList[5].id}">
+	            <a href="javascript:void(0);" style="display: none">${columnList[5].columnName}</a>
+		       	 <select id="selectId" onchange="getList()">
+		       		<option value="0">-选择更多-</option>
+		       	 	<#list columnList as afterFiveList>
+		       	 		<#if afterFiveList_index gt 4>
+		       	 			<option value="${afterFiveList.id}">&nbsp;${afterFiveList.columnName}&nbsp;</option>
+		       	 		</#if>
+		       	 	</#list>
+		       	 </select>
+	       	 </li>
+       	 </#if>
         </ul>
         <div class="clear"></div>
         </div>
@@ -40,9 +55,16 @@
 </body>
  <script type="text/javascript">
    $(function(){
-	  $("div.info ul.infoTab").find("li").eq(0).addClass("active");
-	  var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
-	  getCapitalInfoList(tips);
+	  var columnId = '${columnId}';
+	  if(columnId == ''){
+	 	 $("div.info ul.infoTab").find("li").eq(0).addClass("active");
+	 	 var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
+	 	 getCapitalInfoList(tips);
+	  }
+	  else{
+		  		$("#columnId"+columnId).addClass("active");
+		  		getCapitalInfoList(columnId);
+		}
    });
 
 	//分页--根据页数查询
@@ -52,6 +74,7 @@
    
    //获取子栏目内容列表
    function getCapitalInfoList(columnId){
+	   $("#selectId").val("0");
          $.ajax({
 			  type : "post",
 			  url : '${path}/perm/capital/'+columnId,
@@ -62,6 +85,21 @@
 			  }
 		});
 	}
+
+	function getList(){
+		  var columnId = $('select option:selected').val();
+		  if(columnId!=0){
+			  $.ajax({
+				  type : "post",
+				  url : '${path}/perm/capital/'+columnId,
+				  data:{"columnId":columnId,'pager.offset': 0},
+				  dataType : "html",
+				  success:function(data){
+					$(".infoList").html(data);//要刷新的div
+				  }
+			});
+		  }
+		}
 
 	//获取详细内容
 	function getCapitalDetail(newsId){

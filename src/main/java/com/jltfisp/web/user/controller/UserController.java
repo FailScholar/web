@@ -9,12 +9,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.jltfisp.email.EmailService;
-import com.jltfisp.login.entity.JltfispAdmin;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
-import com.jltfisp.util.captcha.Randoms;
-import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.shiro.AuthorizingRealm;
 import com.jltfisp.web.user.service.UserService;
 
 import org.apache.shiro.SecurityUtils;
@@ -37,6 +34,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+	private AuthorizingRealm authorizingRealm;
     
     @RequestMapping("/toResetPage")
     public String toResetPage() {
@@ -59,8 +58,8 @@ public class UserController {
     public String updateUser(JltfispUser user) {
     	userService.updateByPKSelective(user);
     	JltfispUser user1 = loginService.getCurrentUser();
-    	SecurityUtils.getSubject().getSession().removeAttribute("user");
-    	SecurityUtils.getSubject().getSession().setAttribute("user", user1);
+    	//清除缓存
+        authorizingRealm.clearUserCache(user1.getAccountNumber());
     	return "redirect:../main";
     }
     
@@ -90,6 +89,8 @@ public class UserController {
         }
     	int i = userService.updateByPKSelective(user);
     	userService.updateUserByAccountNumber("", user.getAccountNumber());
+    	//清除缓存
+        authorizingRealm.clearUserCache(loginService.getCurrentUser().getAccountNumber());
     	return i;
     }
 }

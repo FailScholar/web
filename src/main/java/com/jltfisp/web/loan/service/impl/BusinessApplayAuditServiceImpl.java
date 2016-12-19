@@ -75,36 +75,68 @@ public class BusinessApplayAuditServiceImpl extends
     
     @Override
     public int checkApplyFour(Integer userId) {
-        BusinessApplayAudit business1 = businessApplayAuditMapper
-                .checkApply(userId, "1");
-        BusinessApplayAudit business2 = businessApplayAuditMapper
-                .checkApply(userId, "2");
-        BusinessApplayAudit business3 = businessApplayAuditMapper
-                .checkApply(userId, "3");
-        BusinessApplayAudit business4 = businessApplayAuditMapper
-                .checkApply(userId, "4");
+        List<BusinessApplayAudit> business1 = businessApplayAuditMapper
+                .getLoanBusinessByThreeParamsList(userId, "1","1");
+        List<BusinessApplayAudit> business2 = businessApplayAuditMapper
+                .getLoanBusinessByThreeParamsList(userId, "2","1");
+        List<BusinessApplayAudit> business3 = businessApplayAuditMapper
+                .getLoanBusinessByThreeParamsList(userId, "3","1");
+        List<BusinessApplayAudit> business4 = businessApplayAuditMapper
+                .getLoanBusinessByThreeParamsList(userId, "4","1");
         int flag=0;
         if(business1!=null){
-        if(business1.getState()==0 || business1.getState()==1){
+        for (BusinessApplayAudit s:business1){
+        if(s.getState()==0){ //0代表该信息已提交未审核
         	flag=1;
         }
+        	}
         }
         if(business2!=null){
-        if(business2.getState()==0 || business2.getState()==1){
+        for (BusinessApplayAudit s:business2){
+        if(s.getState()==0){//0代表该信息已提交未审核
         	flag=1;
+        }
         }
         }
         if(business3!=null){
-        if(business3.getState()==0 || business3.getState()==1){
+        for (BusinessApplayAudit s:business3){
+        if(s.getState()==0){//0代表该信息已提交未审核
         	flag=1;
+        }
         }
         }
         if(business4!=null){
-        if(business4.getState()==0 || business4.getState()==1){
+        for (BusinessApplayAudit s:business4){
+        if(s.getState()==0){//0代表该信息已提交未审核
         	flag=1;
         }
         }
+        }
         return flag;
+    }
+    
+    
+    @Override
+    public int checkApplyOne(Integer userId,String type) {
+        List<BusinessApplayAudit> business = businessApplayAuditMapper
+                .getLoanBusinessByThreeParamsList(userId, type,"1");
+        int flag=0;
+        if(business!=null){
+        for (BusinessApplayAudit s:business){	
+        if(s.getState()==0){ //0代表该信息已提交未审核
+        	flag=1;
+        }
+        }
+        }
+        return flag;
+    }
+    
+    
+    @Override
+    public BusinessApplayAudit selectBusinessByStatusAndUserIdAndParentType(Integer userId,String type,String parentType,String state) {
+    	BusinessApplayAudit business = businessApplayAuditMapper
+                .getLoanBusinessByFourParams(userId, type,parentType,state);
+        return business;
     }
 
     @Override
@@ -131,12 +163,13 @@ public class BusinessApplayAuditServiceImpl extends
         return businessApplayAuditMapper.getBusinessApplayAudit(userId, parentType,
                 state);
     }
+    
+
 
 	@Override
-	public JltfispCoFillInApply getCoFillInApplyContext(int userid,
-			int applyType) {
+	public JltfispCoFillInApply getCoFillInApplyContext(int info_id) {
 		// TODO Auto-generated method stub
-		return coFillInApplyMapper.getCoFillInApplyContext(userid, applyType);
+		return coFillInApplyMapper.getCoFillInApplyContext(info_id);
 	}
 
 	@Override
@@ -153,4 +186,18 @@ public class BusinessApplayAuditServiceImpl extends
 	public void updateMoneyByUserIdAndType(Integer userId,String type,Double money) {
 		businessApplayAuditMapper.updateMoneyByUserIdAndType(userId,type,money);
 	}
+
+	@Override
+	public BusinessApplayAudit getBusinessApplayAuditByUserIdAndInfoIdAndType(
+			Integer userId, Integer infoId, int Type) {
+		return businessApplayAuditMapper.getBusinessApplayAuditByUserIdAndInfoIdAndType(userId,infoId,Type);
+	}
+
+	@Override
+	public void updateInfoIdById(Integer id,Integer infoId) {
+		businessApplayAuditMapper.updateInfoIdById(id,infoId);
+		
+	}
+	
+	
 }

@@ -16,7 +16,7 @@
               <!--content开始-->
              <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-1);">贷款服务</a>&gt;<a href="javascript:;">申请须知</a>
                 </div>
                 <div class="calt">
                     <h2>申请须知</h2>
@@ -25,7 +25,7 @@
 					</p>
                 </div>
                 <div style="text-align:center;">
-				<input type="button" id="accept" style="color:#ffffff;width:100px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#1679ff" 
+				<input type="button" id="accept" style="color:#ffffff;width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#1679ff" 
 					 value="返回" onclick="javascript:history.go(-1);">
            		</div>
             </div>

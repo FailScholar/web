@@ -36,7 +36,7 @@
                     <p>保费补贴申请</p>
                     <div class="clear"></div>
       <div class="nlistCont" id="printDiv">
-          <p class="ntit">申请信息一览</p>
+          <p class="ntit" style="text-align:center">申请信息预览</p>
           <table class="tab2" style="width:80%">
               <tbody>
               <tr class="tal">
@@ -47,7 +47,7 @@
               </tr>
               <tr class="tal">
                   <th>经营地址</th>
-                  <td colspan="5">${ jltfispCoBaseDto.officeProv}${jltfispCoBaseDto.officeCity!''}${ jltfispCoBaseDto.officeArea!''}${jltfispCoBaseDto.officeAddress!''}</td>
+                  <td colspan="5">${ jltfispCoBaseDto.officeProv!''}${jltfispCoBaseDto.officeCity!''}${ jltfispCoBaseDto.officeArea!''}${jltfispCoBaseDto.officeAddress!''}</td>
                   <th>注册地址</th>
                   <td colspan="3">${jltfispCoBaseDto.registeredAddress!''}</td>
               </tr>
@@ -71,7 +71,7 @@
                   <th>联系人</th>
                   <td colspan="2">${jltfispCoBaseDto.linkMan!''}</td>
                   <th>手机</th>
-                  <td colspan="2">${jltfispCoBaseDto.linkMobile!''}</td>
+                  <td colspan="2">${jltfispCoBaseDto.mobilephone!''}</td>
                   <th>Email</th>
                   <td colspan="3">${jltfispCoBaseDto.email!''}</td>
               </tr>
@@ -165,6 +165,7 @@
                   <td>${jltfispPsMaterialInfo.icLast!''}</td>
                   <td>${jltfispPsMaterialInfo.softwareLast!''}</td>
                   <td>${jltfispPsMaterialInfo.softwaresLast!''}</td>
+                  <td></td>
                   <td colspan="2">${jltfispPsMaterialInfo.knowledgeLast!''}</td>
               </tr>
               <tr>
@@ -175,6 +176,7 @@
                   <td>${jltfispPsMaterialInfo.icThis!''}</td>
                   <td>${jltfispPsMaterialInfo.softwareThis!''}</td>
                   <td>${jltfispPsMaterialInfo.softwaresThis!''}</td>
+                  <td></td>
                   <td colspan="2">${jltfispPsMaterialInfo.knowledgeThis!''}</td>
               </tr>
               <tr>
@@ -185,7 +187,19 @@
                   <th colspan="6">新获政府项目资助情况名称和资助金额</th>
               </tr>
               <tr>
-                  <td colspan="4">${jltfispPsMaterialInfo.cognizanceValue!''}</td>
+                  <td colspan="4">
+                  	<#if (jltfispPsMaterialInfo??&&jltfispPsMaterialInfo.cognizance??)>
+                  		<#if (jltfispPsMaterialInfo.cognizance==1)>
+                  			私营企业
+                  		<#elseif (jltfispPsMaterialInfo.cognizance==2)>
+                  			中外合资企业
+                  		<#elseif (jltfispPsMaterialInfo.cognizance==3)>
+                  			国有企业
+                  		<#else>
+                  			集体企业
+                  		</#if>
+                  	</#if>
+                  </td>
                   <td colspan="6">${jltfispPsMaterialInfo.meta!''}</td>
               </tr>
               <tr>
@@ -194,10 +208,15 @@
               <tr class="tal">
                   <td colspan="10">以上信息全部真实有效</td>
               </tr>
-              <tr class="tal">
+              <tr class="tal" style="height:100px;">
                   <td colspan="3">单位（公章）</td>
                   <td colspan="3">法定代表人（签名盖章）</td>
                   <td colspan="4">企业基本户三排章</td>
+              </tr>
+               <tr class="tal">
+                  <td colspan="3"></td>
+                  <td colspan="3"></td>
+                  <td colspan="4">${jltfispCoBaseDto.basicAccountBank!''}&nbsp;${jltfispCoBaseDto.basicAccountName!''}&nbsp;${jltfispCoBaseDto.basicAccountCard!''}</td>
               </tr>
               </tbody>
           </table>

@@ -4,9 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,19 +55,6 @@ public class FinanceApplyController {
 	public String finaApply(HttpServletRequest request) {
 	    //获取当前用户登录信息
 	    JltfispUser user=loginService.getCurrentUser();
-	    List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
-		for(int i=0;i<businessApplayAuditList.size();i++){
-			  if(businessApplayAuditList.get(i).getState()==0)
-			  {
-				  request.setAttribute("failMes", "您的股权融资申请正在审核中");
-				  return "/website/loan/financing/fail";
-			  }
-			  else if(businessApplayAuditList.get(i).getState()==1)
-			  {
-				  request.setAttribute("failMes", "您已经申请了股权融资申请");
-				  return "/website/loan/financing/fail";
-			  }
-		  }
 	    
 	    JltfispFinanceAndShareholdersDto jltfispCoBaseDto = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
 	    if(jltfispCoBaseDto!=null){
@@ -77,22 +62,13 @@ public class FinanceApplyController {
 	    	request.setAttribute("jltfispFinMaterial", jltfispFinMaterial);
 	    	String createTime = jltfispCoBaseDto.getCreateTime();
 	    	if(createTime!=null){
-		    	String year2 = createTime.substring(0, 4);//获取年份
-		    	String month = createTime.substring(5, 7); //获取月份
-		    	String date = createTime.substring(8, 10);//获取日期
-		    	int year = Integer.parseInt(year2);
+		    	int year = Integer.parseInt(createTime.substring(0, 4));//获取年份
 		    	request.setAttribute("year", year);
-		    	request.setAttribute("month", month);
-		    	request.setAttribute("date", date);
 	    	}
 	    	 else{
 		   		 Calendar cal = Calendar.getInstance();  
 		   		 int year =cal.get(Calendar.YEAR);  
-		   		 int month =  cal.get(Calendar.MONTH) + 1;  
-		   		 int date = cal.get(Calendar.DAY_OF_MONTH); 
 		   		 request.setAttribute("year", year);
-		         request.setAttribute("month", month);
-		    	 request.setAttribute("date", date);
 		   	}
 	    	List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
 	    	shareholderList=this.financeApplyService.getShareholderlistByInfoId(jltfispCoBaseDto.getId());
@@ -102,7 +78,11 @@ public class FinanceApplyController {
 	    		request.setAttribute("shareholderListSize", shareholderListSize);
 	    	}
 	    }
-	   
+	    else{
+	   		 Calendar cal = Calendar.getInstance();  
+	   		 int year =cal.get(Calendar.YEAR);  
+	   		 request.setAttribute("year", year);
+	   	}
 	    request.setAttribute("user", user);
 	    request.setAttribute("jltfispCoBaseDto", jltfispCoBaseDto);
 	    return "/website/loan/financing/financingApply";
@@ -120,11 +100,32 @@ public class FinanceApplyController {
 	  @RequestMapping("/financeKnow")
 	  public String financeKnow(HttpServletRequest request) {
 		  JltfispUser user=loginService.getCurrentUser();
-		  int userType = user.getType();
-		  request.setAttribute("userType", userType);
+		  if(user.getType()==1){
+			  request.setAttribute("failMes", "对不起，个人用户不能申请股权融资贷款服务");
+			  return "/website/loan/financing/fail";
+		  }
+		  if(user.getType()==2){
+			List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
+			for(int i=0;i<businessApplayAuditList.size();i++){
+				if(businessApplayAuditList.get(i).getState()==0)
+				{
+					request.setAttribute("failMes", "对不起，您的股权融资申请正在审核中");
+					return "/website/loan/financing/fail";
+				}
+			}
+		  }
 	      return "/website/loan/financeGuideApply";
 	  }
 	  
+	  /**
+	   * 
+	   * @description 申请须知，不跳转
+	   * @author chenyun
+	   * @date 2016年12月14日 上午8:48:57 
+	   * @param @param request
+	   * @param @return
+	   * @return String
+	   */
 	  @RequestMapping("/financeKnow2")
 	  public String financeKnowNoApply(HttpServletRequest request) {
 		  JltfispUser user=loginService.getCurrentUser();
@@ -146,8 +147,8 @@ public class FinanceApplyController {
 	  @ResponseBody
 	  public void saveFinanceBasicInfo(HttpServletRequest request,JltfispFinanceAndShareholdersDto jltfispCoBaseDto){
 	    	JltfispUser user=loginService.getCurrentUser();
-	    	/**根据用户id和业务类型6获取原来是否有股权融资申请填写的内容**/
-		    JltfispCoBase jltfispCoBase = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
+	    	JltfispFinanceAndShareholdersDto jltfispCoBaseDto0 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);//判断原来是否填写过股权融资申请
+//		    JltfispCoBase jltfispCoBase = this.financeApplyService.getJltfispCoBaseInfo(user.getId());//判断原来是否填写过股权融资申请
 		    JltfispCoBase jltfispCoBase2 = new JltfispCoBase();//用来存放现有信息
 		    Calendar cal = Calendar.getInstance();  
 		    Date tasktime=cal.getTime();  
@@ -184,14 +185,15 @@ public class FinanceApplyController {
 		    jltfispCoBase2.setTechnologyqualifications(jltfispCoBaseDto.getTechnologyqualifications());
 		    jltfispCoBase2.setOtherDesc(jltfispCoBaseDto.getOtherDesc());
 		    jltfispCoBase2.setBusinesstype(6);
-		    if(jltfispCoBase!=null){
-			    /**更新jltfispCoBase表**/
-		    	JltfispFinMaterial jltfispFinMaterial = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBase.getId());
-		    	this.financeApplyService.deleteBase(jltfispCoBase.getId());
-		    	this.financeApplyService.deleteShareholders(jltfispCoBase.getId());
+		    jltfispCoBase2.setApplystate(0);
+		    if(jltfispCoBaseDto0!=null){//修改
+		    	JltfispFinMaterial jltfispFinMaterial = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto0.getId());
+		    	this.financeApplyService.deleteBase(jltfispCoBaseDto0.getId());
+		    	this.financeApplyService.deleteShareholders(jltfispCoBaseDto0.getId());
 		    	this.financeApplyService.addCoBase(jltfispCoBase2);
-		    	JltfispCoBase jltfispCoBase3 = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
-		    	if(jltfispFinMaterial!=null){
+		    	JltfispFinanceAndShareholdersDto jltfispCoBase3 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
+//		    	JltfispCoBase jltfispCoBase3 = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
+		    	if(jltfispFinMaterial!=null){//修改
 		    		this.financeApplyService.updateCoBaseAndMaterial(jltfispCoBase3.getId(),jltfispFinMaterial.getId());
 		    	}
 		    	if(jltfispCoBaseDto.getJltfispFinShareholderList()!=null){
@@ -199,19 +201,24 @@ public class FinanceApplyController {
 		    			if(jltfispCoBaseDto.getJltfispFinShareholderList().get(i)!=null){
 		    				jltfispCoBaseDto.getJltfispFinShareholderList().get(i).setFinancingId(jltfispCoBase2.getId());
 		    				this.financeApplyService.addShareholders(jltfispCoBaseDto.getJltfispFinShareholderList().get(i));
+		    			}
 		    		}
 		    	}
+		    	BusinessApplayAudit businessApplayAudit= this.businessApplayAuditService.getBusinessApplayAuditByUserIdAndInfoIdAndType(user.getId(),jltfispCoBaseDto0.getId(),6);
+		    	if(businessApplayAudit!=null){
+		    		this.businessApplayAuditService.updateInfoIdById(businessApplayAudit.getId(),jltfispCoBase3.getId());
 		    	}
+		    	
 		    }
-		    else{
+		    else{//新增
 		    	this.financeApplyService.addCoBase(jltfispCoBase2);
 		    	if(jltfispCoBaseDto.getJltfispFinShareholderList()!=null){
 		    		for(int i=0;i<jltfispCoBaseDto.getJltfispFinShareholderList().size();i++){
 		    			if(jltfispCoBaseDto.getJltfispFinShareholderList().get(i)!=null){
 		    				jltfispCoBaseDto.getJltfispFinShareholderList().get(i).setFinancingId(jltfispCoBase2.getId());
 		    				this.financeApplyService.addShareholders(jltfispCoBaseDto.getJltfispFinShareholderList().get(i));
+		    			}
 		    		}
-		    	}
 		    	}
 		    }
 	  }
@@ -230,14 +237,15 @@ public class FinanceApplyController {
 		  ModelAndView mv=new ModelAndView("/website/loan/financing/financeLast");	
 		  JltfispUser user=loginService.getCurrentUser();
 		  request.setAttribute("user", user);
-		  JltfispCoBase jltfispCoBase = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
+		  JltfispFinanceAndShareholdersDto jltfispCoBase = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
+//		  JltfispCoBase jltfispCoBase = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
 		  int infoId=jltfispCoBase.getId();//关联关系Id
 	      JltfispFinMaterial jltfispFinMaterial2 = this.financeApplyService.getJltfispFinMaterialInfo(infoId);
-	      if(jltfispFinMaterial2!=null){
+	      if(jltfispFinMaterial2!=null){//修改
 	    	this.financeApplyService.deleteFinMaterial(infoId);
 	      }
 	      jltfispFinMaterial.setInfoId(infoId);
-	      double money=jltfispFinMaterial.getCapitals();
+	      double money=jltfispFinMaterial.getCapitals();//融资金额插入审核表
 	      this.financeApplyService.addFinMaterial(jltfispFinMaterial);
 	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
 	      String createTime = jltfispCoBaseDto2.getCreateTime();
@@ -261,11 +269,11 @@ public class FinanceApplyController {
 		   	}
 	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto2.getId());
 	      request.setAttribute("jltfispFinMaterial3", jltfispFinMaterial3);
-		  JltfispArea  JltfispArea1= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv());
+		  JltfispArea  JltfispArea1= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv());//省
 		  String provName= JltfispArea1.getName();
-		  JltfispArea  JltfispArea2= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeCity());
+		  JltfispArea  JltfispArea2= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeCity());//市
 		  String cityName= JltfispArea2.getName();
-		  JltfispArea  JltfispArea3= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeArea());
+		  JltfispArea  JltfispArea3= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeArea());//区
 		  String areaName= JltfispArea3.getName();
 		  request.setAttribute("provName", provName);
 		  request.setAttribute("cityName", cityName);
@@ -276,24 +284,31 @@ public class FinanceApplyController {
 	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      }
 	      mv.addObject("jltfispCoBaseDto2", jltfispCoBaseDto2);
-	      List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
 	      BusinessApplayAudit businessApplyAudit=new BusinessApplayAudit();
 	 	  businessApplyAudit.setUserId(user.getId());
 	 	  businessApplyAudit.setSubmitDate(new Date());
 	 	  businessApplyAudit.setState(3);
 	 	  businessApplyAudit.setLoanValue(money);
 	 	  businessApplyAudit.setType("6");
-		  if(businessApplayAuditList==null){
+	 	  businessApplyAudit.setInfoId(jltfispCoBaseDto2.getId());
+	 	  businessApplyAudit.setParentType("1");
+	 	  List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
+		  if(businessApplayAuditList.size()==0){
 		 	  businessApplayAuditService.insertRecord(businessApplyAudit);
 		  }
 		  else{
-			  BusinessApplayAudit businessApplyAudit2= this.businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(),"6");
-			  if(businessApplyAudit2==null){
+			  int stateType=2;//2申请不通过或者申请通过,3未提交；（0申请中的在进入申请时已过滤）
+			  for(int i=0;i<businessApplayAuditList.size();i++){
+				  if(businessApplayAuditList.get(i).getState()==3){
+					  stateType=3;
+					  break;
+				  }
+			  }
+			  if(stateType==2){//有申请不通过或者申请通过，保留原来记录，插入一条新的申请记录
 				  businessApplayAuditService.insertRecord(businessApplyAudit);
 			  }
 			  else{
 				  this.businessApplayAuditService.updateMoneyByUserIdAndType(user.getId(),"6",money);
-				  this.businessApplayAuditService.updateBusinessApplayAuditByUserIdAndType(user.getId(),"6",3);
 			  }
 		  }
 	      return  mv;

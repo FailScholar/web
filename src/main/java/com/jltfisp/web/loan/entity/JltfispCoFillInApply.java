@@ -44,6 +44,12 @@ public class JltfispCoFillInApply {
     private String historyState;
     
     /**
+     * 企业基本信息ID
+     */
+    @Column(name = "info_id")
+    private int infoid;
+    
+    /**
      * 是否续贷 
      */
     @Column(name = "continueloan")
@@ -334,6 +340,14 @@ public class JltfispCoFillInApply {
 
 	public void setContinueloan(String continueloan) {
 		this.continueloan = continueloan;
+	}
+
+	public int getInfoid() {
+		return infoid;
+	}
+
+	public void setInfoid(int infoid) {
+		this.infoid = infoid;
 	}
 
 }

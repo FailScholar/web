@@ -87,7 +87,7 @@
 	  $.ajax({
 	                  type: 'POST',
 	                  url:'${path}/perm/policy/'+columnId,
-	                  data: {columnId: ${columnId},'pager.offset':offset},
+	                  data: {columnId: columnId,'pager.offset':offset},
 	                  success: function (data) {
 	                  $('.infoList').html(data);
 	                  }

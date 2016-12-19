@@ -11,7 +11,6 @@ import com.jltfisp.web.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 import java.util.Set;
@@ -26,13 +25,6 @@ import java.util.Set;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
-
-    @Override
-    public List<JltfispUser> getAllUserEmailAndName() {
-        Example example = new Example(JltfispUser.class);
-        example.createCriteria().andCondition("is_delete=0").andCondition("state=1");
-        return userMapper.selectByExample(example);
-    }
 
 	@Override
 	public int updateByPKSelective(JltfispUser user) {

@@ -8,4 +8,6 @@ public interface ILoanformManageService extends IBaseService<LoanformManage>{
 	public Integer selectMaxCode();
 	public int deleteLoanform(Integer id,Integer type);
 	public int saveLoanform(SysDict sys,LoanformManage t);
+
+	LoanformManage queryManage(Integer id);
 }

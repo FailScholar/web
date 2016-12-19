@@ -14,4 +14,7 @@ public interface ColumnMapper extends BaseMapper<JltfispColumn>{
 	
 	@Select("select * from jltfisp_column_manage where  parentColumn=#{0}  and isdelete=1 order by columnNo")
 	List<JltfispColumn> selectSubColumn(Integer parentColumnid);
+
+	@Select("select * from jltfisp_column_manage where  id=#{id}")
+	JltfispColumn getColumnById(Integer id);
 }

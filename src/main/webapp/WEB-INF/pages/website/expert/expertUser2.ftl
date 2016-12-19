@@ -17,7 +17,7 @@
             <!--content开始-->
                 <div class="content">
                     <div class="bread">
-                        <a href="javascript:;">首页</a>&gt;<a href="javascript:;">专家资源</a>&gt;<a href="javascript:;">在线申请</a>
+                        <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-2);">专家资源</a>&gt;<a href="${path}/perm/expert?columnId=${columnId}&isFrontPage=1">${columnName}</a>&gt;<a href="javascript:;">在线申请</a>
                     </div>
                     <div class="calt">
                         <div class="proList nli">
@@ -37,7 +37,7 @@
                                             <#else>
                                             <img width="110px" id="portrait" name="portrait" height="110px" src="${path}/resource/images/blank.png" class="fl" />
                                             </#if>
-                                            <span class="notice fr">建议尺寸110px*110px<br />上传大小不超过320K<br />支持JPG</span>
+                                            <span class="notice fr">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
                                             <div class="clear"></div>
                                             <div class="btnUp fl">
                                                  <input type="file" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
@@ -61,14 +61,14 @@
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label4}</th>
-                                        <td><input type="text" value="<#if jltfispExpert.birthday?date != "">${jltfispExpert.birthday?date}</#if>" id="birthday" onClick="WdatePicker()" name="birthday" class="txt validate[required]" placeholder="请输入" /></td>
+                                        <td><input type="text" value="<#if jltfispExpert.birthday?exists>${jltfispExpert.birthday?date}</#if>" id="birthday" onClick="WdatePicker()" name="birthday" class="txt validate[required]" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
 
                                         <th><b class="red">*</b>${finExpertManage.label5}</th>
                                         <td>
                                             <select name="degree" id="degree" class="validate[required]">
-                                                <option>请选择</option>
+                                                <option value="">请选择</option>
                                                 <option value="1">博士</option>
                                                 <option value="2">硕士</option>
                                                 <option value="3">学士</option>
@@ -77,13 +77,13 @@
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label6}</th>
-                                        <td colspan="3"><input value="${jltfispExpert.workcompany}" name="workcompany" id="workcompany" type="text" class="txt validate[required,maxSize[1000]]" placeholder="请输入" /></td>
+                                        <td colspan="3"><input value="${jltfispExpert.workcompany}" name="workcompany" id="workcompany" type="text" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label7}</th>
                                         <td>
                                             <select name="technologydomain" id="technologydomain" class="validate[required]">
-                                                <option>请选择</option>
+                                                <option value="">请选择</option>
                                                 <option value="1">信贷</option>
                                                 <option value="2">上市辅导</option>
                                                 <option value="3">投资咨询</option>
@@ -94,15 +94,15 @@
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label8}</th>
-                                        <td><input value="${jltfispExpert.workpost}" name="workpost" id="workpost" type="text" class="txt validate[required,maxSize[1000]]" placeholder="请输入" /></td>
+                                        <td><input value="${jltfispExpert.workpost}" name="workpost" id="workpost" type="text" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
                                         <th><b class="red">*</b>${finExpertManage.label9}</th>
-                                        <td><input value="${jltfispExpert.worktitle}" name="worktitle" id="worktitle"  type="text" class="txt validate[required,maxSize[1000]]" placeholder="请输入" /></td>
+                                        <td><input value="${jltfispExpert.worktitle}" name="worktitle" id="worktitle"  type="text" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label10}</th>
                                         <td><input value="${jltfispExpert.fax}" name="fax" id="fax" type="text" class="txt validate[required,custom[fax],minSize[6],maxSize[30]]" placeholder="请输入" /></td>
                                         <th><b class="red">*</b>${finExpertManage.label11}</th>
-                                        <td><input value="${jltfispExpert.postcode}" name="postcode" id="postcode validate[custom[number]]" type="text" class="txt" placeholder="请输入" /></td>
+                                        <td><input value="${jltfispExpert.postcode}" name="postcode" id="postcode" type="text" class="txt validate[required,custom[chinaZip]]" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label12}</th>
@@ -113,19 +113,19 @@
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label14}</th>
                                         <td colspan="3">
-                                            <input value="${jltfispExpert.mainaddress}" name="mainaddress" id="mainaddress" type="text" class="txt validate[required,maxSize[1000]]" placeholder="主要工作地" />
+                                            <input value="${jltfispExpert.mainaddress}" name="mainaddress" id="mainaddress" type="text" class="txt validate[required,maxSize[255]]" placeholder="主要工作地" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label15}</th>
                                         <td colspan="3">
-                                            <input value="${jltfispExpert.postaladdress}" name="postaladdress" id="postaladdress" type="text" class="txt validate[required,maxSize[1000]]" placeholder="通讯地址" />
+                                            <input value="${jltfispExpert.postaladdress}" name="postaladdress" id="postaladdress" type="text" class="txt validate[required,maxSize[255]]" placeholder="通讯地址" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label16}</th>
                                         <td colspan="3">
-                                            <input value="${jltfispExpert.businesaddress}" name="businesaddress" id="businesaddress" type="text" class="txt validate[required,maxSize[1000]]" placeholder="办公地址" />
+                                            <input value="${jltfispExpert.businesaddress}" name="businesaddress" id="businesaddress" type="text" class="txt validate[required,maxSize[255]]" placeholder="办公地址" />
                                         </td>
                                     </tr>
                                     <tr>

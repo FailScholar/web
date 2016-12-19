@@ -101,7 +101,7 @@ public class ImageScreenshotController {
         Map<String, Object> map = new HashMap<String, Object>();
         UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "uploadFile");
         String fileName = uploadFile.getFileName();
-        if (StringUtils.isNotBlank(fileName) && fileName.endsWith(".jpg")) {
+        if (StringUtils.isNotBlank(fileName) && (fileName.endsWith(".jpg") || fileName.endsWith(".gif") || fileName.endsWith(".png") || fileName.endsWith(".jpeg"))) {
             byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
             String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName());
             BufferedImage image = ImageUtils.readImage(uploadFile.getFile().getAbsolutePath());
@@ -112,7 +112,7 @@ public class ImageScreenshotController {
                 map.put("height", image.getHeight() + "");
             }
         } else {
-        	String message= "请选择.jpg格式的图片上传";
+        	String message= "请选择.jpg,.gif,.png,.jpeg格式的图片上传";
             map.put("message", message);
         }
         map.put("result", result);

@@ -59,7 +59,7 @@
                   <th>联系人</th>
                   <td colspan="2">${jltfispCoBaseDto.linkMan}</td>
                   <th>手机</th>
-                  <td colspan="2">${jltfispCoBaseDto.linkMobile }</td>
+                  <td colspan="2">${jltfispCoBaseDto.mobilephone }</td>
                   <th>Email</th>
                   <td colspan="3">${jltfispCoBaseDto.email }</td>
               </tr>
@@ -182,6 +182,8 @@
                                                国有企业
                   <#elseif jltfispPsMaterialInfo.cognizance==4>
                                                 集体企业
+                  <#elseif jltfispPsMaterialInfo.cognizance==5>
+                                               其他
                   </#if>
                   </td>
                   <td colspan="6">${jltfispPsMaterialInfo.meta}</td>
@@ -197,10 +199,23 @@
                   <td colspan="3">法定代表人（签名盖章）</td>
                   <td colspan="4">企业基本户三排章</td>
               </tr>
+              <tr class="tal">
+                  <td colspan="3"></td>
+                  <td colspan="3"></td>
+                  <td colspan="4">${jltfispCoBaseDto.basicAccountBank}&nbsp;${jltfispCoBaseDto.basicAccountName}&nbsp;${jltfispCoBaseDto.basicAccountCard}</td>
+              </tr>
+              <#list applayAudits as applayAudit>
+	              	<#if (applayAudit.state == 1)>
+		              	<tr>
+		              		<td>审核意见</td>
+		              		<td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
+		              	</tr>
+	              	</#if>
+              </#list>
               </tbody>
           </table>
           <div class="btnFld">
-              <input type="button" class="btnSave" value="打印输出" onclick="printdiv()"/>
+              <input type="button" class="btnSave" value="打印输出" onclick="printdiv('${infoId}')"/>
           </div>
       </div>
                       <!--完成-->
@@ -219,8 +234,8 @@
 </body>
 </html>
 <script>
-	  function printdiv()
+	  function printdiv(infoId)
 {
-location.href="${path}/business/printSubsidyPDF?businessType=5"
+location.href="${path}/business/printSubsidyPDF?businessType=5&infoId="+infoId
 }
 </script>

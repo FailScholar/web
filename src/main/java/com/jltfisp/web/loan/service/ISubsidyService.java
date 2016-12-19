@@ -3,6 +3,7 @@ package com.jltfisp.web.loan.service;
 import java.util.List;
 
 import com.jltfisp.web.loan.entity.JlfispPsBaseDto;
+import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
 import com.jltfisp.web.loan.entity.JltfispPsInfo;
 import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
 import com.jltfisp.web.loan.entity.JltfispSubsidyCoBaseDto;
@@ -18,7 +19,7 @@ public interface ISubsidyService {
      * @param id 用户id
      * @return JlfispPsBaseDto
      */
-	public JlfispPsBaseDto getJlfispPsBaseDtoByUserId(Integer id);
+	public JlfispPsBaseDto getJlfispPsBaseDtoByUserId(Integer userId,Integer id);
 	
 	/**
      * 保存保费补贴
@@ -53,4 +54,10 @@ public interface ISubsidyService {
      */
 	public JltfispPsMaterialInfo getJltfispPsMaterialInfoByInfoId(int id);
 	JltfispPsMaterialInfo selectByPk(Integer id);
+	/**
+	 * 新增或者修改企业基本信息
+	 * @param jlfispSubsidyBaseDto
+	 * @return JltfispCoBaseDto
+	 */
+	public JltfispCoBaseDto addOrUpdatejltfispCoBaseDto(Integer userId,JltfispCoBaseDto jlfispSubsidyBaseDto);
 }

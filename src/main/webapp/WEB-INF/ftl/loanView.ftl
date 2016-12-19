@@ -67,10 +67,10 @@
                                   <p class="snum fr"></p>
                                   <div class="clear"></div>
                                   <h2>${applyname}书</h2>
-                                  <p class="ntit">申请单位：<span class="ml200"></span>(签章)</p>
-                                  <p class="ntit">法人代表：<span class="ml200"></span>(签章)</p>
-                                  <p class="ntit">公司地址：<span class="ml200"></span></p>
-                                  <p class="ntit">申请日期：<span class="ml200"></span></p>
+                                  <p class="ntit">申请单位：<span class="ml20"></span>${coAll.jltfispCoBase.company}<span style="float:right;">(签章)</span></p>
+                                  <p class="ntit">法人代表：<span class="ml20"></span>${coAll.jltfispCoBase.corporateRepresentative}<span style="float:right;">(签章)</span></p>
+                                  <p class="ntit">公司地址：<span class="ml20">${coAll.jltfispCoBase.registeredAddress}</span></p>
+                                  <p class="ntit">申请日期：<span class="ml20">${coAll.jltfispCoBase.createTime?date}</span></p>
                                   <p class="ntit"><span class="ml70">年</span><span class="ml70">月</span><span class="ml70">日</span></p>
                               </div>
                           </div>
@@ -100,7 +100,7 @@
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>成立时间</th>
-                                      <td>${coAll.jltfispCoBase.establishTime!''}</td>
+                                      <td>${coAll.jltfispCoBase.establishTime?date!''}</td>
                                       <th><b class="red">*</b>注册资本</th>
                                       <td>${coAll.jltfispCoBase.registeredCapital!''}万元</td>
                                   </tr>
@@ -110,11 +110,11 @@
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>办公地址</th>
-                                      <td colspan="3"><span id="officeAddress"></span></td>
+                                      <td colspan="3"><span id="officeAddress">${coAll.jltfispCoBase.officeAddress!''}</span></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>生产地址</th>
-                                      <td colspan="3"><span id="productAddress"></span></td>
+                                      <td colspan="3"><span id="productAddress">${coAll.jltfispCoBase.productAddress!''}</span></td>
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>法定代表人</th>
@@ -214,7 +214,20 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>企业性质</th>
-                                    <td>${coAll.jltfispCoProfile.nature!''}</td>
+                                    <td>
+                                    	<#if (coAll.jltfispCoProfile.nature ==1) >
+                                    	<label>私营企业</label>
+                                    	<#elseif (coAll.jltfispCoProfile.nature ==2) >
+                                        <label>中外合资企业</label>
+                                        <#elseif (coAll.jltfispCoProfile.nature ==3 )>
+                                        <label>国有企业</label>
+                                        <#elseif (coAll.jltfispCoProfile.nature ==4) >
+                                        <label>集体企业</label>
+                                        </#if>
+                                        <#if (coAll.jltfispCoProfile.otherNature !='') >
+                                        <label>${coAll.jltfispCoProfile.otherNature}</label>
+                                        </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>职工总数</th>
@@ -245,7 +258,12 @@
                                 <tr>
                                     <th>企业曾获得科技认定<br/>或资助情况</th>
                                     <td colspan="3">
-                                    	<label><span id="technologyOrFinance"></span></label>
+                                    	<label><span id="technologyOrFinance">
+                                    	<#list (coAll.jltfispCoProfile.technologyOrFinance?split(",")) as fina>
+                                    		${finaMap["${fina}"]},
+                                    	</#list>
+                                    	${coAll.jltfispCoProfile.otherTechnologyOrFinance!''}
+                                    	</span></label>
                                     </td>
                                 </tr>
                             </table>
@@ -281,7 +299,15 @@
                                   </tr>
                                   <tr>
                                       <th>是否首次贷款</th>
-                                      <td >${coAll.jltfispCoFillInApply.historyState!''}</td>
+                                      <td >
+                                      	<#if (coAll.jltfispCoFillInApply.historyState??)>
+                                      		<#if (coAll.jltfispCoFillInApply.historyState =='1')>
+                                      			是
+                                      		<#else>
+                                      			否
+                                      		</#if>
+                                      	</#if>
+                                      </td>
                                       <th>上次履约贷款还款时间</th>
                                       <td colspan="2">${coAll.jltfispCoFillInApply.historyEndtime!''}</td>
                                   </tr>
@@ -304,9 +330,25 @@
                                   </tr>
                                   <tr>
                                      <th>是否需要股权融资</th>
-                                      <td >${coAll.jltfispCoFillInApply.isFinance!''}</td>
+                                      <td >
+                                      	<#if (coAll.jltfispCoFillInApply.isFinance??)>
+                                      		<#if (coAll.jltfispCoFillInApply.isFinance=='1')>
+                                      			是
+                                      		<#else>
+                                      			否
+                                      		</#if>
+                                      	</#if>
+                                      </td>
                                       <th>是否有上市计划</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.isListingPlan!''}</td>
+                                      <td colspan="2">
+                                      	<#if (coAll.jltfispCoFillInApply.isListingPlan??)>
+                                      		<#if (coAll.jltfispCoFillInApply.isListingPlan=='1')>
+                                      			是
+                                      		<#else>
+                                      			否
+                                      		</#if>
+                                      	</#if>
+                                      </td>
                                   </tr>
                                   <tr>
                                       <th>拟融资金额</th>
@@ -344,6 +386,7 @@
                                       <td colspan="2"><b>流动资产</b></td>
                                       <td colspan="2"><b>流动负债</b></td>
                                   </tr>
+                                  <#if (coAll.jltfispCoDebt?exists)>
                                   <tr>
                                       <td>货币资金</td>
                                       <td>${coAll.jltfispCoDebt.capital!''}</td>
@@ -507,6 +550,171 @@
                                     <td>负债和所有者权益（或股东权益）总计</td>
                                     <td>${coAll.jltfispCoDebt.ownerequityamount!''}</td>
                                 </tr>
+                                <#else>
+                                	 <tr>
+                                      <td>货币资金</td>
+                                      <td></td>
+                                      <td>短期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>短期投资</td>
+                                      <td></td>
+                                      <td>应付票据</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收票据</td>
+                                      <td></td>
+                                      <td>应付账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收股息</td>
+                                      <td></td>
+                                      <td>代付职工薪酬</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收账款</td>
+                                      <td></td>
+                                      <td>应付福利费</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他应收款</td>
+                                      <td></td>
+                                      <td>应付利润</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>存货</td>
+                                      <td></td>
+                                      <td>应交税金</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>待摊费用</td>
+                                      <td></td>
+                                      <td>其他应交款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>一年内到期的长期债权投资</td>
+                                      <td></td>
+                                      <td>其他应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他流动资产</td>
+                                      <td></td>
+                                      <td>预提费用</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>预付账款</td>
+                                      <td></td>
+                                      <td>一年到期的长期负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>流动资产合计</td>
+                                      <td></td>
+                                      <td>其他流动负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>长期投资</b></td>
+                                      <td>预收账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期股权投资</td>
+                                      <td></td>
+                                      <td>流动负债合计</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期债权投资</td>
+                                      <td></td>
+                                      <td colspan="2"><b>长期负债</b></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期投资合计</td>
+                                      <td></td>
+                                      <td>长期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>固定资产</b></td>
+                                      <td>长期应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td >累计折旧</td>
+                                    <td></td>
+                                    <td>其他长期负债</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产净值</td>
+                                    <td></td>
+                                    <td>长期负债合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >工程物资</td>
+                                    <td></td>
+                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产清理</td>
+                                    <td></td>
+                                    <td colspan="2"><b>所有者（或股东权益）</b></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产合计</td>
+                                    <td></td>
+                                    <td>实收资本</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>无形资产及其他资产</b></td>
+                                    <td>资本公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产</td>
+                                    <td></td>
+                                    <td>盈余公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >长期待摊费用</td>
+                                    <td></td>
+                                    <td>其中：法定公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >其他长期资产</td>
+                                    <td></td>
+                                    <td>未分配利润</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产及其他资产合计</td>
+                                    <td></td>
+                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >资产合计</td>
+                                    <td></td>
+                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td></td>
+                                </tr>
+                                </#if>
                               </table>
                               </form>
                           </div>
@@ -530,6 +738,7 @@
                                       <td colspan="2"><b>流动资产</b></td>
                                       <td colspan="2"><b>流动负债</b></td>
                                   </tr>
+                                  <#if (coAll.jltfispCoDebtTwo?exists)>
                                   <tr>
                                       <td>货币资金</td>
                                       <td>${coAll.jltfispCoDebtTwo.capital!''}</td>
@@ -693,6 +902,171 @@
                                     <td>负债和所有者权益（或股东权益）总计</td>
                                     <td>${coAll.jltfispCoDebtTwo.ownerequityamount!''}</td>
                                 </tr>
+                                <#else>
+                                	 <tr>
+                                      <td>货币资金</td>
+                                      <td></td>
+                                      <td>短期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>短期投资</td>
+                                      <td></td>
+                                      <td>应付票据</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收票据</td>
+                                      <td></td>
+                                      <td>应付账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收股息</td>
+                                      <td></td>
+                                      <td>代付职工薪酬</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收账款</td>
+                                      <td></td>
+                                      <td>应付福利费</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他应收款</td>
+                                      <td></td>
+                                      <td>应付利润</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>存货</td>
+                                      <td></td>
+                                      <td>应交税金</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>待摊费用</td>
+                                      <td></td>
+                                      <td>其他应交款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>一年内到期的长期债权投资</td>
+                                      <td></td>
+                                      <td>其他应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他流动资产</td>
+                                      <td></td>
+                                      <td>预提费用</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>预付账款</td>
+                                      <td></td>
+                                      <td>一年到期的长期负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>流动资产合计</td>
+                                      <td></td>
+                                      <td>其他流动负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>长期投资</b></td>
+                                      <td>预收账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期股权投资</td>
+                                      <td></td>
+                                      <td>流动负债合计</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期债权投资</td>
+                                      <td></td>
+                                      <td colspan="2"><b>长期负债</b></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期投资合计</td>
+                                      <td></td>
+                                      <td>长期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>固定资产</b></td>
+                                      <td>长期应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td >累计折旧</td>
+                                    <td></td>
+                                    <td>其他长期负债</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产净值</td>
+                                    <td></td>
+                                    <td>长期负债合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >工程物资</td>
+                                    <td></td>
+                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产清理</td>
+                                    <td></td>
+                                    <td colspan="2"><b>所有者（或股东权益）</b></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产合计</td>
+                                    <td></td>
+                                    <td>实收资本</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>无形资产及其他资产</b></td>
+                                    <td>资本公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产</td>
+                                    <td></td>
+                                    <td>盈余公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >长期待摊费用</td>
+                                    <td></td>
+                                    <td>其中：法定公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >其他长期资产</td>
+                                    <td></td>
+                                    <td>未分配利润</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产及其他资产合计</td>
+                                    <td></td>
+                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >资产合计</td>
+                                    <td></td>
+                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td></td>
+                                </tr>
+                                </#if>
                               </table>
                               </form>
                           </div>
@@ -717,6 +1091,7 @@
                                       <td colspan="2"><b>流动资产</b></td>
                                       <td colspan="2"><b>流动负债</b></td>
                                   </tr>
+                                  <#if (coAll.jltfispCoDebtThree?exists)>
                                   <tr>
                                       <td>货币资金</td>
                                       <td>${coAll.jltfispCoDebtThree.capital!''}</td>
@@ -880,6 +1255,171 @@
                                     <td>负债和所有者权益（或股东权益）总计</td>
                                     <td>${coAll.jltfispCoDebtThree.ownerequityamount!''}</td>
                                 </tr>
+                                <#else>
+                                	 <tr>
+                                      <td>货币资金</td>
+                                      <td></td>
+                                      <td>短期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>短期投资</td>
+                                      <td></td>
+                                      <td>应付票据</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收票据</td>
+                                      <td></td>
+                                      <td>应付账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收股息</td>
+                                      <td></td>
+                                      <td>代付职工薪酬</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收账款</td>
+                                      <td></td>
+                                      <td>应付福利费</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他应收款</td>
+                                      <td></td>
+                                      <td>应付利润</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>存货</td>
+                                      <td></td>
+                                      <td>应交税金</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>待摊费用</td>
+                                      <td></td>
+                                      <td>其他应交款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>一年内到期的长期债权投资</td>
+                                      <td></td>
+                                      <td>其他应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他流动资产</td>
+                                      <td></td>
+                                      <td>预提费用</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>预付账款</td>
+                                      <td></td>
+                                      <td>一年到期的长期负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>流动资产合计</td>
+                                      <td></td>
+                                      <td>其他流动负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>长期投资</b></td>
+                                      <td>预收账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期股权投资</td>
+                                      <td></td>
+                                      <td>流动负债合计</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期债权投资</td>
+                                      <td></td>
+                                      <td colspan="2"><b>长期负债</b></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期投资合计</td>
+                                      <td></td>
+                                      <td>长期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>固定资产</b></td>
+                                      <td>长期应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td >累计折旧</td>
+                                    <td></td>
+                                    <td>其他长期负债</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产净值</td>
+                                    <td></td>
+                                    <td>长期负债合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >工程物资</td>
+                                    <td></td>
+                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产清理</td>
+                                    <td></td>
+                                    <td colspan="2"><b>所有者（或股东权益）</b></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产合计</td>
+                                    <td></td>
+                                    <td>实收资本</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>无形资产及其他资产</b></td>
+                                    <td>资本公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产</td>
+                                    <td></td>
+                                    <td>盈余公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >长期待摊费用</td>
+                                    <td></td>
+                                    <td>其中：法定公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >其他长期资产</td>
+                                    <td></td>
+                                    <td>未分配利润</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产及其他资产合计</td>
+                                    <td></td>
+                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >资产合计</td>
+                                    <td></td>
+                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td></td>
+                                </tr>
+                                </#if>
                               </table>
                               </form>
                           </div>
@@ -904,6 +1444,7 @@
                                       <td colspan="2"><b>流动资产</b></td>
                                       <td colspan="2"><b>流动负债</b></td>
                                   </tr>
+                                  <#if (coAll.jltfispCoDebtFour?exists)>
                                   <tr>
                                       <td>货币资金</td>
                                       <td>${coAll.jltfispCoDebtFour.capital!''}</td>
@@ -1067,6 +1608,171 @@
                                     <td>负债和所有者权益（或股东权益）总计</td>
                                     <td>${coAll.jltfispCoDebtFour.ownerequityamount!''}</td>
                                 </tr>
+                                <#else>
+                                	 <tr>
+                                      <td>货币资金</td>
+                                      <td></td>
+                                      <td>短期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>短期投资</td>
+                                      <td></td>
+                                      <td>应付票据</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收票据</td>
+                                      <td></td>
+                                      <td>应付账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收股息</td>
+                                      <td></td>
+                                      <td>代付职工薪酬</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>应收账款</td>
+                                      <td></td>
+                                      <td>应付福利费</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他应收款</td>
+                                      <td></td>
+                                      <td>应付利润</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>存货</td>
+                                      <td></td>
+                                      <td>应交税金</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>待摊费用</td>
+                                      <td></td>
+                                      <td>其他应交款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>一年内到期的长期债权投资</td>
+                                      <td></td>
+                                      <td>其他应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他流动资产</td>
+                                      <td></td>
+                                      <td>预提费用</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>预付账款</td>
+                                      <td></td>
+                                      <td>一年到期的长期负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>流动资产合计</td>
+                                      <td></td>
+                                      <td>其他流动负债</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>长期投资</b></td>
+                                      <td>预收账款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期股权投资</td>
+                                      <td></td>
+                                      <td>流动负债合计</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期债权投资</td>
+                                      <td></td>
+                                      <td colspan="2"><b>长期负债</b></td>
+                                  </tr>
+                                  <tr>
+                                      <td>长期投资合计</td>
+                                      <td></td>
+                                      <td>长期借款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td colspan="2"><b>固定资产</b></td>
+                                      <td>长期应付款</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                    <td >累计折旧</td>
+                                    <td></td>
+                                    <td>其他长期负债</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产净值</td>
+                                    <td></td>
+                                    <td>长期负债合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >工程物资</td>
+                                    <td></td>
+                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产清理</td>
+                                    <td></td>
+                                    <td colspan="2"><b>所有者（或股东权益）</b></td>
+                                </tr>
+                                <tr>
+                                    <td >固定资产合计</td>
+                                    <td></td>
+                                    <td>实收资本</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><b>无形资产及其他资产</b></td>
+                                    <td>资本公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产</td>
+                                    <td></td>
+                                    <td>盈余公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >长期待摊费用</td>
+                                    <td></td>
+                                    <td>其中：法定公积</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >其他长期资产</td>
+                                    <td></td>
+                                    <td>未分配利润</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >无形资产及其他资产合计</td>
+                                    <td></td>
+                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >资产合计</td>
+                                    <td></td>
+                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td></td>
+                                </tr>
+                                </#if>
                               </table>
                               </form>
                           </div>
@@ -1081,7 +1787,13 @@
                               <div class="clear"></div>
                               <form id="coDebt">
                             <table width="100%" class="tab3 tab4">
-                                <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th><th>${.now?string('yyyy')}年1~${coAll.jltfispCoProfit[0].month!''}月</th></tr>
+                                <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th>
+                                <th>${.now?string('yyyy')}年1~
+                                <#if (coAll.jltfispCoProfit?size gt 0)>
+                                ${coAll.jltfispCoProfit[0].month!''}
+					             </#if>	                   
+					                                月</th></tr>
+					            <#if (coAll.jltfispCoProfit?size gt 0)>
                                 <tr>
                                 	<td><b>主营业务收入</b></td>
                                     <td>${coAll.jltfispCoProfit[0].mainincome!''}</td>
@@ -1194,6 +1906,120 @@
                                     <td>${coAll.jltfispCoProfit[2].netprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].netprofit!''}</td>
                                 </tr>
+                                <#else>
+                                	<tr>
+                                	<td><b>主营业务收入</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：主营业务成本</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：主营业务税金及附加</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td><b>主营业务利润(亏损以"-"号填列)</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>加：其他业务利润(亏损以"-"号填列)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：营业费用</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：管理费用</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：财务费用</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td><b>营业利润(亏损以"-"号填列)</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>加：投资收益(亏损以"-"号填列)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>加：营业外收入</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：营业外支出</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：资产减值损失</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td><b>利润总额(亏损以"-"号填列)</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td>减：所得税</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                	<td><b>净利润(亏损以"-"号填列)</b></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                </#if>
                             </table>
                               </form>
                           </div>
@@ -1405,32 +2231,32 @@
                                     <td>${coAll.jltfispCoFinancialList[20].loanBank!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[20].loanAccount!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[20].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].endTime!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[20].startTime?date!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[20].endTime?date!''}</td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
                                     <td>${coAll.jltfispCoFinancialList[21].loanBank!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[21].loanAccount!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[21].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].endTime!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[21].startTime?date!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[21].endTime?date!''}</td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
                                     <td>${coAll.jltfispCoFinancialList[22].loanBank!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[22].loanAccount!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[22].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].endTime!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[22].startTime?date!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[22].endTime?date!''}</td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
                                     <td>${coAll.jltfispCoFinancialList[23].loanBank!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[23].loanAccount!''}</td>
                                     <td>${coAll.jltfispCoFinancialList[23].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].startTime!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].endTime!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[23].startTime?date!''}</td>
+                                    <td>${coAll.jltfispCoFinancialList[23].endTime?date!''}</td>
                                 </tr>
                                 <tr>
                                 	<td><b>其他金融机构融资</b></td>
@@ -1494,8 +2320,8 @@
                                   <p class="ntit">3、无论我公司是否获得贷款，我公司均同意所提供的一切资料(除特别申明外)留存存档，不必退回。</p>
                               </div>
                               <div class="cover">
-                                  <p class="ntit">申请单位：<span class="ml200"></span>(签章)</p>
-                                  <p class="ntit">法人代表：<span class="ml200"></span>(签字)</p>
+                                  <p class="ntit">申请单位：<span class="ml20">${coAll.jltfispCoBase.company}</span><span style="float:right;">(签章)</span></p>
+                                  <p class="ntit">法人代表：<span class="ml20">${coAll.jltfispCoBase.corporateRepresentative}</span><span style="float:right;">(签字)</span></p>
                                   <p class="ntit"><span class="ml70">年</span><span class="ml70">月</span><span class="ml70">日</span></p>
                               </div>
                           </div>

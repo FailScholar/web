@@ -53,6 +53,7 @@ public class MessageController extends BaseController<Message> {
 	@RequestMapping(value = "/page")
 	public String page(HttpServletRequest request, Message t) throws Exception {
 		PageInfo info  = preparePageinfo(request,t);
+		info.setBy("push_date");
 		String result = handlePage(request, info, t);
 		return result;
 	}

@@ -28,7 +28,7 @@
                                       </#if>                                                                              
                                       </td>
                                       <th>${loanformManage.label6}</th>
-                                      <td colspan=2><#if coAll.jltfispCoFillInApply.historyEndtime?date !="">${coAll.jltfispCoFillInApply.historyEndtime?date}</#if></td>
+                                      <td colspan=2><#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if></td>
                                   </tr> 
                                   <tr>
                                       <th>${loanformManage.label9}</th>

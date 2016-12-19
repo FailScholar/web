@@ -59,8 +59,8 @@
 					</p>
                 </div>
                  <div style="text-align:center;">
-				<input type="button"  style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#c5c5c5" 
-					id="doBackIndex" value="返回" onclick="goBackIndex()">
+				<input type="button"  id="accept" style="color:#ffffff;width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#1679ff" 
+					 value="返回" onclick="goBackIndex()">
            		</div>
             </div>
             <!--content结束-->
@@ -76,14 +76,26 @@
   </body>
 </html>
 <script type="text/javascript">
- function goBackIndex(){
-	 window.location.href="${path}/anon/loan";
+var goBackUrl=${goBackUrl};
+function goBackIndex(){
+     if(goBackUrl==2){
+    	 window.location.href="${path}/business/page";
+      }else{
+    	  window.location.href="${path}/anon/loan";
+       }
+	
  }
-
- $("#doBackIndex").hover(function(){
-	    document.getElementById("doBackIndex").style.backgroundColor = "#1679ff";
-	  	document.getElementById("doBackIndex").style.color="#ffffff";
-	},function(){
-		document.getElementById("doBackIndex").style.backgroundColor = "#c5c5c5";
-	}); 
+ function disable()
+ {
+	   document.getElementById("accept").style.backgroundColor = "#c5c5c5";
+		document.getElementById("accept").disabled=true;
+ }
+ 
+ function enable()
+ {
+	   document.getElementById("accept").style.backgroundColor = "#1679ff";
+	  	document.getElementById("accept").style.color="#ffffff";
+	  
+	   document.getElementById("accept").disabled=false;
+}
 </script>

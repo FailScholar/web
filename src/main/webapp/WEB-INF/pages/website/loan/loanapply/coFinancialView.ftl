@@ -206,16 +206,16 @@
                                     <td>${coAll.jltfispCoFinancialList[20].loanBank}</td>
                                     <td>${coAll.jltfispCoFinancialList[20].loanAccount}</td>
                                     <td>${coAll.jltfispCoFinancialList[20].sureMethod}</td>
-                                    <td><#if coAll.jltfispCoFinancialList[20].startTime?date !="">${coAll.jltfispCoFinancialList[20].startTime?date}</#if></td>
-                                    <td><#if coAll.jltfispCoFinancialList[20].endTime?date !="">${coAll.jltfispCoFinancialList[20].endTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[20].startTime?exists)>${coAll.jltfispCoFinancialList[20].startTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[20].endTime?exists)>${coAll.jltfispCoFinancialList[20].endTime?date}</#if></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
                                     <td>${coAll.jltfispCoFinancialList[21].loanBank}</td>
                                     <td>${coAll.jltfispCoFinancialList[21].loanAccount}</td>
                                     <td>${coAll.jltfispCoFinancialList[21].sureMethod}</td>
-                                    <td><#if coAll.jltfispCoFinancialList[21].startTime?date !="">${coAll.jltfispCoFinancialList[21].startTime?date}</#if></td>
-                                    <td><#if coAll.jltfispCoFinancialList[21].endTime?date !="">${coAll.jltfispCoFinancialList[21].endTime?date}</#if>
+                                    <td><#if (coAll.jltfispCoFinancialList[21].startTime?exists)>${coAll.jltfispCoFinancialList[21].startTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[21].endTime?exists)>${coAll.jltfispCoFinancialList[21].endTime?date}</#if>
                                     </td>
                                 </tr>
                                 <tr>
@@ -223,16 +223,16 @@
                                     <td>${coAll.jltfispCoFinancialList[22].loanBank}</td>
                                     <td>${coAll.jltfispCoFinancialList[22].loanAccount}</td>
                                     <td>${coAll.jltfispCoFinancialList[22].sureMethod}</td>
-                                    <td><#if coAll.jltfispCoFinancialList[22].startTime?date !="">${coAll.jltfispCoFinancialList[22].startTime?date}</#if></td>
-                                    <td><#if coAll.jltfispCoFinancialList[22].endTime?date !="">${coAll.jltfispCoFinancialList[22].endTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[22].startTime?exists)>${coAll.jltfispCoFinancialList[22].startTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[22].endTime?exists)>${coAll.jltfispCoFinancialList[22].endTime?date}</#if></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
                                     <td>${coAll.jltfispCoFinancialList[23].loanBank}</td>
                                     <td>${coAll.jltfispCoFinancialList[23].loanAccount}</td>
                                     <td>${coAll.jltfispCoFinancialList[23].sureMethod}</td>
-                                    <td><#if coAll.jltfispCoFinancialList[23].startTime?date !=''>${coAll.jltfispCoFinancialList[23].startTime?date}</#if></td>
-                                    <td><#if coAll.jltfispCoFinancialList[23].endTime?date !=''>${coAll.jltfispCoFinancialList[23].endTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[23].startTime?exists)>${coAll.jltfispCoFinancialList[23].startTime?date}</#if></td>
+                                    <td><#if (coAll.jltfispCoFinancialList[23].endTime?exists)>${coAll.jltfispCoFinancialList[23].endTime?date}</#if></td>
                                 </tr>
                                 <tr>
                                 	<td><b>其他金融机构融资</b></td>

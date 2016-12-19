@@ -4,6 +4,8 @@
     <resultMap type="com.jltfisp.web.expert.entity.JltfispExpert" id="jltfispExpert">
 		<id property="id" column="id" />
 		<result property="userid" column="userid" />
+		<result property="name" column="name" />
+		<result property="workcompany" column="workcompany" />
 		<result property="columnid" column="columnid" />
 		<result property="sex" column="sex" />
 		<result property="degree" column="degree" />
@@ -26,13 +28,37 @@
 		<result property="email" column="email" />
 	</resultMap>
 	<sql id="expert_column">
-	id,userid,columnid,sex,degree,technology_domain,work_post,work_title,fax,postcode,busines_address,main_address,postal_address,educational_background,part_full,major_info,project_info,agency_logo,agency_info,domain,phone,email
+	jfe.id,jfe.userid,jfe.name,jfe.work_company,jfe.columnid,jfe.sex,jfe.degree,jfe.technology_domain,jfe.work_post,jfe.work_title,jfe.fax,jfe.postcode,jfe.busines_address,jfe.main_address,jfe.postal_address,jfe.educational_background,jfe.part_full,jfe.major_info,jfe.project_info,jfe.agency_logo,jfe.agency_info,jfe.domain,jfe.phone,jfe.email
 	</sql>
 	<!-- 每次分页查询语句 -->
 	<select id="getExpertPageList" resultMap="jltfispExpert" parameterType="map">
+	   (select
+	   jfe.*
+	   from jltfisp_fin_expert jfe
+	   LEFT JOIN jltfisp_business_applay jba
+	   on jba.user_id = jfe.userid AND jba.type = jfe.columnid
+	   where jba.parent_type=3 and jba.state=1 and jfe.columnid = #{columnId})
+	   union all
+	   (select
+	   jfe.*
+	   from jltfisp_fin_expert jfe
+	   where jfe.columnid = #{columnId} AND jfe.userid = -1)
+	   ORDER BY createTime DESC
+	   limit #{rows},#{pageSize}
+	</select>
+	
+	
+	<select id="getExpertPageCount"  resultType="int" parameterType="map">
+	   select count(*) from (select
+	   <include refid="expert_column" />
+	   from jltfisp_fin_expert jfe
+	   LEFT JOIN jltfisp_business_applay jba
+	   on jba.user_id = jfe.userid AND jba.type = jfe.columnid
+	   where jba.parent_type=3 and jba.state=1 and jfe.columnid = #{columnId}
+	   union all
 	   select
 	   <include refid="expert_column" />
-	   from jltfisp_fin_expert
-	   where columnid = #{columnId} limit #{rows},#{pageSize}
+	   from jltfisp_fin_expert jfe
+	   where jfe.columnid = #{columnId} AND jfe.userid = -1) as a
 	</select>
 </mapper>

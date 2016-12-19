@@ -36,7 +36,7 @@ public class JltfispCoBaseDto {
      * 注册资本
      */
     @Column(name = "registeredCapital")
-    private float registeredCapital;
+    private Double registeredCapital;
 
     /**
      * 注册地址
@@ -50,19 +50,19 @@ public class JltfispCoBaseDto {
      * 办公省份
      */
     @Column(name = "officeProv")
-    private int officeProv;
+    private Integer officeProv;
     
     /**
      * 办公城市
      */
     @Column(name = "officeCity")
-    private int officeCity;
+    private Integer officeCity;
 
     /**
      * 办公区域
      */
     @Column(name = "officeArea")
-    private int officeArea;
+    private Integer officeArea;
 
     /**
      * 办公地址
@@ -500,11 +500,11 @@ public class JltfispCoBaseDto {
 		this.establishTime = establishTime;
 	}
 
-	public float getRegisteredCapital() {
+	public Double getRegisteredCapital() {
 		return registeredCapital;
 	}
 
-	public void setRegisteredCapital(float registeredCapital) {
+	public void setRegisteredCapital(Double registeredCapital) {
 		this.registeredCapital = registeredCapital;
 	}
 
@@ -516,27 +516,27 @@ public class JltfispCoBaseDto {
 		this.registeredAddress = registeredAddress;
 	}
 
-	public int getOfficeProv() {
+	public Integer getOfficeProv() {
 		return officeProv;
 	}
 
-	public void setOfficeProv(int officeProv) {
+	public void setOfficeProv(Integer officeProv) {
 		this.officeProv = officeProv;
 	}
 
-	public int getOfficeCity() {
+	public Integer getOfficeCity() {
 		return officeCity;
 	}
 
-	public void setOfficeCity(int officeCity) {
+	public void setOfficeCity(Integer officeCity) {
 		this.officeCity = officeCity;
 	}
 
-	public int getOfficeArea() {
+	public Integer getOfficeArea() {
 		return officeArea;
 	}
 
-	public void setOfficeArea(int officeArea) {
+	public void setOfficeArea(Integer officeArea) {
 		this.officeArea = officeArea;
 	}
 

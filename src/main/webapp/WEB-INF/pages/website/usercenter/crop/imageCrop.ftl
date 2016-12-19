@@ -29,8 +29,8 @@
                enableRotation: false,//是否允许旋转图片true false
                enableZoom: true,//是否允许放大缩小
                selector: {
-                    w:220,//选择器宽度
-                    h:246,//旋转高度
+                    w:200,//选择器宽度
+                    h:200,//旋转高度
                     //showPositionsOnDrag:true,
                    // showDimetionsOnDrag:false,
                    // aspectRatio:true,
@@ -38,8 +38,8 @@
                     bgInfoLayer:'#fff',
                     borderColor: 'blue',//选择区域边框样式
                    // animated: false,
-                   // maxWidth:600,//最大宽度
-                   // maxHeight:600,//最大高度
+                    maxWidth:200,//最大宽度
+                    maxHeight:200,//最大高度
                     borderColorHover: 'yellow'//鼠标放到选择器的边框颜色
                 },
                 image: {
@@ -57,8 +57,9 @@
             	  $("#userlogo").val(filePath);
             	  var fileName = filePath.substring(filePath.lastIndexOf("/")+1);
             	  $("#portrait").attr("src",'${path}'+filePath);
-            	  alert("头像上传成功");
-            	  imgDialog.close();
+            	  dialog.tipsPop('ok-pop','提示:',"头像上传成功",function(){
+	                 imgDialog.close();
+	              });
               });             
           });
           $("#restore").click(function(){//显示初始状态照片

@@ -4,7 +4,9 @@ public interface Constants {
 
 	
 	 public static final String FILE_HOME = "upload";//文件主目录
-	 public static final String	basePath="D:\\files\\jltfisp_cms";
+	 //public static final String	basePath="D:\\files\\jltfisp_cms";
+	 //对应上传的绝对路径或者远程路径
+	 public static final String	basePath="\\\\10.10.21.24\\images";
 	 public static final String	imageFile="image";
 	 public static final String TEMP_DIR = System.getProperty("java.io.tmpdir");
 	
@@ -25,4 +27,19 @@ public interface Constants {
 	public static final String INSTITUTION_APPLY = "2";//机构申请
 	public static final String EXPERT_APPLY = "3";//专家申请
     
+	
+	/**
+	 * 业务审核状态
+	 */
+	public static final String AUDIT_AUDITING= "0";//申请中
+	public static final String AUDIT_PASS = "1";//申请通过
+	public static final String AUDIT_REFUSE = "2";//申请不通过
+	public static final String AUDIT_NOT_SUBMIT = "3";//未提交
+	
+	/**
+	 * 新增业务申请表类型
+	 */
+	public static final String FORM_TYPE_LOAN= "1";//贷款业务
+	public static final String FORM_TYPE_SUBSIDY = "2";//保费补贴
+	public static final String FORM_TYPE_FINANCE = "3";//股权融资
 }

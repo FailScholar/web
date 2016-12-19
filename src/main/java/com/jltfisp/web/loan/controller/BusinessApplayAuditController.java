@@ -1,6 +1,7 @@
 package com.jltfisp.web.loan.controller;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,7 @@ import com.jltfisp.web.loan.service.FinanceApplyService;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.loan.service.ISubsidyService;
 import com.jltfisp.web.loan.service.LoanService;
+import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
 
 
 /**
@@ -118,6 +120,7 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	@ResponseBody
 	public int updateBuss(HttpServletRequest request,BusinessApplayAudit record) {
 		record.setState(0);
+		record.setSubmitDate(new Date());
 		int i = businessApplayAuditService.updateByPKSelective(record);
 		return i;
 	}
@@ -130,14 +133,21 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	 * @return
 	 */
 	@RequestMapping("/detail")
-	public String detail(HttpServletRequest request,Integer businessType) {
+	public String detail(HttpServletRequest request,Integer businessType,Integer infoId) {
 		SysDict dict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
     	request.setAttribute("applyname", dict.getValue());
     	request.setAttribute("applytype", businessType);
+    	request.setAttribute("infoId", infoId);
+    	
+    	
     	//获取当前用户登录信息
-    	JltfispUser user=loginService.getCurrentUser();
-    	JltfispCoAll coAll=loanService.getApplyALL(user.getId(),businessType);
-    	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(user.getId(), businessType);
+    	
+    	BusinessApplayAudit params = new BusinessApplayAudit();
+    	params.setInfoId(infoId);
+    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
+    	request.setAttribute("applayAudits", applayAudit);
+    	JltfispCoAll coAll=loanService.getApplyALL(infoId);
+    	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(infoId);
     	request.setAttribute("coAll", coAll);
     	request.setAttribute("coDebt", coDebt);
     	request.setAttribute("businessType", businessType);
@@ -151,18 +161,24 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      * @return
      */
     @RequestMapping("/showSubsidyDetail")
-    public String showSubsidyDetail(HttpServletRequest request,Integer businessType){
+    public String showSubsidyDetail(HttpServletRequest request,Integer businessType,Integer infoId){
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
+    	BusinessApplayAudit params = new BusinessApplayAudit();
+    	params.setUserId(user.getId());
+    	params.setType(businessType.toString());
+    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
+    	request.setAttribute("applayAudits", applayAudit);
     	//通过USERID获取企业基本信息
-    	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),businessType);
+    	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContext(infoId);
     	//根据企业id获取保费补贴
-    	List<JltfispPsInfo> jltfispPsInfoList=subsidyService.getJltfispPsInfoListByCoBaseId(jltfispCoBaseDto.getId());
+    	List<JltfispPsInfo> jltfispPsInfoList=subsidyService.getJltfispPsInfoListByCoBaseId(infoId);
     	//保费补贴申请信息
-    	JltfispPsMaterialInfo jltfispPsMaterialInfo = subsidyService.getJltfispPsMaterialInfoByInfoId(jltfispCoBaseDto.getId());
+    	JltfispPsMaterialInfo jltfispPsMaterialInfo = subsidyService.getJltfispPsMaterialInfoByInfoId(infoId);
     	request.setAttribute("jltfispCoBaseDto", jltfispCoBaseDto);
     	request.setAttribute("jltfispPsInfoList",jltfispPsInfoList);
     	request.setAttribute("jltfispPsMaterialInfo",jltfispPsMaterialInfo);
+    	request.setAttribute("infoId", infoId);
     	return getFileBasePath()+"subsidyApplyDetail";
     }
     
@@ -173,13 +189,36 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      * @return
      */
     @RequestMapping("/showFinanceApplyDetail")
-    public String showFinanceApplyDetail(HttpServletRequest request,Integer businessType){
+    public String showFinanceApplyDetail(HttpServletRequest request,Integer businessType,Integer infoId){
     	JltfispUser user=loginService.getCurrentUser();
-	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
-	      
+    	
+    	BusinessApplayAudit params = new BusinessApplayAudit();
+    	params.setInfoId(infoId);
+    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
+    	request.setAttribute("applayAudits", applayAudit);
+	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(infoId);
+	      String createTime = jltfispCoBaseDto2.getCreateTime();
+	      if(createTime!=null){
+		    	String year2 = createTime.substring(0, 4);//获取年份
+		    	String month = createTime.substring(5, 7); //获取月份
+		    	String date = createTime.substring(8, 10);//获取日期
+		    	int year = Integer.parseInt(year2);
+		    	request.setAttribute("year", year);
+		    	request.setAttribute("month", month);
+		    	request.setAttribute("date", date);
+	      }
+	      else{
+		   		 Calendar cal = Calendar.getInstance();  
+		   		 int year =cal.get(Calendar.YEAR);  
+		   		 int month =  cal.get(Calendar.MONTH) + 1;  
+		   		 int date = cal.get(Calendar.DAY_OF_MONTH); 
+		   		 request.setAttribute("year", year);
+		         request.setAttribute("month", month);
+		    	 request.setAttribute("date", date);
+		   	}
 	      SysDict dict = dictionaryService.getValueByTypeCode(1002, jltfispCoBaseDto2.getTecdomain());
 	      jltfispCoBaseDto2.setTecdomain(dict.getValue());
-	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto2.getId());
+	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(infoId);
 	      request.setAttribute("jltfispFinMaterial3", jltfispFinMaterial3);
 		  JltfispArea  JltfispArea1= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv());
 		  String provName= JltfispArea1.getName();
@@ -190,8 +229,10 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 		  request.setAttribute("provName", provName);
 		  request.setAttribute("cityName", cityName);
 		  request.setAttribute("areaName", areaName);
+		  request.setAttribute("user", user);
+		  request.setAttribute("infoId", infoId);
 		  List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
-	      shareholderList=this.financeApplyService.getShareholderlistByInfoId(jltfispCoBaseDto2.getId());
+	      shareholderList=this.financeApplyService.getShareholderlistByInfoId(infoId);
 	      if(shareholderList!=null){
 	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      }
@@ -205,38 +246,46 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      * @param response
      */
     @RequestMapping("/printLoanPDF")
-    public void printLoanPDF(HttpServletRequest request,Integer businessType,HttpServletResponse response){
+    public void printLoanPDF(HttpServletRequest request,Integer businessType,Integer infoId,HttpServletResponse response){
     	
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	SysDict dict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
-    	JltfispCoAll coAll=loanService.getApplyALL(user.getId(),businessType);
-    	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(user.getId(), businessType);
+    	JltfispCoAll coAll=loanService.getApplyALL(infoId);
+    	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(infoId);
     	Map<String,Object> variables = new HashMap<String,Object>();
-    	String historyState = coAll.getJltfispCoFillInApply().getHistoryState();
-    	if (historyState.equals("1")) {
-    		coAll.getJltfispCoFillInApply().setHistoryState("是");
-		}else {
-			coAll.getJltfispCoFillInApply().setHistoryState("否");
-		}
-    	if(coAll.getJltfispCoFillInApply().getIsFinance().equals("1")){
-    		coAll.getJltfispCoFillInApply().setIsFinance("是");
-    	}else {
-    		coAll.getJltfispCoFillInApply().setIsFinance("否");
-		}
-    	if(coAll.getJltfispCoFillInApply().getIsListingPlan().equals("1")){
-    		coAll.getJltfispCoFillInApply().setIsListingPlan("是");
-    	}else{
-    		coAll.getJltfispCoFillInApply().setIsListingPlan("否");
-    	}
     	Integer mainField = coAll.getJltfispCoProfile().getMainField();
-    	SysDict dict1 = dictionaryService.getValueByTypeCode(1002, mainField.toString());
+    	SysDict dict1 = dictionaryService.getValueByTypeCode(1004, mainField.toString());
     	coAll.getJltfispCoProfile().setMainFieldValue(dict1.getValue());
+    	//办公地址
+    	JltfispArea officeProv=areaService.getAreaContext(coAll.getJltfispCoBase().getOfficeProv());
+    	JltfispArea officeCity=areaService.getAreaContext(coAll.getJltfispCoBase().getOfficeCity());
+    	JltfispArea officeArea=areaService.getAreaContext(coAll.getJltfispCoBase().getOfficeArea());
+    	coAll.getJltfispCoBase().setOfficeAddress(officeProv.getName()+officeCity.getName()+officeArea.getName()+coAll.getJltfispCoBase().getOfficeAddress());
+    	//生成地址
+    	JltfispArea productProv=areaService.getAreaContext(coAll.getJltfispCoBase().getProductProv());
+    	JltfispArea productCity=areaService.getAreaContext(coAll.getJltfispCoBase().getProductCity());
+    	JltfispArea productArea=areaService.getAreaContext(coAll.getJltfispCoBase().getProductArea());
+    	coAll.getJltfispCoBase().setProductAddress(productProv.getName()+productCity.getName()+productArea.getName()+coAll.getJltfispCoBase().getProductAddress());
     	
+    	Map<String, String> finaMap = new HashMap<String, String>();
+    	finaMap.put("1", "高科技企业");
+    	finaMap.put("2", "科技小巨人企业");
+    	finaMap.put("3", "科技小巨人培育企业");
+    	finaMap.put("4", "软件企业");
+    	finaMap.put("5", "技术先进企业");
+    	finaMap.put("6", "创新性企业");
+    	finaMap.put("7", "专利示范企业");
+    	variables.put("finaMap",finaMap);
     	variables.put("applyname",dict.getValue());
     	variables.put("applytype", businessType);
     	variables.put("coAll", coAll);
     	variables.put("coDebt", coDebt);
+    	BusinessApplayAudit params = new BusinessApplayAudit();
+    	params.setUserId(user.getId());
+    	params.setType(businessType.toString());
+    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
+    	variables.put("applayAudits", applayAudit);
     	String basePath = request.getSession().getServletContext()  
                 .getRealPath("/");  
     	PdfGenerator.printPDF(basePath, variables, dict.getValue(), response,"loanView.ftl");
@@ -249,56 +298,59 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      * @param response
      */
     @RequestMapping("/printSubsidyPDF")
-    public void printSubsidyPDF(HttpServletRequest request,Integer businessType,HttpServletResponse response){
+    public void printSubsidyPDF(HttpServletRequest request,Integer businessType,Integer infoId,HttpServletResponse response){
     	//String outputFile = "D:\\sample.pdf"; 
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	//通过USERID获取企业基本信息
-    	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),businessType);
+    	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContext(infoId);
     	//根据企业id获取保费补贴
-    	List<JltfispPsInfo> jltfispPsInfoList=subsidyService.getJltfispPsInfoListByCoBaseId(jltfispCoBaseDto.getId());
+    	List<JltfispPsInfo> jltfispPsInfoList=subsidyService.getJltfispPsInfoListByCoBaseId(infoId);
     	//保费补贴申请信息
-    	JltfispPsMaterialInfo jltfispPsMaterialInfo = subsidyService.getJltfispPsMaterialInfoByInfoId(jltfispCoBaseDto.getId());
-    	 
-    	Integer cognizance = jltfispPsMaterialInfo.getCognizance();
-    	if(cognizance==1){
-    		jltfispPsMaterialInfo.setCognizanceValue("私营企业");
-    	}else if (cognizance==2) {
-    		jltfispPsMaterialInfo.setCognizanceValue("中外合资企业");
-		}else if (cognizance==3) {
-    		jltfispPsMaterialInfo.setCognizanceValue("国有企业");
-		}else {
-    		jltfispPsMaterialInfo.setCognizanceValue("集体企业");
-		}
+    	JltfispPsMaterialInfo jltfispPsMaterialInfo = subsidyService.getJltfispPsMaterialInfoByInfoId(infoId);
     	Map<String,Object> variables = new HashMap<String,Object>();
     	 variables.put("jltfispCoBaseDto", jltfispCoBaseDto);
     	 variables.put("jltfispPsInfoList", jltfispPsInfoList);
     	 variables.put("jltfispPsMaterialInfo", jltfispPsMaterialInfo);
+    	 BusinessApplayAudit params = new BusinessApplayAudit();
+     	params.setUserId(user.getId());
+     	params.setType(businessType.toString());
+     	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
+     	variables.put("applayAudits", applayAudit);
     	 String basePath = request.getSession().getServletContext()  
                  .getRealPath("/");  
     	 PdfGenerator.printPDF(basePath, variables, "保费补贴申请", response,"subsidyApplyDetail.ftl");
     }
     
     @RequestMapping("/printFinanceApply")
-    public void printFinanceApply(HttpServletRequest request,HttpServletResponse response,Integer businessType){
+    public void printFinanceApply(HttpServletRequest request,HttpServletResponse response,Integer businessType,Integer infoId){
     	
     	Map<String,Object> variables = new HashMap<String,Object>();
     	JltfispUser user=loginService.getCurrentUser();
-	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(), businessType);
+	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(infoId);
 	      
 	      SysDict dict = dictionaryService.getValueByTypeCode(1002, jltfispCoBaseDto2.getTecdomain());
 	      jltfispCoBaseDto2.setTecdomain(dict.getValue());
-	      String technologyqualifications = jltfispCoBaseDto2.getTechnologyqualifications();
-	      if("1".equals(technologyqualifications)) {
-	    	  jltfispCoBaseDto2.setTechnologyqualifications("高科技企业");
-	      }else if("2".equals(technologyqualifications)) {
-	    	  jltfispCoBaseDto2.setTechnologyqualifications("科技小巨人企业");
-	      }else if("3".equals(technologyqualifications)) {
-	    	  jltfispCoBaseDto2.setTechnologyqualifications("科技小巨人培训企业");
-	      }else {
-	    	  jltfispCoBaseDto2.setTechnologyqualifications("软件企业");
-		}
-	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto2.getId());
+	      String createTime = jltfispCoBaseDto2.getCreateTime();
+	      if(createTime!=null){
+		    	String year2 = createTime.substring(0, 4);//获取年份
+		    	String month = createTime.substring(5, 7); //获取月份
+		    	String date = createTime.substring(8, 10);//获取日期
+		    	int year = Integer.parseInt(year2);
+		    	variables.put("year", year);
+		    	variables.put("month", month);
+		    	variables.put("date", date);
+	      }
+	      else{
+		   		 Calendar cal = Calendar.getInstance();  
+		   		 int year =cal.get(Calendar.YEAR);  
+		   		 int month =  cal.get(Calendar.MONTH) + 1;  
+		   		 int date = cal.get(Calendar.DAY_OF_MONTH); 
+		   		 variables.put("year", year);
+		         variables.put("month", month);
+		    	 variables.put("date", date);
+		   	}
+	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(infoId);
 	      variables.put("jltfispFinMaterial3", jltfispFinMaterial3);
 		  JltfispArea  JltfispArea1= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv());
 		  String provName= JltfispArea1.getName();
@@ -309,12 +361,18 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 		  variables.put("provName", provName);
 		  variables.put("cityName", cityName);
 		  variables.put("areaName", areaName);
+		  variables.put("user", user);
 		  List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
-	      shareholderList=this.financeApplyService.getShareholderlistByInfoId(jltfispCoBaseDto2.getId());
+	      shareholderList=this.financeApplyService.getShareholderlistByInfoId(infoId);
 	      if(shareholderList!=null){
 	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      }
 	      variables.put("jltfispCoBaseDto2", jltfispCoBaseDto2);
+	      BusinessApplayAudit params = new BusinessApplayAudit();
+	    	params.setUserId(user.getId());
+	    	params.setType(businessType.toString());
+	    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
+	    	variables.put("applayAudits", applayAudit);
 	      String basePath = request.getSession().getServletContext()  
 	                 .getRealPath("/");  
 	     PdfGenerator.printPDF(basePath, variables, "股权融资申请", response,"financeApplyDetail.ftl");

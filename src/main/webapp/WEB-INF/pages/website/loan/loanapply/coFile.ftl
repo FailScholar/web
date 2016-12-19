@@ -121,7 +121,7 @@
                                 </tr>
                             </table>
                             </form>
-                            <div class="btnFld"><a href="${path}/anon/loan/fillinApply?applytype=${applytype}"><input type="button" value="填写申请表" class="btnSave" /></a><a href="${path}/loan/onlineApplyPage"><input type="button" class="btnCan" value="取消" /></a></div>
+                            <div class="btnFld"><a href="${path}/anon/loan/fillinApply?applytype=${applytype}"><input type="button" value="填写申请表" class="btnSave" /></a><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="取消" /></a></div>
                         </div>
                     </div>
                 </div>

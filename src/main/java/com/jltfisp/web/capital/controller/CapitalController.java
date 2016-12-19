@@ -1,6 +1,5 @@
 package com.jltfisp.web.capital.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +10,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageInfo;
 import com.jltfisp.web.capital.entity.JltfispCapital;
 import com.jltfisp.web.capital.service.CapitalService;
 import com.jltfisp.web.column.entity.JltfispColumn;
+import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.news.entity.DictColumnDto;
+import com.jltfisp.web.news.service.IDictColumnService;
 import com.jltfisp.web.pager.entity.PagerModel;
 
 @Controller
@@ -22,6 +23,12 @@ public class CapitalController {
 	
 	@Autowired
     private CapitalService capitalService;
+	
+	@Autowired
+    private ColumnService columnService;
+	
+	@Autowired
+    private IDictColumnService dictColumnService;
 	
    /**
     * 
@@ -33,8 +40,9 @@ public class CapitalController {
     * @return String
     */ 
     @RequestMapping("/perm/capital")
-    public String capital(HttpServletRequest request){
+    public String capital(HttpServletRequest request,Integer columnId){
     	List<JltfispColumn> columnList=this.capitalService.getJltfispColumnList(5);
+    	request.setAttribute("columnId", columnId);
     	request.setAttribute("columnList", columnList);
         return "/website/capital/capital";
     }
@@ -61,8 +69,6 @@ public class CapitalController {
  	    mv.addObject("columnId",columnId);
  	    mv.addObject("url","anon/capital");
  	    mv.addObject("pm",pm);
-//    	mv.addObject("pageInfo",pageInfo);
-//    	mv.addObject("captialList", captialList);
     	return mv;
     }
     
@@ -81,7 +87,11 @@ public class CapitalController {
 		/**浏览记录加一**/
 		this.capitalService.updateCapitalPv(id);
 		/**根据id查询具体的信息**/
-		JltfispCapital capitalInfoDetail=this.capitalService.getCapitalDetail(id);		
+		JltfispCapital capitalInfoDetail=this.capitalService.getCapitalDetail(id);	
+		JltfispColumn jltfispColumn  = this.columnService.getColumnById(capitalInfoDetail.getColumnId());
+		DictColumnDto dictColumnDto  =this.dictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
+		request.setAttribute("jltfispColumn", jltfispColumn);
+		request.setAttribute("dictColumnDto", dictColumnDto);
 		request.setAttribute("capitalInfoDetail", capitalInfoDetail);
 		return "/website/capital/capitalInfoDetail";
 	}

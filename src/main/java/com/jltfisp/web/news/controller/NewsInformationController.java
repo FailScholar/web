@@ -44,13 +44,13 @@ public class NewsInformationController {
         if(columnId !=null){
         	 request.setAttribute("columnId", columnId);
         	 //获取当前页的数据，且显示12条
-             datas=newsInformationSevice.getNewsInformationPageList(0, 12,columnId);
+             datas=newsInformationSevice.getNewsInformationPageList(0, 8,columnId);
            //获取当前子栏目下所有的数据总数
              total =newsInformationSevice.getNewsInfoPageCount(columnId);
         }else if(columnList !=null && columnList.size()>0){
         	 request.setAttribute("columnId", columnList.get(0).getId());
         	 //获取当前页的数据，且显示12条
-             datas=newsInformationSevice.getNewsInformationPageList(0, 12,columnList.get(0).getId());
+             datas=newsInformationSevice.getNewsInformationPageList(0, 8,columnList.get(0).getId());
            //获取当前子栏目下所有的数据总数
              total =newsInformationSevice.getNewsInfoPageCount(columnList.get(0).getId());
         }
@@ -75,7 +75,7 @@ public class NewsInformationController {
 //     int total =newsInformationSevice.getNewsInfoPageCount(Integer.parseInt(columnId));
      int total =newsInformationSevice.getNewsInfoPageCount(columnId);
      //获取当前页的数据，且显示12条
-     List<NewsInformation>  datas=newsInformationSevice.getNewsInformationPageList(rows, 12,columnId);
+     List<NewsInformation>  datas=newsInformationSevice.getNewsInformationPageList(rows, 8,columnId);
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);

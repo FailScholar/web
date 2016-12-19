@@ -16,7 +16,7 @@
             <!--content开始-->
               <div class="content">
                   <div class="bread">
-                      <a href="javascript:;">首页</a>&gt;<a href="javascript:;">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
+                      <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-4);">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
                   </div>
                   <div class="calt">
                       <p>${applyname}</p>
@@ -56,7 +56,7 @@
                           <#include "website/loan/loanapply/coFinancialView.ftl"/>
                           <!--附件-->
                           <#include "website/loan/loanapply/coFileView.ftl"/>
-                          <div class="btnFld"><input type="button" value="确认提交" class="btnSave" /><input type="button" value="打印输出" onclick="${path}/business/printLoanPDF?businessType=${applytype}" class="btnSave" /><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="返回修改" /></a></div>
+                          <div class="btnFld"><input type="button" value="确认提交" class="btnSave" /><a href="${path}/business/printLoanPDF?businessType=${applytype}&infoId=${coAll.jltfispCoBase.id}"><input type="button" value="打印输出"  class="btnSave" /></a><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="返回修改" /></a></div>
                           <br/>
                           <br/>
                           <br/>
@@ -157,7 +157,7 @@ $('.nlist li').click(function(){
             $(this).parent().siblings(".nlistCont").hide().eq($(this).index()).show();
         });
         
-  $('.btnSave').click(function(){
+  $('.btnSave').eq(0).click(function(){
   window.location.href="${path}/anon/loan/loanSubmit?applytype="+applytype;
   });
 <!--切换时间Tab页-->
@@ -183,7 +183,7 @@ function coDebtTable(year){
                     var year =year;
                     $.ajax({
                     type: "POST",
-                    url: "${path}/anon/loan/selectCoDebtTable",
+                    url: "${path}/anon/loan/selectCoDebtTableView",
                     data: {year:year,applytype:applytype},
                     dateType:"json",
                     success: function(msg){

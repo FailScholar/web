@@ -199,32 +199,32 @@
                                     <td><input value="${coAll.jltfispCoFinancialList[20].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[20].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[20].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[20].startTime?date != "">${coAll.jltfispCoFinancialList[20].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[20].endTime?date != "">${coAll.jltfispCoFinancialList[20].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[20].startTime?exists)>${coAll.jltfispCoFinancialList[20].startTime?date}</#if>" name="startTime" id="startTime1" onClick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime1\')}'})" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[20].endTime?exists)>${coAll.jltfispCoFinancialList[20].endTime?date}</#if>" name="endTime" id="endTime1" onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime1\')}'})" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
                                     <td><input value="${coAll.jltfispCoFinancialList[21].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[21].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[21].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[21].startTime?date != "">${coAll.jltfispCoFinancialList[21].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[21].endTime?date != "">${coAll.jltfispCoFinancialList[21].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[21].startTime?exists)>${coAll.jltfispCoFinancialList[21].startTime?date}</#if>" name="startTime" id="startTime2" onClick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime2\')}'})" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[21].endTime?exists)>${coAll.jltfispCoFinancialList[21].endTime?date}</#if>" name="endTime" id="endTime2" onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime2\')}'})" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
                                     <td><input value="${coAll.jltfispCoFinancialList[22].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[22].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[22].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[22].startTime?date != ''>${coAll.jltfispCoFinancialList[22].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[22].endTime?date != ''>${coAll.jltfispCoFinancialList[22].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[22].startTime?exists)>${coAll.jltfispCoFinancialList[22].startTime?date}</#if>" name="startTime" id="startTime3" onClick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime3\')}'})" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[22].endTime?exists)>${coAll.jltfispCoFinancialList[22].endTime?date}</#if>" name="endTime" id="endTime3" onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime3\')}'})" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
                                     <td><input value="${coAll.jltfispCoFinancialList[23].loanBank}" name="loanBank" id="loanBank" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[23].loanAccount}" name="loanAccount" id="loanAccount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[23].sureMethod}" name="sureMethod" id="sureMethod" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[23].startTime?date != ''>${coAll.jltfispCoFinancialList[23].startTime?date}</#if>" name="startTime" id="startTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
-                                    <td><input value="<#if coAll.jltfispCoFinancialList[23].endTime?date != ''>${coAll.jltfispCoFinancialList[23].endTime?date}</#if>" name="endTime" id="endTime" onClick="WdatePicker()" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[23].startTime?exists)>${coAll.jltfispCoFinancialList[23].startTime?date}</#if>" name="startTime" id="startTime4" onClick="WdatePicker({maxDate:'#F{$dp.$D(\'endTime4\')}'})" type="text" class="txt2 validate[required]" /></td>
+                                    <td><input value="<#if (coAll.jltfispCoFinancialList[23].endTime?exists)>${coAll.jltfispCoFinancialList[23].endTime?date}</#if>" name="endTime" id="endTime4" onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime4\')}'})" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
                                 	<td><b>其他金融机构融资</b></td>
@@ -277,5 +277,5 @@
                                 </tr>
                             </table>
                             </form>
-                            <div class="btnFld"><input type="button" value="保存并下一步" class="btnSave" /><a href="${path}/loan/onlineApplyPage"><input type="button" class="btnCan" value="取消" /></a></div>
+                            <div class="btnFld"><input type="button" value="保存并下一步" class="btnSave" /><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="取消" /></a></div>
                         </div>

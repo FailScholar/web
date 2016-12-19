@@ -5,7 +5,7 @@
 package com.jltfisp.sys.initialize;
 
 import com.jltfisp.index.service.IndexService;
-import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.login.service.LoginService;
 import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.redis.RedisService;
 import com.jltfisp.web.user.service.UserService;
@@ -16,7 +16,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -31,6 +30,9 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
 
     @Autowired
     private RedisService<Serializable, Object> redisService;
+    @Autowired
+    private LoginService loginService;
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -60,8 +62,7 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
      * 为了注册时实时验证邮箱和公司名称是否已经存在
      */
     private void cacheEmailAndName(){
-        List<JltfispUser> list = userService.getAllUserEmailAndName();
-        redisService.putKV("allUser",list);
+        loginService.refreshUserCache();
     }
 
     /**

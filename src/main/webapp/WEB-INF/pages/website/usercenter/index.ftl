@@ -56,6 +56,16 @@ function userForm(){
 	$.cookie('userinfoIndex', 1, {path: '/'});
 	$("#insForm").submit();
 }
+
+function applyInstitution(columnId){
+		$.post("${path}/institution/checkApply",function(msg){
+			if(msg != ""){
+				dialog.tipsPop('ban-pop','提示',msg,'确定');
+			}else{
+				$(".content").load("${path}/anon/institutionGuide",{columnId: columnId});
+			}
+		});
+	}
   </script>
   </head>
 
@@ -102,11 +112,11 @@ function userForm(){
                           <#--最多显示7个，多的显示更多-->
                               <#list columnList as column>
                               	<#if (column_index <7)>
-								 <a href="javascript:;">${column.columnName}</a>
+								 <a href="${path}/expert/expertGuide?columnId=${column.id}">${column.columnName}</a>
 							  	</#if>
 							  </#list>
                               <#if (columnList?size >6)>
-                              	<a href="${path}/perm/institution"><span class="bds_more">更多></span></a>
+                              	<a href="${path}/perm/expert"><span class="bds_more">更多></span></a>
                               </#if>
                               
                               <p></p>
@@ -118,7 +128,7 @@ function userForm(){
                           <#--最多显示7个，多的显示更多-->
                               <#list columnList as column>
                               	<#if (column_index <7)>
-								 <a href="${path}/institution/institutionApply">${column.columnName}</a>
+								 <a href="javascript:applyInstitution(${column.id});">${column.columnName}</a>
 							  	</#if>
 							  </#list>
                               <#if (columnList?size >6)>
@@ -139,20 +149,20 @@ function userForm(){
                   <div class="infoList pi" style="display:none;">
                    	<form action="${path}/user/updateUser" method="post" id="insForm">
                   	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
-                  	  <input type="hidden" name="photoPath" id="photoPath"/>
+                  	  <input type="hidden" name="photoPath" id="userlogo"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
                               <div class="uploadImg fl">
-                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px"/>
+                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
                                   <div class="upload">
                                       <div></div>
-                                      <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()"/>
+                                      <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()" accept=".jpg,.png,.gif"/>
                                   </div>
                               </div>
                               <div class="tip fl">
                                   <p><span class="red">*</span>建议尺寸200px*200px</p>
-                                  <p><span class="red">*</span>支持JPG、GIF、PNG格式</p>
+                                  <p><span class="red">*</span>支持JPG、GIF、PNG、JPEG格式</p>
                                   <p><span class="red">*</span>上传大小不超过1MB</p>
                               </div>
                           </div>
@@ -201,12 +211,12 @@ function userForm(){
                   <div class="infoList pi" style="display:none;">
                   <form action="${path}/user/updateUser" method="post" id="insForm">
                   	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
-                  	  <input type="hidden" name="photoPath" id="photoPath"/>
+                  	  <input type="hidden" name="photoPath" id="userlogo"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
                               <div class="uploadImg fl">
-                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px"/>
+                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
                                   <div class="upload">
                                       <div></div>
                                       <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()"/>
@@ -243,7 +253,7 @@ function userForm(){
                               </div>
                           </div>
                           <div class="per">
-                              <span class="sde fl">统一社会信用代码：</span>
+                              <span class="sde fl" style="width:130px">统一社会信用代码：</span>
                               <div class="fl">
                                   <input type="text" value="${user.socialCode}" readonly="readonly" class="txt" />
                               </div>
@@ -263,250 +273,10 @@ function userForm(){
 
 
 
-                  <#--通知通告开始-->
-                  <div class="infoList pi" style="display:none;">
-                      <table class="tab1">
-                          <thead>
-                          <tr>
-                              <th width="40%">标题</th>
-                              <th width="34%">发布时间</th>
-                              <th>操作</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <#list messageList as message>
-                          	 <tr>
-                              <td>${message.title}</td>
-                              <td>${(message.pushDate?string("yyyy-MM-dd HH:mm:ss"))}  </td>
-                              <td><a href="javascript:showDetail(${message.id})" class="scan">查看</a></td>
-                          </tr>
-                          </#list>
-                          </tbody>
-                      </table>
-                      <div class="paging">
-                          <p class="fl">显示<span>1</span>至<span>5</span>条，共<span>8</span>条</p>
-                          <div class="fr">每页显示行
-                              <select>
-                                  <option>5</option>
-                                  <option>10</option>
-                                  <option>15</option>
-                              </select>
-                              <a href="javascript:;" class="spage prevPg">&lt;</a><a href="javascript:;" class="spage nextPg">&gt;</a>
-                          </div>
-                      </div>
-                  </div>
-                    <#--通知通告结束-->
-
-
-                  <#--业务管理开始-->
-              <@shiro.hasAnyRoles name="企业会员,机构会员">
-                  <div class="infoList" style="display:none;">
-                      <p class="tit2">贷款申请类型</p>
-                      <ul class="aply">
-                          <li class="bbm">
-                              <h4>科技履约贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                          <li class="bbm">
-                              <h4>科技小巨人贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                          <li class="bbm">
-                              <h4>高新技术贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                          <li>
-                              <h4>科技微贷通贷款申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                          <li>
-                              <h4>保费补贴申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                          <li>
-                              <h4>股权融资申请</h4>
-                              <a href="${path}/anon/loan/guideApply?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                      </ul>
-                      <div class="clear"></div>
-                      <div class="grad"></div>
-                      <table class="tab1" style="width:1160px;">
-                          <thead>
-                          <tr>
-                              <th width="18.6%">我的申请记录</th>
-                              <th width="16.2%">企业名称</th>
-                              <th width="16.2%">融资金额/万元</th>
-                              <th>所属领域</th>
-                              <th>申请状态</th>
-                              <th width="11.2%">状态</th>
-                              <th width="11.2%">操作</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr>
-                              <td>科技履约贷款申请</td>
-                              <td>果果果果公司</td>
-                              <td>2222</td>
-                              <td>电子信息技术</td>
-                              <td>2016-10-31</td>
-                              <td>已提交</td>
-                              <td><a href="${path}/user/toApplyRecord" target="_blank">查看</a></td>
-                          </tr>
-                          <tr class="even">
-                              <td>科技小巨人贷款申请</td>
-                              <td>果果果果公司</td>
-                              <td>2222</td>
-                              <td>电子信息技术</td>
-                              <td>2016-10-31</td>
-                              <td><span class="green">通过</span></td>
-                              <td><a href="${path}/user/toApplyRecord" target="_blank">查看</a></td>
-                          </tr>
-                          <tr>
-                              <td>高新技术贷款申请</td>
-                              <td>果果果果公司</td>
-                              <td>2222</td>
-                              <td>电子信息技术</td>
-                              <td>2016-10-31</td>
-                              <td><span class="red">未通过</span></td>
-                              <td><a href="${path}/user/toApplyRecord" target="_blank">查看</a></td>
-                          </tr>
-                          </tbody>
-                      </table>
-                      <div class="paging" style="width:1160px; margin-bottom:40px;">
-                          <p class="fl">显示<span>1</span>至<span>5</span>条，共<span>8</span>条</p>
-                          <div class="fr">每页显示行
-                              <select>
-                                  <option>5</option>
-                                  <option>10</option>
-                                  <option>15</option>
-                              </select>
-                              <a href="javascript:;" class="spage prevPg">&lt;</a><a href="javascript:;" class="spage nextPg">&gt;</a>
-                          </div>
-                      </div>
-                  </div>
-              </@shiro.hasAnyRoles>
-                  <#--业务管理结束-->
 
 
 
-                  <#--我要咨询开始-->
-              <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
-                  <div class="infoList pi" style="display:none;">
-                      <form method="post" class="consult">
-                          <div>
-                              <span>咨询对象类型</span>
-                              <select class="selOpt">
-                                  <option>科技金融专员</option>
-                                  <option>科技金融专员</option>
-                                  <option>科技金融专员</option>
-                              </select>
-                          </div>
-                          <div>
-                              <span>我要咨询</span>
-                              <textarea class="csCont" placeholder="请输入咨询问题"></textarea>
-                          </div>
-                          <div>
-                              <input type="submit" value="确 定" class="btnCom" />
-                          </div>
-                      </form>
-                      <div class="grad"></div>
-                      <div class="result">
-                          <p>咨询记录及反馈</p>
-                          <table class="tab1" style="width:960px;">
-                              <thead>
-                              <tr>
-                                  <th width="30%">咨询类型</th>
-                                  <th width="30%">提交时间</th>
-                                  <th>状态</th>
-                                  <th>操作</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr>
-                                  <td>系统维护通知</td>
-                                  <td>2016年10月31日</td>
-                                  <td>已提交</td>
-                                  <td><a href="javascript:;" onClick="popCon01()">查看</a></td>
-                              </tr>
-                              <tr class="even">
-                                  <td>版本更新通知</td>
-                                  <td>2016年10月31日</td>
-                                  <td>已反馈</td>
-                                  <td><a href="javascript:;" onClick="popCon02()">查看</a></td>
-                              </tr>
-                              <tr>
-                                  <td>会员贷款信息通知</td>
-                                  <td>2016年10月31日</td>
-                                  <td>已提交</td>
-                                  <td><a href="javascript:;" onClick="popCon01()">查看</a></td>
-                              </tr>
-                              </tbody>
-                          </table>
-                          <div class="paging" style="width:960px;">
-                              <p class="fl">显示<span>1</span>至<span>5</span>条，共<span>8</span>条</p>
-                              <div class="fr">每页显示行
-                                  <select>
-                                      <option>5</option>
-                                      <option>10</option>
-                                      <option>15</option>
-                                  </select>
-                                  <a href="javascript:;" class="spage prevPg">&lt;</a><a href="javascript:;" class="spage nextPg">&gt;</a>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </@shiro.hasAnyRoles>
-                  <#--我要咨询结束-->
 
-
-
-                  <#--我要解答开始-->
-              <@shiro.hasRole name="专家会员">
-                  <div class="infoList pi" style="display:none;">
-                          <table class="tab1" style="width:960px;">
-                              <thead>
-                              <tr>
-                                  <th width="30%">咨询类型</th>
-                                  <th width="30%">提交时间</th>
-                                  <th>状态</th>
-                                  <th>操作</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr>
-                                  <td>系统维护通知</td>
-                                  <td>2016年10月31日</td>
-                                  <td>已提交</td>
-                                  <td><a href="javascript:;" onClick="popCon01()">查看</a></td>
-                              </tr>
-                              <tr class="even">
-                                  <td>版本更新通知</td>
-                                  <td>2016年10月31日</td>
-                                  <td>已反馈</td>
-                                  <td><a href="javascript:;" onClick="popCon02()">查看</a></td>
-                              </tr>
-                              <tr>
-                                  <td>会员贷款信息通知</td>
-                                  <td>2016年10月31日</td>
-                                  <td>已提交</td>
-                                  <td><a href="javascript:;" onClick="popCon01()">查看</a></td>
-                              </tr>
-                              </tbody>
-                          </table>
-                          <div class="paging" style="width:960px;">
-                              <p class="fl">显示<span>1</span>至<span>5</span>条，共<span>8</span>条</p>
-                              <div class="fr">每页显示行
-                                  <select>
-                                      <option>5</option>
-                                      <option>10</option>
-                                      <option>15</option>
-                                  </select>
-                                  <a href="javascript:;" class="spage prevPg">&lt;</a><a href="javascript:;" class="spage nextPg">&gt;</a>
-                              </div>
-                          </div>
-                  </div>
-              </@shiro.hasRole>
-                  <#--我要解答结束-->
 
 
                   <div class="clear"></div>
@@ -554,10 +324,6 @@ function userForm(){
 	        }
         });
 
-        $('.setInfo a').click(function(){
-            $(this).siblings('a').hide().end().hide();
-            $(this).siblings('p').html("您已"+$(this).text()).show();
-        });
 
         //用户信息修改
         $('.mod').click(function(){

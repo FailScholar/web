@@ -34,6 +34,13 @@ public class RegistServiceImpl implements RegistService {
     }
 
     @Override
+    public JltfispUser getAUser(String accountNumber) {
+        JltfispUser user = new JltfispUser();
+        user.setAccountNumber(accountNumber);
+        return registMapper.selectOne(user);
+    }
+
+    @Override
     public void updateUser(JltfispUser user) {
         registMapper.updateByPrimaryKeySelective(user);
     }

@@ -16,8 +16,8 @@
               </tr>
               <tr>
                   <th><b class="red">*</b>企业三排章</th>
-                  <td colspan="3"><input id="basicAccountBank" name="basicAccountBank" value="${jlfispPsBaseDto.basicAccountBank }" type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[1000]]" placeholder="基本户开户行" />
-	                  <input id="basicAccountName" name="basicAccountName" type="text"  value="${jlfispPsBaseDto.basicAccountName }" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[1000]]" placeholder="基本户户名" />
+                  <td colspan="3"><input id="basicAccountBank" name="basicAccountBank" value="${jlfispPsBaseDto.basicAccountBank }" type="text" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="基本户开户行" />
+	                  <input id="basicAccountName" name="basicAccountName" type="text"  value="${jlfispPsBaseDto.basicAccountName }" class="txt validate[required,minSize[1],maxSize[1000]]" placeholder="基本户户名" />
 	                  <input id="basicAccountCard" name="basicAccountCard" type="text" value="${jlfispPsBaseDto.basicAccountCard }"  class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[1000]]" placeholder="基本账户卡号" />
 	              </td>
               </tr>
@@ -102,7 +102,7 @@
                   <th>实际放贷日</th>
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt  shijifangdairi" placeholder="请输入实际放贷日" onClick="WdatePicker()" readonly="readonly" /></td>
                   <th>贷款期限</th>
-                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt daikuanqixian validate[custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" /></td>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt daikuanqixian validate[custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" />月</td>
                </tr>
             </table>
                  <#else>
@@ -141,7 +141,7 @@
                   <th>实际放贷日</th>
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt" placeholder="请输入实际放贷日" onClick="WdatePicker()" readonly="readonly" /></td>
                   <th>贷款期限</th>
-                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" /></td>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" />月</td>
                </tr>
             </table>
                </#if>
@@ -185,7 +185,7 @@
                   <th>实际放贷日</th>
                   <td><input name="jltfispPsInfoList[0].lendDate" type="text" class="txt " placeholder="请输入实际放贷日" onClick="WdatePicker()" readonly="readonly" /></td>
                   <th>贷款期限</th>
-                  <td><input name="jltfispPsInfoList[0].loanTerm" type="text" class="txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" /></td>
+                  <td><input name="jltfispPsInfoList[0].loanTerm" type="text" class="txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入贷款期限" />月</td>
               </tr>
             </table>
           </#if>

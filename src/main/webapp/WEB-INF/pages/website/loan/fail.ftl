@@ -18,9 +18,9 @@
             <div class="calt">
                 <div class="log proList pro4">
                     <form method="post" action="" class="ant">
-                        <h1 style="width:370px;">${failMes }</h1>
-                        <p class="antp" style="text-indent:0; font-size:16px;">请等待审核。</p>
-                        <p class="antp" style="text-indent:0;">等待时间：<b class="second">5</b> 秒后页面自动<span class="ml10 mr10"><a href="${path}/index">跳转</a></span>或者<span class="ml10 mr10"><a href="${path}/index">返回首页</a></span></p>
+                        <h1 style="width:385px;">${failMes }</h1>
+                        <p class="antp" style="text-indent:0; font-size:16px;">请及时核对已申请项目的审批情况！</p>
+                        <p class="antp" style="text-indent:0;font-size:16px;">等待时间：<b class="second">5</b> 秒后页面自动<span class="ml10 mr10"><a href="${path}/index">跳转</a></span>或者<span class="ml10 mr10"><a href="${path}/index">返回首页</a></span></p>
                     </form>
                 </div>
             </div>

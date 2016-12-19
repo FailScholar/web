@@ -17,6 +17,8 @@ public interface RegistService {
 
     JltfispUser getAUser(Integer id);
 
+    JltfispUser getAUser(String accountNumber);
+
     void updateUser(JltfispUser user);
 
     void correlationRoles(Integer userId, Integer roleId);

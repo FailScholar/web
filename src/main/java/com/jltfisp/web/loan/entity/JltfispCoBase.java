@@ -33,7 +33,7 @@ public class JltfispCoBase {
      * 注册资本
      */
     @Column(name = "registeredCapital")
-    private float registeredCapital;
+    private double registeredCapital;
 
     /**
      * 注册地址
@@ -481,11 +481,11 @@ public class JltfispCoBase {
 		this.establishTime = establishTime;
 	}
 
-	public float getRegisteredCapital() {
+	public double getRegisteredCapital() {
 		return registeredCapital;
 	}
 
-	public void setRegisteredCapital(float registeredCapital) {
+	public void setRegisteredCapital(double registeredCapital) {
 		this.registeredCapital = registeredCapital;
 	}
 

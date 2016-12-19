@@ -77,7 +77,7 @@ public class CommunicateController extends BaseController<Communicate> {
 		String result = handlePage(request, info, t);
 		Role role = new Role();
 		role.setParentId(6);
-		List<Role> roleList = roleService.selectBySample(role, info);
+		List<Role> roleList = roleService.selectBySample(role, null);
 		request.setAttribute("roleList", roleList);
 		return result;
 	}

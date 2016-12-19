@@ -53,7 +53,7 @@
             <include refid="Example_Where_Clause"/>
             </where>
         </if>
-        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_BY != null">order by a.push_date desc</if>
         <if test="_LM != null">limit #{_LM}</if>
         <if test="_ST != null">offset #{_ST}</if>
     </select>

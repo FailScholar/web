@@ -70,6 +70,44 @@
 		jcb.technology_qualifications as technologyqualifications,
 		jcb.otherDesc as otherDesc
 	from jltfisp_co_base jcb
-	where jcb.user_id=#{user_id} and jcb.business_type=#{business_type}
+	where jcb.apply_state=0 and jcb.user_id=#{user_id} and jcb.business_type=#{business_type}
+	</select>
+	
+	<select id="getJltfispFinanceAndShareholdersDtoByInfoId" parameterType="int" resultMap="jltfispFinance">
+	select
+		jcb.id as id,
+		jcb.company as company,
+		jcb.corporateRepresentative as corporateRepresentative,
+		jcb.establishTime as establishTime,
+		jcb.registeredCapital as registeredCapital,
+		jcb.socialCreditCode as socialCreditCode,
+		jcb.tec_domain as tecdomain,
+		jcb.last_year_sell_scale as lastyearsellscale,
+		jcb.officeProv as officeProv,
+		jcb.officeCity as officeCity,
+		jcb.officeArea as officeArea,
+		jcb.officeAddress as officeAddress,
+		jcb.email as email,
+		jcb.worker_number as workernumber,
+		jcb.registeredAddress as registeredAddress,
+		jcb.referee_company as refereecompany,
+		jcb.referee as referee ,
+		jcb.referee_mobile as refereemobile,
+		jcb.referee_email as refereeemail,
+		jcb.company_url as companyurl,
+		jcb.linkMan as linkMan,
+		jcb.zoneDescription as zoneDescription,
+		jcb.phoneOrFax as phoneOrFax,
+		jcb.linkMobile as linkMobile,
+		jcb.linkEmail as linkEmail,
+		jcb.createTime as createTime ,
+		jcb.user_id as userid,
+		jcb.project_name as projectname,
+		jcb.market_product_summary as marketproductsummary,
+		jcb.manager_team_summary as managerteamsummary,
+		jcb.technology_qualifications as technologyqualifications,
+		jcb.otherDesc as otherDesc
+	from jltfisp_co_base jcb
+	where id=#{infoId}
 	</select>
 </mapper>

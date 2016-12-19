@@ -27,7 +27,7 @@ public class JltfispFinanceAndShareholdersDto {
     /**
      * 注册资本
      */
-    private float registeredCapital;
+    private Float registeredCapital;
     
     /**
      * 组织机构代码
@@ -201,11 +201,11 @@ public class JltfispFinanceAndShareholdersDto {
 		this.establishTime = establishTime;
 	}
 
-	public float getRegisteredCapital() {
+	public Float getRegisteredCapital() {
 		return registeredCapital;
 	}
 
-	public void setRegisteredCapital(float registeredCapital) {
+	public void setRegisteredCapital(Float registeredCapital) {
 		this.registeredCapital = registeredCapital;
 	}
 

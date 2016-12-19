@@ -35,13 +35,13 @@ public class SubsidyServiceImpl implements ISubsidyService {
     private CoBaseMapper coBaseMapper;
 
 	@Override
-	public JlfispPsBaseDto getJlfispPsBaseDtoByUserId(Integer id) {
-		List<JlfispPsBaseDto> jlfispPsBaseDtoList=this.subSidMapper.getJlfispPsBaseDtoByUserId(id);
-		if(jlfispPsBaseDtoList !=null && jlfispPsBaseDtoList.size()>0){
+	public JlfispPsBaseDto getJlfispPsBaseDtoByUserId(Integer userId,Integer id) {
+		JlfispPsBaseDto jlfispPsBaseDto=this.subSidMapper.getJlfispPsBaseDtoByUserId(userId,id);
+		if(jlfispPsBaseDto !=null){
 			//查询企业基本信息下面对应的保费补贴信息
-			List<JltfispPsInfo> jltfispPsInfoList=this.subSidMapper.getJltfispPsInfoListByBaseId(jlfispPsBaseDtoList.get(0).getId());
-			jlfispPsBaseDtoList.get(0).setJltfispPsInfoList(jltfispPsInfoList);
-			return  jlfispPsBaseDtoList.get(0);
+			List<JltfispPsInfo> jltfispPsInfoList=this.subSidMapper.getJltfispPsInfoListByBaseId(jlfispPsBaseDto.getId());
+			jlfispPsBaseDto.setJltfispPsInfoList(jltfispPsInfoList);
+			return  jlfispPsBaseDto;
 		}
 			return null;
 	}
@@ -102,5 +102,27 @@ public class SubsidyServiceImpl implements ISubsidyService {
 	public JltfispPsMaterialInfo selectByPk(Integer id) {
 		// TODO Auto-generated method stub
 		return psMaterialInfoMapper.selectByPk(id);
+	}
+
+	@Override
+	public JltfispCoBaseDto addOrUpdatejltfispCoBaseDto(Integer userId,
+			JltfispCoBaseDto coBase) {
+		JltfispCoBaseDto JltfispCoBaseDto=coBaseMapper.getCoBaseContextByUserIdAndType(coBase.getUserid(),coBase.getBusinesstype(),0);
+		//如果数据库中已有该记录，则更新该记录
+		if(JltfispCoBaseDto!=null){
+	    	 //先删除对应的保费补贴信息
+	    	 List<JltfispPsInfo> jltfispPsInfoList=this.subSidMapper.getJltfispPsInfoListByBaseId(JltfispCoBaseDto.getId());
+	         if(jltfispPsInfoList!=null && jltfispPsInfoList.size()>0){
+	        	 for(JltfispPsInfo sltfispPsInfo:jltfispPsInfoList){
+	        		 this.psInfoMapper.delete(sltfispPsInfo);
+	        	 }
+	         }
+		     coBase.setId(JltfispCoBaseDto.getId());
+		     coBaseMapper.updateByPrimaryKey(coBase);
+		     return	coBase;
+		}else{
+			 coBaseMapper.insert(coBase);
+			 return  coBase;
+		}
 	}
 }

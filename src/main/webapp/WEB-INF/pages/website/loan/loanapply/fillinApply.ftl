@@ -22,7 +22,7 @@
             <!--content开始-->
             <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-3);">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                 	<p>${applyname}</p>
@@ -58,7 +58,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.label3}</th>
-                                    <td colspan="3"><textarea name="useDesc" id="useDesc" class="txta validate[required,minSize[1],maxSize[1000]]" style="height:100px;">${coAll.jltfispCoFillInApply.useDesc}</textarea></td>
+                                    <td colspan="3"><textarea name="useDesc" id="useDesc" class="txta validate[required,minSize[1],maxSize[255]]" style="height:100px;">${coAll.jltfispCoFillInApply.useDesc}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.label4}</th>
@@ -80,7 +80,7 @@
                                     </#if>
                                     是</label></td>
                                     <th>${loanformManage.label6}</th>
-                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if coAll.jltfispCoFillInApply.historyEndtime?date !="">${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker()" type="text" class="txt" /></label></td>
+                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker()" type="text" class="txt" /></label></td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.label7}</th>
@@ -103,16 +103,16 @@
                                 <tr>
                                     <th>${loanformManage.label9}</th>
                                     <td>
-                                    <input value="${coAll.jltfispCoFillInApply.bankid}" name="bankid" id="bankid" type="text" class="txt2 validate[maxSize[1000]]" />
+                                    <input value="${coAll.jltfispCoFillInApply.bankid}" name="bankid" id="bankid" type="text" class="txt2 validate[maxSize[255]]" />
                                     </td>
                                     <th>${loanformManage.label10}</th>
                                     <td>
-                                    <input value="${coAll.jltfispCoFillInApply.riskid}" name="riskid" id="riskid" type="text" class="txt2 validate[maxSize[1000]]" />
+                                    <input value="${coAll.jltfispCoFillInApply.riskid}" name="riskid" id="riskid" type="text" class="txt2 validate[maxSize[255]]" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.label11}</th>
-                                    <td><input value="${coAll.jltfispCoFillInApply.bankBranch}" name="bankBranch" id="bankBranch" type="text" class="txt2 validate[maxSize[1000]]" /></td>
+                                    <td><input value="${coAll.jltfispCoFillInApply.bankBranch}" name="bankBranch" id="bankBranch" type="text" class="txt2 validate[maxSize[255]]" /></td>
                                     <th>${loanformManage.label12}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isOtherbankLoan ==1>
@@ -124,7 +124,7 @@
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.label13}</th>
-                                    <td><input value="${coAll.jltfispCoFillInApply.loanOffice}" name="loanOffice" id="loanOffice" type="text" class="txt2 validate[maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input value="${coAll.jltfispCoFillInApply.loanOffice}" name="loanOffice" id="loanOffice" type="text" class="txt2 validate[maxSize[255]]" placeholder="请输入" /></td>
                                     <th>${loanformManage.label14}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.loanOfficeMobile}" name="loanOfficeMobile" id="loanOfficeMobile" type="text" class="txt2 validate[custom[phone],maxSize[11]]" placeholder="请输入" /></td>
                                 </tr>
@@ -155,15 +155,15 @@
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.label17}</th>
-                                    <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number],maxSize[1000]]" placeholder="请输入" />万元</td>
+                                    <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number],maxSize[255]]" placeholder="请输入" />万元</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.label18}</th>
-                                    <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[1000]]">${coAll.jltfispCoFillInApply.finaneAmount}</textarea></td>
+                                    <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[255]]">${coAll.jltfispCoFillInApply.finaneAmount}</textarea></td>
                                 </tr>
                             </table>
                             </form>
-                            <div class="btnFld"><input type="button" value="保存预览" class="btnSave" /><a href="${path}/loan/onlineApplyPage"><input type="button" class="btnCan" value="返回上一步" /></a></div>
+                            <div class="btnFld"><input type="button" value="保存预览" class="btnSave" /><a href="${path}/loan/onlineApplyPage?applytype=${applytype}"><input type="button" class="btnCan" value="返回上一步" /></a></div>
                         </div>
                     </div>
                 </div>

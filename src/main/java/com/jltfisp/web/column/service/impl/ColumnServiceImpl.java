@@ -56,5 +56,10 @@ public class ColumnServiceImpl implements ColumnService {
 		return columnMapper.selectColumnOne(parentColumnid, columnType);
 	}
 
+	@Override
+	public JltfispColumn getColumnById(Integer id) {
+		return columnMapper.getColumnById(id);
+	}
+
 
 }

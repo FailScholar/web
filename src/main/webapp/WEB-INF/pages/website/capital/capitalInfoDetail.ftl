@@ -16,7 +16,7 @@
               <!--content开始-->
                <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">${capitalInfoDetail.columnName}</a>&gt;<a href="javascript:;">详情</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/capital">${dictColumnDto.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${jltfispColumn.id})">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">详情</a>
                 </div>
                 <div class="video">
                 	<h1>${capitalInfoDetail.title}</h1>
@@ -39,3 +39,8 @@
   <#include "website/common/footer.ftl" />
   </body>
 </html>
+<script type="text/javascript">
+ function goBack(columnId){
+	 window.location.href="${path}/perm/capital?columnId="+columnId;
+	 }
+</script>

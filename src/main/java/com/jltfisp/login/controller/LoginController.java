@@ -85,7 +85,7 @@ public class LoginController {
     	
     	Set<String> roles = loginService.findRoles(user.getAccountNumber());
 		for (String roleName : roles) {
-			if(!roleName.equals("个人会员") && !roleName.equals("企业会员") && !roleName.equals("专家会员")){
+			if(!roleName.equals("个人会员") && !roleName.equals("企业会员") && !roleName.equals("专家会员")&& !roleName.equals("机构会员")){
 				user.setRoleName(roleName);
 				break;
 			}
