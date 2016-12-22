@@ -166,6 +166,12 @@ public class JltfispExpert {
     @Column(name = "email")
     private String email;
     
+    /**
+     * 创建时间
+     */
+    @Column(name = "createTime")
+    private Date createTime;
+    
     public String getPhone() {
         return phone;
     }
@@ -372,6 +378,14 @@ public class JltfispExpert {
 
 	public void setWorkcompany(String workcompany) {
 		this.workcompany = workcompany;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
     
 }

@@ -74,6 +74,7 @@ public class CommunicateController extends BaseController<Communicate> {
 		JltfispUser currentUser = loginService.getCurrentUser();
 		t.setSendUser(currentUser.getId());
 		PageInfo info  = preparePageinfo(request,t);
+		info.setBy("time");
 		String result = handlePage(request, info, t);
 		Role role = new Role();
 		role.setParentId(6);
@@ -96,6 +97,7 @@ public class CommunicateController extends BaseController<Communicate> {
 		}
 		
 		PageInfo info  = preparePageinfo(request,t);
+		info.setBy("time");
 		String result = handlePage(request, info, t);
 		return getFileBasePath()+"/listAnsCommunicate";
 	}

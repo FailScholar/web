@@ -71,6 +71,7 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(6);
     var columnId="${columnId}";
     var isFrontPage="${isFrontPage}";
     $(document).ready(function(e) {

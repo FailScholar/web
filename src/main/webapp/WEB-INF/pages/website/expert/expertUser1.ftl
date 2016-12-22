@@ -40,7 +40,7 @@
                                         <span class="notice fr">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
-                                            <input type="file" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
+                                            <input type="file" style="cursor:pointer;" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
                                             <input name="userlogo" id="userlogo" type="hidden"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
@@ -76,7 +76,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label6}</th>
-                                    <td colspan="3"><input type="text" value="${jltfispExpert.workcompany}" class="txt validate[required,maxSize[255]]" name="workcompany" id="workcompany"  placeholder="请输入" /></td>
+                                    <td colspan="3"><input type="text" value="${jltfispExpert.businesaddress}" class="txt validate[required,maxSize[255]]" name="businesaddress" id="businesaddress"  placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label7}</th>
@@ -127,16 +127,16 @@
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label16}</th>
                                     <td colspan="3">
-                                        <input name="businesaddress" value="${jltfispExpert.businesaddress}" id="businesaddress" type="text" class="txt validate[required,maxSize[255]]" placeholder="办公地址" />
+                                        <input name="workcompany" value="${jltfispExpert.workcompany}" id="workcompany" type="text" class="txt validate[required,maxSize[255]]" placeholder="办公地址" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label20}</th>
-                                    <td colspan="3"><textarea class="txta validate[required,maxSize[255]]" name="educationalbackground" id="educationalbackground" >${jltfispExpert.educationalbackground}</textarea></td>
+                                    <td colspan="3"><textarea class="txta validate[required,maxSize[255]]" name="partfull"  id="partfull" >${jltfispExpert.partfull}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th>${finExpertManage.label21}</th>
-                                    <td colspan="3"><textarea name="partfull"  id="partfull" class="txta validate[maxSize[255]]">${jltfispExpert.partfull}</textarea></td>
+                                    <td colspan="3"><textarea name="educationalbackground" id="educationalbackground" class="txta validate[maxSize[255]]">${jltfispExpert.educationalbackground}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label22}</th>
@@ -153,7 +153,7 @@
                                         <span class="notice fl ml16">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
-                                            <input type="file" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
+                                            <input type="file" style="cursor:pointer;" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
                                             <input type="hidden" name="agencylogo" id="agencylogo"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
@@ -179,17 +179,17 @@
                                 <#list jltfispExpertDoMain as DoMain>
                                 
                                 <tr>
-                                    <td><input type="text" value="${DoMain.firstdomain}" class="txt validate[required,maxSize[1000]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
-                                    <td><input type="text" value="${DoMain.seconddomain}" class="txt validate[required,maxSize[1000]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
-                                    <td><input type="text" value="${DoMain.threedomain}" class="txt validate[required,maxSize[1000]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${DoMain.firstdomain}" class="txt validate[required,maxSize[255]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${DoMain.seconddomain}" class="txt validate[required,maxSize[255]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${DoMain.threedomain}" class="txt validate[required,maxSize[255]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
                                     <td><a href="javascript:;" class="fr delete">删除</a></td>
                                 </tr>
                                </#list>
                                <#else>
                                  <tr>
-                                    <td><input type="text"  class="txt validate[required,maxSize[1000]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
-                                    <td><input type="text"  class="txt validate[required,maxSize[1000]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
-                                    <td><input type="text"  class="txt validate[required,maxSize[1000]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
+                                    <td><input type="text"  class="txt validate[required,maxSize[255]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
+                                    <td><input type="text"  class="txt validate[required,maxSize[255]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
+                                    <td><input type="text"  class="txt validate[required,maxSize[255]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
                                     <td><a href="javascript:;" class="fr delete">删除</a></td>
                                 </tr>
                                </#if>
@@ -215,6 +215,7 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(6);
     var degree="${jltfispExpert.degree}";
     var technologydomain="${jltfispExpert.technologydomain}";
     $(document).ready(function(e) {
@@ -264,6 +265,11 @@
         //增加
         $('.add').click(function(){
             var node = $('.module tr:last').clone(true).removeClass('module');
+            node.find(":input").each(function(i){
+            if($(this).attr("type")!="button"){
+                $(this).val("");
+               }
+             });
             $('.module tr:last').after(node);
         });
         //删除

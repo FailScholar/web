@@ -80,6 +80,12 @@ public class CloudController extends BaseController<Cloud> {
 		request.setAttribute("pm",pm);
 		request.setAttribute("url","/perm/financing");
 		request.setAttribute("columnid", columnId);
+		if (columnId==47) {
+			request.setAttribute("pageSize", 9);
+		} else {
+			request.setAttribute("pageSize", 8);
+		}
+		
 		/*PageInfo info  = preparePageinfo(request,cloud);
 		handlePage(request, info, cloud);*/
 		JltfispColumn columnOne = columnService.getColumnOne(11, 6);

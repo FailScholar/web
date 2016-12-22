@@ -34,6 +34,12 @@ public class JltfispCoFile {
      */
     @Column(name = "file_path")
     private String filepath;
+    
+    /**
+     * 附件原名称
+     */
+    @Column(name = "preName")
+    private String preName;
 
 	public int getId() {
 		return id;
@@ -65,6 +71,14 @@ public class JltfispCoFile {
 
 	public void setFilepath(String filepath) {
 		this.filepath = filepath;
+	}
+
+	public String getPreName() {
+		return preName;
+	}
+
+	public void setPreName(String preName) {
+		this.preName = preName;
 	}
 
 }

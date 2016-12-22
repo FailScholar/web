@@ -26,7 +26,7 @@
     </div>
     <div class="video">
         <h1>${fincing.title}</h1>
-        <p><span class="time fl">${fincing.publishtime ?date}</span><span class="eye fr">${fincing.pv}</span></p>
+        <p style="width:450px;text-align:center;"><span class="time">${fincing.publishtime ?date}</span><span class="eye"  style="margin-left:20px;">${fincing.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${fincing.source}</span></p>
         <div class="clear"></div>
         <div class="artical" style="background-color:#fff;">
             <p>${fincing.content}</p>
@@ -45,3 +45,6 @@
 <#include "website/common/footer.ftl" />
 </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(7);
+</script>

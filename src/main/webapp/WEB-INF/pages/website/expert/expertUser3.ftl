@@ -40,7 +40,7 @@
                                             <span class="notice fr">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
                                             <div class="clear"></div>
                                             <div class="btnUp fl">
-                                                 <input type="file" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
+                                                 <input type="file" style="cursor:pointer;" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
                                                  <input name="userlogo" id="userlogo" type="hidden"/>
                                                 <a href="javascript:;">上传</a>
                                             </div>
@@ -76,7 +76,7 @@
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label6}</th>
-                                        <td colspan="3"><input value="${jltfispExpert.workcompany}" name="workcompany" id="workcompany" type="text" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
+                                        <td colspan="3"><input value="${jltfispExpert.businesaddress}" name="businesaddress" id="businesaddress" type="text" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label7}</th>
@@ -124,19 +124,19 @@
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label16}</th>
                                         <td colspan="3">
-                                            <input value="${jltfispExpert.businesaddress}" name="businesaddress" id="businesaddress" type="text" class="txt validate[required,maxSize[255]]" placeholder="详细地址" />
+                                            <input value="${jltfispExpert.workcompany}" name="workcompany" id="workcompany" type="text" class="txt validate[required,maxSize[255]]" placeholder="详细地址" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label20}</th>
                                         <td colspan="3">
-                                            <textarea name="educationalbackground" id="educationalbackground" class="txta validate[required,maxSize[255]]">${jltfispExpert.educationalbackground}</textarea>
+                                            <textarea name="partfull" id="partfull" class="txta validate[required,maxSize[255]]">${jltfispExpert.partfull}</textarea>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th><b class="red">*</b>${finExpertManage.label27}</th>
                                         <td colspan="3">
-                                            <textarea name="partfull" id="partfull" class="txta validate[required,maxSize[255]]">${jltfispExpert.partfull}</textarea>
+                                            <textarea name="educationalbackground" id="educationalbackground"  class="txta validate[required,maxSize[255]]">${jltfispExpert.educationalbackground}</textarea>
                                         </td>
                                     </tr>
                                     <tr>
@@ -152,7 +152,7 @@
                                             <span class="notice fl ml16">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
                                             <div class="clear"></div>
                                             <div class="btnUp fl">
-                                            <input type="file" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
+                                            <input type="file" style="cursor:pointer;" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
                                             <input type="hidden" name="agencylogo" id="agencylogo"/>
                                                 <a href="javascript:;">上传</a>
                                             </div>
@@ -183,6 +183,7 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(6);
     var degree="${jltfispExpert.degree}";
     var technologydomain="${jltfispExpert.technologydomain}";
     $(document).ready(function(e) {
@@ -242,7 +243,7 @@ function ajaxFileUpload(index) {
     }); 
 } 
 
-              <!--用户logo上传附件-->
+<!--用户logo上传附件-->
 function ajaxFileUploadUserLogo(index) {
     var index=index;
     $.ajaxFileUpload({
@@ -280,7 +281,6 @@ function ajaxFileUploadLogo() {
                 var width = json.width;
                 var height = json.height;
                 var url = '${path}/anon/imageCrop?pop=1&filePath='+filePath+"&width="+width+"&height="+height;
-                alert(url);
                 imgDialog = dialog({
 					width: 600,
 					height : 400,
@@ -297,6 +297,6 @@ function ajaxFileUploadLogo() {
         }
     }  
 );
-    return false;  
+    return false;
 } 
 </script>

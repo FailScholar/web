@@ -28,7 +28,7 @@
                   </div>
                   <div class="video">
                      <h1>${cloudDetail.title}</h1>
-				     <p><span class="time fl">${cloudDetail.publishTime ?date}</span><span class="eye fr">${cloudDetail.pv}</span></p>
+				     <p style="width:450px;text-align:center;"><span class="time">${cloudDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${cloudDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${cloudDetail.source}</span></p>
 				     <div class="clear"></div>
 				     <#if columnOne.id == columnid>
 				        <div class="media">
@@ -59,3 +59,6 @@
   <#include "website/common/footer.ftl" />
   </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(10);
+</script>

@@ -39,29 +39,29 @@
                         <input type="hidden" id="applyType"   name="applyType"   value="${applytype}"/>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>${loanformManage.label1}</th>
+                                    <th><b class="red">*</b>${loanformManage.loanLabel1}</th>
                                     <td ><input value="${coAll.jltfispCoFillInApply.applyAmount}" name="applyAmount" id="applyAmount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" />万元</td>
-                                    <th><b class="red">*</b>${loanformManage.label2}</th>
+                                    <th><b class="red">*</b>${loanformManage.loanLabel2}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.payCycle ==1>
-                                    <input value="1" type="radio" name="payCycle" id="payCycle" class="yes validate[required]" checked/>
+                                    <input value="1" type="radio" name="payCycle" id="payCycle" class="yes validate[payCyclerequired]" checked/>
                                     <#else>
-                                    <input value="1" type="radio" name="payCycle" id="payCycle" class="yes validate[required]" />
+                                    <input value="1" type="radio" name="payCycle" id="payCycle" class="yes validate[payCyclerequired]" />
                                     </#if>
                                     <span class="mr20">6个月</span></label><label>
                                     <#if coAll.jltfispCoFillInApply.payCycle ==2>
-                                    <input value="2" type="radio" name="payCycle" id="payCycle" class="yes validate[required]" checked/>
+                                    <input value="2" type="radio" name="payCycle" id="payCycle" class="yes validate[payCyclerequired]" checked/>
                                     <#else>
-                                     <input value="2" type="radio" name="payCycle" id="payCycle" class="yes validate[required]" />
+                                     <input value="2" type="radio" name="payCycle" id="payCycle" class="yes validate[payCyclerequired]" />
                                    </#if>
                                    <span class="mr20">12个月</span></label></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>${loanformManage.label3}</th>
+                                    <th><b class="red">*</b>${loanformManage.loanLabel3}</th>
                                     <td colspan="3"><textarea name="useDesc" id="useDesc" class="txta validate[required,minSize[1],maxSize[255]]" style="height:100px;">${coAll.jltfispCoFillInApply.useDesc}</textarea></td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label4}</th>
+                                    <th>${loanformManage.loanLabel4}</th>
                                     <td colspan="3"><label>
                                     <#if coAll.jltfispCoFillInApply.historyState ==1>
                                     <input value="1" name="historyState" id="historyState" type="checkbox" class="yes" checked/>
@@ -71,7 +71,7 @@
                                     是</label></td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label5}</th>
+                                    <th>${loanformManage.loanLabel5}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.continueloan ==1>
                                     <input value="1" name="continueloan" id="continueloan" type="checkbox" class="yes" checked/>
@@ -79,11 +79,11 @@
                                     <input value="1" name="continueloan" id="continueloan" type="checkbox" class="yes" />
                                     </#if>
                                     是</label></td>
-                                    <th>${loanformManage.label6}</th>
+                                    <th>${loanformManage.loanLabel6}</th>
                                     <td><label><input name="historyEndtime" id="historyEndtime" value="<#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker()" type="text" class="txt" /></label></td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label7}</th>
+                                    <th>${loanformManage.loanLabel7}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isRecomend1 ==1>
                                     <input value="1" name="isRecomend1" id="isRecomend1" type="checkbox" class="yes" checked/>
@@ -91,7 +91,7 @@
                                    <input value="1" name="isRecomend1" id="isRecomend1" type="checkbox" class="yes" />
                                    </#if>
                                     是</label></td>
-                                    <th>${loanformManage.label8}</th>
+                                    <th>${loanformManage.loanLabel8}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isRecomend2 ==1>
                                     <input value="1" name="isRecomend2" id="isRecomend2" type="checkbox" class="yes" checked/>
@@ -101,19 +101,19 @@
                                     是</label></td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label9}</th>
+                                    <th>${loanformManage.loanLabel9}</th>
                                     <td>
                                     <input value="${coAll.jltfispCoFillInApply.bankid}" name="bankid" id="bankid" type="text" class="txt2 validate[maxSize[255]]" />
                                     </td>
-                                    <th>${loanformManage.label10}</th>
+                                    <th>${loanformManage.loanLabel10}</th>
                                     <td>
                                     <input value="${coAll.jltfispCoFillInApply.riskid}" name="riskid" id="riskid" type="text" class="txt2 validate[maxSize[255]]" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label11}</th>
+                                    <th>${loanformManage.loanLabel11}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.bankBranch}" name="bankBranch" id="bankBranch" type="text" class="txt2 validate[maxSize[255]]" /></td>
-                                    <th>${loanformManage.label12}</th>
+                                    <th>${loanformManage.loanLabel12}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isOtherbankLoan ==1>
                                     <input name="isOtherbankLoan" value="1" id="isOtherbankLoan" type="checkbox" class="yes" checked/>
@@ -123,16 +123,16 @@
                                     是</label></td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label13}</th>
+                                    <th>${loanformManage.loanLabel13}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.loanOffice}" name="loanOffice" id="loanOffice" type="text" class="txt2 validate[maxSize[255]]" placeholder="请输入" /></td>
-                                    <th>${loanformManage.label14}</th>
+                                    <th>${loanformManage.loanLabel14}</th>
                                     <td><input value="${coAll.jltfispCoFillInApply.loanOfficeMobile}" name="loanOfficeMobile" id="loanOfficeMobile" type="text" class="txt2 validate[custom[phone],maxSize[11]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                             <p class="ntit">融资计划(如需股权融资请填写该表)</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th>${loanformManage.label15}</th>
+                                    <th>${loanformManage.loanLabel15}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isFinance ==1>
                                     <input type="radio" name="isFinance" id="isFinance" class="yes" value="1" checked/><span class="mr20">是</span></label><label><input type="radio" name="isFinance" id="isFinance" class="yes" value="2"/>
@@ -142,7 +142,7 @@
                                     <input type="radio" name="isFinance" id="isFinance" class="yes" value="1"/><span class="mr20">是</span></label><label><input type="radio" name="isFinance" id="isFinance" class="yes" value="2"/>
                                     </#if>
                                     <span class="mr20">否</span></label></td>
-                                    <th>${loanformManage.label16}</th>
+                                    <th>${loanformManage.loanLabel16}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isListingPlan ==1>
                                     <input type="radio" name="isListingPlan" id="isListingPlan" class="yes" value="1" checked/><span class="mr20">是</span></label><label><input type="radio" name="isListingPlan" id="isListingPlan" class="yes" value="2"/>
@@ -154,12 +154,12 @@
                                     <span class="mr20">否</span></label></td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label17}</th>
+                                    <th>${loanformManage.loanLabel17}</th>
                                     <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number],maxSize[255]]" placeholder="请输入" />万元</td>
                                 </tr>
                                 <tr>
-                                    <th>${loanformManage.label18}</th>
-                                    <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[255]]">${coAll.jltfispCoFillInApply.finaneAmount}</textarea></td>
+                                    <th>${loanformManage.loanLabel18}</th>
+                                    <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[255]]">${coAll.jltfispCoFillInApply.finaneRequire}</textarea></td>
                                 </tr>
                             </table>
                             </form>
@@ -181,6 +181,7 @@
 </html>
 <script type="text/javascript">
 $(document).ready(function(e) {
+    positionNavigation(1);
         $("#coFillInApply").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
         $('.btnSave').click(function(){
              if(!$('#coFillInApply').validationEngine('validate')){

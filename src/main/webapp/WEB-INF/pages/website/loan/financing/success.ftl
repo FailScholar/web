@@ -40,6 +40,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
+        positionNavigation(1);
         var num=parseInt($('.second').text());
         var timer = setInterval(function(){
             $('.second').html(num--);

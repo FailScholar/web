@@ -50,7 +50,7 @@ public class MarketController {
 		int rows=Integer.parseInt(request.getParameter("pager.offset"));
 		Cloud cloud =new Cloud();
 		cloud.setColumnId(columnId);
-		List<Market> list = marketService.getMarketList(columnId, rows);
+		List<Market> list = marketService.getMarketList(columnId, rows/8+1);
 		int total = marketService.getMarketCount(columnId);
 		PagerModel pm = new PagerModel();
     	pm.setDatas(list);

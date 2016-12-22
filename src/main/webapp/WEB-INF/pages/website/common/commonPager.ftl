@@ -11,21 +11,21 @@
 					<#if (currentPageNumber == 1)>
 					<a onclick="return false;"><font color="#7b7676">首页</font></a>
 					<#else> 
-				    <a  onclick="changePage('${pageUrl}')">首页</a>
+				    <a  style='cursor:pointer;' onclick="changePage('${pageUrl}')">首页</a>
 				    </#if>
 				    </@pg.first>
 					<@pg.prev>
 					<#if (currentPageNumber == 1)>
 					<a onclick="return false;"><font color="#7b7676">上一页</font></a>
 					<#else>
-					<a onclick="changePage('${pageUrl}')">上一页</a>
+					<a style='cursor:pointer;' onclick="changePage('${pageUrl}')">上一页</a>
 					</#if>
 					</@pg.prev>
 						<@pg.pages>
 						<#if (currentPageNumber == pageNumber)>  
 						<a onclick="changePage('${pageUrl}')"><font color="red">${pageNumber}</font></a>
 		                <#else>
-                        <a onclick="changePage('${pageUrl}')">${pageNumber}</a>
+                        <a style='cursor:pointer;' onclick="changePage('${pageUrl}')">${pageNumber}</a>
 						 </#if>
 						</@pg.pages>
 						<#if (pm.total == 0)>
@@ -35,14 +35,14 @@
 					<#if (currentPageNumber >=( pm.total/pageSize))>
 					<a onclick="return false;"><font color="#7b7676">下一页</font></a>
 					<#else>
-					<a onclick="changePage('${pageUrl}')">下一页</a>
+					<a style='cursor:pointer;' onclick="changePage('${pageUrl}')">下一页</a>
 					</#if>
 					</@pg.next>
 					<@pg.last>
 					<#if (currentPageNumber >=( pm.total/pageSize))>
 					<a onclick="return false;"><font color="#7b7676">尾页</font></a>
 					<#else>
-					<a onclick="changePage('${pageUrl}')">尾页</a>
+					<a style='cursor:pointer;' onclick="changePage('${pageUrl}')">尾页</a>
 					</#if>
 					</@pg.last>
 </@pg.pager>

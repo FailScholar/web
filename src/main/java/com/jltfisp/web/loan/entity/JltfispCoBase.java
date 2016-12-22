@@ -200,7 +200,7 @@ public class JltfispCoBase {
      * 第一股东股份
      */
     @Column(name = "oneStock")
-    private int oneStock;
+    private String oneStock;
     /**
      * 第二股东姓名
      */
@@ -210,7 +210,7 @@ public class JltfispCoBase {
      * 第二股东股份
      */
     @Column(name = "twoStock")
-    private int twoStock;
+    private String twoStock;
     
     /**
      * 第三股东姓名
@@ -222,7 +222,7 @@ public class JltfispCoBase {
      * 第三股东股份
      */
     @Column(name = "threeStock")
-    private int threeStock;
+    private String threeStock;
     
     /**
      * 创建时间
@@ -240,13 +240,13 @@ public class JltfispCoBase {
      * 本年度已签订所有合同的标的总额
      */
     @Column(name = "agreementsAmount")
-    private float agreementsAmount;
+    private double agreementsAmount;
     
     /**
      * 实际控制人或核心股东个人经营性贷款
      */
     @Column(name = "loanAccount")
-    private float loanAccount;
+    private double loanAccount;
     
     /**
      * 其他说明
@@ -705,11 +705,11 @@ public class JltfispCoBase {
 		this.oneShareholderName = oneShareholderName;
 	}
 
-	public int getOneStock() {
+	public String getOneStock() {
 		return oneStock;
 	}
 
-	public void setOneStock(int oneStock) {
+	public void setOneStock(String oneStock) {
 		this.oneStock = oneStock;
 	}
 
@@ -721,11 +721,11 @@ public class JltfispCoBase {
 		this.twoShareholderName = twoShareholderName;
 	}
 
-	public int getTwoStock() {
+	public String getTwoStock() {
 		return twoStock;
 	}
 
-	public void setTwoStock(int twoStock) {
+	public void setTwoStock(String twoStock) {
 		this.twoStock = twoStock;
 	}
 
@@ -737,11 +737,11 @@ public class JltfispCoBase {
 		this.threeShareholerName = threeShareholerName;
 	}
 
-	public int getThreeStock() {
+	public String getThreeStock() {
 		return threeStock;
 	}
 
-	public void setThreeStock(int threeStock) {
+	public void setThreeStock(String threeStock) {
 		this.threeStock = threeStock;
 	}
 
@@ -761,19 +761,19 @@ public class JltfispCoBase {
 		this.userid = userid;
 	}
 
-	public float getAgreementsAmount() {
+	public double getAgreementsAmount() {
 		return agreementsAmount;
 	}
 
-	public void setAgreementsAmount(float agreementsAmount) {
+	public void setAgreementsAmount(double agreementsAmount) {
 		this.agreementsAmount = agreementsAmount;
 	}
 
-	public float getLoanAccount() {
+	public double getLoanAccount() {
 		return loanAccount;
 	}
 
-	public void setLoanAccount(float loanAccount) {
+	public void setLoanAccount(double loanAccount) {
 		this.loanAccount = loanAccount;
 	}
 

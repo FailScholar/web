@@ -82,6 +82,7 @@
   </body>
   </html>
   <script type="text/javascript">
+      positionNavigation(0);
   function printdiv(businessType,infoId)
 {
 location.href="${path}/business/printLoanPDF?businessType="+businessType+"&infoId="+infoId

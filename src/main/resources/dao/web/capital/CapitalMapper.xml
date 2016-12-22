@@ -28,7 +28,7 @@
 	</update>
 	<!-- 查询专项资金最后一级的详细信息 -->
 	<select id="getCapitalDetail" resultType="com.jltfisp.web.capital.entity.JltfispCapital" parameterType="int">
-		select * from jltfisp_capital ca where ca.state=1 and ca.id=#{id}
+		select * from jltfisp_capital ca where ca.state=1 and ca.id=#{id} limit 1
 	</select>
 	<select id="getCapitalPageCount" resultType="int" parameterType="int">
 		select count(*) from jltfisp_capital capital where capital.column_id=#{column_id}

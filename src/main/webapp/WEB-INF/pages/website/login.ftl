@@ -28,7 +28,7 @@
                               <div>密&emsp;码：<input placeholder="请输入您的密码" id="password" name="password" type="password" class="txt validate[required,minSize[6],maxSize[16],custom[userLoginPassword]]" value=""/></div>
                               <input type="hidden" id="identity" name="identity" value="user"/>
                               <div>验证码：<input placeholder="请输入验证码" id="captcha" name="captcha" type="text" class="txt txt1 validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" /><div class="fr" style="margin-right : 120px"><img draggable="false" id="validateCodeImg" style="border-radius: 10px;cursor: hand" title="看不清楚" src="${path}/anon/getPngCode?" onclick="refreshCode()" /></div></div>
-                              <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" id="rememberMe" name="rememberMe" value="enabled"/>下次自动登陆 <span class="blue">&nbsp;&nbsp;&nbsp;使用公用电脑勿勾选</span></label></div>
+                              <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" id="rememberMe" name="rememberMe" value="enabled"/>下次自动登录 <span class="blue">&nbsp;&nbsp;&nbsp;使用公用电脑勿勾选</span></label></div>
                               <div class="logbtn"><input id="login" type="submit" value="登 录" /></div>
                               <div class="findsct"><a href="${path}/anon/toResetPage" class="fl">企业用户找回密码</a><a href="${path}/anon/toResetPage" class="fr">个人用户找回密码</a></div>
                           </form>
@@ -48,6 +48,7 @@
   </body>
 </html>
 <script type="text/javascript">
+    positionNavigation(0);
     function refreshCode() {
         document.getElementById("validateCodeImg").src = "${path}/anon/getPngCode?" + Math.random();
     }

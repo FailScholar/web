@@ -26,7 +26,12 @@ public class CloudServiceImpl extends BaseServiceImpl<Cloud> implements ICloudSe
 	public List<Cloud> getCloudsList(Integer columnid, int page) {
 		Cloud cloud = new Cloud();
 		cloud.setColumnId(columnid);
-		PageHelper.startPage(page, 12);
+		if(columnid==47){
+			PageHelper.startPage(page/9+1, 9);
+		}else {
+			PageHelper.startPage(page/8+1, 8);
+		}
+		
 		PageHelper.orderBy("publish_time desc");
 		return cloudMapper.select(cloud);
 	}

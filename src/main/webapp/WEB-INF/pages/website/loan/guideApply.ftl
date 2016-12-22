@@ -42,6 +42,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
+        positionNavigation(1);
         $('.chkbg').toggle(function(){
             $(this).find('input').attr("checked",true);
             $(this).find('b').addClass('active');

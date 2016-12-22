@@ -5,17 +5,17 @@
        <form id="psMaterialInfo">
         <table width="100%" class="tab3 tab4">
             <tr>
-                <th width="12.5%">时间</th>
-                <th width="12.5%">总收入(万元)</th>
-                <th width="12.5%">比上年度增长%</th>
-                <th width="12.5%">研发投入(万元)</th>
-                <th width="12.5%">比上年度增长%</th>
-                <th width="12.5%">利润</th>
-                <th width="12.5%">比上年度增长%</th>
-                <th width="12.5%">纳税总额</th>
+                <th width="12.5%">${loanformManage.psMaterialEconomicTime}</th>
+                <th width="12.5%">${loanformManage.psMaterialGross}</th>
+                <th width="12.5%">${loanformManage.psMaterialGrossIncrease}</th>
+                <th width="12.5%">${loanformManage.psMaterialInvestment}</th>
+                <th width="12.5%">${loanformManage.psMaterialInvestmentIncrease}</th>
+                <th width="12.5%">${loanformManage.psMaterialProfit}</th>
+                <th width="12.5%">${loanformManage.psMaterialProfitIncrease}</th>
+                <th width="12.5%">${loanformManage.psMaterialTaxes}</th>
             </tr>
             <tr>
-                <th>贷款上一年度</th>
+                <th>${loanformManage.psMaterialLastYear}</th>
                 <td><input id="grossedLast" name="grossedLast" value="${PsMaterialInfo.grossedLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="increaseGrossedLast" name="increaseGrossedLast" value="${PsMaterialInfo.increaseGrossedLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="investmentLast" name="investmentLast" value="${PsMaterialInfo.investmentLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
@@ -25,7 +25,7 @@
                 <td><input id="taxesLast" name="taxesLast" value="${PsMaterialInfo.taxesLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
             </tr>
             <tr>
-                <th>贷款当年</th>
+                <th>${loanformManage.psMaterialCurrentYear}</th>
                 <td><input id="grossedThis" name="grossedThis" value="${PsMaterialInfo.grossedThis }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="increaseGrossedThis" name="increaseGrossedThis" value="${PsMaterialInfo.increaseGrossedThis }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="investmentThis" name="investmentThis" value="${PsMaterialInfo.investmentThis }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
@@ -39,17 +39,17 @@
         <p class="ntit"><b class="red">*</b>知识产权情况（单位：项）</p>
         <table width="100%" class="tab3 tab4">
             <tr>
-                <th width="12.5%">时间</th>
-                <th width="12.5%">发明</th>
-                <th width="12.5%">专利情况实用新型</th>
-                <th width="12.5%">外观设计</th>
-                <th width="12.5%">集成电图路设计</th>
-                <th width="12.5%">软件著作权</th>
-                <th width="12.5%">软件组著作权</th>
-                <th width="12.5%">新增知识权统计</th>
+                <th width="12.5%">${loanformManage.psMaterialIntellectualTime}</th>
+                <th width="12.5%">${loanformManage.psMaterialInvention}</th>
+                <th width="12.5%">${loanformManage.psMaterialUtilitarian}</th>
+                <th width="12.5%">${loanformManage.psMaterialAppearance}</th>
+                <th width="12.5%">${loanformManage.psMaterialIc}</th>
+                <th width="12.5%">${loanformManage.psMaterialSoftware}</th>
+                <th width="12.5%">${loanformManage.psMaterialSoftwares}</th>
+                <th width="12.5%">${loanformManage.psMaterialKnowledge}</th>
             </tr>
             <tr>
-                <th>贷款上一年度</th>
+                <th>${loanformManage.psMaterialIntellectualLast}</th>
                 <td><input id="inventionLast" name="inventionLast" value="${PsMaterialInfo.inventionLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="utilitarianLast" name="utilitarianLast" value="${PsMaterialInfo.utilitarianLast }"  type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="appearanceLast" name="appearanceLast" value="${PsMaterialInfo.appearanceLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
@@ -59,7 +59,7 @@
                 <td><input id="knowledgeLast" name="knowledgeLast" value="${PsMaterialInfo.knowledgeLast }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
             </tr>
             <tr>
-                <th>贷款当年</th>
+                <th>${loanformManage.psMaterialIntellectualCurrent}</th>
                 <td><input id="inventionThis" name="inventionThis" value="${PsMaterialInfo.inventionThis }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="utilitarianThis" name="utilitarianThis"  value="${PsMaterialInfo.utilitarianThis }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
                 <td><input id="appearanceThis" name="appearanceThis" value="${PsMaterialInfo.appearanceThis }" type="text" class="txt3 validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" /></td>
@@ -73,7 +73,7 @@
         <p class="ntit">获得荣誉奖项等情况</p>
         <table class="tab3" width="100%">
             <tr>
-                <th><b class="red">*</b>贷款期间新获企业资质和各种认定</th>
+                <th><b class="red">*</b>${loanformManage.psMaterialCognizance}</th>
                 <td>
                     <label><input name="cognizance" class="validate[required]" type="radio" value="1" <#if PsMaterialInfo.cognizance==1>checked="checked"</#if> >私营企业</label>
                     <label><input name="cognizance" class="validate[required]" type="radio" value="2" <#if PsMaterialInfo.cognizance==2>checked="checked"</#if> >中外合资企业</label>
@@ -83,7 +83,7 @@
                 </td>
             </tr>
             <tr>
-                <th><b class="red">*</b>新获政府项目资助情况名称和自助金额</th>
+                <th><b class="red">*</b>${loanformManage.psMaterialMeta}</th>
                 <td><textarea  name="meta" class="txta validate[required,minSize[1],maxSize[1000]]">${PsMaterialInfo.meta }</textarea></td>
             </tr>
         </table>

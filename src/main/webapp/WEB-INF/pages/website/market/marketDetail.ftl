@@ -11,12 +11,6 @@
       <link rel="stylesheet" type="text/css" href="${path}/resource/plugins/videoJs/css/video-js.min.css" />
       <script type="text/javascript" src="${path}/resource/plugins/videoJs/js/video.min.js"></script>
     <title>吉林省科技金融信息服务平台</title>
-    <script>
-    	function goHistory(columnid){
-    		 $.cookie('columnid', columnid, {path: '/'});
-        	 window.location.href = "${path}/perm/market"
-    	}
-    </script>
   </head>
 
   <body>
@@ -28,7 +22,7 @@
                   </div>
                   <div class="video">
                      <h1>${marketDetail.title}</h1>
-				     <p><span class="time fl">${marketDetail.publishTime ?date}</span><span class="eye fr">${marketDetail.pv}</span></p>
+				     <p style="width:450px;text-align:center;"><span class="time">${marketDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${marketDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${marketDetail.source}</span></p>
 				     <div class="clear"></div>
 				     	<div class="artical" style="background-color:#fff;">
 				            <p>${marketDetail.content}</p>
@@ -47,3 +41,10 @@
   <#include "website/common/footer.ftl" />
   </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(8);
+    function goHistory(columnid){
+        $.cookie('columnid', columnid, {path: '/'});
+        window.location.href = "${path}/perm/market"
+    }
+</script>

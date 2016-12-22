@@ -69,6 +69,7 @@ $(document).ready(function(e) {
   </body>
 </html>
 <script type="text/javascript">
+    positionNavigation(5);
  function goBack(columnId){
 	 window.location.href="${path}/perm/institution?columnId="+columnId;
 	 }

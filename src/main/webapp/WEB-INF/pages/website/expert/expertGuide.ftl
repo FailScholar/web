@@ -45,7 +45,7 @@
 </html>
 
 <script type="text/javascript">
-
+    positionNavigation(6);
    function disable()
    {
 	   document.getElementById("accept").style.backgroundColor = "#c5c5c5";

@@ -70,7 +70,7 @@ public class LoginController {
         return "index";
     }
     /**
-     * 登陆成功页面
+     * 登录成功页面
      * @return
      */
     @RequestMapping("/main")
@@ -98,7 +98,7 @@ public class LoginController {
         return "/website/usercenter/index";
     }
     /**
-     * 用户登陆
+     * 用户登录
      * @param request
      * @param model
      * @return

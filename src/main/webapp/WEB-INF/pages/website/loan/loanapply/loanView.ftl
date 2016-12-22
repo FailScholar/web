@@ -82,6 +82,11 @@ var thirdYear=secondYear+1;
 var fourYear=thirdYear+1;
 var applytype=${applytype};
 var cityName;
+<!--时间Tab页显示-->
+$('.lnav li').eq(0).html(firstYear+"年");
+$('.lnav li').eq(1).html(secondYear+"年");
+$('.lnav li').eq(2).html(thirdYear+"年");
+$('.lnav li').eq(3).html(fourYear+"年");
 $('#tabYear').html(firstYear+"年末");
 <!--办公地址省份-->
 var officeProv="${coAll.jltfispCoBase.officeProv}";
@@ -108,6 +113,7 @@ technologyOrFinanceList=technologyOrFinance.split(",");
 var OtherTechnologyOrFinance="${coAll.jltfispCoProfile.otherTechnologyOrFinance}";
 
 $(document).ready(function(e) {
+    positionNavigation(1);
 <!--初始化企业概况企业曾获得科技认定字段-->
 var str="";
 for (i=0;i<technologyOrFinanceList.length;i++ )

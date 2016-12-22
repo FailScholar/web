@@ -6,6 +6,7 @@
 package com.jltfisp.web.financing.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,14 +16,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.github.pagehelper.PageInfo;
 import com.jltfisp.base.entity.SysDict;
+import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.login.service.LoginService;
 import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.financing.entity.JltfispFinancing;
 import com.jltfisp.web.financing.service.FinancingService;
-import com.jltfisp.web.insurance.entity.JltfispInsurance;
 import com.jltfisp.web.pager.entity.PagerModel;
 
 /**
@@ -42,6 +43,8 @@ public class FinancingController {
     
     @Autowired
     private DictionaryService dictionaryService;
+    @Autowired
+    private LoginService loginService;
     
     /**
      * 股权融资栏目主页面
@@ -60,8 +63,7 @@ public class FinancingController {
     public String financingDetail(HttpServletRequest request,@PathVariable Integer columnId,Integer type){
     	int rows=Integer.parseInt(request.getParameter("pager.offset"));
     	int total = financingService.getFinancingCount(columnId, type);
-    	
-    	List<JltfispFinancing> list = financingService.getFinancingList(columnId, rows,type);
+    	List<JltfispFinancing> list = financingService.getFinancingList(columnId, rows/8+1,type);
     	
     	PagerModel pm = new PagerModel();
     	pm.setDatas(list);

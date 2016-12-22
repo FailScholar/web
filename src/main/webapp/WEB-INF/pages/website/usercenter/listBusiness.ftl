@@ -12,6 +12,9 @@
       <style type="text/css">
           .ifo {width:590px;}
           .per .sde { width:130px;}
+          .infoList { position:relative;}
+.more { position:absolute; top:345px; right:0; line-height:36px; padding:0 10px;}
+.more span { font-family:"宋体";}
       </style>
         <script type="text/javascript">
 
@@ -93,32 +96,28 @@ function goMain(flag){
                   <div class="infoList">
                       <p class="tit2">贷款申请类型</p>
                       <ul class="aply">
-                          <li class="bbm">
-                              <h4>科技履约贷款申请</h4>
-                              <a href="${path}/loan/guideApply2?applytype=1">申请须知</a><a href="${path}/loan/onlineApply?applytype=1" class="online">在线申请</a>
-                          </li>
-                          <li class="bbm">
-                              <h4>科技小巨人贷款申请</h4>
-                              <a href="${path}/loan/guideApply2?applytype=2">申请须知</a><a href="${path}/loan/onlineApply?applytype=2" class="online">在线申请</a>
-                          </li>
-                          <li class="bbm">
-                              <h4>高新技术贷款申请</h4>
-                              <a href="${path}/loan/guideApply2?applytype=3">申请须知</a><a href="${path}/loan/onlineApply?applytype=3" class="online">在线申请</a>
-                          </li>
-                          <li>
-                              <h4>科技微贷通贷款申请</h4>
-                              <a href="${path}/loan/guideApply2?applytype=4">申请须知</a><a href="${path}/loan/onlineApply?applytype=4" class="online">在线申请</a>
-                          </li>
-                          <li>
-                              <h4>保费补贴申请</h4>
-                              <a href="${path}/loan/guidApplyIndex">申请须知</a><a href="${path}/loan/judgeIsApplyLoan?applytype=5" class="online">在线申请</a>
-                          </li>
-                          <li>
-                              <h4>股权融资申请</h4>
-                              <a href="${path}/loan/financeKnow2">申请须知</a><a href="${path}/loan/financeKnow" class="online">在线申请</a>
-                          </li>
+	                      <#list list as list>
+		                      <#if (list_index<6)>
+			                      	<li class="bbm">
+		                              <h4>${list.name}</h4>
+		                               <#if list.id == 16>
+		                                  <a href="${path}/loan/guidApplyText?applytype=${list.code}">申请须知</a>
+		                                  <a href="${path}/loan/judgeIsApplyLoan?applytype=${list.code}" class="online">在线申请</a>
+		                                <#elseif list.id == 17>
+		                                    <a href="${path}/loan/financeKnow2">申请须知</a>
+		                                    <a href="${path}/loan/financeKnow" class="online">在线申请</a>
+		                                <#else>
+		                                  <a href="${path}/loan/guideApply2?applytype=${list.code}">申请须知</a>
+		                                  <a href="${path}/loan/onlineApply?applytype=${list.code}" class="online">在线申请</a>
+		                              </#if>
+		                          </li>
+	                          </#if>
+	                      </#list>
                       </ul>
                       <div class="clear"></div>
+                      <#if (list?size>6)>
+                          	<a href="${path}/anon/loan" class="more">更多<span>&gt;&gt;</span></a>
+                      </#if>
                       <div class="grad"></div>
                        <div class="clist fl">
                     	<h1>我的申请记录</h1>
@@ -166,6 +165,7 @@ function goMain(flag){
 </html>
 
 <script type="text/javascript">
+    positionNavigation(0);
 	function subInfo(id,type){
 		$.ajax({
             type: "POST",

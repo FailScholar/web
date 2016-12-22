@@ -37,13 +37,23 @@
             </#if>
         </ul>
         <div class="clear"></div>
-        <a href="${path}/communicate/page" target="_blank" class="apply2" style="width:80px;cursor: pointer;">投资咨询</a>
+        <@shiro.hasRole name="专家会员">
+        	<a href="javascript:alertText();" class="apply2" style="width:80px;cursor: pointer;">投资咨询</a>
+        </@shiro.hasRole>
+        <@shiro.lacksRole name="专家会员">
+        	<a href="${path}/communicate/page" target="_blank" class="apply2" style="width:80px;cursor: pointer;">投资咨询</a>
+        </@shiro.lacksRole>
         <div class="selSearch fr">
         	<select class="selOpt" id="type">
             	<option value="">选择类型</option>
-            	<#list dictList as dict>
-                <option value="${dict.id}">${dict.value}</option>
-                </#list>
+            	<option value="1" <#if (item.type == 1)>selected="selected"</#if> >电子信息技术</option>
+                <option value="2" <#if (item.type == 2)>selected="selected"</#if> >生物医药技术</option>
+                <option value="3" <#if (item.type == 3)>selected="selected"</#if> >航空航天技术</option>
+                <option value="4" <#if (item.type == 4)>selected="selected"</#if> >新科技技术</option>
+                <option value="5" <#if (item.type == 5)>selected="selected"</#if> >高技术服务业</option>
+                <option value="6" <#if (item.type == 6)>selected="selected"</#if> >新能源节能技术</option>
+                <option value="7" <#if (item.type == 7)>selected="selected"</#if> >资源环境技术</option>
+                <option value="7" <#if (item.type == 8)>selected="selected"</#if> >高新技术改造传统行业</option>
             </select>
             <input type="button" onclick="selectPage(${pageInfo.pageNum})" value="搜 索" class="fr" />
         </div>
@@ -66,6 +76,12 @@
 </html>
 
 <script type="text/javascript">
+function alertText(){
+		dialog.tipsPop('ok-pop','提示:',"您已是专家会员",function(){
+	              });
+	}
+
+    positionNavigation(7);
 	function getList(){
 	  var columnId = $('#selectId').val();
 	  if(columnId!=0){
@@ -75,6 +91,7 @@
 	
 	 function infoTabClick(id){
 	 	$("#selectId").val("0");
+	 	$("#type").val("");
         $('#colListDetail').load("${path}/perm/financing/"+id,{'pager.offset':0});
     }
 

@@ -38,7 +38,7 @@ public class InsuranceServiceImpl implements InsuranceService {
     @Override
     public JltfispInsurance getDetailById(int id) {
         JltfispInsurance insurance = jltfispInsuranceMapper.selectByPrimaryKey(id);
-        addPV(insurance);
+        //addPV(insurance);
         return insurance;
     }
 
@@ -59,7 +59,7 @@ public class InsuranceServiceImpl implements InsuranceService {
 	public List<JltfispInsurance> getInsuranceList(Integer columnid, int page) {
 		JltfispInsurance insurance = new JltfispInsurance();
 		insurance.setColumnId(columnid);
-		PageHelper.startPage(page, 12);
+		PageHelper.startPage(page, 8);
 		PageHelper.orderBy("publish_time desc");
 		return jltfispInsuranceMapper.select(insurance);
 	}

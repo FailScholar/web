@@ -149,7 +149,8 @@ function applyInstitution(columnId){
                   <div class="infoList pi" style="display:none;">
                    	<form action="${path}/user/updateUser" method="post" id="insForm">
                   	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
-                  	  <input type="hidden" name="photoPath" id="userlogo"/>
+                  	  <input type="hidden" name="photoPath" id="userlogo" value="${user.photoPath}"/>
+                  	  <input type="hidden" id="imgsrc" value="${user.photoPath}"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
@@ -175,33 +176,33 @@ function applyInstitution(columnId){
                           <div class="per">
                               <span class="sde fl">姓名：</span>
                               <div class="fl">
-                                  <input type="text" value="${user.username}" readonly="readonly" class="txt" />
+                                  <input type="text" name="username" value="${user.username}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[16]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">手机：</span>
                               <div class="fl">
-                                  <input type="text" value="${user.mobilePhone}" readonly="readonly" class="txt" />
+                                  <input type="text" name="mobilePhone" value="${user.mobilePhone}" readonly="readonly" class="txt validate[required,custom[mobile]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">工作单位：</span>
                               <div class="fl">
-                                  <input type="text" value="${user.jobPost}" readonly="readonly" class="txt" />
+                                  <input type="text" name="jobPost" value="${user.jobPost}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[50]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">所属部门：</span>
                               <div class="fl">
-                                  <input type="text" value="${user.departmentName}" readonly="readonly" class="txt" />
+                                  <input type="text" name="departmentName" value="${user.departmentName}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[50]]" />
                               </div>
                           </div>
                           <div class="clear"></div>
                           <div class="grad"></div>
-                          <input value="修 改" class="btnCom mod" type="button">
+                          <input value="修 改" class="btnCom mod" type="button" lang="0">
                           <div class="btnHide">
                               <input value="确 定" class="btnCom" type="button" onclick="userForm()">
-                              <input value="取 消" class="btnCom btnCle" type="button">
+                              <input value="取 消" class="btnCom btnCle" type="reset">
                           </div>
                       </div>
                       </form>
@@ -211,10 +212,11 @@ function applyInstitution(columnId){
                   <div class="infoList pi" style="display:none;">
                   <form action="${path}/user/updateUser" method="post" id="insForm">
                   	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
-                  	  <input type="hidden" name="photoPath" id="userlogo"/>
+                  	  <input type="hidden" name="photoPath" id="userlogo" value="${user.photoPath}"/>
+                      <input type="hidden" id="imgsrc" value="${user.photoPath}"/>
                       <div class="ifo">
                           <div class="per per1">
-                              <span class="sde fl">头像：</span>
+                              <span class="sde fl">企业logo：</span>
                               <div class="uploadImg fl">
                                   <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
                                   <div class="upload">
@@ -237,33 +239,33 @@ function applyInstitution(columnId){
                           <div class="per">
                               <span class="sde fl">企业名称：</span>
                               <div class="fl">
-                                  <input type="text" name="username" value="${user.username}" readonly="readonly" class="txt" />
+                                  <input type="text" name="username" id="username" value="${user.username}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[16]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">联系人：</span>
                               <div class="fl">
-                                  <input type="text" name="contact" value="${user.contact}" readonly="readonly" class="txt" />
+                                  <input type="text" name="contact" value="${user.contact}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[16]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">手机：</span>
                               <div class="fl">
-                                  <input type="text" name="mobilePhone" value="${user.mobilePhone}" readonly="readonly" class="txt" />
+                                  <input type="text" name="mobilePhone" value="${user.mobilePhone}" readonly="readonly" class="txt validate[required,custom[mobile]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl" style="width:130px">统一社会信用代码：</span>
                               <div class="fl">
-                                  <input type="text" value="${user.socialCode}" readonly="readonly" class="txt" />
+                                  <input type="text" value="${user.socialCode}" readonly="readonly" class="txt" style="width:220px"/>
                               </div>
                           </div>
                           <div class="clear"></div>
                           <div class="grad"></div>
-                          <input value="修 改" class="btnCom mod" type="button">
+                          <input value="修 改" class="btnCom mod" type="button" lang="1">
                           <div class="btnHide">
                               <input value="确 定" class="btnCom" type="button" onclick="userForm()">
-                              <input value="取 消" class="btnCom btnCle" type="button">
+                              <input value="取 消" class="btnCom btnCle" type="reset">
                           </div>
                       </div>
                       </form>
@@ -308,7 +310,12 @@ function applyInstitution(columnId){
 </html>
 
 <script type="text/javascript">
+    positionNavigation(0);
     $(document).ready(function(e) {
+    	
+    	$("#insForm").validationEngine('attach', {
+            promptPosition: "bottomRight:-10", scroll: false,focusFirstField:true,showOneMessage:true
+        }); 
         var tbar = $('.infoTab li');
     	var navigationIndex = $.cookie('userinfoIndex');
     	tbar.eq(navigationIndex ? Number(navigationIndex) : 0).addClass('active').siblings('li').removeClass('active');
@@ -330,11 +337,18 @@ function applyInstitution(columnId){
             $(this).siblings('.per').find('input').addClass('txt2').removeAttr("readonly").end().find('.upload').show();
             $(this).hide();
             $(this).siblings('.per').find('input').eq(1).removeClass('txt2').attr("readonly","readonly")
-            $(this).siblings('.per').find('input').eq(5).removeClass('txt2').attr("readonly","readonly")
+            var num = $(this).attr("lang");
+            if(num=="1") {
+				$(this).siblings('.per').find('input').eq(5).removeClass('txt2').attr("readonly","readonly")
+            }
+            
             $('.btnHide').show();
         });
 
         $('.btnHide .btnCle').click(function(){
+        	$(".formError").remove();
+        	var imgsrc = "${path}"+$("#imgsrc").val();
+        	$("#portrait").attr("src",imgsrc);
             $('.per').find('input').removeClass('txt2').attr("readonly","readonly").end().find('.upload').hide();;
             $(this).parents(".btnHide").hide();
             $('.mod').show();

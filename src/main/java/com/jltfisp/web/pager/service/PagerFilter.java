@@ -46,7 +46,7 @@ public class PagerFilter extends HttpServlet implements Filter {
 	    }  
 	      
 	   protected int getPagesize(HttpServletRequest request){  
-	       return 12;//设置每页显示10条数据.这里可以进行更灵活的控制  
+	       return 8;//设置每页显示8条数据.这里可以进行更灵活的控制  
 	    }  
 	 
 	    public void init(FilterConfig arg0) throws ServletException {  

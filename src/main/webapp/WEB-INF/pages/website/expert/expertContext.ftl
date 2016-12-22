@@ -17,10 +17,10 @@
                                   ${expert.workpost}
                                   </#if>
                                    | 
-                                  <#if (expert.workcompany?length >8) >
-                                   <lable title="${expert.workcompany}">${expert.workcompany[0..8]}...</label>
+                                  <#if (expert.businesaddress?length >8) >
+                                   <lable title="${expert.businesaddress}">${expert.businesaddress[0..8]}...</label>
                                   <#else>
-                                  ${expert.workcompany}
+                                  ${expert.businesaddress}
                                   </#if>
                                   </p>
         <p class="phone">${expert.phone}</p>

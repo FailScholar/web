@@ -31,8 +31,8 @@
                               <div><span class="ml70">用户名：</span><input type="text" class="txt validate[required,minSize[3],maxSize[30],custom[email],ajax[ajaxAccountNumber]]" name="accountNumber" id="accountNumber"/></div>
                               <div><span class="ml57">邮箱验证：</span><input type="text" class="txt validate[required]" name="emailCaptcha" id="emailCaptcha" />
                               <div class="fr">
-                              <a href="javascript:;" onclick="sendEamil()" class="ml26 fr" id="sml26" style="margin-right:80px;">发送验证码</a>
-                              	<p id="retext" style="display:none;font-size:13px;text-indent:0px;width:150px;color:#545658" class="ml26 fr">验证码<b class="second" style="font-size:13px;">15</b>分钟内可用</p>
+                              <a href="javascript:;" onclick="sendEamil()" class="ml26" id="sml26" style="margin-left: -130px;">发送验证码</a>
+                              	<p id="retext" style="display:none;font-size:13px;text-indent:0px;width:150px;color:#545658;margin-left:-130px;" class="ml26">验证码<b class="second" style="font-size:13px;">15</b>分钟内可用</p>
                               </div></div>
                               <div class="tip autologin" id="tiptext" style="display:none"><span class="red">* 校验信息不匹配</span></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
@@ -43,7 +43,7 @@
                           <form method="post" action="" id="resetForm">
                               <div id="m170"><span class="ml70">登录帐号：</span>howhahaha@163.com</div>
                               <div><span class="ml70">&emsp;新密码：</span><input type="password" id="password" name="password" class="txt validate[required,minSize[6],maxSize[20],custom[onlyLetterNumber]" /></div>
-                              <div><span class="ml70">确认密码：</span><input type="password" class="txt validate[required,minSize[6],maxSize[20],funcCall[checkRepeat],custom[onlyLetterNumber]]" /></div>
+                              <div><span class="ml70">确认密码：</span><input type="password" id="newpassword" class="txt validate[required,minSize[6],maxSize[20],funcCall[checkRepeat],custom[onlyLetterNumber]]" /></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
                               <div class="logbtn"><input type="button" onclick="resetPassword()" value="提交" /></div>
                           </form>
@@ -71,9 +71,14 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(0);
 	function resetPassword() {
 		var accountNumber = $("#accountNumber").val();
 		var password = $("#password").val();
+		if($("#password").validationEngine("validate") || $("#newpassword").validationEngine("validate")){
+			return false;
+		}
+		
 		$.post("${path}/anon/resetPassword",{"accountNumber":accountNumber,password:password},function(data){
 			$('.progress li').removeClass('active').eq(2).addClass('active');
            	$(".proList").hide().eq(2).show();
@@ -82,6 +87,11 @@
 	
 	function checkEmailInfo(){
 		var accountNumber = $("#accountNumber").val();
+		var emailCaptcha=$("#emailCaptcha").val();
+		if($("#accountNumber").validationEngine("validate") || $("#emailCaptcha").validationEngine("validate")){
+			return false;
+		}
+		
 		var emailCaptcha = $("#emailCaptcha").val();
 		$.post("${path}/anon/checkEmailInfo",{"accountNumber":accountNumber,emailCaptcha:emailCaptcha},function(data){
 			if(data>0){
@@ -95,11 +105,20 @@
 	}
 
 	function sendEamil(){
+		
 		var accountNumber = $("#accountNumber").val();
+		var flag1=$("#accountNumber").validationEngine("validateAjax");
+		var flag = $("#accountNumber").validationEngine("validate");
+		if($("#accountNumber").validationEngine("validateAjax") && $("#accountNumber").validationEngine("validate")){
+			return false;
+		}
+		if((flag1==false) && (flag==false)){
+			return false;
+		}
+		$("#sml26").hide();
+		$("#retext").show();
 		$.post("${path}/anon/sendEamil",{"accountNumber":accountNumber},function(data){
 			if(data>0){
-				$("#sml26").hide();
-				$("#retext").show();
 				var numSecond=900;
 				var num=parseInt($('.second').text());
 		        var timer = setInterval(function(){
@@ -107,11 +126,9 @@
 		            if(numSecond==0)
 		            { 
 		            clearInterval(timer);
-		            $.post("${path}/anon/resetEmailCaptcha",{"accountNumber":accountNumber},function(data){
-		                $("#sml26").text("重新发送");
-		                $("#sml26").show();
-						$("#retext").hide();
-					})
+		             $("#sml26").text("重新发送");
+	                 $("#sml26").show();
+					 $("#retext").hide();
 		            }
 		        },1000)
 			}
@@ -126,12 +143,7 @@
        	     "extraData": "id=",
        	     "alertText":"* 账号不存在，请输入正确的邮箱！",
        	     };
-        $("#saveAdminForm").validationEngine('attach', {
-            promptPosition: "bottomRight:-10", scroll: false
-        }); 
-        $("#resetForm").validationEngine('attach', {
-            promptPosition: "bottomRight:-10", scroll: false
-        }); 
+        $("#saveAdminForm ,#resetForm").validationEngine({promptPosition :'bottomRight',focusFirstField:true,showOneMessage:true});
         
     });
     //输入密码验证，两次输入是否一致

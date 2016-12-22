@@ -18,8 +18,20 @@
    <div class="info">
       <ul class="infoTab">
          <#list columnList as column>
-            <li id="Type${column.id}" name="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+         	<#if column_index lt 5>
+           	 <li id="Type${column.id}" name="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+         	</#if>
          </#list>
+         <#if columnList?size gt 5>
+		       	 <select id="selectId" onchange="getList()">
+		       		<option value="0">-选择更多-</option>
+		       	 	<#list columnList as afterFiveList>
+		       	 		<#if afterFiveList_index gt 4>
+		       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
+		       	 		</#if>
+		       	 	</#list>
+		       	 </select>
+       	 </#if>
       </ul>
       <div class="clear"></div>
       <div class="infoList">
@@ -49,9 +61,11 @@
 </html>
 <script type="text/javascript">
     $(document).ready(function(e) {
+        positionNavigation(2);
     var columnId=${columnId};
     $('#Type'+columnId).addClass('active');
     $("#columnIdValue").val(columnId);
+    $('.infoList').html('');
     <!--传当前子栏目ID-->
 	$.ajax({
             type: 'POST',
@@ -59,9 +73,16 @@
             data: {columnId: columnId,'pager.offset':0},
             success: function (data) {
             $('.infoList').html(data);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                <!--鉴权不通过，则隐藏添加功能-->
+                if(XMLHttpRequest.status ==401){
+                 $('.infoList').html(''); 
+                 }
             }
       });
     $('.infoTab li').click(function(){
+    	$("#selectId").val("0");
         var columnId=$(this).attr("name");
         $("#columnIdValue").val(columnId);
         $(this).addClass('active').siblings('li').removeClass('active');
@@ -71,7 +92,13 @@
                 url:'${path}/perm/news/'+columnId,
                 data: {columnId: columnId,'pager.offset':0},
                 success: function (data) {
-                $('.infoList').html(data);
+                   $('.infoList').html(data);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    <!--鉴权不通过，则隐藏添加功能-->
+                    if(XMLHttpRequest.status ==401){
+                     $('.infoList').html(''); 
+                     }
                 }
           });
 	});
@@ -91,7 +118,32 @@
     	                data: {columnId: columnId,'pager.offset':offset},
     	                success: function (data) {
     	                $('.infoList').html(data);
+    	                },
+    	                error: function(XMLHttpRequest, textStatus, errorThrown) {
+    	                    <!--鉴权不通过，则隐藏添加功能-->
+    	                    if(XMLHttpRequest.status ==401){
+    	                     $('.infoList').html(''); 
+    	                     }
     	                }
     	          });
     	} 
+	function getList(){
+		  var columnId = $('#selectId option:selected').val();
+		  if(columnId!=0){
+			  $.ajax({
+		            type: 'POST',
+		            url:'${path}/perm/news/'+columnId,
+		            data: {"columnId": columnId,'pager.offset':0},
+		            success: function (data) {
+		           		 $('.infoList').html(data);
+		            },
+		            error: function(XMLHttpRequest, textStatus, errorThrown) {
+		                <!--鉴权不通过，则隐藏添加功能-->
+		                if(XMLHttpRequest.status ==401){
+		                 $('.infoList').html(''); 
+		                 }
+		            }
+		      });
+		  }
+		}
 </script>

@@ -7,11 +7,11 @@
                             <p class="ntit">1、企业应收款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>应收款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumOne}</th>
+                                    <th><b class="red">*</b>${loanformManage.finCompanyOne}</th>
+                                    <th><b class="red">*</b>${loanformManage.finYszkyeOne}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZlOne}</th>
+                                    <th><b class="red">*</b>${loanformManage.finPercentOne}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -43,7 +43,7 @@
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[4].company}" name="company" id="company" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
+                                    <td><input value="1" name="company" id="company" type="hidden" class="txt2" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[4].yszkye}" name="yszkye" id="yszkye" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[4].zl}" name="zl" id="zl" type="text" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[4].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
@@ -52,11 +52,11 @@
                             <p class="ntit">2、企业其他应收款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>其他应收款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumTwo}</th>
+                                    <th><b class="red">*</b>${loanformManage.finCompanyTwo}</th>
+                                    <th><b class="red">*</b>${loanformManage.finYszkyeTwo}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZlTwo}</th>
+                                    <th><b class="red">*</b>${loanformManage.finPercentTwo}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -88,7 +88,7 @@
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[9].company}" name="company" id="company" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
+                                    <td><input value="1" name="company" id="company" type="hidden" class="txt2" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[9].qtzkye}" name="qtzkye" id="qtzkye" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[9].zl}" name="zl" id="zl" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[9].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
@@ -97,11 +97,11 @@
                             <p class="ntit">3、企业应付款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>应付款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumThree}</th>
+                                    <th><b class="red">*</b>${loanformManage.finCompanyThree}</th>
+                                    <th><b class="red">*</b>${loanformManage.finYszkyeThree}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZlThree}</th>
+                                    <th><b class="red">*</b>${loanformManage.finPercentThree}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -133,7 +133,7 @@
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[14].company}" name="company" id="company" type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
+                                    <td><input value="1" name="company" id="company" type="hidden" class="txt2" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[14].yszkye}" name="yszkye" id="yszkye" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[14].zl}" name="zl" id="zl" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[14].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
@@ -142,11 +142,11 @@
                             <p class="ntit">4、企业其他应付款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>其他应付款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumFour}</th>
+                                    <th><b class="red">*</b>${loanformManage.finCompanyFour}</th>
+                                    <th><b class="red">*</b>${loanformManage.finYszkyeFour}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZlFour}</th>
+                                    <th><b class="red">*</b>${loanformManage.finPercentFour}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -178,7 +178,7 @@
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td><input value="${coAll.jltfispCoFinancialList[19].company}" name="company" id="company type="text" class="txt2 validate[required,minSize[2],maxSize[20]]" /></td>
+                                    <td><input value="1" name="company" id="company" type="hidden" class="txt2" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[19].qtzkye}" name="qtzkye" id="qtzkye" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[19].zl}" name="zl" id="zl" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
                                     <td><input value="${coAll.jltfispCoFinancialList[19].percent}" name="percent" id="percent" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" /></td>
@@ -187,12 +187,12 @@
                             <p class="ntit">5、企业银行借款明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>贷款银行</th>
-                                    <th>贷款金额</th>
-                                    <th>担保方式</th>
-                                    <th>开始日期</th>
-                                    <th>结束日期</th>
+                                	<th>${loanformManage.finOrdernumFive}</th>
+                                    <th><b class="red">*</b>${loanformManage.finLoanbank}</th>
+                                    <th><b class="red">*</b>${loanformManage.finLoanaccount}</th>
+                                    <th><b class="red">*</b>${loanformManage.finSuremethod}</th>
+                                    <th><b class="red">*</b>${loanformManage.finStarttime}</th>
+                                    <th><b class="red">*</b>${loanformManage.finEndtime}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -227,21 +227,21 @@
                                     <td><input value="<#if (coAll.jltfispCoFinancialList[23].endTime?exists)>${coAll.jltfispCoFinancialList[23].endTime?date}</#if>" name="endTime" id="endTime4" onClick="WdatePicker({minDate:'#F{$dp.$D(\'startTime4\')}'})" type="text" class="txt2 validate[required]" /></td>
                                 </tr>
                                 <tr>
-                                	<td><b>其他金融机构融资</b></td>
+                                	<td><b class="red">*</b><b>${loanformManage.finOtherrz}</b></td>
                                     <td colspan="2"><input value="${coAll.jltfispCoFinancialList[24].otherrz}" name="otherrz" id="otherrz" type="text" class="txt validate[required,minSize[1],maxSize[10],custom[number]]" style="width:316px;" /></td>
-                                    <td><b>民间融资</b></td>
+                                    <td><b class="red">*</b><b>${loanformManage.finMjjk}</b></td>
                                     <td colspan="2"><input value="${coAll.jltfispCoFinancialList[25].mjjk}" name="mjjk" id="mjjk" type="text" class="txt validate[required,minSize[1],maxSize[10],custom[number]]" style="width:316px;" /></td>
                                 </tr>
                             </table>
                             <p class="ntit">6、企业关联公司明细表<span class="red fr">单位：万元</span></p>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>关联企业名称</th>
-                                    <th>关系</th>
-                                    <th>注册资本</th>
-                                    <th>主营业务</th>
-                                    <th>主营收入</th>
+                                	<th>${loanformManage.finOrdernumSix}</th>
+                                    <th><b class="red">*</b>${loanformManage.finCompanySix}</th>
+                                    <th><b class="red">*</b>${loanformManage.finGx}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZczb}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZyyw}</th>
+                                    <th><b class="red">*</b>${loanformManage.finZysr}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>

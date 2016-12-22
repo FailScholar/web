@@ -27,7 +27,7 @@ public class MarketServiceImpl extends BaseServiceImpl<Market> implements IMarke
 	public List<Market> getMarketList(Integer columnid, int page) {
 		Market market = new Market();
 		market.setColumnId(columnid);
-		PageHelper.startPage(page, 12);
+		PageHelper.startPage(page, 8);
 		PageHelper.orderBy("publish_time desc");
 		return marketMapper.select(market);
 	}

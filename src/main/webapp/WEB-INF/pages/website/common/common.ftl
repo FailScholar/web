@@ -22,11 +22,6 @@
 <#--commonjs-->
 <script type="text/javascript" src="${path}/resource/js/common.js"></script>
 
-<script>
+<script type="application/javascript">
     var path = '${path}';
-    $(document).ready(function(e) {
-    $('.nav li').click(function(){
-        $(this).addClass('active').siblings('li').removeClass('active');
-    });
-        })
 </script>

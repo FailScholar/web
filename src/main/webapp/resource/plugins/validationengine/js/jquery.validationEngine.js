@@ -592,6 +592,10 @@
 						required = true;
 						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._required);
 						break;
+					case "payCyclerequired":
+						required = true;
+						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._required);
+						break;
 					case "custom":
 						errorMsg = methods._getErrorMessage(form, field, rules[i], rules, i, options, methods._custom);
 						break;
@@ -1555,9 +1559,9 @@
 			 if(ajaxform) prompt = false;
 			 // Check that there is indded text
 			 if($.trim(promptText)){ 
-				 if (prompt)
-					methods._updatePrompt(field, prompt, promptText, type, ajaxed, options);
-				 else
+				 if (prompt){
+					 methods._updatePrompt(field, prompt, promptText, type, ajaxed, options);
+				 }else
 					methods._buildPrompt(field, promptText, type, ajaxed, options);
 			}
 		 },

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jltfisp.web.loan.dao.LoanManageOtherMapper">
+	<resultMap id="BaseResultMap" type="com.jltfisp.web.loan.entity.LoanManageOther">
+		<id column="id" jdbcType="INTEGER" property="id"  />
+		<result column="form_label_json" jdbcType="LONGVARCHAR" property="formLabelJson"  />
+		<result column="isTemplate" jdbcType="INTEGER" property="istemplate"  />
+		<result column="createTime" jdbcType="TIMESTAMP" property="createtime"  />
+		<result column="type" jdbcType="INTEGER" property="type"  />
+		<result column="apply_guide" jdbcType="LONGVARCHAR" property="applyGuide"  />
+		<result column="loan_guide" jdbcType="LONGVARCHAR" property="loanGuide"  />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		     <if test="id != null and id != ''">
+		        and a.id=#{id,jdbcType=INTEGER}
+		     </if>
+		     <if test="formLabelJson != null and formLabelJson != ''">
+		        and a.form_label_json=#{formLabelJson,jdbcType=LONGVARCHAR}
+		     </if>
+		     <if test="istemplate != null">
+		        and a.isTemplate=#{istemplate,jdbcType=INTEGER}
+		     </if>
+		     <if test="createtime != null and createtime != ''">
+		        and a.createTime=#{createtime,jdbcType=TIMESTAMP}
+		     </if>
+		     <if test="type != null and type != ''">
+		        and a.type=#{type,jdbcType=INTEGER}
+		     </if>
+		     <if test="applyGuide != null and applyGuide != ''">
+		        and a.apply_guide=#{applyGuide,jdbcType=LONGVARCHAR}
+		     </if>
+		     <if test="loanGuide != null and loanGuide != ''">
+		        and a.loan_guide=#{loanGuide,jdbcType=LONGVARCHAR}
+		     </if>
+	 </sql>
+	 
+	<sql id="Base_Column_List">
+		     a.id,
+		     a.form_label_json,
+		     a.isTemplate,
+		     a.createTime,
+		     a.type,
+		     a.apply_guide,
+		     a.loan_guide
+   </sql>
+	<!-- 查询列表count-->
+	<select id="countByExample" parameterType="com.jltfisp.web.loan.entity.LoanManageOther" resultType="java.lang.Integer">
+        select count(1) from jltfisp_loan_manage_other a
+        <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+    </select>
+	<!-- 查询列表-->
+	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
+        select b.value as loanName, b.code as loanCode,
+        <include refid="Base_Column_List"/> 
+        from jltfisp_loan_manage_other a LEFT JOIN sys_dict b on b.id = a.type
+         <if test="_parameter != null">
+        	<where>
+            <include refid="Example_Where_Clause"/>
+            </where>
+        </if>
+        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_LM != null">limit #{_LM}</if>
+        <if test="_ST != null">offset #{_ST}</if>
+    </select>
+	<!-- 根据主键查询-->
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jltfisp_loan_manage_other a
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </select>
+    <!-- 删除-->
+    <update id="deleteFake" parameterType="java.lang.Integer">
+        update jltfisp_loan_manage_other a set a.status = 'd',a.update_at =now(),a.update_by=#userId
+        where 
+	    a.id=#{id,jdbcType=INTEGER}
+    </update>
+	<!-- deleteReal:真删除-->
+	<delete id="deleteReal" parameterType="java.lang.Integer">
+	   delete from jltfisp_loan_manage_other 
+	     where 
+	    id=#{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 新增 -->
+	<insert id="insertRecord" parameterType="com.jltfisp.web.loan.entity.LoanManageOther">
+	   insert into jltfisp_loan_manage_other 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	          id,
+	          form_label_json,
+	          isTemplate,
+	          createTime,
+	          type,
+	          apply_guide,
+	          loan_guide,
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+	    	#{id,jdbcType=INTEGER},
+	    	#{formLabelJson,jdbcType=LONGVARCHAR},
+	    	#{istemplate,jdbcType=INTEGER},
+	    	#{createtime,jdbcType=TIMESTAMP},
+	    	#{type,jdbcType=INTEGER},
+	    	#{applyGuide,jdbcType=LONGVARCHAR},
+	    	#{loanGuide,jdbcType=LONGVARCHAR},
+	    </trim>
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<insert id="insertRecordSelective" parameterType="com.jltfisp.web.loan.entity.LoanManageOther">
+	   insert into jltfisp_loan_manage_other 
+    	<trim prefix="(" suffix=")" suffixOverrides=",">
+	   	   <if test="id != null and id != ''" >
+	          id,
+	       </if>
+	   	   <if test="formLabelJson != null and formLabelJson != ''" >
+	          form_label_json,
+	       </if>
+	   	   <if test="istemplate != null and istemplate != ''" >
+	          isTemplate,
+	       </if>
+	   	   <if test="createtime != null and createtime != ''" >
+	          createTime,
+	       </if>
+	   	   <if test="type != null and type != ''" >
+	          type,
+	       </if>
+	   	   <if test="applyGuide != null and applyGuide != ''" >
+	          apply_guide,
+	       </if>
+	   	   <if test="loanGuide != null and loanGuide != ''" >
+	          loan_guide,
+	       </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides=",">
+    		<if test="id != null and id != ''">
+    		#{id,jdbcType=INTEGER},
+    		</if>
+    		<if test="formLabelJson != null and formLabelJson != ''">
+    		#{formLabelJson,jdbcType=LONGVARCHAR},
+    		</if>
+    		<if test="istemplate != null and istemplate != ''">
+    		#{istemplate,jdbcType=INTEGER},
+    		</if>
+    		<if test="createtime != null and createtime != ''">
+    		#{createtime,jdbcType=TIMESTAMP},
+    		</if>
+    		<if test="type != null and type != ''">
+    		#{type,jdbcType=INTEGER},
+    		</if>
+    		<if test="applyGuide != null and applyGuide != ''">
+    		#{applyGuide,jdbcType=LONGVARCHAR},
+    		</if>
+    		<if test="loanGuide != null and loanGuide != ''">
+    		#{loanGuide,jdbcType=LONGVARCHAR},
+    		</if>
+	    </trim>
+
+       <selectKey resultType="java.lang.Integer" keyProperty="id">
+		SELECT @@IDENTITY AS id
+	   </selectKey> 
+	</insert>
+	<!-- 更新 -->
+	<update id="updateByPKSelective" parameterType="com.jltfisp.web.loan.entity.LoanManageOther">
+	   	update jltfisp_loan_manage_other 
+	  <set>
+		     <if test="id != null and id != ''" >
+		         id=#{id,jdbcType=INTEGER},
+		     </if>
+		     <if test="formLabelJson != null and formLabelJson != ''" >
+		         form_label_json=#{formLabelJson,jdbcType=LONGVARCHAR},
+		     </if>
+		     <if test="istemplate != null and istemplate != ''" >
+		         isTemplate=#{istemplate,jdbcType=INTEGER},
+		     </if>
+		     <if test="createtime != null and createtime != ''" >
+		         createTime=#{createtime,jdbcType=TIMESTAMP},
+		     </if>
+		     <if test="type != null and type != ''" >
+		         type=#{type,jdbcType=INTEGER},
+		     </if>
+		     <if test="applyGuide != null and applyGuide != ''" >
+		         apply_guide=#{applyGuide,jdbcType=LONGVARCHAR},
+		     </if>
+		     <if test="loanGuide != null and loanGuide != ''" >
+		         loan_guide=#{loanGuide,jdbcType=LONGVARCHAR},
+		     </if>
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 更新 -->
+	
+	<update id="updateByPK" parameterType="com.jltfisp.web.loan.entity.LoanManageOther">
+	   	update jltfisp_loan_manage_other 
+	  <set>
+	    form_label_json=#{formLabelJson,jdbcType=LONGVARCHAR},
+	    isTemplate=#{istemplate,jdbcType=INTEGER},
+	    createTime=#{createtime,jdbcType=TIMESTAMP},
+	    type=#{type,jdbcType=INTEGER},
+	    apply_guide=#{applyGuide,jdbcType=LONGVARCHAR},
+	    loan_guide=#{loanGuide,jdbcType=LONGVARCHAR},
+	  </set>
+	   where 
+	    id=#{id,jdbcType=INTEGER} 
+	</update>
+	
+	<!-- 查询目前字典表里存的系统最大的贷款业务code-->
+	<select id="selectMaxCode"  resultType="java.lang.Integer">
+       select max(code+0) from sys_dict where type=1002
+    </select>
+	
+</mapper> 

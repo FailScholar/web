@@ -20,7 +20,7 @@
     </div>-->
     <div class="video">
         <h1>${pojo.title}</h1>
-        <p><span class="time fl">${pojo.publishTime ?date}</span><span class="eye fr">${pojo.pv}</span></p>
+        <p><span class="time fl">${pojo.publishTime ?date}</span><span class="eye fr">${pojo.pv +1}</span></p>
         <div class="clear"></div>
         <div class="artical" style="background-color:#fff;">
             <p>${pojo.content}</p>
@@ -39,3 +39,6 @@
 <#include "website/common/footer.ftl" />
 </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(0);
+</script>

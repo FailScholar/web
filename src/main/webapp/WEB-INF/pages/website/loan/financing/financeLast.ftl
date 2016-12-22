@@ -2,12 +2,12 @@
 <div class="alptable nlistCont">
    <h1 style="width:100%; background:none">吉林省科技股权融资申请表</h1>
    <div class="clear"></div>
-   <table class="tab2" style="width:100%">
+   <table class="tab2" style="word-wrap:break-word;word-break:break-all;">
    		<tbody>
    			<tr class="tal">
-                 <th>项目名称</th>
+                 <th>${formLabel.baseProjectName}</th>
                  <td><span>${jltfispCoBaseDto2.projectname}</span></td>
-                 <th>所属技术领域</th>
+                 <th>${formLabel.baseTecDomain}</th>
                   <td colspan="3">
                  	 <#if jltfispCoBaseDto2.tecdomain==1>
                  	 	<span>电子信息技术</span>
@@ -29,64 +29,64 @@
                   </td>
             </tr>
             <tr class="tal">
-                <th>公司名称(全称)</th>
+                <th>${formLabel.baseCompany}</th>
                 <td><span>${user.username}</span></td>
-                <th>公司通讯地址</th>
+                <th>${formLabel.baseOfficeaddress}</th>
                 <td colspan="3"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
             </tr>
             <tr class="tal">
-                 <th>注册资本</th>
-                 <td><span>${jltfispCoBaseDto2.registeredCapital}</span></td>
-                 <th>注册地址</th>
+                 <th>${formLabel.baseRegisteredcapital}</th>
+                 <td><span>${capilMoney}万元</span></td>
+                 <th>${formLabel.baseRegisteredaddress}</th>
                  <td colspan="3"><span>${jltfispCoBaseDto2.registeredAddress}</span></td>
                  </tr>
                             <tr class="tal">
-                                <th width="16.6%">法人代表</th>
+                                <th width="16.6%">${formLabel.baseCorporaterepresentative}</th>
                                 <td width="16.6%"><span>${jltfispCoBaseDto2.corporateRepresentative}</span></td>
-                                <th width="16.6%">成立时间</th>
+                                <th width="16.6%">${formLabel.baseEstablishtime}</th>
                                 <td width="16.6%"><span>${jltfispCoBaseDto2.establishTime}</span></td>
-                                <th width="16.6%">联系人邮箱</th>
+                                <th width="16.6%">${formLabel.baseLinkemail}</th>
                                 <td><span>${jltfispCoBaseDto2.linkEmail}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>邮编</th>
+                                <th>${formLabel.basePostCode}</th>
                                 <td><span>${jltfispCoBaseDto2.email}</span></td>
-                                <th>组织机构代码</th>
+                                <th>${formLabel.baseSocialcreditcode}</th>
                                 <td><span>${user.socialCode}</span></td>
-                                <th>职工人数(人)</th>
+                                <th>${formLabel.baseWorkerNumber}</th>
                                 <td><span>${jltfispCoBaseDto2.workernumber}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>联系人姓名</th>
+                                <th>${formLabel.baseLinkman}</th>
                                 <td><span>${jltfispCoBaseDto2.linkMan}</span></td>
-                                <th>联系人电话</th>
-                                <td><span>${jltfispCoBaseDto2.phoneOrFax}</span></td>
-                                <th>联系人手机</th>
+                                <th>${formLabel.basePhoneorfax}</th>
+                                <td><span>${jltfispCoBaseDto2.zoneDescription}-${jltfispCoBaseDto2.phoneOrFax}</span></td>
+                                <th>${formLabel.baseLinkmobile}</th>
                                 <td><span>${jltfispCoBaseDto2.linkMobile}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>公司网址</th>
+                                <th>${formLabel.baseCompanyUrl}</th>
                                 <td  colspan="5"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>推荐人单位</th>
+                                <th>${formLabel.baseRefereeCompany}</th>
                                 <td><span>${jltfispCoBaseDto2.refereecompany}</span></td>
-                                <th>推荐人姓名</th>
+                                <th>${formLabel.baseReferee}</th>
                                 <td colspan="3"><span>${jltfispCoBaseDto2.referee}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>推荐人手机</th>
+                                <th>${formLabel.baseRefereeMobile}</th>
                                 <td><span>${jltfispCoBaseDto2.refereemobile}</span></td>
-                                <th>推荐人邮箱</th>
+                                <th>${formLabel.baseRefereeEmail}</th>
                                 <td colspan="3"><span>${jltfispCoBaseDto2.refereeemail}</span></td>
                             </tr>
                             <tr>
-                                <th colspan="6">主要股东</th>
+                                <th colspan="6">${formLabel.baseMainshareholder}</th>
                             </tr>
                             <tr>
-                                <th colspan="2">股东名称</th>
-                                <th colspan="2">法人代表(或证件号)</th>
-                                <th colspan="2">所占股份%</th>
+                                <th colspan="2">${formLabel.baseShareholdername}</th>
+                                <th colspan="2">${formLabel.baseCorporaterepresentative}</th>
+                                <th colspan="2">${formLabel.baseStock}</th>
                             </tr>
                              <#if jltfispCoBaseDto2.jltfispFinShareholderList?? && (jltfispCoBaseDto2.jltfispFinShareholderList?size > 0) >
 	                            <#list jltfispCoBaseDto2.jltfispFinShareholderList as jltfispFinShareholderList>
@@ -101,15 +101,15 @@
                                 <th colspan="6">项目简介</th>
                             </tr>
                             <tr class="tal">
-                                <th>市场及产品综述</th>
+                                <th>${formLabel.baseMarketProductSummary}</th>
                                 <td colspan="5"><span>${jltfispCoBaseDto2.marketproductsummary}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>公司管理团队简介</th>
+                                <th>${formLabel.baseManagerTeamSummary}</th>
                                 <td colspan="5"><span>${jltfispCoBaseDto2.managerteamsummary}</span></td>
                             </tr>
                             <tr class="tal">
-                            	<th>科技资质</th>
+                            	<th>${formLabel.baseTechnologyQualifications}</th>
                                 <td colspan="5">
                                 	<#if jltfispCoBaseDto2.technologyqualifications==1>
 			                 	 		<span>高科技企业</span>
@@ -128,33 +128,33 @@
                                 <th colspan="6">近三年经营情况(单位：万元)</th>
                             </tr>
                             <tr class="tal">
-                                <th>年度</th>
+                                <th>${formLabel.finMaterialYear}</th>
                                 <td>${year-1}年</td>
                                 <td>${year-2}年</td>
                                 <td colspan="3">${year-3}年</td>
                             </tr>
                             <tr class="tal">
-                                <th>总收入</th>
+                                <th>${formLabel.finMaterialIncome}</th>
                                 <td><span>${jltfispFinMaterial3.incomeLast}</span></td>
                                 <td><span>${jltfispFinMaterial3.incomeBeforeLast}</span></td>
                                 <td colspan="3"><span>${jltfispFinMaterial3.incomeThreeLast}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>净利润</th>
+                                <th>${formLabel.finMaterialProfit}</th>
                                 <td><span>${jltfispFinMaterial3.profitLast}</span></td>
                                 <td><span>${jltfispFinMaterial3.profitBeforeLast}</span></td>
                                 <td colspan="3"><span>${jltfispFinMaterial3.profitThreeLast}</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>融资金额</th>
+                                <th>${formLabel.finMaterialCapitals}</th>
                                 <td colspan="5"><span>${jltfispFinMaterial3.capitals}&nbsp;万元</span></td>
                             </tr>
                             <tr class="tal">
-                                <th>对投资机构的要求</th>
+                                <th>${formLabel.finMaterialRequireOrganization}</th>
                                 <td colspan="5"><span>${jltfispFinMaterial3.requireOrganization}</span></td>
                             </tr class="tal">
                             <tr class="tal">
-                                <th>服务要求</th>
+                                <th>${formLabel.finMaterialRequireService}</th>
                                 <td colspan="5">
  									<#if jltfispFinMaterial3.requireService=="1">
 			                 	 		<span>网站上发布&nbsp;${jltfispFinMaterial3.requireServiceText}</span>

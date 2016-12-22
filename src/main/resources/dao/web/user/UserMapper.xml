@@ -13,6 +13,7 @@
 		<result column="role_id" jdbcType="INTEGER" property="roleId"  />
 		<result column="contact" jdbcType="VARCHAR" property="contact"  />
 		<result column="social_code" jdbcType="VARCHAR" property="socialCode"  />
+		<result column="captcha_time" jdbcType="TIMESTAMP" property="captchaTime"  />
 		<result column="type" jdbcType="INTEGER" property="type"  />
 		<result column="is_delete" jdbcType="INTEGER" property="isDelete"  />
 		<result column="state" jdbcType="INTEGER" property="state"  />
@@ -75,6 +76,7 @@
 		     a.role_id,
 		     a.contact,
 		     a.social_code,
+		     a.captcha_time,
 		     a.type,
 		     a.is_delete,
 		     a.state

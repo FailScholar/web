@@ -110,6 +110,7 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(0);
       //通知通告弹窗
         function showDetail(id) {
         	dialog({

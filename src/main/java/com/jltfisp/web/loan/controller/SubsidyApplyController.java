@@ -1,5 +1,6 @@
 package com.jltfisp.web.loan.controller;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,17 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.jltfisp.Constants;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
+import com.jltfisp.redis.RedisService;
 import com.jltfisp.util.WebUtil;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
+import com.jltfisp.web.loan.entity.FormLabel;
 import com.jltfisp.web.loan.entity.JlfispPsBaseDto;
 import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
 import com.jltfisp.web.loan.entity.JltfispPsInfo;
 import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
 import com.jltfisp.web.loan.entity.JltfispSubsidyCoBaseDto;
+import com.jltfisp.web.loan.entity.LoanManageOther;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+import com.jltfisp.web.loan.service.ILoanManageOtherService;
 import com.jltfisp.web.loan.service.ISubsidyService;
 import com.jltfisp.web.loan.service.LoanService;
 /**
@@ -40,8 +46,12 @@ public class SubsidyApplyController {
 	private LoanService loanService;
     @Autowired
     private IBusinessApplayAuditService businessApplayAuditService;
-	
+
+    @Autowired
+    private ILoanManageOtherService loanManageOtherService;
     
+    @Autowired
+    private RedisService<Serializable, String> redisService;
     
     /**
 	 * 跳转申请须知页面
@@ -58,6 +68,18 @@ public class SubsidyApplyController {
         	mv=new ModelAndView("/website/loan/fail");
     		mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
         }*/
+     //获取申请表单 申请须知及业务说明
+     LoanManageOther loanformManage = new LoanManageOther();
+     if(redisService.getV("LoanformManage16") != null){
+         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                 LoanManageOther.class);
+     }else{
+         LoanManageOther params = new LoanManageOther();
+         params.setType(16);
+         params.setIstemplate(0);
+         loanformManage = loanManageOtherService.selectOneByExample(params);
+     }
+     mv.addObject("applyGuid", loanformManage != null ? loanformManage.getApplyGuide() : "");
     	mv.addObject("goBackUrl", 1);
     	return mv;
     }
@@ -69,6 +91,18 @@ public class SubsidyApplyController {
     @RequestMapping("/guidApplyIndex")
     public ModelAndView guidApplyIndex(HttpServletRequest request){
     	ModelAndView mv=new ModelAndView("/website/loan/subsidy/GuideApplyText");
+     //获取申请表单 申请须知及业务说明
+     LoanManageOther loanformManage = new LoanManageOther();
+     if(redisService.getV("LoanformManage16") != null){
+         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                 LoanManageOther.class);
+     }else{
+         LoanManageOther params = new LoanManageOther();
+         params.setType(16);
+         params.setIstemplate(0);
+         loanformManage = loanManageOtherService.selectOneByExample(params);
+     }
+     mv.addObject("applyGuid", loanformManage != null ? loanformManage.getApplyGuide() : "");
     	mv.addObject("goBackUrl", 2);
     	return mv;
     }
@@ -86,7 +120,20 @@ public class SubsidyApplyController {
         if(user !=null && user.getType()==1 ){
         	//第一步先进入申请须知页面
         	mv=new ModelAndView("/website/loan/fail");
-    		mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
+    		   mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
+        }else{
+            //获取申请表单 申请须知及业务说明
+            LoanManageOther loanformManage = new LoanManageOther();
+            if(redisService.getV("LoanformManage16") != null){
+                loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                        LoanManageOther.class);
+            }else{
+                LoanManageOther params = new LoanManageOther();
+                params.setType(16);
+                params.setIstemplate(0);
+                loanformManage = loanManageOtherService.selectOneByExample(params);
+            }
+            mv.addObject("applyGuide", loanformManage != null ? loanformManage.getApplyGuide() : "");
         }
     	return mv;
     }
@@ -116,6 +163,20 @@ public class SubsidyApplyController {
         	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
         	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
         	    	}
+        	    	
+        	   //获取申请表单 字段名称
+              LoanManageOther loanformManage = new LoanManageOther();
+              if(redisService.getV("LoanformManage16") != null){
+                  loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                          LoanManageOther.class);
+              }else{
+                  LoanManageOther params = new LoanManageOther();
+                  params.setType(16);
+                  params.setIstemplate(0);
+                  loanformManage = loanManageOtherService.selectOneByExample(params);
+              }
+              mv.addObject("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
+                      FormLabel.class));
         		}
         	}else{
         		//(未提交)下次进入申请页面信息不用重新填
@@ -126,8 +187,24 @@ public class SubsidyApplyController {
     	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
     	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
     	    	}
+    	    	
+    	     //获取申请表单 字段名称
+          LoanManageOther loanformManage = new LoanManageOther();
+          if(redisService.getV("LoanformManage16") != null){
+              loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                      LoanManageOther.class);
+          }else{
+              LoanManageOther params = new LoanManageOther();
+              params.setType(16);
+              params.setIstemplate(0);
+              loanformManage = loanManageOtherService.selectOneByExample(params);
+          }
+          mv.addObject("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
+                  FormLabel.class));
+    	    	
         	}
 			mv.addObject("companyName", user.getUsername());
+			mv.addObject("socialCode", user.getSocialCode());
 		}
         return mv;
     }
@@ -192,6 +269,21 @@ public class SubsidyApplyController {
     		businessApplayAudit.setType("5");
      		businessApplayAuditService.insertRecord(businessApplayAudit);
     	}
+    	
+     //获取申请表单 字段名称
+     LoanManageOther loanformManage = new LoanManageOther();
+     if(redisService.getV("LoanformManage16") != null){
+         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                 LoanManageOther.class);
+     }else{
+         LoanManageOther params = new LoanManageOther();
+         params.setType(16);
+         params.setIstemplate(0);
+         loanformManage = loanManageOtherService.selectOneByExample(params);
+     }
+     mv.addObject("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
+             FormLabel.class));
+    	
     	mv.addObject("jltfispCoBaseDto", jltfispCoBaseDto);
     	mv.addObject("jltfispPsInfoList",jltfispPsInfoList);
     	mv.addObject("jltfispPsMaterialInfo",jltfispPsMaterialInfo);
@@ -202,14 +294,14 @@ public class SubsidyApplyController {
      * @return
      */
      @RequestMapping("/finishApply")
-     @ResponseBody
-     public String submitSubsidyApply(){
+     public ModelAndView finishApply(){
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
+    	ModelAndView mv=new ModelAndView("/website/loan/success");
     	BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "5");
     	businessApplayAudit.setState(0);
-    	businessApplayAudit.setSubmitDate(new Date());;
+    	businessApplayAudit.setSubmitDate(new Date());
  		businessApplayAuditService.updateByPK(businessApplayAudit);
- 		return "success";
+ 		return mv;
     }
-}
+} 

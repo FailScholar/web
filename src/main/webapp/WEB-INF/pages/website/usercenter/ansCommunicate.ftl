@@ -36,7 +36,7 @@
 	      <p class="qus">问题</p>
 	      <p class="gray6">${comm.content} </p>
 	      <p class="ans">金融专家答复：</p>
-	      <textarea class="txta validate[required,maxSize[250]]" name="ansContent" style="width:620px;">${comm.ansContent}</textarea>
+	      <textarea class="txta validate[required,minSize[2],maxSize[500]]" name="ansContent" style="width:620px;height:200px;">${comm.ansContent}</textarea>
 	  	</form>
 	  	</div>
 	</#if>

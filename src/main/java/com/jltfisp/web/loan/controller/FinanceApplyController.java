@@ -1,5 +1,7 @@
 package com.jltfisp.web.loan.controller;
 
+import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,17 +16,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
+import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
+import com.jltfisp.redis.RedisService;
+import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.area.entity.JltfispArea;
 import com.jltfisp.web.area.service.AreaService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
+import com.jltfisp.web.loan.entity.FormLabel;
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispFinMaterial;
 import com.jltfisp.web.loan.entity.JltfispFinShareholder;
 import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
+import com.jltfisp.web.loan.entity.LoanManageOther;
 import com.jltfisp.web.loan.service.FinanceApplyService;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+import com.jltfisp.web.loan.service.ILoanManageOtherService;
 
 @Controller
 @RequestMapping({"/anon/loan","/loan"})
@@ -41,6 +50,15 @@ public class FinanceApplyController {
     
     @Autowired
     private IBusinessApplayAuditService businessApplayAuditService;
+    
+    @Autowired
+    private ILoanManageOtherService loanManageOtherService;
+    
+    @Autowired
+    private DictionaryService dictionaryService;
+    
+    @Autowired
+    private RedisService<Serializable, String> redisService;
     
 	/**
 	 * 
@@ -83,6 +101,30 @@ public class FinanceApplyController {
 	   		 int year =cal.get(Calendar.YEAR);  
 	   		 request.setAttribute("year", year);
 	   	}
+	    
+	    //获取申请表单 字段名称
+	     LoanManageOther loanformManage = new LoanManageOther();
+	     SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+	     if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+	         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+	                 LoanManageOther.class);
+	     }else{
+	         LoanManageOther params = new LoanManageOther();
+	         params.setType(sysDict.getId());
+	         params.setIstemplate(0);
+	         loanformManage = loanManageOtherService.selectOneByExample(params);
+	         if(loanformManage == null){
+	             params = new LoanManageOther();
+	             params.setIstemplate(1);
+	             loanformManage = loanManageOtherService.selectOneByExample(params);
+	         }
+	         
+	     }
+	     String formlabelJson = loanformManage.getFormLabelJson();
+	     FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+	             FormLabel.class);
+	    request.setAttribute("formLabel", formLabel);
+	    
 	    request.setAttribute("user", user);
 	    request.setAttribute("jltfispCoBaseDto", jltfispCoBaseDto);
 	    return "/website/loan/financing/financingApply";
@@ -114,6 +156,25 @@ public class FinanceApplyController {
 				}
 			}
 		  }
+		//获取股权融资申请须知 内容
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+		                 LoanManageOther.class);
+		  }else{
+		         LoanManageOther params = new LoanManageOther();
+		         params.setType(sysDict.getId());
+		         params.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params);
+		         if(loanformManage == null){
+		             params = new LoanManageOther();
+		             params.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params);
+		         }
+		         
+		   }
+		  request.setAttribute("loanformManage", loanformManage);
 	      return "/website/loan/financeGuideApply";
 	  }
 	  
@@ -128,6 +189,25 @@ public class FinanceApplyController {
 	   */
 	  @RequestMapping("/financeKnow2")
 	  public String financeKnowNoApply(HttpServletRequest request) {
+		//获取股权融资申请须知 内容
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+		                 LoanManageOther.class);
+		  }else{
+		         LoanManageOther params = new LoanManageOther();
+		         params.setType(sysDict.getId());
+		         params.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params);
+		         if(loanformManage == null){
+		             params = new LoanManageOther();
+		             params.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params);
+		         }
+		         
+		   }
+		  request.setAttribute("loanformManage", loanformManage);
 		  JltfispUser user=loginService.getCurrentUser();
 		  int userType = user.getType();
 		  request.setAttribute("userType", userType);
@@ -198,7 +278,7 @@ public class FinanceApplyController {
 		    	}
 		    	if(jltfispCoBaseDto.getJltfispFinShareholderList()!=null){
 		    		for(int i=0;i<jltfispCoBaseDto.getJltfispFinShareholderList().size();i++){
-		    			if(jltfispCoBaseDto.getJltfispFinShareholderList().get(i)!=null){
+		    			if(jltfispCoBaseDto.getJltfispFinShareholderList().get(i).getName()!=null){
 		    				jltfispCoBaseDto.getJltfispFinShareholderList().get(i).setFinancingId(jltfispCoBase2.getId());
 		    				this.financeApplyService.addShareholders(jltfispCoBaseDto.getJltfispFinShareholderList().get(i));
 		    			}
@@ -235,6 +315,29 @@ public class FinanceApplyController {
 	  @RequestMapping("/saveJltfispFinMaterialInfo")
 	  public ModelAndView saveJltfispFinMaterialInfo(HttpServletRequest request,JltfispFinMaterial jltfispFinMaterial){
 		  ModelAndView mv=new ModelAndView("/website/loan/financing/financeLast");	
+		  //获取股权融资申请表单 字段名称
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+		                 LoanManageOther.class);
+		  }else{
+		         LoanManageOther params = new LoanManageOther();
+		         params.setType(sysDict.getId());
+		         params.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params);
+		         if(loanformManage == null){
+		             params = new LoanManageOther();
+		             params.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params);
+		         }
+		         
+		   }
+		   String formlabelJson = loanformManage.getFormLabelJson();
+		   FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+		             FormLabel.class);
+		  request.setAttribute("formLabel", formLabel);
+		  
 		  JltfispUser user=loginService.getCurrentUser();
 		  request.setAttribute("user", user);
 		  JltfispFinanceAndShareholdersDto jltfispCoBase = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
@@ -311,6 +414,9 @@ public class FinanceApplyController {
 				  this.businessApplayAuditService.updateMoneyByUserIdAndType(user.getId(),"6",money);
 			  }
 		  }
+		  DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+		  String capilMoney=decimalFormat.format(jltfispCoBaseDto2.getRegisteredCapital());//format 返回的是字符串
+		  request.setAttribute("capilMoney", capilMoney);
 	      return  mv;
 	  }
 	  

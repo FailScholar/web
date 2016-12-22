@@ -204,3 +204,6 @@
 <#include "website/common/footer.ftl" />
 </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(0);
+</script>

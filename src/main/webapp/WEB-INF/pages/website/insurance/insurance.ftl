@@ -30,7 +30,7 @@
             <li code="${colList[5].id}">
               <a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
             <select id="moreSel" onchange="getList()">
-            <option value="0">-选择更多机构-</option>
+            <option value="0">-选择更多-</option>
             <#list 5..len-1 as i>
                 <option value="${colList[i].id}">${colList[i].columnName}</option>
             </#list>
@@ -52,6 +52,7 @@
 </body>
 </html>
 <script type="text/javascript">
+    positionNavigation(9);
     var infoTab = $("div.info ul.infoTab");
     $(function(){
 		var columnid = $.cookie('columnid');

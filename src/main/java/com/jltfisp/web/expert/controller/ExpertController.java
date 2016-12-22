@@ -91,13 +91,12 @@ public class ExpertController {
         request.setAttribute("columnList", columnList);
         //获取当前子栏目下所有的数据总数
         int total =expertService.getExpertPageCount(columnList.get(0).getId());
-        //获取当前页的数据，且显示12条
-        List<JltfispExpert> datas=expertService.getExpertPageList(0, 12,columnList.get(0).getId());
+        //获取当前页的数据，且显示8条
+        List<JltfispExpert> datas=expertService.getExpertPageList(0, 8,columnList.get(0).getId());
         PagerModel pm = new PagerModel();
         pm.setDatas(datas);
         pm.setTotal(total);
         request.setAttribute("pm", pm);
-        request.setAttribute("pageSize",12);
         request.setAttribute("url", "anon/expert");
         //代表从前台页面传过来的值
         if(null != isFrontPage){
@@ -119,14 +118,13 @@ public class ExpertController {
      int rows=Integer.parseInt(request.getParameter("pager.offset"));
      //获取当前子栏目下所有的数据总数
      int total =expertService.getExpertPageCount(Integer.parseInt(columnId));
-     //获取当前页的数据，且显示12条
-     List<JltfispExpert> datas=expertService.getExpertPageList(rows,12,Integer.parseInt(columnId));
+     //获取当前页的数据，且显示8条
+     List<JltfispExpert> datas=expertService.getExpertPageList(rows,8,Integer.parseInt(columnId));
      PagerModel pm = new PagerModel();
      pm.setDatas(datas);
      pm.setTotal(total);
      model.addAttribute("columnId",columnId);
      model.addAttribute("pm",pm);
-     model.addAttribute("pageSize",12);
      model.addAttribute("url","anon/expert");
      return "/website/expert/expertContext";
     }
@@ -264,6 +262,7 @@ public class ExpertController {
     	expert.setType(String.valueOf(jltfispExpert.getColumnid()));
 	 	businessApplayAuditService.insertRecord(expert);
     	//stop插入审核流程
+	 	jltfispExpert.setCreateTime(new Date());
 	 	int i=expertService.saveExpert(jltfispExpert);
 	 	return i;
     }
@@ -280,7 +279,7 @@ public class ExpertController {
     public String addExpert(HttpServletRequest request,String type,String columnId)
     {   
 		JltfispColumn JltfispColumn=columnService.getColumnContext(Integer.parseInt(columnId));
-    	request.setAttribute("applyname", "申请"+JltfispColumn.getColumnName());
+    	request.setAttribute("applyname", JltfispColumn.getColumnName());
     	  if(type.equals("1")){
     		return "/website/expert/expertApplysuccess";
     		}

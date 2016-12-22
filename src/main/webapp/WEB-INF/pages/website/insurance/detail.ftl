@@ -26,7 +26,7 @@
     </div>
     <div class="video">
         <h1>${insurance.title}</h1>
-        <p><span class="time fl">${insurance.publishTime ?date}</span><span class="eye fr">${insurance.pv}</span></p>
+        <p style="width:450px;text-align:center;"><span class="time">${insurance.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${insurance.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${insurance.source}</span></p>
         <div class="clear"></div>
         <div class="artical" style="background-color:#fff;">
             <p>${insurance.content}</p>
@@ -45,3 +45,6 @@
 <#include "website/common/footer.ftl" />
 </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(9);
+</script>

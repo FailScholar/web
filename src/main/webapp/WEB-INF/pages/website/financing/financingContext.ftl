@@ -26,6 +26,7 @@
 function  changePage(url){
 var columnId='${columnid}';
 var url=url.split("=");
+alert(url);
 var offset=url[1];
 $.ajax({
                 type: 'POST',

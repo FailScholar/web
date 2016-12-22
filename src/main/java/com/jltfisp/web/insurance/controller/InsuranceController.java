@@ -60,7 +60,7 @@ public class InsuranceController {
     public String insuranceListDetail(@PathVariable Integer columnId, HttpServletRequest request){
         
     	int rows=Integer.parseInt(request.getParameter("pager.offset")==null ? "0" :request.getParameter("pager.offset"));
-    	List<JltfispInsurance> list = insuranceService.getInsuranceList(columnId, rows);
+    	List<JltfispInsurance> list = insuranceService.getInsuranceList(columnId, rows/8+1);
 		int total = insuranceService.getInsuranceCount(columnId);
 		PagerModel pm = new PagerModel();
     	pm.setDatas(list);

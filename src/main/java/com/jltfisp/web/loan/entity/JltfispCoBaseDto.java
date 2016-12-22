@@ -250,13 +250,13 @@ public class JltfispCoBaseDto {
      * 本年度已签订所有合同的标的总额
      */
     @Column(name = "agreementsAmount")
-    private float agreementsAmount;
+    private double agreementsAmount;
     
     /**
      * 实际控制人或核心股东个人经营性贷款
      */
     @Column(name = "loanAccount")
-    private float loanAccount;
+    private double loanAccount;
     
     /**
      * 其他说明
@@ -780,19 +780,19 @@ public class JltfispCoBaseDto {
 		this.userid = userid;
 	}
 
-	public float getAgreementsAmount() {
+	public double getAgreementsAmount() {
 		return agreementsAmount;
 	}
 
-	public void setAgreementsAmount(float agreementsAmount) {
+	public void setAgreementsAmount(double agreementsAmount) {
 		this.agreementsAmount = agreementsAmount;
 	}
 
-	public float getLoanAccount() {
+	public double getLoanAccount() {
 		return loanAccount;
 	}
 
-	public void setLoanAccount(float loanAccount) {
+	public void setLoanAccount(double loanAccount) {
 		this.loanAccount = loanAccount;
 	}
 

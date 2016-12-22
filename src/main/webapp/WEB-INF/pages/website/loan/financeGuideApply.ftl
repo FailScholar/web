@@ -80,7 +80,7 @@
 </html>
 
 <script type="text/javascript">
-
+    positionNavigation(1);
    function disable()
    {
 	   document.getElementById("accept").style.backgroundColor = "#c5c5c5";

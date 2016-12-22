@@ -6,32 +6,15 @@
 package com.jltfisp.web.anon;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.alibaba.fastjson.JSON;
-import com.jltfisp.PdfGenerator;
-import com.jltfisp.lucene.pojo.Pojo;
-import com.jltfisp.lucene.service.LuceneService;
-import com.jltfisp.base.entity.SysDict;
-import com.jltfisp.email.EmailService;
-import com.jltfisp.login.entity.JltfispUser;
-import com.jltfisp.shiro.AuthorizingRealm;
-import com.jltfisp.sys.session.statistics.service.StatisticsService;
-import com.jltfisp.util.captcha.Randoms;
-import com.jltfisp.util.service.DictionaryService;
-import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
-import com.jltfisp.web.loan.entity.JltfispFinMaterial;
-import com.jltfisp.web.loan.entity.JltfispFinShareholder;
-import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
-import com.jltfisp.web.loan.entity.JltfispPsInfo;
-import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
-import com.jltfisp.web.user.service.UserService;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
@@ -40,6 +23,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSON;
+import com.jltfisp.PdfGenerator;
+import com.jltfisp.base.entity.SysDict;
+import com.jltfisp.email.EmailService;
+import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.lucene.pojo.Pojo;
+import com.jltfisp.lucene.service.LuceneService;
+import com.jltfisp.redis.RedisService;
+import com.jltfisp.shiro.AuthorizingRealm;
+import com.jltfisp.sys.session.statistics.service.StatisticsService;
+import com.jltfisp.util.captcha.Randoms;
+import com.jltfisp.util.service.DictionaryService;
+import com.jltfisp.web.loan.entity.FormLabel;
+import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
+import com.jltfisp.web.loan.entity.JltfispFinMaterial;
+import com.jltfisp.web.loan.entity.JltfispFinShareholder;
+import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
+import com.jltfisp.web.loan.entity.JltfispPsInfo;
+import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
+import com.jltfisp.web.loan.entity.LoanManageOther;
+import com.jltfisp.web.loan.service.ILoanManageOtherService;
+import com.jltfisp.web.user.service.UserService;
 
 /**
  * Created by LiuFa on 2016/11/9.
@@ -63,6 +69,11 @@ public class AnonController {
     private DictionaryService dictionaryService;
     @Autowired
 	private AuthorizingRealm authorizingRealm;
+    @Autowired
+    private ILoanManageOtherService loanManageOtherService;
+    
+    @Autowired
+    private RedisService<Serializable, String> redisService;
     /**
      * 资本市场栏目主页面
      * @return
@@ -214,7 +225,12 @@ public class AnonController {
     @ResponseBody
     public int checkEmailInfo(JltfispUser user){
     	List<JltfispUser> userList = userService.selectUserByAccountNumber(user.getAccountNumber());
-    	if(!user.getEmailCaptcha().equals(userList.get(0).getEmailCaptcha())) {
+    	Date nowDate = new Date();
+    	long nowMinutes = nowDate.getTime();  
+    	JltfispUser user1 = userList.get(0);
+    	long captchaTime = user1.getCaptchaTime().getTime();  
+    	int minutes = (int) ((nowMinutes - captchaTime)/(1000 * 60));  
+    	if(!user.getEmailCaptcha().equals(user1.getEmailCaptcha()) || (minutes>15)) {
     		return 0;
     	}
     	return 1;
@@ -355,6 +371,28 @@ public class AnonController {
 	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      }
 	      variables.put("jltfispCoBaseDto2", jltfispCoBaseDto2);
+	    //获取股权融资申请表单 字段名称
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+		                 LoanManageOther.class);
+		  }else{
+		         LoanManageOther params1 = new LoanManageOther();
+		         params1.setType(sysDict.getId());
+		         params1.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params1);
+		         if(loanformManage == null){
+		             params1 = new LoanManageOther();
+		             params1.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params1);
+		         }
+		         
+		   }
+		  String formlabelJson = loanformManage.getFormLabelJson();
+		   FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+		             FormLabel.class);
+		  variables.put("formLabel", formLabel);
 	      String basePath = request.getSession().getServletContext()  
 	                 .getRealPath("/");  
 	     PdfGenerator.printPDF(basePath, variables, "股权融资申请", response,"financeApplyDetail.ftl");

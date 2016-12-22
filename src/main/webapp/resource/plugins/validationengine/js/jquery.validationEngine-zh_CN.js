@@ -16,6 +16,13 @@
 					"alertTextCheckboxe":"* 该选项为必选",
 					"alertTextDateRange":"* 日期范围不可空白"
 				},
+				"payCyclerequired":{ 
+					"regex":"none",
+					"alertText":"* 此处不可空白",
+					"alertTextCheckboxMultiple":"* 请选择贷款期限",
+					"alertTextCheckboxe":"* 该选项为必选",
+					"alertTextDateRange":"* 日期范围不可空白"
+				},
 				"dateRange":{
 					"regex":"none",
 					"alertText":"* 无效的 ",
@@ -225,7 +232,7 @@
 				,
 				"userLoginPassword":{
 					"regex" :/^[0-9a-zA-Z]+$/,
-					"alertText":"*至少包含一个英文或数字"
+					"alertText":"*只能为英文或数字(不含特殊字符)"
 				},
 				"chineseAndChar":{
 					"regex" :/^[\u4e00-\u9fa5_a-zA-Z]+$/,

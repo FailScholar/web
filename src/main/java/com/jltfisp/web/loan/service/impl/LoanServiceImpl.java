@@ -340,7 +340,10 @@ public class LoanServiceImpl implements LoanService {
 		JltfispCoFillInApply jltfispCoFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coFillInApply.getInfoid());
 		if(jltfispCoFillInApply!=null){
 			coFillInApplyMapper.deleteCoFillInApplyContext(coFillInApply.getInfoid());
-		} 
+		}
+		if(coFillInApply.getHistoryEndtime()==""){
+		    coFillInApply.setHistoryEndtime(null);
+		}
 		return coFillInApplyMapper.insert(coFillInApply);
 	}
 
@@ -369,7 +372,7 @@ public class LoanServiceImpl implements LoanService {
 		List<JltfispCoFinancialDto> coFinancialList=coFinancialMapper.getCoCoFinancialContext(coBase.getId());
 		JltfispCoFillInApply coFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coBase.getId());
 		CoAll.setJltfispCoBase(coBase);
-		CoAll.setJltfispCoDebt(coDebt!=null?coDebt:new JltfispCoDebt());
+		CoAll.setJltfispCoDebt(coDebt);
 		CoAll.setJltfispCoDebtTwo(coDebt2!=null?coDebt2:new JltfispCoDebt());
 		CoAll.setJltfispCoDebtThree(coDebt3!=null?coDebt3:new JltfispCoDebt());
 		CoAll.setJltfispCoDebtFour(coDebt4!=null?coDebt4:new JltfispCoDebt());

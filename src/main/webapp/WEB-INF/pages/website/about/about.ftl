@@ -16,7 +16,7 @@
               <!--content开始-->
                       <div class="content">
                           <div class="bread">
-                              <a href="javascript:;">首页</a>&gt;<a href="javascript:;">免责条款</a>
+                              <a href="javascript:;">首页</a>&gt;<a href="javascript:;" id="activeName">免责条款</a>
                           </div>
                           <ul class="item">
                               <li class="active"><a href="javascript:;">免责条款</a></li>
@@ -80,17 +80,18 @@
 
 <script type="text/javascript">
     $(document).ready(function(e) {
+        positionNavigation(0);
         $('.item li').click(function(){
+            $("#activeName").text($(this).text());
             $(this).addClass('active').siblings('li').removeClass('active');
             $('.itemCont').eq($(this).index()).show().siblings('.itemCont').hide();
         });
 
         if('${to}'){
             var tbar = $('.item li');
+            $("#activeName").text(tbar.eq(${to}).text());
             tbar.eq(${to}).addClass('active').siblings('li').removeClass('active');
             $('.itemCont').eq(${to}).show().siblings('.itemCont').hide();
         }
-
-        setColumnIndex(0);
     });
 </script>

@@ -6,7 +6,7 @@
     <title>保费补贴申请</title>
       <style>  
       @page{size:297mm 330mm;}
-     .content { padding:25px -50px; background-color:#fff;}
+     .content { padding:25px -50px; background-color:#fff;word-wrap:break-word;word-break:break-all;}
 .bread { background:url(../../resource/images/home.png) 0 0 no-repeat; padding-left:16px; font-family:"宋体"; margin-bottom:14px;}
 .bread a { font-size:16px; color:#666; margin:0 10px; font-family:"微软雅黑";}
 .bread a:hover { color:#1679ff;}
@@ -22,10 +22,10 @@
 .nlistCont { border:1px solid #ccc; margin-top:-1px;}
 .nlistCont .ntit { text-align:left; margin:10px 0 0 0; font-size:14px; color:#333; text-indent:0; width:auto;}
 .tab2 { border-collapse:collapse; width:10%; margin:10px auto; letter-spacing:0.5;}
-.tab2 th,.tab2 td { border:1px solid #d2d2d2; height:32px; font-size:13px; line-height:18px; padding:0 6px; text-align:center; color:#5e5e5e;}
+.tab2 th,.tab2 td { border:1px solid #d2d2d2; height:32px; font-size:13px; line-height:18px; padding:0 6px; text-align:center; color:#5e5e5e;width:129px;}
 .tab2 th { font-weight:600;}
 .tal th { text-align:right;}
-.tal td { text-align:left;}
+.tal td { text-align:left;width:129px;}
 .clearfix { height:134px;}
   </style>  
 </head>
@@ -35,9 +35,9 @@
                 <div class="calt">
                     <p>保费补贴申请</p>
                     <div class="clear"></div>
-      <div class="nlistCont" id="printDiv">
+      <div class="nlistCont" id="printDiv" style="word-wrap:break-word;word-break:break-all;">
           <p class="ntit" style="text-align:center">申请信息预览</p>
-          <table class="tab2" style="width:80%">
+          <table class="tab2" style="width:95%">
               <tbody>
               <tr class="tal">
                   <th>企业名称</th>
@@ -47,7 +47,7 @@
               </tr>
               <tr class="tal">
                   <th>经营地址</th>
-                  <td colspan="5">${ jltfispCoBaseDto.officeProv!''}${jltfispCoBaseDto.officeCity!''}${ jltfispCoBaseDto.officeArea!''}${jltfispCoBaseDto.officeAddress!''}</td>
+                  <td colspan="5">${jltfispCoBaseDto.officeAddress!''}</td>
                   <th>注册地址</th>
                   <td colspan="3">${jltfispCoBaseDto.registeredAddress!''}</td>
               </tr>
@@ -195,6 +195,8 @@
                   			中外合资企业
                   		<#elseif (jltfispPsMaterialInfo.cognizance==3)>
                   			国有企业
+                  		<#elseif (jltfispPsMaterialInfo.cognizance==5)>
+                  			其他
                   		<#else>
                   			集体企业
                   		</#if>
@@ -208,16 +210,11 @@
               <tr class="tal">
                   <td colspan="10">以上信息全部真实有效</td>
               </tr>
-              <tr class="tal" style="height:100px;">
+               <tr class="tal" style="height:100px;">
                   <td colspan="3">单位（公章）</td>
                   <td colspan="3">法定代表人（签名盖章）</td>
                   <td colspan="4">企业基本户三排章</td>
-              </tr>
-               <tr class="tal">
-                  <td colspan="3"></td>
-                  <td colspan="3"></td>
-                  <td colspan="4">${jltfispCoBaseDto.basicAccountBank!''}&nbsp;${jltfispCoBaseDto.basicAccountName!''}&nbsp;${jltfispCoBaseDto.basicAccountCard!''}</td>
-              </tr>
+               </tr>
               </tbody>
           </table>
       </div>

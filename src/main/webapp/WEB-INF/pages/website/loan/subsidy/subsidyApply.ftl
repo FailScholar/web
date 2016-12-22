@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
 <#include "website/common/common.ftl" />
-    <title>专家资源</title>
+    <title>贷款服务申请</title>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
             <!--content开始-->
             <div class="content">
                 <div class="bread">
-                    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">保费补贴</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/loan">保费补贴</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                     <p>保费补贴申请</p>
@@ -48,11 +48,12 @@
 </html>
 
 <script type="text/javascript">
-	<!--办公地址省份-->
+    positionNavigation(1);
+	//办公地址省份
 	var officeProv="${jlfispPsBaseDto.officeProv}";
-	<!--办公地址市级-->
+	//办公地址市级
 	var officeCity="${jlfispPsBaseDto.officeCity}";
-	<!--办公地址区县-->
+	//办公地址区县
 	var officeArea="${jlfispPsBaseDto.officeArea}";
     $(document).ready(function(e) {
         //输入框验证
@@ -113,22 +114,26 @@
       var index;
       $('.add').click(function(){
          index = $(this).parents('p.ntit').nextAll("table:last").index()-1;
+         if(index >9){
+        	 dialog.tipsPop('ban-pop','提示:',"最多可添加10条保费补贴信息！",'确定');
+             return false;
+         }
          var content="<table width='100%' class='tab3 module'>"+
          "<tr> <td colspan='4'><a href='javascript:;' class='fr delete'>删除</a></td></tr>"+
-         "<tr><th style='width:8%'>借款合同编号</th><td colspan='3'><input  name='jltfispPsInfoList["+index+"].contractNumber'  type='text' class='txt validate[minSize[1],maxSize[1000]] hetongbianhao' placeholder='请输入合同编号' /></td></tr>"+
-         "<tr><th><b class='red'>*</b><b>保单号</b></th>"+
+         "<tr><th style='width:8%'>${loanformManage.infoContractNumber}</th><td colspan='3'><input  name='jltfispPsInfoList["+index+"].contractNumber'  type='text' class='txt validate[minSize[1],maxSize[1000]] hetongbianhao' placeholder='请输入合同编号' /></td></tr>"+
+         "<tr><th><b class='red'>*</b><b>${loanformManage.infoPolicyNumber}</b></th>"+
          "<td><input name='jltfispPsInfoList["+index+"].policyNumber' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baodanhao' placeholder='请输入保单号' /></td>"+
-         "<th><b class='red'>*</b><b>担保金额</b></th>"+
+         "<th><b class='red'>*</b><b>${loanformManage.infoPremiumMoney}</b></th>"+
          "<td><input name='jltfispPsInfoList["+index+"].premiumMoney' type='text' class='txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]] danbaojiner' placeholder='请输入担保金额' />万元</td></tr>"+
-         "<tr><th><b class='red'>*</b><b>贷款银行</b></th><td>"+
+         "<tr><th><b class='red'>*</b><b>${loanformManage.infoLoanBank}</b></th><td>"+
          "<input name='jltfispPsInfoList["+index+"].loanBank' type='text' class='txt validate[required,minSize[1],maxSize[1000]] daikuanyinhang' placeholder='请输入贷款银行' /></td>"+
-         "<th><b class='red'>*</b><b>保险/担保公司</b></th>"+
+         "<th><b class='red'>*</b><b>${loanformManage.infoInsuranceCompany}</b></th>"+
          "<td> <input name='jltfispPsInfoList["+index+"].insuranceCompany' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baoxiangongsi' placeholder='请输入保险/担保公司' /></td>"+
-         "</tr><tr><th>实际支付保额金额</th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入实际支付保额金额' />元</td></tr>"+
-         "<tr><th>实际还款日</th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt shijihuankuanri' placeholder='请输入实际还款日' /></td>"+
-         "<th>实际支付本息(本金+利息)</th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[custom[onlyNumberSp], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入实际支付本息(本金+利息)' />元</td></tr>"+
-         "<tr><th>实际放贷日</th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker()' readonly='readonly' class='txt shijifangdairi' placeholder='请输入实际放贷日' /></td>"+
-         "<th>贷款期限</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' />月</td></tr>"+
+         "</tr><tr><th>${loanformManage.infoLoanMoney}</th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入实际支付保额金额' />元</td></tr>"+
+         "<tr><th>${loanformManage.infoRepaymentDate}</th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt shijihuankuanri' placeholder='请输入实际还款日' /></td>"+
+         "<th>${loanformManage.infoPrincipalInterest}</th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[custom[onlyNumberSp], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入实际支付本息(本金+利息)' />元</td></tr>"+
+         "<tr><th>${loanformManage.infoLendDate}</th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt shijifangdairi' placeholder='请输入实际放贷日' /></td>"+
+         "<th>${loanformManage.infoLoanTerm}</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' />月</td></tr>"+
          "</table>";
          $("table.tab3.module:first").after(content);
          index++;
@@ -141,7 +146,7 @@
             success: function(msg){
             	 $("#officeProv").append("<option value='"+msg[7].id+"'>"+msg[7].name+"</option>");  
             	 for(var i=1;i<msg.length;i++){
-                 <!--默认吉林省顶头-->
+                 //默认吉林省顶头
                    if(i!=7){
                       $("#officeProv").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
                     }
@@ -180,6 +185,14 @@
 	            dateType:"json",
 	            success: function(msg){
 	            	$("#officeArea").html("");
+	            	if(msg !=null && msg !=undefined){
+                        if(msg.length <=0){
+                        	$("#officeArea").hide();
+                        }else
+                        {
+                        	$("#officeArea").show();
+                         }
+		            }
 	                for(var i=0;i<msg.length;i++){
 	                    $("#officeArea").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");  
 	                }

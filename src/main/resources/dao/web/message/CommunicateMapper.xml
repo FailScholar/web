@@ -76,7 +76,7 @@
 		     </if>
             </where>
         </if>
-        <if test="_BY != null">order by #{_BY}</if>
+        <if test="_BY != null">order by time desc</if>
         <if test="_LM != null">limit #{_LM}</if>
         <if test="_ST != null">offset #{_ST}</if>
     </select>

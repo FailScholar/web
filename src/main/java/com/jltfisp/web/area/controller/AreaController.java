@@ -60,17 +60,19 @@ public class AreaController {
     	String officeProvName = null;
     	String officeCityName = null;
     	String officeAreaName = null;
-    	if(null!=officeProv || "".endsWith(officeProv)){
+    	if(null!=officeProv && !"".endsWith(officeProv)){
     	JltfispArea JltfispArea1=areaService.getAreaContext(Integer.parseInt(officeProv));
     	officeProvName=JltfispArea1.getName();
     	}
-    	if(null!=officeCity || "".endsWith(officeCity)){
+    	if(null!=officeCity && !"".endsWith(officeCity)){
     	JltfispArea JltfispArea2=areaService.getAreaContext(Integer.parseInt(officeCity));
     	officeCityName=JltfispArea2.getName();
     	}
-    	if(null!=officeArea || "".endsWith(officeArea)){
+    	if(null!=officeArea && !"".endsWith(officeArea) && !"0".equals(officeArea)){
     	JltfispArea JltfispArea3=areaService.getAreaContext(Integer.parseInt(officeArea));
     	officeAreaName=JltfispArea3.getName();
+    	}else{
+    	officeAreaName="";
     	}
      return officeProvName+officeCityName+officeAreaName;
     }

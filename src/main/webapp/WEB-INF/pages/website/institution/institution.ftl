@@ -35,7 +35,7 @@
 	 				       	 	<#list afterFiveList as afterFiveList>
 	 				       	 		<option value="${afterFiveList.id}">&nbsp;${afterFiveList.columnName}&nbsp;</option>
 	 				       	 	</#list>
-	 				       	 </select>
+	 				       	 </select>&nbsp;
  				       	 </li>
 				      </#if>
 				       
@@ -64,6 +64,7 @@
   </body>
    <script type="text/javascript">
    $(function(){
+       positionNavigation(5);
 	  var columnId = '${columnId}';
 	  if(columnId == ''){
 	  	$("div.info ul.infoTab").find("li").eq(0).addClass("active");
@@ -104,8 +105,8 @@
     }
 
 	function getList(){
-	  var columnId = $('select option:selected').val();
-	  var columnName = $('select option:selected').html();
+	  var columnId = $('#selectId option:selected').val();
+	  var columnName = $('#selectId option:selected').text();
 	  if(columnId!=0){
 		  $("#applyColumnId").val(columnId);
 		  $.ajax({
@@ -114,7 +115,8 @@
 			  data:{"columnId":columnId,'pager.offset': 0},
 			  dataType : "html",
 			  success:function(data){
-			  	$("#columnName").html(columnName);
+			  debugger;
+			  	$("#columnName").html($.trim(columnName));
 				$(".infoList").html(data);//要刷新的div
 			  }
 		});

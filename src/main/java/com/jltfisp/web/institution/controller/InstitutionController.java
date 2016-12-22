@@ -159,8 +159,10 @@ public class InstitutionController {
         BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),Constants.INSTITUTION_APPLY);
         if(businessApplayAudit != null){
             JltfispColumn column = columnServiceImpl.getColumnContext(Integer.parseInt(businessApplayAudit.getType()));
-            if(column != null){
-                msg="您已申请成为" + column.getColumnName();
+            if(column != null && businessApplayAudit.getState() != null && businessApplayAudit.getState() == 1){
+                msg="您已申请认证成为" + column.getColumnName();
+            }else if(column != null && businessApplayAudit.getState() != null && businessApplayAudit.getState() == 0){
+                msg = "您已申请认证成为" + column.getColumnName() + "，申请材料正在审核中";
             }
         }
         return msg;
@@ -185,6 +187,10 @@ public class InstitutionController {
                 institutManage = institutManageService.selectTemplate();
             }
         }
+    	JltfispColumn jltfispColumn  = this.columnService.getColumnById(columnId);
+		DictColumnDto dictColumnDto  =this.dictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
+		request.setAttribute("jltfispColumn", jltfispColumn);
+		request.setAttribute("dictColumnDto", dictColumnDto);
         request.setAttribute("columnId", columnId);
         request.setAttribute("institutManage", institutManage);
         return "/website/institution/institutionGuide";
@@ -212,10 +218,14 @@ public class InstitutionController {
         //获取当前用户登录信息
         JltfispUser user=loginService.getCurrentUser();
         JltfispInstitution institution = institutionService.getInstitutionByUserIdAndColumnId(user.getId(), columnId); 
-        
+        JltfispColumn jltfispColumn  = this.columnService.getColumnById(columnId);
+		DictColumnDto dictColumnDto  =this.dictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
+		request.setAttribute("jltfispColumn", jltfispColumn);
+		request.setAttribute("dictColumnDto", dictColumnDto);
         request.setAttribute("columnId", columnId);
         request.setAttribute("institutManage", institutManage);
         request.setAttribute("institution", institution);
+        request.setAttribute("user", user);
         return "/website/institution/institutionApply";
     }
     

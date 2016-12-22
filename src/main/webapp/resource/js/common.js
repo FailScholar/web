@@ -48,21 +48,9 @@
     }
 })(jQuery);
 
-$(document).ready(function (e) {
-    /*设置导航栏的选中的状态*/
-    var navigation = $('.nav li');
-    var navigationIndex = $.cookie('navigation');
-    navigation.eq(navigationIndex ? Number(navigationIndex) : 0).addClass('active').siblings('li').removeClass('active');
-
-    navigation.click(function () {
-        $.cookie('navigation', $(this).index(), {path: '/'});
-    });
-
-});
-
-/*定位一级导航栏*/
-function setColumnIndex(index) {
-    $.cookie('navigation', Number(index), {path: '/'});
+/*定位一级导航栏位置*/
+function positionNavigation(index) {
+    $('.nav li').eq(index).addClass('active').siblings('li').removeClass('active');
 }
 
 /**

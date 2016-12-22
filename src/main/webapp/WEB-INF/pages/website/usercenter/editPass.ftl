@@ -27,7 +27,7 @@
                               <div id="m170"><span class="ml70">登录帐号：</span>${currentUser.accountNumber}</div>
                               <div><span class="ml70">&emsp;旧密码：</span><input type="password" id="oldpassword" class="txt validate[required,minSize[6],maxSize[20],custom[onlyLetterNumber],ajax[ajaxOldPassword]]" /></div>
                               <div><span class="ml70">&emsp;新密码：</span><input type="password" id="password" name="password" class="txt validate[required,minSize[6],maxSize[20],custom[onlyLetterNumber]]" /></div>
-                              <div><span class="ml70">确认密码：</span><input type="password" class="txt validate[required,minSize[6],maxSize[20],funcCall[checkRepeat],custom[onlyLetterNumber]]" /></div>
+                              <div><span class="ml70">确认密码：</span><input type="password" id="newpassword" class="txt validate[required,minSize[6],maxSize[20],funcCall[checkRepeat],custom[onlyLetterNumber]]" /></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
                               <div class="logbtn"><input type="button" onclick="resetPassword()" value="修改" /></div>
                           </form>
@@ -55,7 +55,13 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(0);
 	function resetPassword() {
+		var flag = $("#oldpassword").validationEngine("validateAjax");
+		var flag1=$("#oldpassword").validationEngine("validate");
+		if(!flag|| flag1 || $("#password").validationEngine("validate") || $("#newpassword").validationEngine("validate")){
+			return false;
+		}
 		var userid = $("#userid").val();
 		var password = $("#password").val();
 		$.post("${path}/user/resetPassword",{"id":userid,password:password},function(data){
@@ -64,6 +70,7 @@
 	}
 
     $(document).ready(function(e) {
+    	i=1;
         //输入框验证
         $.validationEngineLanguage.newLang();
         $.validationEngineLanguage.allRules.ajaxOldPassword = {

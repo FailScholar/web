@@ -16,7 +16,7 @@
               <!--content开始-->
               <div class="content">
                 <div class="bread">
-                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/institution">合作机构</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/institution">${dictColumnDto.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${jltfispColumn.id})">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                 	<form id="institutionForm" >
@@ -24,7 +24,7 @@
                     <div class="proList nli">
                         <!--企业基本信息-->
                         <div class="nlistCont">
-                        	<p class="ntit">金融机构</p>
+                        	<p class="ntit">${jltfispColumn.columnName}</p>
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${institutManage.label1 }</th>
@@ -57,7 +57,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label5 }</th>
-                                    <td><input type="text" name="socialCreditCode" value="${institution.socialCreditCode }" class="txt validate[required,minSize[9],maxSize[20]]" placeholder="请输入" /></td>
+                               		<td><input type="text" name="socialCreditCode" value="${user.socialCode }" class="txt validate[required,minSize[9],maxSize[20]]" readonly="readonly"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label6 }</th>
@@ -141,7 +141,8 @@
 </div>
 
 <#include "website/common/footer.ftl" />
-<script>
+<script type="application/javascript">
+    positionNavigation(5);
 var province = '${institution.province!"-1" }';
 var companyRealAddress = '${institution.companyRealAddress!"-1" }';
 var city = '${institution.city!"-1" }';
@@ -299,6 +300,10 @@ $('.btnSave').click(function(){
 			return false;
 		}
    });
+
+function goBack(columnId){
+	 window.location.href="${path}/perm/institution?columnId="+columnId;
+	 }
 </script>
   </body>
 </html>

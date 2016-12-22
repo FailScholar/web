@@ -2,10 +2,10 @@
 <div class="footer">
     <div class="center">
         <div class="fl">
-            <a href="${path}/anon/about?to=0" onclick="setColumnIndex(0)" target="_blank">免责条款</a>
-            <a href="${path}/anon/about?to=1" onclick="setColumnIndex(0)" target="_blank">关于我们</a>
-            <a href="${path}/anon/about?to=2" onclick="setColumnIndex(0)" target="_blank">联系我们</a>
-            <a href="${path}/anon/about?to=3" onclick="setColumnIndex(0)" target="_blank">隐私保护</a>
+            <a href="${path}/anon/about?to=0" target="_blank">免责条款</a>
+            <a href="${path}/anon/about?to=1" target="_blank">关于我们</a>
+            <a href="${path}/anon/about?to=2" target="_blank">联系我们</a>
+            <a href="${path}/anon/about?to=3" target="_blank">隐私保护</a>
         </div>
         <div class="fr">
             <select class="footSe">

@@ -49,6 +49,7 @@
 </body>
 </html>
 <script type="application/javascript">
+    positionNavigation(0);
     function ttPost(tableName,id,keyWords) {
         openBlank('${path}/anon/pojo/detail',{tableName:tableName,id:id,keyWords:keyWords},true);
     }

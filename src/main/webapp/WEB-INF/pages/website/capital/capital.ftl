@@ -55,6 +55,7 @@
 </body>
  <script type="text/javascript">
    $(function(){
+       positionNavigation(4);
 	  var columnId = '${columnId}';
 	  if(columnId == ''){
 	 	 $("div.info ul.infoTab").find("li").eq(0).addClass("active");

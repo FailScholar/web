@@ -6,7 +6,7 @@
     <title>${applyname}</title>
       <style>  
      @page{size:297mm 380mm;}
-	  .content { padding:25px 20px; background-color:#fff;}
+	  .content { padding:25px 20px; background-color:#fff;word-wrap:break-word;word-break:break-all;}
    .nli { width:100%; margin:0 auto; position:relative; padding-top:42px;}
 .nli .logbtn { text-align:center;}
 .nli .logbtn input { margin:30px auto;}
@@ -95,64 +95,64 @@
                               <p class="ntit">企业基本信息</p>
                               <table width="100%" class="tab3">
                                   <tr>
-                                      <th><b class="red">*</b>企业名称</th>
+                                      <th><b class="red">*</b>${loanformManage.baseCompany!''}</th>
                                       <td colspan="3">${coAll.jltfispCoBase.company!''}</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>成立时间</th>
+                                      <th><b class="red">*</b>${loanformManage.baseEstablishtime!''}</th>
                                       <td>${coAll.jltfispCoBase.establishTime?date!''}</td>
-                                      <th><b class="red">*</b>注册资本</th>
+                                      <th><b class="red">*</b>${loanformManage.baseRegisteredcapital!''}</th>
                                       <td>${coAll.jltfispCoBase.registeredCapital!''}万元</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>注册地址</th>
-                                      <td colspan="3">${coAll.jltfispCoBase.registeredCapital!''}</td>
+                                      <th><b class="red">*</b>${loanformManage.baseRegisteredaddress!''}</th>
+                                      <td colspan="3">${coAll.jltfispCoBase.registeredAddress!''}</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>办公地址</th>
+                                      <th><b class="red">*</b>${loanformManage.baseOfficeaddress!''}</th>
                                       <td colspan="3"><span id="officeAddress">${coAll.jltfispCoBase.officeAddress!''}</span></td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>生产地址</th>
+                                      <th><b class="red">*</b>${loanformManage.baseProductaddress!''}</th>
                                       <td colspan="3"><span id="productAddress">${coAll.jltfispCoBase.productAddress!''}</span></td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>法定代表人</th>
+                                      <th><b class="red">*</b>${loanformManage.baseCorporaterepresentative!''}</th>
                                       <td>${coAll.jltfispCoBase.corporateRepresentative!''}</td>
-                                      <th><b class="red">*</b>手机号</th>
+                                      <th><b class="red">*</b>${loanformManage.baseMobilephone!''}</th>
                                       <td>${coAll.jltfispCoBase.mobilephone!''}</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>邮箱</th>
+                                      <th><b class="red">*</b>${loanformManage.baseEmail!''}</th>
                                       <td>${coAll.jltfispCoBase.email!''}</td>
-                                      <th><b class="red">*</b>身份证号码</th>
+                                      <th><b class="red">*</b>${loanformManage.baseIdcard!''}</th>
                                       <td>${coAll.jltfispCoBase.IDcard!''}</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>组织机构代码</th>
+                                      <th><b class="red">*</b>${loanformManage.baseSocialcreditcode!''}</th>
                                       <td>${coAll.jltfispCoBase.socialCreditCode!''}</td>
-                                      <th><b class="red">*</b>税务登记号</th>
+                                      <th><b class="red">*</b>${loanformManage.baseCnpj!''}</th>
                                       <td>${coAll.jltfispCoBase.cnpj!''}</td>
                                   </tr>
                                   <tr>
-                                      <th>贷款账号</th>
+                                      <th>${loanformManage.baseCardno!''}</th>
                                       <td colspan="3">${coAll.jltfispCoBase.cardNo!''}</td>
                                   </tr>
                               </table>
                               <p class="ntit">银行信息</p>
                               <table width="100%" class="tab3 tab4">
                                   <tr>
-                                      <th style="width:8%">账户</th>
-                                      <th>开户银行</th>
-                                      <th>账号</th>
+                                      <th style="width:8%">${loanformManage.baseAccount!''}</th>
+                                      <th>${loanformManage.baseAccountbank!''}</th>
+                                      <th>${loanformManage.baseAccountnumber!''}</th>
                                   </tr>
                                   <tr>
-                                      <td><b class="red">*</b><b>基本账户</b></td>
+                                      <td><b class="red">*</b><b>${loanformManage.baseBasicaccount!''}</b></td>
                                       <td>${coAll.jltfispCoBase.basicAccountBank!''}</td>
                                       <td>${coAll.jltfispCoBase.basicAccountCard!''}</td>
                                   </tr>
                                   <tr>
-                                      <td><b>一般账户</b></td>
+                                      <td><b>${loanformManage.baseGeneralaccount!''}</b></td>
                                       <td>${coAll.jltfispCoBase.generalAccountBank!''}</td>
                                       <td>${coAll.jltfispCoBase.generalAccountCard!''}</td>
                                   </tr>
@@ -160,60 +160,60 @@
                               <p class="ntit">企业联系人</p>
                               <table width="100%" class="tab3">
                                   <tr>
-                                      <th><b class="red">*</b>联系人</th>
+                                      <th><b class="red">*</b>${loanformManage.baseLinkman!''}</th>
                                       <td colspan="3">${coAll.jltfispCoBase.linkMan!''}</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>职务</th>
+                                      <th><b class="red">*</b>${loanformManage.baseDuties!''}</th>
                                       <td>${coAll.jltfispCoBase.duties!''}</td>
-                                      <th><b class="red">*</b>手机</th>
+                                      <th><b class="red">*</b>${loanformManage.baseLinkmobile!''}</th>
                                       <td>${coAll.jltfispCoBase.linkMobile!''}</td>
                                   </tr>
                                   <tr>
-                                      <th><b class="red">*</b>电话/传真</th>
+                                      <th><b class="red">*</b>${loanformManage.basePhoneorfax!''}</th>
                                       <td>${coAll.jltfispCoBase.zoneDescription!''}-${coAll.jltfispCoBase.phoneOrFax!''}</td>
-                                      <th><b class="red">*</b>电子邮件</th>
+                                      <th><b class="red">*</b>${loanformManage.baseLinkemail!''}</th>
                                       <td>${coAll.jltfispCoBase.linkEmail!''}</td>
                                   </tr>
                               </table>
                               <p class="ntit"><b class="red">*</b>股东构成</p>
                               <table width="100%" class="tab3 tab4">
                                   <tr>
-                                      <th style="width:8%">主要股东</th>
-                                      <th>股东名称(或姓名)</th>
-                                      <th>所占股份</th>
+                                      <th style="width:8%">${loanformManage.baseMainshareholder!''}</th>
+                                      <th>${loanformManage.baseShareholdername!''}</th>
+                                      <th>${loanformManage.baseStock!''}</th>
                                   </tr>
                                   <tr>
-                                      <td>第一股东</td>
+                                      <td>${loanformManage.baseOneshareholder!''}</td>
                                       <td>${coAll.jltfispCoBase.oneShareholderName!''}</td>
                                       <td>${coAll.jltfispCoBase.oneStock!''}%</td>
                                   </tr>
                                   <tr>
-                                      <td>第二股东</td>
+                                      <td>${loanformManage.baseTwoshareholder!''}</td>
                                       <td>${coAll.jltfispCoBase.twoShareholderName!''}</td>
                                       <td>${coAll.jltfispCoBase.twoStock!''}%</td>
                                   </tr>
                                   <tr>
-                                      <td>第三股东</td>
+                                      <td>${loanformManage.baseThreeshareholer!''}</td>
                                       <td>${coAll.jltfispCoBase.threeShareholerName!''}</td>
                                       <td>${coAll.jltfispCoBase.threeStock!''}%</td>
                                   </tr>
                               </table>
                               <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>经营范围(主营)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileMainbusiness!''}</th>
                                     <td>${coAll.jltfispCoProfile.mainBusiness!''}</td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>经营范围(兼营)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileSidelinebusses!''}</th>
                                     <td>${coAll.jltfispCoProfile.sidelineBusses!''}</td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>主要技术领域</th>
+                                    <th><b class="red">*</b>${loanformManage.profileMainfield!''}</th>
                                     <td>${coAll.jltfispCoProfile.mainFieldValue!''}</td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>企业性质</th>
+                                    <th><b class="red">*</b>${loanformManage.profileNature!''}</th>
                                     <td>
                                     	<#if (coAll.jltfispCoProfile.nature ==1) >
                                     	<label>私营企业</label>
@@ -225,12 +225,12 @@
                                         <label>集体企业</label>
                                         </#if>
                                         <#if (coAll.jltfispCoProfile.otherNature !='') >
-                                        <label>${coAll.jltfispCoProfile.otherNature}</label>
+                                        <label>${coAll.jltfispCoProfile.otherNature!''}</label>
                                         </#if>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>职工总数</th>
+                                    <th><b class="red">*</b>${loanformManage.profileWorkforce!''}</th>
                                     <td>
                                     	${coAll.jltfispCoProfile.workforce!''}人
                                         <span style="margin-left:30px;">其中：大专以上人数：</span>${coAll.jltfispCoProfile.collegeDegreeOrAboveNum!''}人<span style="margin-left:30px;">研发人员：</span>${coAll.jltfispCoProfile.researchStaffNum!''}人<br />
@@ -240,23 +240,23 @@
                             <p class="ntit">知识产权授权和科技认定状况</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th>已获得知识产权总数</th>
+                                    <th>${loanformManage.profileIntellectualpropertynum!''}</th>
                                     <td colspan="3">${coAll.jltfispCoProfile.intellectualPropertyNum!''}个</td>
                                 </tr>
                                 <tr>
-                                    <th>发明专利</th>
+                                    <th>${loanformManage.profilePatentofinventionnum!''}</th>
                                     <td>${coAll.jltfispCoProfile.patentOfInventionNum!''}个</td>
-                                    <th>实用新型专利</th>
+                                    <th>${loanformManage.profileUtilitymodelpatentnum!''}</th>
                                     <td>${coAll.jltfispCoProfile.utilityModelPatentNum!''}个</td>
                                 </tr>
                                 <tr>
-                                    <th>软件著作权</th>
+                                    <th>${loanformManage.profileSoftwarecopyrightnum!''}</th>
                                     <td>${coAll.jltfispCoProfile.softwareCopyrightNum!''}个</td>
-                                    <th>集成电路设计板块</th>
+                                    <th>${loanformManage.profileIntegratedcircuitdesignnum!''}</th>
                                     <td>${coAll.jltfispCoProfile.integratedCircuitDesignNum!''}个</td>
                                 </tr>
                                 <tr>
-                                    <th>企业曾获得科技认定<br/>或资助情况</th>
+                                    <th>${loanformManage.profileTechnologyorfinance!''}</th>
                                     <td colspan="3">
                                     	<label><span id="technologyOrFinance">
                                     	<#list (coAll.jltfispCoProfile.technologyOrFinance?split(",")) as fina>
@@ -270,15 +270,15 @@
                             <p class="ntit">企业情况概述</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>企业简介</th>
+                                    <th><b class="red">*</b>${loanformManage.profileInstitutionalabstract!''}</th>
                                     <td>${coAll.jltfispCoProfile.institutionalAbstract!''}${coAll.jltfispCoProfile.institutionalAbstract!''}</td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>管理团队简介(主要经<br/>营、管理、技术人员背景)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileManagementteamprofile!''}</th>
                                     <td>${coAll.jltfispCoProfile.managementTeamProfile!''}</td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>主营产品简介(产品特点、销售市场、<br/>主要客户等)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileMainproductintroduction!''}</th>
                                     <td>${coAll.jltfispCoProfile.mainProductIntroduction!''}</td>
                                 </tr>
                             </table>
@@ -288,76 +288,81 @@
                         <p class="ntit" style="text-align:center;">本次申请贷款情况</p>
                               <table width="100%" class="tab3 tab4">
                                   <tr>
-                                      <th>申请贷款额度</th>
+                                      <th>${loanformManage.loanLabel1!''}</th>
                                       <td >${coAll.jltfispCoFillInApply.applyAmount!''}</td>
-                                      <th>贷款期限</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.payCycle!''}个月</td>
+                                      <th>${loanformManage.loanLabel2!''}</th>
+                                      <td colspan="2">
+                                     <#if (coAll.jltfispCoFillInApply.payCycle ==1)>
+                                     6个月
+                                    <#elseif (coAll.jltfispCoFillInApply.payCycle ==2)>
+                                    12个月
+                                    </#if>
+                                    </td>
                                   </tr>
                                   <tr>
-                                      <th>贷款用途说明</th>
+                                      <th>${loanformManage.loanLabel3}</th>
                                       <td colspan="5">${coAll.jltfispCoFillInApply.useDesc!''}</td>
                                   </tr>
                                   <tr>
-                                      <th>是否首次贷款</th>
+                                      <th>${loanformManage.loanLabel4!''}</th>
                                       <td >
-                                      	<#if (coAll.jltfispCoFillInApply.historyState??)>
-                                      		<#if (coAll.jltfispCoFillInApply.historyState =='1')>
-                                      			是
-                                      		<#else>
-                                      			否
-                                      		</#if>
-                                      	</#if>
+                                      <#if (coAll.jltfispCoFillInApply.historyState =='1')>
+                                             是
+                                      <#else>
+                                         否
+                                      </#if>                                
                                       </td>
-                                      <th>上次履约贷款还款时间</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.historyEndtime!''}</td>
-                                  </tr>
+                                      <th>${loanformManage.loanLabel6!''}</th>
+                                      <td colspan="2"><#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if></td>
+                                  </tr> 
                                   <tr>
-                                      <th>选择科技贷款品种</th>
-                                      <td colspan="5">0.00</td>
-                                  </tr>
-                                  <!--待修改-->
-                                  <tr>
-                                      <th>选择申请银行</th>
-                                      <td >${coAll.jltfispCoFillInApply.bankid!''}</td>
-                                      <th>贷款支行</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.riskid!''}</td>
-                                  </tr>
-                                  <tr>
-                                      <th>银行信贷员姓名</th>
-                                      <td >0.00</td>
-                                      <th>信贷员手机号</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.loanOffice!''}</td>
-                                  </tr>
-                                  <tr>
-                                     <th>是否需要股权融资</th>
+                                      <th>${loanformManage.loanLabel9!''}</th>
                                       <td >
-                                      	<#if (coAll.jltfispCoFillInApply.isFinance??)>
-                                      		<#if (coAll.jltfispCoFillInApply.isFinance=='1')>
-                                      			是
-                                      		<#else>
-                                      			否
-                                      		</#if>
-                                      	</#if>
+                                      ${coAll.jltfispCoFillInApply.bankid!''}                                                                          
                                       </td>
-                                      <th>是否有上市计划</th>
+                                      <th>${loanformManage.loanLabel11!''}</th>
                                       <td colspan="2">
-                                      	<#if (coAll.jltfispCoFillInApply.isListingPlan??)>
-                                      		<#if (coAll.jltfispCoFillInApply.isListingPlan=='1')>
-                                      			是
-                                      		<#else>
-                                      			否
-                                      		</#if>
-                                      	</#if>
+                                      ${coAll.jltfispCoFillInApply.riskid!''}
                                       </td>
                                   </tr>
                                   <tr>
-                                      <th>拟融资金额</th>
-                                      <td >${coAll.jltfispCoFillInApply.finaneAmount!''}</td>
-                                      <th>担保/保险公司</th>
-                                      <td colspan="2">${coAll.jltfispCoFillInApply.riskid!''}</td>
+                                      <th>${loanformManage.loanLabel13!''}</th>
+                                      <td >${coAll.jltfispCoFillInApply.loanOffice!''}</td>
+                                      <th>${loanformManage.loanLabel14!''}</th>
+                                      <td colspan="2">${coAll.jltfispCoFillInApply.loanOfficeMobile!''}</td>
                                   </tr>
                                   <tr>
-                                      <th>对投资机构要求</th>
+                                     <th>${loanformManage.loanLabel15!''}</th>
+                                      <td >
+                                      <#if (coAll.jltfispCoFillInApply.isFinance??)>
+                                      <#if (coAll.jltfispCoFillInApply.isFinance =='1')>
+                                     	 是
+                                      <#else>
+                                      	否
+              						  </#if>   
+              						  </#if>                     
+                                      </td>
+                                      <th>${loanformManage.loanLabel16!''}</th>
+                                      <td colspan="2">
+                                      <#if (coAll.jltfispCoFillInApply.isListingPlan??)>
+                                      <#if (coAll.jltfispCoFillInApply.isListingPlan =='1')>
+                                      	是
+		                              <#else>
+						                                      否
+						              </#if> 
+						              </#if>  
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <th>${loanformManage.loanLabel17!''}</th>
+                                      <td >${coAll.jltfispCoFillInApply.finaneAmount!''}</td>
+                                      <th>${loanformManage.loanLabel10!''}</th>
+                                      <td colspan="2">
+                                      ${coAll.jltfispCoFillInApply.riskid!''}
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <th>${loanformManage.loanLabel18!''}</th>
                                       <td colspan="5">${coAll.jltfispCoFillInApply.finaneAmount!''}</td>
                                   </tr>
                                   <tr>
@@ -388,330 +393,330 @@
                                   </tr>
                                   <#if (coAll.jltfispCoDebt?exists)>
                                   <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td>${coAll.jltfispCoDebt.capital!''}</td>
-                                      <td>短期借款</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebt.shortborrow!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>短期投资</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebt.shortinvestment!''}</td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.billpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td>${coAll.jltfispCoDebt.bill!''}</td>
-                                      <td>应付账款</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.accountpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收股息</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td>${coAll.jltfispCoDebt.dividend!''}</td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.salariespayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebt.accountreceivable!''}</td>
-                                      <td>应付福利费</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.welfarepayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他应收款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebt.otherreceivable!''}</td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.profitpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td>${coAll.jltfispCoDebt.stock!''}</td>
-                                      <td>应交税金</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.taxpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>待摊费用</td>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebt.prepaidexpenses!''}</td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
                                       <td>${coAll.jltfispCoDebt.otherpayment!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebt.debtsinvestment!''}</td>
-                                      <td>其他应付款</td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.otherpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他流动资产</td>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
                                       <td>${coAll.jltfispCoDebt.liquidassets!''}</td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebt.accruedexpenses!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebt.preaccountsreceivable!''}</td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
                                       <td>${coAll.jltfispCoDebt.oneyeardebt!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
                                       <td>${coAll.jltfispCoDebt.liquidassetsamount!''}</td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td>${coAll.jltfispCoDebt.currentdebt!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td>${coAll.jltfispCoDebt.preaccountsreceivable2!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebt.longstockinvestment!''}</td>
-                                      <td>流动负债合计</td>
-                                      <td>0</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
+                                      <td>${coAll.jltfispCoDebt.currentdebtamount!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebt.preaccountsreceivable2!''}</td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td>${coAll.jltfispCoDebt.longinvestmentamount!''}</td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebt.longborrow!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td>${coAll.jltfispCoDebt.longpayable!''}</td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td>${coAll.jltfispCoDebt.depreciation!''}</td>
-                                    <td>其他长期负债</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td>${coAll.jltfispCoDebt.otherlongdebt!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产净值</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td>${coAll.jltfispCoDebt.fixedassetsvalue!''}</td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebt.longdebtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
                                     <td>${coAll.jltfispCoDebt.engineeringmaterial!''}</td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebt.debtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td>${coAll.jltfispCoDebt.fixedassetsclean!''}</td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebt.fixedassetsamount!''}</td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td>${coAll.jltfispCoDebt.paidincapital!''}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebt.capitalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td>${coAll.jltfispCoDebt.intangibleassets!''}</td>
-                                    <td>盈余公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td>${coAll.jltfispCoDebt.surplusreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >长期待摊费用</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td>${coAll.jltfispCoDebt.longprepaidexpenses!''}</td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebt.legalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td>${coAll.jltfispCoDebt.otherlongassets!''}</td>
-                                    <td>未分配利润</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
                                     <td>${coAll.jltfispCoDebt.undistributedprofit!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产及其他资产合计</td>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
                                     <td>${coAll.jltfispCoDebt.intangibleandotherassets!''}</td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
                                     <td>${coAll.jltfispCoDebt.ownerequity!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebt.assetsamount!''}</td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td>${coAll.jltfispCoDebt.ownerequityamount!''}</td>
                                 </tr>
                                 <#else>
                                 	 <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td></td>
-                                      <td>短期借款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>短期投资</td>
-                                      <td></td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td></td>
-                                      <td>应付账款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>应收股息</td>
-                                      <td></td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td></td>
-                                      <td>应付福利费</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他应收款</td>
-                                      <td></td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td></td>
-                                      <td>应交税金</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>待摊费用</td>
-                                      <td></td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td></td>
-                                      <td>其他应付款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他流动资产</td>
-                                      <td></td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td></td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td></td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td></td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td></td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td></td>
-                                    <td>其他长期负债</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >固定资产净值</td>
-                                    <td></td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td></td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td></td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td></td>
-                                    <td>盈余公积</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >长期待摊费用</td>
-                                    <td></td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td></td>
-                                    <td>未分配利润</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >无形资产及其他资产合计</td>
-                                    <td></td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td></td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 </#if>
@@ -740,330 +745,330 @@
                                   </tr>
                                   <#if (coAll.jltfispCoDebtTwo?exists)>
                                   <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.capital!''}</td>
-                                      <td>短期借款</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.shortborrow!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>短期投资</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.shortinvestment!''}</td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.billpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.bill!''}</td>
-                                      <td>应付账款</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.accountpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收股息</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.dividend!''}</td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.salariespayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.accountreceivable!''}</td>
-                                      <td>应付福利费</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.welfarepayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他应收款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.otherreceivable!''}</td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.profitpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.stock!''}</td>
-                                      <td>应交税金</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.taxpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>待摊费用</td>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.prepaidexpenses!''}</td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.otherpayment!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.debtsinvestment!''}</td>
-                                      <td>其他应付款</td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.otherpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他流动资产</td>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.liquidassets!''}</td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.accruedexpenses!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.preaccountsreceivable!''}</td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.oneyeardebt!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.liquidassetsamount!''}</td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.currentdebt!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.preaccountsreceivable2!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.longstockinvestment!''}</td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td>0</td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.preaccountsreceivable2!''}</td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.longinvestmentamount!''}</td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.longborrow!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.longpayable!''}</td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.depreciation!''}</td>
-                                    <td>其他长期负债</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.otherlongdebt!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产净值</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.fixedassetsvalue!''}</td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.longdebtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.engineeringmaterial!''}</td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.debtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.fixedassetsclean!''}</td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.fixedassetsamount!''}</td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.paidincapital!''}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.capitalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.intangibleassets!''}</td>
-                                    <td>盈余公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.surplusreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >长期待摊费用</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.longprepaidexpenses!''}</td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.legalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.otherlongassets!''}</td>
-                                    <td>未分配利润</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.undistributedprofit!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产及其他资产合计</td>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.intangibleandotherassets!''}</td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.ownerequity!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.assetsamount!''}</td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtTwo.ownerequityamount!''}</td>
                                 </tr>
                                 <#else>
                                 	 <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td></td>
-                                      <td>短期借款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>短期投资</td>
-                                      <td></td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td></td>
-                                      <td>应付账款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>应收股息</td>
-                                      <td></td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td></td>
-                                      <td>应付福利费</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他应收款</td>
-                                      <td></td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td></td>
-                                      <td>应交税金</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>待摊费用</td>
-                                      <td></td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td></td>
-                                      <td>其他应付款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他流动资产</td>
-                                      <td></td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td></td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td></td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td></td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td></td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td></td>
-                                    <td>其他长期负债</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >固定资产净值</td>
-                                    <td></td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td></td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td></td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td></td>
-                                    <td>盈余公积</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >长期待摊费用</td>
-                                    <td></td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td></td>
-                                    <td>未分配利润</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >无形资产及其他资产合计</td>
-                                    <td></td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td></td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 </#if>
@@ -1093,330 +1098,330 @@
                                   </tr>
                                   <#if (coAll.jltfispCoDebtThree?exists)>
                                   <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.capital!''}</td>
-                                      <td>短期借款</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.shortborrow!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>短期投资</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.shortinvestment!''}</td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.billpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.bill!''}</td>
-                                      <td>应付账款</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.accountpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收股息</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.dividend!''}</td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.salariespayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.accountreceivable!''}</td>
-                                      <td>应付福利费</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.welfarepayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他应收款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.otherreceivable!''}</td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.profitpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.stock!''}</td>
-                                      <td>应交税金</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.taxpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>待摊费用</td>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.prepaidexpenses!''}</td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.otherpayment!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.debtsinvestment!''}</td>
-                                      <td>其他应付款</td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.otherpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他流动资产</td>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.liquidassets!''}</td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.accruedexpenses!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.preaccountsreceivable!''}</td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.oneyeardebt!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.liquidassetsamount!''}</td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.currentdebt!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.preaccountsreceivable2!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.longstockinvestment!''}</td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td>0</td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.preaccountsreceivable2!''}</td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.longinvestmentamount!''}</td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.longborrow!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.longpayable!''}</td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.depreciation!''}</td>
-                                    <td>其他长期负债</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.otherlongdebt!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产净值</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.fixedassetsvalue!''}</td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.longdebtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.engineeringmaterial!''}</td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.debtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.fixedassetsclean!''}</td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.fixedassetsamount!''}</td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.paidincapital!''}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.capitalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.intangibleassets!''}</td>
-                                    <td>盈余公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.surplusreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >长期待摊费用</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.longprepaidexpenses!''}</td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.legalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.otherlongassets!''}</td>
-                                    <td>未分配利润</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.undistributedprofit!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产及其他资产合计</td>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.intangibleandotherassets!''}</td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.ownerequity!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.assetsamount!''}</td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtThree.ownerequityamount!''}</td>
                                 </tr>
                                 <#else>
                                 	 <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td></td>
-                                      <td>短期借款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>短期投资</td>
-                                      <td></td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td></td>
-                                      <td>应付账款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>应收股息</td>
-                                      <td></td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td></td>
-                                      <td>应付福利费</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他应收款</td>
-                                      <td></td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td></td>
-                                      <td>应交税金</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>待摊费用</td>
-                                      <td></td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td></td>
-                                      <td>其他应付款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他流动资产</td>
-                                      <td></td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td></td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td></td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td></td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td></td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td></td>
-                                    <td>其他长期负债</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >固定资产净值</td>
-                                    <td></td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td></td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td></td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td></td>
-                                    <td>盈余公积</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >长期待摊费用</td>
-                                    <td></td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td></td>
-                                    <td>未分配利润</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >无形资产及其他资产合计</td>
-                                    <td></td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td></td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 </#if>
@@ -1446,330 +1451,330 @@
                                   </tr>
                                   <#if (coAll.jltfispCoDebtFour?exists)>
                                   <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.capital!''}</td>
-                                      <td>短期借款</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.shortborrow!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>短期投资</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.shortinvestment!''}</td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.billpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.bill!''}</td>
-                                      <td>应付账款</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.accountpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收股息</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.dividend!''}</td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.salariespayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.accountreceivable!''}</td>
-                                      <td>应付福利费</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.welfarepayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他应收款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.otherreceivable!''}</td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.profitpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.stock!''}</td>
-                                      <td>应交税金</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.taxpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>待摊费用</td>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.prepaidexpenses!''}</td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.otherpayment!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.debtsinvestment!''}</td>
-                                      <td>其他应付款</td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.otherpayable!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>其他流动资产</td>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.liquidassets!''}</td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.accruedexpenses!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.preaccountsreceivable!''}</td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.oneyeardebt!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.liquidassetsamount!''}</td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.currentdebt!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.preaccountsreceivable2!''}</td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.longstockinvestment!''}</td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td>0</td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.preaccountsreceivable2!''}</td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.longinvestmentamount!''}</td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.longborrow!''}</td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.longpayable!''}</td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.depreciation!''}</td>
-                                    <td>其他长期负债</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.otherlongdebt!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产净值</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.fixedassetsvalue!''}</td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.longdebtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.engineeringmaterial!''}</td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.debtamount!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.fixedassetsclean!''}</td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.fixedassetsamount!''}</td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.paidincapital!''}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.capitalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.intangibleassets!''}</td>
-                                    <td>盈余公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.surplusreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >长期待摊费用</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.longprepaidexpenses!''}</td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.legalreserve!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.otherlongassets!''}</td>
-                                    <td>未分配利润</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.undistributedprofit!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产及其他资产合计</td>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.intangibleandotherassets!''}</td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.ownerequity!''}</td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.assetsamount!''}</td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td>${coAll.jltfispCoDebtFour.ownerequityamount!''}</td>
                                 </tr>
                                 <#else>
                                 	 <tr>
-                                      <td>货币资金</td>
+                                      <td>${loanformManage.debtCapital!''}</td>
                                       <td></td>
-                                      <td>短期借款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>短期投资</td>
-                                      <td></td>
-                                      <td>应付票据</td>
+                                      <td>${loanformManage.debtShortBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收票据</td>
+                                      <td>${loanformManage.debtShortInvestment!''}</td>
                                       <td></td>
-                                      <td>应付账款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>应收股息</td>
-                                      <td></td>
-                                      <td>代付职工薪酬</td>
+                                      <td>${loanformManage.debtBillPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>应收账款</td>
+                                      <td>${loanformManage.debtBill!''}</td>
                                       <td></td>
-                                      <td>应付福利费</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他应收款</td>
-                                      <td></td>
-                                      <td>应付利润</td>
+                                      <td>${loanformManage.debtAccountPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>存货</td>
+                                      <td>${loanformManage.debtDividend!''}</td>
                                       <td></td>
-                                      <td>应交税金</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>待摊费用</td>
-                                      <td></td>
-                                      <td>其他应交款</td>
+                                      <td>${loanformManage.debtSalariesPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>一年内到期的长期债权投资</td>
+                                      <td>${loanformManage.debtAccountReceivable!''}</td>
                                       <td></td>
-                                      <td>其他应付款</td>
-                                      <td></td>
-                                  </tr>
-                                  <tr>
-                                      <td>其他流动资产</td>
-                                      <td></td>
-                                      <td>预提费用</td>
+                                      <td>${loanformManage.debtWelfarePayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>预付账款</td>
+                                      <td>${loanformManage.debtOtherReceivable!''}</td>
                                       <td></td>
-                                      <td>一年到期的长期负债</td>
+                                      <td>${loanformManage.debtProfitPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>流动资产合计</td>
+                                      <td>${loanformManage.debtStock!''}</td>
                                       <td></td>
-                                      <td>其他流动负债</td>
+                                      <td>${loanformManage.debtTaxPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPrepaidExpenses!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayment!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtDebtsInvestment!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOtherPayable!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssets!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtAccruedExpenses!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtPreAccountsReceivable!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtOneYearDebt!''}</td>
+                                      <td></td>
+                                  </tr>
+                                  <tr>
+                                      <td>${loanformManage.debtLiquidAssetsAmount!''}</td>
+                                      <td></td>
+                                      <td>${loanformManage.debtCurrentDebt!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>长期投资</b></td>
-                                      <td>预收账款</td>
+                                      <td>${loanformManage.debtPreAccountsReceivable2!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期股权投资</td>
+                                      <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td></td>
-                                      <td>流动负债合计</td>
+                                      <td>${loanformManage.debtCurrentDebtAmount!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                      <td>长期债权投资</td>
+                                      <td>${loanformManage.debtLongDebtsInvestment!''}</td>
                                       <td></td>
                                       <td colspan="2"><b>长期负债</b></td>
                                   </tr>
                                   <tr>
-                                      <td>长期投资合计</td>
+                                      <td>${loanformManage.debtLongInvestmentAmount!''}</td>
                                       <td></td>
-                                      <td>长期借款</td>
+                                      <td>${loanformManage.debtLongBorrow!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
                                       <td colspan="2"><b>固定资产</b></td>
-                                      <td>长期应付款</td>
+                                      <td>${loanformManage.debtLongPayable!''}</td>
                                       <td></td>
                                   </tr>
                                   <tr>
-                                    <td >累计折旧</td>
+                                    <td >${loanformManage.debtDepreciation!''}</td>
                                     <td></td>
-                                    <td>其他长期负债</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >固定资产净值</td>
-                                    <td></td>
-                                    <td>长期负债合计</td>
+                                    <td>${loanformManage.debtOtherLongDebt!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >工程物资</td>
+                                    <td >${loanformManage.debtFixedAssetsValue!''}</td>
                                     <td></td>
-                                    <td>负债合计（流动负债+长期负债）</td>
+                                    <td>${loanformManage.debtLongDebtAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产清理</td>
+                                    <td >${loanformManage.debtEngineeringMaterial!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtDebtAmount!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtFixedAssetsClean!''}</td>
                                     <td></td>
                                     <td colspan="2"><b>所有者（或股东权益）</b></td>
                                 </tr>
                                 <tr>
-                                    <td >固定资产合计</td>
+                                    <td >${loanformManage.debtFixedAssetsAmount!''}</td>
                                     <td></td>
-                                    <td>实收资本</td>
+                                    <td>${loanformManage.debtPaidInCapital!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2"><b>无形资产及其他资产</b></td>
-                                    <td>资本公积</td>
+                                    <td>${loanformManage.debtCapitalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >无形资产</td>
+                                    <td >${loanformManage.debtIntangibleAssets!''}</td>
                                     <td></td>
-                                    <td>盈余公积</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >长期待摊费用</td>
-                                    <td></td>
-                                    <td>其中：法定公积</td>
+                                    <td>${loanformManage.debtSurplusReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >其他长期资产</td>
+                                    <td >${loanformManage.debtLongPrepaidExpenses!''}</td>
                                     <td></td>
-                                    <td>未分配利润</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td >无形资产及其他资产合计</td>
-                                    <td></td>
-                                    <td>所有者权益（或股东权益）合计</td>
+                                    <td>${loanformManage.debtLegalReserve!''}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td >资产合计</td>
+                                    <td >${loanformManage.debtOtherLongAssets!''}</td>
                                     <td></td>
-                                    <td>负债和所有者权益（或股东权益）总计</td>
+                                    <td>${loanformManage.debtUndistributedProfit!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtIntangibleAndOtherAssets!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquity!''}</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td >${loanformManage.debtAssetsAmount!''}</td>
+                                    <td></td>
+                                    <td>${loanformManage.debtOwnerEquityAmount!''}</td>
                                     <td></td>
                                 </tr>
                                 </#if>
@@ -1795,112 +1800,112 @@
 					                                月</th></tr>
 					            <#if (coAll.jltfispCoProfit?size gt 0)>
                                 <tr>
-                                	<td><b>主营业务收入</b></td>
+                                	<td><b>${loanformManage.profitMainIncome!''}</b></td>
                                     <td>${coAll.jltfispCoProfit[0].mainincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].mainincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].mainincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].mainincome!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：主营业务成本</td>
+                                	<td>${loanformManage.profitMainCost!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].maincost!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].maincost!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].maincost}</td>
                                     <td>${coAll.jltfispCoProfit[3].maincost!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：主营业务税金及附加</td>
+                                	<td>${loanformManage.profitMainTax!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].maintax!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].maintax!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].maintax!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].maintax!''}</td>
                                 </tr>
                                 <tr>
-                                	<td><b>主营业务利润(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitMainProfit!''}</b></td>
                                     <td>${coAll.jltfispCoProfit[0].mainprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].mainprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].mainprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].mainprofit!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>加：其他业务利润(亏损以"-"号填列)</td>
+                                	<td>${loanformManage.profitOtherProfit!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].otherprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].otherprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].otherprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].otherprofit!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：营业费用</td>
+                                	<td>${loanformManage.profitBusinessCost!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].businesscost!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].businesscost!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].businesscost!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].businesscost!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：管理费用</td>
+                                	<td>${loanformManage.profitManageCost!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].managecost!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].managecost!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].managecost!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].managecost!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：财务费用</td>
+                                	<td>${loanformManage.profitFinanceCost!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].financecost!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].financecost!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].financecost!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].financecost!''}</td>
                                 </tr>
                                 <tr>
-                                	<td><b>营业利润(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitBusinessProfit!''}</b></td>
                                     <td>${coAll.jltfispCoProfit[0].businessprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].businessprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].businessprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].businessprofit!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>加：投资收益(亏损以"-"号填列)</td>
+                                	<td>${loanformManage.profitInvestmentIncome!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].investmentincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].investmentincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].investmentincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].investmentincome!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>加：营业外收入</td>
+                                	<td>${loanformManage.profitOtherIncome!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].otherincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].otherincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].otherincome!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].otherincome!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：营业外支出</td>
+                                	<td>${loanformManage.profitOtherPay!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].otherpay!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].otherpay!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].otherpay!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].otherpay!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：资产减值损失</td>
+                                	<td>${loanformManage.profitAssetLoss!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].assetloss!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].assetloss!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].assetloss!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].assetloss!''}</td>
                                 </tr>
                                 <tr>
-                                	<td><b>利润总额(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitAmount!''}</b></td>
                                     <td>${coAll.jltfispCoProfit[0].profitamount!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].profitamount!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].profitamount!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].profitamount!''}</td>
                                 </tr>
                                 <tr>
-                                	<td>减：所得税</td>
+                                	<td>${loanformManage.profitIncomeTax!''}</td>
                                     <td>${coAll.jltfispCoProfit[0].incometax!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].incometax!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].incometax!''}</td>
                                     <td>${coAll.jltfispCoProfit[3].incometax!''}</td>
                                 </tr>
                                 <tr>
-                                	<td><b>净利润(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitNetProfit!''}</b></td>
                                     <td>${coAll.jltfispCoProfit[0].netprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[1].netprofit!''}</td>
                                     <td>${coAll.jltfispCoProfit[2].netprofit!''}</td>
@@ -1908,112 +1913,112 @@
                                 </tr>
                                 <#else>
                                 	<tr>
-                                	<td><b>主营业务收入</b></td>
+                                	<td><b>${loanformManage.profitMainIncome!''}</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：主营业务成本</td>
+                                	<td>${loanformManage.profitMainCost!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：主营业务税金及附加</td>
+                                	<td>${loanformManage.profitMainTax!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td><b>主营业务利润(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitMainProfit!''}</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>加：其他业务利润(亏损以"-"号填列)</td>
+                                	<td>${loanformManage.profitOtherProfit!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：营业费用</td>
+                                	<td>${loanformManage.profitBusinessCost!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：管理费用</td>
+                                	<td>${loanformManage.profitManageCost!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：财务费用</td>
+                                	<td>${loanformManage.profitFinanceCost!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td><b>营业利润(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitBusinessProfit!''}</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>加：投资收益(亏损以"-"号填列)</td>
+                                	<td>${loanformManage.profitInvestmentIncome!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>加：营业外收入</td>
+                                	<td>${loanformManage.profitOtherIncome!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：营业外支出</td>
+                                	<td>${loanformManage.profitOtherPay!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：资产减值损失</td>
+                                	<td>${loanformManage.profitAssetLoss!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td><b>利润总额(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitAmount!''}</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td>减：所得税</td>
+                                	<td>${loanformManage.profitIncomeTax!''}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                	<td><b>净利润(亏损以"-"号填列)</b></td>
+                                	<td><b>${loanformManage.profitNetProfit!''}</b></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -2031,11 +2036,11 @@
                               <div class="clear"></div>
                               <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>应收款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumOne!''}</th>
+                                    <th>${loanformManage.finCompanyOne!''}</th>
+                                    <th>${loanformManage.finYszkyeOne!''}</th>
+                                    <th>${loanformManage.finZlOne!''}</th>
+                                    <th>${loanformManage.finPercentOne!''}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -2078,11 +2083,11 @@
                               <div class="clear"></div>
                               <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>其他应收款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumTwo!''}</th>
+                                    <th>${loanformManage.finCompanyTwo!''}</th>
+                                    <th>${loanformManage.finYszkyeTwo!''}</th>
+                                    <th>${loanformManage.finZlTwo!''}</th>
+                                    <th>${loanformManage.finPercentTwo!''}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -2125,11 +2130,11 @@
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>应付款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumThree!''}</th>
+                                    <th>${loanformManage.finCompanyThree!''}</th>
+                                    <th>${loanformManage.finYszkyeThree!''}</th>
+                                    <th>${loanformManage.finZlThree!''}</th>
+                                    <th>${loanformManage.finPercentThree!''}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -2172,11 +2177,11 @@
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>单位名称</th>
-                                    <th>其他应付款余额</th>
-                                    <th>账龄(月)</th>
-                                    <th>占百分比%</th>
+                                	<th>${loanformManage.finOrdernumFour!''}</th>
+                                    <th>${loanformManage.finCompanyFour!''}</th>
+                                    <th>${loanformManage.finYszkyeFour!''}</th>
+                                    <th>${loanformManage.finZlFour!''}</th>
+                                    <th>${loanformManage.finPercentFour!''}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -2219,12 +2224,12 @@
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>贷款银行</th>
-                                    <th>贷款金额</th>
-                                    <th>担保方式</th>
-                                    <th>开始日期</th>
-                                    <th>结束日期</th>
+                                	<th>${loanformManage.finOrdernumFive!''}</th>
+                                    <th>${loanformManage.finLoanbank!''}</th>
+                                    <th>${loanformManage.finLoanaccount!''}</th>
+                                    <th>${loanformManage.finSuremethod!''}</th>
+                                    <th>${loanformManage.finStarttime!''}</th>
+                                    <th>${loanformManage.finEndtime!''}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>
@@ -2270,12 +2275,12 @@
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
                             	<tr>
-                                	<th>序号</th>
-                                    <th>关联企业名称</th>
-                                    <th>关系</th>
-                                    <th>注册资本</th>
-                                    <th>主营业务</th>
-                                    <th>主营收入</th>
+                                	<th>${loanformManage.finOrdernumSix!''}</th>
+                                    <th>${loanformManage.finCompanySix!''}</th>
+                                    <th>${loanformManage.finGx!''}</th>
+                                    <th>${loanformManage.finZczb!''}</th>
+                                    <th>${loanformManage.finZyyw!''}</th>
+                                    <th>${loanformManage.finZysr!''}</th>
                                 </tr>
                                 <tr>
                                 	<td>1</td>

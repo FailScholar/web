@@ -1,14 +1,16 @@
 <#assign path=request.contextPath />
 <div class="bread">
-    <a href="javascript:;">首页</a>&gt;<a href="javascript:;">合作机构</a>&gt;<a href="javascript:;">在线申请</a>&gt;<a href="javascript:;">申请须知</a>
+    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/institution">${dictColumnDto.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${jltfispColumn.id})">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">申请须知</a>
 </div>
 <div class="calt">
-	<p>合作机构申请</p>
     <h2>申请须知</h2>
     <p class="note">${institutManage.applyGuide}</p>
 </div>
 <form id="agreeForm">
-<div class="chkbg"><b></b><input type="checkbox" name="agree" class="validate[required]" />同意</div>
+<div style="text-align:center;">
+<input type="checkBox" style="font-size:16px;border-radius:3px;" name="agree" class="validate[required]" >
+<span style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;">同意协议</span></br></br></br>
+</div>
 </form>
 <a href="javascript: void(0);" class="apply" onclick="apply()">马上申请</a>
 <input type="hidden" name="id" id="id" value="${columnId }"/>
@@ -38,4 +40,7 @@ function apply(){
   	return false;
   }
 }
+function goBack(columnId){
+	 window.location.href="${path}/perm/institution?columnId="+columnId;
+	 }
 </script>

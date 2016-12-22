@@ -26,7 +26,7 @@
             <li code="${colList[5].id}">
             <a href="javascript:void(0);" code="1" style="display: none">${colList[5].columnName}</a>
 	       	 <select id="selectId" onchange="getList()">
-	       		<option value="0">-选择更多机构-</option>
+	       		<option value="0">-选择更多-</option>
 	       	 	<#list colList as afterFiveList>
 	       	 		<#if afterFiveList_index gt 4>
 	       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
@@ -52,6 +52,7 @@
 </html>
 
 <script type="text/javascript">
+	positionNavigation(10);
     var infoTab = $("div.info ul.infoTab");
     $(function(){
 		var columnid = $.cookie('columnid');

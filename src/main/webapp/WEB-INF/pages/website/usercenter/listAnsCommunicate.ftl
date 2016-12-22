@@ -133,13 +133,13 @@
 </html>
 
 <script type="text/javascript">
-  
+    positionNavigation(0);
     function popCon01(id)
     {
         dialog({
             id: 'dialogPop',
             width: 650,
-	        height:300,
+	        height:520,
             title: '问题信息',
             content: $('#dialogShow').load("${path}/communicate/ansComm?id="+id),
            	cancelValue: '取消',
@@ -169,7 +169,7 @@
         dialog({
             id: 'dialogPop',
             width: 650,
-            height:300,
+            height:560,
             title: '问题信息',
             content: $('#dialogShow').load("${path}/communicate/ansComm?id="+id),
             okValue: '确定',

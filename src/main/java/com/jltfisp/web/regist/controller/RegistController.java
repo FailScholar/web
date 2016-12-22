@@ -160,6 +160,15 @@ public class RegistController {
             model.addAttribute("message", "验证码过期,请重新获取");
             return JSON.toJSONString(model);
         }
+        List<JltfispUser> list = redisService.getV("allUser");
+        for (JltfispUser jltfispUser : list) {
+            if(aUser.getAccountNumber().equals(jltfispUser.getAccountNumber())){
+                model.addAttribute("success", false);
+                model.addAttribute("message", "该账号被成功注册过，激活失败");
+                return JSON.toJSONString(model);
+            }
+        }
+           
         user.setState(1);
         registService.updateUser(user);
 

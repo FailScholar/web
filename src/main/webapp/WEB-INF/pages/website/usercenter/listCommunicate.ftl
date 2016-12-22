@@ -86,7 +86,7 @@
                           </div>
                           <div>
                               <span>我要咨询</span>
-                              <textarea class="csCont validate[required,minSize[2],maxSize[255]]" name="content" placeholder="请输入咨询问题"></textarea>
+                              <textarea class="csCont validate[required,minSize[2],maxSize[500]]" name="content" placeholder="请输入咨询问题"></textarea>
                           </div>
                           <div>
                               <input type="submit" value="确 定" class="btnCom" />
@@ -122,7 +122,7 @@
                               </tbody>
                           </table>
                           <div class="paging" style="width:960px;">
-                               <p class="fl">显示至<span>${pageInfo.st+1 }</span>至<span>${(pageInfo.data?size)+pageInfo.st}</span>条，共<span>${pageInfo.totalCount }</span>条</p>
+                               <p class="fl">显示<span>${pageInfo.st+1 }</span>至<span>${(pageInfo.data?size)+pageInfo.st}</span>条，共<span>${pageInfo.totalCount }</span>条</p>
 								<div class="fr">
 									<a href="javascript:last();" class="spage prevPg">&lt;</a>${pageInfo.currentPage}/${pageInfo.totalPage}<a href="javascript:next();" class="spage nextPg">&gt;</a>
 								</div>
@@ -149,6 +149,7 @@
 </html>
 
 <script type="text/javascript">
+    positionNavigation(0);
       //通知通告弹窗
         function showDetail(id) {
         	dialog({
@@ -179,7 +180,7 @@
         dialog({
             id: 'dialogPop',
             width: 650,
-	        height:300,
+	        height:550,
             title: '问题信息',
             content: $('#dialogShow').load("${path}/communicate/viewComm?id="+id),
             okValue: '确定',

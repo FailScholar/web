@@ -60,6 +60,7 @@ public class UserController {
     	JltfispUser user1 = loginService.getCurrentUser();
     	//清除缓存
         authorizingRealm.clearUserCache(user1.getAccountNumber());
+        SecurityUtils.getSubject().getSession().removeAttribute("user");
     	return "redirect:../main";
     }
     

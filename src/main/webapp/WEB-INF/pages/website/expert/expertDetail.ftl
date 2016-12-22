@@ -29,10 +29,10 @@
                                   ${jltfispExpert.workpost}
                                   </#if>                     
                         | 
-                        <#if (jltfispExpert.workcompany?length >30) >
-                                   <lable title="${jltfispExpert.workcompany}">${jltfispExpert.workcompany[0..30]}...</label>
+                        <#if (jltfispExpert.businesaddress?length >30) >
+                                   <lable title="${jltfispExpert.businesaddress}">${jltfispExpert.businesaddress[0..30]}...</label>
                                   <#else>
-                                  ${jltfispExpert.workcompany}
+                                  ${jltfispExpert.businesaddress}
                                   </#if>     
                         </p>
                         <p class="phone">${jltfispExpert.phone}</p>
@@ -41,7 +41,7 @@
                     <div class="clear"></div>
                     <div class="resume">
                         <h2>专家简讯</h2>
-                        ${jltfispExpert.educationalbackground}
+                        ${jltfispExpert.partfull}
                     </div>
                 </div>
             </div>
@@ -55,3 +55,6 @@
   <#include "website/common/footer.ftl" />
   </body>
 </html>
+<script type="application/javascript">
+    positionNavigation(6);
+</script>

@@ -10,6 +10,8 @@
       <script type="text/javascript" src="${path}/resource/js/jquery-1.7.2.min.js"></script>
       <script type="text/javascript" src="${path}/resource/js/js.js"></script>
       <script type="text/javascript" src="${path}/resource/js/common.js"></script>
+      <link rel="stylesheet" type="text/css" href="${path}/resource/css/ui-dialog.css" />
+      <script type="text/javascript" src="${path}/resource/js/dialog-plus.js"></script>
       <script type="application/javascript">
           var path = '${path}';
           $(document).ready(function(e) {
@@ -60,13 +62,17 @@
                           <li class="active"><a href="javascript:;">科技金融服务</a></li>
                           <li><a href="javascript:;">最新动态</a></li>
                       </ul>
-                      <ul class="fr">
-                        <#list indexCache.notices as notices>
-                            <#if notices.mark = 'notice'>
-                              <li><b></b><a href="${path}/anon/getNewsDetail?id=${notices.id}">${notices.title}</a><span>${notices.publishTime ? date}</span></li>
-                            </#if>
-                        </#list>
-                      </ul>
+                      <div class="fr">
+                          <ul>
+                          <#list indexCache.notices as notices>
+                              <#if notices.mark = 'notice'>
+                                  <li><b></b><a href="${path}/anon/getNewsDetail?id=${notices.id}">${notices.title}</a><span>${notices.publishTime ? date}</span></li>
+                              </#if>
+                          </#list>
+                          </ul>
+                      </div>
+                      <div class="clear"></div>
+
                   </div>
                   <div class="lbot">
                       <ul class="snav">
@@ -77,6 +83,7 @@
                           <li class="li5"><a href="${path}/loan/judgeIsApplyLoan?applytype=5"><b></b>保费补贴申请</a></li>
                           <li class="li6"><a href="${path}/loan/financeKnow"><b></b>股权融资申请</a></li>
                       </ul>
+                      <a href="${path}/anon/loan" target="_blank">更多<span>&gt;&gt;</span></a>
                   </div>
                   <div class="lbot" style="display:none;">
                       <div class="banner">
@@ -87,7 +94,7 @@
                               <ul class="img-list clearfix">
                               <#list indexCache.indices as indices>
                                   <#if indices.contentType = 1>
-                                      <li><a href="${indices.url}"><img src="${path}${indices.image}" alt="img"/></a></li>
+                                      <li><a href="${indices.url}" target="_blank"><img src="${path}${indices.image}" alt="img"/></a></li>
                                   </#if>
                               </#list>
                               </ul>
@@ -107,7 +114,13 @@
               <ul>
               	<li><a href="${path}/anon/regist/toRegistPage" class="a1" title="注册">&nbsp;</a></li>
               	<li><a href="${path}/login" class="a2" title="登录">&nbsp;</a></li>
-              	<li><a href="${path}/communicate/page" target="_blank" class="a3" title="咨询">&nbsp;</a></li>
+              	<@shiro.hasRole name="专家会员">
+              		<li><a href="javascript:alertText();"class="a3" title="咨询">&nbsp;</a></li>
+              	</@shiro.hasRole>
+              	<@shiro.lacksRole name="专家会员">
+              		<li><a href="${path}/communicate/page" target="_blank" class="a3" title="咨询">&nbsp;</a></li>
+              	</@shiro.lacksRole>
+              	
               	<li><a href="javascript:;" class="a4" title="分享">&nbsp;</a>
               		<div class="none">
 			        <div class="fx_nr">
@@ -140,10 +153,10 @@
                           </ul>
                           <#list indexCache.columns as columns>
                               <#if columns.mark = 'news_2'>
-                                  <a href="${path}/perm/news?columnId=${columns.id}" onclick="setColumnIndex(2)">${columns.columnName}</a>
+                                  <a href="${path}/perm/news?columnId=${columns.id}">${columns.columnName}</a>
                               </#if>
                           </#list>
-                          <a href="${path}/perm/news" class="fr" onclick="setColumnIndex(2)">更多&nbsp;&gt;</a>
+                          <a href="${path}/perm/news" class="fr">更多&nbsp;&gt;</a>
                       </div>
                       <div class="clear"></div>
                       <div class="selCont">
@@ -151,7 +164,7 @@
                           <ul class="fl">
                               <#list indexCache.notices as notices>
                                   <#if notices.mark = 'news'>
-                                      <li><a href="${path}/anon/getNewsDetail?id=${notices.id}" onclick="setColumnIndex(2)">
+                                      <li><a href="${path}/anon/getNewsDetail?id=${notices.id}">
                                           <h5>${notices.title}</h5>
                                           <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
                                       </a></li>
@@ -163,7 +176,7 @@
                           <ul class="imgList fr">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'news'>
-                                  <li><a href="${path}/anon/getNewsDetail?id=${notices.id}"><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
+                                  <li><a href="${path}/anon/getNewsDetail?id=${notices.id}"><img style="width: 400px;height: 311px" src="${path}${notices.image ! '/resource/images/newsDefault.jpg'}" alt="img" /></a></li>
                               </#if>
                           </#list>
                           </ul>
@@ -187,7 +200,7 @@
                           <ul class="imgList fr">
                               <#list indexCache.notices as notices>
                                   <#if notices.mark = 'video'>
-                                      <li><a href="javascript:;" onclick="toVideoDetailPage(${notices.id},${notices.columnId})"><b></b><img style="width: 400px;height: 311px" src="${path}${notices.image}" alt="img" /></a></li>
+                                      <li><a href="javascript:;" onclick="toVideoDetailPage(${notices.id},${notices.columnId})"><b></b><img style="width: 400px;height: 311px" src="${path}${notices.image ! '/resource/images/newsDefault.jpg'}" alt="img" /></a></li>
                                   </#if>
                               </#list>
                           </ul>
@@ -206,7 +219,7 @@
                               </#if>
                           </#list>
                           </ul>
-                          <a href="${path}/perm/policy" class="fr" onclick="setColumnIndex(3)">更多&nbsp;&gt;</a>
+                          <a href="${path}/perm/policy" class="fr">更多&nbsp;&gt;</a>
                       </div>
                       <div class="clear"></div>
                       <div class="selCont">
@@ -214,7 +227,7 @@
                           <ul class="news fl">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'policy'>
-                                  <li><a href="${path}/anon/policyDetail?policyId=${notices.id}" onclick="setColumnIndex(3)">
+                                  <li><a href="${path}/anon/policyDetail?policyId=${notices.id}">
                                       <h5>${notices.title}</h5>
                                   </a></li>
                               </#if>
@@ -227,7 +240,7 @@
                           <ul class="news fl">
                           <#list indexCache.notices as notices>
                               <#if notices.mark = 'financing'>
-                                  <li><a href="${path}/anon/financing/detail?id=${notices.id}" onclick="setColumnIndex(7)">
+                                  <li><a href="${path}/anon/financing/detail?id=${notices.id}">
                                       <h5>${notices.title}</h5>
                                   </a></li>
                               </#if>
@@ -284,7 +297,7 @@
                       <#--最多显示8个，不加更多-->
                       <#list indexCache.organizes as organizes>
                           <#if organizes.organize = 'institut'>
-                              <li><a onclick="setColumnIndex(5)" href="${path}/perm/institution?columnId=${organizes.id}">${organizes.columnName}</a></li>
+                              <li><a href="${path}/perm/institution?columnId=${organizes.id}">${organizes.columnName}</a></li>
                           </#if>
                       </#list>
                   </ul>
@@ -296,7 +309,7 @@
                   <#--最多显示8个，不加更多-->
                       <#list indexCache.organizes as organizes>
                           <#if organizes.organize = 'expert'>
-                              <li><a onclick="setColumnIndex(6)" href="${path}/perm/expert?columnId=${organizes.id}&isFrontPage=1">${organizes.columnName}</a></li>
+                              <li><a href="${path}/perm/expert?columnId=${organizes.id}&isFrontPage=1">${organizes.columnName}</a></li>
                           </#if>
                       </#list>
                   </ul>
@@ -317,7 +330,13 @@
   </body>
 </html>
 <script type="text/javascript">
+
+	function alertText(){
+		dialog.tipsPop('ok-pop','提示:',"您已是专家会员",function(){
+	              });
+	}
     $(document).ready(function(e) {
+        positionNavigation(0);
         $('.ltop .fl li').click(function(){
             $(this).addClass('active').siblings('li').removeClass('active');
             $('.lbot').hide().eq($(this).index()).show();
@@ -453,8 +472,21 @@
     }
 
     function toVideoDetailPage(id, columnId) {
-        setColumnIndex(10);
         var colName = $('#index_video').find('a').html();
         window.location = '${path}/anon/cloud/detail?id='+id+'&columnid='+columnId+'&colName='+colName
     }
+
+    var lih=$('.ltop .fr li:first').height();
+    var iCur=0;
+    var timer2=setInterval(function(){
+        $('.ltop .fr ul').animate({'margin-top':-lih*((iCur++)%$('.ltop .fr li').length)},800);
+    },2400);
+    $('.ltop .fr ul').hover(function(){
+        clearInterval(timer2);
+    },function(){
+        timer2=setInterval(function(){
+            $('.ltop .fr ul').animate({'margin-top':-lih*((iCur++)%$('.ltop .fr li').length)},800);
+        },2400);
+    });
+
 </script>

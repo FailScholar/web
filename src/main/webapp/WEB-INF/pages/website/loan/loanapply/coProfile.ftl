@@ -5,15 +5,15 @@
                         	<input type="hidden" id="businesstype"   name="businesstype"   value="${applytype}"/>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>经营范围(主营)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileMainbusiness}</th>
                                     <td><input id="mainBusiness" value="${coAll.jltfispCoProfile.mainBusiness}" name="mainBusiness" type="text" class="txt validate[required,minSize[3],maxSize[255]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>经营范围(兼营)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileSidelinebusses}</th>
                                     <td><input id="sidelineBusses" value="${coAll.jltfispCoProfile.sidelineBusses}" name="sidelineBusses" type="text" class="txt validate[required,minSize[3],maxSize[255]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>主要技术领域</th>
+                                    <th><b class="red">*</b>${loanformManage.profileMainfield}</th>
                                     <td>
                                       <#list dicList as dic>
                                       <#if coAll.jltfispCoProfile.mainField ==dic.code >
@@ -25,7 +25,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>企业性质</th>
+                                    <th><b class="red">*</b>${loanformManage.profileNature}</th>
                                     <td>
                                         <#if coAll.jltfispCoProfile.nature ==1 >
                                     	<label><input type="radio" class="validate[required]"  value="1" name="nature" id="nature" checked/>私营企业</label>
@@ -43,20 +43,20 @@
                                         <label><input type="radio" class="validate[required]"  value="3" name="nature" id="nature"/>国有企业</label>
                                         </#if>
                                         <#if coAll.jltfispCoProfile.nature ==4 >
-                                        <label><input type="radio" class="validate[required]"  value="4" name="nature" id="nature" checked/>集体企业</label><br/>
+                                        <label><input type="radio" class="validate[required]"  value="4" name="nature" id="nature" checked/>集体企业</label>
                                         <#else>
-                                        <label><input type="radio" class="validate[required]"  value="4" name="nature" id="nature"/>集体企业</label><br/>
+                                        <label><input type="radio" class="validate[required]"  value="4" name="nature" id="nature"/>集体企业</label>
                                         </#if>
                                         <#if coAll.jltfispCoProfile.nature ==5 >
-                                        <label><input type="radio" class="validate[required]"  value="5" name="nature" id="nature" checked/>其他</label><br/>
+                                        <label><input type="radio" class="validate[required]"  value="5" name="nature" id="nature" checked/>其他</label>
                                         <#else>
-                                        <label><input type="radio" class="validate[required]"  value="5" name="nature" id="nature"/>其他</label><br/>
+                                        <label><input type="radio" class="validate[required]"  value="5" name="nature" id="nature"/>其他</label>
                                         </#if>
-                                        <div class="else"><input name="otherNature" value="1" id="otherNature" type="hidden"/></div>
+                                        <input name="otherNature" value="1" id="otherNature" type="hidden"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>职工总数</th>
+                                    <th><b class="red">*</b>${loanformManage.profileWorkforce}</th>
                                     <td>
                                     	<input id="workforce" name="workforce" value="${coAll.jltfispCoProfile.workforce}" type="text" class="txt validate[required,minSize[1],maxSize[255],custom[integer]]" style="width:60px;" />人
                                         <span style="margin-left:30px;">其中：大专以上人数</span><input name="collegeDegreeOrAboveNum" id="collegeDegreeOrAboveNum" value="${coAll.jltfispCoProfile.collegeDegreeOrAboveNum}" type="text" class="txt" style="width:60px;" />人<span style="margin-left:30px;">研发人员</span><input name="researchStaffNum" id="researchStaffNum" value="${coAll.jltfispCoProfile.researchStaffNum}" type="text" class="txt" style="width:60px;" />人<br /><i class="gray6 tip2">提示：如果没有大专人数或者没有研发人员可填0！</i>
@@ -66,23 +66,23 @@
                             <p class="ntit">知识产权授权和科技认定状况(选填)</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th>已获得知识产权总数</th>
+                                    <th>${loanformManage.profileIntellectualpropertynum}</th>
                                     <td colspan="3"><input id="intellectualPropertyNum" name="intellectualPropertyNum" value="${coAll.jltfispCoProfile.intellectualPropertyNum}" type="text" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
                                 </tr>
                                 <tr>
-                                    <th>发明专利</th>
+                                    <th>${loanformManage.profilePatentofinventionnum}</th>
                                     <td><input name="patentOfInventionNum" id="patentOfInventionNum" type="text" value="${coAll.jltfispCoProfile.patentOfInventionNum}"  class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
-                                    <th>实用新型专利</th>
+                                    <th>${loanformManage.profileUtilitymodelpatentnum}</th>
                                     <td><input name="utilityModelPatentNum" id="utilityModelPatentNum" type="text" value="${coAll.jltfispCoProfile.utilityModelPatentNum}" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
                                 </tr>
                                 <tr>
-                                    <th>软件著作权</th>
+                                    <th>${loanformManage.profileSoftwarecopyrightnum}</th>
                                     <td><input name="softwareCopyrightNum" id="softwareCopyrightNum" value="${coAll.jltfispCoProfile.softwareCopyrightNum}" type="text" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
-                                    <th>集成电路设计板块</th>
+                                    <th>${loanformManage.profileIntegratedcircuitdesignnum}</th>
                                     <td><input name="integratedCircuitDesignNum" id="integratedCircuitDesignNum" value="${coAll.jltfispCoProfile.integratedCircuitDesignNum}" type="text" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
                                 </tr>
                                 <tr>
-                                    <th>企业曾获得科技认定<br/>或资助情况(可多选)</th>
+                                    <th>${loanformManage.profileTechnologyorfinance}</th>
                                     <td colspan="3">
                                     	<label><input type="checkbox" value="1" name="technologyOrFinance" id="technologyOrFinance1" />高科技企业</label>
                                         <label><input type="checkbox" value="2" name="technologyOrFinance" id="technologyOrFinance2" />科技小巨人企业</label>
@@ -98,15 +98,15 @@
                             <p class="ntit">企业情况概述(300字以内)</p>
                             <table width="100%" class="tab3">
                             	<tr>
-                                    <th><b class="red">*</b>企业简介</th>
+                                    <th><b class="red">*</b>${loanformManage.profileInstitutionalabstract}</th>
                                     <td><textarea id="institutionalAbstract" value="${coAll.jltfispCoProfile.institutionalAbstract}" name="institutionalAbstract" class="txta validate[required,minSize[6],maxSize[300]]">${coAll.jltfispCoProfile.institutionalAbstract}</textarea></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>管理团队简介(主要经<br/>营、管理、技术人员背景)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileManagementteamprofile}</th>
                                     <td><textarea name="managementTeamProfile"  id="managementTeamProfile" class="txta validate[required,minSize[6],maxSize[300]]">${coAll.jltfispCoProfile.managementTeamProfile}</textarea></td>
                                 </tr>
                                 <tr>
-                                    <th><b class="red">*</b>主营产品简介(产品特点、销售市场、<br/>主要客户等)</th>
+                                    <th><b class="red">*</b>${loanformManage.profileMainproductintroduction}</th>
                                     <td><textarea name="mainProductIntroduction"   id="mainProductIntroduction" class="txta validate[required,minSize[6],maxSize[300]]">${coAll.jltfispCoProfile.mainProductIntroduction}</textarea></td>
                                 </tr>
                             </table>

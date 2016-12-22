@@ -1,4 +1,5 @@
 package com.jltfisp.web.loan.controller;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.jltfisp.PdfGenerator;
 import com.jltfisp.base.controller.BaseController;
 import com.jltfisp.base.entity.PageInfo;
@@ -23,10 +25,12 @@ import com.jltfisp.base.entity.SysDict;
 import com.jltfisp.base.service.IBaseService;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
+import com.jltfisp.redis.RedisService;
 import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.area.entity.JltfispArea;
 import com.jltfisp.web.area.service.AreaService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
+import com.jltfisp.web.loan.entity.FormLabel;
 import com.jltfisp.web.loan.entity.JltfispCoAll;
 import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
@@ -36,8 +40,12 @@ import com.jltfisp.web.loan.entity.JltfispFinShareholder;
 import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
 import com.jltfisp.web.loan.entity.JltfispPsInfo;
 import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
+import com.jltfisp.web.loan.entity.LoanManageOther;
+import com.jltfisp.web.loan.entity.LoanformManage;
 import com.jltfisp.web.loan.service.FinanceApplyService;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
+import com.jltfisp.web.loan.service.ILoanManageOtherService;
+import com.jltfisp.web.loan.service.ILoanformManageService;
 import com.jltfisp.web.loan.service.ISubsidyService;
 import com.jltfisp.web.loan.service.LoanService;
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
@@ -70,6 +78,12 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
     @Autowired
     private AreaService areaService;
     
+    @Autowired
+    private ILoanManageOtherService loanManageOtherService;
+    
+    @Autowired
+    private RedisService<Serializable, String> redisService;
+    
     @Override
 	public IBaseService<BusinessApplayAudit> getEntityService() {
 		return businessApplayAuditService;
@@ -93,6 +107,36 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	@Override
 	@RequestMapping(value = "/page")
 	public String page(HttpServletRequest request, BusinessApplayAudit t) throws Exception {
+		ArrayList<Map> list = new ArrayList<>();
+        List<SysDict> dicList = dictionaryService.getDictListByType(1002);
+		
+        for (SysDict sysDict : dicList) {
+            HashMap<String,Object> map = new HashMap<>();
+            map.put("name",sysDict.getValue());
+            map.put("code",sysDict.getCode());
+            map.put("id",sysDict.getId());
+			LoanManageOther loanformManage = new LoanManageOther();
+	         if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+	             loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+	                     LoanManageOther.class);
+	         }else{
+	             LoanManageOther params = new LoanManageOther();
+	             params.setType(sysDict.getId());
+	             params.setIstemplate(0);
+	             loanformManage = loanManageOtherService.selectOneByExample(params);
+	             if(loanformManage == null){
+	                 params = new LoanManageOther();
+	                 params.setIstemplate(1);
+	                 loanformManage = loanManageOtherService.selectOneByExample(params);
+	             }
+	             
+	         }
+	         map.put("loanGuide",loanformManage.getLoanGuide());
+	         map.put("applyGuide",loanformManage.getApplyGuide());
+	         list.add(map);
+	     }
+        request.setAttribute("list",list);
+		
 		if(t.getType()==null || "".equals(t.getType())) {
 			t.setType("1");
 		}
@@ -237,6 +281,28 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      }
 	      request.setAttribute("jltfispCoBaseDto2", jltfispCoBaseDto2);
+	      //获取股权融资申请表单 字段名称
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+		                 LoanManageOther.class);
+		  }else{
+		         LoanManageOther params1 = new LoanManageOther();
+		         params1.setType(sysDict.getId());
+		         params1.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params1);
+		         if(loanformManage == null){
+		             params1 = new LoanManageOther();
+		             params1.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params1);
+		         }
+		         
+		   }
+		  String formlabelJson = loanformManage.getFormLabelJson();
+		   FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+		             FormLabel.class);
+		  request.setAttribute("formLabel", formLabel);
     	return getFileBasePath()+"financeApplyDetail";
     }
     /**
@@ -286,6 +352,30 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
     	params.setType(businessType.toString());
     	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
     	variables.put("applayAudits", applayAudit);
+    	
+    	//获取申请表单 字段名称
+        LoanManageOther loanformManage = new LoanManageOther();
+        SysDict sysDict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
+        if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+            loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                    LoanManageOther.class);
+        }else{
+            LoanManageOther params1 = new LoanManageOther();
+            params1.setType(sysDict.getId());
+            params1.setIstemplate(0);
+            loanformManage = loanManageOtherService.selectOneByExample(params1);
+            if(loanformManage == null){
+            	params1 = new LoanManageOther();
+            	params1.setIstemplate(1);
+                loanformManage = loanManageOtherService.selectOneByExample(params1);
+            }
+            
+        }
+        String formlabelJson = loanformManage.getFormLabelJson();
+        FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+                FormLabel.class);
+        variables.put("loanformManage", formLabel);
+    	
     	String basePath = request.getSession().getServletContext()  
                 .getRealPath("/");  
     	PdfGenerator.printPDF(basePath, variables, dict.getValue(), response,"loanView.ftl");
@@ -304,10 +394,16 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
     	JltfispUser user=loginService.getCurrentUser();
     	//通过USERID获取企业基本信息
     	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContext(infoId);
+    	jltfispCoBaseDto.setOfficeAddress(areaService.getAreaContext(jltfispCoBaseDto.getOfficeProv()).getName()+
+    			areaService.getAreaContext(jltfispCoBaseDto.getOfficeCity()).getName()+
+    			areaService.getAreaContext(jltfispCoBaseDto.getOfficeArea()).getName()+
+    			jltfispCoBaseDto.getOfficeAddress());
     	//根据企业id获取保费补贴
     	List<JltfispPsInfo> jltfispPsInfoList=subsidyService.getJltfispPsInfoListByCoBaseId(infoId);
     	//保费补贴申请信息
     	JltfispPsMaterialInfo jltfispPsMaterialInfo = subsidyService.getJltfispPsMaterialInfoByInfoId(infoId);
+    	
+    	
     	Map<String,Object> variables = new HashMap<String,Object>();
     	 variables.put("jltfispCoBaseDto", jltfispCoBaseDto);
     	 variables.put("jltfispPsInfoList", jltfispPsInfoList);
@@ -317,6 +413,8 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      	params.setType(businessType.toString());
      	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
      	variables.put("applayAudits", applayAudit);
+     	
+     	
     	 String basePath = request.getSession().getServletContext()  
                  .getRealPath("/");  
     	 PdfGenerator.printPDF(basePath, variables, "保费补贴申请", response,"subsidyApplyDetail.ftl");
@@ -368,6 +466,29 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      }
 	      variables.put("jltfispCoBaseDto2", jltfispCoBaseDto2);
+	      
+	    //获取股权融资申请表单 字段名称
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+		                 LoanManageOther.class);
+		  }else{
+		         LoanManageOther params1 = new LoanManageOther();
+		         params1.setType(sysDict.getId());
+		         params1.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params1);
+		         if(loanformManage == null){
+		             params1 = new LoanManageOther();
+		             params1.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params1);
+		         }
+		         
+		   }
+		  String formlabelJson = loanformManage.getFormLabelJson();
+		   FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+		             FormLabel.class);
+		  variables.put("formLabel", formLabel);
 	      BusinessApplayAudit params = new BusinessApplayAudit();
 	    	params.setUserId(user.getId());
 	    	params.setType(businessType.toString());

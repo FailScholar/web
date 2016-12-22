@@ -23,14 +23,14 @@
                     <div class="clear"></div>
                         <#assign path=request.contextPath />
       <!--完成-->
-      <div class="nlistCont" id="printDiv">
+      <div class="nlistCont" id="printDiv" style="word-wrap:break-word;word-break:break-all;">
           <p class="ntit">申请信息一览</p>
           <table class="tab2" style="width:100%">
               <tbody>
               <tr class="tal">
-                  <th>企业名称</th>
+                  <th style="width:100px;">企业名称</th>
                   <td colspan="5">${jltfispCoBaseDto.company }</td>
-                  <th>组织机构代码</th>
+                  <th style="width:100px;">组织机构代码</th>
                   <td colspan="3">${jltfispCoBaseDto.socialCreditCode}</td>
               </tr>
               <tr class="tal">
@@ -194,15 +194,10 @@
               <tr class="tal">
                   <td colspan="10">以上信息全部真实有效</td>
               </tr>
-              <tr class="tal">
+               <tr class="tal">
                   <td colspan="3">单位（公章）</td>
                   <td colspan="3">法定代表人（签名盖章）</td>
                   <td colspan="4">企业基本户三排章</td>
-              </tr>
-              <tr class="tal">
-                  <td colspan="3"></td>
-                  <td colspan="3"></td>
-                  <td colspan="4">${jltfispCoBaseDto.basicAccountBank}&nbsp;${jltfispCoBaseDto.basicAccountName}&nbsp;${jltfispCoBaseDto.basicAccountCard}</td>
               </tr>
               <#list applayAudits as applayAudit>
 	              	<#if (applayAudit.state == 1)>
@@ -233,9 +228,9 @@
 <#include "website/common/footer.ftl" />
 </body>
 </html>
-<script>
-	  function printdiv(infoId)
-{
-location.href="${path}/business/printSubsidyPDF?businessType=5&infoId="+infoId
-}
+<script type="application/javascript">
+    positionNavigation(0);
+    function printdiv(infoId) {
+        location.href = "${path}/business/printSubsidyPDF?businessType=5&infoId=" + infoId
+    }
 </script>
