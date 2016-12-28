@@ -12,9 +12,9 @@
 </head>
 
 <body>
-	 <div class="popup" style="border-top:0px solid #fff">
+	 <div class="popup" style="border-top:0px solid #fff;top:30%;">
               <h1>${message.title}</h1>
-              <p>${message.content}</p>
+              <textarea style="width: 600px; height: 339px;resize: none;" readonly="readonly">${message.content}</textarea>
       </div>
 </body>
 </html>

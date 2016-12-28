@@ -162,12 +162,11 @@ $(document).ready(function(e) {
 
 	//选项卡
 	$('.infoTab li').click(function(){
-		$(this).addClass('active').siblings('li').removeClass('active');
-		$('.infoList').eq($(this).index()).show().siblings('.infoList').hide();
+        infoTab_li_index.push($(this).index());
+        infoTabCLICK($(this).index());
 	});
-	
-	function shade()
-	{
+
+	function shade(){
 		var w=$(document).width()>$(window).width()?$(document).width():$(window).width();
 		var h=$(document).height()>$(window).height()?$(document).height():$(window).height();
 		$('.shade').width(w).height(h);

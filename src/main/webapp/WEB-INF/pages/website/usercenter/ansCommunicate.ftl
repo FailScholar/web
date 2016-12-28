@@ -22,7 +22,7 @@
 
 <body>
 	<#if comm.toUser?exists>
-			<div>
+			<div style="word-wrap:break-word;word-break:break-all;">
 		      <p class="qus">问题</p>
 		      <p class="gray6">${comm.content}</p>
 		      <p class="ans">金融专家：${comm.ansUserName}</p>
@@ -30,7 +30,7 @@
 		  </div>
 	  <#else>
 	  
-	  <div>
+	  <div style="word-wrap:break-word;word-break:break-all;">
 	  <form action="${page}/communicate/editComm" method="post" id="saveCommForm">
 	  	<input type="hidden" name="id" value="${comm.id}"/>
 	      <p class="qus">问题</p>

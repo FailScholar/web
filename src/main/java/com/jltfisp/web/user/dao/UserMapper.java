@@ -25,7 +25,7 @@ public interface UserMapper extends BaseMapper<JltfispUser>{
     
     @Update("update jltfisp_user set email_captcha=#{0},captcha_time=now() where account_number=#{1}")
     int updateUserByAccountNumber(String emailCaptcha,String accountNumber);
-    @Select("select t.* from jltfisp_user t where t.account_number=#{0}")
+    @Select("select t.* from jltfisp_user t where t.account_number=#{0} and t.is_delete =0")
     List<JltfispUser> selectUserByAccountNumber(String accountNumber);
     @Update("update jltfisp_user set password=#{0} where account_number=#{1}")
     int updatePasswordByAccountNumber(String password,String accountNumber);

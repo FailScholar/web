@@ -12,6 +12,8 @@
       <script type="text/javascript" src="${path}/resource/plugins/videoJs/js/video.min.js"></script>
     <title>吉林省科技金融信息服务平台</title>
     <script>
+        <!--支持播放flv -->
+        videojs.options.flash.swf = "${path}/resource/plugins/videoJs/js/video-js.swf";
     	function goHistory(columnid){
     		 $.cookie('columnid', columnid, {path: '/'});
         	 window.location.href = "${path}/perm/cloud"
@@ -24,18 +26,23 @@
               <!--content开始-->
               <div class="content">
                   <div class="bread">
-                      <a href="${path}/index">首页</a>&gt;<a href="javascript:goHistory(${columnid})">${colName}></a>&gt;<a>详情</a>
+                      <a href="${path}/index">首页</a>&gt;<a href="javascript:goHistory(${column.id})">${column.columnName}</a>&gt;<a>详情</a>
                   </div>
                   <div class="video">
                      <h1>${cloudDetail.title}</h1>
-				     <p style="width:450px;text-align:center;"><span class="time">${cloudDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${cloudDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${cloudDetail.source}</span></p>
+				     <p style="width:650px;text-align:center;"><span class="time">${cloudDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${cloudDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${cloudDetail.source}</span></p>
 				     <div class="clear"></div>
-				     <#if columnOne.id == columnid>
+				     <#if columnOne.id == column.id>
 				        <div class="media">
                           <video id="example_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="none" width="800" height="500"
                                  poster="${path}${cloudDetail.image}"
                                  data-setup="{}">
-                              <source src="${path}${cloudDetail.video}" type='video/mp4' />
+                              <#if cloudDetail.video ?contains('mp4')>
+                                  <source src="${path}${cloudDetail.video}" type='video/mp4' />
+                              </#if>
+                              <#if cloudDetail.video ?contains('flv')>
+                                  <source src="${path}${cloudDetail.video}" type='video/x-flv' />
+                              </#if>
                      	 </div>
                      	 <div class="artical">
                      	 	<p>${cloudDetail.content}</p>

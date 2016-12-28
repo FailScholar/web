@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jltfisp.base.controller.BaseController;
-import com.jltfisp.base.entity.PageInfo;
 import com.jltfisp.base.service.IBaseService;
 import com.jltfisp.web.cloud.entity.Cloud;
 import com.jltfisp.web.cloud.service.ICloudService;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.news.entity.DictColumnDto;
+import com.jltfisp.web.news.service.IDictColumnService;
 import com.jltfisp.web.pager.entity.PagerModel;
 
 
@@ -36,6 +37,8 @@ public class CloudController extends BaseController<Cloud> {
     private ICloudService cloudService;
     @Autowired
     private ColumnService columnService;
+    @Autowired
+	private IDictColumnService deictColumnService;
     
     @Override
 	public IBaseService<Cloud> getEntityService() {
@@ -95,13 +98,14 @@ public class CloudController extends BaseController<Cloud> {
 
 	 @RequestMapping("/anon/cloud/detail")
 	    public String videoDetail(int id,Integer columnid,String colName,HttpServletRequest request){
-		 JltfispColumn columnOne = columnService.getColumnOne(11, 6);
 		 Cloud cloudDetail = cloudService.selectByPk(id);
-		 request.setAttribute("columnOne", columnOne);
+		 cloudDetail.setPv(cloudDetail.getPv()==null?1:cloudDetail.getPv()+1);
 		 request.setAttribute("cloudDetail", cloudDetail);
-		 cloudService.updateCloudPv(cloudDetail.getId(), cloudDetail.getPv()==null?1:cloudDetail.getPv()+1);
-		 request.setAttribute("columnid", columnid);
-		 request.setAttribute("colName", StringUtils.hasLength(colName) ? colName : "云课堂");
+		 cloudService.updateCloudPv(cloudDetail.getId(), cloudDetail.getPv());
+		 JltfispColumn column = columnService.getColumnById(cloudDetail.getColumnId());
+		 request.setAttribute("column", column);
+		 JltfispColumn columnOne = columnService.getColumnOne(11, 6);
+		 request.setAttribute("columnOne", columnOne);
 	        return "/website/cloud/videoDetail";
 	    }
   

@@ -40,7 +40,7 @@
                                       </#if>
                                   </div>
                                   <div class="clear"></div>
-                                  <p>${list.loanGuide}</p>
+                                  <p><#if list.loanGuide ? length  lte 260>${list.loanGuide}<#else>${list.loanGuide[0..260]}...</#if></p>
                               </div>
                           </li>
                       </#list>

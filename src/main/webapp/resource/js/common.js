@@ -60,6 +60,8 @@ function positionNavigation(index) {
 $(document).ajaxError(function (event, request, settings) {
     if (request.status == 401) {
         dialog.tipsPop('ban-pop','提示:','您没有相应的权限',function () {});
+        infoTab_li_index.pop();
+        infoTabCLICK(infoTab_li_index[infoTab_li_index.length - 1]);
         return false;
     }
     if(request.status == 666){
@@ -69,6 +71,11 @@ $(document).ajaxError(function (event, request, settings) {
         return false;
     }
 });
+
+function infoTabCLICK(index) {
+    $('.infoTab').find('li').eq(index).addClass('active').siblings('li').removeClass('active');
+    $('.infoList').eq(index).show().siblings('.infoList').hide();
+}
 
 /**
  * @author LiuFa

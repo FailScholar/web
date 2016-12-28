@@ -195,6 +195,32 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
     	request.setAttribute("coAll", coAll);
     	request.setAttribute("coDebt", coDebt);
     	request.setAttribute("businessType", businessType);
+    	
+    	List<SysDict> dicList = dictionaryService.getDictListByType(1004);
+    	request.setAttribute("dicList", dicList);
+    	//获取申请表单 字段名称
+        LoanManageOther loanformManage = new LoanManageOther();
+        SysDict sysDict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
+        if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+            loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                    LoanManageOther.class);
+        }else{
+            LoanManageOther params1 = new LoanManageOther();
+            params1.setType(sysDict.getId());
+            params1.setIstemplate(0);
+            loanformManage = loanManageOtherService.selectOneByExample(params1);
+            if(loanformManage == null){
+                params1 = new LoanManageOther();
+                params1.setIstemplate(1);
+                loanformManage = loanManageOtherService.selectOneByExample(params1);
+            }
+            
+        }
+        String formlabelJson = loanformManage.getFormLabelJson();
+        FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+                FormLabel.class);
+        request.setAttribute("loanformManage", formLabel);
+    	
 		return getFileBasePath()+"loanView";
 	}
 	
@@ -320,9 +346,12 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
     	JltfispCoAll coAll=loanService.getApplyALL(infoId);
     	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(infoId);
     	Map<String,Object> variables = new HashMap<String,Object>();
-    	Integer mainField = coAll.getJltfispCoProfile().getMainField();
-    	SysDict dict1 = dictionaryService.getValueByTypeCode(1004, mainField.toString());
-    	coAll.getJltfispCoProfile().setMainFieldValue(dict1.getValue());
+    	if(coAll.getJltfispCoProfile()!=null) {
+    		Integer mainField = coAll.getJltfispCoProfile().getMainField();
+        	SysDict dict1 = dictionaryService.getValueByTypeCode(1004, mainField.toString());
+        	coAll.getJltfispCoProfile().setMainFieldValue(dict1.getValue());
+    	}
+    	
     	//办公地址
     	JltfispArea officeProv=areaService.getAreaContext(coAll.getJltfispCoBase().getOfficeProv());
     	JltfispArea officeCity=areaService.getAreaContext(coAll.getJltfispCoBase().getOfficeCity());
@@ -414,6 +443,19 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
      	variables.put("applayAudits", applayAudit);
      	
+     	//获取申请表单 字段名称
+        LoanManageOther loanformManage = new LoanManageOther();
+        if(redisService.getV("LoanformManage16") != null){
+            loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                    LoanManageOther.class);
+        }else{
+            LoanManageOther params1 = new LoanManageOther();
+            params1.setType(16);
+            params1.setIstemplate(0);
+            loanformManage = loanManageOtherService.selectOneByExample(params1);
+        }
+        variables.put("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
+                FormLabel.class));
      	
     	 String basePath = request.getSession().getServletContext()  
                  .getRealPath("/");  

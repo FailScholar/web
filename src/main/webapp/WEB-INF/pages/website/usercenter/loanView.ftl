@@ -59,6 +59,13 @@
 	                                  <td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
 	                                  </tr>
 	                                </table>
+	                            <#elseif (applayAudit.state == 2)>
+	                            	<table class="tab2" style="width:93%;margin-top:-20px">
+				              		<tr>
+	                                  <td>审核意见</td>
+	                                  <td colspan="9">审核不通过，${applayAudit.auditDesc!''}</td>
+	                                  </tr>
+	                                </table>
 				              	</#if>
 			              </#list>
                           </div>
@@ -95,7 +102,13 @@ var secondYear=firstYear+1;
 var thirdYear=secondYear+1;
 var fourYear=thirdYear+1;
 var applytype=${applytype};
+var infoId =${infoId}
 var cityName;
+<!--时间Tab页显示-->
+$('.lnav li').eq(0).html(firstYear+"年");
+$('.lnav li').eq(1).html(secondYear+"年");
+$('.lnav li').eq(2).html(thirdYear+"年");
+$('.lnav li').eq(3).html(fourYear+"年");
 $('#tabYear').html(firstYear+"年末");
 <!--办公地址省份-->
 var officeProv="${coAll.jltfispCoBase.officeProv}";
@@ -194,8 +207,8 @@ function coDebtTable(year){
                     var year =year;
                     $.ajax({
                     type: "POST",
-                    url: "${path}/anon/loan/selectCoDebtTable",
-                    data: {year:year,applytype:applytype},
+                    url: "${path}/anon/loan/selectCoDebtTableByInfoId",
+                    data: {year:year,applytype:applytype,infoId:infoId},
                     dateType:"json",
                     success: function(msg){
                      $('#coDebt').html(msg);
@@ -211,8 +224,8 @@ function coDebtTable(year){
 function coProfitTable(){
                     $.ajax({
                     type: "POST",
-                    url: "${path}/anon/loan/selectCoProfitTable",
-                    data: {applytype:applytype},
+                    url: "${path}/anon/loan/selectCoProfitTableByInfoId",
+                    data: {applytype:applytype,infoId:infoId},
                     dateType:"json",
                     success: function(msg){
                      $('#coDebt').html(msg);

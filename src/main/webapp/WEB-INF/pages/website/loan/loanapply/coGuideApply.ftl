@@ -25,7 +25,7 @@
 					</p>
                 </div>
                 <div style="text-align:center;">
-                <input type="checkBox" style="font-size:16px;border-radius:3px;" onclick="if (this.checked) {enable()} else {disable()}">
+                <input type="checkBox" id="checkBox1" style="font-size:16px;border-radius:3px;" onclick="if (this.checked) {enable()} else {disable()}">
                 <span style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;">同意协议</span></br></br></br>
 				<input type="button" id="accept" style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#c5c5c5" 
 					disabled="true" value="在线申请" onclick="apply()">
@@ -45,11 +45,15 @@
 </html>
 
 <script type="text/javascript">
-
+   $(document).ready(function(e) {
+      $('#checkBox1').removeAttr("checked");
+      $("P").addClass("note");
+   });
+   
    function disable()
    {
 	   document.getElementById("accept").style.backgroundColor = "#c5c5c5";
-  		document.getElementById("accept").disabled=true;
+  	   document.getElementById("accept").disabled=true;
    }
    
    function enable()

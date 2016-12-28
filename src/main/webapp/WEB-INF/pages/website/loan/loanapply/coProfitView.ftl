@@ -1,6 +1,13 @@
                         <!--利润表-->
                             <table width="100%" class="tab3 tab4">
-                                <tr><th>项目</th><th>${coAll.jltfispCoDebt.year}年末</th><th>${coAll.jltfispCoDebt.year?number+1}年末</th><th>${coAll.jltfispCoDebt.year?number+2}年末</th><th>${coAll.jltfispCoDebt.year?number+3}年1~${coAll.jltfispCoProfit[0].month}月</th></tr>
+                                <tr><th>项目</th><th>${firstYear}年末</th><th>${secondYear}年末</th><th>${thirdYear}年末</th><th>${fourYear}年1~
+                                <#if coAll.jltfispCoProfit[0].month?exists>
+                                ${coAll.jltfispCoProfit[0].month}
+                                <#else>
+                                ${month}
+                                </#if>
+                                
+                                月</th></tr>
                                 <tr>
                                 	<td><b class="red">*</b><b>${loanformManage.profitMainIncome}</b></td>
                                     <td>${coAll.jltfispCoProfit[0].mainincome}</td>

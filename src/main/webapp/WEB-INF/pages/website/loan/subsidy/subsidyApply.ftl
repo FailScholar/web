@@ -16,7 +16,7 @@
             <!--content开始-->
             <div class="content">
                 <div class="bread">
-                    <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/loan">保费补贴</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/loan">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt">
                     <p>保费补贴申请</p>
@@ -120,20 +120,20 @@
          }
          var content="<table width='100%' class='tab3 module'>"+
          "<tr> <td colspan='4'><a href='javascript:;' class='fr delete'>删除</a></td></tr>"+
-         "<tr><th style='width:8%'>${loanformManage.infoContractNumber}</th><td colspan='3'><input  name='jltfispPsInfoList["+index+"].contractNumber'  type='text' class='txt validate[minSize[1],maxSize[1000]] hetongbianhao' placeholder='请输入合同编号' /></td></tr>"+
+         "<tr><th style='width:8%'><b class='red'>*</b>${loanformManage.infoContractNumber}</b></th><td colspan='3'><input  name='jltfispPsInfoList["+index+"].contractNumber'  type='text' class='txt validate[required,custom[userLoginPassword],minSize[1],maxSize[20]] hetongbianhao' placeholder='请输入' /></td></tr>"+
          "<tr><th><b class='red'>*</b><b>${loanformManage.infoPolicyNumber}</b></th>"+
-         "<td><input name='jltfispPsInfoList["+index+"].policyNumber' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baodanhao' placeholder='请输入保单号' /></td>"+
+         "<td><input name='jltfispPsInfoList["+index+"].policyNumber' type='text' class='txt validate[required,custom[userLoginPassword],minSize[1],maxSize[50]] baodanhao' placeholder='请输入' /></td>"+
          "<th><b class='red'>*</b><b>${loanformManage.infoPremiumMoney}</b></th>"+
-         "<td><input name='jltfispPsInfoList["+index+"].premiumMoney' type='text' class='txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]] danbaojiner' placeholder='请输入担保金额' />万元</td></tr>"+
+         "<td><input name='jltfispPsInfoList["+index+"].premiumMoney' type='text' class='txt validate[required,custom[number2],minSize[1],maxSize[10]] danbaojiner' placeholder='请输入' />万元</td></tr>"+
          "<tr><th><b class='red'>*</b><b>${loanformManage.infoLoanBank}</b></th><td>"+
-         "<input name='jltfispPsInfoList["+index+"].loanBank' type='text' class='txt validate[required,minSize[1],maxSize[1000]] daikuanyinhang' placeholder='请输入贷款银行' /></td>"+
+         "<input name='jltfispPsInfoList["+index+"].loanBank' type='text' class='txt validate[required,minSize[1],maxSize[20]] daikuanyinhang' placeholder='请输入' /></td>"+
          "<th><b class='red'>*</b><b>${loanformManage.infoInsuranceCompany}</b></th>"+
-         "<td> <input name='jltfispPsInfoList["+index+"].insuranceCompany' type='text' class='txt validate[required,minSize[1],maxSize[1000]] baoxiangongsi' placeholder='请输入保险/担保公司' /></td>"+
-         "</tr><tr><th>${loanformManage.infoLoanMoney}</th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入实际支付保额金额' />元</td></tr>"+
-         "<tr><th>${loanformManage.infoRepaymentDate}</th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt shijihuankuanri' placeholder='请输入实际还款日' /></td>"+
-         "<th>${loanformManage.infoPrincipalInterest}</th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[custom[onlyNumberSp], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入实际支付本息(本金+利息)' />元</td></tr>"+
-         "<tr><th>${loanformManage.infoLendDate}</th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt shijifangdairi' placeholder='请输入实际放贷日' /></td>"+
-         "<th>${loanformManage.infoLoanTerm}</th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入贷款期限' />月</td></tr>"+
+         "<td> <input name='jltfispPsInfoList["+index+"].insuranceCompany' type='text' class='txt validate[required,minSize[1],maxSize[20]] baoxiangongsi' placeholder='请输入' /></td>"+
+         "</tr><tr><th><b class='red'>*</b>${loanformManage.infoLoanMoney}</b></th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[required,custom[number2],minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入' />元</td></tr>"+
+         "<tr><th><b class='red'>*</b>${loanformManage.infoRepaymentDate}</b></th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt validate[required] shijihuankuanri' placeholder='请输入' /></td>"+
+         "<th><b class='red'>*</b>${loanformManage.infoPrincipalInterest}</b></th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[required,custom[number2], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入' />元</td></tr>"+
+         "<tr><th><b class='red'>*</b>${loanformManage.infoLendDate}</b></th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt validate[required] shijifangdairi' placeholder='请输入' /></td>"+
+         "<th><b class='red'>*</b>${loanformManage.infoLoanTerm}</b></th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入' />月</td></tr>"+
          "</table>";
          $("table.tab3.module:first").after(content);
          index++;
@@ -211,9 +211,9 @@
           });
           
          //填写完企业基本信息以后点击取消跳转至首页
-         $('.proList .logbtn input.can').click(function(){
-        	 window.location.href="${path}/index";
-          });
+//          $('.proList .logbtn input.can').click(function(){
+//         	 window.location.href="${path}/index";
+//           });
          
        //填写完企业基本信息以后点击下一步
         $('.proList .logbtn input.nor').click(function(){
@@ -224,14 +224,14 @@
                  if(!$('#coBase').validationEngine('validate')){
                    return false;
                  } 
-                 url='${path}/loan/saveSubsidyCoBase';
+                 url='${path}/loan/saveSubsidyCoBase?xss=true';
                  data=$("#coBase").serialize();
              }else if(index==2){
                  //保存填写申请表格
                  if(!$('#psMaterialInfo').validationEngine('validate')){
                    return false;
                  } 
-                 url='${path}/loan/SavePsMaterialInfo';
+                 url='${path}/loan/SavePsMaterialInfo?xss=true';
                  data=$("#psMaterialInfo").serialize();
               }
              if(index<3){    

@@ -66,7 +66,7 @@
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.baseCompanyUrl}</th>
-                                <td  colspan="5"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
+                                <td  colspan="5"><span>${jltfispCoBaseDto2.companyurl}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.baseRefereeCompany}</th>
@@ -168,8 +168,8 @@
                             <tr>
                                 <td colspan="6">
                                     <div class="cover cv1 fr">
-                                        <p class="ntit"><span class="ml70"></span>公司名称：<U>&nbsp;&nbsp;&nbsp;&nbsp;${user.username}&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
-                                        <p class="ntit"><span class="ml70"></span>${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
+                                        <p class="ntit">公司名称：<U>${user.username}</U></p>
+                                        <p class="ntit">${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
                                     </div>
                                 </td>
                             </tr>

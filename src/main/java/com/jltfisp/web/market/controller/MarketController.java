@@ -64,11 +64,13 @@ public class MarketController {
 	@RequestMapping("/anon/market/detail")
     public String detail(int id,Integer columnid,String colName,HttpServletRequest request){
 	 Market marketDetail = marketService.selectByPk(id);
+	 marketDetail.setPv(marketDetail.getPv()==null?1:marketDetail.getPv()+1);
 	 request.setAttribute("marketDetail", marketDetail);
 	 //更新浏览量
-	 marketService.updateMarketPv(marketDetail.getId(), marketDetail.getPv()==null?1:marketDetail.getPv()+1);
+	 marketService.updateMarketPv(marketDetail.getId(), marketDetail.getPv());
 	 request.setAttribute("columnid", columnid);
-	 request.setAttribute("colName", StringUtils.hasLength(colName) ? colName : "资本市场");
+	 JltfispColumn column = columnService.getColumnById(marketDetail.getColumnId());
+	 request.setAttribute("column", column);
         return "/website/market/marketDetail";
     }
 }

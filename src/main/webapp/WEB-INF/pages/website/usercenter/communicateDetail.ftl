@@ -13,14 +13,14 @@
 
 <body>
 	<#if comm.toUser?exists>
-		<div>
+		<div style="word-wrap:break-word;word-break:break-all;">
 	      <p class="qus">问题</p>
 	      <p class="gray6">${comm.content} </p>
 	      <p class="ans">金融专家：${comm.ansUserName}</p>
 	      <p class="gray6">${comm.ansContent}</p>
 	  	</div>
 	  <#else>
-	  	<div>
+	  	<div style="word-wrap:break-word;word-break:break-all;">
 	      <p class="qus">问题</p>
 	      <p class="gray6">${comm.content}</p>
 	  </div>

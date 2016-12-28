@@ -5,7 +5,7 @@
             <div class="top">
                 <img src="${path}/resource/images/logo.png" alt="logo" />
                 <div class="topR fr">
-                    <div class="searchIcon fl">&nbsp;</div>
+                    <#--<div class="searchIcon fl">&nbsp;</div>-->
                     <div class="search fl">
                         <form method="post" action="${path}/anon/search">
                             <input id="TopSearchInput" type="text" name="keyWords" class="searchText" />

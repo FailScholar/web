@@ -22,11 +22,11 @@
 <!--content开始-->
 <div class="content">
     <div class="bread">
-        <a href="${path}/perm/financing">股权融资</a>&gt;<a href="javascript:goHistory(${fincing.columnid})">${colName}</a>&gt;<a>详情</a>
+        <a href="${path}/perm/financing">股权融资</a>&gt;<a href="javascript:goHistory(${fincing.columnid})">${column.columnName}</a>&gt;<a>详情</a>
     </div>
     <div class="video">
         <h1>${fincing.title}</h1>
-        <p style="width:450px;text-align:center;"><span class="time">${fincing.publishtime ?date}</span><span class="eye"  style="margin-left:20px;">${fincing.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${fincing.source}</span></p>
+        <p style="width:650px;text-align:center;"><span class="time">${fincing.publishtime ?date}</span><span class="eye"  style="margin-left:20px;">${fincing.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${fincing.source}</span></p>
         <div class="clear"></div>
         <div class="artical" style="background-color:#fff;">
             <p>${fincing.content}</p>

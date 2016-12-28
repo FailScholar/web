@@ -30,11 +30,11 @@
 <!--                 		<img src="${path}${jltfispInstitutionDetail.logoFile}" class="fl" /> -->
                         <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a></h1>
                     </div>
-                    <div class="br fl ml57">
+                    <div class="br fl ml57" style="word-wrap:break-word;word-break:break-all;">
                     	<h1>${jltfispInstitutionDetail.institutionalName}</h1>
                         <p>联系人：${jltfispInstitutionDetail.linkMan}</p>
                         <p>联系电话：${jltfispInstitutionDetail.phoneNumer}</p>
-                        <p>联系地址：${jltfispInstitutionDetail.address}</p>
+                        <p style="max-width: 714px;">联系地址：${jltfispInstitutionDetail.address}</p>
                     </div>
                     <div class="clear"></div>
                     <div class="proList nli" style="margin-top:40px;">
@@ -42,7 +42,7 @@
                             <li class="active">业务介绍</li>
                         </ul>
                     </div>
-                    <div class="resume re1">
+                    <div class="resume re1" style="word-wrap:break-word;word-break:break-all;">
                         <p>${jltfispInstitutionDetail.serviceProductsAndFeatures}</p>
                     </div>
                     

@@ -2087,7 +2087,7 @@
 		// Custom ID uses suffix
 		useSuffix: "",
 		// Only show one message per error prompt
-		showOneMessage: false
+		showOneMessage: true
 	}};
 	$(function(){$.validationEngine.defaults.promptPosition = methods.isRTL()?'topLeft':"topRight"});
 })(jQuery);

@@ -28,7 +28,7 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${institutManage.label1 }</th>
-                                    <td><input type="text" name="institutionalName" value="${institution.institutionalName }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="institutionalName" value="${user.username }" readonly="readonly" class="txt validate[required]" placeholder="请输入" /></td>
                                     <th rowspan="4">${institutManage.label3 }</th>
                                     <td rowspan="4">
                                     	<img id="logoFileImg" 
@@ -38,7 +38,7 @@
                                     		src="${path}/resource/images/blank.png" 
                                     		</#if>
                                     	 class="fl" style="width:110px;height:110px;" />
-                                        <span class="notice fr">建议尺寸250px*100px<br />上传大小不超过320K<br />支持JPG、GIF、PNG格式</span>
+                                        <span class="notice fr">建议尺寸200px*200px<br />上传大小不超过1M<br />支持JPG、GIF、PNG格式</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
                                         	<input type="file" id="upFile" name="upFile" onchange="ajaxFileUpload()" />
@@ -49,26 +49,26 @@
                                 </tr>
                                 <tr>
                                     <th>${institutManage.label2 }</th>
-                                    <td><input type="text" name="abbreviation" value="${institution.abbreviation }" class="txt validate[maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="abbreviation" value="${institution.abbreviation }" class="txt validate[maxSize[20],custom[chineseEnglish]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label4 }</th>
-                                    <td><input type="text" name="corporateRepresentative" value="${institution.corporateRepresentative }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="corporateRepresentative" value="${institution.corporateRepresentative }" class="txt validate[required,minSize[2],maxSize[20],custom[chineseEnglish]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label5 }</th>
-                               		<td><input type="text" name="socialCreditCode" value="${user.socialCode }" class="txt validate[required,minSize[9],maxSize[20]]" readonly="readonly"/></td>
+                               		<td><input type="text" name="socialCreditCode" value="${user.socialCode }" class="txt validate[required]" readonly="readonly"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label6 }</th>
                                     <td colspan="3">
                                     	<select id="province" name="province" value="${institution.province }"  class="validate[required]" onchange="changCity(this.value)">
-                                        	<option value="">-请选择省份-</option>
+                                        	
                                         </select>
                                         <select id="city" class="validate[required]" name="city" value="${institution.city }">
-                                        	<option value="">-请选择城市-</option>
+                                        	
                                         </select>
-                                    	<input type="text" name="address" value="${institution.address }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="详细地址" />
+                                    	<input type="text" name="address" value="${institution.address }" class="txt validate[required,minSize[2],maxSize[100]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 
@@ -76,19 +76,19 @@
                                
                                 <tr>
                                     <th>${institutManage.label7 }</th>
-                                    <td colspan="3"><input type="text" name="url" value="${institution.url }" class="txt validate[maxSize[1000],custom[url]]" placeholder="详细地址" /></td>
+                                    <td colspan="3"><input type="text" name="url" value="${institution.url }" class="txt validate[minSize[2],maxSize[100],custom[url]]" placeholder="详细地址" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label8 }</th>
-                                    <td colspan="3"><textarea name="institutionalAbstract" class="txta validate[required,maxSize[500]]">${institution.institutionalAbstract }</textarea></td>
+                                    <td colspan="3"><textarea name="institutionalAbstract" class="txta validate[required,minSize[2],maxSize[500]]">${institution.institutionalAbstract }</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label9 }</th>
-                                    <td colspan="3"><textarea name="serviceProductsAndFeatures" class="txta validate[required,maxSize[2000]]">${institution.serviceProductsAndFeatures }</textarea></td>
+                                    <td colspan="3"><textarea name="serviceProductsAndFeatures" class="txta validate[required,minSize[2],maxSize[500]]">${institution.serviceProductsAndFeatures }</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label10 }</th>
-                                    <td colspan="3"><textarea name="investmentTeam" class="txta validate[required,maxSize[500]]">${institution.investmentTeam }</textarea></td>
+                                    <td colspan="3"><textarea name="investmentTeam" class="txta validate[required,minSize[2],maxSize[500]]">${institution.investmentTeam }</textarea></td>
                                 </tr>
                             </table>
                             <p class="ntit">联系方式</p>
@@ -97,31 +97,31 @@
                                     <th><b class="red">*</b>${institutManage.label11 }</th>
                                     <td colspan="3">
                                     	<select id="companyRealAddress" name="companyRealAddress" value="${institution.companyRealAddress }" class="validate[required]" onchange="changCity2(this.value)">
-                                        	<option value="">-请选择省份-</option>
+                                        	
                                         </select>
                                         <select id="companyCity" name="companyCity" value="${institution.companyCity }" class="validate[required]">
-                                        	<option value="">-请选择城市-</option>
+                                        	
                                         </select>
-                                    	<input type="text" name="institutionalAddress" value="${institution.institutionalAddress }" class="txt validate[required,minSize[2],maxSize[1000]]" placeholder="详细地址" />
+                                    	<input type="text" name="institutionalAddress" value="${institution.institutionalAddress }" class="txt validate[required,minSize[2],maxSize[100]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b><b>${institutManage.label12 }</b></th>
                                     <td><input type="text" name="postcodes" value="${institution.postcodes }" class="txt validate[required,custom[chinaZip]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b><b>${institutManage.label13 }</b></th>
-                                    <td><input type="text" name="linkMan" value="${institution.linkMan }" class="txt validate[required,minSize[2],maxSize[20]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="linkMan" value="${user.contact }" readonly="readonly" class="txt validate[required]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b><b>${institutManage.label14 }</b></th>
-                                    <td><input type="text" name="mobilePhone" value="${institution.mobilePhone }" class="txt validate[required,custom[mobile]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="mobilePhone" value="${user.mobilePhone }" readonly="readonly" class="txt validate[required,custom[mobile]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b><b>${institutManage.label15 }</b></th>
-                                    <td><input type="text" name="email" value="${institution.email }" class="txt validate[required,custom[email]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="email" value="${user.accountNumber }" readonly="readonly" class="txt validate[required,custom[email]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b><b>${institutManage.label16 }</b></th>
-                                    <td><input type="text" name="phoneNumer" value="${institution.phoneNumer }" class="txt validate[required,custom[phone]]" placeholder="请输入" /></td>
+                                    <td><input id="zoneDescription" name="zoneDescription" value="${institution.zoneDescription}" type="text" class="txt validate[required,minSize[3],maxSize[4],custom[onlyNumberSp]]" placeholder="区号" style="width:56px;" />-<input id="phoneNumer" name="phoneNumer" value="${institution.phoneNumer}" type="text" class="txt validate[required,minSize[7],maxSize[8],custom[onlyNumberSp]]" placeholder="电话" style="width:126px;" /></td>
                                     <th><b class="red">*</b><b>${institutManage.label17 }</b></th>
-                                    <td><input type="text" name="fax" value="${institution.fax }" class="txt validate[required,custom[fax]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="fax" value="${institution.fax }" class="txt validate[required,minSize[6],maxSize[30],custom[onlyNumberSp]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                         </div>
@@ -189,27 +189,39 @@ $(document).ready(function(e) {
         url: "${path}/anon/area",
         dateType:"json",
         success: function(msg){
-          for(var i=0;i<msg.length;i++){  
-          		if(province == msg[i].id){
-          			$("#province").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");
-          		}else{
-          			$("#province").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");
-          		}
-          		if(companyRealAddress == msg[i].id){
-          			$("#companyRealAddress").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>"); 
-          		}else{
-          			$("#companyRealAddress").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>"); 
+	        if(province == msg[7].id){
+	          	$("#province").append("<option value='"+msg[7].id+"'>"+msg[7].name+"</option>");  
+	          	$("#companyRealAddress").append("<option value='"+msg[7].id+"'>"+msg[7].name+"</option>");  
+	        }else{
+	        	$("#province").append("<option value='"+msg[7].id+"' selected='selected'>"+msg[7].name+"</option>");  
+	          	$("#companyRealAddress").append("<option value='"+msg[7].id+"' selected='selected''>"+msg[7].name+"</option>");  
+	        }
+          for(var i=1;i<msg.length;i++){  
+          		if(i != 7){
+          			if(province == msg[i].id){
+	          			$("#province").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");
+	          		}else{
+	          			$("#province").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>");
+	          		}
+	          		if(companyRealAddress == msg[i].id){
+	          			$("#companyRealAddress").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>"); 
+	          		}else{
+	          			$("#companyRealAddress").append("<option value='"+msg[i].id+"'>"+msg[i].name+"</option>"); 
+	          		}
           		}
           } 
+          
+          changCity($("#province").val());
+    	  changCity2($("#companyRealAddress").val());
         }
     });
     
-    changCity(province);
-    changCity2(companyRealAddress);
+    
 });
 
 //更换申请的机构所在省份时，级联更新城市
 function changCity(id){
+debugger;
     $.ajax({
 	    type: "POST",
 	    url: "${path}/anon/area",
@@ -217,7 +229,6 @@ function changCity(id){
 	    dateType:"json",
 	    success: function(msg){
 	      $("#city").html("");
-	      $("#city").append("<option value=''>-请选择城市-</option>"); 
 	      for(var i=0;i<msg.length;i++){
 		      if(city == msg[i].id){
 		      	$("#city").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");  
@@ -231,14 +242,14 @@ function changCity(id){
 
 //更换单位所在省份时，级联更新城市
 function changCity2(id){
+debugger;
     $.ajax({
 	    type: "POST",
 	    url: "${path}/anon/area",
 	    data:{areaId:id},
 	    dateType:"json",
 	    success: function(msg){
-	      $("#companyCity").html("");
-	      $("#companyCity").append("<option value=''>-请选择城市-</option>"); 
+	      $("#companyCity").html(""); 
 	      for(var i=0;i<msg.length;i++){
 	      		if(companyCity == msg[i].id){
 		      		$("#companyCity").append("<option value='"+msg[i].id+"' selected='selected'>"+msg[i].name+"</option>");  
@@ -291,7 +302,7 @@ $('.btnSave').click(function(){
               	$(".content").load("${path}/anon/registerSuccess");
               	$(".content").height(445);
               }else{
-              	dialog.tipsPop('ban-pop','提示',"操作失败",'确定');
+              	dialog.tipsPop('ban-pop','提示',msg,'确定');
                 return false;
               }
             }

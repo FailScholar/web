@@ -5,6 +5,7 @@
 
 package com.jltfisp.login.controller;
 
+import com.jltfisp.Constants;
 import com.jltfisp.index.service.IndexService;
 import com.jltfisp.log.service.LogService;
 import com.jltfisp.login.entity.JltfispUser;
@@ -14,6 +15,8 @@ import com.jltfisp.util.captcha.Captcha;
 import com.jltfisp.util.captcha.SpecCaptcha;
 import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
+import com.jltfisp.web.loan.entity.BusinessApplayAudit;
+import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.message.entity.Message;
 import com.jltfisp.web.message.service.IMessageService;
 import org.apache.shiro.SecurityUtils;
@@ -25,6 +28,7 @@ import org.apache.shiro.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +37,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
 import java.util.List;
 import java.util.Set;
 
@@ -58,6 +61,11 @@ public class LoginController {
 
     @Autowired
     private IndexService indexService;
+    @Autowired
+	private IBusinessApplayAuditService businessApplayAuditService;
+
+    @Value("${system.performance.enable-running}")
+    private boolean enablePerformance;
 
     @RequestMapping("/")
     public String home(){
@@ -77,10 +85,13 @@ public class LoginController {
     public String main(HttpServletRequest request){
     	JltfispUser user = loginService.getCurrentUser();
     	Integer parentid=null;
+    	String applytype="";
     	if(user.getType()==1) {
     		parentid=7;
+    		applytype= Constants.EXPERT_APPLY;
     	}else {
     		parentid=6;
+    		applytype= Constants.INSTITUTION_APPLY;
 		}
     	
     	Set<String> roles = loginService.findRoles(user.getAccountNumber());
@@ -90,6 +101,12 @@ public class LoginController {
 				break;
 			}
 		}
+		BusinessApplayAudit businessApplayAudit = businessApplayAuditService.checkApply(user.getId(),applytype);
+        if(businessApplayAudit != null){
+            JltfispColumn column = columnService.getColumnContext(Integer.parseInt(businessApplayAudit.getType()));
+            request.setAttribute("column", column);
+        }
+        request.setAttribute("businessApplayAudit", businessApplayAudit);
     	List<Message> messageList = messageService.selectBySample(null, null);
     	request.setAttribute("messageList", messageList);
     	List<JltfispColumn> columnList = columnService.getColumnList(parentid);
@@ -125,7 +142,7 @@ public class LoginController {
         } else if (exceptionClassName != null) {
             error = "您的账号存在异常,请联系管理员";
         }
-        if (StringUtils.hasLength(error)) {
+        if (StringUtils.hasLength(error) && !enablePerformance) {
             saveLoginErrorLog(request,error,subject);
         }
         model.addAttribute("message", error);

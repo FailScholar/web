@@ -19,13 +19,13 @@ public class JltfispCoProfile {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     /**
      * 关联的企业申请信息id
      */
     @Column(name = "info_id")
-    private int infoid;
+    private Integer infoid;
 
     /**
      * 经营范围（主营）
@@ -43,7 +43,7 @@ public class JltfispCoProfile {
      * 主营技术领域
      */
     @Column(name = "mainField")
-    private int mainField;
+    private Integer mainField;
     @Transient
     private String mainFieldValue;
 
@@ -51,7 +51,7 @@ public class JltfispCoProfile {
      * 企业性质
      */
     @Column(name = "nature")
-    private int nature;
+    private Integer nature;
 
     /**
      * 企业性质其他
@@ -63,50 +63,50 @@ public class JltfispCoProfile {
      * 职工总数
      */
     @Column(name = "workforce")
-    private int workforce;
+    private Integer workforce;
 
 
     /**
      * 研发人员数量
      */
     @Column(name = "researchStaffNum")
-    private int researchStaffNum;
+    private Integer researchStaffNum;
     
     /**
      * 大专以上学历职工数
      */
     @Column(name = "collegeDegreeOrAboveNum")
-    private int collegeDegreeOrAboveNum;
+    private Integer collegeDegreeOrAboveNum;
 
     /**
      * 知识产权数量
      */
     @Column(name = "intellectualPropertyNum")
-    private int intellectualPropertyNum;
+    private Integer intellectualPropertyNum;
 
     /**
      * 发明专利个数
      */
     @Column(name = "patentOfInventionNum")
-    private String patentOfInventionNum;
+    private Integer patentOfInventionNum;
     
     /**
      * 实用新型专利个数
      */
     @Column(name = "utilityModelPatentNum")
-    private int utilityModelPatentNum;
+    private Integer utilityModelPatentNum;
     
     /**
      * 软件著作权个数
      */
     @Column(name = "softwareCopyrightNum")
-    private int softwareCopyrightNum;
+    private Integer softwareCopyrightNum;
     
     /**
      * 集成电路设计板块个数
      */
     @Column(name = "integratedCircuitDesignNum")
-    private int integratedCircuitDesignNum;
+    private Integer integratedCircuitDesignNum;
     
     /**
      * 企业曾获得科技认定或资助情况
@@ -148,21 +148,21 @@ public class JltfispCoProfile {
      * 创建人
      */
     @Column(name = "createUserid")
-    private int createUserid;
+    private Integer createUserid;
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getInfoid() {
+	public Integer getInfoid() {
 		return infoid;
 	}
 
-	public void setInfoid(int infoid) {
+	public void setInfoid(Integer infoid) {
 		this.infoid = infoid;
 	}
 
@@ -182,19 +182,27 @@ public class JltfispCoProfile {
 		this.sidelineBusses = sidelineBusses;
 	}
 
-	public int getMainField() {
+	public Integer getMainField() {
 		return mainField;
 	}
 
-	public void setMainField(int mainField) {
+	public void setMainField(Integer mainField) {
 		this.mainField = mainField;
 	}
 
-	public int getNature() {
+	public String getMainFieldValue() {
+		return mainFieldValue;
+	}
+
+	public void setMainFieldValue(String mainFieldValue) {
+		this.mainFieldValue = mainFieldValue;
+	}
+
+	public Integer getNature() {
 		return nature;
 	}
 
-	public void setNature(int nature) {
+	public void setNature(Integer nature) {
 		this.nature = nature;
 	}
 
@@ -206,67 +214,67 @@ public class JltfispCoProfile {
 		this.otherNature = otherNature;
 	}
 
-	public int getWorkforce() {
+	public Integer getWorkforce() {
 		return workforce;
 	}
 
-	public void setWorkforce(int workforce) {
+	public void setWorkforce(Integer workforce) {
 		this.workforce = workforce;
 	}
 
-	public int getResearchStaffNum() {
+	public Integer getResearchStaffNum() {
 		return researchStaffNum;
 	}
 
-	public void setResearchStaffNum(int researchStaffNum) {
+	public void setResearchStaffNum(Integer researchStaffNum) {
 		this.researchStaffNum = researchStaffNum;
 	}
 
-	public int getCollegeDegreeOrAboveNum() {
+	public Integer getCollegeDegreeOrAboveNum() {
 		return collegeDegreeOrAboveNum;
 	}
 
-	public void setCollegeDegreeOrAboveNum(int collegeDegreeOrAboveNum) {
+	public void setCollegeDegreeOrAboveNum(Integer collegeDegreeOrAboveNum) {
 		this.collegeDegreeOrAboveNum = collegeDegreeOrAboveNum;
 	}
 
-	public int getIntellectualPropertyNum() {
+	public Integer getIntellectualPropertyNum() {
 		return intellectualPropertyNum;
 	}
 
-	public void setIntellectualPropertyNum(int intellectualPropertyNum) {
+	public void setIntellectualPropertyNum(Integer intellectualPropertyNum) {
 		this.intellectualPropertyNum = intellectualPropertyNum;
 	}
 
-	public String getPatentOfInventionNum() {
+	public Integer getPatentOfInventionNum() {
 		return patentOfInventionNum;
 	}
 
-	public void setPatentOfInventionNum(String patentOfInventionNum) {
+	public void setPatentOfInventionNum(Integer patentOfInventionNum) {
 		this.patentOfInventionNum = patentOfInventionNum;
 	}
 
-	public int getUtilityModelPatentNum() {
+	public Integer getUtilityModelPatentNum() {
 		return utilityModelPatentNum;
 	}
 
-	public void setUtilityModelPatentNum(int utilityModelPatentNum) {
+	public void setUtilityModelPatentNum(Integer utilityModelPatentNum) {
 		this.utilityModelPatentNum = utilityModelPatentNum;
 	}
 
-	public int getSoftwareCopyrightNum() {
+	public Integer getSoftwareCopyrightNum() {
 		return softwareCopyrightNum;
 	}
 
-	public void setSoftwareCopyrightNum(int softwareCopyrightNum) {
+	public void setSoftwareCopyrightNum(Integer softwareCopyrightNum) {
 		this.softwareCopyrightNum = softwareCopyrightNum;
 	}
 
-	public int getIntegratedCircuitDesignNum() {
+	public Integer getIntegratedCircuitDesignNum() {
 		return integratedCircuitDesignNum;
 	}
 
-	public void setIntegratedCircuitDesignNum(int integratedCircuitDesignNum) {
+	public void setIntegratedCircuitDesignNum(Integer integratedCircuitDesignNum) {
 		this.integratedCircuitDesignNum = integratedCircuitDesignNum;
 	}
 
@@ -318,21 +326,13 @@ public class JltfispCoProfile {
 		this.createTime = createTime;
 	}
 
-	public int getCreateUserid() {
+	public Integer getCreateUserid() {
 		return createUserid;
 	}
 
-	public void setCreateUserid(int createUserid) {
+	public void setCreateUserid(Integer createUserid) {
 		this.createUserid = createUserid;
 	}
 
-	public String getMainFieldValue() {
-		return mainFieldValue;
-	}
-
-	public void setMainFieldValue(String mainFieldValue) {
-		this.mainFieldValue = mainFieldValue;
-	}
-    
     
 }

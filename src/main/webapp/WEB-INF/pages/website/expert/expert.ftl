@@ -29,13 +29,13 @@
                           <#if  (columnList?size>5)>
                           <li>
                          <select id="columnName" name="columnName" >
-                         <option  value="">--选择更多资源--</option>
+                         <option  value="">--选择更多--</option>
                          <#list columnList as column>
                          <#if   (column_index>4)>
                          <option  value="${column.id}">${column.columnName}</option>
                          </#if>
                          </#list>
-                         </select>
+                         </select>&nbsp;
                          </li>
                          </#if>
                       </ul>
@@ -71,6 +71,7 @@
 </html>
 
 <script type="text/javascript">
+    var infoTab_li_index = [0];
     positionNavigation(6);
     var columnId="${columnId}";
     var isFrontPage="${isFrontPage}";

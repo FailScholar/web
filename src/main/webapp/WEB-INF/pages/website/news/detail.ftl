@@ -20,7 +20,7 @@
                 </div>
                 <div class="video">
                 	<h1>${columnDto.title}</h1>
-                    <p style="width:450px;text-align:center;"><span class="time">${columnDto.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${columnDto.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${columnDto.source}</span></p>
+                    <p style="width:500px;text-align:center;"><span class="time">${columnDto.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${columnDto.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${columnDto.source}</span></p>
                     <div class="clear"></div>
                     <div class="artical" style="background-color:#fff;">
                     	<p>${columnDto.content}</p>

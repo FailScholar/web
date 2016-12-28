@@ -115,6 +115,8 @@ public interface LoanService {
      */
     JltfispCoAll getCoDebtTable(int userid,String year,int businesstype,int applystate);
     
+    
+    JltfispCoAll getCoDebtTable(String year,int infoId);
     /**
      * 通过userid和business_type获取所有资产负债表
      * @param userid  用户ID

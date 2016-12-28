@@ -37,11 +37,11 @@
                                         <#else>
                                         <img width="110px" id="portrait" name="portrait" height="110px" src="${path}/resource/images/blank.png" class="fl" />
                                         </#if>
-                                        <span class="notice fr">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
+                                        <span class="notice fr">建议尺寸220px*246px<br/>支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
-                                            <input type="file" style="cursor:pointer;" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
-                                            <input name="userlogo" id="userlogo" type="hidden"/>
+                                            <input unselectable="on" type="file" style="cursor:pointer;" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
+                                            <input name="userlogo" id="userlogo" type="hidden" value="${jltfispExpert.userlogo}"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
                                     </td>
@@ -55,13 +55,13 @@
                                     <label><input type="radio" value="0" name="sex" id="sex" class="validate[required]"/>保密</label><label><input  type="radio" value="1" class="validate[required]" name="sex" id="sex" />男</label><label><input type="radio" value="2" class="validate[required]" name="sex" id="sex" checked/>女</label>
                                     <#else>
                                     <label><input type="radio" value="0" name="sex" id="sex" class="validate[required]" checked/>保密</label><label><input type="radio" value="1" class="validate[required]" name="sex" id="sex" />男</label><label><input type="radio" value="2" class="validate[required]" name="sex" id="sex" />女</label>
-                                    </#if>          
+                                    </#if>      
                                     </td>
                                     
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label4}</th>
-                                    <td><input value="<#if jltfispExpert.birthday?exists>${jltfispExpert.birthday?date}</#if>"  id="birthday" name="birthday" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker()"/></td>
+                                    <td><input value="<#if jltfispExpert.birthday?exists>${jltfispExpert.birthday?date}</#if>"  id="birthday" name="birthday" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label5}</th>
@@ -76,7 +76,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label6}</th>
-                                    <td colspan="3"><input type="text" value="${jltfispExpert.businesaddress}" class="txt validate[required,maxSize[255]]" name="businesaddress" id="businesaddress"  placeholder="请输入" /></td>
+                                    <td colspan="3"><input type="text" value="${jltfispExpert.businesaddress}" class="txt validate[required,maxSize[30]]" name="businesaddress" id="businesaddress"  placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label7}</th>
@@ -96,9 +96,9 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label8}</th>
-                                    <td><input type="text" value="${jltfispExpert.workpost}" name="workpost" id="workpost" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${jltfispExpert.workpost}" name="workpost" id="workpost" class="txt validate[required,maxSize[30]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b>${finExpertManage.label9}</th>
-                                    <td><input type="text" value="${jltfispExpert.worktitle}" name="worktitle" id="worktitle" class="txt validate[required,maxSize[255]]" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${jltfispExpert.worktitle}" name="worktitle" id="worktitle" class="txt validate[required,maxSize[30]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label10}</th>
@@ -115,19 +115,19 @@
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label14}</th>
                                     <td colspan="3">
-                                        <input name="mainaddress" value="${jltfispExpert.mainaddress}" id="mainaddress" type="text" class="txt validate[required,maxSize[255]]" placeholder="主要工作地" />
+                                        <input name="mainaddress" value="${jltfispExpert.mainaddress}" id="mainaddress" type="text" class="txt validate[required,maxSize[100]]" placeholder="请输入" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label15}</th>
                                     <td colspan="3">
-                                        <input name="postaladdress" value="${jltfispExpert.postaladdress}"  id="postaladdress" type="text" class="txt validate[required,maxSize[255]]" placeholder="通讯地址" />
+                                        <input name="postaladdress" value="${jltfispExpert.postaladdress}"  id="postaladdress" type="text" class="txt validate[required,maxSize[100]]" placeholder="请输入" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label16}</th>
                                     <td colspan="3">
-                                        <input name="workcompany" value="${jltfispExpert.workcompany}" id="workcompany" type="text" class="txt validate[required,maxSize[255]]" placeholder="办公地址" />
+                                        <input name="workcompany" value="${jltfispExpert.workcompany}" id="workcompany" type="text" class="txt validate[required,maxSize[100]]" placeholder="请输入" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -149,12 +149,16 @@
                                 <tr>
                                     <th>${finExpertManage.label18}</th>
                                     <td colspan="3">
+                                        <#if jltfispExpert.agencylogo?exists>
+                                        <img width="110px" id="agencylogoimg" name="agencylogoimg" height="110px" src="${path}${jltfispExpert.agencylogo}" class="fl" />
+                                        <#else>
                                         <img width="110px" id="agencylogoimg" name="agencylogoimg" height="110px" src="${path}/resource/images/blank.png" class="fl" />
-                                        <span class="notice fl ml16">建议尺寸220px*246px<br />上传大小不超过320K<br />支持JPG</span>
+                                        </#if>
+                                        <span class="notice fl ml16">建议尺寸220px*246px<br />支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
-                                            <input type="file" style="cursor:pointer;" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
-                                            <input type="hidden" name="agencylogo" id="agencylogo"/>
+                                            <input unselectable="on" type="file" style="cursor:pointer;" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
+                                            <input type="hidden" name="agencylogo" id="agencylogo" value="${jltfispExpert.agencylogo}"/>
                                             <a href="javascript:;">上传</a>
                                         </div>
                                     </td>
@@ -236,7 +240,7 @@
        <!--请求技术领域-->
        $.ajax({
             type: "POST",
-            url: '${path}/anon/addDoMain',
+            url: '${path}/anon/addDoMain?xss=true',
             data: $("#expertDoMain").serialize(),
             dateType:"json",
             success: function(msg){
@@ -244,7 +248,7 @@
              <!--注册表基本信息--> 
               $.ajax({
                  type: "POST",
-                 url: '${path}/anon/addExpert',
+                 url: '${path}/anon/addExpert?xss=true',
                  data: $("#jinRong").serialize(),
                  dateType:"json",
                  success: function(msg){
@@ -292,12 +296,11 @@ function ajaxFileUpload(index) {
         fileElementId: 'UpFile'+index,
         dataType:"text",  
         success: function(msg) {
-        alert(msg);
             if(msg!='false'){
                 $('#agencylogo').val(msg);
                 $("#agencylogoimg").attr("src","${path}"+msg);
             }else{
-                alert("图片上传失败");
+                alert("图片上传失败,只能上传JPG格式图片！");
             }
         }
     }); 
@@ -317,7 +320,7 @@ function ajaxFileUploadUserLogo(index) {
                 $('#userlogo').val(msg);
                 $("#portrait").attr("src","${path}"+msg);
             }else{
-                alert("图片上传失败");
+                alert("图片上传失败,只能上传JPG格式图片！");
             }
         }
     }); 

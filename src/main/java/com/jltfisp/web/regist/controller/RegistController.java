@@ -182,11 +182,18 @@ public class RegistController {
 
     @RequestMapping("/repeatSendEmail")
     @ResponseBody
-    public String repeatSendEmail(String accountNumber, Model model){
-        JltfispUser user = registService.getAUser(accountNumber);
+    public String repeatSendEmail(int id, Model model){
+        JltfispUser user = registService.getAUser(id);
+
+        //重新生成验证码
+        JltfispUser nUser = new JltfispUser();
+        nUser.setId(user.getId());
+        nUser.setCaptchaTime(new Date());
+        nUser.setEmailCaptcha(Randoms.random(5));
+        registService.updateUser(nUser);
         model.addAttribute("success", true);
         try {
-            emailService.sendText(accountNumber,subject,contentPrefix + user.getEmailCaptcha() + contentSuffix);
+            emailService.sendText(nUser.getAccountNumber(),subject,contentPrefix + nUser.getEmailCaptcha() + contentSuffix);
         } catch (Exception e) {
             return JSON.toJSONString(model);
         }

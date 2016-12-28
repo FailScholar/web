@@ -203,7 +203,8 @@
 
   //申请页面点击返回修改
     $('.proList .logbtn input.can').click(function(){
-        $('.progress li').removeClass('active').eq(0).addClass('active');
+       
+        $('.progress li').removeClass('active').eq(1).addClass('active');
         $(this).parents('.proList').hide().prev('.proList').show();
     });
     

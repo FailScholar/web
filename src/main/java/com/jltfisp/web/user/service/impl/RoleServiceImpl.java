@@ -1,4 +1,6 @@
 package com.jltfisp.web.user.service.impl;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +20,10 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements IRoleServi
 	public void setMapper(BaseMapper<Role> mapper) {
 		this.mapper = mapper;
 		this.roleMapper=(RoleMapper)mapper;
+	}
+	@Override
+	public List<String> getColumnList(Integer parentid) {
+		// TODO Auto-generated method stub
+		return roleMapper.getColumnList(parentid);
 	}
 }

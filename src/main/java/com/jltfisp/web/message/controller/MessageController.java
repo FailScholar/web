@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.jltfisp.base.controller.BaseController;
 import com.jltfisp.base.entity.PageInfo;
 import com.jltfisp.base.service.IBaseService;
+import com.jltfisp.login.entity.JltfispUser;
+import com.jltfisp.login.service.LoginService;
 import com.jltfisp.web.message.entity.Message;
 import com.jltfisp.web.message.service.IMessageService;
 
@@ -28,6 +30,8 @@ public class MessageController extends BaseController<Message> {
 
     @Autowired
     private IMessageService messageService;
+    @Autowired
+    private LoginService loginService;
     
     @Override
 	public IBaseService<Message> getEntityService() {
@@ -52,6 +56,8 @@ public class MessageController extends BaseController<Message> {
 	@Override
 	@RequestMapping(value = "/page")
 	public String page(HttpServletRequest request, Message t) throws Exception {
+		JltfispUser currentUser = loginService.getCurrentUser();
+		t.setUserid(currentUser.getId());
 		PageInfo info  = preparePageinfo(request,t);
 		info.setBy("push_date");
 		String result = handlePage(request, info, t);

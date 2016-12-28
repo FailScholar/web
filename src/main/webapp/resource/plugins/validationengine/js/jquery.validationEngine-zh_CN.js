@@ -49,11 +49,11 @@
 				},
 				"min":{
 					"regex":"none",
-					"alertText":"* 最小值为 "
+					"alertText":"* 最小值不能小于 "
 				},
 				"max":{
 					"regex":"none",
-					"alertText":"* 最大值为 "
+					"alertText":"* 最大值不能大于 "
 				},
 				"past":{
 					"regex":"none",
@@ -107,6 +107,16 @@
 					// Number, including positive, negative, and floating decimal. credit:orefalo
                     "regex": /^[\-\+]?((([0-9]{1,3})([,][0-9]{3})*)|([0-9]+))?([\.]([0-9]+))?$/,
 					"alertText":"* 无效的数值"
+				},
+				"number2":{
+					// Number, including positive, negative, and floating decimal. credit:orefalo
+                    "regex": /^[-]{0,1}(\d){1,10}(\.(\d){1,2})?$/,
+					"alertText":"* 请输入数字，且整数位最多10位，小数位最多2位！"
+				},
+				"number3":{
+					// Number, including positive, negative, and floating decimal. credit:orefalo
+                    "regex": /^(\d){1,3}(\.(\d){1,2})?$/,
+					"alertText":"* 请输入非负数，且整数位最多3位，小数位最多2位！"
 				},
 				"date":{
 					"regex":/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/,

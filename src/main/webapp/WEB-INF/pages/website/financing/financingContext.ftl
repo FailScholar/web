@@ -4,7 +4,13 @@
         <#list pm.datas as list>
         <li>
             <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${list.id}')">${list.title }</a></h2>
-            <p class="tit">${list.source}<span>${list.publishtime ? date}</span><span class="eye fr">${list.pv}</span></p>
+            <p class="tit">
+            <#if list.source?length lte 15>
+	            	${list.source}
+	            <#else>
+	            	${list.source[0..15]}...
+	            </#if>
+            <span>${list.publishtime ? date}</span><span class="eye fr">${list.pv}</span></p>
             <p>
             	<#if list.contentreview?length lte 40>
 	            	${list.contentreview}
@@ -26,7 +32,6 @@
 function  changePage(url){
 var columnId='${columnid}';
 var url=url.split("=");
-alert(url);
 var offset=url[1];
 $.ajax({
                 type: 'POST',
@@ -39,6 +44,6 @@ $.ajax({
 }
     function ttPost(id) {
      var colName = $('#selectId').text();
-        openBlank('${path}/anon/financing/detail',{id :id,colName :$("div.info ul.infoTab").find('li.active').find('a').html()},true);
+    	location.href='${path}/anon/financing/detail?id='+id;
     }
 </script>

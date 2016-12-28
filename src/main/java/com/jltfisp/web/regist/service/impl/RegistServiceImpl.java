@@ -37,6 +37,7 @@ public class RegistServiceImpl implements RegistService {
     public JltfispUser getAUser(String accountNumber) {
         JltfispUser user = new JltfispUser();
         user.setAccountNumber(accountNumber);
+        user.setState(0);
         return registMapper.selectOne(user);
     }
 

@@ -19,19 +19,24 @@
         <div class="clear"></div>
         <div class="infoList">
             <ul class="ul1">
-            <#list pojoList as list>
-                <li>
-                    <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${list.tableName}','${list.id}','${keyWords}')">${list.title}</a></h2>
-                    <p class="tit">${list.source}<span>${list.publishTime ? date}</span><span class="eye fr">${list.pv}</span></p>
-                    <p>
-                        <#if list.contentReview?length gt 40>
-                        ${list.contentReview[0..40]}...
-                        <#else>
-                        ${list.contentReview}
-                        </#if>
-                    </p>
-                </li>
-            </#list>
+                <#if pojoList?? && (pojoList ? size <=0)>
+                    <div style="align-content: center"><img draggable="false" style="clear: both; display: block;margin:auto; " src="${path}/resource/images/nodata.jpg"/></div>
+                    <div style="text-align: center;font-size:18px;color:#448ACA;">对不起，未能找到您搜索的内容！</div>
+                <#else>
+                    <#list pojoList as list>
+                        <li>
+                            <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${list.tableName}','${list.id}','${keyWords}')">${list.title}</a></h2>
+                            <p class="tit">${list.source}<span>${list.publishTime ? date}</span><span class="eye fr">${list.pv}</span></p>
+                            <p>
+                                <#if list.contentReview?length gt 40>
+                                ${list.contentReview[0..40]}...
+                                <#else>
+                                ${list.contentReview}
+                                </#if>
+                            </p>
+                        </li>
+                    </#list>
+                </#if>
             </ul>
         </div>
     </div>

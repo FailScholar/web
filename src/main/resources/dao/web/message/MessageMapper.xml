@@ -36,9 +36,10 @@
    </sql>
 	<!-- 查询列表count-->
 	<select id="countByExample" parameterType="com.jltfisp.web.message.entity.Message" resultType="java.lang.Integer">
-        select count(1) from jltfisp_message_push a
+        select count(1) from jltfisp_message_push a,jltfisp_user_message jum
         <if test="_parameter != null">
         	<where>
+        	and a.id = jum.message_id and jum.user_id=#{userid,jdbcType=INTEGER}
             <include refid="Example_Where_Clause"/>
             </where>
         </if>
@@ -47,9 +48,10 @@
 	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
         select
         <include refid="Base_Column_List"/>
-        from jltfisp_message_push a
+        from jltfisp_message_push a,jltfisp_user_message jum
          <if test="_parameter != null">
         	<where>
+        	and a.id = jum.message_id and jum.user_id=#{userid,jdbcType=INTEGER}
             <include refid="Example_Where_Clause"/>
             </where>
         </if>

@@ -6,11 +6,11 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainbusiness}</th>
-                                    <td><input id="mainBusiness" value="${coAll.jltfispCoProfile.mainBusiness}" name="mainBusiness" type="text" class="txt validate[required,minSize[3],maxSize[255]]" placeholder="请输入" /></td>
+                                    <td><input id="mainBusiness" value="${coAll.jltfispCoProfile.mainBusiness}" name="mainBusiness" type="text" class="txt validate[required,minSize[3],maxSize[500]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileSidelinebusses}</th>
-                                    <td><input id="sidelineBusses" value="${coAll.jltfispCoProfile.sidelineBusses}" name="sidelineBusses" type="text" class="txt validate[required,minSize[3],maxSize[255]]" placeholder="请输入" /></td>
+                                    <td><input id="sidelineBusses" value="${coAll.jltfispCoProfile.sidelineBusses}" name="sidelineBusses" type="text" class="txt validate[required,minSize[3],maxSize[500]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainfield}</th>
@@ -58,8 +58,8 @@
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileWorkforce}</th>
                                     <td>
-                                    	<input id="workforce" name="workforce" value="${coAll.jltfispCoProfile.workforce}" type="text" class="txt validate[required,minSize[1],maxSize[255],custom[integer]]" style="width:60px;" />人
-                                        <span style="margin-left:30px;">其中：大专以上人数</span><input name="collegeDegreeOrAboveNum" id="collegeDegreeOrAboveNum" value="${coAll.jltfispCoProfile.collegeDegreeOrAboveNum}" type="text" class="txt" style="width:60px;" />人<span style="margin-left:30px;">研发人员</span><input name="researchStaffNum" id="researchStaffNum" value="${coAll.jltfispCoProfile.researchStaffNum}" type="text" class="txt" style="width:60px;" />人<br /><i class="gray6 tip2">提示：如果没有大专人数或者没有研发人员可填0！</i>
+                                    	<input id="workforce" name="workforce" value="${coAll.jltfispCoProfile.workforce}" type="text" class="txt validate[required,minSize[1],min[0],maxSize[10],custom[integer]]" style="width:60px;" />人
+                                        <span style="margin-left:30px;">其中：大专以上人数</span><input name="collegeDegreeOrAboveNum" id="collegeDegreeOrAboveNum" value="${coAll.jltfispCoProfile.collegeDegreeOrAboveNum}" type="text" class="txt validate[required,minSize[1],min[0],maxSize[10],custom[integer]]" style="width:60px;" />人<span style="margin-left:30px;">研发人员</span><input name="researchStaffNum" id="researchStaffNum" value="${coAll.jltfispCoProfile.researchStaffNum}" type="text" class="txt validate[required,minSize[1],min[0],maxSize[10],custom[integer]]" style="width:60px;" />人<br /><i class="gray6 tip2">提示：如果没有大专人数或者没有研发人员可填0！</i>
                                     </td>
                                 </tr>
                             </table>
@@ -67,19 +67,19 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th>${loanformManage.profileIntellectualpropertynum}</th>
-                                    <td colspan="3"><input id="intellectualPropertyNum" name="intellectualPropertyNum" value="${coAll.jltfispCoProfile.intellectualPropertyNum}" type="text" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
+                                    <td colspan="3"><input id="intellectualPropertyNum" name="intellectualPropertyNum" value="${coAll.jltfispCoProfile.intellectualPropertyNum}" type="text" class="txt validate[maxSize[10],min[0],custom[integer]]" style="width:60px;" />个</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profilePatentofinventionnum}</th>
-                                    <td><input name="patentOfInventionNum" id="patentOfInventionNum" type="text" value="${coAll.jltfispCoProfile.patentOfInventionNum}"  class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
+                                    <td><input name="patentOfInventionNum" id="patentOfInventionNum" type="text" value="${coAll.jltfispCoProfile.patentOfInventionNum}"  class="txt validate[maxSize[10],min[0],custom[integer]]" style="width:60px;" />个</td>
                                     <th>${loanformManage.profileUtilitymodelpatentnum}</th>
-                                    <td><input name="utilityModelPatentNum" id="utilityModelPatentNum" type="text" value="${coAll.jltfispCoProfile.utilityModelPatentNum}" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
+                                    <td><input name="utilityModelPatentNum" id="utilityModelPatentNum" type="text" value="${coAll.jltfispCoProfile.utilityModelPatentNum}" class="txt validate[maxSize[10],min[0],custom[integer]]" style="width:60px;" />个</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profileSoftwarecopyrightnum}</th>
-                                    <td><input name="softwareCopyrightNum" id="softwareCopyrightNum" value="${coAll.jltfispCoProfile.softwareCopyrightNum}" type="text" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
+                                    <td><input name="softwareCopyrightNum" id="softwareCopyrightNum" value="${coAll.jltfispCoProfile.softwareCopyrightNum}" type="text" class="txt validate[maxSize[10],min[0],custom[integer]]" style="width:60px;" />个</td>
                                     <th>${loanformManage.profileIntegratedcircuitdesignnum}</th>
-                                    <td><input name="integratedCircuitDesignNum" id="integratedCircuitDesignNum" value="${coAll.jltfispCoProfile.integratedCircuitDesignNum}" type="text" class="txt validate[maxSize[255],custom[integer]]" style="width:60px;" />个</td>
+                                    <td><input name="integratedCircuitDesignNum" id="integratedCircuitDesignNum" value="${coAll.jltfispCoProfile.integratedCircuitDesignNum}" type="text" class="txt validate[maxSize[10],min[0],custom[integer]]" style="width:60px;" />个</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profileTechnologyorfinance}</th>
@@ -91,23 +91,23 @@
                                         <label><input type="checkbox" value="5" name="technologyOrFinance" id="technologyOrFinance5" />技术先进企业</label>
                                         <label><input type="checkbox" value="6" name="technologyOrFinance" id="technologyOrFinance6" />创新性企业</label><br/>
                                         <label><input type="checkbox" value="7" name="technologyOrFinance" id="technologyOrFinance7" />专利示范企业</label><br/>
-                                        <div class="else">自填<input name="OtherTechnologyOrFinance"  value="${coAll.jltfispCoProfile.otherTechnologyOrFinance}" id="OtherTechnologyOrFinance" type="text" class="txt validate[maxSize[255]]" /></div>
+                                        <div class="else">自填<input name="OtherTechnologyOrFinance"  value="${coAll.jltfispCoProfile.otherTechnologyOrFinance}" id="OtherTechnologyOrFinance" type="text" class="txt validate[maxSize[500]]" /></div>
                                     </td>
                                 </tr>
                             </table>
-                            <p class="ntit">企业情况概述(300字以内)</p>
+                            <p class="ntit">企业情况概述(500字以内)</p>
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.profileInstitutionalabstract}</th>
-                                    <td><textarea id="institutionalAbstract" value="${coAll.jltfispCoProfile.institutionalAbstract}" name="institutionalAbstract" class="txta validate[required,minSize[6],maxSize[300]]">${coAll.jltfispCoProfile.institutionalAbstract}</textarea></td>
+                                    <td><textarea id="institutionalAbstract" value="${coAll.jltfispCoProfile.institutionalAbstract}" name="institutionalAbstract" class="txta validate[required,minSize[6],maxSize[500]]">${coAll.jltfispCoProfile.institutionalAbstract}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileManagementteamprofile}</th>
-                                    <td><textarea name="managementTeamProfile"  id="managementTeamProfile" class="txta validate[required,minSize[6],maxSize[300]]">${coAll.jltfispCoProfile.managementTeamProfile}</textarea></td>
+                                    <td><textarea name="managementTeamProfile"  id="managementTeamProfile" class="txta validate[required,minSize[6],maxSize[500]]">${coAll.jltfispCoProfile.managementTeamProfile}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainproductintroduction}</th>
-                                    <td><textarea name="mainProductIntroduction"   id="mainProductIntroduction" class="txta validate[required,minSize[6],maxSize[300]]">${coAll.jltfispCoProfile.mainProductIntroduction}</textarea></td>
+                                    <td><textarea name="mainProductIntroduction"   id="mainProductIntroduction" class="txta validate[required,minSize[6],maxSize[500]]">${coAll.jltfispCoProfile.mainProductIntroduction}</textarea></td>
                                 </tr>
                             </table>
                             </form>

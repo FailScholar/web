@@ -33,13 +33,13 @@
                     h:200,//旋转高度
                     //showPositionsOnDrag:true,
                    // showDimetionsOnDrag:false,
-                   // aspectRatio:true,
+                    aspectRatio:true,
                     centered: true,//居中
                     bgInfoLayer:'#fff',
                     borderColor: 'blue',//选择区域边框样式
                    // animated: false,
-                    maxWidth:200,//最大宽度
-                    maxHeight:200,//最大高度
+                   // maxWidth:200,//最大宽度
+                    //maxHeight:200,//最大高度
                     borderColorHover: 'yellow'//鼠标放到选择器的边框颜色
                 },
                 image: {

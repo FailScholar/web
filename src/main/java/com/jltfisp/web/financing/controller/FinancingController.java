@@ -79,11 +79,13 @@ public class FinancingController {
     public String financingDetail(HttpServletRequest request,int id,String colName){
         //获取股权融资信息
         JltfispFinancing jltfispFincing=financingService.getFinancingContext(id);
+        jltfispFincing.setPv(jltfispFincing.getPv()==null?1:jltfispFincing.getPv()+1);
         //更新浏览量
-        financingService.updateFinancingPv(jltfispFincing.getId(), jltfispFincing.getPv()==null?1:jltfispFincing.getPv()+1);
+        financingService.updateFinancingPv(jltfispFincing.getId(), jltfispFincing.getPv());
         
         request.setAttribute("fincing",jltfispFincing);
-        request.setAttribute("colName", StringUtils.hasLength(colName) ? colName : "科技保险");
+        JltfispColumn column = columnService.getColumnById(jltfispFincing.getColumnid());
+		 request.setAttribute("column", column);
         return "/website/financing/financingDetail";
 
     }

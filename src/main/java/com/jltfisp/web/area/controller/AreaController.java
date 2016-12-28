@@ -40,10 +40,16 @@ public class AreaController {
     @ResponseBody
     public List<JltfispArea> expert(HttpServletRequest request){
     	String areaId = request.getParameter("areaId");
+    	String type = request.getParameter("type");
     	if(areaId==null || "".equals(areaId.trim())){
     		areaId="0";
     		}
-     List<JltfispArea> areaList=areaService.getAreaList(Integer.valueOf(areaId));
+       List<JltfispArea> areaList=null;
+       if("1".equals(type)){
+       areaList=areaService.getAreaAllList(Integer.valueOf(areaId));
+       }else{
+       areaList=areaService.getAreaList(Integer.valueOf(areaId)); 
+       }
      return areaList;
     }
     

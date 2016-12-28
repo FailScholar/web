@@ -4,7 +4,13 @@
 	        <#list pm.datas as marketMsg>
 	        <li>
 	            <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${marketMsg.id}',${columnid})">${marketMsg.title }</a></h2>
-	            <p class="tit">${marketMsg.source}<span>${marketMsg.publishTime ? date}</span><span class="eye fr">${marketMsg.pv}</span></p>
+	            <p class="tit">
+	            <#if marketMsg.source?length lte 15>
+	            	${marketMsg.source}
+	            <#else>
+	            	${marketMsg.source[0..15] }...
+	            </#if>
+	            <span>${marketMsg.publishTime ? date}</span><span class="eye fr">${marketMsg.pv}</span></p>
 	            <p>
 	            	<#if marketMsg.contentReview?length lte 40>
 		            	${marketMsg.contentReview}
@@ -38,7 +44,6 @@ $.ajax({
 }
 
     function ttPost(id,columnid) {
-    	
-        openBlank('${path}/anon/market/detail',{id :id,columnid:columnid,colName :$("div.info ul.infoTab").find('li.active').find('a').html()},true);
+    	location.href='${path}/anon/market/detail?id='+id;
     }
 </script>

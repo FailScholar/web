@@ -52,6 +52,7 @@
 </body>
 </html>
 <script type="text/javascript">
+    var infoTab_li_index = [0];
     positionNavigation(9);
     var infoTab = $("div.info ul.infoTab");
     $(function(){
@@ -94,7 +95,7 @@
     $(document).ready(function () {
         $("#moreSel").bind("change",function(){
             $(this).parent().attr('code',$(this).val());
-            $(this).parent().find('a').text($(this).html)
+            $(this).parent().find('a').text($(this).html())
         });
     });
 </script>

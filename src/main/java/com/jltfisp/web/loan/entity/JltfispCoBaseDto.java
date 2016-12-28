@@ -210,7 +210,7 @@ public class JltfispCoBaseDto {
      * 第一股东股份
      */
     @Column(name = "oneStock")
-    private int oneStock;
+    private Double oneStock;
     /**
      * 第二股东姓名
      */
@@ -220,7 +220,7 @@ public class JltfispCoBaseDto {
      * 第二股东股份
      */
     @Column(name = "twoStock")
-    private int twoStock;
+    private Double twoStock;
     
     /**
      * 第三股东姓名
@@ -232,7 +232,7 @@ public class JltfispCoBaseDto {
      * 第三股东股份
      */
     @Column(name = "threeStock")
-    private int threeStock;
+    private Double threeStock;
     
     /**
      * 创建时间
@@ -355,461 +355,349 @@ public class JltfispCoBaseDto {
      */
     @Column(name="loan_bank_name")
     private String loanBankName;
-    
-	public String getLoanBankName() {
-		return loanBankName;
-	}
-
-	public void setLoanBankName(String loanBankName) {
-		this.loanBankName = loanBankName;
-	}
-
-	public String getTecdomain() {
-		return tecdomain;
-	}
-
-	public void setTecdomain(String tecdomain) {
-		this.tecdomain = tecdomain;
-	}
-
-	public int getLastyearsellscale() {
-		return lastyearsellscale;
-	}
-
-	public void setLastyearsellscale(int lastyearsellscale) {
-		this.lastyearsellscale = lastyearsellscale;
-	}
-
-	public int getWorkernumber() {
-		return workernumber;
-	}
-
-	public void setWorkernumber(int workernumber) {
-		this.workernumber = workernumber;
-	}
-
-	public String getReferee() {
-		return referee;
-	}
-
-	public void setReferee(String referee) {
-		this.referee = referee;
-	}
-
-	public String getRefereecompany() {
-		return refereecompany;
-	}
-
-	public void setRefereecompany(String refereecompany) {
-		this.refereecompany = refereecompany;
-	}
-
-	public String getRefereemobile() {
-		return refereemobile;
-	}
-
-	public void setRefereemobile(String refereemobile) {
-		this.refereemobile = refereemobile;
-	}
-
-	public String getRefereeemail() {
-		return refereeemail;
-	}
-
-	public void setRefereeemail(String refereeemail) {
-		this.refereeemail = refereeemail;
-	}
-
-	public String getCompanyurl() {
-		return companyurl;
-	}
-
-	public void setCompanyurl(String companyurl) {
-		this.companyurl = companyurl;
-	}
-
-	public String getProjectname() {
-		return projectname;
-	}
-
-	public void setProjectname(String projectname) {
-		this.projectname = projectname;
-	}
-
-	public String getMarketproductsummary() {
-		return marketproductsummary;
-	}
-
-	public void setMarketproductsummary(String marketproductsummary) {
-		this.marketproductsummary = marketproductsummary;
-	}
-
-	public String getManagerteamsummary() {
-		return managerteamsummary;
-	}
-
-	public void setManagerteamsummary(String managerteamsummary) {
-		this.managerteamsummary = managerteamsummary;
-	}
-
-	public String getTechnologyqualifications() {
-		return technologyqualifications;
-	}
-
-	public void setTechnologyqualifications(String technologyqualifications) {
-		this.technologyqualifications = technologyqualifications;
-	}
-
-	public int getBusinesstype() {
-		return businesstype;
-	}
-
-	public void setBusinesstype(int businesstype) {
-		this.businesstype = businesstype;
-	}
-
-	public int getApplystate() {
-		return applystate;
-	}
-
-	public void setApplystate(int applystate) {
-		this.applystate = applystate;
-	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getCompany() {
 		return company;
 	}
-
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
 	public Date getEstablishTime() {
 		return establishTime;
 	}
-
 	public void setEstablishTime(Date establishTime) {
 		this.establishTime = establishTime;
 	}
-
 	public Double getRegisteredCapital() {
 		return registeredCapital;
 	}
-
 	public void setRegisteredCapital(Double registeredCapital) {
 		this.registeredCapital = registeredCapital;
 	}
-
 	public String getRegisteredAddress() {
 		return registeredAddress;
 	}
-
 	public void setRegisteredAddress(String registeredAddress) {
 		this.registeredAddress = registeredAddress;
 	}
-
 	public Integer getOfficeProv() {
 		return officeProv;
 	}
-
 	public void setOfficeProv(Integer officeProv) {
 		this.officeProv = officeProv;
 	}
-
 	public Integer getOfficeCity() {
 		return officeCity;
 	}
-
 	public void setOfficeCity(Integer officeCity) {
 		this.officeCity = officeCity;
 	}
-
 	public Integer getOfficeArea() {
 		return officeArea;
 	}
-
 	public void setOfficeArea(Integer officeArea) {
 		this.officeArea = officeArea;
 	}
-
 	public String getOfficeAddress() {
 		return officeAddress;
 	}
-
 	public void setOfficeAddress(String officeAddress) {
 		this.officeAddress = officeAddress;
 	}
-
 	public int getProductProv() {
 		return productProv;
 	}
-
 	public void setProductProv(int productProv) {
 		this.productProv = productProv;
 	}
-
 	public int getProductCity() {
 		return productCity;
 	}
-
 	public void setProductCity(int productCity) {
 		this.productCity = productCity;
 	}
-
 	public int getProductArea() {
 		return productArea;
 	}
-
 	public void setProductArea(int productArea) {
 		this.productArea = productArea;
 	}
-
 	public String getProductAddress() {
 		return productAddress;
 	}
-
 	public void setProductAddress(String productAddress) {
 		this.productAddress = productAddress;
 	}
-
 	public String getCorporateRepresentative() {
 		return corporateRepresentative;
 	}
-
 	public void setCorporateRepresentative(String corporateRepresentative) {
 		this.corporateRepresentative = corporateRepresentative;
 	}
-
 	public String getMobilephone() {
 		return mobilephone;
 	}
-
 	public void setMobilephone(String mobilephone) {
 		this.mobilephone = mobilephone;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	public String getIDcard() {
 		return IDcard;
 	}
-
 	public void setIDcard(String iDcard) {
 		IDcard = iDcard;
 	}
-
 	public String getSocialCreditCode() {
 		return socialCreditCode;
 	}
-
 	public void setSocialCreditCode(String socialCreditCode) {
 		this.socialCreditCode = socialCreditCode;
 	}
-
 	public String getCnpj() {
 		return cnpj;
 	}
-
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-
 	public String getCardNo() {
 		return cardNo;
 	}
-
 	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;
 	}
-
 	public String getBasicAccountBank() {
 		return basicAccountBank;
 	}
-
 	public void setBasicAccountBank(String basicAccountBank) {
 		this.basicAccountBank = basicAccountBank;
 	}
-
 	public String getBasicAccountCard() {
 		return basicAccountCard;
 	}
-
 	public void setBasicAccountCard(String basicAccountCard) {
 		this.basicAccountCard = basicAccountCard;
 	}
-
-	public String getGeneralAccountBank() {
-		return generalAccountBank;
-	}
-
-	public void setGeneralAccountBank(String generalAccountBank) {
-		this.generalAccountBank = generalAccountBank;
-	}
-
-	public String getGeneralAccountCard() {
-		return generalAccountCard;
-	}
-
-	public void setGeneralAccountCard(String generalAccountCard) {
-		this.generalAccountCard = generalAccountCard;
-	}
-
-	public String getLinkMan() {
-		return linkMan;
-	}
-
-	public void setLinkMan(String linkMan) {
-		this.linkMan = linkMan;
-	}
-
-	public String getDuties() {
-		return duties;
-	}
-
-	public void setDuties(String duties) {
-		this.duties = duties;
-	}
-
-	public String getLinkMobile() {
-		return linkMobile;
-	}
-
-	public void setLinkMobile(String linkMobile) {
-		this.linkMobile = linkMobile;
-	}
-
-	public String getZoneDescription() {
-		return zoneDescription;
-	}
-
-	public void setZoneDescription(String zoneDescription) {
-		this.zoneDescription = zoneDescription;
-	}
-
-	public String getPhoneOrFax() {
-		return phoneOrFax;
-	}
-
-	public void setPhoneOrFax(String phoneOrFax) {
-		this.phoneOrFax = phoneOrFax;
-	}
-
-	public String getLinkEmail() {
-		return linkEmail;
-	}
-
-	public void setLinkEmail(String linkEmail) {
-		this.linkEmail = linkEmail;
-	}
-
-	public String getOneShareholderName() {
-		return oneShareholderName;
-	}
-
-	public void setOneShareholderName(String oneShareholderName) {
-		this.oneShareholderName = oneShareholderName;
-	}
-
-	public int getOneStock() {
-		return oneStock;
-	}
-
-	public void setOneStock(int oneStock) {
-		this.oneStock = oneStock;
-	}
-
-	public String getTwoShareholderName() {
-		return twoShareholderName;
-	}
-
-	public void setTwoShareholderName(String twoShareholderName) {
-		this.twoShareholderName = twoShareholderName;
-	}
-
-	public int getTwoStock() {
-		return twoStock;
-	}
-
-	public void setTwoStock(int twoStock) {
-		this.twoStock = twoStock;
-	}
-
-	public String getThreeShareholerName() {
-		return threeShareholerName;
-	}
-
-	public void setThreeShareholerName(String threeShareholerName) {
-		this.threeShareholerName = threeShareholerName;
-	}
-
-	public int getThreeStock() {
-		return threeStock;
-	}
-
-	public void setThreeStock(int threeStock) {
-		this.threeStock = threeStock;
-	}
-
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public double getAgreementsAmount() {
-		return agreementsAmount;
-	}
-
-	public void setAgreementsAmount(double agreementsAmount) {
-		this.agreementsAmount = agreementsAmount;
-	}
-
-	public double getLoanAccount() {
-		return loanAccount;
-	}
-
-	public void setLoanAccount(double loanAccount) {
-		this.loanAccount = loanAccount;
-	}
-
-	public String getOtherDesc() {
-		return otherDesc;
-	}
-
-	public void setOtherDesc(String otherDesc) {
-		this.otherDesc = otherDesc;
-	}
-
 	public String getBasicAccountName() {
 		return basicAccountName;
 	}
-
 	public void setBasicAccountName(String basicAccountName) {
 		this.basicAccountName = basicAccountName;
 	}
+	public String getGeneralAccountBank() {
+		return generalAccountBank;
+	}
+	public void setGeneralAccountBank(String generalAccountBank) {
+		this.generalAccountBank = generalAccountBank;
+	}
+	public String getGeneralAccountCard() {
+		return generalAccountCard;
+	}
+	public void setGeneralAccountCard(String generalAccountCard) {
+		this.generalAccountCard = generalAccountCard;
+	}
+	public String getLinkMan() {
+		return linkMan;
+	}
+	public void setLinkMan(String linkMan) {
+		this.linkMan = linkMan;
+	}
+	public String getDuties() {
+		return duties;
+	}
+	public void setDuties(String duties) {
+		this.duties = duties;
+	}
+	public String getLinkMobile() {
+		return linkMobile;
+	}
+	public void setLinkMobile(String linkMobile) {
+		this.linkMobile = linkMobile;
+	}
+	public String getZoneDescription() {
+		return zoneDescription;
+	}
+	public void setZoneDescription(String zoneDescription) {
+		this.zoneDescription = zoneDescription;
+	}
+	public String getPhoneOrFax() {
+		return phoneOrFax;
+	}
+	public void setPhoneOrFax(String phoneOrFax) {
+		this.phoneOrFax = phoneOrFax;
+	}
+	public String getLinkEmail() {
+		return linkEmail;
+	}
+	public void setLinkEmail(String linkEmail) {
+		this.linkEmail = linkEmail;
+	}
+	public String getOneShareholderName() {
+		return oneShareholderName;
+	}
+	public void setOneShareholderName(String oneShareholderName) {
+		this.oneShareholderName = oneShareholderName;
+	}
+	public Double getOneStock() {
+		return oneStock;
+	}
+	public void setOneStock(Double oneStock) {
+		this.oneStock = oneStock;
+	}
+	public String getTwoShareholderName() {
+		return twoShareholderName;
+	}
+	public void setTwoShareholderName(String twoShareholderName) {
+		this.twoShareholderName = twoShareholderName;
+	}
+	public Double getTwoStock() {
+		return twoStock;
+	}
+	public void setTwoStock(Double twoStock) {
+		this.twoStock = twoStock;
+	}
+	public String getThreeShareholerName() {
+		return threeShareholerName;
+	}
+	public void setThreeShareholerName(String threeShareholerName) {
+		this.threeShareholerName = threeShareholerName;
+	}
+	public Double getThreeStock() {
+		return threeStock;
+	}
+	public void setThreeStock(Double threeStock) {
+		this.threeStock = threeStock;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	public double getAgreementsAmount() {
+		return agreementsAmount;
+	}
+	public void setAgreementsAmount(double agreementsAmount) {
+		this.agreementsAmount = agreementsAmount;
+	}
+	public double getLoanAccount() {
+		return loanAccount;
+	}
+	public void setLoanAccount(double loanAccount) {
+		this.loanAccount = loanAccount;
+	}
+	public String getOtherDesc() {
+		return otherDesc;
+	}
+	public void setOtherDesc(String otherDesc) {
+		this.otherDesc = otherDesc;
+	}
+	public String getTecdomain() {
+		return tecdomain;
+	}
+	public void setTecdomain(String tecdomain) {
+		this.tecdomain = tecdomain;
+	}
+	public int getLastyearsellscale() {
+		return lastyearsellscale;
+	}
+	public void setLastyearsellscale(int lastyearsellscale) {
+		this.lastyearsellscale = lastyearsellscale;
+	}
+	public int getWorkernumber() {
+		return workernumber;
+	}
+	public void setWorkernumber(int workernumber) {
+		this.workernumber = workernumber;
+	}
+	public String getReferee() {
+		return referee;
+	}
+	public void setReferee(String referee) {
+		this.referee = referee;
+	}
+	public String getRefereecompany() {
+		return refereecompany;
+	}
+	public void setRefereecompany(String refereecompany) {
+		this.refereecompany = refereecompany;
+	}
+	public String getRefereemobile() {
+		return refereemobile;
+	}
+	public void setRefereemobile(String refereemobile) {
+		this.refereemobile = refereemobile;
+	}
+	public String getRefereeemail() {
+		return refereeemail;
+	}
+	public void setRefereeemail(String refereeemail) {
+		this.refereeemail = refereeemail;
+	}
+	public String getCompanyurl() {
+		return companyurl;
+	}
+	public void setCompanyurl(String companyurl) {
+		this.companyurl = companyurl;
+	}
+	public String getProjectname() {
+		return projectname;
+	}
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
+	}
+	public String getMarketproductsummary() {
+		return marketproductsummary;
+	}
+	public void setMarketproductsummary(String marketproductsummary) {
+		this.marketproductsummary = marketproductsummary;
+	}
+	public String getManagerteamsummary() {
+		return managerteamsummary;
+	}
+	public void setManagerteamsummary(String managerteamsummary) {
+		this.managerteamsummary = managerteamsummary;
+	}
+	public String getTechnologyqualifications() {
+		return technologyqualifications;
+	}
+	public void setTechnologyqualifications(String technologyqualifications) {
+		this.technologyqualifications = technologyqualifications;
+	}
+	public int getBusinesstype() {
+		return businesstype;
+	}
+	public void setBusinesstype(int businesstype) {
+		this.businesstype = businesstype;
+	}
+	public int getApplystate() {
+		return applystate;
+	}
+	public void setApplystate(int applystate) {
+		this.applystate = applystate;
+	}
+	public String getLoanBankName() {
+		return loanBankName;
+	}
+	public void setLoanBankName(String loanBankName) {
+		this.loanBankName = loanBankName;
+	}
+	
+
     
 }

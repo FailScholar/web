@@ -100,23 +100,31 @@
                                   <tr>
                                       <td>${loanformManage.baseTwoshareholder}</td>
                                       <td>${coAll.jltfispCoBase.twoShareholderName}</td>
-                                      <td>${coAll.jltfispCoBase.twoStock}%</td>
+                                      <td>
+                                      <#if coAll.jltfispCoBase.twoStock?exists>
+                                      ${coAll.jltfispCoBase.twoStock}%
+                                      </#if>
+                                      </td>
                                   </tr>
                                   <tr>
                                       <td>${loanformManage.baseThreeshareholer}</td>
                                       <td>${coAll.jltfispCoBase.threeShareholerName}</td>
-                                      <td>${coAll.jltfispCoBase.threeStock}%</td>
+                                      <td>
+                                      <#if coAll.jltfispCoBase.threeStock?exists>
+                                      ${coAll.jltfispCoBase.threeStock}%
+                                      </#if>
+                                      </td>
                                   </tr>
                               </table>
                               <p class="ntit">企业概况</p>
                               <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainbusiness}</th>
-                                    <td>${coAll.jltfispCoProfile.mainBusiness}</td>
+                                    <td><div style="width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoProfile.mainBusiness}</div></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileSidelinebusses}</th>
-                                    <td>${coAll.jltfispCoProfile.sidelineBusses}</td>
+                                    <td><div style="width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoProfile.sidelineBusses}</div></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainfield}</th>
@@ -160,19 +168,39 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th>${loanformManage.profileIntellectualpropertynum}</th>
-                                    <td colspan="3">${coAll.jltfispCoProfile.intellectualPropertyNum}个</td>
+                                    <td colspan="3">
+                                    <#if coAll.jltfispCoProfile.intellectualPropertyNum?exists>
+                                    ${coAll.jltfispCoProfile.intellectualPropertyNum}个
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profilePatentofinventionnum}</th>
-                                    <td>${coAll.jltfispCoProfile.patentOfInventionNum}个</td>
+                                    <td>
+                                    <#if coAll.jltfispCoProfile.patentOfInventionNum?exists>
+                                    ${coAll.jltfispCoProfile.patentOfInventionNum}个
+                                    </#if>
+                                    </td>
                                     <th>${loanformManage.profileUtilitymodelpatentnum}</th>
-                                    <td>${coAll.jltfispCoProfile.utilityModelPatentNum}个</td>
+                                    <td>
+                                    <#if coAll.jltfispCoProfile.utilityModelPatentNum?exists>
+                                    ${coAll.jltfispCoProfile.utilityModelPatentNum}个
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profileSoftwarecopyrightnum}</th>
-                                    <td>${coAll.jltfispCoProfile.softwareCopyrightNum}个</td>
+                                    <td>
+                                    <#if coAll.jltfispCoProfile.softwareCopyrightNum?exists>
+                                    ${coAll.jltfispCoProfile.softwareCopyrightNum}个
+                                    </#if>
+                                    </td>
                                     <th>${loanformManage.profileIntegratedcircuitdesignnum}</th>
-                                    <td>${coAll.jltfispCoProfile.integratedCircuitDesignNum}个</td>
+                                    <td>
+                                    <#if coAll.jltfispCoProfile.integratedCircuitDesignNum?exists>
+                                    ${coAll.jltfispCoProfile.integratedCircuitDesignNum}个
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profileTechnologyorfinance}</th>
@@ -185,15 +213,15 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.profileInstitutionalabstract}</th>
-                                    <td>${coAll.jltfispCoProfile.institutionalAbstract}${coAll.jltfispCoProfile.institutionalAbstract}</td>
+                                    <td><div style="width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoProfile.institutionalAbstract}${coAll.jltfispCoProfile.institutionalAbstract}</div></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileManagementteamprofile}</th>
-                                    <td>${coAll.jltfispCoProfile.managementTeamProfile}</td>
+                                    <td><div style="width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoProfile.managementTeamProfile}</div></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainproductintroduction}</th>
-                                    <td>${coAll.jltfispCoProfile.mainProductIntroduction}</td>
+                                    <td><div style="width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoProfile.mainProductIntroduction}</div></td>
                                 </tr>
                             </table>
                           </div>

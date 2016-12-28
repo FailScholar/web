@@ -22,11 +22,11 @@
 <!--content开始-->
 <div class="content">
     <div class="bread">
-        <a href="${path}/perm/insurance">科技保险</a>&gt;<a href="javascript:goHistory(${insurance.columnId})">${colName}</a>&gt;<a>详情</a>
+        <a href="${path}/perm/insurance">科技保险</a>&gt;<a href="javascript:goHistory(${insurance.columnId})">${column.columnName}</a>&gt;<a>详情</a>
     </div>
     <div class="video">
         <h1>${insurance.title}</h1>
-        <p style="width:450px;text-align:center;"><span class="time">${insurance.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${insurance.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${insurance.source}</span></p>
+        <p style="width:650px;text-align:center;"><span class="time">${insurance.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${insurance.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${insurance.source}</span></p>
         <div class="clear"></div>
         <div class="artical" style="background-color:#fff;">
             <p>${insurance.content}</p>

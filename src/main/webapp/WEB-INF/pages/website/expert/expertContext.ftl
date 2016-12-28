@@ -2,7 +2,11 @@
 <ul class="ul2">
   <#list pm.datas as expert>
      <li>
+      <#if expert.agencylogo?exists>
       <img width="220px" height="246px" src="${path}${expert.agencylogo}" alt="head" style="cursor: pointer;" onclick="expertDetail(${expert.id})"/>
+      <#else>
+      <img width="220px" height="246px" src="${path}/resource/images/head.jpg" alt="head" style="cursor: pointer;" onclick="expertDetail(${expert.id})"/>
+      </#if> 
        <h4 class="blue">
        <#if (expert.name?length >10) >
        <lable title="${expert.name}">${expert.name[0..10]}...</label>

@@ -29,7 +29,7 @@
               <div class="top">
                   <img src="${path}/resource/images/logo.png" alt="logo" />
                   <div class="topR fr">
-                      <div class="searchIcon fl">&nbsp;</div>
+                      <#--<div class="searchIcon fl">&nbsp;</div>-->
                       <div class="search fl">
                           <form method="post" action="${path}/anon/search">
                               <input type="text" name="keyWords" class="searchText" />
@@ -166,7 +166,7 @@
                                   <#if notices.mark = 'news'>
                                       <li><a href="${path}/anon/getNewsDetail?id=${notices.id}">
                                           <h5>${notices.title}</h5>
-                                          <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
+                                          <span class="sp1">${notices.publishTime ? date}</span><span><#if notices.source ? length  lte 12>${notices.source}<#else>${notices.source[0..12]}...</#if></span>
                                       </a></li>
                                   </#if>
                               </#list>
@@ -189,7 +189,7 @@
                               <#if notices.mark = 'video'>
                                   <li><a href="javascript:;" onclick="toVideoDetailPage(${notices.id},${notices.columnId})">
                                       <h5>${notices.title}</h5>
-                                      <span class="sp1">${notices.publishTime ? date}</span><span>${notices.source}</span>
+                                      <span class="sp1">${notices.publishTime ? date}</span><span><#if notices.source ? length  lte 12>${notices.source}<#else>${notices.source[0..12]}...</#if></span>
                                   </a></li>
                               </#if>
                           </#list>
@@ -324,7 +324,7 @@
 
   <#list indexCache.indices as indices>
       <#if indices.contentType = 3>
-      <div class="fly" id="fly"><a href="javascript:;" class="close">&nbsp;</a><a href="${indices.url}" target="view_window">${indices.title}</a></div>
+      <div class="fly" id="fly" style="background-image:url('${path}${indices.image}');background-size:100%100%"><a href="javascript:;" class="close">&nbsp;</a><a href="${indices.url}" target="view_window">${indices.title}</a></div>
       </#if>
   </#list>
   </body>

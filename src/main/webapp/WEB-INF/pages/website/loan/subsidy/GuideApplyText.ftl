@@ -40,6 +40,9 @@
   </body>
 </html>
 <script type="text/javascript">
+$(document).ready(function(e) {
+	     $("P").addClass("note");
+	});
     positionNavigation(1);
 var goBackUrl=${goBackUrl};
 function goBackIndex(){

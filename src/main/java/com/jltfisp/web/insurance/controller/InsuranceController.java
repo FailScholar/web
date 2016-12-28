@@ -80,10 +80,13 @@ public class InsuranceController {
     @RequestMapping("/anon/insurance/toDetail")
     public String toDetail(int id,String colName, Model model){
         JltfispInsurance insurance = insuranceService.getDetailById(id);
+        
+        insurance.setPv(insurance.getPv()==null?1:insurance.getPv()+1);
         model.addAttribute("insurance",insurance);
         //更新浏览量
-        insuranceService.updateInsurancePv(insurance.getId(), insurance.getPv()==null?1:insurance.getPv()+1);
-        model.addAttribute("colName", StringUtils.hasLength(colName) ? colName : "科技保险");
+        insuranceService.updateInsurancePv(insurance.getId(), insurance.getPv());
+        JltfispColumn column = columnService.getColumnById(insurance.getColumnId());
+        model.addAttribute("column", column);
         return "/website/insurance/detail";
     }
 }

@@ -23,7 +23,7 @@ public class JltfispCoFillInApply {
      * 贷款额度
      */
     @Column(name = "applyAmount")
-    private double applyAmount;
+    private Double applyAmount;
 
     /**
      * 贷款期限 6 、6个月  12、12个月
@@ -120,7 +120,7 @@ public class JltfispCoFillInApply {
      * 投融资金额
      */
     @Column(name = "finaneAmount")
-    private double finaneAmount;
+    private Double finaneAmount;
     
     /**
      * 是否有上市计划  1、是  2、否
@@ -166,11 +166,11 @@ public class JltfispCoFillInApply {
 		this.id = id;
 	}
 
-	public double getApplyAmount() {
+	public Double getApplyAmount() {
 		return applyAmount;
 	}
 
-	public void setApplyAmount(double applyAmount) {
+	public void setApplyAmount(Double applyAmount) {
 		this.applyAmount = applyAmount;
 	}
 
@@ -196,6 +196,22 @@ public class JltfispCoFillInApply {
 
 	public void setHistoryState(String historyState) {
 		this.historyState = historyState;
+	}
+
+	public int getInfoid() {
+		return infoid;
+	}
+
+	public void setInfoid(int infoid) {
+		this.infoid = infoid;
+	}
+
+	public String getContinueloan() {
+		return continueloan;
+	}
+
+	public void setContinueloan(String continueloan) {
+		this.continueloan = continueloan;
 	}
 
 	public String getHistoryEndtime() {
@@ -278,11 +294,11 @@ public class JltfispCoFillInApply {
 		this.isFinance = isFinance;
 	}
 
-	public double getFinaneAmount() {
+	public Double getFinaneAmount() {
 		return finaneAmount;
 	}
 
-	public void setFinaneAmount(double finaneAmount) {
+	public void setFinaneAmount(Double finaneAmount) {
 		this.finaneAmount = finaneAmount;
 	}
 
@@ -334,20 +350,5 @@ public class JltfispCoFillInApply {
 		this.state = state;
 	}
 
-	public String getContinueloan() {
-		return continueloan;
-	}
-
-	public void setContinueloan(String continueloan) {
-		this.continueloan = continueloan;
-	}
-
-	public int getInfoid() {
-		return infoid;
-	}
-
-	public void setInfoid(int infoid) {
-		this.infoid = infoid;
-	}
 
 }

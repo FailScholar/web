@@ -16,7 +16,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp" style="cursor:pointer;">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile1" id="UpFile1" onchange="ajaxFileUpload(1,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile1" id="UpFile1" onchange="ajaxFileUpload(1,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -30,7 +30,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile2" id="UpFile2" onchange="ajaxFileUpload(2,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile2" id="UpFile2" onchange="ajaxFileUpload(2,${applytype})"/>
                                            <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -44,7 +44,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile3" id="UpFile3" onchange="ajaxFileUpload(3,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile3" id="UpFile3" onchange="ajaxFileUpload(3,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -58,7 +58,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile4" id="UpFile4" onchange="ajaxFileUpload(4,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile4" id="UpFile4" onchange="ajaxFileUpload(4,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -72,7 +72,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile5" id="UpFile5" onchange="ajaxFileUpload(5,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile5" id="UpFile5" onchange="ajaxFileUpload(5,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -86,7 +86,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile6" id="UpFile6" onchange="ajaxFileUpload(6,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile6" id="UpFile6" onchange="ajaxFileUpload(6,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -100,7 +100,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp">
-                                        	<input onclick="blur();" type="file" style="cursor:pointer;" name="UpFile7" id="UpFile7" onchange="ajaxFileUpload(7,${applytype})"/>
+                                        	<input  unselectable="on" type="file" style="cursor:pointer;" name="UpFile7" id="UpFile7" onchange="ajaxFileUpload(7,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>
@@ -114,7 +114,7 @@
                                          <img width="110px" height="110px;"  src="${path}/resource/images/blank.png" class="blank" />
                                         </#if>
                                         <div class="btnUp" >
-                                        	<input onclick="blur();" style="cursor:pointer;" type="file" name="UpFile8" id="UpFile8" onchange="ajaxFileUpload(8,${applytype})"/>
+                                        	<input  unselectable="on" style="cursor:pointer;" type="file" name="UpFile8" id="UpFile8" onchange="ajaxFileUpload(8,${applytype})"/>
                                             <a href="javascript:void(0);">上传</a>
                                         </div>
                                     </td>

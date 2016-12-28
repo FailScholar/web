@@ -17,16 +17,16 @@
               <div class="content">
                   <div class="info">
                       <ul class="infoTab">
-                      <#if (columnList?size<5)>
+                      <#if (columnList?size<6)>
                      	 	<#list columnList as columnList>
-				        		 <li tips="${columnList.id}" id="columnId${columnList.id}">
-				         			<a href="javascript:void(0);" onclick="getInstitutionList(${columnList.id},'${columnList.columnName}')">${columnList.columnName}</a>
+				        		 <li tips="${columnList.id}" id="columnId${columnList.id}" onclick="getInstitutionList(${columnList.id},'${columnList.columnName}')">
+				         			<a href="javascript:void(0);" >${columnList.columnName}</a>
 				        	 	 </li>
 				      		</#list> 
 				      <#else>
 				     	  <#list foreFiveList as foreFiveList>
-				        		 <li tips="${foreFiveList.id}" id="columnId${foreFiveList.id}">
-				         			<a href="javascript:void(0);" onclick="getInstitutionList(${foreFiveList.id},'${foreFiveList.columnName}')">${foreFiveList.columnName}</a>
+				        		 <li tips="${foreFiveList.id}" id="columnId${foreFiveList.id}" onclick="getInstitutionList(${foreFiveList.id},'${foreFiveList.columnName}')">
+				         			<a href="javascript:void(0);" >${foreFiveList.columnName}</a>
 				        	 	 </li>
 				      	 </#list> 
  				       	 <li>
@@ -63,6 +63,7 @@
   <#include "website/common/footer.ftl" />
   </body>
    <script type="text/javascript">
+       var infoTab_li_index = [0];
    $(function(){
        positionNavigation(5);
 	  var columnId = '${columnId}';

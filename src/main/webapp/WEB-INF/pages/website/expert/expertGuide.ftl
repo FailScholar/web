@@ -9,6 +9,7 @@
     <meta name="renderer" content="webkit">
     <#include "website/common/common.ftl" />
     <title>专家资源申请须知</title>
+  
   </head>
 
   <body>
@@ -20,12 +21,12 @@
                 </div>
                 <div class="calt">
                     <h2>专家申请须知</h2>
-                    <p class="note">
+                    <p>
                     ${finExpertManage.applyGuide}
 					</p>
                 </div>
                 <div style="text-align:center;">
-                <input type="checkBox" style="font-size:16px;border-radius:3px;" onclick="if (this.checked) {enable()} else {disable()}">
+                <input type="checkBox" id="checkBox1" style="font-size:16px;border-radius:3px;" onclick="if (this.checked) {enable()} else {disable()}">
                 <span style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;">同意协议</span></br></br></br>
 				<input type="button" id="accept" style="width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#c5c5c5" 
 					disabled="true" value="马上申请" onclick="apply()">
@@ -46,6 +47,10 @@
 
 <script type="text/javascript">
     positionNavigation(6);
+   $(document).ready(function(e) {
+      $('#checkBox1').removeAttr("checked");
+      $("p").addClass("note");
+   }); 
    function disable()
    {
 	   document.getElementById("accept").style.backgroundColor = "#c5c5c5";

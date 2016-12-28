@@ -20,7 +20,7 @@
                 </div>
                 <div class="video">
                 	<h1>${capitalInfoDetail.title}</h1>
-                    <p style="width:450px;text-align:center;"><span class="time">${capitalInfoDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${capitalInfoDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${capitalInfoDetail.source}</span></p>
+                    <p style="width:650px;text-align:center;"><span class="time">${capitalInfoDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${capitalInfoDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${capitalInfoDetail.source}</span></p>
                     <div class="clear"></div>
                     <div class="artical" style="background-color:#fff;">
                     	<p>${capitalInfoDetail.content}</p>

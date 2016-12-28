@@ -219,9 +219,9 @@ public class InstitutionController {
         JltfispUser user=loginService.getCurrentUser();
         JltfispInstitution institution = institutionService.getInstitutionByUserIdAndColumnId(user.getId(), columnId); 
         JltfispColumn jltfispColumn  = this.columnService.getColumnById(columnId);
-		DictColumnDto dictColumnDto  =this.dictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
-		request.setAttribute("jltfispColumn", jltfispColumn);
-		request.setAttribute("dictColumnDto", dictColumnDto);
+      		DictColumnDto dictColumnDto  =this.dictColumnService.SelectDictColumnDtoById(jltfispColumn.getParentColumn());
+      		request.setAttribute("jltfispColumn", jltfispColumn);
+      		request.setAttribute("dictColumnDto", dictColumnDto);
         request.setAttribute("columnId", columnId);
         request.setAttribute("institutManage", institutManage);
         request.setAttribute("institution", institution);
@@ -244,7 +244,7 @@ public class InstitutionController {
         try {
          UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "upFile");
          fileName = uploadFile.getFileName();
-         if (StringUtils.isNotBlank(fileName) && uploadFile.getFileSize() <= 327680) {
+         if (StringUtils.isNotBlank(fileName) && uploadFile.getFileSize() <= 1048576) {
           byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
           String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName());
 
@@ -252,7 +252,7 @@ public class InstitutionController {
           map.put("fileName", fileName);
           map.put("msg", "success");
          } else {
-           map.put("msg", "请上传大小在320k以内的图片!");
+           map.put("msg", "请上传大小在1M以内的图片!");
          }
         } catch (Exception e) {
          map.put("msg", e.toString());
@@ -275,6 +275,18 @@ public class InstitutionController {
         BusinessApplayAudit businessApplayAudit = new BusinessApplayAudit();
         //获取当前用户登录信息
         JltfispUser user=loginService.getCurrentUser();
+        
+        BusinessApplayAudit applayAudit = businessApplayAuditService.checkApply(user.getId(),Constants.INSTITUTION_APPLY);
+        if(applayAudit != null){
+            JltfispColumn column = columnServiceImpl.getColumnContext(Integer.parseInt(applayAudit.getType()));
+            if(column != null && applayAudit.getState() != null && applayAudit.getState() == 1){
+                msg="您已申请认证成为" + column.getColumnName();
+                return msg;
+            }else if(column != null && applayAudit.getState() != null && applayAudit.getState() == 0){
+                msg = "您已申请认证成为" + column.getColumnName() + "，申请材料正在审核中";
+                return msg;
+            }
+        }
         
         institution.setCreateTime(nowDate);
         institution.setUserId(user.getId());

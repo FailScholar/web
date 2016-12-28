@@ -40,23 +40,23 @@
           <table class="tab2" style="width:95%">
               <tbody>
               <tr class="tal">
-                  <th>企业名称</th>
+                  <th>${loanformManage.baseCompany}</th>
                   <td colspan="5">${jltfispCoBaseDto.company!''}</td>
-                  <th>组织机构代码</th>
+                  <th>${loanformManage.baseSocialcreditcode}</th>
                   <td colspan="3">${jltfispCoBaseDto.socialCreditCode!''}</td>
               </tr>
               <tr class="tal">
-                  <th>经营地址</th>
+                  <th>${loanformManage.baseOfficeaddress}</th>
                   <td colspan="5">${jltfispCoBaseDto.officeAddress!''}</td>
-                  <th>注册地址</th>
+                  <th>${loanformManage.baseRegisteredaddress}</th>
                   <td colspan="3">${jltfispCoBaseDto.registeredAddress!''}</td>
               </tr>
               <tr class="tal">
-                  <th>贷款银行</th>
+                  <th>${loanformManage.baseAccountbank}</th>
                   <td colspan="2">${jltfispCoBaseDto.loanBankName!'' }</td>
-                  <th>贷款账户</th>
+                  <th>${loanformManage.baseCardno}</th>
                   <td colspan="2">${jltfispCoBaseDto.cardNo!''}</td>
-                  <th>注册资金</th>
+                  <th>${loanformManage.baseRegisteredcapital}</th>
                   <td colspan="3">${jltfispCoBaseDto.registeredCapital!''}</td>
               </tr>
               <tr class="tal">
@@ -68,27 +68,27 @@
                   <td colspan="3">${jltfispCoBaseDto.basicAccountCard!'' }</td>
               </tr>
               <tr class="tal">
-                  <th>联系人</th>
+                  <th>${loanformManage.baseLinkman}</th>
                   <td colspan="2">${jltfispCoBaseDto.linkMan!''}</td>
-                  <th>手机</th>
+                  <th>${loanformManage.baseLinkmobile}</th>
                   <td colspan="2">${jltfispCoBaseDto.mobilephone!''}</td>
-                  <th>Email</th>
+                  <th>${loanformManage.baseLinkemail}</th>
                   <td colspan="3">${jltfispCoBaseDto.email!''}</td>
               </tr>
               <tr>
                   <th colspan="10">申请保费补贴信息</th>
               </tr>
               <tr>
-                  <th>借款信息</th>
-                  <th>保款单</th>
-                  <th>贷款金额</th>
-                  <th>贷款银行</th>
-                  <th>保险/担保公司</th>
-                  <th>实际放贷日</th>
-                  <th>实际还款日</th>
-                  <th>实际支付本息<br/>(本金+利息)</th>
-                  <th>贷款期限</th>
-                  <th>实际支付保费<br/>(金额/元)</th>
+                  <th>${loanformManage.infoContractNumber}</th>
+                  <th>${loanformManage.infoPolicyNumber}</th>
+                  <th>${loanformManage.infoPremiumMoney}</th>
+                  <th>${loanformManage.infoLoanBank}</th>
+                  <th>${loanformManage.infoInsuranceCompany}</th>
+                  <th>${loanformManage.infoLendDate}</th>
+                  <th>${loanformManage.infoRepaymentDate}</th>
+                  <th>${loanformManage.infoPrincipalInterest}</th>
+                  <th>${loanformManage.infoLoanTerm}</th>
+                  <th>${loanformManage.infoLoanMoney}</th>
               </tr>
               <#list jltfispPsInfoList as psInfoList>
                 <tr>
@@ -111,17 +111,17 @@
                   <th colspan="10">1、主要经济指标（单位：万元）</th>
               </tr>
               <tr>
-                  <th>时间</th>
-                  <th>总收入</th>
-                  <th>比上年度增长%</th>
-                  <th>研发投入</th>
-                  <th>比上年度增长%</th>
-                  <th colspan="2">利润</th>
-                  <th>比上年度增长%</th>
-                  <th colspan="2">纳税总额</th>
+                  <th>${loanformManage.psMaterialEconomicTime}</th>
+                  <th>${loanformManage.psMaterialGross}</th>
+                  <th>${loanformManage.psMaterialGrossIncrease}</th>
+                  <th>${loanformManage.psMaterialInvestment}</th>
+                  <th>${loanformManage.psMaterialInvestmentIncrease}</th>
+                  <th colspan="2">${loanformManage.psMaterialProfit}</th>
+                  <th>${loanformManage.psMaterialProfitIncrease}</th>
+                  <th colspan="2">${loanformManage.psMaterialTaxes}</th>
               </tr>
               <tr>
-                  <th>贷款上一年度</th>
+                  <th>${loanformManage.psMaterialLastYear}</th>
                   <td>${jltfispPsMaterialInfo.grossedLast!''}</td>
                   <td>${jltfispPsMaterialInfo.increaseGrossedLast!''}</td>
                   <td>${jltfispPsMaterialInfo.investmentLast!''}</td>
@@ -131,7 +131,7 @@
                   <td colspan="2">${jltfispPsMaterialInfo.taxesLast!''}</td>
               </tr>
               <tr>
-                  <th>贷款当年</th>
+                  <th>${loanformManage.psMaterialCurrentYear}</th>
                   <td>${jltfispPsMaterialInfo.grossedThis!''}</td>
                   <td>${jltfispPsMaterialInfo.increaseGrossedThis!''}</td>
                   <td>${jltfispPsMaterialInfo.investmentThis!''}</td>
@@ -144,21 +144,21 @@
                   <th colspan="10">2、知识产权（单位：项）</th>
               </tr>
               <tr>
-                  <th rowspan="2">时间</th>
+                 <th rowspan="2">${loanformManage.psMaterialIntellectualTime}</th>
                   <th colspan="3">专利情况（已授权）</th>
-                  <th rowspan="2">集成电路图设计</th>
-                  <th rowspan="2">软件著作权</th>
-                  <th rowspan="2">软件组著作权</th>
+                  <th rowspan="2">${loanformManage.psMaterialIc}</th>
+                  <th rowspan="2">${loanformManage.psMaterialSoftware}</th>
+                  <th rowspan="2">${loanformManage.psMaterialSoftwares}</th>
                   <th rowspan="2">其他（请说明）</th>
-                  <th colspan="2" rowspan="2">新增知识权总计</th>
+                  <th colspan="2" rowspan="2">${loanformManage.psMaterialKnowledge}</th>
               </tr>
               <tr>
-                  <th width="10%">发明</th>
-                  <th width="10%">实用新型</th>
-                  <th width="10%">外观设计</th>
+                  <th width="10%">${loanformManage.psMaterialInvention}</th>
+                  <th width="10%">${loanformManage.psMaterialUtilitarian}</th>
+                  <th width="10%">${loanformManage.psMaterialAppearance}</th>
               </tr>
               <tr>
-                  <th>贷款上一年度</th>
+                  <th>${loanformManage.psMaterialIntellectualLast}</th>
                   <td>${jltfispPsMaterialInfo.inventionLast!''}</td>
                   <td>${jltfispPsMaterialInfo.utilitarianLast!''}</td>
                   <td>${jltfispPsMaterialInfo.appearanceLast!''}</td>
@@ -169,7 +169,7 @@
                   <td colspan="2">${jltfispPsMaterialInfo.knowledgeLast!''}</td>
               </tr>
               <tr>
-                  <th>贷款当年</th>
+                  <th>${loanformManage.psMaterialIntellectualCurrent}</th>
                   <td>${jltfispPsMaterialInfo.inventionThis!''}</td>
                   <td>${jltfispPsMaterialInfo.utilitarianThis!''}</td>
                   <td>${jltfispPsMaterialInfo.appearanceThis!''}</td>
@@ -183,8 +183,8 @@
                   <th colspan="10">3、获得荣誉、奖项等情况</th>
               </tr>
               <tr>
-                  <th colspan="4">贷款期间新获企业资质和各种认定</th>
-                  <th colspan="6">新获政府项目资助情况名称和资助金额</th>
+                  <th colspan="4">${loanformManage.psMaterialCognizance}</th>
+                  <th colspan="6">${loanformManage.psMaterialMeta}</th>
               </tr>
               <tr>
                   <td colspan="4">

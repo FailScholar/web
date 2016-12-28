@@ -66,6 +66,9 @@ function applyInstitution(columnId){
 			}
 		});
 	}
+	function goUrl(url){
+		location.href=url;
+	}
   </script>
   </head>
 
@@ -77,18 +80,18 @@ function applyInstitution(columnId){
                       <ul class="infoTab">
                           <li class="active"><a href="javascript:;">用户中心</a></li>
                           <li><a href="javascript:;">用户信息</a></li>
-                          <li lang="${path}/message/page"><a href="javascript:;">通知通告</a></li>
+                          <li onclick="goUrl('${path}/message/page')"><a href="javascript:;">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
-                              <li lang="${path}/business/page"><a href="javascript:;">业务管理</a></li>
+                              <li onclick="goUrl('${path}/business/page')"><a href="javascript:;">业务管理</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
-                              <li lang="${path}/communicate/page"><a href="javascript:;">我要咨询</a></li>
+                              <li onclick="goUrl('${path}/communicate/page')"><a href="javascript:;">我要咨询</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasRole name="专家会员">
-                              <li lang="${path}/communicate/expertPage"><a href="javascript:;">我要解答</a></li>
+                              <li onclick="goUrl('${path}/communicate/expertPage')"><a href="javascript:;">我要解答</a></li>
                           </@shiro.hasRole>
 
                       </ul>
@@ -99,7 +102,11 @@ function applyInstitution(columnId){
               <#--用户中心开始-->
                   <div class="infoList pi">
                       <div class="personInfo fl">
-                          <img src="${path}${user.photoPath}" alt="head" class="fl" />
+                      <#if (user.photoPath??)>
+                          <img src="${path}${user.photoPath}" alt="head" class="fl" width="200px" height="200px"/>
+                      <#else>
+                      	<img src="${path}/resource/images/head.jpg" alt="head" class="fl" width="200px" height="200px"/>
+                      </#if>
                           <div class="me fr">
                               <h3>${user.username}</h3>
                               <p>用户名：${user.accountNumber}</p>
@@ -109,6 +116,9 @@ function applyInstitution(columnId){
                       <div class="setInfo fr">
                           <h2>申请认证</h2>
                           <@shiro.hasAnyRoles name="个人会员">
+                          <#if businessApplayAudit.parentType=='3' && businessApplayAudit.state==0>
+                          	您已申请认证成为${column.columnName}，申请材料正在审核中
+                          <#else>
                           <#--最多显示7个，多的显示更多-->
                               <#list columnList as column>
                               	<#if (column_index <7)>
@@ -118,13 +128,16 @@ function applyInstitution(columnId){
                               <#if (columnList?size >6)>
                               	<a href="${path}/perm/expert"><span class="bds_more">更多></span></a>
                               </#if>
-                              
+                              </#if>
                               <p></p>
                           </@shiro.hasAnyRoles>
                           <@shiro.hasAnyRoles name="专家会员,机构会员">
-                              您已申请成为${user.roleName}
+                              您已申请认证成为${user.roleName}
                           </@shiro.hasAnyRoles>
                           <@shiro.hasAnyRoles name="企业会员">
+                          <#if businessApplayAudit.parentType=='2' && businessApplayAudit.state==0>
+                          	您已申请认证成为${column.columnName}，申请材料正在审核中
+                          <#else>
                           <#--最多显示7个，多的显示更多-->
                               <#list columnList as column>
                               	<#if (column_index <7)>
@@ -133,6 +146,7 @@ function applyInstitution(columnId){
 							  </#list>
                               <#if (columnList?size >6)>
                               	<a href="${path}/perm/institution"><span class="bds_more">更多></span></a>
+                              </#if>
                               </#if>
                               <p></p>
                           </@shiro.hasAnyRoles>
@@ -155,7 +169,12 @@ function applyInstitution(columnId){
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
                               <div class="uploadImg fl">
-                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
+                              	<#if (user.photoPath??)>
+			                         <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
+			                      <#else>
+			                      <img src="${path}/resource/images/head.jpg" id="portrait" alt="head" width="65px" height="65px"/>
+			                      </#if>
+                                  
                                   <div class="upload">
                                       <div></div>
                                       <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()" accept=".jpg,.png,.gif"/>
@@ -163,7 +182,7 @@ function applyInstitution(columnId){
                               </div>
                               <div class="tip fl">
                                   <p><span class="red">*</span>建议尺寸200px*200px</p>
-                                  <p><span class="red">*</span>支持JPG、GIF、PNG、JPEG格式</p>
+                                  <p><span class="red">*</span>支持JPG、PNG、JPEG格式</p>
                                   <p><span class="red">*</span>上传大小不超过1MB</p>
                               </div>
                           </div>
@@ -218,7 +237,11 @@ function applyInstitution(columnId){
                           <div class="per per1">
                               <span class="sde fl">企业logo：</span>
                               <div class="uploadImg fl">
-                                  <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
+                                  <#if (user.photoPath??)>
+			                         <img src="${path}${user.photoPath}" id="portrait" alt="head" width="65px" height="65px"/>
+			                      <#else>
+			                      <img src="${path}/resource/images/head.jpg" id="portrait" alt="head" width="65px" height="65px"/>
+			                      </#if>
                                   <div class="upload">
                                       <div></div>
                                       <input type="file" id="uploadFile" name="uploadFile" onchange="ajaxFileUpload1()"/>
@@ -226,7 +249,7 @@ function applyInstitution(columnId){
                               </div>
                               <div class="tip fl">
                                   <p><span class="red">*</span>建议尺寸200px*200px</p>
-                                  <p><span class="red">*</span>支持JPG、GIF、PNG格式</p>
+                                  <p><span class="red">*</span>支持JPG、JPEG、PNG格式</p>
                                   <p><span class="red">*</span>上传大小不超过1MB</p>
                               </div>
                           </div>
@@ -310,6 +333,7 @@ function applyInstitution(columnId){
 </html>
 
 <script type="text/javascript">
+	var infoTab_li_index = [0];
     positionNavigation(0);
     $(document).ready(function(e) {
     	

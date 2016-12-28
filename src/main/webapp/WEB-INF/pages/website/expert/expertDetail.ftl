@@ -19,7 +19,11 @@
                     <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/expert?columnId=${jltfispColumn.id}&isFrontPage=1">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">专家详情</a>
                 </div>
                 <div class="detail">
-                	<img width="220px" height="246px" src="${path}/${jltfispExpert.agencylogo}" class="fl" />
+                    <#if jltfispExpert.agencylogo?exists>
+                                            <img width="220px" height="246px" src="${path}/${jltfispExpert.agencylogo}" class="fl" />
+                                            <#else>
+                                            <img width="220px" height="246px" id="agencylogoimg" name="agencylogoimg"  src="${path}/resource/images/head.jpg" class="fl" />
+                                            </#if>
                     <div class="ul2 fl ml57">
                     	<h1>${jltfispExpert.name}</h1>
                         <p style="padding-left:0;">
@@ -27,7 +31,7 @@
                                   <lable title="${jltfispExpert.workpost}">${jltfispExpert.workpost[0..20]}...</label>
                                   <#else>
                                   ${jltfispExpert.workpost}
-                                  </#if>                     
+                                  </#if>   
                         | 
                         <#if (jltfispExpert.businesaddress?length >30) >
                                    <lable title="${jltfispExpert.businesaddress}">${jltfispExpert.businesaddress[0..30]}...</label>

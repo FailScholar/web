@@ -19,7 +19,13 @@
 	        <#list pm.datas as cloudMsg>
 	        <li>
 	            <h2 class="ellipsis"><a href="javascript:;" onclick="ttPost('${cloudMsg.id}',${columnid})">${cloudMsg.title }</a></h2>
-	            <p class="tit">${cloudMsg.source}<span>${cloudMsg.publishTime ? date}</span><span class="eye fr">${cloudMsg.pv}</span></p>
+	            <p class="tit">
+	            <#if cloudMsg.source?length lte 15>
+	            	${cloudMsg.source}
+	            <#else>
+	            	${cloudMsg.source[0..15]}...
+	            </#if>
+	            <span>${cloudMsg.publishTime ? date}</span><span class="eye fr">${cloudMsg.pv}</span></p>
 	            <p>
 	            	<#if cloudMsg.contentReview?length lte 40>
 		            	${cloudMsg.contentReview}
@@ -55,6 +61,6 @@ $.ajax({
 }
 
     function ttPost(id,columnid) {
-        openBlank('${path}/anon/cloud/detail',{id :id,columnid:columnid,colName :$("div.info ul.infoTab").find('li.active').find('a').html()},true);
+        location.href='${path}/anon/cloud/detail?id='+id+'&columnid='+columnid;
     }
 </script>

@@ -62,6 +62,10 @@ function goMain(flag){
 				 $.cookie('userinfoIndex', flag, {path: '/'});
 				 window.location.href = "${path}/main"
 			}
+			
+	function goUrl(url){
+		location.href=url;
+	}
   </script>
   </head>
 
@@ -71,20 +75,20 @@ function goMain(flag){
               <div class="content">
                   <div class="info">
                       <ul class="infoTab">
-                          <li><a href="javascript:goMain(0);">用户中心</a></li>
-                          <li><a href="javascript:goMain(1);">用户信息</a></li>
-                          <li><a href="${path}/message/page">通知通告</a></li>
+                          <li onclick="goMain(0)"><a href="javascript:void(0);">用户中心</a></li>
+                          <li onclick="goMain(1)"><a href="javascript:void(1);">用户信息</a></li>
+                          <li onclick="goUrl('${path}/message/page')"><a href="javascript:;">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
-                              <li class="active"><a href="${path}/business/page">业务管理</a></li>
+                              <li  class="active" onclick="goUrl('${path}/business/page')"><a href="javascript:;">业务管理</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
-                              <li><a href="${path}/communicate/page">我要咨询</a></li>
+                              <li onclick="goUrl('${path}/communicate/page')"><a href="javascript:;">我要咨询</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasRole name="专家会员">
-                              <li><a href="${path}/communicate/expertPage">我要解答</a></li>
+                              <li onclick="goUrl('${path}/communicate/expertPage')"><a href="javascript:;">我要解答</a></li>
                           </@shiro.hasRole>
 
                       </ul>

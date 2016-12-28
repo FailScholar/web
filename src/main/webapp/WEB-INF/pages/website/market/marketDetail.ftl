@@ -18,11 +18,11 @@
               <!--content开始-->
               <div class="content">
                   <div class="bread">
-                      <a href="javascript:;">首页</a>&gt;<a href="javascript:goHistory(${columnid})">${colName}</a>&gt;<a>详情</a>
+                      <a href="javascript:;">首页</a>&gt;<a href="javascript:goHistory(${column.id})">${column.columnName}</a>&gt;<a>详情</a>
                   </div>
                   <div class="video">
                      <h1>${marketDetail.title}</h1>
-				     <p style="width:450px;text-align:center;"><span class="time">${marketDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${marketDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${marketDetail.source}</span></p>
+				     <p style="width:650px;text-align:center;"><span class="time">${marketDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${marketDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${marketDetail.source}</span></p>
 				     <div class="clear"></div>
 				     	<div class="artical" style="background-color:#fff;">
 				            <p>${marketDetail.content}</p>

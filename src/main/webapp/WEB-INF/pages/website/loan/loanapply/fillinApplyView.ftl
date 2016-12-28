@@ -4,7 +4,7 @@
                               <table width="100%" class="tab3 tab4">
                                   <tr>
                                       <th><b class="red">*</b>${loanformManage.loanLabel1}</th>
-                                      <td >${coAll.jltfispCoFillInApply.applyAmount}</td>
+                                      <td >${coAll.jltfispCoFillInApply.applyAmount}万元</td>
                                       <th><b class="red">*</b>${loanformManage.loanLabel2}</th>
                                       <td colspan=2>
                                      <#if coAll.jltfispCoFillInApply.payCycle ==1>
@@ -16,7 +16,7 @@
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>${loanformManage.loanLabel3}</th>
-                                      <td colspan=5>${coAll.jltfispCoFillInApply.useDesc}</td>
+                                      <td colspan=5><div style="text-align:left;width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoFillInApply.useDesc}</div></td>
                                   </tr>
                                   <tr>
                                       <th>${loanformManage.loanLabel4}</th>
@@ -49,24 +49,20 @@
                                   <tr>
                                      <th>${loanformManage.loanLabel15}</th>
                                       <td >
-                                      <#if coAll.jltfispCoFillInApply.isFinance ==1>
-                                      是
-                                      <#else>
-                                      否
-              </#if>                        
+                                      <#if coAll.jltfispCoFillInApply.isFinance ==1>是<#else>否</#if>                        
                                       </td>
                                       <th>${loanformManage.loanLabel16}</th>
                                       <td colspan=2>
-                                      <#if coAll.jltfispCoFillInApply.isListingPlan ==1>
-                                      是
-                              <#else>
-                                      否
-              </#if> 
+                                      <#if coAll.jltfispCoFillInApply.isListingPlan ==1>是<#else>否</#if> 
                                       </td>
                                   </tr>
                                   <tr>
                                       <th>${loanformManage.loanLabel17}</th>
-                                      <td >${coAll.jltfispCoFillInApply.finaneAmount}</td>
+                                      <td >
+                                       <#if coAll.jltfispCoFillInApply.finaneAmount?exists>
+                                      ${coAll.jltfispCoFillInApply.finaneAmount}万元
+                                      </#if>
+                                      </td>
                                       <th>${loanformManage.loanLabel10}</th>
                                       <td colspan=2>
                                       ${coAll.jltfispCoFillInApply.riskid}
@@ -74,13 +70,14 @@
                                   </tr>
                                   <tr>
                                       <th>${loanformManage.loanLabel18}</th>
-                                      <td colspan=5>${coAll.jltfispCoFillInApply.finaneRequire}</td>
+                                      <td colspan=5><div style="text-align:left;width:900px;word-wrap:break-word;word-break:normal;">${coAll.jltfispCoFillInApply.finaneRequire}</div></td>
                                   </tr>
                                   <tr>
                                       <th>推荐意见</th>
-                                      <td colspan=5 style="text-align:right">推荐单位（盖章）:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <br>经办人:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                      <br>日期:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                      <td colspan=5 style="text-align:right"><br><br><br><br><br><br><br><br><br><br>
+                                                                                                        推荐单位（盖章）:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <br><br>经办人:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <br><br>日期:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                   </tr>
                               </table>
                           </div>

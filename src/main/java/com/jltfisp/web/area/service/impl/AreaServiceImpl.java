@@ -43,6 +43,27 @@ public class AreaServiceImpl implements AreaService {
     	jltfispArea.setPid(Pid);
         return areaMapper.select(jltfispArea);
     }
+    
+    /**
+     * 三级数据和四级数据合并
+     * @author 张舒西 2016年11月22日 上午9:17:39
+     */
+    @Override
+    public List<JltfispArea> getAreaAllList(Integer Pid) {
+    	JltfispArea  jltfispArea = new JltfispArea();
+    	jltfispArea.setPid(Pid);
+    	List<JltfispArea> areathree= areaMapper.select(jltfispArea);
+    	if(!areathree.isEmpty()){
+    		String area=areathree.get(0).getName();
+    		if("市辖区".equals(area)){
+    		jltfispArea.setPid(areathree.get(0).getId());
+    		List<JltfispArea> areafour=  areaMapper.select(jltfispArea);
+    		areathree.addAll(areafour);
+    		}
+    	}
+        return areathree;
+    }
+    
     /**
      * 根据id查询二级数据
      * @author 张舒西 2016年11月22日 上午9:17:39

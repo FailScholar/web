@@ -60,7 +60,7 @@
         <if test="_parameter != null">
         	<where>
         	a.user_id =jcb.user_id
-			and jcb.business_type=a.type
+			and jcb.business_type=a.type and jcb.id = a.info_id
             <include refid="Example_Where_Clause"/>
             </where>
         </if>
@@ -88,7 +88,7 @@
 				 LEFT JOIN jltfisp_co_profile jcp on jcb.id = jcp.info_id
          <if test="_parameter != null">
         	<where>
-        	a.user_id =jcb.user_id
+        	a.user_id =jcb.user_id and jcb.id = a.info_id
 			and jcb.business_type=a.type
             <include refid="Example_Where_Clause"/>
             </where>

@@ -30,15 +30,17 @@
                     </ul>
                     <div class="clear"></div>
                     <div class="proList nli">
+                       
                     	<ul class="nlist">
-                        	<li class="active">企业基本信息</li>
-                            <li>企业概况</li>
-                            <li>资产负债表</li>
-                            <li>利润表</li>
-                            <li>企业其他情况</li>
-                            <li>附加财务明细</li>
-                            <li>附件</li>
+                        	<li class="active" style="cursor:default">企业基本信息</li>
+                            <li style="cursor:default">企业概况</li>
+                            <li style="cursor:default">资产负债表</li>
+                            <li style="cursor:default">利润表</li>
+                            <li style="cursor:default">企业其他情况</li>
+                            <li style="cursor:default">附加财务明细</li>
+                            <li style="cursor:default">附件</li>
                         </ul>
+                        
                         <div class="clear"></div>
                         <#include "website/loan/loanapply/coBase.ftl" />
                         <#include "website/loan/loanapply/coProfile.ftl" />
@@ -144,7 +146,7 @@
             $.ajax({
             type: "POST",
             url: "${path}/anon/area",
-            data:{areaId:id},
+            data:{areaId:id,type:1},
             dateType:"json",
             success: function(msg){
               $("#officeArea").html("");
@@ -219,7 +221,7 @@
             $.ajax({
             type: "POST",
             url: "${path}/anon/area",
-            data:{areaId:id},
+            data:{areaId:id,type:1},
             dateType:"json",
             success: function(msg){
               $("#productArea").html("");
@@ -255,12 +257,12 @@
             $('.progress li').removeClass('active').eq(index).addClass('active');
             $(this).parents('.proList').hide().next('.proList').show();
         });
-
-        $('.nlist li').click(function(){
+<#--
+       $('.nlist li').click(function(){
                     var index =$(this).index();
                     $.ajax({
                     type: "POST",
-                    url: "${path}/anon/loan/queryCoBase",<!--查询企业基本信息是否已添加-->
+                    url: "${path}/anon/loan/queryCoBase",
                     data: {applytype:applytype},
                     dateType:"json",
                     success: function(msg){
@@ -275,6 +277,7 @@
                 });
             
         });
+  -->
 
         function autoRisize()
         {
@@ -294,7 +297,7 @@
                return false;
                }
             var index=$(this).index();
-            url='${path}/anon/loan/saveCoDebt';
+            url='${path}/loan/saveCoDebt?xss=true';
             data=$("#coDebt").serialize();
             $.ajax({
             type: "POST",
@@ -329,40 +332,40 @@
                if(!$('#coBase').validationEngine('validate')){
                return false;
                }
-            url='${path}/anon/loan/saveCoBase';
+            url='${path}/loan/saveCoBase?xss=true';
             data=$("#coBase").serialize();
             }else if(index==2){
             if(!$('#coProfile').validationEngine('validate')){
                return false;
                }
-            url='${path}/anon/loan/saveCoProfile';
+            url='${path}/loan/saveCoProfile?xss=true';
             data=$("#coProfile").serialize();
             }else if(index==3){
             if(!$('#coDebt').validationEngine('validate')){
                return false;
                }
-            url='${path}/anon/loan/saveCoDebt';
+            url='${path}/loan/saveCoDebt?xss=true';
             data=$("#coDebt").serialize();
             }else if(index==4){
             if(!$('#coProfit').validationEngine('validate')){
                return false;
                }
-            url='${path}/anon/loan/saveCoProfit';
+            url='${path}/loan/saveCoProfit?xss=true';
             data=$("#coProfit").serialize();
             }else if(index==5){
             if(!$('#coOther').validationEngine('validate')){
                return false;
                }
-            url='${path}/anon/loan/saveCoOther';
+            url='${path}/loan/saveCoOther?xss=true';
             data=$("#coOther").serialize();
             }else if(index==6){
             if(!$('#coFinancial').validationEngine('validate')){
                return false;
                }
-            url='${path}/anon/loan/saveCoFinancial';
+            url='${path}/loan/saveCoFinancial?xss=true';
             data=$("#coFinancial").serialize();
             }else{
-            url='${path}/anon/loan/saveOnlineApply';
+            url='${path}/loan/saveOnlineApply?xss=true';
             data=$("#coBase").serialize();
             }
             if(index<7) {

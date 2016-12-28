@@ -38,7 +38,7 @@
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请输入密码：</span><input id="bpassword1" type="password" class="txt" placeholder="密码" onBlur="validPassword('#bpassword1',false)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请确认密码：</span><input id="password1" name="password" type="password" class="txt" placeholder="确认密码" onBlur="repeatPassword('#bpassword1','#password1',false)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">&emsp;*</span>企业名称：</span><input id="username1" name="username" type="text" class="txt" placeholder="输入企业名称" onBlur="validComName('#username1',false)"/></div>
-                              <div class="regdiv"><span class="ml80"><span class="red">&emsp;*</span>联系人：</span><input id="contact" name="contact" type="text" class="txt" placeholder="输入联系人" onBlur="validUsername('#contact',false)"/></div>
+                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;*</span>联系人：</span><input id="contact" name="contact" type="text" class="txt" placeholder="输入联系人" onBlur="validUsername('#contact',false)"/></div>
                               <div class="regdiv"><span class="ml70" style="margin-left:28px;"><span class="red">*</span>统一社会信用代码：</span><input id="socialCode" name="socialCode" type="text" class="txt" placeholder="统一社会信用代码" onBlur="validSocialCode('#socialCode',false)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;&emsp;*</span>手机：</span><input id="mobilePhone1" name="mobilePhone" type="text" class="txt" placeholder="请输入手机号码" onBlur="validMobilePhone('#mobilePhone1',false)"/></div>
                               <div class="code">验证码：<input id="captcha1" name="captcha" type="text" class="txt txt1 validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" placeholder="请输入验证码" /><div class="fr" style="margin-right: 120px;"><img draggable="false" id="validateCodeImg1" style="border-radius: 10px;cursor: hand" title="看不清楚" src="${path}/anon/getPngCode?" onclick="refreshCode('validateCodeImg1')" /></div></div>
@@ -59,7 +59,7 @@
                           <div class="tips">
                               <p>没有收到邮件？</p>
                               <p>1.检查您的邮件垃圾箱。</p>
-                              <p>2.若仍未收到确认，请尝试<a href="javascript:;" onclick="repeatSendEmail($('#checkEmail1').html())">重新发送</a>。</p>
+                              <p>2.若仍未收到确认，请尝试<a href="javascript:;" onclick="repeatSendEmail($('#checkEmail1').attr('lang'))">重新发送</a>。</p>
 
                           </div>
                       </div>
@@ -88,9 +88,9 @@
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请输入密码：</span><input id="bpassword" type="password" class="txt" placeholder="密码" onBlur="validPassword('#bpassword',true)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请确认密码：</span><input id="password" type="password" name="password" class="txt" placeholder="确认密码" onBlur="repeatPassword('#bpassword','#password',true)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;&emsp;*</span>姓名：</span><input id="username" name="username" type="text" class="txt" placeholder="请输入您的姓名" onBlur="validUsername('#username',true)"/></div>
-                              <div class="regdiv"><span class="ml80"><span class="red">*</span>工作单位：</span><input id="jobPost" name="jobPost" type="text" class="txt" placeholder="请输入工作单位" onBlur="validJobPost('#jobPost',true)"/></div>
-                              <div class="regdiv"><span class="ml80"><span class="red">*</span>所属部门：</span><input id="departmentName" name="departmentName" type="text" class="txt" placeholder="请输入部门名称" onBlur="validDepartmentName('#departmentName',true)"/></div>
-                              <div class="regdiv"><span class="ml80">&emsp;&emsp;<span class="red">*</span>手机：</span><input id="mobilePhone" name="mobilePhone" type="text" class="txt" placeholder="请输入手机号码" onBlur="validMobilePhone('#mobilePhone',true)"/></div>
+                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;*</span>工作单位：</span><input id="jobPost" name="jobPost" type="text" class="txt" placeholder="请输入工作单位" onBlur="validJobPost('#jobPost',true)"/></div>
+                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;*</span>所属部门：</span><input id="departmentName" name="departmentName" type="text" class="txt" placeholder="请输入部门名称" onBlur="validDepartmentName('#departmentName',true)"/></div>
+                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;&emsp;*</span>手机：</span><input id="mobilePhone" name="mobilePhone" type="text" class="txt" placeholder="请输入手机号码" onBlur="validMobilePhone('#mobilePhone',true)"/></div>
                               <div class="code">验证码：<input id="captcha" name="captcha" type="text" class="txt txt1 validate[required,minSize[4],maxSize[4],custom[onlyLetterNumber]]" placeholder="请输入验证码"/><div class="fr" style="margin-right: 120px;"><img draggable="false" id="validateCodeImg2" style="border-radius: 10px;cursor: hand" title="看不清楚" src="${path}/anon/getPngCode?" onclick="refreshCode('validateCodeImg2')" /></div></div>
                               <div class="autologin"><label style="white-space: nowrap"><input type="checkbox" name="agree" class="validate[required] "/>同意“<a href="${path}/anon/about?to=0" target="_blank">用户服务条款</a>”和“<a href="${path}/anon/about?to=3" target="_blank">隐私权相关政策</a>”</label></div>
                               <div class="grad" style="width:500px;margin:0 auto;"></div>
@@ -109,7 +109,7 @@
                           <div class="tips">
                               <p>没有收到邮件？</p>
                               <p>1.检查您的邮件垃圾箱。</p>
-                              <p>2.若仍未收到确认，请尝试<a href="javascript:;" onclick="repeatSendEmail($('#checkEmail').html())">重新发送</a>。</p>
+                              <p>2.若仍未收到确认，请尝试<a href="javascript:;" onclick="repeatSendEmail($('#checkEmail').attr('lang'))">重新发送</a>。</p>
 
                           </div>
                       </div>
@@ -221,6 +221,7 @@
                         }else {
                             var email = json.email;
                             $("#checkEmail").html(email);
+                            $("#checkEmail").attr('lang',json.id);
                             $("#userId").val(json.id)
                             var index = $('#userFormButton').parents('.proList').index() - 3;
                             $('.progress').eq(1).find('li').removeClass('active').eq(index).addClass('active');
@@ -254,6 +255,7 @@
                     }else {
                         var email = json.email;
                         $("#checkEmail1").html(email);
+                        $("#checkEmail1").attr('lang',json.id);
                         $("#userId1").val(json.id)
                         var index = $('#comFormButton').parents('.proList').index() - 3;
                         $('.progress').eq(0).find('li').removeClass('active').eq(index).addClass('active');
@@ -533,7 +535,7 @@
         $.ajax({
             type: 'POST',
             url: path + '/anon/regist/repeatSendEmail',
-            data: {accountNumber: accountNumber},
+            data: {id: accountNumber},
             success: function (msg) {
                 var json = jQuery.parseJSON(msg);
                 if (json.success) {

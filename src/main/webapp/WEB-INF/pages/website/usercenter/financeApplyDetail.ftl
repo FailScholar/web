@@ -203,6 +203,11 @@
 					              		<td>审核意见</td>
 					              		<td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
 					              	</tr>
+					              <#elseif (applayAudit.state == 2)>
+				                    <tr>
+					              		<td>审核意见</td>
+					              		<td colspan="9">审核不通过，${applayAudit.auditDesc!''}</td>
+					              	</tr>
 				              	</#if>
 			              </#list>
                             </tbody>

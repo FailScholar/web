@@ -19,18 +19,20 @@
       <ul class="infoTab">
          <#list columnList as column>
          	<#if column_index lt 5>
-           	 <li id="Type${column.id}" name="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+           	 <li id="Type${column.id}" name="${column.id}" onclick="infoTabClick(${column.id})"><a href="javascript:void(0);">${column.columnName}</a></li>
          	</#if>
          </#list>
          <#if columnList?size gt 5>
-		       	 <select id="selectId" onchange="getList()">
+	       	 <li>
+	       	 	<select id="selectId" onchange="getList()">
 		       		<option value="0">-选择更多-</option>
 		       	 	<#list columnList as afterFiveList>
 		       	 		<#if afterFiveList_index gt 4>
 		       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
 		       	 		</#if>
 		       	 	</#list>
-		       	 </select>
+		       	 </select>&nbsp;
+	       	 </li>
        	 </#if>
       </ul>
       <div class="clear"></div>
@@ -38,7 +40,7 @@
               <#list pm.datas as news>
               <ul class="ul1">
 			     <li>
-			        <h2 class="ellipsis"><a href="javascript:void(0);" onclick="newsDetail(${news.id})">${news.title }</a></h2>
+			        <h2 class="ellipsis"><a href="${path}/anon/getNewsDetail?id=${news.id}" target="_blank">${news.title }</a></h2>
 			        <p class="tit">${news.source }<#if news.publishTime ??><span>${news.publishTime ?date }</span></#if><span class="eye fr">${news.pv }</span></p>
 			         <#if news.contentReview ??>
                        <p>${news.contentReview }</p>
@@ -56,17 +58,19 @@
 </div>
 <div class="clear"></div>
 <div class="clearfix"></div>
+</div>
 <#include "website/common/footer.ftl" />
 </body>
 </html>
 <script type="text/javascript">
+    var infoTab_li_index = [0];
     $(document).ready(function(e) {
         positionNavigation(2);
     var columnId=${columnId};
     $('#Type'+columnId).addClass('active');
     $("#columnIdValue").val(columnId);
     $('.infoList').html('');
-    <!--传当前子栏目ID-->
+    //传当前子栏目ID
 	$.ajax({
             type: 'POST',
             url:'${path}/perm/news/'+columnId,
@@ -75,34 +79,17 @@
             $('.infoList').html(data);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                <!--鉴权不通过，则隐藏添加功能-->
+               //鉴权不通过，则隐藏添加功能
                 if(XMLHttpRequest.status ==401){
                  $('.infoList').html(''); 
                  }
             }
-      });
-    $('.infoTab li').click(function(){
-    	$("#selectId").val("0");
-        var columnId=$(this).attr("name");
-        $("#columnIdValue").val(columnId);
-        $(this).addClass('active').siblings('li').removeClass('active');
-        <!--传当前子栏目ID-->
-		$.ajax({
-                type: 'POST',
-                url:'${path}/perm/news/'+columnId,
-                data: {columnId: columnId,'pager.offset':0},
-                success: function (data) {
-                   $('.infoList').html(data);
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    <!--鉴权不通过，则隐藏添加功能-->
-                    if(XMLHttpRequest.status ==401){
-                     $('.infoList').html(''); 
-                     }
-                }
-          });
 	});
 });
+function infoTabClick(columnid) {
+		$("#selectId").val("0");
+		$('.infoList').load("${path}/perm/news/"+columnid,{'pager.offset' :0});
+	}
     //跳转页面详情
     function newsDetail(id){
     	window.location.href="${path}/anon/getNewsDetail?id="+id;
@@ -120,7 +107,7 @@
     	                $('.infoList').html(data);
     	                },
     	                error: function(XMLHttpRequest, textStatus, errorThrown) {
-    	                    <!--鉴权不通过，则隐藏添加功能-->
+    	                    //鉴权不通过，则隐藏添加功能
     	                    if(XMLHttpRequest.status ==401){
     	                     $('.infoList').html(''); 
     	                     }
@@ -138,7 +125,7 @@
 		           		 $('.infoList').html(data);
 		            },
 		            error: function(XMLHttpRequest, textStatus, errorThrown) {
-		                <!--鉴权不通过，则隐藏添加功能-->
+		                //鉴权不通过，则隐藏添加功能
 		                if(XMLHttpRequest.status ==401){
 		                 $('.infoList').html(''); 
 		                 }

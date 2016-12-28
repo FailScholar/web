@@ -19,20 +19,20 @@
         <ul class="infoTab">
       	<#list colList as list>
       		<#if list_index lt 5>
-                <li code="${list.id}" onclick="infoTabClick(${list.id})"><a href="javascript:void(0);">${list.columnName}</a></li>
+                <li code="${list.id}"  onclick="infoTabClick(${list.id})"><a href="javascript:void(0);">${list.columnName}</a></li>
            	</#if>
             </#list>
             <#if colList?size gt 5>
             	<li>
             	<a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
 			       	 <select id="selectId" onchange="getList()">
-			       		<option value="0">-选择更多机构-</option>
+			       		<option value="0">-选择更多-</option>
 			       	 	<#list colList as afterFiveList>
 			       	 		<#if afterFiveList_index gt 4>
 			       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
 			       	 		</#if>
 			       	 	</#list>
-			       	 </select>
+			       	 </select>&nbsp;
 		       	 </li>
             </#if>
         </ul>
@@ -76,6 +76,7 @@
 </html>
 
 <script type="text/javascript">
+    var infoTab_li_index = [0];
 function alertText(){
 		dialog.tipsPop('ok-pop','提示:',"您已是专家会员",function(){
 	              });
@@ -125,7 +126,7 @@ function alertText(){
      $(document).ready(function () {
         $("#selectId").bind("change",function(){
             $(this).parent().attr('code',$(this).val());
-            $(this).parent().find('a').text($(this).html)
+            $(this).parent().find('a').text($(this).html())
         });
     });
 </script>

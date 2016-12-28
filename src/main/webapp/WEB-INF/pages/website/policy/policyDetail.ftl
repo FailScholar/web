@@ -20,7 +20,7 @@
                 </div>
                 <div class="video">
                 	<h1>${ltfispPolicy.title}</h1>
-                    <p style="width:450px;text-align:center;"><span class="time">${ltfispPolicy.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${ltfispPolicy.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${ltfispPolicy.source}</span></p>
+                    <p style="width:650px;text-align:center;"><span class="time">${ltfispPolicy.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${ltfispPolicy.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${ltfispPolicy.source}</span></p>
                     <div class="clear"></div>
                     <div class="artical" style="background-color:#fff;">
                     	<p>${ltfispPolicy.content}</p>

@@ -37,4 +37,6 @@ public interface AreaService {
      * @author 张舒西 2016年11月22日 上午9:12:54
      */
     List<JltfispArea> getSubAreaList(Integer id);
+    
+    List<JltfispArea> getAreaAllList(Integer Pid);
 }

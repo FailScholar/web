@@ -7,8 +7,8 @@
                                   <p class="ntit">3、无论我公司是否获得贷款，我公司均同意所提供的一切资料(除特别申明外)留存存档，不必退回。</p>
                               </div>
                               <div class="cover">
-                                  <p class="ntit">申请单位：<input type="text" class="txt3" readonly value="${coAll.jltfispCoBase.company}"/>(签章)</p>
-                                  <p class="ntit">法人代表：<input type="text" class="txt3" readonly value="${coAll.jltfispCoBase.corporateRepresentative}"/>(签字)</p>
+                                  <p class="ntit">申请单位：<input type="text" class="txt3" readonly />(签章)</p>
+                                  <p class="ntit">法人代表：<input type="text" class="txt3" readonly />(签字)</p>
                                   <p class="ntit"><span class="ml70">年</span><span class="ml70">月</span><span class="ml70">日</span></p>
                               </div>
                           </div>

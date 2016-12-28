@@ -39,5 +39,10 @@
 </div>
 
   <#include "website/common/footer.ftl" />
+  <script>
+  	$(document).ready(function(e) {
+	     $("P").addClass("note");
+	});
+  </script>
   </body>
 </html>

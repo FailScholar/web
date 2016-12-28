@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
     <title>${applyname}</title>
       <style>  
-     @page{size:297mm 380mm;}
+     @page{size:297mm 450mm;}
 	  .content { padding:25px 20px; background-color:#fff;word-wrap:break-word;word-break:break-all;}
    .nli { width:100%; margin:0 auto; position:relative; padding-top:42px;}
 .nli .logbtn { text-align:center;}
@@ -39,7 +39,7 @@
 .calt h2 a { padding:6px 12px; color:#1679ff; position:absolute; right:0; border:1px dashed #1679ff; border-radius:3px; top:-44px;}
 .calt h2 a:hover { color:#0147a6; border-color:#0147a6;}
 .cover { padding-bottom:100px;}
-.cover h2 { font-size:26px; margin:100px auto 180px;}
+.cover h2 { font-size:28px; margin:100px auto 180px;}
 .cover .ntit { width:340px; margin:10px auto;}
 .cover .txt3 { border:none; border-bottom:1px solid #ccc; margin:0 6px; width:200px;}
 .tip3 { width:800px; margin:0 auto;}
@@ -66,12 +66,11 @@
                               <div class="cover">
                                   <p class="snum fr"></p>
                                   <div class="clear"></div>
-                                  <h2>${applyname}书</h2>
-                                  <p class="ntit">申请单位：<span class="ml20"></span>${coAll.jltfispCoBase.company}<span style="float:right;">(签章)</span></p>
-                                  <p class="ntit">法人代表：<span class="ml20"></span>${coAll.jltfispCoBase.corporateRepresentative}<span style="float:right;">(签章)</span></p>
-                                  <p class="ntit">公司地址：<span class="ml20">${coAll.jltfispCoBase.registeredAddress}</span></p>
-                                  <p class="ntit">申请日期：<span class="ml20">${coAll.jltfispCoBase.createTime?date}</span></p>
-                                  <p class="ntit"><span class="ml70">年</span><span class="ml70">月</span><span class="ml70">日</span></p>
+                                  <h2>${applyname!''}书</h2>
+                                  <p class="ntit">申请单位：<span class="ml20"></span><span style="float:right;">(签章)</span></p>
+                                  <p class="ntit">法人代表：<span class="ml20"></span><span style="float:right;">(签章)</span></p>
+                                  <p class="ntit">公司地址：<span class="ml20"></span></p>
+                                  <p class="ntit">申请日期：<span class="ml20"></span></p>
                               </div>
                           </div>
                           <!--重要提示-->
@@ -199,22 +198,35 @@
                                       <td>${coAll.jltfispCoBase.threeStock!''}%</td>
                                   </tr>
                               </table>
+                              <p class="ntit">企业概况</p>
                               <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainbusiness!''}</th>
-                                    <td>${coAll.jltfispCoProfile.mainBusiness!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                                    ${coAll.jltfispCoProfile.mainBusiness!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileSidelinebusses!''}</th>
-                                    <td>${coAll.jltfispCoProfile.sidelineBusses!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                                    ${coAll.jltfispCoProfile.sidelineBusses!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainfield!''}</th>
-                                    <td>${coAll.jltfispCoProfile.mainFieldValue!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                                    ${coAll.jltfispCoProfile.mainFieldValue!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileNature!''}</th>
-                                    <td>
+                                    <td><#if (coAll.jltfispCoProfile??)>
                                     	<#if (coAll.jltfispCoProfile.nature ==1) >
                                     	<label>私营企业</label>
                                     	<#elseif (coAll.jltfispCoProfile.nature ==2) >
@@ -223,17 +235,29 @@
                                         <label>国有企业</label>
                                         <#elseif (coAll.jltfispCoProfile.nature ==4) >
                                         <label>集体企业</label>
+                                        <#elseif (coAll.jltfispCoProfile.nature ==5) >
+                                        	其他
                                         </#if>
-                                        <#if (coAll.jltfispCoProfile.otherNature !='') >
-                                        <label>${coAll.jltfispCoProfile.otherNature!''}</label>
                                         </#if>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileWorkforce!''}</th>
                                     <td>
-                                    	${coAll.jltfispCoProfile.workforce!''}人
-                                        <span style="margin-left:30px;">其中：大专以上人数：</span>${coAll.jltfispCoProfile.collegeDegreeOrAboveNum!''}人<span style="margin-left:30px;">研发人员：</span>${coAll.jltfispCoProfile.researchStaffNum!''}人<br />
+                                    	<#if (coAll.jltfispCoProfile??)>
+                                   			${coAll.jltfispCoProfile.workforce!''}
+                                    	</#if>
+                                    	人
+                                        <span style="margin-left:30px;">其中：大专以上人数：</span>
+                                        <#if (coAll.jltfispCoProfile??)>
+                                   			${coAll.jltfispCoProfile.collegeDegreeOrAboveNum!''}
+                                    	</#if>
+                                        
+                                        	人<span style="margin-left:30px;">研发人员：</span>
+                                        	<#if (coAll.jltfispCoProfile??)>
+                                   			${coAll.jltfispCoProfile.researchStaffNum!''}
+                                    	</#if>
+                                        	人<br />
                                     </td>
                                 </tr>
                             </table>
@@ -241,28 +265,51 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th>${loanformManage.profileIntellectualpropertynum!''}</th>
-                                    <td colspan="3">${coAll.jltfispCoProfile.intellectualPropertyNum!''}个</td>
+                                    <td colspan="3">
+                                    <#if (coAll.jltfispCoProfile??)>
+                                   			${coAll.jltfispCoProfile.intellectualPropertyNum!''}
+                                    	</#if>
+                                    	个</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profilePatentofinventionnum!''}</th>
-                                    <td>${coAll.jltfispCoProfile.patentOfInventionNum!''}个</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                                   			${coAll.jltfispCoProfile.patentOfInventionNum!''}
+                                    	</#if>
+                                    	个</td>
                                     <th>${loanformManage.profileUtilitymodelpatentnum!''}</th>
-                                    <td>${coAll.jltfispCoProfile.utilityModelPatentNum!''}个</td>
+                                    <td>
+                                    	<#if (coAll.jltfispCoProfile??)>
+                                   			${coAll.jltfispCoProfile.utilityModelPatentNum!''}
+                                    	</#if>
+                                    	个</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profileSoftwarecopyrightnum!''}</th>
-                                    <td>${coAll.jltfispCoProfile.softwareCopyrightNum!''}个</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                               			${coAll.jltfispCoProfile.softwareCopyrightNum!''}
+                                	</#if>
+                                	个</td>
                                     <th>${loanformManage.profileIntegratedcircuitdesignnum!''}</th>
-                                    <td>${coAll.jltfispCoProfile.integratedCircuitDesignNum!''}个</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                               			${coAll.jltfispCoProfile.integratedCircuitDesignNum!''}
+                                	</#if>
+                                    	个</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.profileTechnologyorfinance!''}</th>
                                     <td colspan="3">
                                     	<label><span id="technologyOrFinance">
+                                    	<#if (coAll.jltfispCoProfile?? && coAll.jltfispCoProfile.technologyOrFinance??)>
                                     	<#list (coAll.jltfispCoProfile.technologyOrFinance?split(",")) as fina>
                                     		${finaMap["${fina}"]},
                                     	</#list>
-                                    	${coAll.jltfispCoProfile.otherTechnologyOrFinance!''}
+                               			${coAll.jltfispCoProfile.otherTechnologyOrFinance!''}
+                                	</#if>
+                                    	
                                     	</span></label>
                                     </td>
                                 </tr>
@@ -271,15 +318,27 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.profileInstitutionalabstract!''}</th>
-                                    <td>${coAll.jltfispCoProfile.institutionalAbstract!''}${coAll.jltfispCoProfile.institutionalAbstract!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                               			${coAll.jltfispCoProfile.institutionalAbstract!''}${coAll.jltfispCoProfile.institutionalAbstract!''}
+                                	</#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileManagementteamprofile!''}</th>
-                                    <td>${coAll.jltfispCoProfile.managementTeamProfile!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                               			${coAll.jltfispCoProfile.managementTeamProfile!''}
+                                	</#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.profileMainproductintroduction!''}</th>
-                                    <td>${coAll.jltfispCoProfile.mainProductIntroduction!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoProfile??)>
+                               			${coAll.jltfispCoProfile.mainProductIntroduction!''}
+                                	</#if>
+                                    </td>
                                 </tr>
                             </table>
                           </div>
@@ -306,11 +365,13 @@
                                   <tr>
                                       <th>${loanformManage.loanLabel4!''}</th>
                                       <td >
-                                      <#if (coAll.jltfispCoFillInApply.historyState =='1')>
-                                             是
-                                      <#else>
-                                         否
-                                      </#if>                                
+                                      <#if (coAll.jltfispCoFillInApply.historyState??)>
+	                                      <#if (coAll.jltfispCoFillInApply.historyState?? && coAll.jltfispCoFillInApply.historyState =='1')>
+											是
+	                                      <#else>
+	                                      	   否
+	                                      </#if>        
+                                      </#if>                        
                                       </td>
                                       <th>${loanformManage.loanLabel6!''}</th>
                                       <td colspan="2"><#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if></td>
@@ -363,11 +424,11 @@
                                   </tr>
                                   <tr>
                                       <th>${loanformManage.loanLabel18!''}</th>
-                                      <td colspan="5">${coAll.jltfispCoFillInApply.finaneAmount!''}</td>
+                                      <td colspan="5">${coAll.jltfispCoFillInApply.finaneRequire!''}</td>
                                   </tr>
                                   <tr>
                                       <th>推荐意见</th>
-                                      <td colspan="5" style="text-align:right">推荐单位（盖章）<br/>经办人<br/>日期</td>
+                                      <td colspan="5" style="padding-right: 200px;text-align:right"><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>推荐单位（盖章）：<br/><br/>经办人：<br/><br/>日期：<br/></td>
                                   </tr>
                               </table>
                           </div>
@@ -825,7 +886,7 @@
                                       <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtTwo.longstockinvestment!''}</td>
                                       <td>${loanformManage.debtCurrentDebtAmount!''}</td>
-                                      <td>0</td>
+                                      <td>${coAll.jltfispCoDebtTwo.currentdebtamount!''}</td>
                                   </tr>
                                   <tr>
                                       <td>${loanformManage.debtLongDebtsInvestment!''}</td>
@@ -1178,7 +1239,7 @@
                                       <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtThree.longstockinvestment!''}</td>
                                       <td>${loanformManage.debtCurrentDebtAmount!''}</td>
-                                      <td>0</td>
+                                      <td>${coAll.jltfispCoDebtThree.currentdebtamount!''}</td>
                                   </tr>
                                   <tr>
                                       <td>${loanformManage.debtLongDebtsInvestment!''}</td>
@@ -1531,7 +1592,7 @@
                                       <td>${loanformManage.debtLongStockInvestment!''}</td>
                                       <td>${coAll.jltfispCoDebtFour.longstockinvestment!''}</td>
                                       <td>${loanformManage.debtCurrentDebtAmount!''}</td>
-                                      <td>0</td>
+                                      <td>${coAll.jltfispCoDebtFour.currentdebtamount!''}</td>
                                   </tr>
                                   <tr>
                                       <td>${loanformManage.debtLongDebtsInvestment!''}</td>
@@ -1794,9 +1855,11 @@
                             <table width="100%" class="tab3 tab4">
                                 <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th>
                                 <th>${.now?string('yyyy')}年1~
-                                <#if (coAll.jltfispCoProfit?size gt 0)>
+					              <#if coAll.jltfispCoProfit[0]?exists>
                                 ${coAll.jltfispCoProfit[0].month!''}
-					             </#if>	                   
+                                <#else>
+                                ${(.now?string('MM')?number-1)?string('##')}
+                                </#if>	                   
 					                                月</th></tr>
 					            <#if (coAll.jltfispCoProfit?size gt 0)>
                                 <tr>
@@ -2044,38 +2107,114 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[0].percent!''}</td>
+                                    <td>
+	                                    <#if (coAll.jltfispCoFinancialList[0]??)>
+	                                   		 ${coAll.jltfispCoFinancialList[0].company!''}
+	                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[0]??)>
+                                    	${coAll.jltfispCoFinancialList[0].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                     <#if (coAll.jltfispCoFinancialList[0]??)>
+                                    	${coAll.jltfispCoFinancialList[0].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[0]??)>
+                                    	${coAll.jltfispCoFinancialList[0].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[1].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[1]??)>
+                                    	${coAll.jltfispCoFinancialList[1].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[1]??)>
+                                    	${coAll.jltfispCoFinancialList[1].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[1]??)>
+                                    	${coAll.jltfispCoFinancialList[1].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[1]??)>
+                                    	${coAll.jltfispCoFinancialList[1].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[2].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[2]??)>
+                                    	${coAll.jltfispCoFinancialList[2].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[2]??)>
+                                    	${coAll.jltfispCoFinancialList[2].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[2]??)>
+                                    	${coAll.jltfispCoFinancialList[2].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[2]??)>
+                                    	${coAll.jltfispCoFinancialList[2].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[3].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[3]??)>
+                                    	${coAll.jltfispCoFinancialList[3].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[3]??)>
+                                    	${coAll.jltfispCoFinancialList[3].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[3]??)>
+                                    	${coAll.jltfispCoFinancialList[3].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[3]??)>
+                                    	${coAll.jltfispCoFinancialList[3].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[4].percent!''}</td>
+                                    <td></td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[4]??)>
+                                    	${coAll.jltfispCoFinancialList[4].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[4]??)>
+                                    	${coAll.jltfispCoFinancialList[4].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[4]??)>
+                                    	${coAll.jltfispCoFinancialList[4].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                             </table>
                               <p class="ntit" style="text-align:center;">2、其他应收明细表</p>
@@ -2091,38 +2230,114 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[5].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[5]??)>
+                                    	${coAll.jltfispCoFinancialList[5].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[5]??)>
+                                    	${coAll.jltfispCoFinancialList[5].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[5]??)>
+                                    	${coAll.jltfispCoFinancialList[5].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[5]??)>
+                                    	${coAll.jltfispCoFinancialList[5].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[6].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[6]??)>
+                                    	${coAll.jltfispCoFinancialList[6].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[6]??)>
+                                    	${coAll.jltfispCoFinancialList[6].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[6]??)>
+                                    	${coAll.jltfispCoFinancialList[6].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[6]??)>
+                                    	${coAll.jltfispCoFinancialList[6].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[7].percent!''}</td>
+                                     <td>
+                                    <#if (coAll.jltfispCoFinancialList[7]??)>
+                                    	${coAll.jltfispCoFinancialList[7].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[7]??)>
+                                    	${coAll.jltfispCoFinancialList[7].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[7]??)>
+                                    	${coAll.jltfispCoFinancialList[7].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[7]??)>
+                                    	${coAll.jltfispCoFinancialList[7].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[8].percent!''}</td>
+                                     <td>
+                                    <#if (coAll.jltfispCoFinancialList[8]??)>
+                                    	${coAll.jltfispCoFinancialList[8].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[8]??)>
+                                    	${coAll.jltfispCoFinancialList[8].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[8]??)>
+                                    	${coAll.jltfispCoFinancialList[8].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[8]??)>
+                                    	${coAll.jltfispCoFinancialList[8].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[9].percent!''}</td>
+                                     <td></td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[9]??)>
+                                    	${coAll.jltfispCoFinancialList[9].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[9]??)>
+                                    	${coAll.jltfispCoFinancialList[9].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[9]??)>
+                                    	${coAll.jltfispCoFinancialList[9].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">3、应付款明细表</p>
@@ -2138,38 +2353,114 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[10].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[10]??)>
+                                    	${coAll.jltfispCoFinancialList[10].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[10]??)>
+                                    	${coAll.jltfispCoFinancialList[10].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[10]??)>
+                                    	${coAll.jltfispCoFinancialList[10].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[10]??)>
+                                    	${coAll.jltfispCoFinancialList[10].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[11].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[11]??)>
+                                    	${coAll.jltfispCoFinancialList[11].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[11]??)>
+                                    	${coAll.jltfispCoFinancialList[11].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[11]??)>
+                                    	${coAll.jltfispCoFinancialList[11].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[11]??)>
+                                    	${coAll.jltfispCoFinancialList[11].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[12].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[12]??)>
+                                    	${coAll.jltfispCoFinancialList[12].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[12]??)>
+                                    	${coAll.jltfispCoFinancialList[12].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[12]??)>
+                                    	${coAll.jltfispCoFinancialList[12].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[12]??)>
+                                    	${coAll.jltfispCoFinancialList[12].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[13].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[13]??)>
+                                    	${coAll.jltfispCoFinancialList[13].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[13]??)>
+                                    	${coAll.jltfispCoFinancialList[13].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[13]??)>
+                                    	${coAll.jltfispCoFinancialList[13].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[13]??)>
+                                    	${coAll.jltfispCoFinancialList[13].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].yszkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[14].percent!''}</td>
+                                    <td></td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[14]??)>
+                                    	${coAll.jltfispCoFinancialList[14].yszkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[14]??)>
+                                    	${coAll.jltfispCoFinancialList[14].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[14]??)>
+                                    	${coAll.jltfispCoFinancialList[14].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">4、其他应付款明细表</p>
@@ -2185,38 +2476,114 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[15].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[15]??)>
+                                    	${coAll.jltfispCoFinancialList[15].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[15]??)>
+                                    	${coAll.jltfispCoFinancialList[15].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[15]??)>
+                                    	${coAll.jltfispCoFinancialList[15].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[15]??)>
+                                    	${coAll.jltfispCoFinancialList[15].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[16].percent!''}</td>
+                                   <td>
+                                    <#if (coAll.jltfispCoFinancialList[16]??)>
+                                    	${coAll.jltfispCoFinancialList[16].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[16]??)>
+                                    	${coAll.jltfispCoFinancialList[16].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[16]??)>
+                                    	${coAll.jltfispCoFinancialList[16].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[16]??)>
+                                    	${coAll.jltfispCoFinancialList[16].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[17].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[17]??)>
+                                    	${coAll.jltfispCoFinancialList[17].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[17]??)>
+                                    	${coAll.jltfispCoFinancialList[17].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[17]??)>
+                                    	${coAll.jltfispCoFinancialList[17].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[17]??)>
+                                    	${coAll.jltfispCoFinancialList[17].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[18].percent!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[18]??)>
+                                    	${coAll.jltfispCoFinancialList[18].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[18]??)>
+                                    	${coAll.jltfispCoFinancialList[18].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[18]??)>
+                                    	${coAll.jltfispCoFinancialList[18].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[18]??)>
+                                    	${coAll.jltfispCoFinancialList[18].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>合计</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].qtzkye!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].zl!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[19].percent!''}</td>
+                                    <td></td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[19]??)>
+                                    	${coAll.jltfispCoFinancialList[19].qtzkye!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[19]??)>
+                                    	${coAll.jltfispCoFinancialList[19].zl!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[19]??)>
+                                    	${coAll.jltfispCoFinancialList[19].percent!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">5、银行借款明细表</p>
@@ -2233,41 +2600,129 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].startTime?date!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[20].endTime?date!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[20]??)>
+                                    	${coAll.jltfispCoFinancialList[20].loanBank!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[20]??)>
+                                    	${coAll.jltfispCoFinancialList[20].loanAccount!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[20]??)>
+                                    	${coAll.jltfispCoFinancialList[20].sureMethod!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[20]??)>
+                                    	${coAll.jltfispCoFinancialList[20].startTime?date!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[20]??)>
+                                    	${coAll.jltfispCoFinancialList[20].endTime?date!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].startTime?date!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[21].endTime?date!''}</td>
+                                     <td>
+                                    <#if (coAll.jltfispCoFinancialList[21]??)>
+                                    	${coAll.jltfispCoFinancialList[21].loanBank!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[21]??)>
+                                    	${coAll.jltfispCoFinancialList[21].loanAccount!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[21]??)>
+                                    	${coAll.jltfispCoFinancialList[21].sureMethod!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[21]??)>
+                                    	${coAll.jltfispCoFinancialList[21].startTime?date!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[21]??)>
+                                    	${coAll.jltfispCoFinancialList[21].endTime?date!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].startTime?date!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[22].endTime?date!''}</td>
+                                     <td>
+                                    <#if (coAll.jltfispCoFinancialList[22]??)>
+                                    	${coAll.jltfispCoFinancialList[22].loanBank!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[22]??)>
+                                    	${coAll.jltfispCoFinancialList[22].loanAccount!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[22]??)>
+                                    	${coAll.jltfispCoFinancialList[22].sureMethod!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[22]??)>
+                                    	${coAll.jltfispCoFinancialList[22].startTime?date!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[22]??)>
+                                    	${coAll.jltfispCoFinancialList[22].endTime?date!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].loanBank!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].loanAccount!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].sureMethod!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].startTime?date!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[23].endTime?date!''}</td>
+                                     <td>
+                                    <#if (coAll.jltfispCoFinancialList[23]??)>
+                                    	${coAll.jltfispCoFinancialList[23].loanBank!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[23]??)>
+                                    	${coAll.jltfispCoFinancialList[23].loanAccount!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[23]??)>
+                                    	${coAll.jltfispCoFinancialList[23].sureMethod!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[23]??)>
+                                    	${coAll.jltfispCoFinancialList[23].startTime?date!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[23]??)>
+                                    	${coAll.jltfispCoFinancialList[23].endTime?date!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td><b>其他金融机构融资</b></td>
-                                    <td colspan="2">${coAll.jltfispCoFinancialList[24].otherrz!''}</td>
+                                    <td colspan="2">
+                                    <#if (coAll.jltfispCoFinancialList[24]??)>
+                                    	${coAll.jltfispCoFinancialList[24].otherrz!''}
+                                    </#if>
+                                    </td>
                                     <td><b>民间融资</b></td>
-                                    <td colspan="2">${coAll.jltfispCoFinancialList[25].mjjk!''}</td>
+                                    <td colspan="2">
+                                    <#if (coAll.jltfispCoFinancialList[25]??)>
+                                    	${coAll.jltfispCoFinancialList[25].mjjk!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                             </table>
                             <p class="ntit" style="text-align:center;">6、关联公司明细表</p>
@@ -2284,35 +2739,115 @@
                                 </tr>
                                 <tr>
                                 	<td>1</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[26].zysr!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[26]??)>
+                                    	${coAll.jltfispCoFinancialList[26].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[26]??)>
+                                    	${coAll.jltfispCoFinancialList[26].gx!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[26]??)>
+                                    	${coAll.jltfispCoFinancialList[26].zczb!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[26]??)>
+                                    	${coAll.jltfispCoFinancialList[26].zyyw!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[26]??)>
+                                    	${coAll.jltfispCoFinancialList[26].zysr!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>2</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[27].zysr!''}</td>
+                                   <td>
+                                    <#if (coAll.jltfispCoFinancialList[27]??)>
+                                    	${coAll.jltfispCoFinancialList[27].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[27]??)>
+                                    	${coAll.jltfispCoFinancialList[27].gx!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[27]??)>
+                                    	${coAll.jltfispCoFinancialList[27].zczb!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[27]??)>
+                                    	${coAll.jltfispCoFinancialList[27].zyyw!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[27]??)>
+                                    	${coAll.jltfispCoFinancialList[27].zysr!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>3</td>
-                                     <td>${coAll.jltfispCoFinancialList[28].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[28].zysr!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[28]??)>
+                                    	${coAll.jltfispCoFinancialList[28].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[28]??)>
+                                    	${coAll.jltfispCoFinancialList[28].gx!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[28]??)>
+                                    	${coAll.jltfispCoFinancialList[28].zczb!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[28]??)>
+                                    	${coAll.jltfispCoFinancialList[28].zyyw!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[28]??)>
+                                    	${coAll.jltfispCoFinancialList[28].zysr!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                                 <tr>
                                 	<td>4</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].company!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].gx!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].zczb!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].zyyw!''}</td>
-                                    <td>${coAll.jltfispCoFinancialList[29].zysr!''}</td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[29]??)>
+                                    	${coAll.jltfispCoFinancialList[29].company!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[29]??)>
+                                    	${coAll.jltfispCoFinancialList[29].gx!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[29]??)>
+                                    	${coAll.jltfispCoFinancialList[29].zczb!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[29]??)>
+                                    	${coAll.jltfispCoFinancialList[29].zyyw!''}
+                                    </#if>
+                                    </td>
+                                    <td>
+                                    <#if (coAll.jltfispCoFinancialList[29]??)>
+                                    	${coAll.jltfispCoFinancialList[29].zysr!''}
+                                    </#if>
+                                    </td>
                                 </tr>
                             </table>
                           </div>
@@ -2320,13 +2855,13 @@
                          <div class="nlistCont nlc">
                               <div class="tip3" style="padding-bottom:300px;">
                                   <h3>本公司在此承诺</h3>
-                                  <p class="ntit">1、所提供的资料、填写的数据真实、合法、有效，若所提供的资料失真，由此产生的一切后果由本公司承担；</p>
-                                  <p class="ntit">2、本次提供的资料仅为基础资料，在通过预审后需补充其他资料的，本公司将协助银行、担保/保险公司业务经理在贷款调查时提供；</p>
-                                  <p class="ntit">3、无论我公司是否获得贷款，我公司均同意所提供的一切资料(除特别申明外)留存存档，不必退回。</p>
+                                  <p class="ntit" style="border-bottom:0px solid #ddd">1、所提供的资料、填写的数据真实、合法、有效，若所提供的资料失真，由此产生的一切后果由本公司承担；</p>
+                                  <p class="ntit" style="border-bottom:0px solid #ddd">2、本次提供的资料仅为基础资料，在通过预审后需补充其他资料的，本公司将协助银行、担保/保险公司业务经理在贷款调查时提供；</p>
+                                  <p class="ntit" style="border-bottom:0px solid #ddd">3、无论我公司是否获得贷款，我公司均同意所提供的一切资料(除特别申明外)留存存档，不必退回。</p>
                               </div>
                               <div class="cover">
-                                  <p class="ntit">申请单位：<span class="ml20">${coAll.jltfispCoBase.company}</span><span style="float:right;">(签章)</span></p>
-                                  <p class="ntit">法人代表：<span class="ml20">${coAll.jltfispCoBase.corporateRepresentative}</span><span style="float:right;">(签字)</span></p>
+                                  <p class="ntit">申请单位：<span class="ml20"></span><span style="float:right;">(签章)</span></p>
+                                  <p class="ntit">法人代表：<span class="ml20"></span><span style="float:right;">(签字)</span></p>
                                   <p class="ntit"><span class="ml70">年</span><span class="ml70">月</span><span class="ml70">日</span></p>
                               </div>
                           </div>

@@ -7,6 +7,7 @@ package com.jltfisp.web.loan.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -31,16 +32,14 @@ import com.jltfisp.util.UploadFile;
 import com.jltfisp.util.WebUtil;
 import com.jltfisp.util.service.DictionaryService;
 import com.jltfisp.web.area.service.AreaService;
-import com.jltfisp.web.loan.entity.BusinessApplayAudit;
-import com.jltfisp.web.loan.entity.FormLabel;
-import com.jltfisp.web.loan.entity.JltfispCoAll;
-import com.jltfisp.web.loan.entity.JltfispCoBase;
 import com.jltfisp.web.loan.entity.*;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
 import com.jltfisp.web.loan.service.ILoanManageOtherService;
 import com.jltfisp.web.loan.service.LoanService;
 import com.jltfisp.web.news.entity.DictColumnDto;
+
 import org.springframework.ui.Model;
+
 import java.util.*;
 
 
@@ -257,6 +256,15 @@ public class LoanController {
     public int saveCoBase(HttpServletRequest request,JltfispCoBase jltfispCoBase) {
     	JltfispCoBaseDto jltfispCoBaseDto=new JltfispCoBaseDto();
     	WebUtil.copyBean(jltfispCoBase, jltfispCoBaseDto);
+    	if("".equals(jltfispCoBase.getOneStock())){
+    		jltfispCoBaseDto.setOneStock(null);
+    	}
+    	if("".equals(jltfispCoBase.getTwoStock())){
+    		jltfispCoBaseDto.setTwoStock(null);
+    	}
+    	if("".equals(jltfispCoBase.getThreeStock())){
+    		jltfispCoBaseDto.setThreeStock(null);
+    	}
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	//通过USERID获取企业基本信息
@@ -282,7 +290,8 @@ public class LoanController {
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispCoBaseDto Dto=loanService.getCoBaseContextByUserIdAndType(user.getId(), Integer.parseInt(applytype),3);
-        if(Dto == null){
+        
+    	if(Dto == null){
         	return 0;
         }else{
         	return 1;
@@ -304,6 +313,21 @@ public class LoanController {
     	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),businesstype,3);
     	JltfispCoProfile jltfispCoProfile=new JltfispCoProfile();
     	WebUtil.copyBean(jltfispCoProfileDto, jltfispCoProfile);
+    	if("".equals(jltfispCoProfileDto.getPatentOfInventionNum())){
+    		jltfispCoProfile.setPatentOfInventionNum(null);
+    	}
+    	if("".equals(jltfispCoProfileDto.getIntellectualPropertyNum())){
+    		jltfispCoProfile.setIntellectualPropertyNum(null);
+    	}
+    	if("".equals(jltfispCoProfileDto.getUtilityModelPatentNum())){
+    		jltfispCoProfile.setUtilityModelPatentNum(null);
+    	}
+    	if("".equals(jltfispCoProfileDto.getSoftwareCopyrightNum())){
+    		jltfispCoProfile.setSoftwareCopyrightNum(null);
+    	}
+    	if("".equals(jltfispCoProfileDto.getIntegratedCircuitDesignNum())){
+    		jltfispCoProfile.setIntegratedCircuitDesignNum(null);
+    	}
     	jltfispCoProfile.setInfoid(jltfispCoBaseDto.getId());
     	jltfispCoProfile.setCreateUserid(user.getId());
         return loanService.saveCoProfile(jltfispCoProfile);
@@ -367,6 +391,41 @@ public class LoanController {
     	request.setAttribute("coAll", coAll);
     	request.setAttribute("applytype", applytype);
         return "/website/loan/loanapply/coDebtTable";
+    }
+    
+    @RequestMapping("/selectCoDebtTableByInfoId")
+    public String selectCoDebtTableByInfoId(HttpServletRequest request,String year,String applytype,Integer infoId) {
+    	//获取当前用户登录信息
+    	JltfispUser user=loginService.getCurrentUser();
+    	JltfispCoAll coAll =loanService.getCoDebtTable(year, infoId);
+    	
+    	//获取申请表单 字段名称
+        LoanManageOther loanformManage = new LoanManageOther();
+        SysDict sysDict = dictionaryService.getValueByTypeCode(1002, applytype);
+        if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+            loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                    LoanManageOther.class);
+        }else{
+            LoanManageOther params = new LoanManageOther();
+            params.setType(sysDict.getId());
+            params.setIstemplate(0);
+            loanformManage = loanManageOtherService.selectOneByExample(params);
+            if(loanformManage == null){
+                params = new LoanManageOther();
+                params.setIstemplate(1);
+                loanformManage = loanManageOtherService.selectOneByExample(params);
+            }
+            
+        }
+        String formlabelJson = loanformManage.getFormLabelJson();
+        FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+                FormLabel.class);
+        request.setAttribute("loanformManage", formLabel);
+    	
+    	
+    	request.setAttribute("coAll", coAll);
+    	request.setAttribute("applytype", applytype);
+        return "/website/loan/loanapply/coDebtTableView";
     }
     
     /**
@@ -447,9 +506,59 @@ public class LoanController {
         request.setAttribute("loanformManage", formLabel);
     	
     	request.setAttribute("coAll", coAll);
+    	
+    	Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		request.setAttribute("firstYear", year-3);
+		request.setAttribute("secondYear", year-2);
+		request.setAttribute("thirdYear", year-1);
+		request.setAttribute("fourYear", year);
+		request.setAttribute("month", month);
         return "/website/loan/loanapply/coProfitView";
     }
     
+    
+    @RequestMapping("/selectCoProfitTableByInfoId")
+    public String selectCoProfitTableByInfoId(HttpServletRequest request,String applytype,Integer infoId) {
+    	//获取该用户所有信息
+    	JltfispCoAll coAll =loanService.getApplyALL(infoId);
+    	
+    	//获取申请表单 字段名称
+        LoanManageOther loanformManage = new LoanManageOther();
+        SysDict sysDict = dictionaryService.getValueByTypeCode(1002, applytype);
+        if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+            loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                    LoanManageOther.class);
+        }else{
+            LoanManageOther params = new LoanManageOther();
+            params.setType(sysDict.getId());
+            params.setIstemplate(0);
+            loanformManage = loanManageOtherService.selectOneByExample(params);
+            if(loanformManage == null){
+                params = new LoanManageOther();
+                params.setIstemplate(1);
+                loanformManage = loanManageOtherService.selectOneByExample(params);
+            }
+            
+        }
+        String formlabelJson = loanformManage.getFormLabelJson();
+        FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+                FormLabel.class);
+        request.setAttribute("loanformManage", formLabel);
+    	
+    	request.setAttribute("coAll", coAll);
+    	
+    	Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH);
+		request.setAttribute("firstYear", year-3);
+		request.setAttribute("secondYear", year-2);
+		request.setAttribute("thirdYear", year-1);
+		request.setAttribute("fourYear", year);
+		request.setAttribute("month", month);
+        return "/website/loan/loanapply/coProfitView";
+    }
     
     /**
      * 科技履约贷款申请填写企业基本信息-利润表
@@ -555,6 +664,9 @@ public class LoanController {
     	JltfispCoFillInApply jltfispCoFillInApply=new JltfispCoFillInApply();
     	//将jltfispCoFillInApplyDto的属性拷贝到jltfispCoFillInApply中去
     	WebUtil.copyBean(jltfispCoFillInApplyDto, jltfispCoFillInApply);
+    	if("".equals(jltfispCoFillInApplyDto.getFinaneAmount())){
+    		jltfispCoFillInApply.setFinaneAmount(null);
+    	}
     	jltfispCoFillInApply.setCreateTime(new Date());
     	//获取当前用户登录信息
     	JltfispUser user=loginService.getCurrentUser();
@@ -646,6 +758,7 @@ public class LoanController {
     	request.setAttribute("coAll", coAll);
     	request.setAttribute("coDebt", coDebt);
     	request.setAttribute("dicList", dicList);
+		
     	
      //获取申请表单 字段名称
      LoanManageOther loanformManage = new LoanManageOther();

@@ -40,7 +40,7 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.loanLabel1}</th>
-                                    <td ><input value="${coAll.jltfispCoFillInApply.applyAmount}" name="applyAmount" id="applyAmount" type="text" class="txt2 validate[required,minSize[1],maxSize[10],custom[number]]" />万元</td>
+                                    <td ><input value="${coAll.jltfispCoFillInApply.applyAmount}" name="applyAmount" id="applyAmount" type="text" class="txt2 validate[required,minSize[1],min[0],maxSize[10],custom[number2]]" />万元</td>
                                     <th><b class="red">*</b>${loanformManage.loanLabel2}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.payCycle ==1>
@@ -58,7 +58,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.loanLabel3}</th>
-                                    <td colspan="3"><textarea name="useDesc" id="useDesc" class="txta validate[required,minSize[1],maxSize[255]]" style="height:100px;">${coAll.jltfispCoFillInApply.useDesc}</textarea></td>
+                                    <td colspan="3"><textarea name="useDesc" id="useDesc" class="txta validate[required,minSize[1],maxSize[500]]" style="height:100px;">${coAll.jltfispCoFillInApply.useDesc}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel4}</th>
@@ -80,7 +80,7 @@
                                     </#if>
                                     是</label></td>
                                     <th>${loanformManage.loanLabel6}</th>
-                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker()" type="text" class="txt" /></label></td>
+                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker({readOnly:true})" type="text" class="txt" /></label></td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel7}</th>
@@ -103,16 +103,16 @@
                                 <tr>
                                     <th>${loanformManage.loanLabel9}</th>
                                     <td>
-                                    <input value="${coAll.jltfispCoFillInApply.bankid}" name="bankid" id="bankid" type="text" class="txt2 validate[maxSize[255]]" />
+                                    <input value="${coAll.jltfispCoFillInApply.bankid}" name="bankid" id="bankid" type="text" class="txt2 validate[maxSize[20]]" />
                                     </td>
                                     <th>${loanformManage.loanLabel10}</th>
                                     <td>
-                                    <input value="${coAll.jltfispCoFillInApply.riskid}" name="riskid" id="riskid" type="text" class="txt2 validate[maxSize[255]]" />
+                                    <input value="${coAll.jltfispCoFillInApply.riskid}" name="riskid" id="riskid" type="text" class="txt2 validate[maxSize[20]]" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel11}</th>
-                                    <td><input value="${coAll.jltfispCoFillInApply.bankBranch}" name="bankBranch" id="bankBranch" type="text" class="txt2 validate[maxSize[255]]" /></td>
+                                    <td><input value="${coAll.jltfispCoFillInApply.bankBranch}" name="bankBranch" id="bankBranch" type="text" class="txt2 validate[maxSize[20]]" /></td>
                                     <th>${loanformManage.loanLabel12}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.isOtherbankLoan ==1>
@@ -124,9 +124,9 @@
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel13}</th>
-                                    <td><input value="${coAll.jltfispCoFillInApply.loanOffice}" name="loanOffice" id="loanOffice" type="text" class="txt2 validate[maxSize[255]]" placeholder="请输入" /></td>
+                                    <td><input value="${coAll.jltfispCoFillInApply.loanOffice}" name="loanOffice" id="loanOffice" type="text" class="txt2 validate[maxSize[20]]" placeholder="请输入" /></td>
                                     <th>${loanformManage.loanLabel14}</th>
-                                    <td><input value="${coAll.jltfispCoFillInApply.loanOfficeMobile}" name="loanOfficeMobile" id="loanOfficeMobile" type="text" class="txt2 validate[custom[phone],maxSize[11]]" placeholder="请输入" /></td>
+                                    <td><input value="${coAll.jltfispCoFillInApply.loanOfficeMobile}" name="loanOfficeMobile" id="loanOfficeMobile" type="text" class="txt2 validate[custom[mobile],maxSize[11]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                             <p class="ntit">融资计划(如需股权融资请填写该表)</p>
@@ -155,11 +155,11 @@
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel17}</th>
-                                    <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number],maxSize[255]]" placeholder="请输入" />万元</td>
+                                    <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number2],min[0],maxSize[10]]" placeholder="请输入" />万元</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel18}</th>
-                                    <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[255]]">${coAll.jltfispCoFillInApply.finaneRequire}</textarea></td>
+                                    <td colspan="3"><textarea  name="finaneRequire" id="finaneRequire" class="txta validate[maxSize[500]]">${coAll.jltfispCoFillInApply.finaneRequire}</textarea></td>
                                 </tr>
                             </table>
                             </form>
@@ -189,7 +189,7 @@ $(document).ready(function(e) {
                }
             $.ajax({
             type: "POST",
-            url: '${path}/anon/loan/saveCoFillInApply',
+            url: '${path}/loan/saveCoFillInApply?xss=true',
             data: $("#coFillInApply").serialize(),
             dateType:"json",
             success: function(msg){

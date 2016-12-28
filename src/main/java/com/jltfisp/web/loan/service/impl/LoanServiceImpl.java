@@ -394,7 +394,14 @@ public class LoanServiceImpl implements LoanService {
 		CoAll.setJltfispCoDebt(coDebt);
 		return CoAll;
 	}
-	
+	@Override
+	public JltfispCoAll getCoDebtTable(String year,int infoId) {
+		JltfispCoBaseDto coBase=this.getCoBaseContext(infoId);
+		JltfispCoDebt coDebt=coDebtMapper.getCoDebtContextByInfoId(coBase.getId(), year);
+		JltfispCoAll CoAll=new JltfispCoAll();
+		CoAll.setJltfispCoDebt(coDebt);
+		return CoAll;
+	}
 	
 	@Override
 	public DictColumnDto getAppName(String apptype) {
@@ -437,10 +444,10 @@ public class LoanServiceImpl implements LoanService {
 		List<JltfispCoFinancialDto> coFinancialList=coFinancialMapper.getCoCoFinancialContextByinfoId(infoid);
 		JltfispCoFillInApply coFillInApply=coFillInApplyMapper.getCoFillInApplyContext(coBase.getId());
 		CoAll.setJltfispCoBase(coBase);
-		CoAll.setJltfispCoDebt(coDebt!=null?coDebt:new JltfispCoDebt());
-		CoAll.setJltfispCoDebtTwo(coDebt2!=null?coDebt2:new JltfispCoDebt());
-		CoAll.setJltfispCoDebtThree(coDebt3!=null?coDebt3:new JltfispCoDebt());
-		CoAll.setJltfispCoDebtFour(coDebt4!=null?coDebt4:new JltfispCoDebt());
+		CoAll.setJltfispCoDebt(coDebt);
+		CoAll.setJltfispCoDebtTwo(coDebt2);
+		CoAll.setJltfispCoDebtThree(coDebt3);
+		CoAll.setJltfispCoDebtFour(coDebt4);
 		CoAll.setJltfispCoOther(coOther);
 		CoAll.setJltfispCoFileList(coFileList);
 		CoAll.setJltfispCoProfit(coProfit);

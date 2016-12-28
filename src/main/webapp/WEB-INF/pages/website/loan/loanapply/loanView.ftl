@@ -135,7 +135,7 @@ for (i=0;i<technologyOrFinanceList.length;i++ )
           }
   }
  str=str+" "+OtherTechnologyOrFinance;
- $('#technologyOrFinance').html(str);
+ $('#technologyOrFinance').html("<div style='width:900px;word-wrap:break-word;word-break:normal;'>"+str+"</div>");
 <!--查询办公地址-->
 $.ajax({
             type: "POST",

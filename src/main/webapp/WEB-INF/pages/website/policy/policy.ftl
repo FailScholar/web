@@ -19,10 +19,11 @@
           <ul class="infoTab">
             <#list columnList as column>
             	<#if column_index lt 5>
-               		 <li id="Type${column.id}" name="${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+               		 <li id="Type${column.id}" name="${column.id}" onclick="infoTabClick(${column.id})"><a href="javascript:void(0);">${column.columnName}</a></li>
             	</#if>
              </#list>
               <#if columnList?size gt 5>
+               <li>
 		       	 <select id="selectId" onchange="getList()">
 		       		<option value="0">-选择更多-</option>
 		       	 	<#list columnList as afterFiveList>
@@ -30,7 +31,8 @@
 		       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
 		       	 		</#if>
 		       	 	</#list>
-		       	 </select>
+		       	 </select>&nbsp;
+		       </li>	 
        	 </#if>
           </ul>
           <div class="clear"></div>
@@ -38,7 +40,7 @@
               <#list pm.datas as policy>
                 <ul class="ul1">
                    <li>
-			        <h2 class="ellipsis"><a href="javascript:void(0);" onclick="policyDetail(${policy.id})">${policy.title }</a></h2>
+			        <h2 class="ellipsis"><a href="${path}/anon/policyDetail?policyId=${policy.id}" target="_blank" >${policy.title }</a></h2>
 			        <p class="tit">${policy.source }<span>${policy.publishTime ?date }</span><span class="eye fr">${policy.pv }</span></p>
 			        <p>${policy.contentReview }</p>
 			     </li>
@@ -55,17 +57,23 @@
  
  <div class="clear"></div>
  <div class="clearfix"></div>
+ </div>
  <#include "website/common/footer.ftl" />
  </body>
 </html>
 <script type="text/javascript">
+function infoTabClick(columnid) {
+		$("#selectId").val("0");
+		$('.infoList').load("${path}/perm/policy/"+columnid,{'pager.offset' :0});
+	}
+    var infoTab_li_index = [0];
   $(document).ready(function(e) {
       positionNavigation(3);
     var columnId=${columnId};
     $('#Type'+columnId).addClass('active');
     $("#columnIdValue").val(columnId);
     $('.infoList').html('');
-    <!--传当前子栏目ID-->
+    //传当前子栏目ID
 	$.ajax({
             type: 'POST',
             url:'${path}/perm/policy/'+columnId,
@@ -74,32 +82,11 @@
             $('.infoList').html(data);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                <!--鉴权不通过，则隐藏添加功能-->
+                //鉴权不通过，则隐藏添加功能
                 if(XMLHttpRequest.status ==401){
                  $('.infoList').html(''); 
                  }
             }
-      });
-    $('.infoTab li').click(function(){
-    	$("#selectId").val("0");
-        var columnId=$(this).attr("name");
-        $("#columnIdValue").val(columnId);
-        $(this).addClass('active').siblings('li').removeClass('active');
-		    <!--传当前子栏目ID-->
-			$.ajax({
-	                type: 'POST',
-	                url:'${path}/perm/policy/'+columnId,
-	                data: {columnId: columnId,'pager.offset':0},
-	                success: function (data) {
-	                $('.infoList').html(data);
-	                },
-	                error: function(XMLHttpRequest, textStatus, errorThrown) {
-	                      <!--鉴权不通过，则隐藏添加功能-->
-	                      if(XMLHttpRequest.status ==401){
-	                       $('.infoList').html(''); 
-	                       }
-	                  }
-	          });
 	});
 });
   //跳转页面详情
@@ -119,7 +106,7 @@
 	                  $('.infoList').html(data);
 	                  },
 	                  error: function(XMLHttpRequest, textStatus, errorThrown) {
-	                      <!--鉴权不通过，则隐藏添加功能-->
+	                     //鉴权不通过，则隐藏添加功能
 	                      if(XMLHttpRequest.status ==401){
 	                       $('.infoList').html(''); 
 	                       }
@@ -137,7 +124,7 @@
 	           		 $('.infoList').html(data);
 	            },
 	            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    <!--鉴权不通过，则隐藏添加功能-->
+                    //鉴权不通过，则隐藏添加功能
                     if(XMLHttpRequest.status ==401){
                      $('.infoList').html(''); 
                      }

@@ -35,6 +35,9 @@
 				 $.cookie('userinfoIndex', flag, {path: '/'});
 				 window.location.href = "${path}/main"
 			}
+			function goUrl(url){
+		location.href=url;
+	}
   </script>
   </head>
 
@@ -44,20 +47,20 @@
               <div class="content">
                   <div class="info">
                       <ul class="infoTab">
-                          <li><a href="javascript:goMain(0);">用户中心</a></li>
-                          <li><a href="javascript:goMain(1);">用户信息</a></li>
-                          <li class="active"><a href="${path}/message/page">通知通告</a></li>
+                          <li onclick="goMain(0)"><a href="javascript:void(0);">用户中心</a></li>
+                          <li onclick="goMain(1)"><a href="javascript:void(0);">用户信息</a></li>
+                          <li  class="active" onclick="goUrl('${path}/message/page')"><a href="javascript:;">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
-                              <li><a href="${path}/business/page">业务管理</a></li>
+                              <li onclick="goUrl('${path}/business/page')"><a href="javascript:;">业务管理</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasAnyRoles name="个人会员,企业会员,机构会员">
-                              <li><a href="${path}/communicate/page">我要咨询</a></li>
+                              <li onclick="goUrl('${path}/communicate/page')"><a href="javascript:;">我要咨询</a></li>
                           </@shiro.hasAnyRoles>
 
                           <@shiro.hasRole name="专家会员">
-                              <li><a href="${path}/communicate/expertPage">我要解答</a></li>
+                              <li onclick="goUrl('${path}/communicate/expertPage')"><a href="javascript:;">我要解答</a></li>
                           </@shiro.hasRole>
 
                       </ul>
@@ -87,7 +90,13 @@
                           </tbody>
                       </table>
                       <div class="paging">
-                          <p class="fl">显示至<span>${pageInfo.st+1 }</span>至<span>${(pageInfo.data?size)+pageInfo.st}</span>条，共<span>${pageInfo.totalCount }</span>条</p>
+                          <p class="fl">显示<span>
+                          <#if (pageInfo.data?size==0)>
+                               	${pageInfo.st}
+                               	<#else>
+                               		${pageInfo.st+1 }
+                               </#if>
+                          </span>至<span>${(pageInfo.data?size)+pageInfo.st}</span>条，共<span>${pageInfo.totalCount }</span>条</p>
                           <div class="fr">
                               <a href="javascript:last();" class="spage prevPg">&lt;</a>${pageInfo.currentPage}/${pageInfo.totalPage}<a href="javascript:next();" class="spage nextPg">&gt;</a>
                           </div>
@@ -116,7 +125,7 @@
         	dialog({
 	            id: 'dialogPop',
 	            width: 650,
-	            height:300,
+	            height:400,
 	            autoOpen:false,//默认关闭  
     			modal: true,//开启遮罩层
 	            resizable:false,  
@@ -129,8 +138,10 @@
 			    }},  
 	            title: '通知通告详情',
 	            content: $('#dialogShow').load("${path }/message/showDetail?id="+id),
-	            okValue: '确定',
-	            ok: function (){}
+	            cancelValue: '关闭',
+	            cancel: function (){
+	            	$('#dialogShow').html("");
+	            }
 	        }).showModal();
         }
 </script>

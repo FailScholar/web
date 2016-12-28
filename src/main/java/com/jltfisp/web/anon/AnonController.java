@@ -324,6 +324,30 @@ public class AnonController {
     	
     	variables.put("applyname",dict.getValue());
     	variables.put("applytype", businessType);
+    	
+    	//获取申请表单 字段名称
+        LoanManageOther loanformManage = new LoanManageOther();
+        SysDict sysDict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
+        if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+            loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
+                    LoanManageOther.class);
+        }else{
+            LoanManageOther params = new LoanManageOther();
+            params.setType(sysDict.getId());
+            params.setIstemplate(0);
+            loanformManage = loanManageOtherService.selectOneByExample(params);
+            if(loanformManage == null){
+                params = new LoanManageOther();
+                params.setIstemplate(1);
+                loanformManage = loanManageOtherService.selectOneByExample(params);
+            }
+            
+        }
+        String formlabelJson = loanformManage.getFormLabelJson();
+        FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
+                FormLabel.class);
+        variables.put("loanformManage", formLabel);
+    	
     	String basePath = request.getSession().getServletContext()  
                 .getRealPath("/");  
     	PdfGenerator.printPDF(basePath, variables, dict.getValue(), response,"loanEmptyView.ftl");
@@ -348,6 +372,20 @@ public class AnonController {
     	 variables.put("jltfispCoBaseDto", jltfispCoBaseDto);
     	 variables.put("jltfispPsInfoList", jltfispPsInfoList);
     	 variables.put("jltfispPsMaterialInfo", jltfispPsMaterialInfo);
+    	 
+    	//获取申请表单 字段名称
+         LoanManageOther loanformManage = new LoanManageOther();
+         if(redisService.getV("LoanformManage16") != null){
+             loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
+                     LoanManageOther.class);
+         }else{
+             LoanManageOther params1 = new LoanManageOther();
+             params1.setType(16);
+             params1.setIstemplate(0);
+             loanformManage = loanManageOtherService.selectOneByExample(params1);
+         }
+         variables.put("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
+                 FormLabel.class));
     	 String basePath = request.getSession().getServletContext()  
                  .getRealPath("/");  
     	 PdfGenerator.printPDF(basePath, variables, "保费补贴申请", response,"subsidyApplyDetail.ftl");

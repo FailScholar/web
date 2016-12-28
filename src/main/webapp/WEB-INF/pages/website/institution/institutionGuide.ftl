@@ -21,6 +21,7 @@ $(function(){
     $("#agreeForm").validationEngine('attach', {
         promptPosition: "bottomRight:-10", scroll: false
     });
+    $("p").addClass("note");
 });
 
 //复选框选中/选不中

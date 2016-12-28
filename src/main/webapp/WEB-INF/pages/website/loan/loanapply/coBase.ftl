@@ -11,13 +11,13 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.baseEstablishtime}</th>
-                                    <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker({readonly:true})" readonly="readonly" value="<#if (coAll.jltfispCoBase.establishTime?exists)>${coAll.jltfispCoBase.establishTime?date}</#if>"/></td>
+                                    <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker({readOnly:true})" readonly="readonly" value="<#if (coAll.jltfispCoBase.establishTime?exists)>${coAll.jltfispCoBase.establishTime?date}</#if>"/></td>
                                     <th><b class="red">*</b>${loanformManage.baseRegisteredcapital}</th>
-                                    <td><input type="text" class="txt validate[required,custom[number],maxSize[10]]" placeholder="请输入" id="registeredCapital" name="registeredCapital" value="${coAll.jltfispCoBase.registeredCapital}"/>万元</td>
+                                    <td><input type="text" class="txt validate[required,custom[number2],maxSize[10]]" placeholder="请输入" id="registeredCapital" name="registeredCapital" value="${coAll.jltfispCoBase.registeredCapital}"/>万元</td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.baseRegisteredaddress}</th>
-                                    <td><input type="text" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="请输入"  id="registeredAddress" name="registeredAddress" value="${coAll.jltfispCoBase.registeredAddress}"/></td>
+                                    <td><input type="text" class="txt validate[required,mixSize[2],maxSize[100]]" placeholder="请输入"  id="registeredAddress" name="registeredAddress" value="${coAll.jltfispCoBase.registeredAddress}"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.baseOfficeaddress}</th>
@@ -31,7 +31,7 @@
                                         <select id="officeArea" name="officeArea">
                                         	
                                         </select>
-                                        <input id="officeAddress" name="officeAddress" value="${coAll.jltfispCoBase.officeAddress}" type="text" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="详细地址" />
+                                        <input id="officeAddress" name="officeAddress" value="${coAll.jltfispCoBase.officeAddress}" type="text" class="txt validate[required,mixSize[2],maxSize[100]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -46,12 +46,12 @@
                                         <select id="productArea" name="productArea">
                                         	
                                         </select>
-                                        <input id="productAddress" value="${coAll.jltfispCoBase.productAddress}" name="productAddress" type="text" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="详细地址" />
+                                        <input id="productAddress" value="${coAll.jltfispCoBase.productAddress}" name="productAddress" type="text" class="txt validate[required,mixSize[2],maxSize[100]]" placeholder="详细地址" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.baseCorporaterepresentative}</th>
-                                    <td><input id="corporateRepresentative" name="corporateRepresentative" value="${coAll.jltfispCoBase.corporateRepresentative}" type="text" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="请输入" /></td>
+                                    <td><input id="corporateRepresentative" name="corporateRepresentative" value="${coAll.jltfispCoBase.corporateRepresentative}" type="text" class="txt validate[required,mixSize[2],maxSize[20]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b>${loanformManage.baseMobilephone}</th>
                                     <td><input id="mobilephone" name="mobilephone" value="${coAll.jltfispCoBase.mobilephone}" type="text" class="txt validate[required,maxSize[11],custom[mobile]]" placeholder="请输入" /></td>
                                 </tr>
@@ -65,11 +65,11 @@
                                     <th><b class="red">*</b>${loanformManage.baseSocialcreditcode}</th>
                                     <td><input id="socialCreditCode" name="socialCreditCode" readonly value="${user.socialCode}" type="text" class="txt validate[required,mixSize[9],maxSize[20]]" /></td>
                                     <th><b class="red">*</b>${loanformManage.baseCnpj}</th>
-                                    <td><input id="cnpj" name="cnpj" type="text" value="${coAll.jltfispCoBase.cnpj}" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="请输入" /></td>
+                                    <td><input id="cnpj" name="cnpj" type="text" value="${coAll.jltfispCoBase.cnpj}" class="txt validate[required,mixSize[2],maxSize[500]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.baseCardno}</th>
-                                    <td colspan="3"><input id="cardNo" name="cardNo" type="text" value="${coAll.jltfispCoBase.cardNo}" class="txt validate[maxSize[50],custom[onlyNumberSp]]" placeholder="请输入"/></td>
+                                    <td colspan="3"><input id="cardNo" name="cardNo" type="text" value="${coAll.jltfispCoBase.cardNo}" class="txt validate[mixSize[10],maxSize[30],custom[onlyNumberSp]]" placeholder="请输入"/></td>
                                 </tr>
                             </table>
                             <p class="ntit">银行信息</p>
@@ -82,23 +82,23 @@
                                 <tr>
                                     <td><b class="red">*</b><b>${loanformManage.baseBasicaccount}</b></td>
                                     <td><input id="basicAccountBank" value="${coAll.jltfispCoBase.basicAccountBank}" name="basicAccountBank" type="text" class="txt validate[required]" placeholder="可手动输入" /></td>
-                                    <td><input id="basicAccountCard" value="${coAll.jltfispCoBase.basicAccountCard}" name="basicAccountCard" type="text" class="txt validate[required,mixSize[2],maxSize[50],custom[onlyNumberSp]]" placeholder="请输入" /></td>
+                                    <td><input id="basicAccountCard" value="${coAll.jltfispCoBase.basicAccountCard}" name="basicAccountCard" type="text" class="txt validate[required,mixSize[10],maxSize[30],custom[onlyNumberSp]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <td><b>${loanformManage.baseGeneralaccount}</b></td>
                                     <td><input id="generalAccountBank" value="${coAll.jltfispCoBase.generalAccountBank}" name="generalAccountBank" type="text" class="txt" placeholder="可手动输入" /></td>
-                                    <td><input id="generalAccountCard" value="${coAll.jltfispCoBase.generalAccountCard}" name="generalAccountCard" type="text" class="txt validate[maxSize[50],custom[onlyNumberSp]]" placeholder="请输入" /></td>
+                                    <td><input id="generalAccountCard" value="${coAll.jltfispCoBase.generalAccountCard}" name="generalAccountCard" type="text" class="txt validate[mixSize[10],maxSize[30],custom[onlyNumberSp]]" placeholder="请输入" /></td>
                                 </tr>
                             </table>
                             <p class="ntit">企业联系人</p>
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.baseLinkman}</th>
-                                    <td colspan="3"><input id="linkMan" name="linkMan" value="${coAll.jltfispCoBase.linkMan}" type="text" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="请输入" /></td>
+                                    <td colspan="3"><input id="linkMan" name="linkMan" value="${coAll.jltfispCoBase.linkMan}" type="text" class="txt validate[required,mixSize[2],maxSize[20]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.baseDuties}</th>
-                                    <td><input id="duties" name="duties" type="text" value="${coAll.jltfispCoBase.duties}" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="请输入" /></td>
+                                    <td><input id="duties" name="duties" type="text" value="${coAll.jltfispCoBase.duties}" class="txt validate[required,mixSize[2],maxSize[10]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b>${loanformManage.baseLinkmobile}</th>
                                     <td><input id="linkMobile" name="linkMobile" value="${coAll.jltfispCoBase.linkMobile}" type="text" class="txt validate[required,maxSize[11],custom[mobile]]" placeholder="请输入" /></td>
                                 </tr>
@@ -119,19 +119,19 @@
                                 <tr>
                                     <td>${loanformManage.baseOneshareholder}</td>
                                     <td><input id="oneShareholderName" name="oneShareholderName" value="${coAll.jltfispCoBase.oneShareholderName}" type="text" class="txt validate[required,mixSize[2],maxSize[20],custom[chineseEnglish]]" placeholder="请输入" /></td>
-                                    <td><input id="oneStock" name="oneStock" type="text" value="${coAll.jltfispCoBase.oneStock}" class="txt validate[required,mixSize[1],max[100],custom[number]]" value="0" />%</td>
+                                    <td><input id="oneStock" name="oneStock" type="text" value="${coAll.jltfispCoBase.oneStock}" class="txt validate[required,mixSize[1],min[0],max[100],custom[number3]]" value="0" />%</td>
                                 </tr>
                                 <tr>
                                     <td>${loanformManage.baseTwoshareholder}</td>
                                     <td><input id="twoShareholderName" name="twoShareholderName" value="${coAll.jltfispCoBase.twoShareholderName}"  type="text" class="txt validate[mixSize[2],maxSize[20],custom[chineseEnglish]]" placeholder="请输入" /></td>
-                                    <td><input id="twoStock" name="twoStock" type="text" value="${coAll.jltfispCoBase.twoStock}" class="txt validate[max[100],custom[number]]" value="0" />%</td>
+                                    <td><input id="twoStock" name="twoStock" type="text" value="${coAll.jltfispCoBase.twoStock}" class="txt validate[min[0],max[100],custom[number3]]" value="0" />%</td>
                                 </tr>
                                 <tr>
                                     <td>${loanformManage.baseThreeshareholer}</td>
                                     <td><input id="threeShareholerName" name="threeShareholerName" value="${coAll.jltfispCoBase.threeShareholerName}" type="text" class="txt validate[mixSize[2],maxSize[20],custom[chineseEnglish]]" placeholder="请输入" /></td>
-                                    <td><input id="threeStock" name="threeStock" type="text" value="${coAll.jltfispCoBase.threeStock}" class="txt validate[max[100],custom[number]]" value="0" />%</td>
+                                    <td><input id="threeStock" name="threeStock" type="text" value="${coAll.jltfispCoBase.threeStock}" class="txt validate[min[0],max[100],custom[number3]]" value="0" />%</td>
                                 </tr>
                             </table>
                             </form>
-                            <div class="btnFld"><input type="button" value="保存并下一步" class="btnSave" /><input type="button" class="btnCan" value="取消" /></div>
+                            <div class="btnFld"><input type="button" value="保存并下一步" class="btnSave" /></div>
                         </div>

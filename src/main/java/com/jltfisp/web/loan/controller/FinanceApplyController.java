@@ -88,6 +88,11 @@ public class FinanceApplyController {
 		   		 int year =cal.get(Calendar.YEAR);  
 		   		 request.setAttribute("year", year);
 		   	}
+	    	if(jltfispCoBaseDto.getRegisteredCapital()!=null){
+	    		DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+	    		String capilMoney=decimalFormat.format(jltfispCoBaseDto.getRegisteredCapital());//format 返回的是字符串
+	  		  	request.setAttribute("capilMoney", capilMoney);
+	    	}
 	    	List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
 	    	shareholderList=this.financeApplyService.getShareholderlistByInfoId(jltfispCoBaseDto.getId());
 	    	if(shareholderList!=null){
@@ -234,11 +239,11 @@ public class FinanceApplyController {
 		    Date tasktime=cal.getTime();  
 		    SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //设置日期输出的格式  
 		    jltfispCoBase2.setCreateTime(df.format(tasktime));
+		    jltfispCoBase2.setSocialCreditCode(user.getSocialCode());
 		    jltfispCoBase2.setCompany(user.getUsername());
 		    jltfispCoBase2.setCorporateRepresentative(jltfispCoBaseDto.getCorporateRepresentative());
 		    jltfispCoBase2.setEstablishTime(jltfispCoBaseDto.getEstablishTime());
 		    jltfispCoBase2.setRegisteredCapital(jltfispCoBaseDto.getRegisteredCapital());
-		    jltfispCoBase2.setSocialCreditCode(jltfispCoBaseDto.getSocialCreditCode());
 		    jltfispCoBase2.setTecdomain(jltfispCoBaseDto.getTecdomain());
 		    jltfispCoBase2.setLastyearsellscale(jltfispCoBaseDto.getLastyearsellscale());
 		    jltfispCoBase2.setOfficeProv(jltfispCoBaseDto.getOfficeProv());
@@ -376,8 +381,11 @@ public class FinanceApplyController {
 		  String provName= JltfispArea1.getName();
 		  JltfispArea  JltfispArea2= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeCity());//市
 		  String cityName= JltfispArea2.getName();
-		  JltfispArea  JltfispArea3= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeArea());//区
-		  String areaName= JltfispArea3.getName();
+		  String areaName="";
+		  if(jltfispCoBaseDto2.getOfficeArea()!=0){
+		    	JltfispArea JltfispArea3=this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeArea());
+		    	areaName= JltfispArea3.getName();
+		  }
 		  request.setAttribute("provName", provName);
 		  request.setAttribute("cityName", cityName);
 		  request.setAttribute("areaName", areaName);

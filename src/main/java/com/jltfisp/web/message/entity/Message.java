@@ -1,6 +1,7 @@
 package com.jltfisp.web.message.entity;
 
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.jltfisp.base.entity.BaseEntity;
 /**
@@ -15,6 +16,8 @@ public class Message extends BaseEntity{
 	private java.lang.String content; // 内容
 	private java.util.Date pushDate; // 推送时间
 	private java.lang.Integer createuserid; // 创建人id
+	@Transient
+	private Integer userid;
 
 	/**
      * 获取属性
@@ -109,6 +112,14 @@ public class Message extends BaseEntity{
 	public void setCreateuserid(java.lang.Integer createuserid) {
 		this.createuserid = createuserid;
 		
+	}
+
+	public Integer getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Integer userid) {
+		this.userid = userid;
 	}
 	
 	

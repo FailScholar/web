@@ -19,8 +19,8 @@
         <ul class="infoTab">
         <#list columnList as columnList>
        		 <#if columnList_index lt 5>
-        		 <li tips="${columnList.id}" id="columnId${columnList.id}">
-         			<a href="javascript:void(0);" onclick="getCapitalInfoList(${columnList.id})">${columnList.columnName}</a>
+        		 <li tips="${columnList.id}" id="columnId${columnList.id}" onclick="getCapitalInfoList(${columnList.id})">
+         			<a href="javascript:void(0);" >${columnList.columnName}</a>
          		</li>
          	 </#if>
        </#list> 
@@ -34,7 +34,7 @@
 		       	 			<option value="${afterFiveList.id}">&nbsp;${afterFiveList.columnName}&nbsp;</option>
 		       	 		</#if>
 		       	 	</#list>
-		       	 </select>
+		       	 </select>&nbsp;
 	       	 </li>
        	 </#if>
         </ul>
@@ -54,6 +54,7 @@
 <#include "website/common/footer.ftl" />
 </body>
  <script type="text/javascript">
+     var infoTab_li_index = [0];
    $(function(){
        positionNavigation(4);
 	  var columnId = '${columnId}';
