@@ -380,8 +380,12 @@ public class ExpertController {
     public String uploadImage(HttpServletRequest request, HttpServletResponse response,String index) throws Exception {
        // Map<String, Object> map = new HashMap<String, Object>();
         UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "UpFile"+index);
-        String fileName = uploadFile.getFileName();
         String Path;
+        double fileSize=uploadFile.getFileSize()/(1024*1024);
+    	if(fileSize > 1){
+    		Path="false";
+    	}
+        String fileName = uploadFile.getFileName();
         if (StringUtils.isNotBlank(fileName) && fileName.endsWith(".jpg")) {
             byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
             String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName());

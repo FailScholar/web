@@ -126,13 +126,13 @@
 	                            <#list jltfispCoBaseDto.jltfispFinShareholderList as jltfispFinShareholderList>
 	                            	<#if jltfispFinShareholderList_index==0>
 	                         		<tr>
-	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
+	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[2],maxSize[20]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
 	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].number" value="${jltfispFinShareholderList.number}"/></td>
 	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[1],max[100],custom[number3]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].ratio" value="${jltfispFinShareholderList.ratio}"/><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 	                            	</tr>
 	                            	<#else>
 	                            	<tr>
-	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
+	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[2],maxSize[20]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
 	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].number" value="${jltfispFinShareholderList.number}"/></td>
 	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[1],max[100],custom[number3]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].ratio" value="${jltfispFinShareholderList.ratio}"/><a onclick='removetr(this)' href='javascript:void(0)'>删除</a></td>
 	                            	</tr>
@@ -140,7 +140,7 @@
 				      			 </#list> 
 	                         <#else> 
 	                            <tr>
-	                                <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]"  name="jltfispFinShareholderList[0].name" placeholder="请输入" /></td>
+	                                <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[2],maxSize[20]]"  name="jltfispFinShareholderList[0].name" placeholder="请输入" /></td>
 	                                <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]"  name="jltfispFinShareholderList[0].number" placeholder="请输入" /></td>
 	                                <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[1],max[100],custom[number3]]"  name="jltfispFinShareholderList[0].ratio" placeholder="请输入" /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 	                            </tr>
@@ -360,7 +360,7 @@
         }
         $('.add').click(function(){
             var 	trhtml = "</br><tr>";
-            trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,mixSize[10],maxSize[30]]' name='jltfispFinShareholderList["+index+"].name'  placeholder='请输入' /></td>";
+            trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,minSize[2],maxSize[20]]' name='jltfispFinShareholderList["+index+"].name'  placeholder='请输入' /></td>";
             trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,mixSize[10],maxSize[30]]' name='jltfispFinShareholderList["+index+"].number' placeholder='请输入' /></td>";
             trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,mixSize[1],max[100],custom[number3]]' name='jltfispFinShareholderList["+index+"].ratio' placeholder='请输入' /><a onclick='removetr(this)' href='javascript:void(0)'>删除</a></td>";
             trhtml +="</tr>";

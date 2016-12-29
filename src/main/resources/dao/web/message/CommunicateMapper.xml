@@ -51,7 +51,7 @@
    </sql>
 	<!-- 查询列表count-->
 	<select id="countByExample" parameterType="com.jltfisp.web.message.entity.Communicate" resultType="java.lang.Integer">
-        select count(1) from jltfisp_communicate a,sys_role sr 
+        select count(1) from jltfisp_communicate a LEFT JOIN jltfisp_user ju on a.send_user = ju.id,sys_role sr 
         <if test="_parameter != null">
         	<where>
             <include refid="Example_Where_Clause"/>
@@ -64,9 +64,9 @@
     </select>
 	<!-- 查询列表-->
 	<select id="selectBySample" parameterType="java.util.Map" resultMap="BaseResultMap" >
-        select sr.role_name as ansExpertName,
+        select ju.username as sendName,sr.role_name as ansExpertName,
         <include refid="Base_Column_List"/>
-        from jltfisp_communicate a,sys_role sr 
+        from jltfisp_communicate a LEFT JOIN jltfisp_user ju on a.send_user = ju.id,sys_role sr 
          <if test="_parameter != null">
         	<where>
             <include refid="Example_Where_Clause"/>

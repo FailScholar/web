@@ -28,7 +28,6 @@ import org.apache.shiro.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,9 +62,6 @@ public class LoginController {
     private IndexService indexService;
     @Autowired
 	private IBusinessApplayAuditService businessApplayAuditService;
-
-    @Value("${system.performance.enable-running}")
-    private boolean enablePerformance;
 
     @RequestMapping("/")
     public String home(){
@@ -142,7 +138,7 @@ public class LoginController {
         } else if (exceptionClassName != null) {
             error = "您的账号存在异常,请联系管理员";
         }
-        if (StringUtils.hasLength(error) && !enablePerformance) {
+        if (StringUtils.hasLength(error)) {
             saveLoginErrorLog(request,error,subject);
         }
         model.addAttribute("message", error);

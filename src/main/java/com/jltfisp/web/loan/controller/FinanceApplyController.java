@@ -22,7 +22,6 @@ import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
 import com.jltfisp.redis.RedisService;
 import com.jltfisp.util.service.DictionaryService;
-import com.jltfisp.web.area.entity.JltfispArea;
 import com.jltfisp.web.area.service.AreaService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.entity.FormLabel;
@@ -60,11 +59,89 @@ public class FinanceApplyController {
     @Autowired
     private RedisService<Serializable, String> redisService;
     
+    /**
+     * 
+     * @description 股权融资申请须知
+     * @author chenyun
+     * @param @param request
+     * @param @return
+     * @return String
+     */
+	  @RequestMapping("/financeKnow")
+	  public String financeKnow(HttpServletRequest request) {
+		  JltfispUser user=loginService.getCurrentUser();
+		  if(user.getType()==1){
+			  request.setAttribute("failMes", "对不起，个人用户不能申请股权融资贷款服务");
+			  return "/website/loan/financing/fail";
+		  }
+		  if(user.getType()==2){
+			List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
+			for(int i=0;i<businessApplayAuditList.size();i++){
+				if(businessApplayAuditList.get(i).getState()==0)
+				{
+					request.setAttribute("failMes", "对不起，您的股权融资申请正在审核中");
+					return "/website/loan/financing/fail";
+				}
+			}
+		  }
+		  //获取股权融资申请须知内容
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		      loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),LoanManageOther.class);
+		  }else{
+		         LoanManageOther params = new LoanManageOther();
+		         params.setType(sysDict.getId());
+		         params.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params);
+		         if(loanformManage == null){
+		             params = new LoanManageOther();
+		             params.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params);
+		         }
+		   }
+		  request.setAttribute("loanformManage", loanformManage);
+	      return "/website/loan/financeGuideApply";
+	  }
+	  
+	  /**
+	   * 
+	   * @description 贷款模块下的申请须知，不跳转，只返回
+	   * @author chenyun
+	   * @param @param request
+	   * @param @return
+	   * @return String
+	   */
+	  @RequestMapping("/financeKnow2")
+	  public String financeKnowNoApply(HttpServletRequest request) {
+		  //获取股权融资申请须知 内容
+		  LoanManageOther loanformManage = new LoanManageOther();
+		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
+		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
+		     loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),LoanManageOther.class);
+		  }else{
+		         LoanManageOther params = new LoanManageOther();
+		         params.setType(sysDict.getId());
+		         params.setIstemplate(0);
+		         loanformManage = loanManageOtherService.selectOneByExample(params);
+		         if(loanformManage == null){
+		             params = new LoanManageOther();
+		             params.setIstemplate(1);
+		             loanformManage = loanManageOtherService.selectOneByExample(params);
+		         }
+		         
+		   }
+		  request.setAttribute("loanformManage", loanformManage);
+		  JltfispUser user=loginService.getCurrentUser();
+		  int userType = user.getType();
+		  request.setAttribute("userType", userType);
+	      return "/website/loan/financing/financeGuideApply";
+	  }
+    
 	/**
 	 * 
 	 * @description 跳转到股权融资申请页面
 	 * @author chenyun
-	 * @date 2016年12月6日 下午2:17:49 
 	 * @param @param request
 	 * @param @return
 	 * @return String
@@ -73,7 +150,6 @@ public class FinanceApplyController {
 	public String finaApply(HttpServletRequest request) {
 	    //获取当前用户登录信息
 	    JltfispUser user=loginService.getCurrentUser();
-	    
 	    JltfispFinanceAndShareholdersDto jltfispCoBaseDto = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
 	    if(jltfispCoBaseDto!=null){
 	    	JltfispFinMaterial jltfispFinMaterial = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto.getId());
@@ -111,8 +187,7 @@ public class FinanceApplyController {
 	     LoanManageOther loanformManage = new LoanManageOther();
 	     SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
 	     if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
-	         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
-	                 LoanManageOther.class);
+	         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),LoanManageOther.class);
 	     }else{
 	         LoanManageOther params = new LoanManageOther();
 	         params.setType(sysDict.getId());
@@ -125,115 +200,27 @@ public class FinanceApplyController {
 	         }
 	         
 	     }
-	     String formlabelJson = loanformManage.getFormLabelJson();
-	     FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
-	             FormLabel.class);
+	    String formlabelJson = loanformManage.getFormLabelJson();
+	    FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),FormLabel.class);
 	    request.setAttribute("formLabel", formLabel);
-	    
 	    request.setAttribute("user", user);
 	    request.setAttribute("jltfispCoBaseDto", jltfispCoBaseDto);
 	    return "/website/loan/financing/financingApply";
      }
-	
+	  
       /**
        * 
-       * @description 股权融资申请须知
+       * @description 保存用户填写股权融资申请的基本信息(第一步)
        * @author chenyun
-       * @date 2016年12月6日 下午2:19:36 
        * @param @param request
-       * @param @return
-       * @return String
+       * @param @param jltfispCoBaseDto
+       * @return void
        */
-	  @RequestMapping("/financeKnow")
-	  public String financeKnow(HttpServletRequest request) {
-		  JltfispUser user=loginService.getCurrentUser();
-		  if(user.getType()==1){
-			  request.setAttribute("failMes", "对不起，个人用户不能申请股权融资贷款服务");
-			  return "/website/loan/financing/fail";
-		  }
-		  if(user.getType()==2){
-			List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
-			for(int i=0;i<businessApplayAuditList.size();i++){
-				if(businessApplayAuditList.get(i).getState()==0)
-				{
-					request.setAttribute("failMes", "对不起，您的股权融资申请正在审核中");
-					return "/website/loan/financing/fail";
-				}
-			}
-		  }
-		//获取股权融资申请须知 内容
-		  LoanManageOther loanformManage = new LoanManageOther();
-		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
-		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
-		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
-		                 LoanManageOther.class);
-		  }else{
-		         LoanManageOther params = new LoanManageOther();
-		         params.setType(sysDict.getId());
-		         params.setIstemplate(0);
-		         loanformManage = loanManageOtherService.selectOneByExample(params);
-		         if(loanformManage == null){
-		             params = new LoanManageOther();
-		             params.setIstemplate(1);
-		             loanformManage = loanManageOtherService.selectOneByExample(params);
-		         }
-		         
-		   }
-		  request.setAttribute("loanformManage", loanformManage);
-	      return "/website/loan/financeGuideApply";
-	  }
-	  
-	  /**
-	   * 
-	   * @description 申请须知，不跳转
-	   * @author chenyun
-	   * @date 2016年12月14日 上午8:48:57 
-	   * @param @param request
-	   * @param @return
-	   * @return String
-	   */
-	  @RequestMapping("/financeKnow2")
-	  public String financeKnowNoApply(HttpServletRequest request) {
-		//获取股权融资申请须知 内容
-		  LoanManageOther loanformManage = new LoanManageOther();
-		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
-		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
-		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
-		                 LoanManageOther.class);
-		  }else{
-		         LoanManageOther params = new LoanManageOther();
-		         params.setType(sysDict.getId());
-		         params.setIstemplate(0);
-		         loanformManage = loanManageOtherService.selectOneByExample(params);
-		         if(loanformManage == null){
-		             params = new LoanManageOther();
-		             params.setIstemplate(1);
-		             loanformManage = loanManageOtherService.selectOneByExample(params);
-		         }
-		         
-		   }
-		  request.setAttribute("loanformManage", loanformManage);
-		  JltfispUser user=loginService.getCurrentUser();
-		  int userType = user.getType();
-		  request.setAttribute("userType", userType);
-	      return "/website/loan/financing/financeGuideApply";
-	  }
-	  
-	  /**
-	   * 
-	   * @description 保存用户填写股权融资申请的基本信息(第一步)
-	   * @author chenyun
-	   * @date 2016年12月6日 下午2:14:47 
-	   * @param @param request
-	   * @param @param jltfispCoBase
-	   * @return void
-	   */
 	  @RequestMapping("/saveFinanceBasicInfo")
 	  @ResponseBody
 	  public void saveFinanceBasicInfo(HttpServletRequest request,JltfispFinanceAndShareholdersDto jltfispCoBaseDto){
 	    	JltfispUser user=loginService.getCurrentUser();
 	    	JltfispFinanceAndShareholdersDto jltfispCoBaseDto0 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);//判断原来是否填写过股权融资申请
-//		    JltfispCoBase jltfispCoBase = this.financeApplyService.getJltfispCoBaseInfo(user.getId());//判断原来是否填写过股权融资申请
 		    JltfispCoBase jltfispCoBase2 = new JltfispCoBase();//用来存放现有信息
 		    Calendar cal = Calendar.getInstance();  
 		    Date tasktime=cal.getTime();  
@@ -272,28 +259,17 @@ public class FinanceApplyController {
 		    jltfispCoBase2.setBusinesstype(6);
 		    jltfispCoBase2.setApplystate(0);
 		    if(jltfispCoBaseDto0!=null){//修改
-		    	JltfispFinMaterial jltfispFinMaterial = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto0.getId());
-		    	this.financeApplyService.deleteBase(jltfispCoBaseDto0.getId());
-		    	this.financeApplyService.deleteShareholders(jltfispCoBaseDto0.getId());
-		    	this.financeApplyService.addCoBase(jltfispCoBase2);
-		    	JltfispFinanceAndShareholdersDto jltfispCoBase3 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
-//		    	JltfispCoBase jltfispCoBase3 = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
-		    	if(jltfispFinMaterial!=null){//修改
-		    		this.financeApplyService.updateCoBaseAndMaterial(jltfispCoBase3.getId(),jltfispFinMaterial.getId());
-		    	}
+		    	int infoId=jltfispCoBaseDto0.getId();
+		    	this.financeApplyService.deleteShareholders(infoId);
+		    	this.financeApplyService.updateCoBase(jltfispCoBase2,infoId);
 		    	if(jltfispCoBaseDto.getJltfispFinShareholderList()!=null){
 		    		for(int i=0;i<jltfispCoBaseDto.getJltfispFinShareholderList().size();i++){
 		    			if(jltfispCoBaseDto.getJltfispFinShareholderList().get(i).getName()!=null){
-		    				jltfispCoBaseDto.getJltfispFinShareholderList().get(i).setFinancingId(jltfispCoBase2.getId());
+		    				jltfispCoBaseDto.getJltfispFinShareholderList().get(i).setFinancingId(infoId);
 		    				this.financeApplyService.addShareholders(jltfispCoBaseDto.getJltfispFinShareholderList().get(i));
 		    			}
 		    		}
 		    	}
-		    	BusinessApplayAudit businessApplayAudit= this.businessApplayAuditService.getBusinessApplayAuditByUserIdAndInfoIdAndType(user.getId(),jltfispCoBaseDto0.getId(),6);
-		    	if(businessApplayAudit!=null){
-		    		this.businessApplayAuditService.updateInfoIdById(businessApplayAudit.getId(),jltfispCoBase3.getId());
-		    	}
-		    	
 		    }
 		    else{//新增
 		    	this.financeApplyService.addCoBase(jltfispCoBase2);
@@ -324,8 +300,7 @@ public class FinanceApplyController {
 		  LoanManageOther loanformManage = new LoanManageOther();
 		  SysDict sysDict = dictionaryService.getValueByTypeCode(1002, "6");
 		  if(redisService.getV("LoanformManage"+sysDict.getId()) != null){
-		         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),
-		                 LoanManageOther.class);
+		     loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage"+sysDict.getId())),LoanManageOther.class);
 		  }else{
 		         LoanManageOther params = new LoanManageOther();
 		         params.setType(sysDict.getId());
@@ -338,23 +313,23 @@ public class FinanceApplyController {
 		         }
 		         
 		   }
-		   String formlabelJson = loanformManage.getFormLabelJson();
-		   FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
-		             FormLabel.class);
+		  String formlabelJson = loanformManage.getFormLabelJson();
+		  FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),FormLabel.class);
 		  request.setAttribute("formLabel", formLabel);
 		  
 		  JltfispUser user=loginService.getCurrentUser();
 		  request.setAttribute("user", user);
 		  JltfispFinanceAndShareholdersDto jltfispCoBase = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
-//		  JltfispCoBase jltfispCoBase = this.financeApplyService.getJltfispCoBaseInfo(user.getId());
 		  int infoId=jltfispCoBase.getId();//关联关系Id
 	      JltfispFinMaterial jltfispFinMaterial2 = this.financeApplyService.getJltfispFinMaterialInfo(infoId);
 	      if(jltfispFinMaterial2!=null){//修改
-	    	this.financeApplyService.deleteFinMaterial(infoId);
+	    	  this.financeApplyService.updateFinMaterial(jltfispFinMaterial,jltfispFinMaterial2.getId());
 	      }
-	      jltfispFinMaterial.setInfoId(infoId);
+	      else{
+	    	  jltfispFinMaterial.setInfoId(infoId);
+	    	  this.financeApplyService.addFinMaterial(jltfispFinMaterial);
+	      }
 	      double money=jltfispFinMaterial.getCapitals();//融资金额插入审核表
-	      this.financeApplyService.addFinMaterial(jltfispFinMaterial);
 	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(user.getId(),6);
 	      String createTime = jltfispCoBaseDto2.getCreateTime();
 	      if(createTime!=null){
@@ -377,23 +352,17 @@ public class FinanceApplyController {
 		   	}
 	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(jltfispCoBaseDto2.getId());
 	      request.setAttribute("jltfispFinMaterial3", jltfispFinMaterial3);
-		  JltfispArea  JltfispArea1= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv());//省
-		  String provName= JltfispArea1.getName();
-		  JltfispArea  JltfispArea2= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeCity());//市
-		  String cityName= JltfispArea2.getName();
+	      String provName= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv()).getName();//省
+		  String cityName= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeCity()).getName();//市
 		  String areaName="";
 		  if(jltfispCoBaseDto2.getOfficeArea()!=0){
-		    	JltfispArea JltfispArea3=this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeArea());
-		    	areaName= JltfispArea3.getName();
+			  	areaName=this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeArea()).getName();
 		  }
 		  request.setAttribute("provName", provName);
 		  request.setAttribute("cityName", cityName);
 		  request.setAttribute("areaName", areaName);
-		  List<JltfispFinShareholder> shareholderList = new ArrayList<JltfispFinShareholder>();
-	      shareholderList=this.financeApplyService.getShareholderlistByInfoId(jltfispCoBaseDto2.getId());
-	      if(shareholderList!=null){
-	    	  jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
-	      }
+		  List<JltfispFinShareholder> shareholderList=this.financeApplyService.getShareholderlistByInfoId(jltfispCoBaseDto2.getId());
+	      jltfispCoBaseDto2.setJltfispFinShareholderList(shareholderList);
 	      mv.addObject("jltfispCoBaseDto2", jltfispCoBaseDto2);
 	      BusinessApplayAudit businessApplyAudit=new BusinessApplayAudit();
 	 	  businessApplyAudit.setUserId(user.getId());
@@ -403,25 +372,13 @@ public class FinanceApplyController {
 	 	  businessApplyAudit.setType("6");
 	 	  businessApplyAudit.setInfoId(jltfispCoBaseDto2.getId());
 	 	  businessApplyAudit.setParentType("1");
-	 	  List<BusinessApplayAudit> businessApplayAuditList= this.businessApplayAuditService.getBusinessApplayAuditListByUserId(user.getId(),"6");
-		  if(businessApplayAuditList.size()==0){
-		 	  businessApplayAuditService.insertRecord(businessApplyAudit);
-		  }
-		  else{
-			  int stateType=2;//2申请不通过或者申请通过,3未提交；（0申请中的在进入申请时已过滤）
-			  for(int i=0;i<businessApplayAuditList.size();i++){
-				  if(businessApplayAuditList.get(i).getState()==3){
-					  stateType=3;
-					  break;
-				  }
-			  }
-			  if(stateType==2){//有申请不通过或者申请通过，保留原来记录，插入一条新的申请记录
-				  businessApplayAuditService.insertRecord(businessApplyAudit);
-			  }
-			  else{
-				  this.businessApplayAuditService.updateMoneyByUserIdAndType(user.getId(),"6",money);
-			  }
-		  }
+	 	  BusinessApplayAudit businessApplayAudit= this.businessApplayAuditService.getBusinessApplayAuditByUserIdAndInfoIdAndType(user.getId(),jltfispCoBaseDto2.getId(),6);
+	 	  if(businessApplayAudit==null){
+	 		 businessApplayAuditService.insertRecord(businessApplyAudit);
+	 	  }
+	 	  else{
+	 		 this.businessApplayAuditService.updateMoneyByUserIdAndType(user.getId(),"6",money);
+	 	  }
 		  DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
 		  String capilMoney=decimalFormat.format(jltfispCoBaseDto2.getRegisteredCapital());//format 返回的是字符串
 		  request.setAttribute("capilMoney", capilMoney);
@@ -443,6 +400,4 @@ public class FinanceApplyController {
 	 	  this.businessApplayAuditService.updateBusinessApplayAuditByUserIdAndType(user.getId(),"6",0);
 	      return mv;
 	  }
-	  
-	  
 }

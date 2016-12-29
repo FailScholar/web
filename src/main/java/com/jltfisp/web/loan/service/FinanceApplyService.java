@@ -13,19 +13,11 @@ public interface FinanceApplyService {
 	
 	public JltfispFinMaterial getJltfispFinMaterialInfo(Integer id);
 	
-	public void deleteBase(Integer id);
-
 	public Object addCoBase(JltfispCoBase jltfispCoBase);
-	
-	public void updateCoBaseAndMaterial(Integer infoId,Integer Id);
-	
-	public void deleteFinMaterial(Integer infoId);
 	
 	public Object addFinMaterial(JltfispFinMaterial jltfispFinMaterial);
 
 	public List<JltfispFinShareholder> getShareholderlistByInfoId(int id);
-
-	public void updateJltfispCoBaseInfo(Integer id);
 
 	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id,Integer type);
 	
@@ -34,6 +26,10 @@ public interface FinanceApplyService {
 	public void addShareholders(JltfispFinShareholder jltfispFinShareholder);
 
 	public void deleteShareholders(Integer id);
+
+	public void updateCoBase(JltfispCoBase jltfispCoBase2, Integer id);
+
+	public void updateFinMaterial(JltfispFinMaterial jltfispFinMaterial,int id);
 
 	
 }

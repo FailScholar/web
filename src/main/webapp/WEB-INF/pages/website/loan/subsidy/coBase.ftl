@@ -30,7 +30,7 @@
               <tr>
                   <th><b class="red">*</b>${loanformManage.baseRegisteredaddress}</th>
                   <td colspan="3">
-                      <input id="registeredAddress" name="registeredAddress" value="${jlfispPsBaseDto.registeredAddress }"  type="text validate[required,minSize[2],maxSize[50]]" placeholder="请输入"  class="txt" />
+                      <input id="registeredAddress" name="registeredAddress" value="${jlfispPsBaseDto.registeredAddress }"  type="text" placeholder="请输入"  class="txt validate[required,minSize[2],maxSize[50]]"/>
                   </td>
               </tr>
               <tr>

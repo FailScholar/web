@@ -99,10 +99,10 @@ function goMain(flag){
               <@shiro.hasAnyRoles name="企业会员,机构会员">
                   <div class="infoList">
                       <p class="tit2">贷款申请类型</p>
-                      <ul class="aply">
+                      <ul class="aply" style="margin-top:0">
 	                      <#list list as list>
 		                      <#if (list_index<6)>
-			                      	<li class="bbm">
+			                      	<li class="bbm" style="padding-top:48px">
 		                              <h4>${list.name}</h4>
 		                               <#if list.id == 16>
 		                                  <a href="${path}/loan/guidApplyText?applytype=${list.code}">申请须知</a>
@@ -120,7 +120,7 @@ function goMain(flag){
                       </ul>
                       <div class="clear"></div>
                       <#if (list?size>6)>
-                          	<a href="${path}/anon/loan" class="more">更多<span>&gt;&gt;</span></a>
+                          	<a href="${path}/anon/loan" class="more" style="top:385px">更多<span>&gt;&gt;</span></a>
                       </#if>
                       <div class="grad"></div>
                        <div class="clist fl">

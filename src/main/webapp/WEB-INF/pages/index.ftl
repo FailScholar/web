@@ -123,13 +123,14 @@
               	
               	<li><a href="javascript:;" class="a4" title="分享">&nbsp;</a>
               		<div class="none">
-			        <div class="fx_nr">
-			          <div id="bdshare" class="bdshare_t bds_tools"> <a class="bds_tsina">新浪微博</a> <a class="bds_qzone">QQ空间</a> <a class="bds_tqq">腾讯微博</a> <a class="bds_renren">人人网</a> <a class="bds_t163">网易微博</a> <a class="bds_tqf">腾讯朋友</a> <a class="bds_douban">豆瓣网</a> <a class="bds_sqq">QQ好友</a> <span class="bds_more">更多</span> </div>
-			          <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0"></script> 
-			          <script type="text/javascript" id="bdshell_js"></script> 
-			          <script type="text/javascript">
-			            document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000);
-			        </script> </div>
+                        <div class="fx_nr">
+                            <div id="bdshare" class="bdshare_t bds_tools"> <a class="bds_tsina">新浪微博</a> <a class="bds_qzone">QQ空间</a> <a class="bds_tqq">腾讯微博</a> <a class="bds_renren">人人网</a> <a class="bds_t163">网易微博</a> <a class="bds_tqf">腾讯朋友</a> <a class="bds_douban">豆瓣网</a> <a class="bds_sqq">QQ好友</a> <span class="bds_more">更多</span> </div>
+                            <script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=0"></script>
+                            <script type="text/javascript" id="bdshell_js"></script>
+                            <script type="text/javascript">
+                                document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date() / 3600000);
+                            </script>
+                        </div>
 			      </div>
               	</li>
               </ul>

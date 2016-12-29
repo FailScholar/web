@@ -16,6 +16,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +52,6 @@ import java.util.*;
 @Controller
 @RequestMapping({"/anon/loan","/loan"})
 public class LoanController {
-	
 	
     @Autowired
     private LoanService loanService;
@@ -613,7 +613,11 @@ public class LoanController {
     	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),Integer.parseInt(applytype),3);
     	jltfispCoFile.setApplyid(jltfispCoBaseDto.getId());
     	UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "UpFile"+index);
-        String fileName = uploadFile.getFileName();
+    	double fileSize=uploadFile.getFileSize()/(1024*1024);
+    	if(fileSize > 1){
+    		return "1";
+    	}
+    	String fileName = uploadFile.getFileName();
         if (StringUtils.isNotBlank(fileName) && (fileName.endsWith(".jpg"))) {
             byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
             String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName()).trim();

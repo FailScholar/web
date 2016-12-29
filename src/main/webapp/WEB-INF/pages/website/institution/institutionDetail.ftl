@@ -34,7 +34,7 @@
                     	<h1>${jltfispInstitutionDetail.institutionalName}</h1>
                         <p>联系人：${jltfispInstitutionDetail.linkMan}</p>
                         <p>联系电话：${jltfispInstitutionDetail.phoneNumer}</p>
-                        <p style="max-width: 714px;">联系地址：${jltfispInstitutionDetail.address}</p>
+                        <p style="max-width: 360px;">联系地址：${jltfispInstitutionDetail.address}</p>
                     </div>
                     <div class="clear"></div>
                     <div class="proList nli" style="margin-top:40px;">
@@ -43,7 +43,7 @@
                         </ul>
                     </div>
                     <div class="resume re1" style="word-wrap:break-word;word-break:break-all;">
-                        <p>${jltfispInstitutionDetail.serviceProductsAndFeatures}</p>
+                        <textarea  readonly class="txta" style="cursor:default;height:200px;overflow-y:visible;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0">${jltfispInstitutionDetail.serviceProductsAndFeatures}</textarea>
                     </div>
                     
                 </div>

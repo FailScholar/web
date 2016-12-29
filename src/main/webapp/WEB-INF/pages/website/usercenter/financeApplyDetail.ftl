@@ -16,7 +16,7 @@
     <!--content开始-->
     <div class="content" style="word-wrap:break-word;word-break:break-all;">
         <div class="bread">
-            <a href="${path}/index">首页</a>&gt;<a href="${path}/loan/onlineApply?applytype=5">保费补贴</a>&gt;<a href="javascript:;">在线查看</a>
+            <a href="${path}/index">首页</a>&gt;<a href="${path}/loan/onlineApply?applytype=6">股权融资</a>&gt;<a href="javascript:;">在线查看</a>
         </div>
         <div class="calt">
             <p>股权融资申请</p>
@@ -33,23 +33,7 @@
                  <td><span>${jltfispCoBaseDto2.projectname}</span></td>
                  <th>${formLabel.baseTecDomain}</th>
                   <td colspan="3">
-                 	 <#if jltfispCoBaseDto2.tecdomain==1>
-                 	 	<span>电子信息技术</span>
-                 	 <#elseif jltfispCoBaseDto2.tecdomain==2>
-                 	 	<span>生物医药技术</span>
-                 	 <#elseif jltfispCoBaseDto2.tecdomain==3>
-                 		<span>航空航天技术</span>
-                 	 <#elseif jltfispCoBaseDto2.tecdomain==4>
-                 		<span>新科技技术</span>
-                 	 <#elseif jltfispCoBaseDto2.tecdomain==5>
-                 	 	<span>高技术服务业</span>
-                 	 <#elseif jltfispCoBaseDto2.tecdomain==6>
-                 		<span>新能源节能技术</span>
-                 	 <#elseif jltfispCoBaseDto2.tecdomain==7>
-                 	    <span>新能源节能技术</span>
-                 	 <#else>
-                 	 	<span>资源环境技术</span>
-                 	 </#if>
+                 	 <span>${tecdomainName}</span>
                   </td>
             </tr>
             <tr class="tal">
@@ -60,7 +44,7 @@
             </tr>
             <tr class="tal">
                  <th>${formLabel.baseRegisteredcapital}</th>
-                 <td><span>${jltfispCoBaseDto2.registeredCapital}</span></td>
+                 <td><span>${capilMoney}万元</span></td>
                  <th>${formLabel.baseRegisteredaddress}</th>
                  <td colspan="3"><span>${jltfispCoBaseDto2.registeredAddress}</span></td>
                  </tr>
@@ -90,7 +74,7 @@
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.baseCompanyUrl}</th>
-                                <td  colspan="5"><span>${provName}&nbsp;${cityName}&nbsp;${areaName}&nbsp;${jltfispCoBaseDto2.officeAddress}</span></td>
+                                <td  colspan="5"><span>${jltfispCoBaseDto2.companyurl}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.baseRefereeCompany}</th>
@@ -192,8 +176,8 @@
                             <tr>
                                 <td colspan="6">
                                     <div class="cover cv1 fr">
-                                        <p class="ntit"><span class="ml70"></span>公司名称：<U>&nbsp;&nbsp;&nbsp;&nbsp;${user.username}&nbsp;&nbsp;&nbsp;&nbsp;</U></p>
-                                        <p class="ntit"><span class="ml70"></span>${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
+                                        <p class="ntit">公司名称：<U>${user.username}</U></p>
+                                        <p class="ntit">${year}&nbsp;&nbsp;年&nbsp;&nbsp;${month}&nbsp;&nbsp;月&nbsp;&nbsp;${date}&nbsp;&nbsp;日</span></p>
                                     </div>
                                 </td>
                             </tr>

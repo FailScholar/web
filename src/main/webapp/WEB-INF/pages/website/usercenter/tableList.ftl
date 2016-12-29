@@ -6,7 +6,7 @@
       	<th width="16.2%">融资金额/万元</th>
       	<th>所属领域</th>
       </#if>
-      <th>申请时间</th>
+      <th width="11.2%">申请时间</th>
       <th width="11.2%">状态</th>
       <th width="11.2%">操作</th>
   </tr>
@@ -19,7 +19,11 @@
       	<td>${business.loanValue}</td>
       	<td>${business.tecName}</td>
       </#if>
-      <td>${(business.submitDate?string("yyyy-MM-dd"))}</td>
+      <td>
+      <#if (business.submitDate??)>
+      	${(business.submitDate?string("yyyy-MM-dd"))}
+      </#if>
+      </td>
       <td>
       	<#if business.state = 0>
       		已提交

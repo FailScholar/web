@@ -24,12 +24,6 @@ public interface  FinanceApplyDao extends BaseMapper<JltfispCoBase> {
 
 	public Object saveCoBase(JltfispCoBase jltfispCoBase);
 
-	@Select("delete from jltfisp_co_base where id=#{id}")
-	public void deleteCoBase(Integer id);
-
-	@Select("update jltfisp_co_base set apply_state=0 where user_id=#{user_id}")
-	public void updateJltfispCoBaseInfo(Integer user_id);
-
 	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(@Param("user_id")Integer user_id,@Param("business_type")Integer business_type);
 	
 	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDtoByInfoId(@Param("infoId")Integer infoId);

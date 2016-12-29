@@ -81,7 +81,7 @@
                           <table class="tab1" style="width:960px;">
                               <thead>
                               <tr>
-                                  <th width="30%">咨询类型</th>
+                                  <th width="30%">咨询用户</th>
                                   <th width="30%">提交时间</th>
                                   <th>状态</th>
                                   <th>操作</th>
@@ -90,7 +90,7 @@
                               <tbody>
                               <#list pageInfo.data as comm1>
                               <tr>
-                                  <td>${comm1.ansExpertName}</td>
+                                  <td>${comm1.sendName}</td>
                                   <td>${(comm1.time?string("yyyy-MM-dd HH:mm:ss"))}</td>
                                   <td>
                                   	<#if comm1.contentType==0>

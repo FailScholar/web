@@ -414,8 +414,11 @@ function ajaxFileUpload(index,applytype) {
         dataType:"text",
         success: function(msg) {
             if(msg =="0"){
-              dialog.tipsPop('ban-pop','提示:',"操作失败,图片只能上jpg格式,请检查!",'确定');
+              dialog.tipsPop('ban-pop','提示:',"图片上传失败,只能上传JPG格式图片，大小不能大于1M!",'确定');
               return false;
+            }else if(msg =="1"){
+             dialog.tipsPop('ban-pop','提示:',"图片上传失败,只能上传JPG格式图片，大小不能大于1M!",'确定');
+             return false;
             }else{
               $("#coFile img").eq(index-1).attr("src","${path}"+msg);
             }

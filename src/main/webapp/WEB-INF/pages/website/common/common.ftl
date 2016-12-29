@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="${path}/resource/css/css.css" />
 <link rel="stylesheet" type="text/css" href="${path}/resource/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="${path}/resource/css/ui-dialog.css" />
+<link rel="stylesheet" type="text/css" href="${path}/resource/css/wangEditor.min.css" />
 <script type="text/javascript" src="${path}/resource/js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${path}/resource/js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="${path}/resource/js/dialog-plus.js"></script>

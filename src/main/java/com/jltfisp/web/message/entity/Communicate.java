@@ -9,6 +9,7 @@ import com.jltfisp.base.entity.BaseEntity;
 public class Communicate extends BaseEntity{
 	private Integer id; // 
 	private Integer sendUser; // 发送人
+	private String sendName;//发送人姓名
 	private Integer toUser; // 收信人
 	private Integer ansExpertType; // 资讯专家角色类型
 	private String ansExpertName;//咨询专家类型
@@ -190,6 +191,14 @@ public class Communicate extends BaseEntity{
 
 	public void setAnsUserName(String ansUserName) {
 		this.ansUserName = ansUserName;
+	}
+
+	public String getSendName() {
+		return sendName;
+	}
+
+	public void setSendName(String sendName) {
+		this.sendName = sendName;
 	}
 	
 	

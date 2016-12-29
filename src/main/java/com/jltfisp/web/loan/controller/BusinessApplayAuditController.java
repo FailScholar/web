@@ -1,5 +1,6 @@
 package com.jltfisp.web.loan.controller;
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -287,7 +288,7 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 		    	 request.setAttribute("date", date);
 		   	}
 	      SysDict dict = dictionaryService.getValueByTypeCode(1002, jltfispCoBaseDto2.getTecdomain());
-	      jltfispCoBaseDto2.setTecdomain(dict.getValue());
+//	      jltfispCoBaseDto2.setTecdomain(dict.getValue());
 	      JltfispFinMaterial jltfispFinMaterial3 = this.financeApplyService.getJltfispFinMaterialInfo(infoId);
 	      request.setAttribute("jltfispFinMaterial3", jltfispFinMaterial3);
 		  JltfispArea  JltfispArea1= this.areaService.getAreaContext(jltfispCoBaseDto2.getOfficeProv());
@@ -325,10 +326,41 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 		         }
 		         
 		   }
+		  if(jltfispCoBaseDto2.getRegisteredCapital()!=null){
+	    		DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+	    		String capilMoney=decimalFormat.format(jltfispCoBaseDto2.getRegisteredCapital());//format 返回的是字符串
+	  		  	request.setAttribute("capilMoney", capilMoney);
+	    	}
 		  String formlabelJson = loanformManage.getFormLabelJson();
 		   FormLabel formLabel = JSON.toJavaObject((JSON) JSON.parse(formlabelJson),
 		             FormLabel.class);
 		  request.setAttribute("formLabel", formLabel);
+		  String tecdomainName="";
+		  if(("1").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="电子信息技术";
+		  }
+		  else if(("2").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="生物医药技术";
+		  }
+		  else if(("3").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="航空航天技术";
+		  }
+		  else if(("4").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="新科技技术";
+		  }
+		  else if(("5").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="高技术服务业";
+		  }
+		  else if(("6").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="新能源节能技术";
+		  }
+		  else if(("7").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="资源环境技术";
+		  }
+		  else{
+			  tecdomainName="高新技术改造传统产业";
+		  }
+		  request.setAttribute("tecdomainName", tecdomainName);
     	return getFileBasePath()+"financeApplyDetail";
     }
     /**
@@ -470,7 +502,7 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(infoId);
 	      
 	      SysDict dict = dictionaryService.getValueByTypeCode(1002, jltfispCoBaseDto2.getTecdomain());
-	      jltfispCoBaseDto2.setTecdomain(dict.getValue());
+//	      jltfispCoBaseDto2.setTecdomain(dict.getValue());
 	      String createTime = jltfispCoBaseDto2.getCreateTime();
 	      if(createTime!=null){
 		    	String year2 = createTime.substring(0, 4);//获取年份
@@ -538,6 +570,32 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	    	variables.put("applayAudits", applayAudit);
 	      String basePath = request.getSession().getServletContext()  
 	                 .getRealPath("/");  
+	      String tecdomainName="";
+		  if(("1").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="电子信息技术";
+		  }
+		  else if(("2").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="生物医药技术";
+		  }
+		  else if(("3").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="航空航天技术";
+		  }
+		  else if(("4").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="新科技技术";
+		  }
+		  else if(("5").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="高技术服务业";
+		  }
+		  else if(("6").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="新能源节能技术";
+		  }
+		  else if(("7").equals(jltfispCoBaseDto2.getTecdomain())){
+			  tecdomainName="资源环境技术";
+		  }
+		  else{
+			  tecdomainName="高新技术改造传统产业";
+		  }
+		  variables.put("tecdomainName", tecdomainName);
 	     PdfGenerator.printPDF(basePath, variables, "股权融资申请", response,"financeApplyDetail.ftl");
     }
     

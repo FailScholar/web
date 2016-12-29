@@ -45,7 +45,7 @@
                     <div class="clear"></div>
                     <div class="resume">
                         <h2>专家简讯</h2>
-                        ${jltfispExpert.partfull}
+                        <textarea  readonly class="txta" onclick="blur();"style="cursor:default;height:250px;overflow-y:visible;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0">${jltfispExpert.partfull}</textarea>
                     </div>
                 </div>
             </div>

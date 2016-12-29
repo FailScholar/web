@@ -37,7 +37,7 @@
                                         <#else>
                                         <img width="110px" id="portrait" name="portrait" height="110px" src="${path}/resource/images/blank.png" class="fl" />
                                         </#if>
-                                        <span class="notice fr">建议尺寸220px*246px<br/>支持JPG</span>
+                                        <span class="notice fr">建议尺寸220px*246px<br/>上传大小不超过1M<br/>支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
                                             <input unselectable="on" type="file" style="cursor:pointer;" name="UpFile9" id="UpFile9" onchange="ajaxFileUploadUserLogo(9)"/>
@@ -154,7 +154,7 @@
                                         <#else>
                                         <img width="110px" id="agencylogoimg" name="agencylogoimg" height="110px" src="${path}/resource/images/blank.png" class="fl" />
                                         </#if>
-                                        <span class="notice fl ml16">建议尺寸220px*246px<br />支持JPG</span>
+                                        <span class="notice fl ml16">建议尺寸220px*246px<br />上传大小不超过1M<br/>支持JPG</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
                                             <input unselectable="on" type="file" style="cursor:pointer;" name="UpFile10" id="UpFile10"  onchange="ajaxFileUpload(10)"/>
@@ -320,7 +320,7 @@ function ajaxFileUploadUserLogo(index) {
                 $('#userlogo').val(msg);
                 $("#portrait").attr("src","${path}"+msg);
             }else{
-                alert("图片上传失败,只能上传JPG格式图片！");
+                alert("图片上传失败,只能上传JPG格式图片，大小不能大于1M！");
             }
         }
     }); 

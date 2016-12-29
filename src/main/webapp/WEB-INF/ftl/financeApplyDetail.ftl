@@ -63,7 +63,7 @@
                  <th>${formLabel.baseProjectName}</th>
                  <td style="width:71px;"><span>${jltfispCoBaseDto2.projectname!''}</span></td>
                  <th>${formLabel.baseTecDomain}</th>
-                  <td colspan="3">${jltfispCoBaseDto2.tecdomain!''}</td>
+                  <td colspan="3">${tecdomainName!''}</td>
             </tr>
             <tr class="tal">
                 <th>${formLabel.baseCompany}</th>
@@ -73,7 +73,7 @@
             </tr>
             <tr class="tal">
                  <th>${formLabel.baseRegisteredcapital}</th>
-                 <td><span>${jltfispCoBaseDto2.registeredCapital!''}</span></td>
+                 <td><span>${jltfispCoBaseDto2.registeredCapital!''}万元</span></td>
                  <th>${formLabel.baseRegisteredaddress}</th>
                  <td colspan="3"><span>${jltfispCoBaseDto2.registeredAddress!''}</span></td>
                  </tr>
@@ -103,7 +103,7 @@
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.baseCompanyUrl}</th>
-                                <td  colspan="5"><span>${provName!''}&nbsp;${cityName!''}&nbsp;${areaName!''}&nbsp;${jltfispCoBaseDto2.officeAddress!''}</span></td>
+                                <td  colspan="5"><span>${jltfispCoBaseDto2.companyurl!''}</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.baseRefereeCompany}</th>
@@ -184,7 +184,7 @@
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.finMaterialCapitals}</th>
-                                <td colspan="5"><span>${jltfispFinMaterial3.capitals!''}</span></td>
+                                <td colspan="5"><span>${jltfispFinMaterial3.capitals!''}万元</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.finMaterialRequireOrganization}</th>

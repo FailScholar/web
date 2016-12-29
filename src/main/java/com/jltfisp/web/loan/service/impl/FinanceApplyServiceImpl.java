@@ -44,46 +44,20 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 		return this.financeApplyDao.insert(jltfispCoBase);
 	}
 
-
-	@Override
-	public void updateCoBaseAndMaterial(Integer infoId,Integer id) {
-		 this.financeMaterialDao.updateCoBaseAndMaterial(infoId,id);
-	}
-
-
 	@Override
 	public JltfispFinMaterial getJltfispFinMaterialInfo(Integer id) {
 		return this.financeMaterialDao.getJltfispFinMaterialInfo(id);
 	}
 
 	@Override
-	public void deleteFinMaterial(Integer infoId) {
-		this.financeMaterialDao.deleteFinMaterial(infoId);
-		
-	}
-	
-	@Override
 	public Object addFinMaterial(JltfispFinMaterial jltfispFinMaterial) {
 		return this.financeMaterialDao.insert(jltfispFinMaterial);
 	}
 
 	@Override
-	public void deleteBase(Integer id) {
-		this.financeApplyDao.deleteCoBase(id);
-	}
-
-
-	@Override
 	public List<JltfispFinShareholder> getShareholderlistByInfoId(int id) {
 		return this.financeShareholderDao.getShareholderlistByInfoId(id);
 	}
-
-
-	@Override
-	public void updateJltfispCoBaseInfo(Integer id) {
-	   this.financeApplyDao.updateJltfispCoBaseInfo(id);
-	}
-
 
 	@Override
 	public JltfispFinanceAndShareholdersDto getJltfispFinanceAndShareholdersDto(Integer id,Integer type) {
@@ -110,6 +84,20 @@ public class FinanceApplyServiceImpl implements FinanceApplyService  {
 		// TODO Auto-generated method stub
 		return financeApplyDao.getJltfispFinanceAndShareholdersDtoByInfoId(infoId);
 	}
-	
+
+
+	@Override
+	public void updateCoBase(JltfispCoBase coBase, Integer id) {
+		coBase.setId(id);
+		this.financeApplyDao.updateByPrimaryKey(coBase);
+	}
+
+
+	@Override
+	public void updateFinMaterial(JltfispFinMaterial jltfispFinMaterial,int id) {
+		jltfispFinMaterial.setId(id);
+		this.financeMaterialDao.updateByPrimaryKey(jltfispFinMaterial);
+		
+	}
 	
 }

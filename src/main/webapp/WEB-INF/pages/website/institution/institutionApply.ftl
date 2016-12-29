@@ -38,7 +38,7 @@
                                     		src="${path}/resource/images/blank.png" 
                                     		</#if>
                                     	 class="fl" style="width:110px;height:110px;" />
-                                        <span class="notice fr">建议尺寸200px*200px<br />上传大小不超过1M<br />支持JPG、GIF、PNG格式</span>
+                                        <span class="notice fr">建议尺寸200px*200px<br />上传大小不超过1M<br />支持JPG格式</span>
                                         <div class="clear"></div>
                                         <div class="btnUp fl">
                                         	<input type="file" id="upFile" name="upFile" onchange="ajaxFileUpload()" />
@@ -76,7 +76,7 @@
                                
                                 <tr>
                                     <th>${institutManage.label7 }</th>
-                                    <td colspan="3"><input type="text" name="url" value="${institution.url }" class="txt validate[minSize[2],maxSize[100],custom[url]]" placeholder="详细地址" /></td>
+                                    <td colspan="3"><input type="text" name="url" value="${institution.url }" class="txt validate[minSize[2],maxSize[100],custom[url]]" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label8 }</th>
@@ -266,7 +266,7 @@ function ajaxFileUpload() {
 	var filepath = $("#upFile").val();
 	if(filepath != ""){
 		var fileend = filepath.substring(filepath.indexOf(".")); 
-		if(fileend != ".jpg" && fileend != ".gif" && fileend != ".png") {
+		if(fileend != ".jpg") {
 			dialog.tipsPop('ban-pop','提示',"上传图片格式不正确",'确定');
 		}else{
 			$.ajaxFileUpload({

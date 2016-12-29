@@ -22,9 +22,9 @@
                  	 <#elseif jltfispCoBaseDto2.tecdomain==6>
                  		<span>新能源节能技术</span>
                  	 <#elseif jltfispCoBaseDto2.tecdomain==7>
-                 	    <span>新能源节能技术</span>
+                 	    <span>资源环境技术</span>
                  	 <#else>
-                 	 	<span>资源环境技术</span>
+                 	 	<span>高新技术改造传统产业</span>
                  	 </#if>
                   </td>
             </tr>

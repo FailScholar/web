@@ -46,6 +46,8 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
             try {
                 indexService.synchronizedFlush();
                 luceneService.synchronizedBuildIndex();
+                loginService.synchronizedCacheUserRole();
+                loginService.synchronizedCacheRolePermissions();
                 cacheEmailAndName();
                 cacheVisitorPerm();
             } catch (Exception e) {
