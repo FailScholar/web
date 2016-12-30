@@ -24,8 +24,10 @@
                      <h1>${marketDetail.title}</h1>
 				     <p style="width:650px;text-align:center;"><span class="time">${marketDetail.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${marketDetail.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${marketDetail.source}</span></p>
 				     <div class="clear"></div>
-				     	<div class="artical" style="background-color:#fff;">
-				            <p>${marketDetail.content}</p>
+				     	<div class="artical wangEditor-container" style="background-color:#fff;">
+				            <div class="wangEditor-txt">
+				           	 <p>${marketDetail.content}</p>
+				            </div>
 				        </div>
                   </div>
                   <div class="clear"></div>

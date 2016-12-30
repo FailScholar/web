@@ -38,7 +38,7 @@
                       </div>
                           <@shiro.user>
                               <div class="person fr">
-                                  <a href="${path}/main"><@shiro.principal/></a>
+                                  <a href="${path}/main" id="user_name"><@shiro.principal/></a>
                                   <ul>
                                       <li class="first"><a href="${path}/user/toResetPass">修改密码</a></li>
                                       <li><a href="${path}/logout">安全退出</a></li>

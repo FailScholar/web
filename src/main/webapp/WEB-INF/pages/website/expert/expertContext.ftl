@@ -28,7 +28,13 @@
                                   </#if>
                                   </p>
         <p class="phone">${expert.phone}</p>
-        <p class="email">${expert.email}</p>
+        <p class="email">
+        <#if (expert.email?length >10) >
+        <lable title="${expert.email}">${expert.email[0..10]}...</label>
+        <#else>
+        ${expert.email}
+        </#if>
+        </p>
         </li>
       </#list>
 </ul>

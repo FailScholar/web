@@ -185,7 +185,7 @@
             width: 650,
             height:560,
             title: '问题信息',
-            content: $('#dialogShow').load("${path}/communicate/ansComm?id="+id),
+            content: $('#dialogShow').load("${path}/communicate/viewComm?id="+id),
             cancelValue: '关闭',
             cancel: function (){
             	$('#dialogShow').html("");

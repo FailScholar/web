@@ -108,8 +108,20 @@ function applyInstitution(columnId){
                       	<img src="${path}/resource/images/head.jpg" alt="head" class="fl" width="200px" height="200px"/>
                       </#if>
                           <div class="me fr">
-                              <h3>${user.username}</h3>
-                              <p>用户名：${user.accountNumber}</p>
+                              <h3 title="${user.username}"> 
+                              <#if (user.username?length lte 10)>
+                              	${user.username}
+                              <#else>
+                              	${user.username[0..10]}...
+                              </#if>
+                              </h3>
+                              <p title="${user.accountNumber }">用户名：
+                              <#if (user.accountNumber?length lte 12)>
+                              	${user.accountNumber}
+                              <#else>
+                              	${user.accountNumber[0..12]}...
+                              </#if>
+                              </p>
                               <p>手机号：${user.mobilePhone}</p>
                           </div>
                       </div>
@@ -164,7 +176,7 @@ function applyInstitution(columnId){
                    	<form action="${path}/user/updateUser" method="post" id="insForm">
                   	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
                   	  <input type="hidden" name="photoPath" id="userlogo" value="${user.photoPath}"/>
-                  	  <input type="hidden" id="imgsrc" value="${user.photoPath}"/>
+                  	  <input type="hidden" id="imgsrc" value="${user.photoPath!'/resource/images/head.jpg'}"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">头像：</span>
@@ -207,13 +219,13 @@ function applyInstitution(columnId){
                           <div class="per">
                               <span class="sde fl">工作单位：</span>
                               <div class="fl">
-                                  <input type="text" name="jobPost" value="${user.jobPost}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[50]]" />
+                                  <input type="text" name="jobPost" value="${user.jobPost}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[100]]" />
                               </div>
                           </div>
                           <div class="per">
                               <span class="sde fl">所属部门：</span>
                               <div class="fl">
-                                  <input type="text" name="departmentName" value="${user.departmentName}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[50]]" />
+                                  <input type="text" name="departmentName" value="${user.departmentName}" readonly="readonly" class="txt validate[required,minSize[2],maxSize[100]]" />
                               </div>
                           </div>
                           <div class="clear"></div>
@@ -232,7 +244,7 @@ function applyInstitution(columnId){
                   <form action="${path}/user/updateUser" method="post" id="insForm">
                   	  <input type="hidden" name="id" id="userId" value="${user.id}"/>
                   	  <input type="hidden" name="photoPath" id="userlogo" value="${user.photoPath}"/>
-                      <input type="hidden" id="imgsrc" value="${user.photoPath}"/>
+                      <input type="hidden" id="imgsrc" value="${user.photoPath!'/resource/images/head.jpg'}"/>
                       <div class="ifo">
                           <div class="per per1">
                               <span class="sde fl">企业logo：</span>
@@ -372,6 +384,9 @@ function applyInstitution(columnId){
         $('.btnHide .btnCle').click(function(){
         	$(".formError").remove();
         	var imgsrc = "${path}"+$("#imgsrc").val();
+        	if(imgsrc == "${path}"){
+        	  imgsrc = "${path}/resource/images/head.jpg";
+        	}
         	$("#portrait").attr("src",imgsrc);
             $('.per').find('input').removeClass('txt2').attr("readonly","readonly").end().find('.upload').hide();;
             $(this).parents(".btnHide").hide();

@@ -259,7 +259,7 @@ html,body { width:100%; height:100%; background-color:#fff; min-width:1200px; fo
 .person ul li.first { border-bottom:1px dashed #5b96ff;}
 .person ul a { color:#fff;}
 .pi { padding:50px 30px; position:relative;}
-.personInfo:after { content:""; position:absolute; height:190px; left:540px; top:50px; border-right:1px dashed #bfbfbf;}
+.personInfo:after { content:""; position:absolute; height:190px; left:580px; top:50px; border-right:1px dashed #bfbfbf;}
 .personInfo img { border:4px solid #eee;}
 .me { margin:40px 0 0 44px;}
 .me h3 { font-size:18px; color:#333; margin-bottom:10px;}

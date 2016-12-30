@@ -27,8 +27,11 @@
                                     src="${path}/resource/images/img3.jpg" 
                             </#if>
                               class="fl" />
-<!--                 		<img src="${path}${jltfispInstitutionDetail.logoFile}" class="fl" /> -->
-                        <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a></h1>
+                        <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}
+                       		<#if jltfispInstitutionDetail.url?? && jltfispInstitutionDetail.url != "">
+                       	 		<a href=${jltfispInstitutionDetail.url} target="_blank">官网</a>
+                        	</#if>
+                        </h1>
                     </div>
                     <div class="br fl ml57" style="word-wrap:break-word;word-break:break-all;">
                     	<h1>${jltfispInstitutionDetail.institutionalName}</h1>

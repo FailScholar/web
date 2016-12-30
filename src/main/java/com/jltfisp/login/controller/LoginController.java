@@ -10,6 +10,7 @@ import com.jltfisp.index.service.IndexService;
 import com.jltfisp.log.service.LogService;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
+import com.jltfisp.shiro.AuthorizingRealm;
 import com.jltfisp.shiro.CaptchaException;
 import com.jltfisp.util.captcha.Captcha;
 import com.jltfisp.util.captcha.SpecCaptcha;
@@ -17,7 +18,6 @@ import com.jltfisp.web.column.entity.JltfispColumn;
 import com.jltfisp.web.column.service.ColumnService;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
 import com.jltfisp.web.loan.service.IBusinessApplayAuditService;
-import com.jltfisp.web.message.entity.Message;
 import com.jltfisp.web.message.service.IMessageService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -89,7 +89,7 @@ public class LoginController {
     		parentid=6;
     		applytype= Constants.INSTITUTION_APPLY;
 		}
-    	
+
     	Set<String> roles = loginService.findRoles(user.getAccountNumber());
 		for (String roleName : roles) {
 			if(!roleName.equals("个人会员") && !roleName.equals("企业会员") && !roleName.equals("专家会员")&& !roleName.equals("机构会员")){
@@ -103,8 +103,6 @@ public class LoginController {
             request.setAttribute("column", column);
         }
         request.setAttribute("businessApplayAudit", businessApplayAudit);
-    	List<Message> messageList = messageService.selectBySample(null, null);
-    	request.setAttribute("messageList", messageList);
     	List<JltfispColumn> columnList = columnService.getColumnList(parentid);
     	request.setAttribute("columnList", columnList);
     	request.setAttribute("user", user);

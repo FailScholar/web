@@ -39,7 +39,7 @@
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>${formLabel.baseCorporaterepresentative}</th>
-                                <td><input type="text" class="txt validate[required,mixSize[2],maxSize[20]]" id="corporateRepresentative" name="corporateRepresentative" value="${jltfispCoBaseDto.corporateRepresentative}" placeholder="请输入"/></td>
+                                <td><input type="text" class="txt validate[required,minSize[2],maxSize[20]]" id="corporateRepresentative" name="corporateRepresentative" value="${jltfispCoBaseDto.corporateRepresentative}" placeholder="请输入"/></td>
                                 <th><b class="red">*</b>${formLabel.baseRegisteredcapital}</th>
                                 <td><input type="text" class="txt validate[required,custom[number2],maxSize[10]]"  id="registeredCapital" name="registeredCapital" value="${capilMoney}" placeholder="请输入"/>万元</td>
                             </tr>
@@ -81,25 +81,25 @@
                                		<select id="officeProv" name="officeProv" value="${jltfispCoBaseDto.officeProv}"></select>
                                     <select id="officeCity" name="officeCity" value="${jltfispCoBaseDto.officeCity}"></select>
                                     <select id="officeArea" name="officeArea" value="${jltfispCoBaseDto.officeArea}"></select>
-                                    <input id="officeAddress" name="officeAddress" type="text" value="${jltfispCoBaseDto.officeAddress}" class="txt validate[required,mixSize[2],maxSize[50]]" style="width:499px;" placeholder="详细地址"  />
+                                    <input id="officeAddress" name="officeAddress" type="text" value="${jltfispCoBaseDto.officeAddress}" class="txt validate[required,minSize[2],maxSize[50]]" style="width:499px;" placeholder="详细地址"  />
                                 </td>
                             </tr>
                             <tr>
 								<!-- 数据库未设置邮编，此处将邮箱email字段又来保存邮编-->
                                 <th><b class="red">*</b>${formLabel.basePostCode}</th>
-                                <td><input type="text" class="txt validate[required,minSize[6],maxSize[6],custom[number]]"  id="email" name="email" value="${jltfispCoBaseDto.email}" class="txt validate[required,mixSize[6],maxSize[6]]" placeholder="请输入"/></td>
+                                <td><input type="text" class="txt validate[required,minSize[6],maxSize[6],custom[number]]"  id="email" name="email" value="${jltfispCoBaseDto.email}" class="txt validate[required,minSize[6],maxSize[6]]" placeholder="请输入"/></td>
                                 <th><b class="red">*</b>${formLabel.baseWorkerNumber}</th>
                                 <td><input type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]"  id="workernumber" name="workernumber" value="${jltfispCoBaseDto.workernumber}" placeholder="请输入"/></td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>${formLabel.baseRegisteredaddress}</th>
                                 <td colspan="3">
-                                   <input type="text" class="txt validate[required,mixSize[2],maxSize[50]]" placeholder="请输入" style="width:713px;" id="registeredAddress" name="registeredAddress" value="${jltfispCoBaseDto.registeredAddress}"/>
+                                   <input type="text" class="txt validate[required,minSize[2],maxSize[50]]" placeholder="请输入" style="width:713px;" id="registeredAddress" name="registeredAddress" value="${jltfispCoBaseDto.registeredAddress}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <th>${formLabel.baseRefereeCompany}</th>
-                                <td><input type="text" class="txt validate[mixSize[2],maxSize[30]]" placeholder="请输入" id="refereecompany" name="refereecompany" value="${jltfispCoBaseDto.refereecompany}"/></td>
+                                <td><input type="text" class="txt validate[minSize[2],maxSize[30]]" placeholder="请输入" id="refereecompany" name="refereecompany" value="${jltfispCoBaseDto.refereecompany}"/></td>
                                 <th>${formLabel.baseReferee}</th>
                                 <td><input type="text" class="txt validate[custom[chineseAndChar],minSize[2],maxSize[20]]"  placeholder="请输入" id="referee" name="referee" value="${jltfispCoBaseDto.referee}"/></td>
                             </tr>
@@ -107,11 +107,11 @@
                                 <th>${formLabel.baseRefereeMobile}</th>
                                 <td><input type="text" class="txt validate[custom[mobile]]" placeholder="请输入" id="refereemobile" name="refereemobile" value="${jltfispCoBaseDto.refereemobile}"/></td>
                                 <th>${formLabel.baseRefereeEmail}</th>
-                                <td><input type="text" class="txt validate[mixSize[2],maxSize[50],custom[email]]" placeholder="请输入" id="refereeemail" name="refereeemail" value="${jltfispCoBaseDto.refereeemail}"/></td>
+                                <td><input type="text" class="txt validate[minSize[2],maxSize[50],custom[email]]" placeholder="请输入" id="refereeemail" name="refereeemail" value="${jltfispCoBaseDto.refereeemail}"/></td>
                             </tr>
                             <tr>
                                 <th>${formLabel.baseCompanyUrl}</th>
-                                <td colspan="3"><input type="text" class="txt validate[mixSize[5],maxSize[100],custom[url]]" style="width:713px;" placeholder="请输入" id="companyurl" name="companyurl" value="${jltfispCoBaseDto.companyurl}"/></td>
+                                <td colspan="3"><input type="text" class="txt validate[minSize[5],maxSize[100],custom[url]]" style="width:713px;" placeholder="请输入" id="companyurl" name="companyurl" value="${jltfispCoBaseDto.companyurl}"/></td>
                             </tr>
                         </table>
                         <input type="hidden" id="shareholderListSize" value="${shareholderListSize}"/>
@@ -126,15 +126,15 @@
 	                            <#list jltfispCoBaseDto.jltfispFinShareholderList as jltfispFinShareholderList>
 	                            	<#if jltfispFinShareholderList_index==0>
 	                         		<tr>
-	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[2],maxSize[20]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
-	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].number" value="${jltfispFinShareholderList.number}"/></td>
-	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[1],max[100],custom[number3]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].ratio" value="${jltfispFinShareholderList.ratio}"/><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[2],maxSize[20]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
+	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].number" value="${jltfispFinShareholderList.number}"/></td>
+	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[1],max[100],custom[number3]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].ratio" value="${jltfispFinShareholderList.ratio}"/><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 	                            	</tr>
 	                            	<#else>
 	                            	<tr>
 	                               	 	 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[2],maxSize[20]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].name" value="${jltfispFinShareholderList.name}"/></td>
 	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].number" value="${jltfispFinShareholderList.number}"/></td>
-	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[1],max[100],custom[number3]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].ratio" value="${jltfispFinShareholderList.ratio}"/><a onclick='removetr(this)' href='javascript:void(0)'>删除</a></td>
+	                               		 <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[1],max[100],custom[number3]]" name="jltfispFinShareholderList[${jltfispFinShareholderList_index}].ratio" value="${jltfispFinShareholderList.ratio}"/><a onclick='removetr(this)' href='javascript:void(0)'>删除</a></td>
 	                            	</tr>
 	                            	</#if>
 				      			 </#list> 
@@ -142,7 +142,7 @@
 	                            <tr>
 	                                <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[2],maxSize[20]]"  name="jltfispFinShareholderList[0].name" placeholder="请输入" /></td>
 	                                <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[10],maxSize[30]]"  name="jltfispFinShareholderList[0].number" placeholder="请输入" /></td>
-	                                <td><b class="red">*</b><input type="text" class="txt validate[required,mixSize[1],max[100],custom[number3]]"  name="jltfispFinShareholderList[0].ratio" placeholder="请输入" /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+	                                <td><b class="red">*</b><input type="text" class="txt validate[required,minSize[1],max[100],custom[number3]]"  name="jltfispFinShareholderList[0].ratio" placeholder="请输入" /><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
 	                            </tr>
                             </#if>
                         </table>
@@ -158,7 +158,7 @@
                                 <th><b class="red">*</b>${formLabel.baseLinkmobile}</th>
                                 <td><input type="text" class="txt validate[required,custom[mobile]]" placeholder="请输入" id="linkMobile" name="linkMobile" value="${jltfispCoBaseDto.linkMobile}"/></td>
                                 <th><b class="red">*</b>${formLabel.baseLinkemail}</th>
-                                <td><input type="text" class="txt validate[required,mixSize[2],maxSize[50],custom[email]]" placeholder="请输入" id="linkEmail" name="linkEmail" value="${jltfispCoBaseDto.linkEmail}"/></td>
+                                <td><input type="text" class="txt validate[required,minSize[2],maxSize[50],custom[email]]" placeholder="请输入" id="linkEmail" name="linkEmail" value="${jltfispCoBaseDto.linkEmail}"/></td>
                             </tr>
                         </table>
                         <p class="ntit">项目简介</p>
@@ -182,7 +182,7 @@
 	                                <label><input type="radio" class="validate[required]"  value="2" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==2>checked="checked"</#if>/>科技小巨人企业</label>
 	                                <label><input type="radio" class="validate[required]"  value="3" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==3>checked="checked"</#if>/>科技小巨人培训企业</label>
 	                                <label><input type="radio" class="validate[required]"  value="4" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==4>checked="checked"</#if>/>软件企业</label>
-	                                <label><input type="radio" class="validate[required]"  value="5" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==4>checked="checked"</#if>/>其它</label><br/>
+	                                <label><input type="radio" class="validate[required]"  value="5" name="technologyqualifications" id="technologyqualifications" <#if jltfispCoBaseDto.technologyqualifications==5>checked="checked"</#if>/>其它</label><br/>
 <!--                                     <div class="else">其他<input name="otherDesc" id="otherDesc" name="otherDesc" type="text" class="txt validate[maxSize[1000]]" value="${jltfispCoBaseDto.otherDesc}"/></div> -->
                                 </td>
                             </tr>
@@ -361,8 +361,8 @@
         $('.add').click(function(){
             var 	trhtml = "</br><tr>";
             trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,minSize[2],maxSize[20]]' name='jltfispFinShareholderList["+index+"].name'  placeholder='请输入' /></td>";
-            trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,mixSize[10],maxSize[30]]' name='jltfispFinShareholderList["+index+"].number' placeholder='请输入' /></td>";
-            trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,mixSize[1],max[100],custom[number3]]' name='jltfispFinShareholderList["+index+"].ratio' placeholder='请输入' /><a onclick='removetr(this)' href='javascript:void(0)'>删除</a></td>";
+            trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,minSize[10],maxSize[30]]' name='jltfispFinShareholderList["+index+"].number' placeholder='请输入' /></td>";
+            trhtml +="<td><b class='red'>*</b><input type='text' class='txt validate[required,minSize[1],max[100],custom[number3]]' name='jltfispFinShareholderList["+index+"].ratio' placeholder='请输入' /><a onclick='removetr(this)' href='javascript:void(0)'>删除</a></td>";
             trhtml +="</tr>";
 			if($('.module tr').length<11){
 				$('.module tr:last').after(trhtml);

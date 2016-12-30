@@ -48,6 +48,13 @@
     }
 })(jQuery);
 
+$(document).ready(function(e) {
+    var user_name_dom = $('#user_name');
+    if(user_name_dom.length > 0 && user_name_dom.html().length > 20){
+        user_name_dom.text(user_name_dom.html().substring(0, 20)+'...')
+    }
+});
+
 /*定位一级导航栏位置*/
 function positionNavigation(index) {
     $('.nav li').eq(index).addClass('active').siblings('li').removeClass('active');

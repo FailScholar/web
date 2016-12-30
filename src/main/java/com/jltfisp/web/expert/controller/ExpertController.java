@@ -84,7 +84,7 @@ public class ExpertController {
     public String expertPage(HttpServletRequest request){
     	//获取父栏目columnId
     	String columnId = request.getParameter("columnId");
-    	//获取父栏目columnId
+    	//获取isFrontPage值
     	String isFrontPage = request.getParameter("isFrontPage");
     	//根据父栏目columnId查询子栏目信息
     	List<JltfispColumn> columnList=columnService.getColumnList(7);
@@ -115,7 +115,7 @@ public class ExpertController {
      */
     @RequestMapping("/perm/expert/{columnId}")
     public String changeExpert(HttpServletRequest request,@PathVariable String columnId,Model model){
-     int rows=Integer.parseInt(request.getParameter("pager.offset"));
+    	int rows=Integer.parseInt(request.getParameter("pager.offset"));
      //获取当前子栏目下所有的数据总数
      int total =expertService.getExpertPageCount(Integer.parseInt(columnId));
      //获取当前页的数据，且显示8条

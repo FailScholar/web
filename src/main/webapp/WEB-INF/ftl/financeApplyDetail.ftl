@@ -154,8 +154,10 @@
 				                  			科技小巨人企业
 				                  		<#elseif (jltfispCoBaseDto2.technologyqualifications=='3')>
 				                  			科技小巨人培训企业
-				                  		<#else>
+				                  		<#elseif (jltfispCoBaseDto2.technologyqualifications=='4')>
 				                  			软件企业
+				                  		<#else>
+				                  			其它
 				                  		</#if>
 				                  	</#if>
                                 	&nbsp;${jltfispCoBaseDto2.otherDesc!''}</span>

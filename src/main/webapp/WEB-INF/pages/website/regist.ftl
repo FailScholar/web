@@ -34,7 +34,7 @@
                       <div class="log proList log2">
                           <form id="comForm" method="post">
                               <input type="hidden" name="type" value="2">
-                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;*</span>用户名：</span><input id="accountNumber1" name="accountNumber" type="text" class="txt" placeholder="输入邮箱作为您的用户名" onBlur="validEmail('#accountNumber1',false)"/></div>
+                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;*</span>用户名：</span><input id="accountNumber1" name="accountNumber" maxlength="50" type="text" class="txt" placeholder="输入邮箱作为您的用户名" onBlur="validEmail('#accountNumber1',false)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请输入密码：</span><input id="bpassword1" type="password" class="txt" placeholder="密码" onBlur="validPassword('#bpassword1',false)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请确认密码：</span><input id="password1" name="password" type="password" class="txt" placeholder="确认密码" onBlur="repeatPassword('#bpassword1','#password1',false)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">&emsp;*</span>企业名称：</span><input id="username1" name="username" type="text" class="txt" placeholder="输入企业名称" onBlur="validComName('#username1',false)"/></div>
@@ -84,7 +84,7 @@
                       <div class="log proList log2">
                           <form id="userForm" method="post">
                               <input type="hidden" name="type" value="1">
-                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;*</span>用户名：</span><input id="accountNumber" name="accountNumber" placeholder="输入邮箱作为您的用户名" type="text" class="txt" onBlur="validEmail('#accountNumber',true)"/></div>
+                              <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;*</span>用户名：</span><input id="accountNumber" name="accountNumber" maxlength="50" placeholder="输入邮箱作为您的用户名" type="text" class="txt" onBlur="validEmail('#accountNumber',true)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请输入密码：</span><input id="bpassword" type="password" class="txt" placeholder="密码" onBlur="validPassword('#bpassword',true)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">*</span>请确认密码：</span><input id="password" type="password" name="password" class="txt" placeholder="确认密码" onBlur="repeatPassword('#bpassword','#password',true)"/></div>
                               <div class="regdiv"><span class="ml70"><span class="red">&emsp;&emsp;&emsp;*</span>姓名：</span><input id="username" name="username" type="text" class="txt" placeholder="请输入您的姓名" onBlur="validUsername('#username',true)"/></div>
@@ -276,7 +276,7 @@
     function validEmail(id,val) {
         var emailReg = /^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/;
         var dom = $(id);
-        if (!emailReg.test(dom.val())) {
+        if (!emailReg.test(dom.val()) || dom.val().length < 5 ||dom.val().length >50) {
             dom.removeClass().addClass('txt txtred');
             dom.next().remove();
             dom.after('<span class="ml10 red">* 无效的邮箱地址</span>');

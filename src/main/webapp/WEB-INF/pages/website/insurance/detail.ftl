@@ -28,8 +28,10 @@
         <h1>${insurance.title}</h1>
         <p style="width:650px;text-align:center;"><span class="time">${insurance.publishTime ?date}</span><span class="eye"  style="margin-left:20px;">${insurance.pv}</span><span  style="margin-left:20px;">来源：&nbsp;${insurance.source}</span></p>
         <div class="clear"></div>
-        <div class="artical" style="background-color:#fff;">
-            <p>${insurance.content}</p>
+        <div class="artical wangEditor-container" style="background-color:#fff;">
+            <div class="wangEditor-txt">
+           	 <p>${insurance.content}</p>
+            </div>
         </div>
     </div>
     <div class="clear"></div>

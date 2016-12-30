@@ -196,7 +196,7 @@
                   		<#elseif (jltfispPsMaterialInfo.cognizance==3)>
                   			国有企业
                   		<#elseif (jltfispPsMaterialInfo.cognizance==5)>
-                  			其他
+                  			其它
                   		<#else>
                   			集体企业
                   		</#if>

@@ -132,15 +132,15 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label20}</th>
-                                    <td colspan="3"><textarea class="txta validate[required,maxSize[255]]" name="partfull"  id="partfull" >${jltfispExpert.partfull}</textarea></td>
+                                    <td colspan="3"><textarea class="txta validate[required,maxSize[500]]" name="partfull"  id="partfull" >${jltfispExpert.partfull}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th>${finExpertManage.label21}</th>
-                                    <td colspan="3"><textarea name="educationalbackground" id="educationalbackground" class="txta validate[maxSize[255]]">${jltfispExpert.educationalbackground}</textarea></td>
+                                    <td colspan="3"><textarea name="educationalbackground" id="educationalbackground" class="txta validate[maxSize[500]]">${jltfispExpert.educationalbackground}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label22}</th>
-                                    <td colspan="3"><textarea name="majorinfo" id="majorinfo" class="txta validate[required,maxSize[255]]">${jltfispExpert.majorinfo}</textarea></td>
+                                    <td colspan="3"><textarea name="majorinfo" id="majorinfo" class="txta validate[required,maxSize[500]]">${jltfispExpert.majorinfo}</textarea></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${finExpertManage.label23}</th>
@@ -183,17 +183,17 @@
                                 <#list jltfispExpertDoMain as DoMain>
                                 
                                 <tr>
-                                    <td><input type="text" value="${DoMain.firstdomain}" class="txt validate[required,maxSize[255]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
-                                    <td><input type="text" value="${DoMain.seconddomain}" class="txt validate[required,maxSize[255]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
-                                    <td><input type="text" value="${DoMain.threedomain}" class="txt validate[required,maxSize[255]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${DoMain.firstdomain}" class="txt validate[required,maxSize[500]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${DoMain.seconddomain}" class="txt validate[required,maxSize[500]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
+                                    <td><input type="text" value="${DoMain.threedomain}" class="txt validate[required,maxSize[500]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
                                     <td><a href="javascript:;" class="fr delete">删除</a></td>
                                 </tr>
                                </#list>
                                <#else>
                                  <tr>
-                                    <td><input type="text"  class="txt validate[required,maxSize[255]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
-                                    <td><input type="text"  class="txt validate[required,maxSize[255]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
-                                    <td><input type="text"  class="txt validate[required,maxSize[255]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
+                                    <td><input type="text"  class="txt validate[required,maxSize[500]]" name="firstdomain" id="firstdomain" placeholder="请输入" /></td>
+                                    <td><input type="text"  class="txt validate[required,maxSize[500]]" name="seconddomain" id="seconddomain" placeholder="请输入" /></td>
+                                    <td><input type="text"  class="txt validate[required,maxSize[500]]" name="threedomain" id="threedomain" placeholder="请输入" /></td>
                                     <td><a href="javascript:;" class="fr delete">删除</a></td>
                                 </tr>
                                </#if>

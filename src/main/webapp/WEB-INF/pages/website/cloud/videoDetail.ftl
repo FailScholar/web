@@ -48,8 +48,10 @@
                      	 	<p>${cloudDetail.content}</p>
                      	 </div>
 				     <#else>
-				     	<div class="artical" style="background-color:#fff;">
-				            <p>${cloudDetail.content}</p>
+				     	<div class="artical  wangEditor-container" style="background-color:#fff;">
+				            <div class="wangEditor-txt">
+				           	 <p>${cloudDetail.content}</p>
+				            </div>
 				        </div>
 				     </#if>
                   </div>

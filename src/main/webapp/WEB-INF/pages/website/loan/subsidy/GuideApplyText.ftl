@@ -18,9 +18,11 @@
                 <div class="bread">
                     <a href="${path}/index">首页</a>&gt;<a href="${path}/anon/loan">贷款服务</a>&gt;<a href="javascript:;">申请须知</a>
                 </div>
-                <div class="calt">
+                <div class="calt wangEditor-container" style="border: 0px;">
                     <h2>申请须知</h2>
+                    <div class=" wangEditor-txt">
                     <p class="note">${applyGuid }</p>
+					</div>
                 </div>
                  <div style="text-align:center;">
 				<input type="button"  id="accept" style="color:#ffffff;width:300px;height:50px;text-align:center;font-size:16px;border-radius:3px;background-color:#1679ff" 

@@ -18,11 +18,13 @@
                 <div class="bread">
                     <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-1);">贷款服务</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
-                <div class="calt">
+                <div class="calt wangEditor-container" style="border: 0px;">
                     <h2>申请须知</h2>
+                    <div class=" wangEditor-txt">
                     <p class="note">
                     ${loanformManage.applyGuide}
 					</p>
+					</div>
                 </div>
                 <div style="text-align:center;">
                 <input type="checkBox" id="checkBox1" style="font-size:16px;border-radius:3px;" onclick="if (this.checked) {enable()} else {disable()}">
