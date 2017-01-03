@@ -71,7 +71,7 @@ $(document).ajaxError(function (event, request, settings) {
         infoTabCLICK(infoTab_li_index[infoTab_li_index.length - 1]);
         return false;
     }
-    if(request.status == 666){
+    if(request.status == 405){
         dialog.tipsPop('ban-pop','提示:','您尚未登录或会话已过期',function () {
             window.location = path +'/login';
         });

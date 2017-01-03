@@ -10,6 +10,7 @@ import com.jltfisp.email.EmailService;
 import com.jltfisp.login.entity.JltfispUser;
 import com.jltfisp.login.service.LoginService;
 import com.jltfisp.redis.RedisService;
+import com.jltfisp.shiro.AuthorizingRealm;
 import com.jltfisp.util.captcha.Randoms;
 import com.jltfisp.web.regist.service.RegistService;
 import org.apache.shiro.SecurityUtils;
@@ -45,6 +46,8 @@ public class RegistController {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private AuthorizingRealm authorizingRealm;
 
     private final static String subject = "欢迎注册吉林省信息科技金融平台";
     private final static String contentPrefix = "您的注册验证码为:";
@@ -176,6 +179,7 @@ public class RegistController {
         registService.correlationRoles(aUser.getId(),aUser.getType() == 1 ? 4 : 5);
         //更新缓存
         loginService.flushUserCache();
+        authorizingRealm.clearAllUserRolePermissionCache();
         model.addAttribute("success", true);
         return JSON.toJSONString(model);
     }

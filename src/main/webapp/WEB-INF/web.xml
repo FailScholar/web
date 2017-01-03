@@ -105,7 +105,6 @@
     <context-param>
         <param-name>webAppRootKey</param-name>
         <param-value>jltfisp_web</param-value>
-        <description>吉林省科技信息金融服务平台---Web端</description>
     </context-param>
 
     <listener>

@@ -45,18 +45,12 @@ public class StatisticsService {
 
     @Async
     public void onStop(Session session) {
-        JltfispStatistics statistics = getJltfispStatistics();
-        statistics.setTotalTime(statistics.getTotalTime() + session.getLastAccessTime().getTime() - session
-                .getStartTimestamp().getTime());
-        redisService.putKV("jltfisp_statistics", JSON.toJSONString(statistics));
+        storeStatistics(session);
     }
 
     @Async
     public void onExpiration(Session session) {
-        JltfispStatistics statistics = getJltfispStatistics();
-        statistics.setTotalTime(statistics.getTotalTime() + System.currentTimeMillis() - session
-                .getStartTimestamp().getTime());
-        redisService.putKV("jltfisp_statistics", JSON.toJSONString(statistics));
+        storeStatistics(session);
     }
 
     @Async
@@ -77,5 +71,12 @@ public class StatisticsService {
 
     private JltfispStatistics getJltfispStatistics() {
         return toObject(redisService.getV("jltfisp_statistics"),JltfispStatistics.class);
+    }
+
+    private void storeStatistics(Session session){
+        JltfispStatistics statistics = getJltfispStatistics();
+        statistics.setTotalTime(statistics.getTotalTime() + session.getLastAccessTime().getTime() - session
+                .getStartTimestamp().getTime());
+        redisService.putKV("jltfisp_statistics", JSON.toJSONString(statistics));
     }
 }
