@@ -17,6 +17,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,9 @@ public class RegistController {
 
     @Autowired
     private AuthorizingRealm authorizingRealm;
+
+    @Value("${system.register.enable-captcha}")
+    private boolean enableCaptcha;
 
     private final static String subject = "欢迎注册吉林省信息科技金融平台";
     private final static String contentPrefix = "您的注册验证码为:";
@@ -111,10 +115,12 @@ public class RegistController {
     public String registBaseInfo(JltfispUser user, String captcha, int type, Model model){
         try {
             String exitCode = (String) SecurityUtils.getSubject().getSession().getAttribute("captcha");
-            if (null == exitCode || !exitCode.equalsIgnoreCase(captcha)) {
-                model.addAttribute("success", false);
-                model.addAttribute("message", "验证码错误");
-                return JSON.toJSONString(model);
+            if(enableCaptcha){
+                if (null == exitCode || !exitCode.equalsIgnoreCase(captcha)) {
+                    model.addAttribute("success", false);
+                    model.addAttribute("message", "验证码错误");
+                    return JSON.toJSONString(model);
+                }
             }
             String emailCaptcha = Randoms.random(5);
             user.setEmailCaptcha(emailCaptcha);
