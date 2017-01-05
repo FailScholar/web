@@ -7,7 +7,7 @@
                             <#if institutionList.logoFile?? && institutionList.logoFile != "">
                                   src="${path}${institutionList.logoFile}"
                             <#else>
-                                    src="${path}/resource/images/img3.jpg" 
+                                    src="${path}/resource/images/head.jpg" 
                             </#if>
                               alt="img" class="appImg fl" />
                    <div class="appDetail ap3 fr" style="word-wrap:break-word;word-break:break-all;">

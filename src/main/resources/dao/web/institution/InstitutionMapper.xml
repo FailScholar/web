@@ -42,7 +42,16 @@
 	</select>
 	<!--查询记录总数 -->
 	<select id="getInstitutionPageCount" resultType="int" parameterType="int">
-		select count(*) from jltfisp_institut institut where institut.columnId=#{columnId}
+		select count(*) from ((SELECT 
+		institut.id 
+		FROM 
+			jltfisp_institut institut  
+		LEFT JOIN jltfisp_business_applay jba ON jba.user_id = institut.user_id AND jba.type = institut.columnId AND jba.parent_type = '2'
+		WHERE
+			institut.columnId = #{columnId} AND jba.state = 1)
+		UNION ALL
+		(SELECT 	a.id 	FROM 	jltfisp_institut a  WHERE	a.columnId = 12 AND a.user_id = -1))
+		bbb
 	</select>
 	<sql id="institution_column">
 		id,institutionalName,logoFile,abbreviation,corporateRepresentative,socialCreditCode,province,city,area,address,institutionalNature,url,institutionalAbstract,investmentTeam,ServiceProductsAndFeatures,mainAreas,specialAreas,mainInvestmentStage,projectRequirement,companyRealAddress,companyCity,institutionalAddress,postcodes,linkMan,mobilePhone,email,zoneDescription,phoneNumer,fax,institutionalType,createTime,columnId,user_id

@@ -45,7 +45,7 @@
                               </#if>
                      	 </div>
                      	 <div class="artical">
-                     	 	<p>${cloudDetail.content}</p>
+                     	 	<textarea id="autoTextArea" readonly class="txta" style="cursor:default;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0;overflow-y: hidden;">${cloudDetail.content}</textarea>
                      	 </div>
 				     <#else>
 				     	<div class="artical  wangEditor-container" style="background-color:#fff;">
@@ -70,4 +70,12 @@
 </html>
 <script type="application/javascript">
     positionNavigation(10);
+    $(function(){
+var minHeight=$('#autoTextArea').height();
+var scrollHeight=$('#autoTextArea')[0].scrollHeight;
+$('#autoTextArea').attr("height", minHeight + 'px');
+if (scrollHeight > minHeight) {
+$('#autoTextArea').attr("style", "cursor:default;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0;overflow-y: hidden;height:"+scrollHeight + 'px;');
+}
+})
 </script>

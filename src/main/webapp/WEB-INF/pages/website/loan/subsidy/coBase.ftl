@@ -25,7 +25,7 @@
                   <th><b class="red">*</b>${loanformManage.baseAccountbank}</th>
                   <td><input id="loanBankName" name="loanBankName" value="${jlfispPsBaseDto.loanBankName }" type="text" class="txt validate[required,minSize[1],maxSize[20]]" placeholder="请输入" /></td>
                   <th><b class="red">*</b>${loanformManage.baseRegisteredcapital}</th>
-                  <td><input id="registeredCapital" name="registeredCapital" value="${capilMoney}"   type="text" class="txt validate[required,custom[number2],minSize[1],maxSize[10]]" placeholder="请输入" />万元</td>
+                  <td><input id="registeredCapital" name="registeredCapital" value="${capilMoney}"   type="text" class="txt validate[required,custom[number4],minSize[1],maxSize[10]]" placeholder="请输入" />万元</td>
               </tr>
               <tr>
                   <th><b class="red">*</b>${loanformManage.baseRegisteredaddress}</th>

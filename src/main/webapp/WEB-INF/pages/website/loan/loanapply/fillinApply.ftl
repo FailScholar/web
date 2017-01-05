@@ -40,7 +40,7 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${loanformManage.loanLabel1}</th>
-                                    <td ><input value="${coAll.jltfispCoFillInApply.applyAmount}" name="applyAmount" id="applyAmount" type="text" class="txt2 validate[required,minSize[1],min[0],maxSize[10],custom[number2]]" />万元</td>
+                                    <td ><input value="${coAll.jltfispCoFillInApply.applyAmount}" name="applyAmount" id="applyAmount" type="text" class="txt2 validate[required,minSize[1],min[0],maxSize[10],custom[number4]]" />万元</td>
                                     <th><b class="red">*</b>${loanformManage.loanLabel2}</th>
                                     <td><label>
                                     <#if coAll.jltfispCoFillInApply.payCycle ==1>
@@ -155,7 +155,7 @@
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel17}</th>
-                                    <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number2],min[0],maxSize[10]]" placeholder="请输入" />万元</td>
+                                    <td colspan="3"><input value="${coAll.jltfispCoFillInApply.finaneAmount}" name="finaneAmount" id="finaneAmount" type="text" class="txt2 validate[custom[number4],min[0],maxSize[10]]" placeholder="请输入" />万元</td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel18}</th>

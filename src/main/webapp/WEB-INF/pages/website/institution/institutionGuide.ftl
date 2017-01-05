@@ -1,4 +1,5 @@
 <#assign path=request.contextPath />
+<#include "website/common/common.ftl" />
 <div class="bread">
     <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/institution">${dictColumnDto.value}</a>&gt;<a href="javascript:void(0);" onclick="goBack(${jltfispColumn.id})">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">申请须知</a>
 </div>

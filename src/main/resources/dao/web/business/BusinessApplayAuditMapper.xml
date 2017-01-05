@@ -93,12 +93,13 @@
             <include refid="Example_Where_Clause"/>
             </where>
         </if>
+        order by a.id desc
         <if test="_BY != null">order by #{_BY}</if>
         <if test="_LM != null">limit #{_LM}</if>
         <if test="_ST != null">offset #{_ST}</if>
     </select>
 	<!-- 根据主键查询-->
-	<select id="selectByPK" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	<select id="selectByPk" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from jltfisp_business_applay a

@@ -19,7 +19,7 @@
                     <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/expert?columnId=${jltfispColumn.id}&isFrontPage=1">${jltfispColumn.columnName}</a>&gt;<a href="javascript:;">专家详情</a>
                 </div>
                 <div class="detail">
-                    <#if jltfispExpert.agencylogo?exists>
+                    <#if (jltfispExpert.agencylogo?length>0)>
                                             <img width="220px" height="246px" src="${path}/${jltfispExpert.agencylogo}" class="fl" />
                                             <#else>
                                             <img width="220px" height="246px" id="agencylogoimg" name="agencylogoimg"  src="${path}/resource/images/head.jpg" class="fl" />
@@ -45,7 +45,7 @@
                     <div class="clear"></div>
                     <div class="resume">
                         <h2>专家简讯</h2>
-                        <textarea  readonly class="txta" onclick="blur();"style="cursor:default;height:250px;overflow-y:visible;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0">${jltfispExpert.partfull}</textarea>
+                        <textarea id="autoTextArea" readonly class="txta" style="cursor:default;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0;overflow-y: hidden;">${jltfispExpert.partfull}</textarea>
                     </div>
                 </div>
             </div>
@@ -60,5 +60,13 @@
   </body>
 </html>
 <script type="application/javascript">
-    positionNavigation(6);
+positionNavigation(6);
+$(function(){
+var minHeight=$('#autoTextArea').height();
+var scrollHeight=$('#autoTextArea')[0].scrollHeight;
+$('#autoTextArea').attr("height", minHeight + 'px');
+if (scrollHeight > minHeight) {
+$('#autoTextArea').attr("style", "cursor:default;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0;overflow-y: hidden;height:"+scrollHeight + 'px;');
+}
+})
 </script>

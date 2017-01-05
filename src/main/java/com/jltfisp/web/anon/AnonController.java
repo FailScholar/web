@@ -14,6 +14,7 @@ import com.jltfisp.lucene.pojo.Pojo;
 import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.redis.RedisService;
 import com.jltfisp.shiro.AuthorizingRealm;
+import com.jltfisp.shiro.SessionDAO;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
 import com.jltfisp.util.captcha.Randoms;
 import com.jltfisp.util.service.DictionaryService;
@@ -432,5 +433,15 @@ public class AnonController {
         for (String s : set) {
             jedis.del(s);
         }
+    }
+
+    @Autowired
+    private SessionDAO sessionDAO;
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(){
+        sessionDAO.offLineSession("444@qq.com");
+        return "success";
     }
 }

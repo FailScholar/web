@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
-    <title>股权融资保费申请</title>
+    <title>股权融资申请</title>
     <style>  
       @page{size:297mm 450mm;}
   	.content { padding:25px 20px; background-color:#fff;word-wrap:break-word;word-break:break-all;}
@@ -73,7 +73,13 @@
             </tr>
             <tr class="tal">
                  <th>${formLabel.baseRegisteredcapital}</th>
-                 <td><span>${jltfispCoBaseDto2.registeredCapital!''}万元</span></td>
+                 <td><span>
+                 <#if (jltfispCoBaseDto2.registeredCapital?exists)>
+                 ${jltfispCoBaseDto2.registeredCapital!''}
+                 <#else>
+                 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 </#if>
+                 	万元</span></td>
                  <th>${formLabel.baseRegisteredaddress}</th>
                  <td colspan="3"><span>${jltfispCoBaseDto2.registeredAddress!''}</span></td>
                  </tr>
@@ -97,7 +103,11 @@
                                 <th>${formLabel.baseLinkman}</th>
                                 <td><span>${jltfispCoBaseDto2.linkMan!''}</span></td>
                                 <th>${formLabel.basePhoneorfax}</th>
-                                <td><span>${jltfispCoBaseDto2.phoneOrFax!''}</span></td>
+                                <td><span>
+                                <#if (jltfispCoBaseDto2.zoneDescription?exists && jltfispCoBaseDto2.phoneOrFax?exists)>
+                                	${jltfispCoBaseDto2.zoneDescription!''}-${jltfispCoBaseDto2.phoneOrFax!''}
+                                </#if>
+                                </span></td>
                                 <th>${formLabel.baseLinkmobile}</th>
                                 <td><span>${jltfispCoBaseDto2.linkMobile!''}</span></td>
                             </tr>
@@ -186,7 +196,13 @@
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.finMaterialCapitals}</th>
-                                <td colspan="5"><span>${jltfispFinMaterial3.capitals!''}万元</span></td>
+                                <td colspan="5"><span>
+                                <#if (jltfispFinMaterial3.capitals?exists)>
+                                	${jltfispFinMaterial3.capitals!''}
+                                <#else>
+                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </#if>
+								万元</span></td>
                             </tr>
                             <tr class="tal">
                                 <th>${formLabel.finMaterialRequireOrganization}</th>

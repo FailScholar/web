@@ -19,7 +19,7 @@
       <ul class="infoTab">
          <#list columnList as column>
          	<#if column_index lt 5>
-           	 <li id="Type${column.id}" name="${column.id}" onclick="infoTabClick(${column.id})"><a href="javascript:void(0);">${column.columnName}</a></li>
+           	 <li id="Type${column.id}" name="${column.id}" onclick="infoTabClick(${column.id})"><#if column.columnName?length lte 6><a href="javascript:void(0);">${column.columnName } </a><#else><a href="javascript:void(0);" title="${column.columnName}"> ${column.columnName[0..5]}...</a></#if></li>
          	</#if>
          </#list>
          <#if columnList?size gt 5>
@@ -28,7 +28,11 @@
 		       		<option value="0">-选择更多-</option>
 		       	 	<#list columnList as afterFiveList>
 		       	 		<#if afterFiveList_index gt 4>
+		       	 		    <#if afterFiveList.columnName?length lte 6>
 		       	 			<option value="${afterFiveList.id}">${afterFiveList.columnName}</option>
+		       	 			<#else>
+		       	 			<option title="${afterFiveList.columnName}" value="${afterFiveList.id}">${afterFiveList.columnName[0..5]}...</option>
+		       	 			</#if>
 		       	 		</#if>
 		       	 	</#list>
 		       	 </select>&nbsp;
@@ -87,6 +91,7 @@
 	});
 });
 function infoTabClick(columnid) {
+	    $("#columnIdValue").val(columnid);
 		$("#selectId").val("0");
 		$('.infoList').load("${path}/perm/news/"+columnid,{'pager.offset' :0});
 	}

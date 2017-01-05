@@ -21,14 +21,20 @@
                           <#list columnList as column>
                           <#assign n = n+1>
                           <!--<li <#if type=="1">class="active"</#if>><a href="javascript:;">科技金融专家</a></li>-->
-                          <li name="${column.id}" id="Type${column.id}"><a href="javascript:void(0);">${column.columnName}</a></li>
+                          <li name="${column.id}" id="Type${column.id}"><a href="javascript:void(0);">
+                          <#if (column.columnName?length >6) >
+                          <lable title="${column.columnName}">${column.columnName[0..5]}...</label>
+                          <#else>
+                          ${column.columnName}
+                          </#if>
+                          </a></li>
                           <#if (n>4) >
                           <#break>
                           </#if>
                           </#list>
                           <#if  (columnList?size>5)>
                           <li>
-                         <select id="columnName" name="columnName" >
+                         <select id="columnName" name="columnName" style="width:120px">
                          <option  value="">--选择更多--</option>
                          <#list columnList as column>
                          <#if   (column_index>4)>
@@ -42,7 +48,13 @@
                       <div class="clear"></div>
                       <#list columnList as column>
                           <!--<a href="#" class="apply2"<#if type!="1">style="width:150px; display:none"</#if><#if type=="1">style="width:150px;"</#if>>申请成为科技金融专家</a>-->
-                          <a href="${path}/expert/expertGuide?columnId=${column.id}" class="apply2" style="width:150px;" id="${column.id}">申请成为${column.columnName}</a>
+                          <a href="${path}/expert/expertGuide?columnId=${column.id}" class="apply2" style="width:170px;" id="${column.id}">
+             <#if (column.columnName?length >6) >
+                                  <lable title="申请成为${column.columnName}">申请成为${column.columnName[0..5]}...</label>
+                                  <#else>             
+                          申请成为${column.columnName}
+                       </#if>   
+                          </a>
                       </#list>
                       
                       <div class="infoList">

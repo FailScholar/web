@@ -178,7 +178,7 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 	 * @return
 	 */
 	@RequestMapping("/detail")
-	public String detail(HttpServletRequest request,Integer businessType,Integer infoId) {
+	public String detail(HttpServletRequest request,Integer businessType,Integer infoId,Integer id) {
 		SysDict dict = dictionaryService.getValueByTypeCode(1002, businessType.toString());
     	request.setAttribute("applyname", dict.getValue());
     	request.setAttribute("applytype", businessType);
@@ -187,10 +187,8 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
     	
     	//获取当前用户登录信息
     	
-    	BusinessApplayAudit params = new BusinessApplayAudit();
-    	params.setInfoId(infoId);
-    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
-    	request.setAttribute("applayAudits", applayAudit);
+    	BusinessApplayAudit applayAudit = businessApplayAuditService.selectByPk(id);
+    	request.setAttribute("applayAudit", applayAudit);
     	JltfispCoAll coAll=loanService.getApplyALL(infoId);
     	List<JltfispCoDebt> coDebt=loanService.getCoDebtTableList(infoId);
     	request.setAttribute("coAll", coAll);
@@ -232,14 +230,10 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      * @return
      */
     @RequestMapping("/showSubsidyDetail")
-    public String showSubsidyDetail(HttpServletRequest request,Integer businessType,Integer infoId){
+    public String showSubsidyDetail(HttpServletRequest request,Integer businessType,Integer infoId,Integer id){
     	//获取当前用户登录信息
-    	JltfispUser user=loginService.getCurrentUser();
-    	BusinessApplayAudit params = new BusinessApplayAudit();
-    	params.setUserId(user.getId());
-    	params.setType(businessType.toString());
-    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
-    	request.setAttribute("applayAudits", applayAudit);
+    	BusinessApplayAudit applayAudit = businessApplayAuditService.selectByPk(id);
+    	request.setAttribute("applayAudit", applayAudit);
     	//通过USERID获取企业基本信息
     	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContext(infoId);
     	//根据企业id获取保费补贴
@@ -260,13 +254,11 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
      * @return
      */
     @RequestMapping("/showFinanceApplyDetail")
-    public String showFinanceApplyDetail(HttpServletRequest request,Integer businessType,Integer infoId){
+    public String showFinanceApplyDetail(HttpServletRequest request,Integer businessType,Integer infoId,Integer id){
     	JltfispUser user=loginService.getCurrentUser();
     	
-    	BusinessApplayAudit params = new BusinessApplayAudit();
-    	params.setInfoId(infoId);
-    	List<BusinessApplayAudit> applayAudit = businessApplayAuditService.selectBySample(params, null);
-    	request.setAttribute("applayAudits", applayAudit);
+    	BusinessApplayAudit applayAudit = businessApplayAuditService.selectByPk(id);
+    	request.setAttribute("applayAudit", applayAudit);
 	      JltfispFinanceAndShareholdersDto jltfispCoBaseDto2 = this.financeApplyService.getJltfispFinanceAndShareholdersDto(infoId);
 	      String createTime = jltfispCoBaseDto2.getCreateTime();
 	      if(createTime!=null){
@@ -327,7 +319,7 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 		         
 		   }
 		  if(jltfispCoBaseDto2.getRegisteredCapital()!=null){
-	    		DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+	    		DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
 	    		String capilMoney=decimalFormat.format(jltfispCoBaseDto2.getRegisteredCapital());//format 返回的是字符串
 	  		  	request.setAttribute("capilMoney", capilMoney);
 	    	}

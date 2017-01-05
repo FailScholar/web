@@ -164,7 +164,7 @@ public class SubsidyApplyController {
         	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
         	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
         	    		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
-	               		 DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+	               		 DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
 	               		 String capilMoney=decimalFormat.format(jlfispPsBaseDto.getRegisteredCapital());//format 返回的是字符串
 	               		 mv.addObject("capilMoney", capilMoney);
         	    	}
@@ -189,6 +189,9 @@ public class SubsidyApplyController {
         		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
     			// 获取保费补贴申请第二部里面的内容
     	    	if(jlfispPsBaseDto !=null){
+    	    		DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+               		String capilMoney=decimalFormat.format(jlfispPsBaseDto.getRegisteredCapital());//format 返回的是字符串
+               		mv.addObject("capilMoney", capilMoney);
     	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
     	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
     	    	}
@@ -221,7 +224,7 @@ public class SubsidyApplyController {
 	 */
     @RequestMapping("/saveSubsidyCoBase")
     @ResponseBody
-    public int saveSubsidyCoBase(HttpServletRequest request,JltfispSubsidyCoBaseDto jlfispSubsidyBaseDto) {
+    public void saveSubsidyCoBase(HttpServletRequest request,JltfispSubsidyCoBaseDto jlfispSubsidyBaseDto) {
         //首先判断该企业用户的申请信息是否已经存在数据库存在先删除否则直接新增一条信息
     	JltfispUser user =loginService.getCurrentUser();
     	JltfispCoBaseDto jltfispCoBaseDto=new JltfispCoBaseDto();
@@ -241,7 +244,6 @@ public class SubsidyApplyController {
     	  }
     	     subsidyService.saveJltfispPsInfo(jltfispPsInfoList);
     	}
-    	return 1;
     	
     }
     /**

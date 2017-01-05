@@ -61,9 +61,14 @@ public class UserController {
     	//清除缓存
         authorizingRealm.clearUserCache(user1.getAccountNumber());
         SecurityUtils.getSubject().getSession().removeAttribute("user");
-    	return "redirect:../main";
+    	return "redirect:../user/showUser";
     }
-    
+    @RequestMapping("/showUser")
+	public String showUser(HttpServletRequest request){
+		JltfispUser currentUser = loginService.getCurrentUser();
+		request.setAttribute("user", currentUser);
+		return "/website/usercenter/listUser";
+	}
     
     
     @RequestMapping("/saveImg")

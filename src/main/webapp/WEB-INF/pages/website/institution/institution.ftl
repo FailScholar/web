@@ -19,18 +19,30 @@
                       <ul class="infoTab">
                       <#if (columnList?size<6)>
                      	 	<#list columnList as columnList>
-				        		 <li tips="${columnList.id}" id="columnId${columnList.id}" onclick="getInstitutionList(${columnList.id},'${columnList.columnName}')">
-				         			<a href="javascript:void(0);" >${columnList.columnName}</a>
+				        		 <li tips="${columnList.id}" id="columnId${columnList.id}" attr1="${columnList.columnName}" onclick="getInstitutionList(${columnList.id},'${columnList.columnName}')">
+				         			<a href="javascript:void(0);" >
+				         			  <#if (columnList.columnName?length >6) >
+			                          <lable title="${columnList.columnName}">${columnList.columnName[0..5]}...</label>
+			                          <#else>
+			                          ${columnList.columnName}
+			                          </#if>
+				         			</a>
 				        	 	 </li>
 				      		</#list> 
 				      <#else>
 				     	  <#list foreFiveList as foreFiveList>
-				        		 <li tips="${foreFiveList.id}" id="columnId${foreFiveList.id}" onclick="getInstitutionList(${foreFiveList.id},'${foreFiveList.columnName}')">
-				         			<a href="javascript:void(0);" >${foreFiveList.columnName}</a>
+				        		 <li tips="${foreFiveList.id}" id="columnId${foreFiveList.id}" attr1="${foreFiveList.columnName}" onclick="getInstitutionList(${foreFiveList.id},'${foreFiveList.columnName}')">
+				         			<a href="javascript:void(0);" >
+				         				<#if (foreFiveList.columnName?length >6) >
+			                            <lable title="${foreFiveList.columnName}">${foreFiveList.columnName[0..5]}...</label>
+			                            <#else>
+			                            ${foreFiveList.columnName}
+			                            </#if>
+				         			</a>
 				        	 	 </li>
 				      	 </#list> 
  				       	 <li>
-	 				       	 <select id="selectId" onchange="getList()">
+	 				       	 <select id="selectId" onchange="getList()" style="width:120px">
 	 				       		<option value="0">-选择更多-</option>
 	 				       	 	<#list afterFiveList as afterFiveList>
 	 				       	 		<option value="${afterFiveList.id}">&nbsp;${afterFiveList.columnName}&nbsp;</option>
@@ -42,7 +54,7 @@
                       </ul>
                       <div class="clear"></div>
                       <input type="hidden" id="applyColumnId" />
-                      <a href="javascript: void(0);" class="apply2" onclick="applyInstitution();">申请成为<span id="columnName">合作机构</span></a>
+                      <a href="javascript: void(0);" style="width:170px;" class="apply2" onclick="applyInstitution();">申请成为<span id="columnName">合作机构</span></a>
                      
                       
                      
@@ -70,7 +82,7 @@
 	  if(columnId == ''){
 	  	$("div.info ul.infoTab").find("li").eq(0).addClass("active");
 	  	var tips= $("div.info ul.infoTab").find("li").eq(0).attr("tips");
-	  	var columnName= $("div.info ul.infoTab").find("li").eq(0).find("a").text();
+	  	var columnName= $("div.info ul.infoTab").find("li").eq(0).attr("attr1");
 	  	getInstitutionList(tips,columnName);
 	  }else{
 	  	if($("#columnId"+columnId).html() == null ){
@@ -94,6 +106,11 @@
 			  data:{"columnId":columnId,'pager.offset': 0},
 			  dataType : "html",
 			  success:function(data){
+			    columnName = $.trim(columnName)
+			  	if(columnName.length > 6){
+			  		$("#columnName").parent().attr("title", "申请成为"+columnName);
+			  		columnName = columnName.substring(0,6)+"...";
+			  	}
 			  	$("#columnName").html(columnName);
 				$(".infoList").html(data);//要刷新的div
 			  }
@@ -116,8 +133,12 @@
 			  data:{"columnId":columnId,'pager.offset': 0},
 			  dataType : "html",
 			  success:function(data){
-			  debugger;
-			  	$("#columnName").html($.trim(columnName));
+			  	columnName = $.trim(columnName)
+			  	if(columnName.length > 6){
+			  		$("#columnName").parent().attr("title", "申请成为"+columnName);
+			  		columnName = columnName.substring(0,6)+"...";
+			  	}
+			  	$("#columnName").html(columnName);
 				$(".infoList").html(data);//要刷新的div
 			  }
 		});

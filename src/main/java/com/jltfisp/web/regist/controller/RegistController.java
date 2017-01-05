@@ -203,7 +203,7 @@ public class RegistController {
         registService.updateUser(nUser);
         model.addAttribute("success", true);
         try {
-            emailService.sendText(nUser.getAccountNumber(),subject,contentPrefix + nUser.getEmailCaptcha() + contentSuffix);
+            emailService.sendText(user.getAccountNumber(),subject,contentPrefix + nUser.getEmailCaptcha() + contentSuffix);
         } catch (Exception e) {
             return JSON.toJSONString(model);
         }

@@ -7,7 +7,7 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
-<#include "website/common/common.ftl" />
+	<#include "website/common/common.ftl" />
     <title>贷款服务在线申请</title>
 </head>
 
@@ -41,7 +41,7 @@
                                 <th><b class="red">*</b>${formLabel.baseCorporaterepresentative}</th>
                                 <td><input type="text" class="txt validate[required,minSize[2],maxSize[20]]" id="corporateRepresentative" name="corporateRepresentative" value="${jltfispCoBaseDto.corporateRepresentative}" placeholder="请输入"/></td>
                                 <th><b class="red">*</b>${formLabel.baseRegisteredcapital}</th>
-                                <td><input type="text" class="txt validate[required,custom[number2],maxSize[10]]"  id="registeredCapital" name="registeredCapital" value="${capilMoney}" placeholder="请输入"/>万元</td>
+                                <td><input type="text" class="txt validate[required,custom[number4],maxSize[13]]"  id="registeredCapital" name="registeredCapital" value="${capilMoney}" placeholder="请输入"/>万元</td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>${formLabel.baseEstablishtime}</th>
@@ -236,7 +236,7 @@
                         <table class="tab3" width="100%">
                             <tr>
                                 <th><b class="red">*</b>${formLabel.finMaterialCapitals}</th>
-                                <td><input type="text" class="txt  validate[required,minSize[1],maxSize[10],custom[number2]]" id="capitals" name="capitals" value="${jltfispFinMaterial.capitals}"/>万元</td>
+                                <td><input type="text" class="txt  validate[required,minSize[1],maxSize[13],custom[number4]]" id="capitals" name="capitals" value="${jltfispFinMaterial.capitals}"/>万元</td>
                             </tr>
                             <tr>
                                 <th><b class="red">*</b>${formLabel.finMaterialRequireOrganization}</th>

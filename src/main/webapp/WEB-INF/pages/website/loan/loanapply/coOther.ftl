@@ -6,9 +6,9 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                 	<th style="width:20%"><b class="red">*</b>${loanformManage.otherSubjectAmount}</th>
-                                    <td><input name="subjectamount" id="subjectamount" value="${coAll.jltfispCoOther.subjectamount}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],min[0],custom[number2]]" placeholder="请输入" />万元</td>
+                                    <td><input name="subjectamount" id="subjectamount" value="${coAll.jltfispCoOther.subjectamount}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],min[0],custom[number4]]" placeholder="请输入" />万元</td>
                                     <th style="width:22%"><b class="red">*</b>${loanformManage.otherLoanAmount}</th>
-                                    <td><input name="loanamount" id="loanamount" value="${coAll.jltfispCoOther.loanamount}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],min[0],custom[number2]]" placeholder="请输入" />万元</td>
+                                    <td><input name="loanamount" id="loanamount" value="${coAll.jltfispCoOther.loanamount}" type="text" class="txt2 validate[required,minSize[1],maxSize[10],min[0],custom[number4]]" placeholder="请输入" />万元</td>
                                 </tr>
                                 <tr>
                                 	<th><b class="red">*</b>${loanformManage.otherExplain}</th>

@@ -199,19 +199,19 @@
                   <td colspan="3">法定代表人（签名盖章）</td>
                   <td colspan="4">企业基本户三排章</td>
               </tr>
-              <#list applayAudits as applayAudit>
-	              	<#if (applayAudit.state == 1)>
-		              	<tr>
-		              		<td>审核意见</td>
-		              		<td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
-		              	</tr>
-		             <#elseif (applayAudit.state == 2)>
-	                    <tr>
-		              		<td>审核意见</td>
-		              		<td colspan="9">审核不通过，${applayAudit.auditDesc!''}</td>
-		              	</tr>
-	              	</#if>
-              </#list>
+              	<tr>
+              		<td>审核意见</td>
+              		<td colspan="9">
+              		<#if (applayAudit.state == "1")>
+                      		审核通过
+                      	<#else>
+                      		审核不通过
+                      	</#if>
+              		<#if (applayAudit.auditDesc??)>
+              		，${applayAudit.auditDesc!''}
+              		</#if> 
+              		</td>
+              	</tr>
               </tbody>
           </table>
           <div class="btnFld">

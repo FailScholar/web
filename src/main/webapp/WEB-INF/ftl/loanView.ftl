@@ -190,12 +190,20 @@
                                   <tr>
                                       <td>${loanformManage.baseTwoshareholder!''}</td>
                                       <td>${coAll.jltfispCoBase.twoShareholderName!''}</td>
-                                      <td>${coAll.jltfispCoBase.twoStock!''}%</td>
+                                      <td>
+                                      <#if (coAll.jltfispCoBase.twoStock?exists)>
+                                      ${coAll.jltfispCoBase.twoStock!''}%
+                                      </#if>
+                                      </td>
                                   </tr>
                                   <tr>
                                       <td>${loanformManage.baseThreeshareholer!''}</td>
                                       <td>${coAll.jltfispCoBase.threeShareholerName!''}</td>
-                                      <td>${coAll.jltfispCoBase.threeStock!''}%</td>
+                                      <td>
+                                      <#if (coAll.jltfispCoBase.threeStock?exists)>
+                                      ${coAll.jltfispCoBase.threeStock!''}%
+                                      </#if>
+                                      </td>
                                   </tr>
                               </table>
                               <p class="ntit">企业概况</p>

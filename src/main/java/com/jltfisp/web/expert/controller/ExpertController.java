@@ -386,7 +386,7 @@ public class ExpertController {
     		Path="false";
     	}
         String fileName = uploadFile.getFileName();
-        if (StringUtils.isNotBlank(fileName) && fileName.endsWith(".jpg")) {
+        if (StringUtils.isNotBlank(fileName) && (fileName.endsWith(".jpg") || fileName.endsWith(".JPG"))) {
             byte[] fileData = FileUpDownUtils.getFileContent(uploadFile.getFile());
             String filePath = fileManager.saveImageFile(fileData, uploadFile.getFileName());
             //BufferedImage image = ImageUtils.readImage(uploadFile.getFile().getAbsolutePath());

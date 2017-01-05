@@ -17,7 +17,7 @@
               <!--content开始-->
              <div class="content">
                 <div class="bread">
-                    <a href="${path}/index">首页</a>&gt;<a href="javascript:history.go(-1);">专家资源</a>&gt;<a href="${path}/perm/expert?columnId=${columnId}&isFrontPage=1">${columnName}</a>&gt;<a href="javascript:;">在线申请</a>
+                    <a href="${path}/index">首页</a>&gt;<a href="${path}/perm/expert">专家资源</a>&gt;<a href="${path}/perm/expert?columnId=${columnId}&isFrontPage=1">${columnName}</a>&gt;<a href="javascript:;">在线申请</a>
                 </div>
                 <div class="calt wangEditor-container" style="border: 0px;">
                 <div class=" wangEditor-txt">

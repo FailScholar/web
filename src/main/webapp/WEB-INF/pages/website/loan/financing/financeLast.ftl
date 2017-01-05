@@ -117,7 +117,7 @@
 			                 	 		<span>科技小巨人企业</span>
 			                 		<#elseif jltfispCoBaseDto2.technologyqualifications==3>
 			                 			<span>科技小巨人培训企业</span>
-			                 		<#elseif jltfispCoBaseDto2.technologyqualifications==3>
+			                 		<#elseif jltfispCoBaseDto2.technologyqualifications==4>
 			                 	 		<span>软件企业</span>
 			                 	 	<#else>
 			                 	 		<span>其它</span>

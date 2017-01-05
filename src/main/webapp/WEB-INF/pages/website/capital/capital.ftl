@@ -20,7 +20,13 @@
         <#list columnList as columnList>
        		 <#if columnList_index lt 5>
         		 <li tips="${columnList.id}" id="columnId${columnList.id}" onclick="getCapitalInfoList(${columnList.id})">
-         			<a href="javascript:void(0);" >${columnList.columnName}</a>
+         			<a href="javascript:void(0);" >
+         			   <#if (columnList.columnName?length >6) >
+			              <lable title="${columnList.columnName}">${columnList.columnName[0..5]}...</label>
+			              <#else>
+			               ${columnList.columnName}
+			             </#if>
+			         </a>
          		</li>
          	 </#if>
        </#list> 

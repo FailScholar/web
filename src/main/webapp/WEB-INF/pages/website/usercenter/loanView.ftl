@@ -50,24 +50,22 @@
                           <#include "website/loan/loanapply/coFinancialView.ftl"/>
                           <!--附件-->
                           <#include "website/loan/loanapply/coFileView.ftl"/>
-                          <div>
-                          	<#list applayAudits as applayAudit>
-				              	<#if (applayAudit.state == 1)>
-				              		<table class="tab2" style="width:93%;margin-top:-20px">
-				              		<tr>
-	                                  <td>审核意见</td>
-	                                  <td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
-	                                  </tr>
-	                                </table>
-	                            <#elseif (applayAudit.state == 2)>
-	                            	<table class="tab2" style="width:93%;margin-top:-20px">
-				              		<tr>
-	                                  <td>审核意见</td>
-	                                  <td colspan="9">审核不通过，${applayAudit.auditDesc!''}</td>
-	                                  </tr>
-	                                </table>
-				              	</#if>
-			              </#list>
+                          <div style="word-wrap:break-word;word-break:break-all;">
+		              		<table class="tab2" style="width:93%;margin-top:-20px">
+		              		<tr>
+                              <td>审核意见</td>
+                              <td colspan="9">
+                              	<#if (applayAudit.state == "1")>
+                              		审核通过
+                              	<#else>
+                              		审核不通过
+                              	</#if>
+                              <#if (applayAudit.auditDesc??)>
+			              		，${applayAudit.auditDesc!''}
+			              		</#if> 
+                              	</td>
+                              </tr>
+                            </table>
                           </div>
                           <div class="btnFld">
                           <input type="button" value="打印输出" onclick="printdiv('${businessType}','${infoId}');" class="btnSave" />

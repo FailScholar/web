@@ -24,7 +24,7 @@
                             <#if jltfispInstitutionDetail.logoFile?? && jltfispInstitutionDetail.logoFile != "">
                                   src="${path}${jltfispInstitutionDetail.logoFile}"
                             <#else>
-                                    src="${path}/resource/images/img3.jpg" 
+                                    src="${path}/resource/images/head.jpg" 
                             </#if>
                               class="fl" />
                         <h1 class="bankname fr">${jltfispInstitutionDetail.institutionalName}
@@ -46,7 +46,7 @@
                         </ul>
                     </div>
                     <div class="resume re1" style="word-wrap:break-word;word-break:break-all;">
-                        <textarea  readonly class="txta" style="cursor:default;height:200px;overflow-y:visible;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0">${jltfispInstitutionDetail.serviceProductsAndFeatures}</textarea>
+                        <textarea id="autoTextArea" readonly class="txta" style="cursor:default;height:200px;overflow-y:visible;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0">${jltfispInstitutionDetail.serviceProductsAndFeatures}</textarea>
                     </div>
                     
                 </div>
@@ -66,7 +66,14 @@ $(document).ready(function(e) {
 		$(this).parents('.nli').siblings(".resume").hide().eq($(this).index()).show();
 	});
 });
-
+$(function(){
+	var minHeight=$('#autoTextArea').height();
+	var scrollHeight=$('#autoTextArea')[0].scrollHeight;
+	$('#autoTextArea').attr("height", minHeight + 'px');
+	if (scrollHeight > minHeight) {
+	$('#autoTextArea').attr("style", "cursor:default;width:100%;BORDER-BOTTOM: 0px solid; BORDER-LEFT: 0px solid; BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid;border:0;overflow-y: hidden;height:"+scrollHeight + 'px;');
+}
+})
 </script>
   <#include "website/common/footer.ftl" />
   </body>

@@ -14,7 +14,13 @@
   <tbody>
   <#list pageInfo.data as business>
   <tr>
-      <td>${business.companyName}</td>
+      <td title="${business.companyName}">
+      	<#if business.companyName?length lte 9>
+      		${business.companyName}
+      	<#else>
+      		${business.companyName[0..8]}..
+      	</#if>
+      </td>
       <#if t.type != '5'>
       	<td>${business.loanValue}</td>
       	<td>${business.tecName}</td>
@@ -46,11 +52,11 @@
      	</#if>
      	<a href="javascript:;" onclick="subInfo(${business.id},${business.type})" target="_blank">提交</a>
       <#elseif business.type =='5'>
-      	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}&infoId=${business.infoId}" target="_blank">查看</a>
+      	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}&infoId=${business.infoId}&id=${business.id}" target="_blank">查看</a>
       <#elseif business.type !='5' &&  business.type !='6'>
-      	<a href="${path}/business/detail?businessType=${business.type}&infoId=${business.infoId}" target="_blank">查看</a>
+      	<a href="${path}/business/detail?businessType=${business.type}&infoId=${business.infoId}&id=${business.id}" target="_blank">查看</a>
       <#elseif business.type =='6'>
-      	<a href="${path}/business/showFinanceApplyDetail?businessType=${business.type}&infoId=${business.infoId}" target="_blank">查看</a>
+      	<a href="${path}/business/showFinanceApplyDetail?businessType=${business.type}&infoId=${business.infoId}&id=${business.id}" target="_blank">查看</a>
       </#if>
       </td>
   </tr>

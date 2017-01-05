@@ -110,13 +110,18 @@
 				},
 				"number2":{
 					// Number, including positive, negative, and floating decimal. credit:orefalo
-                    "regex": /^[-]{0,1}(\d){1,10}(\.(\d){1,2})?$/,
+                    "regex": /^([-]{0,1}[1-9](\d){0,9}(\.(\d){1,2})?|0|0(\.[1-9][0-9]{0,1})|0(\.0[1-9]))$/,
 					"alertText":"* 请输入数字，且整数位最多10位，小数位最多2位！"
 				},
 				"number3":{
 					// Number, including positive, negative, and floating decimal. credit:orefalo
                     "regex": /^(\d){1,3}(\.(\d){1,2})?$/,
 					"alertText":"* 请输入非负数，且整数位最多3位，小数位最多2位！"
+				},
+				"number4":{
+					// Number, including positive, negative, and floating decimal. credit:orefalo
+                    "regex": /^(([1-9])(\d){0,9}(\.(\d){1,2})?|0(\.[1-9][0-9]{0,1})|0(\.0[1-9]))$/,
+					"alertText":"* 请输入正数，且整数位最多10位，小数位最多2位！"
 				},
 				"date":{
 					"regex":/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/,

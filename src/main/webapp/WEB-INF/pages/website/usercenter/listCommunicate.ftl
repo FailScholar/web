@@ -52,8 +52,8 @@
               <div class="content">
                   <div class="info">
                       <ul class="infoTab">
-                          <li><a href="javascript:goMain(0);">用户中心</a></li>
-                          <li><a href="javascript:goMain(1);">用户信息</a></li>
+                          <li onclick="goMain(0)"><a href="javascript:;">用户中心</a></li>
+                          <li onclick="goUrl('${path}/user/showUser')"><a href="javascript:;">用户信息</a></li>
                           <li onclick="goUrl('${path}/message/page')"><a href="javascript:;">通知通告</a></li>
 
                           <@shiro.hasAnyRoles name="企业会员,机构会员">
@@ -81,7 +81,7 @@
                       <form action="${path}/communicate/saveToPage" method="post" class="consult" id="consultForm">
                           <div>
                               <span>咨询对象类型</span>
-                              <select class="selOpt" name="ansExpertType" >
+                              <select class="selOpt validate[required]" name="ansExpertType">
                               	<#list roleList as role>
                               		<#if (columnList?seq_contains(role.roleName))>
                                   		<option value="${role.id}">${role.roleName}</option>

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
 <#include "website/common/common.ftl" />
-    <title>股权融资保费申请</title>
+    <title>股权融资申请</title>
 </head>
 
 <body>
@@ -68,7 +68,7 @@
                                 <th>${formLabel.baseLinkman}</th>
                                 <td><span>${jltfispCoBaseDto2.linkMan}</span></td>
                                 <th>${formLabel.basePhoneorfax}</th>
-                                <td><span>${jltfispCoBaseDto2.phoneOrFax}</span></td>
+                                <td><span>${jltfispCoBaseDto2.zoneDescription}-${jltfispCoBaseDto2.phoneOrFax}</span></td>
                                 <th>${formLabel.baseLinkmobile}</th>
                                 <td><span>${jltfispCoBaseDto2.linkMobile}</span></td>
                             </tr>
@@ -181,19 +181,19 @@
                                     </div>
                                 </td>
                             </tr>
-                             <#list applayAudits as applayAudit>
-				              	<#if (applayAudit.state == 1)>
-					              	<tr>
-					              		<td>审核意见</td>
-					              		<td colspan="9">审核通过，${applayAudit.auditDesc!''}</td>
-					              	</tr>
-					              <#elseif (applayAudit.state == 2)>
-				                    <tr>
-					              		<td>审核意见</td>
-					              		<td colspan="9">审核不通过，${applayAudit.auditDesc!''}</td>
-					              	</tr>
-				              	</#if>
-			              </#list>
+			              	<tr>
+			              		<td>审核意见</td>
+			              		<td colspan="9">
+			              		<#if (applayAudit.state == "1")>
+		                      		审核通过
+		                      	<#else>
+		                      		审核不通过
+		                      	</#if>
+			              		<#if (applayAudit.auditDesc??)>
+			              		，${applayAudit.auditDesc!''}
+			              		</#if> 
+			              		</td>
+			              	</tr>
                             </tbody>
                         </table>
                         

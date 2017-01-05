@@ -13,7 +13,7 @@
                                     <th><b class="red">*</b>${loanformManage.baseEstablishtime}</th>
                                     <td><input type="text" id="establishTime" name="establishTime" class="txt dateIcon validate[required]" onClick="WdatePicker({readOnly:true})" readonly="readonly" value="<#if (coAll.jltfispCoBase.establishTime?exists)>${coAll.jltfispCoBase.establishTime?date}</#if>"/></td>
                                     <th><b class="red">*</b>${loanformManage.baseRegisteredcapital}</th>
-                                    <td><input type="text" class="txt validate[required,custom[number2],maxSize[10]]" placeholder="请输入" id="registeredCapital" name="registeredCapital" value="${coAll.jltfispCoBase.registeredCapital}"/>万元</td>
+                                    <td><input type="text" class="txt validate[required,custom[number4],maxSize[10]]" placeholder="请输入" id="registeredCapital" name="registeredCapital" value="${coAll.jltfispCoBase.registeredCapital}"/>万元</td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${loanformManage.baseRegisteredaddress}</th>

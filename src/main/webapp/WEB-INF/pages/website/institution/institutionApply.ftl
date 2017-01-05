@@ -28,7 +28,7 @@
                             <table width="100%" class="tab3">
                             	<tr>
                                     <th><b class="red">*</b>${institutManage.label1 }</th>
-                                    <td><input type="text" name="institutionalName" value="${user.username }" readonly="readonly" class="txt validate[required]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="institutionalName" value="${user.username }" readonly="readonly" class="txt" placeholder="请输入" /></td>
                                     <th rowspan="4">${institutManage.label3 }</th>
                                     <td rowspan="4">
                                     	<img id="logoFileImg" 
@@ -57,7 +57,7 @@
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label5 }</th>
-                               		<td><input type="text" name="socialCreditCode" value="${user.socialCode }" class="txt validate[required]" readonly="readonly"/></td>
+                               		<td><input type="text" name="socialCreditCode" value="${user.socialCode }" class="txt" readonly="readonly"/></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b>${institutManage.label6 }</th>
@@ -109,13 +109,13 @@
                                     <th><b class="red">*</b><b>${institutManage.label12 }</b></th>
                                     <td><input type="text" name="postcodes" value="${institution.postcodes }" class="txt validate[required,custom[chinaZip]]" placeholder="请输入" /></td>
                                     <th><b class="red">*</b><b>${institutManage.label13 }</b></th>
-                                    <td><input type="text" name="linkMan" value="${user.contact }" readonly="readonly" class="txt validate[required]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="linkMan" value="${user.contact }" readonly="readonly" class="txt" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b><b>${institutManage.label14 }</b></th>
-                                    <td><input type="text" name="mobilePhone" value="${user.mobilePhone }" readonly="readonly" class="txt validate[required,custom[mobile]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="mobilePhone" value="${user.mobilePhone }" readonly="readonly" class="txt" placeholder="请输入" /></td>
                                     <th><b class="red">*</b><b>${institutManage.label15 }</b></th>
-                                    <td><input type="text" name="email" value="${user.accountNumber }" readonly="readonly" class="txt validate[required,custom[email]]" placeholder="请输入" /></td>
+                                    <td><input type="text" name="email" value="${user.accountNumber }" readonly="readonly" class="txt" placeholder="请输入" /></td>
                                 </tr>
                                 <tr>
                                     <th><b class="red">*</b><b>${institutManage.label16 }</b></th>
@@ -266,7 +266,7 @@ function ajaxFileUpload() {
 	var filepath = $("#upFile").val();
 	if(filepath != ""){
 		var fileend = filepath.substring(filepath.indexOf(".")); 
-		if(fileend != ".jpg") {
+		if(fileend.toLowerCase() != ".jpg" ) {
 			dialog.tipsPop('ban-pop','提示',"上传图片格式不正确",'确定');
 		}else{
 			$.ajaxFileUpload({
