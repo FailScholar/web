@@ -70,8 +70,14 @@
 	 	 getCapitalInfoList(tips);
 	  }
 	  else{
+	  		if($("#columnId"+columnId).html() == null ){
+		  		$("#selectId").parent().addClass("active");
+		  		$("#selectId").val(columnId);
+		  		getList();
+		  	}else{
 		  		$("#columnId"+columnId).addClass("active");
 		  		getCapitalInfoList(columnId);
+		  	}
 		}
    });
 

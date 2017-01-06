@@ -23,4 +23,7 @@ public interface RegistService {
 
     void correlationRoles(Integer userId, Integer roleId);
 
+    int validEmail(String email);
+
+    int validComName(String comName);
 }

@@ -421,6 +421,7 @@ html,body { width:100%; height:100%; background-color:#fff; min-width:1200px; fo
 .nlistCont .ntit { text-align:left; margin:10px 0 0 0; font-size:14px; color:#333; text-indent:0; width:auto;}
 .tab3 { border-collapse:collapse;}
 .tab3 th,.tab3 td { border:1px solid #ddd; height:16px; padding:4px 6px; font-size:12px; color:#444;}
+.module.tab3 th { text-align:right; width:16%; background-color:#eee; line-height:20px;}
 .tab3 th { text-align:right; width:15%; background-color:#eee; line-height:20px;}
 .tab4 th,.tab4 td { text-align:center;}
 .tab3 .txt { height:24px; line-height:24px; margin:0 6px; width:200px; color:#444;}
@@ -529,3 +530,4 @@ html,body { width:100%; height:100%; background-color:#fff; min-width:1200px; fo
 .lbot > a { position:absolute; bottom:0; right:0; line-height:36px; padding:0 10px;}
 .lbot > a span { font-family:"宋体";}
 .ltop .fr { height:40px; overflow:hidden;}
+.atonewline {width:100px;display:inline-block;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;}

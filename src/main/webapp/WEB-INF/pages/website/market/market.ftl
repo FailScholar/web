@@ -19,11 +19,11 @@
         <ul class="infoTab">
             <#list colList as column>
 	            <#if column_index lt 5>
-	                <li code="${column.id}"><a href="javascript:marketList(${column.id});">${column.columnName}</a></li>
+	                <li code="${column.id}" id="columnId${column.id}"><a href="javascript:marketList(${column.id});">${column.columnName}</a></li>
 	            </#if>
             </#list>
             <#if colList?size gt 5>
-	            <li code="${colList[5].id}">
+	            <li code="${colList[5].id}" id="columnlist">
 	            <a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
 		       	 <select id="selectId" onchange="getList()">
 		       		<option value="0">-选择更多-</option>
@@ -58,23 +58,19 @@
     $(function(){
     	var columnid = $.cookie('columnid');
 		
-		var insuranceIndex=-1;
-		var i=0;
-		$(".infoTab li").each(function(){
-			if($(this).attr("code")==columnid  && i<5){
-				insuranceIndex=i;
-			}
-			i++;
-		});
-		if(columnid !=null && insuranceIndex==-1){
-			insuranceIndex=5;
-			$("#selectId").val(columnid);
-		}else if(columnid ==null){
-			insuranceIndex=0;
+		if(columnid==null || columnid=='') {
+			columnid= infoTab.find("li").eq(0).attr("code");
 		}
-		$.cookie('columnid', null, {path: '/'}); 
-        infoTab.find("li").eq(insuranceIndex).addClass("active");
-        $('#colListDetail').load("${path}/perm/market/"+infoTab.find("li").eq(insuranceIndex).attr("code"),{'pager.offset' :0});
+		if($("#columnId"+columnid).html() == null){
+			$("#selectId").val(columnid);
+			$("#columnlist").addClass("active");
+	  		getList();
+		}else{
+			$("#columnId"+columnid).addClass("active");
+			$('#colListDetail').load("${path}/perm/market/"+columnid,{'pager.offset' :0});
+		}
+		$.cookie('columnid', null, {path: '/'});
+		
     });
     
     function marketList(columnid) {

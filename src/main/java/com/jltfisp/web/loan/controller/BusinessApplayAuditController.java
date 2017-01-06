@@ -167,6 +167,7 @@ public class BusinessApplayAuditController extends BaseController<BusinessApplay
 		record.setState(0);
 		record.setSubmitDate(new Date());
 		int i = businessApplayAuditService.updateByPKSelective(record);
+		businessApplayAuditService.updateCoInfoState(0, record.getInfoId());
 		return i;
 	}
 	

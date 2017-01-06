@@ -67,7 +67,7 @@
 			i++;
 		});
 		if(columnid !=null && insuranceIndex==-1){
-			$("#selectId").val(columnid);
+			$("#moreSel").val(columnid);
 		}else if(columnid ==null){
 			insuranceIndex=0;
 		}

@@ -381,8 +381,7 @@ public class ExpertController {
        // Map<String, Object> map = new HashMap<String, Object>();
         UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "UpFile"+index);
         String Path;
-        double fileSize=uploadFile.getFileSize()/(1024*1024);
-    	if(fileSize > 1){
+        if(uploadFile.getFileSize() > 1048576L){
     		Path="false";
     	}
         String fileName = uploadFile.getFileName();

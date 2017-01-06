@@ -17,14 +17,12 @@
 						//翻页前一页
 			function last(){
 				var page = parseInt($("#currentPage").val())-1;
-				$("#currentPage").val(page);
-				$("#queryform").submit();
+				location.href="${path}/communicate/expertPage?currentPage="+page
 			}
 			//翻页下一页
 			function next(){
 				var page = parseInt($("#currentPage").val())+1;
-				$("#currentPage").val(page);
-				$("#queryform").submit();
+				location.href="${path}/communicate/expertPage?currentPage="+page
 			}
 			//列表查询
 			function query(){
@@ -72,8 +70,8 @@
                       <div class="clear"></div>
                   </div>
 
-				<form action="${path}/communicate/expertPage" method="post" id="queryform">
-						<input type="hidden" name="currentPage" id="currentPage" value="${pageInfo.currentPage }"/>
+				<form action="${path}/communicate/expertPage?currentPage=${pageInfo.currentPage }" method="post" id="queryform">
+						<input type="hidden" id="currentPage" value="${pageInfo.currentPage }"/>
 					</form>
                   <#--我要解答开始-->
               <@shiro.hasRole name="专家会员">

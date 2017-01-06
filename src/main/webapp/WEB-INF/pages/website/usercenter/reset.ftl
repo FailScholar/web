@@ -29,7 +29,7 @@
                       <div class="log proList" style="width:556px;">
                           <form method="post" action="" id="saveAdminForm">
                               <div><span class="ml70">用户名：</span><input type="text" class="txt validate[required,minSize[3],maxSize[30],custom[email],ajax[ajaxAccountNumber]]" name="accountNumber" id="accountNumber"/></div>
-                              <div><span class="ml57">邮箱验证：</span><input type="text" class="txt validate[required]" name="emailCaptcha" id="emailCaptcha" />
+                              <div><span class="ml70">验证码：</span><input type="text" class="txt validate[required]" name="emailCaptcha" id="emailCaptcha" />
                               <div class="fr">
                               <a href="javascript:;" onclick="sendEamil()" class="ml26" id="sml26" style="margin-left: -130px;">发送验证码</a>
                               	<p id="retext" style="display:none;font-size:13px;text-indent:0px;width:150px;color:#545658;margin-left:-130px;" class="ml26">验证码<b class="second" style="font-size:13px;">15</b>分钟内可用</p>

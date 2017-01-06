@@ -19,11 +19,11 @@
         <ul class="infoTab">
             <#list colList as column>
             	<#if column_index lt 5>
-                	<li code="${column.id}" onclick="infoTabClick(${column.id})"><a href="javascript:void(0);">${column.columnName}</a></li>
+                	<li code="${column.id}" id="columnId${column.id}" onclick="infoTabClick(${column.id})"><a href="javascript:void(0);">${column.columnName}</a></li>
                 </#if>
             </#list>
             <#if colList?size gt 5>
-            <li code="${colList[5].id}">
+            <li code="${colList[5].id}" id="columnlist">
             <a href="javascript:void(0);" code="1" style="display: none">${colList[5].columnName}</a>
 	       	 <select id="selectId" onchange="getList()">
 	       		<option value="0">-选择更多-</option>
@@ -55,25 +55,22 @@
     var infoTab_li_index = [0];
 	positionNavigation(10);
     var infoTab = $("div.info ul.infoTab");
+    
     $(function(){
 		var columnid = $.cookie('columnid');
-		
-		var cloudIndex=-1;
-		var i=0;
-		$(".infoTab li").each(function(){
-			if($(this).attr("code")==columnid  && i<5){
-				cloudIndex=i;
-			}
-			i++;
-		});
-		if(columnid !=null && cloudIndex==-1){
+		if(columnid==null || columnid=='') {
+			columnid= infoTab.find("li").eq(0).attr("code");
+		}
+		if($("#columnId"+columnid).html() == null){
 			$("#selectId").val(columnid);
-		}else if(columnid ==null){
-			cloudIndex=0;
+			$("#columnlist").addClass("active");
+	  		getList();
+		}else{
+			$("#columnId"+columnid).addClass("active");
+			$('#colListDetail').load("${path}/perm/cloud/"+columnid,{'pager.offset' :0});
 		}
 		$.cookie('columnid', null, {path: '/'});
-       	infoTab.find("li").eq(cloudIndex).addClass("active");
-        $('#colListDetail').load("${path}/perm/cloud/"+infoTab.find("li").eq(cloudIndex).attr("code"),{'pager.offset' :0});
+		
     });
 
 

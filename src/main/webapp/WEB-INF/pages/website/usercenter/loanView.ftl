@@ -53,8 +53,8 @@
                           <div style="word-wrap:break-word;word-break:break-all;">
 		              		<table class="tab2" style="width:93%;margin-top:-20px">
 		              		<tr>
-                              <td>审核意见</td>
-                              <td colspan="9">
+                              <td width="113px">审核意见</td>
+                              <td colspan="9" style="text-align:left">
                               	<#if (applayAudit.state == "1")>
                               		审核通过
                               	<#else>

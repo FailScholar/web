@@ -75,7 +75,13 @@ function infoTabClick(columnid) {
   $(document).ready(function(e) {
       positionNavigation(3);
     var columnId=${columnId};
-    $('#Type'+columnId).addClass('active');
+    
+    if($('#Type'+columnId).html() == null ){
+  		$("#selectId").parent().addClass("active");
+  		$("#selectId").val(columnId);
+  	}else{
+  		$('#Type'+columnId).addClass('active');
+  	}
     $("#columnIdValue").val(columnId);
     $('.infoList').html('');
     //传当前子栏目ID

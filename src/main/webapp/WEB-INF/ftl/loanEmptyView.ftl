@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
     <title>${applyname}</title>
       <style>  
-     @page{size:297mm 450mm;}
+     @page{size:300mm 450mm;}
 	  .content { padding:25px 20px; background-color:#fff;word-wrap:break-word;word-break:break-all;}
    .nli { width:100%; margin:0 auto; position:relative; padding-top:42px;}
 .nli .logbtn { text-align:center;}
@@ -13,7 +13,8 @@
 .nlist { overflow:hidden; padding-left:1px; border-bottom:1px solid #ccc; position:absolute; top:0; left:0; background-color:#fff; z-index:10;}
 .nlist li { float:left; width:124px; text-align:center; height:40px; line-height:40px; border:1px solid #ccc; margin-left:-1px; border-bottom:none; cursor:pointer;}
 .nlist li.active,.nlist li:hover { background-color:#1679ff; color:#fff; border-color:#1679ff;}
-.nlistCont { padding:0 20px 20px 20px; border:1px solid #ccc; margin-top:-1px;page-break-after: always;}
+.pagenext {page-break-after: always;}
+.nlistCont { padding:0 20px 20px 20px; border:1px solid #ccc; margin-top:-1px;}
 .nlistCont .ntit { text-align:left; margin:10px 0 0 0; font-size:14px; color:#333; text-indent:0; width:auto;}
 .tab3 { border-collapse:collapse;}
 .tab3 th,.tab3 td { border:1px solid #ddd; height:16px; padding:4px 6px; font-size:12px; color:#444;}
@@ -62,7 +63,7 @@
                       <div class="proList nli" id="printDiv">
                           <div class="clear"></div>
                           <!--申请书封面-->
-                          <div class="nlistCont">
+                          <div class="nlistCont pagenext">
                               <div class="cover">
                                   <p class="snum fr"></p>
                                   <div class="clear"></div>
@@ -74,7 +75,7 @@
                               </div>
                           </div>
                           <!--重要提示-->
-                          <div class="nlistCont">
+                          <div class="nlistCont pagenext">
                               <div class="tip3" style="table-layout:fixed; word-break:break-strict;">              
                                   <h3>重要提示</h3>
                                   <p class="ntit" style="border-bottom:none;">1、企业申请科技贷款必须以诚信为基础，在整个受理、审查、放贷和资金回收过程中，借款企业有任何不符合诚信原则的状况发<br/>生，由此产生的后果由借款企业自行负责。</p>
@@ -90,7 +91,7 @@
                               
                           </div>
                           <!--企业基本情况-->
-                          <div class="nlistCont">
+                          <div class="nlistCont pagenext">
                               <p class="ntit">企业基本信息</p>
                               <table width="100%" class="tab3">
                                   <tr>
@@ -99,7 +100,7 @@
                                   </tr>
                                   <tr>
                                       <th><b class="red">*</b>${loanformManage.baseEstablishtime!''}</th>
-                                      <td></td>
+                                      <td style="width:23%"></td>
                                       <th><b class="red">*</b>${loanformManage.baseRegisteredcapital!''}</th>
                                       <td style="padding-left:100px">万元</td>
                                   </tr>
@@ -265,12 +266,12 @@
                             </table>
                           </div>
                           <!--贷款申请表-->
-                           <div class="nlistCont">
+                           <div class="nlistCont pagenext">
                         <p class="ntit" style="text-align:center;">本次申请贷款情况</p>
                                <table width="100%" class="tab3 tab4">
                                   <tr>
                                       <th>${loanformManage.loanLabel1!''}</th>
-                                      <td ></td>
+                                      <td>万元</td>
                                       <th>${loanformManage.loanLabel2!''}</th>
                                       <td colspan="2"></td>
                                   </tr>
@@ -304,7 +305,7 @@
                                   </tr>
                                   <tr>
                                       <th>${loanformManage.loanLabel17!''}</th>
-                                      <td ></td>
+                                      <td >万元</td>
                                       <th>${loanformManage.loanLabel10!''}</th>
                                       <td colspan="2"></td>
                                   </tr>
@@ -319,7 +320,7 @@
                               </table>
                           </div>
                           <!--资产负债表/损益表-->
-                           <div class="nlistCont">
+                           <div class="nlistCont pagenext">
                               <p class="ntit" id="tableType2">资产负债表</p>
                               <ul class="lnav">
                                   <li class="active">${(.now?string('yyyy')?number-3)?string('####')}年</li>
@@ -505,7 +506,7 @@
                               </form>
                           </div>
                          <!--资产负债表2-->
-                         	<div class="nlistCont">
+                         	<div class="nlistCont pagenext">
                               <p class="ntit" id="tableType2">资产负债表</p>
                               <ul class="lnav">
                                   <li class="active">${(.now?string('yyyy')?number-2)?string('####')}年</li>
@@ -692,7 +693,7 @@
                           </div>
                          <!--资产负债表2-->
                          <!--资产负债表3-->
-                         	<div class="nlistCont">
+                         	<div class="nlistCont pagenext">
                               <p class="ntit" id="tableType2">资产负债表</p>
                               <ul class="lnav">
                                   <li class="active">${(.now?string('yyyy')?number-1)?string('####')}年</li>
@@ -879,7 +880,7 @@
                           </div>
                          <!--资产负债表3-->
                          <!--资产负债表4-->
-                         	<div class="nlistCont">
+                         	<div class="nlistCont pagenext">
                               <p class="ntit" id="tableType2">资产负债表</p>
                               <ul class="lnav">
                                   <li class="active">${.now?string('yyyy')!''}年</li>
@@ -1066,7 +1067,7 @@
                           </div>
                          <!--资产负债表4-->
                          <!--利润-->
-                         <div class="nlistCont">
+                         <div class="nlistCont pagenext">
                               <p class="ntit" id="tableType2">资产负债表</p>
                               <ul class="lnav">
                                   <li class="active">利润表</li>
@@ -1075,7 +1076,7 @@
                               <div class="clear"></div>
                               <form id="coDebt">
                             <table width="100%" class="tab3 tab4">
-                                <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th><th>${.now?string('yyyy')}年1~2月</th></tr>
+                                <tr><th>项目</th><th>${(.now?string('yyyy')?number-3)?string('####')}年末</th><th>${(.now?string('yyyy')?number-2)?string('####')}年末</th><th>${(.now?string('yyyy')?number-1)?string('####')}年末</th><th>${.now?string('yyyy')}年1&nbsp;~&nbsp;<span style="width: 20px;border-bottom: 1px solid #000;display: inline-block;"></span>月</th></tr>
                                <tr>
                                 	<td><b>${loanformManage.profitMainIncome!''}</b></td>
                                     <td></td>
@@ -1192,7 +1193,7 @@
                               </form>
                           </div>
                           <!--财务明细表-->
-                           <div class="nlistCont">
+                           <div class="nlistCont pagenext">
                               <h3>财务明细</h3>
                               <p class="ntit" style="text-align:center;">1、应收明细表</p>
                               <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>

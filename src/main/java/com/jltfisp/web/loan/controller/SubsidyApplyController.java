@@ -61,14 +61,7 @@ public class SubsidyApplyController {
 	 */
     @RequestMapping("/guidApplyText")
     public ModelAndView guidApplyText(HttpServletRequest request){
-    	ModelAndView mv=new ModelAndView("/website/loan/subsidy/GuideApplyText");
-        /*JltfispUser user =loginService.getCurrentUser();
-        //如果是企业用户则判断是否申请相应的贷款服务
-        if(user !=null && user.getType()==1 ){
-        	//第一步先进入申请须知页面
-        	mv=new ModelAndView("/website/loan/fail");
-    		mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
-        }*/
+     ModelAndView mv=new ModelAndView("/website/loan/subsidy/GuideApplyText");
      //获取申请表单 申请须知及业务说明
      LoanManageOther loanformManage = new LoanManageOther();
      if(redisService.getV("LoanformManage16") != null){
@@ -117,13 +110,22 @@ public class SubsidyApplyController {
     public ModelAndView judgeIsApplyLoan(HttpServletRequest request){
     	ModelAndView mv=new ModelAndView("/website/loan/subsidy/GuideApply");
         JltfispUser user =loginService.getCurrentUser();
+        Integer InfoId=null;
+        Integer state=null;
         //如果是企业用户则判断是否申请相应的贷款服务
-        if(user !=null && user.getType()==1 ){
+        if(null !=user && user.getType()==1 ){
         	//第一步先进入申请须知页面
         	mv=new ModelAndView("/website/loan/fail");
-    		   mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
-        }else{
-            //获取申请表单 申请须知及业务说明
+    		mv.addObject("failMes", "对不起，个人用户不可以申请保费补贴贷款服务");
+    		return mv;
+        }else if(null !=user && user.getType()==2){
+        	//企业用户如果是申请了贷款服务没有最后一步点击提交下次进入则要回显之前几个页面填写的内容
+    		BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "5");
+            if(null !=businessApplayAudit){
+            	InfoId=businessApplayAudit.getInfoId();
+            	state=businessApplayAudit.getState();
+            }
+    		//获取申请表单 申请须知及业务说明
             LoanManageOther loanformManage = new LoanManageOther();
             if(redisService.getV("LoanformManage16") != null){
                 loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
@@ -135,6 +137,11 @@ public class SubsidyApplyController {
                 loanformManage = loanManageOtherService.selectOneByExample(params);
             }
             mv.addObject("applyGuide", loanformManage != null ? loanformManage.getApplyGuide() : "");
+            mv.addObject("userId", user.getId());
+            mv.addObject("companyName", user.getUsername());
+            mv.addObject("socialCode", user.getSocialCode());
+            mv.addObject("bussinessApplyId", InfoId);
+            mv.addObject("state", state);
         }
     	return mv;
     }
@@ -143,78 +150,59 @@ public class SubsidyApplyController {
 	 * @return
 	 */
 	@RequestMapping("/subsidy")
-    public ModelAndView subsidy(HttpServletRequest request){
-		JltfispUser user =loginService.getCurrentUser();
+    public ModelAndView subsidy(HttpServletRequest request,Integer userId,String companyName,String socialCode,Integer bussinessApplyId,Integer state ){
+		//JltfispUser user =loginService.getCurrentUser();
 		ModelAndView mv=new ModelAndView("/website/loan/subsidy/subsidyApply");
-		//企业用户如果是申请了贷款服务没有最后一步点击提交下次进入则要回显之前几个页面填写的内容
-		if(user !=null && user.getType()==2){
-			BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(user.getId(), "5");
+		/*//企业用户如果是申请了贷款服务没有最后一步点击提交下次进入则要回显之前几个页面填写的内容
+		BusinessApplayAudit businessApplayAudit=businessApplayAuditService.getBusinessApplayAuditByUserId(userId, "5");*/
         	//若是已经申请则判断申请状态(0：申请中；1：申请通过；2：申请不通过 3:未提交)
-        	if(businessApplayAudit !=null){
-        		if(businessApplayAudit.getState()==0){
-        			//申请状态为申请不通过下次进入申请页面信息重新填
-            		mv=new ModelAndView("/website/loan/fail");
-            		mv.addObject("failMes", "对不起，您已经申请了保费补贴贷款");
-        		}else{
-        			//下次进入申请页面信息不用重新填
-            		JlfispPsBaseDto jlfispPsBaseDto=this.subsidyService.getJlfispPsBaseDtoByUserId(user.getId(),businessApplayAudit.getInfoId());
-            		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
-        			// 获取保费补贴申请第二部里面的内容
-        	    	if(jlfispPsBaseDto !=null){
-        	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
-        	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
-        	    		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
-	               		 DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
-	               		 String capilMoney=decimalFormat.format(jlfispPsBaseDto.getRegisteredCapital());//format 返回的是字符串
-	               		 mv.addObject("capilMoney", capilMoney);
-        	    	}
-        	    	
-        	   //获取申请表单 字段名称
-              LoanManageOther loanformManage = new LoanManageOther();
-              if(redisService.getV("LoanformManage16") != null){
-                  loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
-                          LoanManageOther.class);
-              }else{
-                  LoanManageOther params = new LoanManageOther();
-                  params.setType(16);
-                  params.setIstemplate(0);
-                  loanformManage = loanManageOtherService.selectOneByExample(params);
-              }
-              mv.addObject("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
-                      FormLabel.class));
-        		}
-        	}else{
-        		//(未提交)下次进入申请页面信息不用重新填
-        		JlfispPsBaseDto jlfispPsBaseDto=this.subsidyService.getJlfispPsBaseDtoByUserId(user.getId(),null);
+        	if(null!=bussinessApplyId && state==0){
+        		mv=new ModelAndView("/website/loan/fail");
+        		mv.addObject("failMes", "对不起，您已经申请了保费补贴贷款");
+        		return mv;
+        	}else if(null!=bussinessApplyId && state!=0){
+        		//下次进入申请页面信息不用重新填
+        		JlfispPsBaseDto jlfispPsBaseDto=this.subsidyService.getJlfispPsBaseDtoByUserId(userId,bussinessApplyId);
         		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
     			// 获取保费补贴申请第二部里面的内容
     	    	if(jlfispPsBaseDto !=null){
+    	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
+    	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
+    	    		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
+           		    DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+           		    String capilMoney=decimalFormat.format(jlfispPsBaseDto.getRegisteredCapital());//format 返回的是字符串
+           		    mv.addObject("capilMoney", capilMoney);
+    	    	}  	
+        	}else if(null==bussinessApplyId){
+        		//(未提交)下次进入申请页面信息不用重新填
+        		JlfispPsBaseDto jlfispPsBaseDto=this.subsidyService.getJlfispPsBaseDtoByUserId(userId,null);
+        		mv.addObject("jlfispPsBaseDto", jlfispPsBaseDto);
+    			// 获取保费补贴申请第二部里面的内容
+    	    	if(null!=jlfispPsBaseDto){
     	    		DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
                		String capilMoney=decimalFormat.format(jlfispPsBaseDto.getRegisteredCapital());//format 返回的是字符串
                		mv.addObject("capilMoney", capilMoney);
     	    		JltfispPsMaterialInfo PsMaterialInfo=subsidyService.getJltfispPsMaterialInfoByInfoId(jlfispPsBaseDto.getId());
     	    		mv.addObject("PsMaterialInfo", PsMaterialInfo);
     	    	}
-    	    	
-    	     //获取申请表单 字段名称
-          LoanManageOther loanformManage = new LoanManageOther();
-          if(redisService.getV("LoanformManage16") != null){
-              loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),
-                      LoanManageOther.class);
-          }else{
-              LoanManageOther params = new LoanManageOther();
-              params.setType(16);
-              params.setIstemplate(0);
-              loanformManage = loanManageOtherService.selectOneByExample(params);
-          }
-          mv.addObject("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
-                  FormLabel.class));
-    	    	
         	}
-			mv.addObject("companyName", user.getUsername());
-			mv.addObject("socialCode", user.getSocialCode());
-		}
-        return mv;
+			/*mv.addObject("companyName", user.getUsername());
+			mv.addObject("socialCode", user.getSocialCode());*/
+        	mv.addObject("companyName", companyName);
+			mv.addObject("socialCode", socialCode);
+		   //获取申请表单 字段名称
+	     LoanManageOther loanformManage = new LoanManageOther();
+	     if(redisService.getV("LoanformManage16") != null){
+	         loanformManage = JSON.toJavaObject((JSON) JSON.parse(redisService.getV("LoanformManage16")),LoanManageOther.class);
+	     }else{
+	         LoanManageOther params = new LoanManageOther();
+	         params.setType(16);
+	         params.setIstemplate(0);
+	         loanformManage = loanManageOtherService.selectOneByExample(params);
+	     }
+	    mv.addObject("loanformManage", JSON.toJavaObject((JSON) JSON.parse(loanformManage.getFormLabelJson()),
+	             FormLabel.class));
+		return mv;
     }
 	/**
 	 * 保存申请保费补贴企业信息第一步

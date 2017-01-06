@@ -5,6 +5,25 @@
 
 package com.jltfisp.web.anon;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.alibaba.fastjson.JSON;
 import com.jltfisp.PdfGenerator;
 import com.jltfisp.base.entity.SysDict;
@@ -14,27 +33,19 @@ import com.jltfisp.lucene.pojo.Pojo;
 import com.jltfisp.lucene.service.LuceneService;
 import com.jltfisp.redis.RedisService;
 import com.jltfisp.shiro.AuthorizingRealm;
-import com.jltfisp.shiro.SessionDAO;
 import com.jltfisp.sys.session.statistics.service.StatisticsService;
 import com.jltfisp.util.captcha.Randoms;
 import com.jltfisp.util.service.DictionaryService;
-import com.jltfisp.web.loan.entity.*;
+import com.jltfisp.web.loan.entity.FormLabel;
+import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
+import com.jltfisp.web.loan.entity.JltfispFinMaterial;
+import com.jltfisp.web.loan.entity.JltfispFinShareholder;
+import com.jltfisp.web.loan.entity.JltfispFinanceAndShareholdersDto;
+import com.jltfisp.web.loan.entity.JltfispPsInfo;
+import com.jltfisp.web.loan.entity.JltfispPsMaterialInfo;
+import com.jltfisp.web.loan.entity.LoanManageOther;
 import com.jltfisp.web.loan.service.ILoanManageOtherService;
 import com.jltfisp.web.user.service.UserService;
-import org.apache.shiro.crypto.hash.SimpleHash;
-import org.apache.shiro.util.ByteSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import redis.clients.jedis.Jedis;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * Created by LiuFa on 2016/11/9.
@@ -423,25 +434,5 @@ public class AnonController {
 	      String basePath = request.getSession().getServletContext()  
 	                 .getRealPath("/");  
 	     PdfGenerator.printPDF(basePath, variables, "股权融资申请", response,"financeApplyDetail.ftl");
-    }
-
-    public static void main(String[] args){
-        Jedis jedis = new Jedis("10.10.21.24",6379);
-        jedis.auth("123");
-
-        Set<String> set = jedis.keys("*_web*");
-        for (String s : set) {
-            jedis.del(s);
-        }
-    }
-
-    @Autowired
-    private SessionDAO sessionDAO;
-
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test(){
-        sessionDAO.offLineSession("444@qq.com");
-        return "success";
     }
 }

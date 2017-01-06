@@ -291,7 +291,7 @@ public class LoanController {
     	JltfispUser user=loginService.getCurrentUser();
     	JltfispCoBaseDto Dto=loanService.getCoBaseContextByUserIdAndType(user.getId(), Integer.parseInt(applytype),3);
         
-    	if(Dto == null){
+    	if(null == Dto){
         	return 0;
         }else{
         	return 1;
@@ -410,7 +410,7 @@ public class LoanController {
             params.setType(sysDict.getId());
             params.setIstemplate(0);
             loanformManage = loanManageOtherService.selectOneByExample(params);
-            if(loanformManage == null){
+            if(null == loanformManage){
                 params = new LoanManageOther();
                 params.setIstemplate(1);
                 loanformManage = loanManageOtherService.selectOneByExample(params);
@@ -613,8 +613,7 @@ public class LoanController {
     	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),Integer.parseInt(applytype),3);
     	jltfispCoFile.setApplyid(jltfispCoBaseDto.getId());
     	UploadFile uploadFile = FileUpDownUtils.getUploadFile(request, "UpFile"+index);
-    	double fileSize=uploadFile.getFileSize()/(1024*1024);
-    	if(fileSize > 1){
+    	if(uploadFile.getFileSize() > 1048576L){
     		return "1";
     	}
     	String fileName = uploadFile.getFileName();
@@ -805,6 +804,10 @@ public class LoanController {
 	 	BusinessApplayAudit loan=businessApplayAuditService.checkApplyForLoan(user.getId(), applytype, "1");
 	 	//更改流程状态为0，0代表申请中
 	 	loan.setState(0);
+	 	JltfispCoBaseDto jltfispCoBaseDto=loanService.getCoBaseContextByUserIdAndType(user.getId(),Integer.parseInt(applytype),3);
+	 	//更改企业申请表中的状态为0，0代表申请中
+	 	jltfispCoBaseDto.setApplystate(0);
+	 	loanService.saveCoBase(jltfispCoBaseDto);
 	 	int i=businessApplayAuditService.updateByPK(loan);
 	 	if(i==0){
 	 	request.setAttribute("failMes", "申请失败");

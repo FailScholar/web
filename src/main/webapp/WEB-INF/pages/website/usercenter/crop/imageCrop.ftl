@@ -57,8 +57,8 @@
             	  $("#userlogo").val(filePath);
             	  var fileName = filePath.substring(filePath.lastIndexOf("/")+1);
             	  $("#portrait").attr("src",'${path}'+filePath);
+            	  imgDialog.close();
             	  dialog.tipsPop('ok-pop','提示:',"头像上传成功",function(){
-	                 imgDialog.close();
 	              });
               });             
           });

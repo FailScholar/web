@@ -18,6 +18,7 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,9 +46,6 @@ public class RegistController {
     private EmailService emailService;
 
     @Autowired
-    private LoginService loginService;
-
-    @Autowired
     private AuthorizingRealm authorizingRealm;
 
     @Value("${system.register.enable-captcha}")
@@ -63,6 +61,12 @@ public class RegistController {
         return "/website/regist";
     }
 
+
+    @Async
+    private void sendEmail(String to,String subject,String text){
+        emailService.sendText(to,subject,text);
+    }
+
     /**
      * @author LiuFa
      * @param email, model
@@ -72,14 +76,8 @@ public class RegistController {
     @RequestMapping("/validEmail")
     @ResponseBody
     public String validEmail(String email,Model model){
-        List<JltfispUser> list = redisService.getV("allUser");
-        model.addAttribute("success",false);
-        for (JltfispUser jltfispUser : list) {
-            if(email.equals(jltfispUser.getAccountNumber())){
-                model.addAttribute("success",true);
-                break;
-            }
-        }
+        int count = registService.validEmail(email);
+        model.addAttribute("success", count > 0);
         return JSON.toJSONString(model);
     }
 
@@ -93,14 +91,8 @@ public class RegistController {
     @RequestMapping("/validComName")
     @ResponseBody
     public String validComName(String comName,Model model){
-        List<JltfispUser> list = redisService.getV("allUser");
-        model.addAttribute("success",false);
-        for (JltfispUser jltfispUser : list) {
-            if(comName.equals(jltfispUser.getUsername())){
-                model.addAttribute("success",true);
-                break;
-            }
-        }
+        int count = registService.validComName(comName);
+        model.addAttribute("success", count > 0);
         return JSON.toJSONString(model);
     }
 
@@ -112,39 +104,27 @@ public class RegistController {
      */
     @RequestMapping("/registBaseInfo")
     @ResponseBody
-    public String registBaseInfo(JltfispUser user, String captcha, int type, Model model){
-        try {
-            String exitCode = (String) SecurityUtils.getSubject().getSession().getAttribute("captcha");
-            if(enableCaptcha){
-                if (null == exitCode || !exitCode.equalsIgnoreCase(captcha)) {
-                    model.addAttribute("success", false);
-                    model.addAttribute("message", "验证码错误");
-                    return JSON.toJSONString(model);
-                }
-            }
-            String emailCaptcha = Randoms.random(5);
-            user.setEmailCaptcha(emailCaptcha);
-            user.setState(0);
-            user.setType(type);
-            user.setCaptchaTime(new Date());
-            user.setIsDelete(0);
-            user.setPassword(new SimpleHash("md5", user.getPassword(), ByteSource.Util.bytes("gta"), 2).toHex());
-            registService.registBaseInfo(user);
-            try {
-                emailService.sendText(user.getAccountNumber(),subject,contentPrefix + emailCaptcha + contentSuffix);
-            } catch (Exception e) {
-                model.addAttribute("success", true);
-                model.addAttribute("email", user.getAccountNumber());
-                model.addAttribute("id", user.getId());
+    public String registBaseInfo(JltfispUser user, String captcha, int type, Model model) {
+        String exitCode = (String) SecurityUtils.getSubject().getSession().getAttribute("captcha");
+        if (enableCaptcha) {
+            if (null == exitCode || !exitCode.equalsIgnoreCase(captcha)) {
+                model.addAttribute("success", false);
+                model.addAttribute("message", "验证码错误");
                 return JSON.toJSONString(model);
             }
-            model.addAttribute("success", true);
-            model.addAttribute("email", user.getAccountNumber());
-            model.addAttribute("id", user.getId());
-        } catch (Exception e) {
-            model.addAttribute("success", false);
-            model.addAttribute("message", e.getMessage());
         }
+        String emailCaptcha = Randoms.random(5);
+        user.setEmailCaptcha(emailCaptcha);
+        user.setState(0);
+        user.setType(type);
+        user.setCaptchaTime(new Date());
+        user.setIsDelete(0);
+        user.setPassword(new SimpleHash("md5", user.getPassword(), ByteSource.Util.bytes("gta"), 2).toHex());
+        registService.registBaseInfo(user);
+        sendEmail(user.getAccountNumber(), subject, contentPrefix + emailCaptcha + contentSuffix);
+        model.addAttribute("success", true);
+        model.addAttribute("email", user.getAccountNumber());
+        model.addAttribute("id", user.getId());
         return JSON.toJSONString(model);
     }
 
@@ -169,22 +149,19 @@ public class RegistController {
             model.addAttribute("message", "验证码过期,请重新获取");
             return JSON.toJSONString(model);
         }
-        List<JltfispUser> list = redisService.getV("allUser");
-        for (JltfispUser jltfispUser : list) {
-            if(aUser.getAccountNumber().equals(jltfispUser.getAccountNumber())){
-                model.addAttribute("success", false);
-                model.addAttribute("message", "该账号被成功注册过，激活失败");
-                return JSON.toJSONString(model);
-            }
+        int count = registService.validEmail(aUser.getAccountNumber());
+        if(count > 0){
+            model.addAttribute("success", false);
+            model.addAttribute("message", "该账号已被成功注册，激活失败");
+            return JSON.toJSONString(model);
         }
-           
+
         user.setState(1);
         registService.updateUser(user);
 
         //添加相关角色
         registService.correlationRoles(aUser.getId(),aUser.getType() == 1 ? 4 : 5);
         //更新缓存
-        loginService.flushUserCache();
         authorizingRealm.clearAllUserRolePermissionCache();
         model.addAttribute("success", true);
         return JSON.toJSONString(model);
@@ -202,11 +179,7 @@ public class RegistController {
         nUser.setEmailCaptcha(Randoms.random(5));
         registService.updateUser(nUser);
         model.addAttribute("success", true);
-        try {
-            emailService.sendText(user.getAccountNumber(),subject,contentPrefix + nUser.getEmailCaptcha() + contentSuffix);
-        } catch (Exception e) {
-            return JSON.toJSONString(model);
-        }
+        sendEmail(user.getAccountNumber(),subject,contentPrefix + nUser.getEmailCaptcha() + contentSuffix);
         return JSON.toJSONString(model);
     }
 }

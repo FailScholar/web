@@ -19,11 +19,11 @@
         <ul class="infoTab">
       	<#list colList as list>
       		<#if list_index lt 5>
-                <li code="${list.id}"  onclick="infoTabClick(${list.id})"><a href="javascript:void(0);">${list.columnName}</a></li>
+                <li code="${list.id}" id="columnId${list.id}"  onclick="infoTabClick(${list.id})"><a href="javascript:void(0);">${list.columnName}</a></li>
            	</#if>
             </#list>
             <#if colList?size gt 5>
-            	<li>
+            	<li id="columnlist">
             	<a href="javascript:void(0);" style="display: none">${colList[5].columnName}</a>
 			       	 <select id="selectId" onchange="getList()">
 			       		<option value="0">-选择更多-</option>
@@ -97,26 +97,21 @@ function alertText(){
     }
 
      var infoTab = $("div.info ul.infoTab");
+     
     $(function(){
     	var columnid = $.cookie('columnid');
-		
-		var insuranceIndex=-1;
-		var i=0;
-		$(".infoTab li").each(function(){
-			if($(this).attr("code")==columnid  && i<5){
-				insuranceIndex=i;
-			}
-			i++;
-		});
-		if(columnid !=null && insuranceIndex==-1){
-			$("#selectId").val(columnid);
-		}else if(columnid ==null){
-			insuranceIndex=0;
+		if(columnid==null || columnid=='') {
+			columnid= infoTab.find("li").eq(0).attr("code");
 		}
-		$.cookie('columnid', null, {path: '/'});  	
-        infoTab.find("li").eq(insuranceIndex).addClass("active");
-        infoTab.find("li").eq(insuranceIndex).addClass("active");
-        $('#colListDetail').load("${path}/perm/financing/"+infoTab.find("li").eq(insuranceIndex).attr("code"),{'pager.offset':0});
+		if($("#columnId"+columnid).html() == null){
+			$("#selectId").val(columnid);
+			$("#columnlist").addClass("active");
+	  		getList();
+		}else{
+			$("#columnId"+columnid).addClass("active");
+			$('#colListDetail').load("${path}/perm/financing/"+columnid,{'pager.offset':0});
+		}
+		$.cookie('columnid', null, {path: '/'});
     });
 
 

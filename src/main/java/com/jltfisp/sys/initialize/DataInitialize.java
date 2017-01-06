@@ -48,23 +48,12 @@ public class DataInitialize implements ApplicationListener<ContextRefreshedEvent
                 luceneService.synchronizedBuildIndex();
                 loginService.synchronizedCacheUserRole();
                 loginService.synchronizedCacheRolePermissions();
-                cacheEmailAndName();
                 cacheVisitorPerm();
             } catch (Exception e) {
                 e.printStackTrace();
                 _logger.error("初始化应用数据失败.....",e);
             }
         }
-    }
-
-
-    /**
-     * @author LiuFa
-     * @description  缓存用户数据
-     * 为了注册时实时验证邮箱和公司名称是否已经存在
-     */
-    private void cacheEmailAndName(){
-        loginService.refreshUserCache();
     }
 
     /**

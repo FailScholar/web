@@ -2,6 +2,7 @@ package com.jltfisp.web.loan.dao;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.web.loan.entity.JltfispCoBaseDto;
@@ -20,4 +21,6 @@ public interface CoBaseMapper extends BaseMapper<JltfispCoBaseDto>{
 	 */
 	@Delete("DELETE  FROM jltfisp_co_base WHERE user_id = #{userid}")
 	 void deleteCoBaseContext(int userid);
+	@Update("update jltfisp_co_base set apply_state=#{0} where id=#{1}")
+	int updateState(Integer state,Integer infoId);
 }

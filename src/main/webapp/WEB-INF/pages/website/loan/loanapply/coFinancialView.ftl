@@ -1,7 +1,7 @@
                         <!--财务明细-->
                           <div class="nlistCont" style="display:none;">
                               <h3>财务明细</h3>
-                              <p class="ntit" style="text-align:center;">1、应收明细表</p>
+                              <p class="ntit" style="text-align:center;">1、企业应收明细表</p>
                               <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>
                               <div class="clear"></div>
                               <table width="100%" class="tab3 tab4">
@@ -48,7 +48,7 @@
                                     <td>${coAll.jltfispCoFinancialList[4].percent}</td>
                                 </tr>
                             </table>
-                              <p class="ntit" style="text-align:center;">2、其他应收明细表</p>
+                              <p class="ntit" style="text-align:center;">2、企业其他应收明细表</p>
                               <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>
                               <div class="clear"></div>
                               <table width="100%" class="tab3 tab4">
@@ -95,7 +95,7 @@
                                     <td>${coAll.jltfispCoFinancialList[9].percent}</td>
                                 </tr>
                             </table>
-                            <p class="ntit" style="text-align:center;">3、应付款明细表</p>
+                            <p class="ntit" style="text-align:center;">3、企业应付款明细表</p>
                             <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
@@ -142,7 +142,7 @@
                                     <td>${coAll.jltfispCoFinancialList[14].percent}</td>
                                 </tr>
                             </table>
-                            <p class="ntit" style="text-align:center;">4、其他应付款明细表</p>
+                            <p class="ntit" style="text-align:center;">4、企业其他应付款明细表</p>
                             <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
@@ -189,7 +189,7 @@
                                     <td>${coAll.jltfispCoFinancialList[19].percent}</td>
                                 </tr>
                             </table>
-                            <p class="ntit" style="text-align:center;">5、银行借款明细表</p>
+                            <p class="ntit" style="text-align:center;">5、企业银行借款明细表</p>
                             <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">
@@ -241,7 +241,7 @@
                                     <td colspan="2">${coAll.jltfispCoFinancialList[25].mjjk}</td>
                                 </tr>
                             </table>
-                            <p class="ntit" style="text-align:center;">6、关联公司明细表</p>
+                            <p class="ntit" style="text-align:center;">6、企业关联公司明细表</p>
                             <p class="ntit"><span class="fl"></span><span class="fr">单位：万元</span></p>
                             <div class="clear"></div>
                             <table width="100%" class="tab3 tab4">

@@ -94,13 +94,13 @@
                </tr>
                <tr>
                   <th><b class="red">*</b><b>${loanformManage.infoRepaymentDate}</b></th>
-                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].repaymentDate" value="${jltfispPsInfoList.repaymentDate}" type="text" class="txt validate[required] shijihuankuanri" placeholder="请输入" onClick="WdatePicker({readOnly:true})" /></td>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].repaymentDate" value="${jltfispPsInfoList.repaymentDate}" type="text" class="txt validate[required] shijihuankuanri" placeholder="请输入" onClick="WdatePicker({readOnly:true})" readonly="readonly" /></td>
                   <th><b class="red">*</b><b>${loanformManage.infoPrincipalInterest}</b></th>
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].principalInterest"  value="${jltfispPsInfoList.principalInterest}" type="text" class="txt shijizhifubenxi validate[required,custom[number2], minSize[1],maxSize[10]]" placeholder="请输入" />元</td>
                </tr>
                <tr>
                   <th><b class="red">*</b><b>${loanformManage.infoLendDate}</b></th>
-                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt validate[required] shijifangdairi" placeholder="请输入" onClick="WdatePicker({readOnly:true})" /></td>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt validate[required] shijifangdairi" placeholder="请输入" onClick="WdatePicker({readOnly:true})" readonly="readonly" /></td>
                   <th><b class="red">*</b><b>${loanformManage.infoLoanTerm}</b></th>
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt daikuanqixian validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入" />月</td>
                </tr>
@@ -133,13 +133,13 @@
                </tr>
                <tr>
                   <th><b class="red">*</b><b>${loanformManage.infoRepaymentDate}</b></th>
-                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].repaymentDate" value="${jltfispPsInfoList.repaymentDate}" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})"/></td>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].repaymentDate" value="${jltfispPsInfoList.repaymentDate}" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})" readonly="readonly"/></td>
                   <th><b class="red">*</b><b>${loanformManage.infoPrincipalInterest}</b></th>
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].principalInterest"  value="${jltfispPsInfoList.principalInterest}" type="text" class="txt validate[required,custom[number2], minSize[1],maxSize[10]]" placeholder="请输入" />元</td>
                </tr>
                <tr>
                   <th><b class="red">*</b><b>${loanformManage.infoLendDate}</b></th>
-                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})"/></td>
+                  <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].lendDate" type="text" value="${jltfispPsInfoList.lendDate}" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})" readonly="readonly"/></td>
                   <th><b class="red">*</b><b>${loanformManage.infoLoanTerm}</b></th>
                   <td><input name="jltfispPsInfoList[${jltfispPsInfoList_index}].loanTerm" type="text" value="${jltfispPsInfoList.loanTerm}" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入" />月</td>
                </tr>
@@ -177,13 +177,13 @@
               </tr>
               <tr>
                   <th><b class="red">*</b><b>${loanformManage.infoRepaymentDate}</b></th>
-                  <td><input name="jltfispPsInfoList[0].repaymentDate" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})" /></td>
+                  <td><input name="jltfispPsInfoList[0].repaymentDate" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})" readonly="readonly" /></td>
                   <th><b class="red">*</b><b>${loanformManage.infoPrincipalInterest}</b></th>
                   <td><input name="jltfispPsInfoList[0].principalInterest" type="text" class="txt validate[required,custom[number2], minSize[1],maxSize[10]]" placeholder="请输入" />元</td>
               </tr>
               <tr>
                   <th><b class="red">*</b><b>${loanformManage.infoLendDate}</b></th>
-                  <td><input name="jltfispPsInfoList[0].lendDate" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})"  /></td>
+                  <td><input name="jltfispPsInfoList[0].lendDate" type="text" class="txt validate[required]" placeholder="请输入" onClick="WdatePicker({readOnly:true})" readonly="readonly" /></td>
                   <th><b class="red">*</b><b>${loanformManage.infoLoanTerm}</b></th>
                   <td><input name="jltfispPsInfoList[0].loanTerm" type="text" class="txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]]" placeholder="请输入" />月</td>
               </tr>

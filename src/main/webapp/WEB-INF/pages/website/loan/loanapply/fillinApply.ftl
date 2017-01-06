@@ -80,7 +80,7 @@
                                     </#if>
                                     是</label></td>
                                     <th>${loanformManage.loanLabel6}</th>
-                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" onClick="WdatePicker({readOnly:true})" type="text" class="txt" /></label></td>
+                                    <td><label><input name="historyEndtime" id="historyEndtime" value="<#if (coAll.jltfispCoFillInApply.historyEndtime?exists)>${coAll.jltfispCoFillInApply.historyEndtime?date}</#if>" readonly onClick="WdatePicker({readOnly:true})" type="text" class="txt" /></label></td>
                                 </tr>
                                 <tr>
                                     <th>${loanformManage.loanLabel7}</th>

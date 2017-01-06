@@ -145,16 +145,16 @@
                           <ul>
                           <#list indexCache.columns as columns>
                               <#if columns.mark = 'news_1'>
-                                  <li class="active" lang="${path}/perm/news"><a href="javascript:;">${columns.columnName}</a></li>
+                                  <li class="active" lang="${path}/perm/news"><a href="javascript:;" class="atonewline">${columns.columnName}</a></li>
                               </#if>
                               <#if columns.mark = 'video'>
-                                  <li id="index_video" lang="${path}/perm/cloud"><a href="javascript:;">${columns.columnName}</a></li>
+                                  <li id="index_video" lang="${path}/perm/cloud"><a href="javascript:;" class="atonewline">${columns.columnName}</a></li>
                               </#if>
                           </#list>
                           </ul>
                           <#list indexCache.columns as columns>
                               <#if columns.mark = 'news_2'>
-                                  <a href="${path}/perm/news?columnId=${columns.id}">${columns.columnName}</a>
+                                  <a href="${path}/perm/news?columnId=${columns.id}" class="atonewline">${columns.columnName}</a>
                               </#if>
                           </#list>
                           <a href="${path}/perm/news" class="fr">更多&nbsp;&gt;</a>
@@ -325,7 +325,7 @@
 
   <#list indexCache.indices as indices>
       <#if indices.contentType = 3>
-      <div class="fly" id="fly" style="background-image:url('${path}${indices.image}');background-size:100%100%"><a href="javascript:;" class="close">&nbsp;</a><a href="${indices.url}" target="view_window">${indices.title}</a></div>
+      <div class="fly" id="fly" style="background-image:url('${path}${indices.image}');background-size:100%100%"><a href="javascript:;" class="close">&nbsp;</a><a href="${indices.url}" target="view_window" style="word-wrap:break-word;word-break:break-all;">${indices.title}</a></div>
       </#if>
   </#list>
   </body>
@@ -479,14 +479,27 @@
 
     var lih=$('.ltop .fr li:first').height();
     var iCur=0;
+    $('.ltop .fr ul').html($('.ltop .fr ul').html()+$('.ltop .fr ul').html());
+    function nscroll()
+    {
+        if(iCur>$('.ltop .fr li').length/2-1)
+        {
+            $('.ltop .fr ul').css('margin-top','0');
+            iCur=0;
+        }
+        else
+        {
+            $('.ltop .fr ul').animate({'margin-top':-lih*(++iCur)},800);
+        }
+    }
     var timer2=setInterval(function(){
-        $('.ltop .fr ul').animate({'margin-top':-lih*((iCur++)%$('.ltop .fr li').length)},800);
+        nscroll();
     },2400);
     $('.ltop .fr ul').hover(function(){
         clearInterval(timer2);
     },function(){
         timer2=setInterval(function(){
-            $('.ltop .fr ul').animate({'margin-top':-lih*((iCur++)%$('.ltop .fr li').length)},800);
+            nscroll();
         },2400);
     });
 

@@ -112,7 +112,6 @@
     </listener>
 
     <listener>
-        <description>随时对地通过((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()获取当前request</description>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 

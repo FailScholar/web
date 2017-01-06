@@ -130,9 +130,9 @@
          "<th><b class='red'>*</b><b>${loanformManage.infoInsuranceCompany}</b></th>"+
          "<td> <input name='jltfispPsInfoList["+index+"].insuranceCompany' type='text' class='txt validate[required,minSize[1],maxSize[20]] baoxiangongsi' placeholder='请输入' /></td>"+
          "</tr><tr><th><b class='red'>*</b>${loanformManage.infoLoanMoney}</b></th><td colspan='3'><input name='jltfispPsInfoList["+index+"].loanMoney' type='text' class='txt validate[required,custom[number2],minSize[1],maxSize[10]] shijizhifujine' placeholder='请输入' />元</td></tr>"+
-         "<tr><th><b class='red'>*</b>${loanformManage.infoRepaymentDate}</b></th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt validate[required] shijihuankuanri' placeholder='请输入' /></td>"+
+         "<tr><th><b class='red'>*</b>${loanformManage.infoRepaymentDate}</b></th><td><input name='jltfispPsInfoList["+index+"].repaymentDate' type='text' onClick='WdatePicker({readOnly:true})' readonly='readonly' class='txt validate[required] shijihuankuanri' placeholder='请输入' /></td>"+
          "<th><b class='red'>*</b>${loanformManage.infoPrincipalInterest}</b></th><td><input name='jltfispPsInfoList["+index+"].principalInterest' type='tex' class='txt validate[required,custom[number2], minSize[1],maxSize[10]] shijizhifubenxi' placeholder='请输入' />元</td></tr>"+
-         "<tr><th><b class='red'>*</b>${loanformManage.infoLendDate}</b></th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker({readOnly:true})' class='txt validate[required] shijifangdairi' placeholder='请输入' /></td>"+
+         "<tr><th><b class='red'>*</b>${loanformManage.infoLendDate}</b></th><td><input name='jltfispPsInfoList["+index+"].lendDate' type='text' onClick='WdatePicker({readOnly:true})' readonly='readonly' class='txt validate[required] shijifangdairi' placeholder='请输入' /></td>"+
          "<th><b class='red'>*</b>${loanformManage.infoLoanTerm}</b></th><td><input name='jltfispPsInfoList["+index+"].loanTerm' type='text' class='txt validate[required,custom[onlyNumberSp],minSize[1],maxSize[10]] daikuanqixian' placeholder='请输入' />月</td></tr>"+
          "</table>";
          $("table.tab3.module:first").after(content);

@@ -170,11 +170,11 @@ function goMain(flag){
 
 <script type="text/javascript">
     positionNavigation(0);
-	function subInfo(id,type){
+	function subInfo(id,type,infoId){
 		$.ajax({
             type: "POST",
             url: "${path}/business/updateBuss",
-            data: {id:id},
+            data: {id:id,infoId:infoId},
             dateType:"json",
             success: function(msg){
                 dialog.tipsPop('ok-pop','提示:',"提交成功",function(){

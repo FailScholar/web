@@ -135,4 +135,6 @@ public interface IBusinessApplayAuditService extends
      */
     BusinessApplayAudit selectBusinessByStatusAndUserIdAndParentType(Integer userId,String type,String parentType,String state);
 
+    
+    int updateCoInfoState(Integer state,Integer infoId);
 }

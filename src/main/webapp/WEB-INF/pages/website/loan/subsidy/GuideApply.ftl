@@ -63,6 +63,6 @@ $(document).ready(function(e) {
   	   document.getElementById("accept").disabled=false;
   }
    function apply(){
-		  location.href="${path}/loan/subsidy";
+	location.href="${path}/loan/subsidy?userId="+${userId}+"&companyName="+'${companyName}'+"&socialCode="+'${socialCode}'+"&bussinessApplyId="+'${bussinessApplyId}'+"&state="+'${state}';
 	}
 </script>

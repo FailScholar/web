@@ -1,8 +1,8 @@
 package com.jltfisp.web.loan.service.impl;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.jltfisp.base.basedao.BaseMapper;
 import com.jltfisp.base.service.impl.BaseServiceImpl;
 import com.jltfisp.web.loan.dao.BusinessApplayAuditMapper;
+import com.jltfisp.web.loan.dao.CoBaseMapper;
 import com.jltfisp.web.loan.dao.CoDebtMapper;
 import com.jltfisp.web.loan.dao.CoFillInApplyMapper;
 import com.jltfisp.web.loan.entity.BusinessApplayAudit;
@@ -30,6 +31,8 @@ public class BusinessApplayAuditServiceImpl extends
     private CoFillInApplyMapper coFillInApplyMapper;
     @Autowired
     private CoDebtMapper coDebtMapper;
+    @Autowired
+    private CoBaseMapper coBaseMapper;
 
     @Resource(name = "businessApplayAuditMapper")
     public void setMapper(BaseMapper<BusinessApplayAudit> mapper) {
@@ -197,6 +200,12 @@ public class BusinessApplayAuditServiceImpl extends
 	public void updateInfoIdById(Integer id,Integer infoId) {
 		businessApplayAuditMapper.updateInfoIdById(id,infoId);
 		
+	}
+
+	@Override
+	public int updateCoInfoState(Integer state, Integer infoId) {
+		// TODO Auto-generated method stub
+		return coBaseMapper.updateState(state, infoId);
 	}
 	
 	

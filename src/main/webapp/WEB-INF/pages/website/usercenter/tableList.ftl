@@ -50,7 +50,7 @@
      		<#else>
      		<a href="${path}/loan/onlineApplyPage?applytype=${business.type}" target="_blank">编辑</a>
      	</#if>
-     	<a href="javascript:;" onclick="subInfo(${business.id},${business.type})" target="_blank">提交</a>
+     	<a href="javascript:;" onclick="subInfo(${business.id},${business.type},${business.infoId})" target="_blank">提交</a>
       <#elseif business.type =='5'>
       	<a href="${path}/business/showSubsidyDetail?businessType=${business.type}&infoId=${business.infoId}&id=${business.id}" target="_blank">查看</a>
       <#elseif business.type !='5' &&  business.type !='6'>

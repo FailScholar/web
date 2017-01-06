@@ -50,4 +50,14 @@ public class RegistServiceImpl implements RegistService {
     public void correlationRoles(Integer userId, Integer roleID) {
         registMapper.correlationRoles(userId,roleID);
     }
+
+    @Override
+    public int validEmail(String email) {
+        return registMapper.validEmail(email);
+    }
+
+    @Override
+    public int validComName(String comName) {
+        return registMapper.validComName(comName);
+    }
 }
